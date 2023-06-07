@@ -1,11 +1,21 @@
 package com.wildfit.server.service;
 
-import com.wildfit.server.domain.*;
+import com.wildfit.server.domain.UserDigest;
+import com.wildfit.server.domain.UserProfileDigest;
+import com.wildfit.server.exception.UserServiceException;
 
 public interface UserService {
-    void createUser(UserDigest userDigest);
+    UserDigest createUser(UserDigest userDigest) throws UserServiceException;
+
+    void deleteUser(UserDigest userDigest);
 
     void login(UserDigest userDigest);
 
-    UserProfileDigest getUser(UserDigest userDigest)
+    void changePassword(UserDigest userDigest);
+
+    UserProfileDigest getUserProfile(UserDigest userDigest);
+
+    UserProfileDigest updateUserProfile(UserProfileDigest userProfileDigest);
+
+
 }
