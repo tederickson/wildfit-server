@@ -15,7 +15,7 @@ class UserProfileTest {
     @BeforeAll
     public static void init() {
         BeanMatchers.registerValueGenerator(() -> {
-            final var user = new com.wildfit.server.model.User();
+            final var user = new User();
             user.setId(1234L);
 
             return user;
