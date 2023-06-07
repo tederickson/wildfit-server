@@ -3,6 +3,7 @@ package com.wildfit.server.service.handler;
 import java.util.Objects;
 
 import com.wildfit.server.domain.UserDigest;
+import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.User;
 import com.wildfit.server.model.mapper.UserDigestMapper;
@@ -21,22 +22,21 @@ public class CreateUserHandler {
         validate();
 
         if (!PasswordValidator.isValid(userDigest.getPassword())) {
-            throw new UserServiceException("invalid password");
+            throw new UserServiceException(UserServiceError.INVALID_PASSWORD);
         }
         final var encodedPassword = PasswordEncodeDecode.encode(userDigest.getPassword());
         final var users = userRepository.findByUserName(userDigest.getUserName());
 
         if (!CollectionUtils.isEmpty(users)) {
-            throw new UserServiceException("user " + userDigest.getUserName() + " already exists");
+            throw new UserServiceException(UserServiceError.EXISTING_USER);
         }
         final var user = User.builder()
                 .withUserName(userDigest.getUserName())
                 .withPassword(encodedPassword)
                 .withEmail(userDigest.getEmail()).build();
         final var saved = userRepository.save(user);
-        final var mapper = new UserDigestMapper();
 
-        return mapper.map(saved);
+        return UserDigestMapper.map(saved);
     }
 
     private void validate() throws UserServiceException {
@@ -44,10 +44,10 @@ public class CreateUserHandler {
         Objects.requireNonNull(userDigest, "userDigest");
 
         if (!StringUtils.hasText(userDigest.getUserName())) {
-            throw new UserServiceException("missing user name");
+            throw new UserServiceException(UserServiceError.MISSING_USER_NAME);
         }
         if (!StringUtils.hasText(userDigest.getPassword())) {
-            throw new UserServiceException("missing password");
+            throw new UserServiceException(UserServiceError.INVALID_PASSWORD);
         }
     }
 }

@@ -19,9 +19,8 @@ class UserDigestMapperTest {
                 .withUserName(USER_NAME)
                 .withPassword("encodedPassword")
                 .withEmail(MAIL).build();
-        final var mapper = new UserDigestMapper();
 
-        final var digest = mapper.map(user);
+        final var digest = UserDigestMapper.map(user);
 
         assertEquals(USER_NAME, digest.getUserName());
         assertNull(digest.getPassword());
@@ -30,17 +29,15 @@ class UserDigestMapperTest {
 
     @Test
     void map_null() {
-        final var mapper = new UserDigestMapper();
         assertThrows(NullPointerException.class,
-                () -> mapper.map(null));
+                () -> UserDigestMapper.map(null));
     }
 
     @Test
     void map_empty() {
         final var user = User.builder().build();
-        final var mapper = new UserDigestMapper();
 
-        final var digest = mapper.map(user);
+        final var digest = UserDigestMapper.map(user);
         assertNull(digest.getUserName());
         assertNull(digest.getPassword());
         assertNull(digest.getEmail());

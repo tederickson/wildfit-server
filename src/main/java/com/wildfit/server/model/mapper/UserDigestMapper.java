@@ -5,8 +5,10 @@ import com.wildfit.server.model.User;
 
 
 public final class UserDigestMapper {
+    private UserDigestMapper() {
+    }
 
-    public UserDigest map(User user) {
+    public static UserDigest map(User user) {
         return UserDigest.builder()
                 .withUserName(user.getUserName())
                 .withEmail(user.getEmail())

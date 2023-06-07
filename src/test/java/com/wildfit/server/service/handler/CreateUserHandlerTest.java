@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.wildfit.server.domain.UserDigest;
+import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.User;
 import com.wildfit.server.repository.UserRepository;
@@ -52,7 +53,7 @@ class CreateUserHandlerTest {
                         .withUserRepository(userRepository)
                         .withUserDigest(userDigest)
                         .build().execute());
-        System.out.println("exception = " + exception);
+        assertEquals(UserServiceError.INVALID_PASSWORD, exception.getError());
     }
 
     @Test
@@ -66,7 +67,7 @@ class CreateUserHandlerTest {
                         .withUserRepository(userRepository)
                         .withUserDigest(userDigest)
                         .build().execute());
-        System.out.println("exception = " + exception);
+        assertEquals(UserServiceError.INVALID_PASSWORD, exception.getError());
     }
 
     @ParameterizedTest
@@ -81,7 +82,7 @@ class CreateUserHandlerTest {
                         .withUserRepository(userRepository)
                         .withUserDigest(userDigest)
                         .build().execute());
-        System.out.println("exception = " + exception);
+        assertEquals(UserServiceError.MISSING_USER_NAME, exception.getError());
     }
 
     @Test
@@ -95,7 +96,7 @@ class CreateUserHandlerTest {
                         .withUserRepository(userRepository)
                         .withUserDigest(userDigest)
                         .build().execute());
-        System.out.println("exception = " + exception);
+        assertEquals(UserServiceError.MISSING_USER_NAME, exception.getError());
     }
 
     @Test
@@ -134,7 +135,7 @@ class CreateUserHandlerTest {
                         .withUserDigest(userDigest)
                         .build().execute());
 
-        System.out.println("exception = " + exception);
+        assertEquals(UserServiceError.EXISTING_USER, exception.getError());
     }
 
 }

@@ -1,7 +1,12 @@
 package com.wildfit.server.exception;
 
+@lombok.Getter
 public class UserServiceException extends Exception {
-    public UserServiceException(String message) {
-        super(message);
+    final UserServiceError error;
+
+    public UserServiceException(UserServiceError error) {
+        super(error.getMessage());
+
+        this.error = error;
     }
 }
