@@ -1,4 +1,4 @@
-package com.wildfit.server.domain.mapper;
+package com.wildfit.server.model.mapper;
 
 import com.wildfit.server.domain.UserDigest;
 import com.wildfit.server.model.User;
