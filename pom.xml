@@ -16,6 +16,7 @@
     <properties>
         <java.version>14</java.version>
         <flyway.version>9.8.1</flyway.version>
+        <swagger-version>2.7.0</swagger-version>
     </properties>
     <dependencies>
         <dependency>
@@ -64,6 +65,17 @@
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcpkix-jdk15on</artifactId>
             <version>1.70</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger-version}</version>
         </dependency>
 
         <dependency>
