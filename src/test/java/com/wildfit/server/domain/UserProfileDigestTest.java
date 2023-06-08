@@ -49,7 +49,7 @@ class UserProfileDigestTest {
         final var userProfileDigest = UserProfileDigest.builder()
                 .withUser(userDigest)
                 .withAge(39)
-                .withGender('M')
+                .withGender(GenderType.FEMALE)
                 .withWeight(185.7f)
                 .withHeight(65.23f)
                 .build();

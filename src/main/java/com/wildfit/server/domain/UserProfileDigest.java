@@ -13,7 +13,7 @@ public final class UserProfileDigest {
     private UserDigest user;
 
     private int age;
-    private char gender;
+    private GenderType gender;
     private float height;
     private float weight;
 }

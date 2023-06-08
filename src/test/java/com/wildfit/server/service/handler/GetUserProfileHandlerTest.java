@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import com.wildfit.server.domain.GenderType;
 import com.wildfit.server.domain.UserDigest;
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
@@ -101,7 +102,7 @@ class GetUserProfileHandlerTest {
         assertNull(digest.getUser().getPassword());
         assertEquals("bob@test.com", digest.getUser().getEmail());
         assertEquals(39, digest.getAge());
-        assertEquals('M', digest.getGender());
+        assertEquals(GenderType.MALE, digest.getGender());
         assertEquals(185.7f, digest.getWeight());
         assertEquals(65.23f, digest.getHeight());
     }
