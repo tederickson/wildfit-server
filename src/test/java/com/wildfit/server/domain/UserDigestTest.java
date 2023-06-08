@@ -3,14 +3,22 @@ package com.wildfit.server.domain;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanToString;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetters;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.json.JsonTest;
+import org.springframework.boot.test.json.JacksonTester;
 
+@JsonTest
 class UserDigestTest {
+    @Autowired
+    private JacksonTester<UserDigest> json;
 
     @Test
     public void shouldHaveANoArgsConstructor() {
@@ -40,5 +48,17 @@ class UserDigestTest {
                 .build();
 
         assertEquals("password", digest.getPassword());
+    }
+
+    @Test
+    public void testDeserialize() throws Exception {
+        String jsonContent = "{\"userName\":\"   Mike Callas \",   \"password\":\"S1D2notS!\"," +
+                " \"email\": \"         \" }";
+
+        UserDigest result = this.json.parse(jsonContent).getObject();
+
+        assertThat(result.getUserName()).isEqualTo("Mike Callas");
+        assertThat(result.getPassword()).isEqualTo("S1D2notS!");
+        assertNull(result.getEmail());
     }
 }
