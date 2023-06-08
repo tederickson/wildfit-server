@@ -1,7 +1,9 @@
 package com.wildfit.server.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder(setterPrefix = "with")

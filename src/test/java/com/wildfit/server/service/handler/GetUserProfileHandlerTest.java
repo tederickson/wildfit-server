@@ -9,6 +9,7 @@ import com.wildfit.server.domain.UserDigest;
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.User;
+import com.wildfit.server.model.UserProfile;
 import com.wildfit.server.repository.UserProfileRepository;
 import com.wildfit.server.repository.UserRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -19,7 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CreateUserHandlerTest {
+class GetUserProfileHandlerTest {
 
     private static final String PASSWORD = "Super2023!";
     private static final String USER_NAME = "Bob";
@@ -37,48 +38,17 @@ class CreateUserHandlerTest {
     @Test
     void nullParameters() {
         assertThrows(NullPointerException.class,
-                () -> CreateUserHandler.builder().build().execute());
-    }
-
-    @ParameterizedTest
-    @NullAndEmptySource
-    void nullPassword(String password) {
-        final var userDigest = UserDigest.builder()
-                .withUserName(USER_NAME)
-                .withPassword(password).build();
-        final var exception = assertThrows(UserServiceException.class,
-                () -> CreateUserHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withUserProfileRepository(userProfileRepository)
-                        .withUserDigest(userDigest)
-                        .build().execute());
-        assertEquals(UserServiceError.INVALID_PASSWORD, exception.getError());
-    }
-
-    @Test
-    void invalidPassword() {
-        final var userDigest = UserDigest.builder()
-                .withUserName(USER_NAME)
-                .withPassword("apple")
-                .build();
-        final var exception = assertThrows(UserServiceException.class,
-                () -> CreateUserHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withUserProfileRepository(userProfileRepository)
-                        .withUserDigest(userDigest)
-                        .build().execute());
-        assertEquals(UserServiceError.INVALID_PASSWORD, exception.getError());
+                () -> GetUserProfileHandler.builder().build().execute());
     }
 
     @ParameterizedTest
     @NullAndEmptySource
     void missingUserName(String userName) {
         final var userDigest = UserDigest.builder()
-                .withPassword(PASSWORD)
                 .withUserName(userName)
                 .build();
         final var exception = assertThrows(UserServiceException.class,
-                () -> CreateUserHandler.builder()
+                () -> GetUserProfileHandler.builder()
                         .withUserRepository(userRepository)
                         .withUserProfileRepository(userProfileRepository)
                         .withUserDigest(userDigest)
@@ -89,11 +59,10 @@ class CreateUserHandlerTest {
     @Test
     void emptyUserName() {
         final var userDigest = UserDigest.builder()
-                .withPassword(PASSWORD)
                 .withUserName("    ")
                 .build();
         final var exception = assertThrows(UserServiceException.class,
-                () -> CreateUserHandler.builder()
+                () -> GetUserProfileHandler.builder()
                         .withUserRepository(userRepository)
                         .withUserProfileRepository(userProfileRepository)
                         .withUserDigest(userDigest)
@@ -104,42 +73,36 @@ class CreateUserHandlerTest {
     @Test
     void execute() throws UserServiceException {
         final var userDigest = UserDigest.builder()
-                .withPassword(PASSWORD)
-                .withUserName(USER_NAME)
-                .build();
-        final var saved = CreateUserHandler.builder()
-                .withUserRepository(userRepository)
-                .withUserProfileRepository(userProfileRepository)
-                .withUserDigest(userDigest)
-                .build().execute();
-
-        assertEquals(USER_NAME, saved.getUserName());
-        assertNull(saved.getPassword());
-        assertNull(saved.getEmail());
-    }
-
-    @Test
-    void userAlreadyExists() {
-        final var userDigest = UserDigest.builder()
-                .withPassword(PASSWORD)
                 .withUserName(USER_NAME)
                 .build();
 
         final var user = User.builder()
                 .withUserName(USER_NAME)
-                .withPassword("encodedPassword")
+                .withPassword(PASSWORD)
                 .withEmail("bob@test.com").build();
-        final var saved = userRepository.save(user);
+        final var userProfile = UserProfile.builder().withUser(user)
+                .withAge(39)
+                .withGender('M')
+                .withWeight(185.7f)
+                .withHeight(65.23f)
+                .build();
+
+        final var saved = userProfileRepository.save(userProfile);
         assertNotNull(saved);
+        System.out.println("saved = " + saved);
 
-        final var exception = assertThrows(UserServiceException.class,
-                () -> CreateUserHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withUserProfileRepository(userProfileRepository)
-                        .withUserDigest(userDigest)
-                        .build().execute());
+        final var digest = GetUserProfileHandler.builder()
+                .withUserRepository(userRepository)
+                .withUserProfileRepository(userProfileRepository)
+                .withUserDigest(userDigest)
+                .build().execute();
 
-        assertEquals(UserServiceError.EXISTING_USER, exception.getError());
+        assertEquals(USER_NAME, digest.getUser().getUserName());
+        assertNull(digest.getUser().getPassword());
+        assertEquals("bob@test.com", digest.getUser().getEmail());
+        assertEquals(39, digest.getAge());
+        assertEquals('M', digest.getGender());
+        assertEquals(185.7f, digest.getWeight());
+        assertEquals(65.23f, digest.getHeight());
     }
-
 }

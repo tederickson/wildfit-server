@@ -13,7 +13,7 @@ public interface UserService {
 
     void changePassword(UserDigest userDigest);
 
-    UserProfileDigest getUserProfile(UserDigest userDigest);
+    UserProfileDigest getUserProfile(UserDigest userDigest) throws UserServiceException;
 
     UserProfileDigest updateUserProfile(UserProfileDigest userProfileDigest);
 

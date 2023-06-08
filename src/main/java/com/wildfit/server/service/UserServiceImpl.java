@@ -3,8 +3,10 @@ package com.wildfit.server.service;
 import com.wildfit.server.domain.UserDigest;
 import com.wildfit.server.domain.UserProfileDigest;
 import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.repository.UserProfileRepository;
 import com.wildfit.server.repository.UserRepository;
 import com.wildfit.server.service.handler.CreateUserHandler;
+import com.wildfit.server.service.handler.GetUserProfileHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +21,14 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    UserProfileRepository userProfileRepository;
 
     @Override
     public UserDigest createUser(UserDigest userDigest) throws UserServiceException {
         return CreateUserHandler.builder()
                 .withUserRepository(userRepository)
+                .withUserProfileRepository(userProfileRepository)
                 .withUserDigest(userDigest)
                 .build().execute();
     }
@@ -44,8 +49,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserProfileDigest getUserProfile(UserDigest userDigest) {
-        return null;
+    public UserProfileDigest getUserProfile(UserDigest userDigest) throws UserServiceException {
+        return GetUserProfileHandler.builder()
+                .withUserRepository(userRepository)
+                .withUserProfileRepository(userProfileRepository)
+                .withUserDigest(userDigest)
+                .build().execute();
     }
 
     @Override

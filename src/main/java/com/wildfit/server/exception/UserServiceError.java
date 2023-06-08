@@ -9,7 +9,8 @@ import org.springframework.http.HttpStatus;
 public enum UserServiceError {
     MISSING_USER_NAME("missing user name", HttpStatus.BAD_REQUEST),
     INVALID_PASSWORD("invalid password", HttpStatus.BAD_REQUEST),
-    EXISTING_USER("user exists", HttpStatus.BAD_REQUEST);
+    EXISTING_USER("user exists", HttpStatus.BAD_REQUEST),
+    USER_NOT_FOUND("user not found", HttpStatus.NOT_FOUND);
 
     private final String message;
     private final HttpStatus httpStatus;
