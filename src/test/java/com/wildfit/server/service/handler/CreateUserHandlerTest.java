@@ -22,7 +22,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 class CreateUserHandlerTest {
 
     private static final String PASSWORD = "Super2023!";
-    private static final String USER_NAME = "Bob";
+    private static final String EMAIL = "bob@bob.com";
 
     @Autowired
     UserRepository userRepository;
@@ -44,7 +44,7 @@ class CreateUserHandlerTest {
     @NullAndEmptySource
     void nullPassword(String password) {
         final var userDigest = UserDigest.builder()
-                .withUserName(USER_NAME)
+                .withEmail(EMAIL)
                 .withPassword(password).build();
         final var exception = assertThrows(UserServiceException.class,
                 () -> CreateUserHandler.builder()
@@ -58,7 +58,7 @@ class CreateUserHandlerTest {
     @Test
     void invalidPassword() {
         final var userDigest = UserDigest.builder()
-                .withUserName(USER_NAME)
+                .withEmail(EMAIL)
                 .withPassword("apple")
                 .build();
         final var exception = assertThrows(UserServiceException.class,
@@ -72,10 +72,10 @@ class CreateUserHandlerTest {
 
     @ParameterizedTest
     @NullAndEmptySource
-    void missingUserName(String userName) {
+    void missingEmail(String email) {
         final var userDigest = UserDigest.builder()
                 .withPassword(PASSWORD)
-                .withUserName(userName)
+                .withEmail(email)
                 .build();
         final var exception = assertThrows(UserServiceException.class,
                 () -> CreateUserHandler.builder()
@@ -83,14 +83,14 @@ class CreateUserHandlerTest {
                         .withUserProfileRepository(userProfileRepository)
                         .withUserDigest(userDigest)
                         .build().execute());
-        assertEquals(UserServiceError.MISSING_USER_NAME, exception.getError());
+        assertEquals(UserServiceError.MISSING_EMAIL, exception.getError());
     }
 
     @Test
-    void emptyUserName() {
+    void emptyEmail() {
         final var userDigest = UserDigest.builder()
                 .withPassword(PASSWORD)
-                .withUserName("    ")
+                .withEmail("    ")
                 .build();
         final var exception = assertThrows(UserServiceException.class,
                 () -> CreateUserHandler.builder()
@@ -98,14 +98,14 @@ class CreateUserHandlerTest {
                         .withUserProfileRepository(userProfileRepository)
                         .withUserDigest(userDigest)
                         .build().execute());
-        assertEquals(UserServiceError.MISSING_USER_NAME, exception.getError());
+        assertEquals(UserServiceError.MISSING_EMAIL, exception.getError());
     }
 
     @Test
     void execute() throws UserServiceException {
         final var userDigest = UserDigest.builder()
                 .withPassword(PASSWORD)
-                .withUserName(USER_NAME)
+                .withEmail(EMAIL)
                 .build();
         final var saved = CreateUserHandler.builder()
                 .withUserRepository(userRepository)
@@ -113,22 +113,21 @@ class CreateUserHandlerTest {
                 .withUserDigest(userDigest)
                 .build().execute();
 
-        assertEquals(USER_NAME, saved.getUserName());
+        assertEquals(EMAIL, saved.getEmail());
         assertNull(saved.getPassword());
-        assertNull(saved.getEmail());
     }
 
     @Test
     void userAlreadyExists() {
         final var userDigest = UserDigest.builder()
                 .withPassword(PASSWORD)
-                .withUserName(USER_NAME)
+                .withEmail(EMAIL)
                 .build();
 
         final var user = User.builder()
-                .withUserName(USER_NAME)
+                .withUserName(EMAIL)
                 .withPassword("encodedPassword")
-                .withEmail("bob@test.com").build();
+                .withEmail(EMAIL).build();
         final var saved = userRepository.save(user);
         assertNotNull(saved);
 

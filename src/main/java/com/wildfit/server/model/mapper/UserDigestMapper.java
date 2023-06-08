@@ -10,7 +10,6 @@ public final class UserDigestMapper {
 
     public static UserDigest map(User user) {
         return UserDigest.builder()
-                .withUserName(user.getUserName())
                 .withEmail(user.getEmail())
                 .build();
     }

@@ -26,7 +26,7 @@ public class GetUserProfileHandler {
         log.info("GetUserProfileHandler(" + userDigest + ")");
         validate();
 
-        final var users = userRepository.findByUserName(userDigest.getUserName());
+        final var users = userRepository.findByUserName(userDigest.getEmail());
         if (CollectionUtils.isEmpty(users)) {
             throw new UserServiceException(UserServiceError.USER_NOT_FOUND);
         }
@@ -44,8 +44,8 @@ public class GetUserProfileHandler {
         Objects.requireNonNull(userProfileRepository, "userProfileRepository");
         Objects.requireNonNull(userDigest, "userDigest");
 
-        if (!StringUtils.hasText(userDigest.getUserName())) {
-            throw new UserServiceException(UserServiceError.MISSING_USER_NAME);
+        if (!StringUtils.hasText(userDigest.getEmail())) {
+            throw new UserServiceException(UserServiceError.MISSING_EMAIL);
         }
 
     }

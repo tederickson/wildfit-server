@@ -42,7 +42,7 @@ class UserDigestTest {
 
     @Test
     void builder() {
-        final var digest = UserDigest.builder().withUserName("user name")
+        final var digest = UserDigest.builder()
                 .withPassword("password")
                 .withEmail("email")
                 .build();
@@ -57,7 +57,6 @@ class UserDigestTest {
 
         UserDigest result = this.json.parse(jsonContent).getObject();
 
-        assertThat(result.getUserName()).isEqualTo("Mike Callas");
         assertThat(result.getPassword()).isEqualTo("S1D2notS!");
         assertNull(result.getEmail());
     }

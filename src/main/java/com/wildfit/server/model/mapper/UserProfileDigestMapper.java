@@ -1,7 +1,6 @@
 package com.wildfit.server.model.mapper;
 
 import com.wildfit.server.domain.GenderType;
-import com.wildfit.server.domain.UserDigest;
 import com.wildfit.server.domain.UserProfileDigest;
 import com.wildfit.server.model.UserProfile;
 
@@ -10,13 +9,11 @@ public final class UserProfileDigestMapper {
     }
 
     public static UserProfileDigest map(UserProfile userProfile) {
-        final var user = userProfile.getUser();
-        final var userDigest = UserDigest.builder()
-                .withUserName(user.getUserName())
-                .withEmail(user.getEmail())
-                .build();
+        final var userDigest = UserDigestMapper.map(userProfile.getUser());
 
-        final var builder = UserProfileDigest.builder().withUser(userDigest)
+        final var builder = UserProfileDigest.builder()
+                .withUser(userDigest)
+                .withName(userProfile.getName())
                 .withAge(userProfile.getAge())
                 .withHeight(userProfile.getHeight())
                 .withWeight(userProfile.getWeight());

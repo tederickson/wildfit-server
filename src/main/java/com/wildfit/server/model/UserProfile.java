@@ -32,6 +32,7 @@ public final class UserProfile {
     @JoinColumn(name = "user_id")
     private User user;
 
+    private String name;
     private int age;
     private char gender;
     private float height;
@@ -59,6 +60,7 @@ public final class UserProfile {
         return "UserProfile{" +
                 "id=" + id +
                 ", user=" + user +
+                ", name='" + name + '\'' +
                 ", age=" + age +
                 ", gender=" + gender +
                 ", height=" + height +

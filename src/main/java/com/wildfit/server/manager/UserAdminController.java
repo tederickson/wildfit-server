@@ -50,7 +50,7 @@ public class UserAdminController {
     public UserProfileDigest getUser(@PathVariable("userName") String userName) throws UserServiceException {
         log.info("/users/" + userName);
 
-        final var userDigest = UserDigest.builder().withUserName(userName).build();
+        final var userDigest = UserDigest.builder().withEmail(userName).build();
         return userService.getUserProfile(userDigest);
     }
 }

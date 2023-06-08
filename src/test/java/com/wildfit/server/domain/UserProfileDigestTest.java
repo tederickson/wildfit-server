@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 
 class UserProfileDigestTest {
     final static UserDigest userDigest = UserDigest.builder()
-            .withUserName("user name")
             .withPassword("password")
             .withEmail("email")
             .build();

@@ -5,8 +5,9 @@ CREATE TABLE user_profile (
     CONSTRAINT user_fk FOREIGN KEY (user_id) REFERENCES user(id)
     ON DELETE CASCADE,
 
-    age    int,
-    gender char(1),
-    height float,
-    weight float
+    name    varchar(256),
+    age     int,
+    gender  char(1),
+    height  float,
+    weight  float
 );

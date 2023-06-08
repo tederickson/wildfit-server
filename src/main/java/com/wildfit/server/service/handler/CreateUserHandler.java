@@ -28,13 +28,14 @@ public class CreateUserHandler {
             throw new UserServiceException(UserServiceError.INVALID_PASSWORD);
         }
         final var encodedPassword = PasswordEncodeDecode.encode(userDigest.getPassword());
-        final var users = userRepository.findByUserName(userDigest.getUserName());
+        final var userName = userDigest.getEmail();
+        final var users = userRepository.findByUserName(userName);
 
         if (!CollectionUtils.isEmpty(users)) {
             throw new UserServiceException(UserServiceError.EXISTING_USER);
         }
         final var user = User.builder()
-                .withUserName(userDigest.getUserName())
+                .withUserName(userName)
                 .withPassword(encodedPassword)
                 .withEmail(userDigest.getEmail()).build();
         final var userProfile = UserProfile.builder().withUser(user).build();
@@ -49,8 +50,8 @@ public class CreateUserHandler {
         Objects.requireNonNull(userProfileRepository, "userProfileRepository");
         Objects.requireNonNull(userDigest, "userDigest");
 
-        if (!StringUtils.hasText(userDigest.getUserName())) {
-            throw new UserServiceException(UserServiceError.MISSING_USER_NAME);
+        if (!StringUtils.hasText(userDigest.getEmail())) {
+            throw new UserServiceException(UserServiceError.MISSING_EMAIL);
         }
         if (!StringUtils.hasText(userDigest.getPassword())) {
             throw new UserServiceException(UserServiceError.INVALID_PASSWORD);

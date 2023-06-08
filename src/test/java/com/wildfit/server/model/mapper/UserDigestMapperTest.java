@@ -9,20 +9,19 @@ import org.junit.jupiter.api.Test;
 
 class UserDigestMapperTest {
 
-    public static final String USER_NAME = "Bob";
     public static final String MAIL = "bob@bob.com";
 
     @Test
     void map() {
         final var user = User.builder()
                 .withId(12314L)
-                .withUserName(USER_NAME)
+                .withUserName(MAIL)
+                .withEmail(MAIL)
                 .withPassword("encodedPassword")
-                .withEmail(MAIL).build();
+                .build();
 
         final var digest = UserDigestMapper.map(user);
 
-        assertEquals(USER_NAME, digest.getUserName());
         assertNull(digest.getPassword());
         assertEquals(MAIL, digest.getEmail());
     }
@@ -38,7 +37,7 @@ class UserDigestMapperTest {
         final var user = User.builder().build();
 
         final var digest = UserDigestMapper.map(user);
-        assertNull(digest.getUserName());
+
         assertNull(digest.getPassword());
         assertNull(digest.getEmail());
     }

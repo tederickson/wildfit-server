@@ -24,7 +24,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 class GetUserProfileHandlerTest {
 
     private static final String PASSWORD = "Super2023!";
-    private static final String USER_NAME = "Bob";
+    private static final String EMAIL = "bob@bob.com";
 
     @Autowired
     UserRepository userRepository;
@@ -44,9 +44,9 @@ class GetUserProfileHandlerTest {
 
     @ParameterizedTest
     @NullAndEmptySource
-    void missingUserName(String userName) {
+    void missingUserName(String email) {
         final var userDigest = UserDigest.builder()
-                .withUserName(userName)
+                .withEmail(email)
                 .build();
         final var exception = assertThrows(UserServiceException.class,
                 () -> GetUserProfileHandler.builder()
@@ -54,13 +54,13 @@ class GetUserProfileHandlerTest {
                         .withUserProfileRepository(userProfileRepository)
                         .withUserDigest(userDigest)
                         .build().execute());
-        assertEquals(UserServiceError.MISSING_USER_NAME, exception.getError());
+        assertEquals(UserServiceError.MISSING_EMAIL, exception.getError());
     }
 
     @Test
-    void emptyUserName() {
+    void emptyEmail() {
         final var userDigest = UserDigest.builder()
-                .withUserName("    ")
+                .withEmail("    ")
                 .build();
         final var exception = assertThrows(UserServiceException.class,
                 () -> GetUserProfileHandler.builder()
@@ -68,19 +68,19 @@ class GetUserProfileHandlerTest {
                         .withUserProfileRepository(userProfileRepository)
                         .withUserDigest(userDigest)
                         .build().execute());
-        assertEquals(UserServiceError.MISSING_USER_NAME, exception.getError());
+        assertEquals(UserServiceError.MISSING_EMAIL, exception.getError());
     }
 
     @Test
     void execute() throws UserServiceException {
         final var userDigest = UserDigest.builder()
-                .withUserName(USER_NAME)
+                .withEmail(EMAIL)
                 .build();
 
         final var user = User.builder()
-                .withUserName(USER_NAME)
+                .withUserName(EMAIL)
                 .withPassword(PASSWORD)
-                .withEmail("bob@test.com").build();
+                .withEmail(EMAIL).build();
         final var userProfile = UserProfile.builder().withUser(user)
                 .withAge(39)
                 .withGender('M')
@@ -98,9 +98,9 @@ class GetUserProfileHandlerTest {
                 .withUserDigest(userDigest)
                 .build().execute();
 
-        assertEquals(USER_NAME, digest.getUser().getUserName());
+        assertEquals(EMAIL, digest.getUser().getEmail());
         assertNull(digest.getUser().getPassword());
-        assertEquals("bob@test.com", digest.getUser().getEmail());
+        assertEquals(EMAIL, digest.getUser().getEmail());
         assertEquals(39, digest.getAge());
         assertEquals(GenderType.MALE, digest.getGender());
         assertEquals(185.7f, digest.getWeight());

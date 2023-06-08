@@ -13,8 +13,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public final class UserDigest {
     @JsonDeserialize(using = CustomStringDeserializer.class)
-    private String userName;
-    @JsonDeserialize(using = CustomStringDeserializer.class)
     private String password;
     @JsonDeserialize(using = CustomStringDeserializer.class)
     private String email;
