@@ -26,7 +26,7 @@ public class UserAdminController {
 
     @ApiOperation(value = "Create User")
     @ApiResponses(value = { //
-            @ApiResponse(code = 201, message = "Successfully created user"), //
+            @ApiResponse(code = 201, message = "Successfully created user", response = UserDigest.class), //
             @ApiResponse(code = 400, message = "Invalid user name and/or password or user already exists")})
     @PostMapping("/users")
     @ResponseStatus(code = HttpStatus.CREATED)
