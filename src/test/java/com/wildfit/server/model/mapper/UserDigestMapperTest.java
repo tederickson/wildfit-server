@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Date;
 
+import com.wildfit.server.domain.UserStatusType;
 import com.wildfit.server.model.User;
 import com.wildfit.server.model.UserStatus;
 import org.junit.jupiter.api.Test;
@@ -28,6 +29,8 @@ class UserDigestMapperTest {
 
         assertNull(digest.getPassword());
         assertEquals(MAIL, digest.getEmail());
+        assertEquals(UserStatusType.FREE, digest.getStatus());
+        assertEquals(12314L, digest.getId());
     }
 
     @Test
@@ -44,5 +47,6 @@ class UserDigestMapperTest {
 
         assertNull(digest.getPassword());
         assertNull(digest.getEmail());
+        assertNull(digest.getStatus());
     }
 }
