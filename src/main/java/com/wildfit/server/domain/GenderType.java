@@ -8,7 +8,7 @@ import lombok.Getter;
 public enum GenderType {
     FEMALE("F"), MALE("M"), NON_BINARY("N");
 
-    final String code;
+    private final String code;
 
     public static GenderType findByCode(String code) {
         for (var value : values()) {
