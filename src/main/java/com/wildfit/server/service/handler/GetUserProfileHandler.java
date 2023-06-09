@@ -2,7 +2,6 @@ package com.wildfit.server.service.handler;
 
 import java.util.Objects;
 
-import com.wildfit.server.domain.UserDigest;
 import com.wildfit.server.domain.UserProfileDigest;
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
@@ -12,7 +11,6 @@ import com.wildfit.server.repository.UserRepository;
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
 
 @Builder(setterPrefix = "with")
 @Slf4j
@@ -20,18 +18,16 @@ public class GetUserProfileHandler {
 
     final UserRepository userRepository;
     final UserProfileRepository userProfileRepository;
-    final UserDigest userDigest;
+    final Long userId;
 
     public UserProfileDigest execute() throws UserServiceException {
-        log.info("GetUserProfileHandler(" + userDigest + ")");
+        log.info("GetUserProfileHandler(" + userId + ")");
         validate();
 
-        final var users = userRepository.findByEmail(userDigest.getEmail());
-        if (CollectionUtils.isEmpty(users)) {
-            throw new UserServiceException(UserServiceError.USER_NOT_FOUND);
-        }
+        final var user = userRepository.findById(userId)
+                .orElseThrow(() -> new UserServiceException(UserServiceError.USER_NOT_FOUND));
 
-        final var userProfiles = userProfileRepository.findByUser(users.get(0));
+        final var userProfiles = userProfileRepository.findByUser(user);
         if (CollectionUtils.isEmpty(userProfiles)) {
             throw new UserServiceException(UserServiceError.USER_NOT_FOUND);
         }
@@ -42,12 +38,10 @@ public class GetUserProfileHandler {
     private void validate() throws UserServiceException {
         Objects.requireNonNull(userRepository, "userRepository");
         Objects.requireNonNull(userProfileRepository, "userProfileRepository");
-        Objects.requireNonNull(userDigest, "userDigest");
 
-        if (!StringUtils.hasText(userDigest.getEmail())) {
-            throw new UserServiceException(UserServiceError.MISSING_EMAIL);
+        if (userId == null) {
+            throw new UserServiceException(UserServiceError.USER_NOT_FOUND);
         }
-
     }
 }
 

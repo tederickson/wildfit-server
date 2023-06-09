@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.Date;
 
 import com.wildfit.server.domain.GenderType;
-import com.wildfit.server.domain.UserDigest;
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.User;
@@ -18,8 +17,6 @@ import com.wildfit.server.repository.UserProfileRepository;
 import com.wildfit.server.repository.UserRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -36,7 +33,9 @@ class GetUserProfileHandlerTest {
 
     @AfterEach
     void tearDown() {
-        userRepository.deleteAll();
+        final var users = userRepository.findByEmail(EMAIL);
+
+        userRepository.deleteAll(users);
     }
 
     @Test
@@ -45,41 +44,30 @@ class GetUserProfileHandlerTest {
                 () -> GetUserProfileHandler.builder().build().execute());
     }
 
-    @ParameterizedTest
-    @NullAndEmptySource
-    void missingUserName(String email) {
-        final var userDigest = UserDigest.builder()
-                .withEmail(email)
-                .build();
+    @Test
+    void missingId() {
         final var exception = assertThrows(UserServiceException.class,
                 () -> GetUserProfileHandler.builder()
                         .withUserRepository(userRepository)
                         .withUserProfileRepository(userProfileRepository)
-                        .withUserDigest(userDigest)
+                        .withUserId(null)
                         .build().execute());
-        assertEquals(UserServiceError.MISSING_EMAIL, exception.getError());
+        assertEquals(UserServiceError.USER_NOT_FOUND, exception.getError());
     }
 
     @Test
-    void emptyEmail() {
-        final var userDigest = UserDigest.builder()
-                .withEmail("    ")
-                .build();
+    void userNotFound() {
         final var exception = assertThrows(UserServiceException.class,
                 () -> GetUserProfileHandler.builder()
                         .withUserRepository(userRepository)
                         .withUserProfileRepository(userProfileRepository)
-                        .withUserDigest(userDigest)
+                        .withUserId(-14L)
                         .build().execute());
-        assertEquals(UserServiceError.MISSING_EMAIL, exception.getError());
+        assertEquals(UserServiceError.USER_NOT_FOUND, exception.getError());
     }
 
     @Test
     void execute() throws UserServiceException {
-        final var userDigest = UserDigest.builder()
-                .withEmail(EMAIL)
-                .build();
-
         final var user = User.builder()
                 .withStatus(UserStatus.FREE.getCode())
                 .withCreateDate(new Date())
@@ -94,17 +82,15 @@ class GetUserProfileHandlerTest {
 
         final var saved = userProfileRepository.save(userProfile);
         assertNotNull(saved);
-        System.out.println("saved = " + saved);
 
         final var digest = GetUserProfileHandler.builder()
                 .withUserRepository(userRepository)
                 .withUserProfileRepository(userProfileRepository)
-                .withUserDigest(userDigest)
+                .withUserId(saved.getUser().getId())
                 .build().execute();
 
         assertEquals(EMAIL, digest.getUser().getEmail());
         assertNull(digest.getUser().getPassword());
-        assertEquals(EMAIL, digest.getUser().getEmail());
         assertEquals(39, digest.getAge());
         assertEquals(GenderType.MALE, digest.getGender());
         assertEquals(185.7f, digest.getWeight());

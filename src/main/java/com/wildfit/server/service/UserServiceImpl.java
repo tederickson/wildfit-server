@@ -1,5 +1,6 @@
 package com.wildfit.server.service;
 
+import com.wildfit.server.domain.CreateUserResponse;
 import com.wildfit.server.domain.UserDigest;
 import com.wildfit.server.domain.UserProfileDigest;
 import com.wildfit.server.exception.UserServiceException;
@@ -25,7 +26,7 @@ public class UserServiceImpl implements UserService {
     UserProfileRepository userProfileRepository;
 
     @Override
-    public UserDigest createUser(UserDigest userDigest) throws UserServiceException {
+    public CreateUserResponse createUser(UserDigest userDigest) throws UserServiceException {
         return CreateUserHandler.builder()
                 .withUserRepository(userRepository)
                 .withUserProfileRepository(userProfileRepository)
@@ -49,11 +50,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserProfileDigest getUserProfile(UserDigest userDigest) throws UserServiceException {
+    public UserProfileDigest getUserProfile(Long userId) throws UserServiceException {
         return GetUserProfileHandler.builder()
                 .withUserRepository(userRepository)
                 .withUserProfileRepository(userProfileRepository)
-                .withUserDigest(userDigest)
+                .withUserId(userId)
                 .build().execute();
     }
 

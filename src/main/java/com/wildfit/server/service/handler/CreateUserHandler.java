@@ -1,20 +1,24 @@
 package com.wildfit.server.service.handler;
 
-import java.util.Objects;
 import java.util.Date;
+import java.util.Objects;
+
+import com.wildfit.server.domain.CreateUserResponse;
 import com.wildfit.server.domain.UserDigest;
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.User;
 import com.wildfit.server.model.UserProfile;
 import com.wildfit.server.model.UserStatus;
-import com.wildfit.server.model.mapper.UserDigestMapper;
+import com.wildfit.server.model.mapper.CreateUserResponseMapper;
 import com.wildfit.server.repository.UserProfileRepository;
 import com.wildfit.server.repository.UserRepository;
 import lombok.Builder;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
+@Slf4j
 @Builder(setterPrefix = "with")
 public class CreateUserHandler {
 
@@ -22,8 +26,9 @@ public class CreateUserHandler {
     final UserProfileRepository userProfileRepository;
     final UserDigest userDigest;
 
-    public UserDigest execute() throws UserServiceException {
+    public CreateUserResponse execute() throws UserServiceException {
         validate();
+        log.info(userDigest.toString());
 
         if (!PasswordValidator.isValid(userDigest.getPassword())) {
             throw new UserServiceException(UserServiceError.INVALID_PASSWORD);
@@ -42,9 +47,9 @@ public class CreateUserHandler {
                 .withEmail(userDigest.getEmail()).build();
         final var userProfile = UserProfile.builder().withUser(user).build();
 
-        userProfileRepository.save(userProfile);
+        final var saved = userProfileRepository.save(userProfile);
 
-        return UserDigestMapper.map(user);
+        return CreateUserResponseMapper.map(saved.getUser());
     }
 
     private void validate() throws UserServiceException {

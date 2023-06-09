@@ -1,5 +1,7 @@
 package com.wildfit.server.manager;
 
+import com.wildfit.server.domain.CreateUserRequest;
+import com.wildfit.server.domain.CreateUserResponse;
 import com.wildfit.server.domain.UserDigest;
 import com.wildfit.server.domain.UserProfileDigest;
 import com.wildfit.server.exception.UserServiceException;
@@ -31,26 +33,27 @@ public class UserAdminController {
 
     @ApiOperation(value = "Create User")
     @ApiResponses(value = { //
-            @ApiResponse(code = 201, message = "Successfully created user", response = UserDigest.class), //
+            @ApiResponse(code = 201, message = "Successfully created user", response = CreateUserResponse.class), //
             @ApiResponse(code = 400, message = "Invalid user name and/or password or user already exists")})
     @PostMapping("/users")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public UserDigest createUser(@RequestBody UserDigest userDigest) throws UserServiceException {
-        log.info("/users/" + userDigest);
-
+    public CreateUserResponse createUser(@RequestBody CreateUserRequest request) throws UserServiceException {
+        log.info("createUser|" + request);
+        final var userDigest = UserDigest.builder()
+                .withEmail(request.getEmail())
+                .withPassword(request.getPassword())
+                .build();
         return userService.createUser(userDigest);
     }
-
 
     @ApiOperation(value = "Get User Profile")
     @ApiResponses(value = { //
             @ApiResponse(code = 200, message = "Get user", response = UserProfileDigest.class), //
-            @ApiResponse(code = 400, message = "User name not found")})
-    @GetMapping("/users/{userName}")
-    public UserProfileDigest getUser(@PathVariable("userName") String userName) throws UserServiceException {
-        log.info("/users/" + userName);
+            @ApiResponse(code = 400, message = "User id not found")})
+    @GetMapping("/users/{id}")
+    public UserProfileDigest getUser(@PathVariable("id") Long id) throws UserServiceException {
+        log.info("getUser|" + id);
 
-        final var userDigest = UserDigest.builder().withEmail(userName).build();
-        return userService.getUserProfile(userDigest);
+        return userService.getUserProfile(id);
     }
 }

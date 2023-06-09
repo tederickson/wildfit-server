@@ -2,7 +2,6 @@ package com.wildfit.server.service.handler;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Date;
@@ -34,7 +33,9 @@ class CreateUserHandlerTest {
 
     @AfterEach
     void tearDown() {
-        userRepository.deleteAll();
+        final var users = userRepository.findByEmail(EMAIL);
+
+        userRepository.deleteAll(users);
     }
 
     @Test
@@ -110,14 +111,16 @@ class CreateUserHandlerTest {
                 .withPassword(PASSWORD)
                 .withEmail(EMAIL)
                 .build();
-        final var saved = CreateUserHandler.builder()
+        final var response = CreateUserHandler.builder()
                 .withUserRepository(userRepository)
                 .withUserProfileRepository(userProfileRepository)
                 .withUserDigest(userDigest)
                 .build().execute();
 
-        assertEquals(EMAIL, saved.getEmail());
-        assertNull(saved.getPassword());
+        assertEquals(EMAIL, response.getEmail());
+
+        final var user = userRepository.findById(response.getId()).orElseThrow();
+        assertEquals(EMAIL, user.getEmail());
     }
 
     @Test
