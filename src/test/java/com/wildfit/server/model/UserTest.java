@@ -1,8 +1,8 @@
 package com.wildfit.server.model;
 
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
-import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanToString;
-import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetters;
+import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanToStringExcluding;
+import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSettersExcluding;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
@@ -18,12 +18,12 @@ class UserTest {
 
     @Test
     public void gettersAndSettersShouldWorkForEachProperty() {
-        assertThat(User.class, hasValidGettersAndSetters());
+        assertThat(User.class, hasValidGettersAndSettersExcluding("userStatus"));
     }
 
     @Test
     public void allPropertiesShouldBeRepresentedInToStringOutput() {
-        assertThat(User.class, hasValidBeanToString());
+        assertThat(User.class, hasValidBeanToStringExcluding("userStatus"));
     }
 
     @Test

@@ -4,7 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.Date;
+
 import com.wildfit.server.model.User;
+import com.wildfit.server.model.UserStatus;
 import org.junit.jupiter.api.Test;
 
 class UserDigestMapperTest {
@@ -15,8 +18,9 @@ class UserDigestMapperTest {
     void map() {
         final var user = User.builder()
                 .withId(12314L)
-                .withUserName(MAIL)
                 .withEmail(MAIL)
+                .withStatus(UserStatus.FREE.getCode())
+                .withCreateDate(new Date())
                 .withPassword("encodedPassword")
                 .build();
 

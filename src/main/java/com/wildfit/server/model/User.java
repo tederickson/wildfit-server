@@ -1,12 +1,15 @@
 package com.wildfit.server.model;
 
-import javax.persistence.Column;
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.util.Date;
 import java.util.Objects;
 
 import lombok.AllArgsConstructor;
@@ -21,20 +24,23 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "USER",
-        indexes = {
-                @Index(name = "user_idx1", columnList = "user_name"),
-                @Index(name = "user_idx2", columnList = "email")
-        })
+@Table(name = "USER", indexes = {@Index(name = "user_idx1", columnList = "email")})
 public final class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "user_name")
-    private String userName;
-    private String password;
     private String email;
+    private String password;
+    private String status;
+
+    @Basic
+    @Temporal(TemporalType.DATE)
+    private Date createDate;
+
+    public UserStatus getUserStatus() {
+        return UserStatus.findByCode(status);
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -57,9 +63,10 @@ public final class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", status='" + status + '\'' +
+                ", createDate=" + createDate +
                 '}';
     }
 }

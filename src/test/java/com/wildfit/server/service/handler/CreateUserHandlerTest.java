@@ -5,10 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.Date;
+
 import com.wildfit.server.domain.UserDigest;
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.User;
+import com.wildfit.server.model.UserStatus;
 import com.wildfit.server.repository.UserProfileRepository;
 import com.wildfit.server.repository.UserRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -125,8 +128,9 @@ class CreateUserHandlerTest {
                 .build();
 
         final var user = User.builder()
-                .withUserName(EMAIL)
-                .withPassword("encodedPassword")
+                .withStatus(UserStatus.CREATE.getCode())
+                .withCreateDate(new Date())
+                .withPassword("encoded password")
                 .withEmail(EMAIL).build();
         final var saved = userRepository.save(user);
         assertNotNull(saved);

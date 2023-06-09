@@ -26,7 +26,7 @@ public class GetUserProfileHandler {
         log.info("GetUserProfileHandler(" + userDigest + ")");
         validate();
 
-        final var users = userRepository.findByUserName(userDigest.getEmail());
+        final var users = userRepository.findByEmail(userDigest.getEmail());
         if (CollectionUtils.isEmpty(users)) {
             throw new UserServiceException(UserServiceError.USER_NOT_FOUND);
         }
