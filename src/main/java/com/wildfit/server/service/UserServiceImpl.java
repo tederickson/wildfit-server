@@ -1,6 +1,7 @@
 package com.wildfit.server.service;
 
 import com.wildfit.server.domain.CreateUserResponse;
+import com.wildfit.server.domain.UpdateUserProfileRequest;
 import com.wildfit.server.domain.UserDigest;
 import com.wildfit.server.domain.UserProfileDigest;
 import com.wildfit.server.exception.UserServiceException;
@@ -9,6 +10,7 @@ import com.wildfit.server.repository.UserRepository;
 import com.wildfit.server.service.handler.CreateUserHandler;
 import com.wildfit.server.service.handler.DeleteUserHandler;
 import com.wildfit.server.service.handler.GetUserProfileHandler;
+import com.wildfit.server.service.handler.UpdateUserProfileHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -63,7 +65,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserProfileDigest updateUserProfile(UserProfileDigest userProfileDigest) {
-        return null;
+    public UserProfileDigest updateUserProfile(Long id, UpdateUserProfileRequest request) throws UserServiceException {
+        return UpdateUserProfileHandler.builder()
+                .withUserRepository(userRepository)
+                .withUserProfileRepository(userProfileRepository)
+                .withUserId(id)
+                .withUserProfileRequest(request)
+                .build().execute();
     }
 }

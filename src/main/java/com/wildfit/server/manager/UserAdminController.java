@@ -2,6 +2,7 @@ package com.wildfit.server.manager;
 
 import com.wildfit.server.domain.CreateUserRequest;
 import com.wildfit.server.domain.CreateUserResponse;
+import com.wildfit.server.domain.UpdateUserProfileRequest;
 import com.wildfit.server.domain.UserDigest;
 import com.wildfit.server.domain.UserProfileDigest;
 import com.wildfit.server.exception.UserServiceException;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -56,6 +58,18 @@ public class UserAdminController {
         log.info("getUser|" + id);
 
         return userService.getUserProfile(id);
+    }
+
+    @ApiOperation(value = "Update User Profile")
+    @ApiResponses(value = { //
+            @ApiResponse(code = 200, message = "Update user", response = UserProfileDigest.class), //
+            @ApiResponse(code = 400, message = "User id not found")})
+    @PutMapping("/users/{id}")
+    public UserProfileDigest updateUserProfile(@PathVariable("id") Long id,
+                                               @RequestBody UpdateUserProfileRequest request) throws UserServiceException {
+        log.info("updateUserProfile|" + id + "|" + request);
+
+        return userService.updateUserProfile(id, request);
     }
 
     @ApiOperation(value = "Delete User")

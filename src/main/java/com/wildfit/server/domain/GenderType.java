@@ -22,4 +22,8 @@ public enum GenderType {
     public static GenderType findByCode(char code) {
         return findByCode(String.valueOf(code));
     }
+
+    public char getCodeAsCharacter() {
+        return code.charAt(0);
+    }
 }

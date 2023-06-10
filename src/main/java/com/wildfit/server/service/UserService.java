@@ -1,6 +1,7 @@
 package com.wildfit.server.service;
 
 import com.wildfit.server.domain.CreateUserResponse;
+import com.wildfit.server.domain.UpdateUserProfileRequest;
 import com.wildfit.server.domain.UserDigest;
 import com.wildfit.server.domain.UserProfileDigest;
 import com.wildfit.server.exception.UserServiceException;
@@ -16,7 +17,5 @@ public interface UserService {
 
     UserProfileDigest getUserProfile(Long userId) throws UserServiceException;
 
-    UserProfileDigest updateUserProfile(UserProfileDigest userProfileDigest);
-
-
+    UserProfileDigest updateUserProfile(Long id, UpdateUserProfileRequest request) throws UserServiceException;
 }

@@ -22,4 +22,9 @@ class GenderTypeTest {
     void findByCode_notFound() {
         assertNull(GenderType.findByCode("Apple"));
     }
+
+    @Test
+    void getCodeAsCharacter() {
+        assertEquals('N', GenderType.NON_BINARY.getCodeAsCharacter());
+    }
 }
