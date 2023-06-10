@@ -13,6 +13,7 @@ import com.wildfit.server.model.mapper.CreateUserResponseMapper;
 import com.wildfit.server.repository.UserProfileRepository;
 import com.wildfit.server.repository.UserRepository;
 import lombok.Builder;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
@@ -41,7 +42,9 @@ public class CreateUserHandler {
                 .withStatus(UserStatus.CREATE.getCode())
                 .withCreateDate(new Date())
                 .withPassword(encodedPassword)
-                .withEmail(email).build();
+                .withEmail(email)
+                .withConfirmCode(RandomStringUtils.randomAlphabetic(10))
+                .build();
         final var userProfile = UserProfile.builder().withUser(user).build();
 
         final var saved = userProfileRepository.save(userProfile);

@@ -113,6 +113,7 @@ class CreateUserHandlerTest {
         final var user = User.builder()
                 .withStatus(UserStatus.CREATE.getCode())
                 .withCreateDate(new Date())
+                .withConfirmCode("confcode")
                 .withPassword("encoded password")
                 .withEmail(EMAIL).build();
         final var saved = userRepository.save(user);

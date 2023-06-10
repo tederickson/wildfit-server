@@ -43,6 +43,7 @@ class UserProfileRepositoryTest {
         final var user = User.builder()
                 .withStatus(UserStatus.CREATE.getCode())
                 .withCreateDate(new Date())
+                .withConfirmCode("confcode")
                 .withPassword(PASSWORD)
                 .withEmail(EMAIL).build();
         final var userProfile = UserProfile.builder()

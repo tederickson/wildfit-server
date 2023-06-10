@@ -21,8 +21,6 @@ class UserRepositoryTest {
 
     @Autowired
     UserRepository userRepository;
-    @Autowired
-    UserProfileRepository userProfileRepository;
 
     @AfterEach
     void tearDown() {
@@ -42,6 +40,7 @@ class UserRepositoryTest {
         final var user = User.builder()
                 .withStatus(UserStatus.CREATE.getCode())
                 .withCreateDate(new Date())
+                .withConfirmCode("confcode")
                 .withPassword(PASSWORD)
                 .withEmail(EMAIL).build();
         final var saved = userRepository.save(user);

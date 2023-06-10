@@ -81,6 +81,7 @@ class ChangePasswordHandlerTest {
                 .withStatus(UserStatus.CREATE.getCode())
                 .withCreateDate(new Date())
                 .withPassword("encoded password")
+                .withConfirmCode("confcode")
                 .withEmail(EMAIL).build();
         final var saved = userRepository.save(user);
         assertNotNull(saved);
