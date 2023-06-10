@@ -8,6 +8,7 @@ import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.repository.UserProfileRepository;
 import com.wildfit.server.repository.UserRepository;
 import com.wildfit.server.service.handler.ChangePasswordHandler;
+import com.wildfit.server.service.handler.ConfirmUserHandler;
 import com.wildfit.server.service.handler.CreateUserHandler;
 import com.wildfit.server.service.handler.DeleteUserHandler;
 import com.wildfit.server.service.handler.GetUserProfileHandler;
@@ -77,6 +78,15 @@ public class UserServiceImpl implements UserService {
                 .withUserProfileRepository(userProfileRepository)
                 .withUserId(id)
                 .withUserProfileRequest(request)
+                .build().execute();
+    }
+
+    @Override
+    public void confirmUser(String email, String confirmationCode) throws UserServiceException {
+        ConfirmUserHandler.builder()
+                .withUserRepository(userRepository)
+                .withEmail(email)
+                .withConfirmationCode(confirmationCode)
                 .build().execute();
     }
 }

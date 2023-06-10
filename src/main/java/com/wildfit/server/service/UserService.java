@@ -18,4 +18,6 @@ public interface UserService {
     UserProfileDigest getUserProfile(Long userId) throws UserServiceException;
 
     UserProfileDigest updateUserProfile(Long id, UpdateUserProfileRequest request) throws UserServiceException;
+
+    void confirmUser(String email, String confirmationCode) throws UserServiceException;
 }
