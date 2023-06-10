@@ -10,7 +10,6 @@ import com.wildfit.server.repository.UserProfileRepository;
 import com.wildfit.server.repository.UserRepository;
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.CollectionUtils;
 
 @Builder(setterPrefix = "with")
 @Slf4j
@@ -28,9 +27,6 @@ public class GetUserProfileHandler {
                 .orElseThrow(() -> new UserServiceException(UserServiceError.USER_NOT_FOUND));
 
         final var userProfiles = userProfileRepository.findByUser(user);
-        if (CollectionUtils.isEmpty(userProfiles)) {
-            throw new UserServiceException(UserServiceError.USER_NOT_FOUND);
-        }
 
         return UserProfileDigestMapper.map(userProfiles.get(0));
     }

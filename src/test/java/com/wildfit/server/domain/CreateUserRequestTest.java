@@ -4,6 +4,7 @@ import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanToString;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetters;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
@@ -30,4 +31,13 @@ class CreateUserRequestTest {
         EqualsVerifier.forClass(CreateUserRequest.class).suppress(Warning.NONFINAL_FIELDS).verify();
     }
 
+    @Test
+    void builder() {
+        final var request = CreateUserRequest.builder()
+                .withEmail("email")
+                .withPassword("p")
+                .build();
+        assertEquals("email", request.getEmail());
+        assertEquals("p", request.getPassword());
+    }
 }
