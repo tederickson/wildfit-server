@@ -13,6 +13,7 @@ import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,5 +56,16 @@ public class UserAdminController {
         log.info("getUser|" + id);
 
         return userService.getUserProfile(id);
+    }
+
+    @ApiOperation(value = "Delete User")
+    @ApiResponses(value = { //
+            @ApiResponse(code = 200, message = "User deleted"), //
+            @ApiResponse(code = 400, message = "User id not found")})
+    @DeleteMapping("/users/{id}")
+    public void deleteUser(@PathVariable("id") Long id) throws UserServiceException {
+        log.info("deleteUser|" + id);
+
+        userService.deleteUser(id);
     }
 }

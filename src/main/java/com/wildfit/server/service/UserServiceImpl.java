@@ -7,6 +7,7 @@ import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.repository.UserProfileRepository;
 import com.wildfit.server.repository.UserRepository;
 import com.wildfit.server.service.handler.CreateUserHandler;
+import com.wildfit.server.service.handler.DeleteUserHandler;
 import com.wildfit.server.service.handler.GetUserProfileHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,17 +36,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(UserDigest userDigest) {
+    public void deleteUser(Long userId) throws UserServiceException {
+        DeleteUserHandler.builder()
+                .withUserRepository(userRepository)
+                .withUserId(userId)
+                .build().execute();
+    }
+
+    @Override
+    public void login(UserDigest userDigest) throws UserServiceException {
 
     }
 
     @Override
-    public void login(UserDigest userDigest) {
-
-    }
-
-    @Override
-    public void changePassword(UserDigest userDigest) {
+    public void changePassword(UserDigest userDigest) throws UserServiceException {
 
     }
 

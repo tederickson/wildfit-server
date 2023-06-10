@@ -8,11 +8,11 @@ import com.wildfit.server.exception.UserServiceException;
 public interface UserService {
     CreateUserResponse createUser(UserDigest userDigest) throws UserServiceException;
 
-    void deleteUser(UserDigest userDigest);
+    void deleteUser(Long userId) throws UserServiceException;
 
-    void login(UserDigest userDigest);
+    void login(UserDigest userDigest) throws UserServiceException;
 
-    void changePassword(UserDigest userDigest);
+    void changePassword(UserDigest userDigest) throws UserServiceException;
 
     UserProfileDigest getUserProfile(Long userId) throws UserServiceException;
 
