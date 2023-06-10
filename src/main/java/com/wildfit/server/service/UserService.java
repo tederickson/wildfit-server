@@ -13,7 +13,7 @@ public interface UserService {
 
     void login(UserDigest userDigest) throws UserServiceException;
 
-    void changePassword(UserDigest userDigest) throws UserServiceException;
+    void changePassword(Long id, String password) throws UserServiceException;
 
     UserProfileDigest getUserProfile(Long userId) throws UserServiceException;
 

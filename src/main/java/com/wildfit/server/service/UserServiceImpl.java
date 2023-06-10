@@ -7,6 +7,7 @@ import com.wildfit.server.domain.UserProfileDigest;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.repository.UserProfileRepository;
 import com.wildfit.server.repository.UserRepository;
+import com.wildfit.server.service.handler.ChangePasswordHandler;
 import com.wildfit.server.service.handler.CreateUserHandler;
 import com.wildfit.server.service.handler.DeleteUserHandler;
 import com.wildfit.server.service.handler.GetUserProfileHandler;
@@ -47,12 +48,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void login(UserDigest userDigest) throws UserServiceException {
-
+    public void changePassword(Long id, String password) throws UserServiceException {
+        ChangePasswordHandler.builder()
+                .withUserRepository(userRepository)
+                .withUserId(id)
+                .withPassword(password)
+                .build().execute();
     }
 
     @Override
-    public void changePassword(UserDigest userDigest) throws UserServiceException {
+    public void login(UserDigest userDigest) throws UserServiceException {
 
     }
 

@@ -1,5 +1,6 @@
 package com.wildfit.server.manager;
 
+import com.wildfit.server.domain.ChangePasswordRequest;
 import com.wildfit.server.domain.CreateUserRequest;
 import com.wildfit.server.domain.CreateUserResponse;
 import com.wildfit.server.domain.UpdateUserProfileRequest;
@@ -40,7 +41,9 @@ public class UserAdminController {
     @PostMapping("/users")
     @ResponseStatus(code = HttpStatus.CREATED)
     public CreateUserResponse createUser(@RequestBody CreateUserRequest request) throws UserServiceException {
-        log.info("createUser|" + request);
+        final var logMessage = String.join("|", "createUser", request.toString());
+        log.info(logMessage);
+
         return userService.createUser(request.getEmail(), request.getPassword());
     }
 
@@ -50,7 +53,8 @@ public class UserAdminController {
             @ApiResponse(code = 400, message = "User id not found")})
     @GetMapping("/users/{id}")
     public UserProfileDigest getUser(@PathVariable("id") Long id) throws UserServiceException {
-        log.info("getUser|" + id);
+        final var logMessage = String.join("|", "getUser", id.toString());
+        log.info(logMessage);
 
         return userService.getUserProfile(id);
     }
@@ -62,7 +66,8 @@ public class UserAdminController {
     @PutMapping("/users/{id}")
     public UserProfileDigest updateUserProfile(@PathVariable("id") Long id,
                                                @RequestBody UpdateUserProfileRequest request) throws UserServiceException {
-        log.info("updateUserProfile|" + id + "|" + request);
+        final var logMessage = String.join("|", "updateUserProfile", id.toString(), request.toString());
+        log.info(logMessage);
 
         return userService.updateUserProfile(id, request);
     }
@@ -73,8 +78,21 @@ public class UserAdminController {
             @ApiResponse(code = 400, message = "User id not found")})
     @DeleteMapping("/users/{id}")
     public void deleteUser(@PathVariable("id") Long id) throws UserServiceException {
-        log.info("deleteUser|" + id);
+        final var logMessage = String.join("|", "deleteUser", id.toString());
+        log.info(logMessage);
 
         userService.deleteUser(id);
+    }
+
+    @ApiOperation(value = "Change Password")
+    @ApiResponses(value = { //
+            @ApiResponse(code = 200, message = "Successfully changed password"), //
+            @ApiResponse(code = 400, message = "Invalid user id and/or password")})
+    @PostMapping("/users/{id}/change-password")
+    public void changePassword(@PathVariable("id") Long id, @RequestBody ChangePasswordRequest request) throws UserServiceException {
+        final var logMessage = String.join("|", "changePassword", id.toString(), request.toString());
+        log.info(logMessage);
+
+        userService.changePassword(id, request.getPassword());
     }
 }
