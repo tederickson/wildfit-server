@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Date;
 
-import com.wildfit.server.domain.UserDigest;
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.User;
@@ -47,29 +46,24 @@ class CreateUserHandlerTest {
     @ParameterizedTest
     @NullAndEmptySource
     void nullPassword(String password) {
-        final var userDigest = UserDigest.builder()
-                .withEmail(EMAIL)
-                .withPassword(password).build();
         final var exception = assertThrows(UserServiceException.class,
                 () -> CreateUserHandler.builder()
                         .withUserRepository(userRepository)
                         .withUserProfileRepository(userProfileRepository)
-                        .withUserDigest(userDigest)
+                        .withEmail(EMAIL)
+                        .withPassword(password)
                         .build().execute());
         assertEquals(UserServiceError.INVALID_PASSWORD, exception.getError());
     }
 
     @Test
     void invalidPassword() {
-        final var userDigest = UserDigest.builder()
-                .withEmail(EMAIL)
-                .withPassword("apple")
-                .build();
         final var exception = assertThrows(UserServiceException.class,
                 () -> CreateUserHandler.builder()
                         .withUserRepository(userRepository)
                         .withUserProfileRepository(userProfileRepository)
-                        .withUserDigest(userDigest)
+                        .withPassword("apple")
+                        .withEmail(EMAIL)
                         .build().execute());
         assertEquals(UserServiceError.INVALID_PASSWORD, exception.getError());
     }
@@ -77,44 +71,35 @@ class CreateUserHandlerTest {
     @ParameterizedTest
     @NullAndEmptySource
     void missingEmail(String email) {
-        final var userDigest = UserDigest.builder()
-                .withPassword(PASSWORD)
-                .withEmail(email)
-                .build();
         final var exception = assertThrows(UserServiceException.class,
                 () -> CreateUserHandler.builder()
                         .withUserRepository(userRepository)
                         .withUserProfileRepository(userProfileRepository)
-                        .withUserDigest(userDigest)
+                        .withPassword(PASSWORD)
+                        .withEmail(email)
                         .build().execute());
         assertEquals(UserServiceError.MISSING_EMAIL, exception.getError());
     }
 
     @Test
     void emptyEmail() {
-        final var userDigest = UserDigest.builder()
-                .withPassword(PASSWORD)
-                .withEmail("    ")
-                .build();
         final var exception = assertThrows(UserServiceException.class,
                 () -> CreateUserHandler.builder()
                         .withUserRepository(userRepository)
                         .withUserProfileRepository(userProfileRepository)
-                        .withUserDigest(userDigest)
+                        .withPassword(PASSWORD)
+                        .withEmail("    ")
                         .build().execute());
         assertEquals(UserServiceError.MISSING_EMAIL, exception.getError());
     }
 
     @Test
     void execute() throws UserServiceException {
-        final var userDigest = UserDigest.builder()
-                .withPassword(PASSWORD)
-                .withEmail(EMAIL)
-                .build();
         final var response = CreateUserHandler.builder()
                 .withUserRepository(userRepository)
                 .withUserProfileRepository(userProfileRepository)
-                .withUserDigest(userDigest)
+                .withPassword(PASSWORD)
+                .withEmail(EMAIL)
                 .build().execute();
 
         assertEquals(EMAIL, response.getEmail());
@@ -125,11 +110,6 @@ class CreateUserHandlerTest {
 
     @Test
     void userAlreadyExists() {
-        final var userDigest = UserDigest.builder()
-                .withPassword(PASSWORD)
-                .withEmail(EMAIL)
-                .build();
-
         final var user = User.builder()
                 .withStatus(UserStatus.CREATE.getCode())
                 .withCreateDate(new Date())
@@ -142,7 +122,8 @@ class CreateUserHandlerTest {
                 () -> CreateUserHandler.builder()
                         .withUserRepository(userRepository)
                         .withUserProfileRepository(userProfileRepository)
-                        .withUserDigest(userDigest)
+                        .withPassword(PASSWORD)
+                        .withEmail(EMAIL)
                         .build().execute());
 
         assertEquals(UserServiceError.EXISTING_USER, exception.getError());

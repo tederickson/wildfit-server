@@ -2,7 +2,6 @@ package com.wildfit.server.service.handler;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Date;
@@ -90,7 +89,6 @@ class GetUserProfileHandlerTest {
                 .build().execute();
 
         assertEquals(EMAIL, digest.getUser().getEmail());
-        assertNull(digest.getUser().getPassword());
         assertEquals(39, digest.getAge());
         assertEquals(GenderType.MALE, digest.getGender());
         assertEquals(185.7f, digest.getWeight());

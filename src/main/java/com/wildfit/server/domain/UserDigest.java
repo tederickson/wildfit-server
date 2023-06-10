@@ -14,8 +14,6 @@ import lombok.NoArgsConstructor;
 public final class UserDigest {
     private long id;
     @JsonDeserialize(using = CustomStringDeserializer.class)
-    private String password;
-    @JsonDeserialize(using = CustomStringDeserializer.class)
     private String email;
     private UserStatusType status;
 }

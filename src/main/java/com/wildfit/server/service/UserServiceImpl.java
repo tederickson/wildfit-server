@@ -29,11 +29,12 @@ public class UserServiceImpl implements UserService {
     UserProfileRepository userProfileRepository;
 
     @Override
-    public CreateUserResponse createUser(UserDigest userDigest) throws UserServiceException {
+    public CreateUserResponse createUser(String email, String password) throws UserServiceException {
         return CreateUserHandler.builder()
                 .withUserRepository(userRepository)
                 .withUserProfileRepository(userProfileRepository)
-                .withUserDigest(userDigest)
+                .withEmail(email)
+                .withPassword(password)
                 .build().execute();
     }
 

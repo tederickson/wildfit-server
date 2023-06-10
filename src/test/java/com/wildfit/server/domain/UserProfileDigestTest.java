@@ -14,8 +14,9 @@ import org.junit.jupiter.api.Test;
 
 class UserProfileDigestTest {
     final static UserDigest userDigest = UserDigest.builder()
-            .withPassword("password")
+            .withId(123L)
             .withEmail("email")
+            .withStatus(UserStatusType.PREMIUM)
             .build();
 
     @BeforeAll
@@ -53,7 +54,7 @@ class UserProfileDigestTest {
                 .withHeight(65.23f)
                 .build();
 
-        assertEquals("password", userProfileDigest.getUser().getPassword());
+        assertEquals("email", userProfileDigest.getUser().getEmail());
         assertEquals(39, userProfileDigest.getAge());
     }
 }

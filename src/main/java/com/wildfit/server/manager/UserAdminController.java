@@ -3,7 +3,6 @@ package com.wildfit.server.manager;
 import com.wildfit.server.domain.CreateUserRequest;
 import com.wildfit.server.domain.CreateUserResponse;
 import com.wildfit.server.domain.UpdateUserProfileRequest;
-import com.wildfit.server.domain.UserDigest;
 import com.wildfit.server.domain.UserProfileDigest;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.service.UserService;
@@ -42,11 +41,7 @@ public class UserAdminController {
     @ResponseStatus(code = HttpStatus.CREATED)
     public CreateUserResponse createUser(@RequestBody CreateUserRequest request) throws UserServiceException {
         log.info("createUser|" + request);
-        final var userDigest = UserDigest.builder()
-                .withEmail(request.getEmail())
-                .withPassword(request.getPassword())
-                .build();
-        return userService.createUser(userDigest);
+        return userService.createUser(request.getEmail(), request.getPassword());
     }
 
     @ApiOperation(value = "Get User Profile")

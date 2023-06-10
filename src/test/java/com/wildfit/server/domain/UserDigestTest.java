@@ -43,21 +43,21 @@ class UserDigestTest {
     @Test
     void builder() {
         final var digest = UserDigest.builder()
-                .withPassword("password")
                 .withEmail("email")
                 .build();
 
-        assertEquals("password", digest.getPassword());
+        assertEquals("email", digest.getEmail());
     }
 
     @Test
     public void testDeserialize() throws Exception {
         String jsonContent = "{\"userName\":\"   Mike Callas \",   \"password\":\"S1D2notS!\"," +
+                " \"id\": \"    456     \" ," +
                 " \"email\": \"         \" }";
 
         UserDigest result = this.json.parse(jsonContent).getObject();
 
-        assertThat(result.getPassword()).isEqualTo("S1D2notS!");
+        assertThat(result.getId()).isEqualTo(456);
         assertNull(result.getEmail());
     }
 }

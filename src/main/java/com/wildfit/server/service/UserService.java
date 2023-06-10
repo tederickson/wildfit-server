@@ -7,7 +7,7 @@ import com.wildfit.server.domain.UserProfileDigest;
 import com.wildfit.server.exception.UserServiceException;
 
 public interface UserService {
-    CreateUserResponse createUser(UserDigest userDigest) throws UserServiceException;
+    CreateUserResponse createUser(String email, String password) throws UserServiceException;
 
     void deleteUser(Long userId) throws UserServiceException;
 

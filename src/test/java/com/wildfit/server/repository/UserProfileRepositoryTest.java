@@ -46,7 +46,9 @@ class UserProfileRepositoryTest {
                 .withPassword(PASSWORD)
                 .withEmail(EMAIL).build();
         final var userProfile = UserProfile.builder()
-                .withUser(user).build();
+                .withUser(user)
+                .withName(USER_NAME)
+                .build();
 
         final var saved = userProfileRepository.save(userProfile);
 
@@ -58,12 +60,13 @@ class UserProfileRepositoryTest {
         final var retrieved = users.get(0);
 
         assertEquals(EMAIL, retrieved.getEmail());
-        assertEquals(UserStatus.CREATE, retrieved.getUserStatus() );
+        assertEquals(UserStatus.CREATE, retrieved.getUserStatus());
 
         final var userProfiles = userProfileRepository.findByUser(users.get(0));
         assertEquals(1, userProfiles.size());
         final var retrievedProfile = userProfiles.get(0);
 
         assertEquals(EMAIL, retrievedProfile.getUser().getEmail());
+        assertEquals(USER_NAME, retrievedProfile.getName());
     }
 }
