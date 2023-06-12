@@ -9,8 +9,9 @@ import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import java.time.Instant;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -19,23 +20,24 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "VERIFICATION_TOKEN", indexes = {@Index(name = "token_idx1", columnList = "token")})
-public class VerificationToken {
-    private static final int EXPIRATION = 60 * 60 * 24;
-
+final public class VerificationToken {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    private String token;
 
     @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "user_id")
     private User user;
 
+    private String token;
     private Date expiryDate;
 
     private Date calculateExpirationDate() {
-        return new Date(Instant.now().plusSeconds(EXPIRATION).toEpochMilli());
+        final var cal = Calendar.getInstance();
+
+        cal.add(Calendar.DATE, 1);
+
+        return new Date(cal.getTime().getTime());
     }
 
     public VerificationToken() {
@@ -46,5 +48,32 @@ public class VerificationToken {
         this();
         this.token = token;
         this.user = user;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        VerificationToken that = (VerificationToken) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "VerificationToken{" +
+                "id=" + id +
+                ", user=" + user +
+                ", token='" + token + '\'' +
+                ", expiryDate=" + expiryDate +
+                '}';
     }
 }
