@@ -5,7 +5,7 @@ CREATE TABLE user (
     email varchar(100)  NOT NULL,
     status varchar(2)   NOT NULL,
     create_date date    NOT NULL,
-    confirm_code varchar(10)  NOT NULL,
+    enabled boolean     NOT NULL,
 
     KEY user_idx1 (email)
 );

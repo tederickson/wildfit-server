@@ -70,7 +70,6 @@ class GetUserProfileHandlerTest {
         final var user = User.builder()
                 .withStatus(UserStatus.FREE.getCode())
                 .withCreateDate(new Date())
-                .withConfirmCode("confcode")
                 .withPassword(PASSWORD)
                 .withEmail(EMAIL).build();
         final var userProfile = UserProfile.builder().withUser(user)

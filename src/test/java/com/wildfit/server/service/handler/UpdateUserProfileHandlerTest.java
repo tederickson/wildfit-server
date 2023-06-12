@@ -83,7 +83,6 @@ class UpdateUserProfileHandlerTest {
         final var user = User.builder()
                 .withStatus(UserStatus.PREMIUM.getCode())
                 .withCreateDate(new Date())
-                .withConfirmCode("confcode")
                 .withPassword(PASSWORD)
                 .withEmail(EMAIL).build();
         final var saved = userProfileRepository.save(UserProfile.builder().withUser(user).build());

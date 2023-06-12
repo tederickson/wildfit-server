@@ -38,7 +38,7 @@ public final class User {
     @Temporal(TemporalType.DATE)
     private Date createDate;
 
-    private String confirmCode;
+    private boolean enabled;
 
     public UserStatus getUserStatus() {
         return UserStatus.findByCode(status);
@@ -69,7 +69,7 @@ public final class User {
                 ", password='" + password + '\'' +
                 ", status='" + status + '\'' +
                 ", createDate=" + createDate +
-                ", confirmCode='" + confirmCode + '\'' +
+                ", enabled=" + enabled +
                 '}';
     }
 }

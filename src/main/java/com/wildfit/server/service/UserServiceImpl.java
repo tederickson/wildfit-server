@@ -7,6 +7,7 @@ import com.wildfit.server.domain.UserProfileDigest;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.repository.UserProfileRepository;
 import com.wildfit.server.repository.UserRepository;
+import com.wildfit.server.repository.VerificationTokenRepository;
 import com.wildfit.server.service.handler.ChangePasswordHandler;
 import com.wildfit.server.service.handler.ConfirmUserHandler;
 import com.wildfit.server.service.handler.CreateUserHandler;
@@ -29,12 +30,15 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepository;
     @Autowired
     UserProfileRepository userProfileRepository;
+    @Autowired
+    VerificationTokenRepository verificationTokenRepository;
 
     @Override
     public CreateUserResponse createUser(String email, String password) throws UserServiceException {
         return CreateUserHandler.builder()
                 .withUserRepository(userRepository)
                 .withUserProfileRepository(userProfileRepository)
+                .withVerificationTokenRepository(verificationTokenRepository)
                 .withEmail(email)
                 .withPassword(password)
                 .build().execute();
@@ -85,6 +89,7 @@ public class UserServiceImpl implements UserService {
     public void confirmUser(String email, String confirmationCode) throws UserServiceException {
         ConfirmUserHandler.builder()
                 .withUserRepository(userRepository)
+                .withVerificationTokenRepository(verificationTokenRepository)
                 .withEmail(email)
                 .withConfirmationCode(confirmationCode)
                 .build().execute();

@@ -27,8 +27,7 @@ public class UpdateUserProfileHandler {
         final var user = userRepository.findById(userId).orElseThrow(() ->
                 new UserServiceException(UserServiceError.USER_NOT_FOUND));
 
-        final var profiles = userProfileRepository.findByUser(user);
-        final var userProfile = profiles.get(0);
+        final var userProfile = userProfileRepository.findByUser(user);
 
         userProfile.setName(userProfileRequest.getName());
         userProfile.setAge(userProfileRequest.getAge());

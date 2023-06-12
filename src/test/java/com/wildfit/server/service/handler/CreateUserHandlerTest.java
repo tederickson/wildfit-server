@@ -12,6 +12,7 @@ import com.wildfit.server.model.User;
 import com.wildfit.server.model.UserStatus;
 import com.wildfit.server.repository.UserProfileRepository;
 import com.wildfit.server.repository.UserRepository;
+import com.wildfit.server.repository.VerificationTokenRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -29,6 +30,8 @@ class CreateUserHandlerTest {
     UserRepository userRepository;
     @Autowired
     UserProfileRepository userProfileRepository;
+    @Autowired
+    VerificationTokenRepository verificationTokenRepository;
 
     @AfterEach
     void tearDown() {
@@ -50,6 +53,7 @@ class CreateUserHandlerTest {
                 () -> CreateUserHandler.builder()
                         .withUserRepository(userRepository)
                         .withUserProfileRepository(userProfileRepository)
+                        .withVerificationTokenRepository(verificationTokenRepository)
                         .withEmail(EMAIL)
                         .withPassword(password)
                         .build().execute());
@@ -62,6 +66,7 @@ class CreateUserHandlerTest {
                 () -> CreateUserHandler.builder()
                         .withUserRepository(userRepository)
                         .withUserProfileRepository(userProfileRepository)
+                        .withVerificationTokenRepository(verificationTokenRepository)
                         .withPassword("apple")
                         .withEmail(EMAIL)
                         .build().execute());
@@ -75,6 +80,7 @@ class CreateUserHandlerTest {
                 () -> CreateUserHandler.builder()
                         .withUserRepository(userRepository)
                         .withUserProfileRepository(userProfileRepository)
+                        .withVerificationTokenRepository(verificationTokenRepository)
                         .withPassword(PASSWORD)
                         .withEmail(email)
                         .build().execute());
@@ -87,6 +93,7 @@ class CreateUserHandlerTest {
                 () -> CreateUserHandler.builder()
                         .withUserRepository(userRepository)
                         .withUserProfileRepository(userProfileRepository)
+                        .withVerificationTokenRepository(verificationTokenRepository)
                         .withPassword(PASSWORD)
                         .withEmail("    ")
                         .build().execute());
@@ -98,6 +105,7 @@ class CreateUserHandlerTest {
         final var response = CreateUserHandler.builder()
                 .withUserRepository(userRepository)
                 .withUserProfileRepository(userProfileRepository)
+                .withVerificationTokenRepository(verificationTokenRepository)
                 .withPassword(PASSWORD)
                 .withEmail(EMAIL)
                 .build().execute();
@@ -113,7 +121,6 @@ class CreateUserHandlerTest {
         final var user = User.builder()
                 .withStatus(UserStatus.CREATE.getCode())
                 .withCreateDate(new Date())
-                .withConfirmCode("confcode")
                 .withPassword("encoded password")
                 .withEmail(EMAIL).build();
         final var saved = userRepository.save(user);
@@ -123,6 +130,7 @@ class CreateUserHandlerTest {
                 () -> CreateUserHandler.builder()
                         .withUserRepository(userRepository)
                         .withUserProfileRepository(userProfileRepository)
+                        .withVerificationTokenRepository(verificationTokenRepository)
                         .withPassword(PASSWORD)
                         .withEmail(EMAIL)
                         .build().execute());

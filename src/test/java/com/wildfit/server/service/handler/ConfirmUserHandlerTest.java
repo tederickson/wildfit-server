@@ -3,6 +3,7 @@ package com.wildfit.server.service.handler;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Date;
 
@@ -10,7 +11,9 @@ import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.User;
 import com.wildfit.server.model.UserStatus;
+import com.wildfit.server.model.VerificationToken;
 import com.wildfit.server.repository.UserRepository;
+import com.wildfit.server.repository.VerificationTokenRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -25,6 +28,8 @@ class ConfirmUserHandlerTest {
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    VerificationTokenRepository verificationTokenRepository;
 
     @AfterEach
     void tearDown() {
@@ -45,6 +50,7 @@ class ConfirmUserHandlerTest {
         final var exception = assertThrows(UserServiceException.class,
                 () -> ConfirmUserHandler.builder()
                         .withUserRepository(userRepository)
+                        .withVerificationTokenRepository(verificationTokenRepository)
                         .withConfirmationCode(CONFIRMATION_CODE)
                         .withEmail(email)
                         .build().execute());
@@ -57,6 +63,7 @@ class ConfirmUserHandlerTest {
         final var exception = assertThrows(UserServiceException.class,
                 () -> ConfirmUserHandler.builder()
                         .withUserRepository(userRepository)
+                        .withVerificationTokenRepository(verificationTokenRepository)
                         .withConfirmationCode(confirmationCode)
                         .withEmail(EMAIL)
                         .build().execute());
@@ -64,12 +71,13 @@ class ConfirmUserHandlerTest {
     }
 
     @Test
-    void invalidConfirmationCode() {
+    void confirmationCodeDoesNotMatch() {
         createUser();
 
         final var exception = assertThrows(UserServiceException.class,
                 () -> ConfirmUserHandler.builder()
                         .withUserRepository(userRepository)
+                        .withVerificationTokenRepository(verificationTokenRepository)
                         .withConfirmationCode("BugsBunny")
                         .withEmail(EMAIL)
                         .build().execute());
@@ -82,12 +90,14 @@ class ConfirmUserHandlerTest {
 
         ConfirmUserHandler.builder()
                 .withUserRepository(userRepository)
+                .withVerificationTokenRepository(verificationTokenRepository)
                 .withConfirmationCode(CONFIRMATION_CODE)
                 .withEmail(EMAIL)
                 .build().execute();
 
         final var updatedUser = userRepository.findById(saved.getId()).orElseThrow();
         assertEquals(UserStatus.FREE, updatedUser.getUserStatus());
+        assertTrue(updatedUser.isEnabled());
     }
 
     private User createUser() {
@@ -95,10 +105,13 @@ class ConfirmUserHandlerTest {
                 .withStatus(UserStatus.CREATE.getCode())
                 .withCreateDate(new Date())
                 .withPassword("encoded password")
-                .withConfirmCode(CONFIRMATION_CODE)
                 .withEmail(EMAIL).build();
         final var saved = userRepository.save(user);
         assertNotNull(saved);
+
+        final var verificationToken = new VerificationToken(CONFIRMATION_CODE, user);
+
+        verificationTokenRepository.save(verificationToken);
 
         return saved;
     }

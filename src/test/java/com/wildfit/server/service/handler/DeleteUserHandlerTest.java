@@ -64,7 +64,6 @@ class DeleteUserHandlerTest {
                 .withStatus(UserStatus.FREE.getCode())
                 .withCreateDate(new Date())
                 .withPassword(PASSWORD)
-                .withConfirmCode("confcode")
                 .withEmail(EMAIL).build();
 
         final var saved = userRepository.save(user);
