@@ -1,7 +1,6 @@
 package com.wildfit.server.manager;
 
 import com.wildfit.server.domain.ChangePasswordRequest;
-import com.wildfit.server.domain.ConfirmUserRequest;
 import com.wildfit.server.domain.CreateUserRequest;
 import com.wildfit.server.domain.CreateUserResponse;
 import com.wildfit.server.domain.UpdateUserProfileRequest;
@@ -97,15 +96,4 @@ public class UserAdminController {
         userService.changePassword(id, request.getPassword());
     }
 
-    @ApiOperation(value = "Confirm User Email")
-    @ApiResponses(value = { //
-            @ApiResponse(code = 200, message = "Confirm user", response = UserProfileDigest.class), //
-            @ApiResponse(code = 400, message = "User email not found")})
-    @PutMapping("/users/confirm")
-    public void confirmUser(@RequestBody ConfirmUserRequest request) throws UserServiceException {
-        final var logMessage = String.join("|", "confirmUser", request.toString());
-        log.info(logMessage);
-
-        userService.confirmUser(request.getEmail(), request.getConfirmationCode());
-    }
 }
