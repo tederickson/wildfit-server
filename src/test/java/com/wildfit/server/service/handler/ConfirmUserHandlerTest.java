@@ -85,6 +85,20 @@ class ConfirmUserHandlerTest {
     }
 
     @Test
+    void emailDoesNotMatch() {
+        createUser();
+
+        final var exception = assertThrows(UserServiceException.class,
+                () -> ConfirmUserHandler.builder()
+                        .withUserRepository(userRepository)
+                        .withVerificationTokenRepository(verificationTokenRepository)
+                        .withConfirmationCode(CONFIRMATION_CODE)
+                        .withEmail("BugsBunny")
+                        .build().execute());
+        assertEquals(UserServiceError.INVALID_CONFIRMATION_CODE, exception.getError());
+    }
+
+    @Test
     void execute() throws UserServiceException {
         final User saved = createUser();
 
