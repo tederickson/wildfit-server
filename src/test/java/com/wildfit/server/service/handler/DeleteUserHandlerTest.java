@@ -11,26 +11,11 @@ import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.User;
 import com.wildfit.server.model.UserStatus;
-import com.wildfit.server.repository.UserRepository;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DeleteUserHandlerTest {
-    private static final String PASSWORD = "Super2023!";
-    private static final String EMAIL = "bob@bob.com";
-
-    @Autowired
-    UserRepository userRepository;
-
-    @AfterEach
-    void tearDown() {
-        final var users = userRepository.findByEmail(EMAIL);
-
-        userRepository.deleteAll(users);
-    }
+class DeleteUserHandlerTest extends AbstractHandlerTest {
 
     @Test
     void nullParameters() {

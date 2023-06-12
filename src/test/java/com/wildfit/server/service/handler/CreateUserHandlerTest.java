@@ -11,9 +11,7 @@ import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.User;
 import com.wildfit.server.model.UserStatus;
 import com.wildfit.server.repository.UserProfileRepository;
-import com.wildfit.server.repository.UserRepository;
 import com.wildfit.server.repository.VerificationTokenRepository;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -21,24 +19,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CreateUserHandlerTest {
-
-    private static final String PASSWORD = "Super2023!";
-    private static final String EMAIL = "bob@bob.com";
-
-    @Autowired
-    UserRepository userRepository;
+class CreateUserHandlerTest extends AbstractHandlerTest {
     @Autowired
     UserProfileRepository userProfileRepository;
     @Autowired
     VerificationTokenRepository verificationTokenRepository;
-
-    @AfterEach
-    void tearDown() {
-        final var users = userRepository.findByEmail(EMAIL);
-
-        userRepository.deleteAll(users);
-    }
 
     @Test
     void nullParameters() {

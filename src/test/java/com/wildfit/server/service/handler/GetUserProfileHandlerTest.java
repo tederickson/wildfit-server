@@ -13,29 +13,14 @@ import com.wildfit.server.model.User;
 import com.wildfit.server.model.UserProfile;
 import com.wildfit.server.model.UserStatus;
 import com.wildfit.server.repository.UserProfileRepository;
-import com.wildfit.server.repository.UserRepository;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class GetUserProfileHandlerTest {
-
-    private static final String PASSWORD = "Super2023!";
-    private static final String EMAIL = "bob@bob.com";
-
-    @Autowired
-    UserRepository userRepository;
+class GetUserProfileHandlerTest extends AbstractHandlerTest {
     @Autowired
     UserProfileRepository userProfileRepository;
-
-    @AfterEach
-    void tearDown() {
-        final var users = userRepository.findByEmail(EMAIL);
-
-        userRepository.deleteAll(users);
-    }
 
     @Test
     void nullParameters() {
