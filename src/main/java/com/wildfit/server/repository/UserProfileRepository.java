@@ -1,7 +1,5 @@
 package com.wildfit.server.repository;
 
-import java.util.List;
-
 import com.wildfit.server.model.User;
 import com.wildfit.server.model.UserProfile;
 import org.springframework.data.jpa.repository.JpaRepository;
