@@ -13,6 +13,7 @@ import com.wildfit.server.service.handler.ConfirmUserHandler;
 import com.wildfit.server.service.handler.CreateUserHandler;
 import com.wildfit.server.service.handler.DeleteUserHandler;
 import com.wildfit.server.service.handler.GetUserProfileHandler;
+import com.wildfit.server.service.handler.LoginHandler;
 import com.wildfit.server.service.handler.UpdateUserProfileHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,8 +63,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void login(UserDigest userDigest) throws UserServiceException {
-
+    public UserDigest login(String email, String password) throws UserServiceException {
+        return LoginHandler.builder()
+                .withUserRepository(userRepository)
+                .withEmail(email)
+                .withPassword(password)
+                .build().execute();
     }
 
     @Override

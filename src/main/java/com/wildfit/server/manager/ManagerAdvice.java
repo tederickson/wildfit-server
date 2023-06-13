@@ -20,7 +20,10 @@ public class ManagerAdvice extends ResponseEntityExceptionHandler {
     protected ResponseEntity<ErrorData> serviceExceptionHandler(UserServiceException ex, WebRequest request) {
         log.error("UserServiceException", ex);
         final var userServiceException = ex.getError();
-        final var error = ErrorData.builder().withMessage(userServiceException.getMessage()).build();
+        final var error = ErrorData.builder()
+                .withMessage(userServiceException.getMessage())
+                .withErrorCode(userServiceException.name())
+                .build();
 
         return new ResponseEntity<>(error, userServiceException.getHttpStatus());
     }

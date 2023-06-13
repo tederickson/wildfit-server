@@ -11,8 +11,6 @@ public interface UserService {
 
     void deleteUser(Long userId) throws UserServiceException;
 
-    void login(UserDigest userDigest) throws UserServiceException;
-
     void changePassword(Long id, String password) throws UserServiceException;
 
     UserProfileDigest getUserProfile(Long userId) throws UserServiceException;
@@ -20,4 +18,6 @@ public interface UserService {
     UserProfileDigest updateUserProfile(Long id, UpdateUserProfileRequest request) throws UserServiceException;
 
     void confirmUser(String confirmationCode) throws UserServiceException;
+
+    UserDigest login(String email, String password) throws UserServiceException;
 }
