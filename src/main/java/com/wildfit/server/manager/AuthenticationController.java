@@ -1,7 +1,5 @@
 package com.wildfit.server.manager;
 
-import com.wildfit.server.domain.ConfirmUserRequest;
-import com.wildfit.server.domain.UserProfileDigest;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.service.UserService;
 import io.swagger.annotations.Api;
@@ -11,7 +9,7 @@ import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -27,13 +25,13 @@ public class AuthenticationController {
 
     @ApiOperation(value = "Confirm User Email")
     @ApiResponses(value = { //
-            @ApiResponse(code = 200, message = "Confirm user", response = UserProfileDigest.class), //
-            @ApiResponse(code = 400, message = "User email not found")})
-    @PutMapping("/auth/confirm")
-    public void confirmUser(@RequestBody ConfirmUserRequest request) throws UserServiceException {
-        final var logMessage = String.join("|", "confirmUser", request.toString());
+            @ApiResponse(code = 200, message = "Confirm user email account"), //
+            @ApiResponse(code = 400, message = "Confirmation code not found")})
+    @PutMapping("/auth/register")
+    public void register(@RequestParam(value = "confirmCode", required = true) String confirmCode) throws UserServiceException {
+        final var logMessage = String.join("|", "register", confirmCode);
         log.info(logMessage);
 
-        userService.confirmUser(request.getEmail(), request.getConfirmationCode());
+        userService.confirmUser(confirmCode);
     }
 }

@@ -86,11 +86,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void confirmUser(String email, String confirmationCode) throws UserServiceException {
+    public void confirmUser(String confirmationCode) throws UserServiceException {
         ConfirmUserHandler.builder()
                 .withUserRepository(userRepository)
                 .withVerificationTokenRepository(verificationTokenRepository)
-                .withEmail(email)
                 .withConfirmationCode(confirmationCode)
                 .build().execute();
     }

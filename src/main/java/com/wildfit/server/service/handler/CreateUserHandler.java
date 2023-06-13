@@ -42,7 +42,7 @@ public class CreateUserHandler {
         }
 
         final var user = User.builder()
-                .withStatus(UserStatus.CREATE.getCode())
+                .withStatus(UserStatus.FREE.getCode())
                 .withCreateDate(new Date())
                 .withPassword(encodedPassword)
                 .withEmail(email)

@@ -63,7 +63,7 @@ class ChangePasswordHandlerTest extends AbstractHandlerTest {
     @Test
     void execute() throws UserServiceException {
         final var user = User.builder()
-                .withStatus(UserStatus.CREATE.getCode())
+                .withStatus(UserStatus.FREE.getCode())
                 .withCreateDate(new Date())
                 .withPassword("encoded password")
                 .withEmail(EMAIL).build();

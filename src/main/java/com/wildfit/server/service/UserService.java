@@ -19,5 +19,5 @@ public interface UserService {
 
     UserProfileDigest updateUserProfile(Long id, UpdateUserProfileRequest request) throws UserServiceException;
 
-    void confirmUser(String email, String confirmationCode) throws UserServiceException;
+    void confirmUser(String confirmationCode) throws UserServiceException;
 }

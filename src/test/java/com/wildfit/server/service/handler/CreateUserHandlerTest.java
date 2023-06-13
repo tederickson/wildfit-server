@@ -104,7 +104,7 @@ class CreateUserHandlerTest extends AbstractHandlerTest {
     @Test
     void userAlreadyExists() {
         final var user = User.builder()
-                .withStatus(UserStatus.CREATE.getCode())
+                .withStatus(UserStatus.FREE.getCode())
                 .withCreateDate(new Date())
                 .withPassword("encoded password")
                 .withEmail(EMAIL).build();

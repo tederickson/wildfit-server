@@ -40,7 +40,7 @@ class VerificationTokenRepositoryTest {
     @Test
     public void findByToken() {
         final var user = User.builder()
-                .withStatus(UserStatus.CREATE.getCode())
+                .withStatus(UserStatus.FREE.getCode())
                 .withCreateDate(new Date())
                 .withPassword(PASSWORD)
                 .withEmail(EMAIL).build();

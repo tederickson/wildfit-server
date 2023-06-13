@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum UserStatus {
-    CREATE("C"), FREE("F"), PREMIUM("P");
+    FREE("F"), PREMIUM("P");
 
     final String code;
 

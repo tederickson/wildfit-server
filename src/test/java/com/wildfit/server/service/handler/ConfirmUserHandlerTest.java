@@ -35,26 +35,12 @@ class ConfirmUserHandlerTest extends AbstractHandlerTest {
 
     @ParameterizedTest
     @NullAndEmptySource
-    void invalidEmail(String email) {
-        final var exception = assertThrows(UserServiceException.class,
-                () -> ConfirmUserHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withVerificationTokenRepository(verificationTokenRepository)
-                        .withConfirmationCode(CONFIRMATION_CODE)
-                        .withEmail(email)
-                        .build().execute());
-        assertEquals(UserServiceError.MISSING_EMAIL, exception.getError());
-    }
-
-    @ParameterizedTest
-    @NullAndEmptySource
     void invalidConfirmationCode(String confirmationCode) {
         final var exception = assertThrows(UserServiceException.class,
                 () -> ConfirmUserHandler.builder()
                         .withUserRepository(userRepository)
                         .withVerificationTokenRepository(verificationTokenRepository)
                         .withConfirmationCode(confirmationCode)
-                        .withEmail(EMAIL)
                         .build().execute());
         assertEquals(UserServiceError.INVALID_CONFIRMATION_CODE, exception.getError());
     }
@@ -68,21 +54,6 @@ class ConfirmUserHandlerTest extends AbstractHandlerTest {
                         .withUserRepository(userRepository)
                         .withVerificationTokenRepository(verificationTokenRepository)
                         .withConfirmationCode("BugsBunny")
-                        .withEmail(EMAIL)
-                        .build().execute());
-        assertEquals(UserServiceError.INVALID_CONFIRMATION_CODE, exception.getError());
-    }
-
-    @Test
-    void emailDoesNotMatch() {
-        createUser();
-
-        final var exception = assertThrows(UserServiceException.class,
-                () -> ConfirmUserHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withVerificationTokenRepository(verificationTokenRepository)
-                        .withConfirmationCode(CONFIRMATION_CODE)
-                        .withEmail("BugsBunny")
                         .build().execute());
         assertEquals(UserServiceError.INVALID_CONFIRMATION_CODE, exception.getError());
     }
@@ -95,7 +66,6 @@ class ConfirmUserHandlerTest extends AbstractHandlerTest {
                 .withUserRepository(userRepository)
                 .withVerificationTokenRepository(verificationTokenRepository)
                 .withConfirmationCode(CONFIRMATION_CODE)
-                .withEmail(EMAIL)
                 .build().execute();
 
         final var updatedUser = userRepository.findById(saved.getId()).orElseThrow();
@@ -105,7 +75,7 @@ class ConfirmUserHandlerTest extends AbstractHandlerTest {
 
     private User createUser() {
         final var user = User.builder()
-                .withStatus(UserStatus.CREATE.getCode())
+                .withStatus(UserStatus.FREE.getCode())
                 .withCreateDate(new Date())
                 .withPassword("encoded password")
                 .withEmail(EMAIL).build();

@@ -38,7 +38,7 @@ class UserRepositoryTest {
     @Test
     void findByEmail_withUser() {
         final var user = User.builder()
-                .withStatus(UserStatus.CREATE.getCode())
+                .withStatus(UserStatus.FREE.getCode())
                 .withCreateDate(new Date())
                 .withPassword(PASSWORD)
                 .withEmail(EMAIL).build();
@@ -51,6 +51,6 @@ class UserRepositoryTest {
         final var retrieved = users.get(0);
 
         assertEquals(EMAIL, retrieved.getEmail());
-        assertEquals(UserStatus.CREATE, retrieved.getUserStatus());
+        assertEquals(UserStatus.FREE, retrieved.getUserStatus());
     }
 }
