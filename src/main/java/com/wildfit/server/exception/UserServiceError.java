@@ -7,12 +7,12 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 @Getter
 public enum UserServiceError {
-    MISSING_EMAIL("missing email", HttpStatus.BAD_REQUEST),
-    INVALID_PASSWORD("invalid password", HttpStatus.BAD_REQUEST),
-    INVALID_CONFIRMATION_CODE("invalid confirmation code", HttpStatus.BAD_REQUEST),
-    EXISTING_USER("user exists", HttpStatus.BAD_REQUEST),
-    USER_NOT_FOUND("user not found", HttpStatus.NOT_FOUND),
-    NOT_REGISTERED("user not registered", HttpStatus.BAD_REQUEST);
+    MISSING_EMAIL("Missing email.", HttpStatus.BAD_REQUEST),
+    INVALID_PASSWORD("Invalid password.", HttpStatus.BAD_REQUEST),
+    INVALID_CONFIRMATION_CODE("Invalid confirmation code.", HttpStatus.BAD_REQUEST),
+    EXISTING_USER("User exists.", HttpStatus.BAD_REQUEST),
+    USER_NOT_FOUND("User not found.", HttpStatus.NOT_FOUND),
+    NOT_REGISTERED("Your account isn't active or hasn't been approved yet.", HttpStatus.BAD_REQUEST);
 
     private final String message;
     private final HttpStatus httpStatus;
