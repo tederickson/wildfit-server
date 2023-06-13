@@ -1,8 +1,8 @@
 package com.wildfit.server.manager;
 
+import com.wildfit.server.domain.ErrorData;
 import com.wildfit.server.exception.UserServiceException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -17,12 +17,11 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class ManagerAdvice extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(UserServiceException.class)
-    protected ResponseEntity<Object> serviceExceptionHandler(UserServiceException ex, WebRequest request) {
+    protected ResponseEntity<ErrorData> serviceExceptionHandler(UserServiceException ex, WebRequest request) {
         log.error("UserServiceException", ex);
+        final var userServiceException = ex.getError();
+        final var error = ErrorData.builder().withMessage(userServiceException.getMessage()).build();
 
-        final var error = ex.getError();
-        return handleExceptionInternal(ex, error.getMessage(),
-                new HttpHeaders(),
-                error.getHttpStatus(), request);
+        return new ResponseEntity<>(error, userServiceException.getHttpStatus());
     }
 }
