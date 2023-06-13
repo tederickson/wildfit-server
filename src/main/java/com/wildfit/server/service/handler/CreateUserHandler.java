@@ -52,7 +52,7 @@ public class CreateUserHandler {
 
         final var saved = userProfileRepository.save(userProfile);
 
-        final var verificationToken = new VerificationToken(RandomStringUtils.randomAlphabetic(20),
+        final var verificationToken = new VerificationToken(RandomStringUtils.randomAlphabetic(30),
                 userProfile.getUser());
 
         verificationTokenRepository.save(verificationToken);
