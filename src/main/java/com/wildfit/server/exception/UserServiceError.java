@@ -13,7 +13,8 @@ public enum UserServiceError {
     EXISTING_USER("User exists.", HttpStatus.BAD_REQUEST),
     USER_NOT_FOUND("User not found.", HttpStatus.NOT_FOUND),
     NOT_REGISTERED("Your account isn't active or hasn't been approved yet.", HttpStatus.BAD_REQUEST),
-    EMAIL_NOT_CONFIGURED("The email server is not configured.", HttpStatus.PRECONDITION_FAILED);
+    EMAIL_NOT_CONFIGURED("The email server is not configured.", HttpStatus.PRECONDITION_FAILED),
+    INVALID_NAME("Missing name.", HttpStatus.BAD_REQUEST);
 
     private final String message;
     private final HttpStatus httpStatus;

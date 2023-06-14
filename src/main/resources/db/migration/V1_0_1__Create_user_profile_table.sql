@@ -5,7 +5,7 @@ CREATE TABLE user_profile (
     FOREIGN KEY (user_id) REFERENCES user(id)
     ON DELETE CASCADE,
 
-    name    varchar(256),
+    name    varchar(256) NOT NULL,
     age     int,
     gender  char(1),
     height  float,

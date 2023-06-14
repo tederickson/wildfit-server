@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -26,5 +28,13 @@ public class ManagerAdvice extends ResponseEntityExceptionHandler {
                 .build();
 
         return new ResponseEntity<>(error, userServiceException.getHttpStatus());
+    }
+
+    @ResponseBody
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR)
+    String defaultExceptionHandler(Exception ex) {
+        log.warn("Unexpected exception", ex);
+        return ex.getMessage();
     }
 }

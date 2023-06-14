@@ -34,6 +34,7 @@ public class CreateUserHandler {
     final JavaMailSender javaMailSender;
     final String email;
     final String password;
+    final String name;
 
     public CreateUserResponse execute() throws UserServiceException {
         validate();
@@ -55,7 +56,9 @@ public class CreateUserHandler {
                 .withEmail(email)
                 .withEnabled(false)
                 .build();
-        final var userProfile = UserProfile.builder().withUser(user).build();
+        final var userProfile = UserProfile.builder().withUser(user)
+                .withName(name)
+                .build();
 
         final var saved = userProfileRepository.save(userProfile);
 
@@ -72,8 +75,22 @@ public class CreateUserHandler {
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo(verificationToken.getUser().getEmail());
 
-        msg.setSubject("Testing from Spring Boot");
-        msg.setText("Hello World \n Spring Boot Email");
+        msg.setSubject("WILDFIT account activiation");
+        final var text = String.join("\n",
+                "Dear " + name + ",",
+                "",
+                "Thank you for signing up for access to the WILDFIT application, your account has been created.",
+                "",
+                "To activate your account, please visit:",
+                "http://localhost:8080/auth/register/" + verificationToken.getToken(),
+                "",
+                "Your account will automatically be approved once you click this URL. " +
+                        "If you have problems activating your account please contact support (support@wildfit.com).",
+                "",
+                "Warm Regards,",
+                "Wildfit team"
+        );
+        msg.setText(text);
 
         javaMailSender.send(msg);
     }
@@ -89,6 +106,9 @@ public class CreateUserHandler {
         }
         if (!StringUtils.hasText(password)) {
             throw new UserServiceException(UserServiceError.INVALID_PASSWORD);
+        }
+        if (!StringUtils.hasText(name)) {
+            throw new UserServiceException(UserServiceError.INVALID_NAME);
         }
 
         if (environment == null || !environment.containsProperty("spring.mail.username")) {

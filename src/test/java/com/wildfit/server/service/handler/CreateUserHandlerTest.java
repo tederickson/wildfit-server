@@ -49,6 +49,7 @@ class CreateUserHandlerTest extends AbstractHandlerTest {
                         .withJavaMailSender(javaMailSender)
                         .withEmail(EMAIL)
                         .withPassword(password)
+                        .withName(NAME)
                         .build().execute());
         assertEquals(UserServiceError.INVALID_PASSWORD, exception.getError());
     }
@@ -64,6 +65,7 @@ class CreateUserHandlerTest extends AbstractHandlerTest {
                         .withJavaMailSender(javaMailSender)
                         .withPassword("apple")
                         .withEmail(EMAIL)
+                        .withName(NAME)
                         .build().execute());
         assertEquals(UserServiceError.INVALID_PASSWORD, exception.getError());
     }
@@ -80,6 +82,7 @@ class CreateUserHandlerTest extends AbstractHandlerTest {
                         .withJavaMailSender(javaMailSender)
                         .withPassword(PASSWORD)
                         .withEmail(email)
+                        .withName(NAME)
                         .build().execute());
         assertEquals(UserServiceError.MISSING_EMAIL, exception.getError());
     }
@@ -95,6 +98,7 @@ class CreateUserHandlerTest extends AbstractHandlerTest {
                         .withJavaMailSender(javaMailSender)
                         .withPassword(PASSWORD)
                         .withEmail("    ")
+                        .withName(NAME)
                         .build().execute());
         assertEquals(UserServiceError.MISSING_EMAIL, exception.getError());
     }
@@ -109,6 +113,7 @@ class CreateUserHandlerTest extends AbstractHandlerTest {
                 .withJavaMailSender(javaMailSender)
                 .withPassword(PASSWORD)
                 .withEmail(EMAIL)
+                .withName(NAME)
                 .build().execute();
 
         assertEquals(EMAIL, response.getEmail());
@@ -136,6 +141,7 @@ class CreateUserHandlerTest extends AbstractHandlerTest {
                         .withJavaMailSender(javaMailSender)
                         .withPassword(PASSWORD)
                         .withEmail(EMAIL)
+                        .withName(NAME)
                         .build().execute());
 
         assertEquals(UserServiceError.EXISTING_USER, exception.getError());

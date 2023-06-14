@@ -11,13 +11,8 @@ import lombok.NoArgsConstructor;
 @Builder(setterPrefix = "with")
 @NoArgsConstructor
 @AllArgsConstructor
-public final class CreateUserRequest {
-    @JsonDeserialize(using = CustomStringDeserializer.class)
-    private String email;
+public final class RegisterUserResponse {
 
     @JsonDeserialize(using = CustomStringDeserializer.class)
-    private String password;
-
-    @JsonDeserialize(using = CustomStringDeserializer.class)
-    private String name;
+    private String message;
 }

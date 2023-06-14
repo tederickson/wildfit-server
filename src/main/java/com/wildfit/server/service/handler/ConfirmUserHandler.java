@@ -2,6 +2,7 @@ package com.wildfit.server.service.handler;
 
 import java.util.Objects;
 
+import com.wildfit.server.domain.RegisterUserResponse;
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.repository.UserRepository;
@@ -15,7 +16,7 @@ public class ConfirmUserHandler {
     final VerificationTokenRepository verificationTokenRepository;
     final String confirmationCode;
 
-    public void execute() throws UserServiceException {
+    public RegisterUserResponse execute() throws UserServiceException {
         validate();
 
         final var verificationToken = verificationTokenRepository.findByToken(confirmationCode);
@@ -28,6 +29,10 @@ public class ConfirmUserHandler {
         user.setEnabled(true);
 
         userRepository.save(user);
+
+        return RegisterUserResponse.builder()
+                .withMessage("Your account is active.")
+                .build();
     }
 
     private void validate() throws UserServiceException {

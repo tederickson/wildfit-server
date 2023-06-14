@@ -70,7 +70,9 @@ class UpdateUserProfileHandlerTest extends AbstractHandlerTest {
                 .withCreateDate(new Date())
                 .withPassword(PASSWORD)
                 .withEmail(EMAIL).build();
-        final var saved = userProfileRepository.save(UserProfile.builder().withUser(user).build());
+        final var saved = userProfileRepository.save(UserProfile.builder()
+                .withUser(user)
+                .withName(NAME).build());
         assertNotNull(saved);
 
         final var updateUserProfileRequest = UpdateUserProfileRequest.builder()

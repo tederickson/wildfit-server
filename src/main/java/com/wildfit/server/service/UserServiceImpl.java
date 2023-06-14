@@ -1,6 +1,7 @@
 package com.wildfit.server.service;
 
 import com.wildfit.server.domain.CreateUserResponse;
+import com.wildfit.server.domain.RegisterUserResponse;
 import com.wildfit.server.domain.UpdateUserProfileRequest;
 import com.wildfit.server.domain.UserDigest;
 import com.wildfit.server.domain.UserProfileDigest;
@@ -17,8 +18,9 @@ import com.wildfit.server.service.handler.LoginHandler;
 import com.wildfit.server.service.handler.UpdateUserProfileHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
-import org.springframework.mail.javamail.*;
+
 /**
  * The service calls Handlers to implement the functionality.
  * This provides loose coupling, allows several people to work on the service without merge collisions
@@ -35,12 +37,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     VerificationTokenRepository verificationTokenRepository;
     @Autowired
-      Environment environment;
+    Environment environment;
     @Autowired
-      JavaMailSender javaMailSender;
+    JavaMailSender javaMailSender;
 
     @Override
-    public CreateUserResponse createUser(String email, String password) throws UserServiceException {
+    public CreateUserResponse createUser(String email, String password, String name) throws UserServiceException {
         return CreateUserHandler.builder()
                 .withUserRepository(userRepository)
                 .withUserProfileRepository(userProfileRepository)
@@ -49,6 +51,7 @@ public class UserServiceImpl implements UserService {
                 .withJavaMailSender(javaMailSender)
                 .withEmail(email)
                 .withPassword(password)
+                .withName(name)
                 .build().execute();
     }
 
@@ -98,8 +101,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void confirmUser(String confirmationCode) throws UserServiceException {
-        ConfirmUserHandler.builder()
+    public RegisterUserResponse confirmUser(String confirmationCode) throws UserServiceException {
+        return ConfirmUserHandler.builder()
                 .withUserRepository(userRepository)
                 .withVerificationTokenRepository(verificationTokenRepository)
                 .withConfirmationCode(confirmationCode)

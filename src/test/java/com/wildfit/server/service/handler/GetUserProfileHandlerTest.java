@@ -58,6 +58,7 @@ class GetUserProfileHandlerTest extends AbstractHandlerTest {
                 .withPassword(PASSWORD)
                 .withEmail(EMAIL).build();
         final var userProfile = UserProfile.builder().withUser(user)
+                .withName(NAME)
                 .withAge(39)
                 .withGender('M')
                 .withWeight(185.7f)
