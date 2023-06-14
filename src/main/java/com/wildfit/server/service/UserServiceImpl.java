@@ -16,8 +16,9 @@ import com.wildfit.server.service.handler.GetUserProfileHandler;
 import com.wildfit.server.service.handler.LoginHandler;
 import com.wildfit.server.service.handler.UpdateUserProfileHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
-
+import org.springframework.mail.javamail.*;
 /**
  * The service calls Handlers to implement the functionality.
  * This provides loose coupling, allows several people to work on the service without merge collisions
@@ -33,6 +34,10 @@ public class UserServiceImpl implements UserService {
     UserProfileRepository userProfileRepository;
     @Autowired
     VerificationTokenRepository verificationTokenRepository;
+    @Autowired
+      Environment environment;
+    @Autowired
+      JavaMailSender javaMailSender;
 
     @Override
     public CreateUserResponse createUser(String email, String password) throws UserServiceException {
@@ -40,6 +45,8 @@ public class UserServiceImpl implements UserService {
                 .withUserRepository(userRepository)
                 .withUserProfileRepository(userProfileRepository)
                 .withVerificationTokenRepository(verificationTokenRepository)
+                .withEnvironment(environment)
+                .withJavaMailSender(javaMailSender)
                 .withEmail(email)
                 .withPassword(password)
                 .build().execute();

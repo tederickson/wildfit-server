@@ -37,7 +37,8 @@ public class UserAdminController {
     @ApiOperation(value = "Create User")
     @ApiResponses(value = { //
             @ApiResponse(code = 201, message = "Successfully created user", response = CreateUserResponse.class), //
-            @ApiResponse(code = 400, message = "Invalid user name and/or password or user already exists")})
+            @ApiResponse(code = 400, message = "Invalid user name and/or password or user already exists"),
+            @ApiResponse(code = 412, message = "Email not configured")})
     @PostMapping("/users")
     @ResponseStatus(code = HttpStatus.CREATED)
     public CreateUserResponse createUser(@RequestBody CreateUserRequest request) throws UserServiceException {

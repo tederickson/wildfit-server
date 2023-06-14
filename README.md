@@ -15,8 +15,18 @@ Run the application and point a browser to http://localhost:8080/swagger-ui.html
 Run the following command in a terminal window:
 
 ```bash
-mvn spring-boot:run
+mvn spring-boot:run -Dspring-boot.run.profiles=dev
 ```
+
+## Config
+Only the application.properties file is stored in Git.  
+The rest are local files to prevent leaking sensitive information.
+* src/main/resources/application.properties
+    * Common configuration values
+* src/main/resources/application-dev.properties
+    * Development configuration values
+* flyway.conf
+    * Flyway configuration
 
 # Wildfit Server uses https://www.nutritionix.com/business/api
 

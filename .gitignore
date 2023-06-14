@@ -4,7 +4,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-flyway.conf
+
 
 ### STS ###
 .apt_generated
@@ -33,3 +33,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### ####
+flyway.conf
+/src/main/resources/application-dev.properties
+/src/main/resources/application-prod.properties

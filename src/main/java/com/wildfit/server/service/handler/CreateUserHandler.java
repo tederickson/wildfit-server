@@ -15,16 +15,23 @@ import com.wildfit.server.repository.UserProfileRepository;
 import com.wildfit.server.repository.UserRepository;
 import com.wildfit.server.repository.VerificationTokenRepository;
 import lombok.Builder;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.core.env.Environment;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
+@Slf4j
 @Builder(setterPrefix = "with")
 public class CreateUserHandler {
 
     final UserRepository userRepository;
     final UserProfileRepository userProfileRepository;
     final VerificationTokenRepository verificationTokenRepository;
+    final Environment environment;
+    final JavaMailSender javaMailSender;
     final String email;
     final String password;
 
@@ -56,20 +63,36 @@ public class CreateUserHandler {
                 userProfile.getUser());
 
         verificationTokenRepository.save(verificationToken);
+        sendEmail(verificationToken);
 
         return CreateUserResponseMapper.map(saved.getUser());
+    }
+
+    private void sendEmail(VerificationToken verificationToken) {
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setTo(verificationToken.getUser().getEmail());
+
+        msg.setSubject("Testing from Spring Boot");
+        msg.setText("Hello World \n Spring Boot Email");
+
+        javaMailSender.send(msg);
     }
 
     private void validate() throws UserServiceException {
         Objects.requireNonNull(userRepository, "userRepository");
         Objects.requireNonNull(userProfileRepository, "userProfileRepository");
         Objects.requireNonNull(verificationTokenRepository, "verificationTokenRepository");
+        Objects.requireNonNull(javaMailSender, "javaMailSender");
 
         if (!StringUtils.hasText(email)) {
             throw new UserServiceException(UserServiceError.MISSING_EMAIL);
         }
         if (!StringUtils.hasText(password)) {
             throw new UserServiceException(UserServiceError.INVALID_PASSWORD);
+        }
+
+        if (environment == null || !environment.containsProperty("spring.mail.username")) {
+            throw new UserServiceException(UserServiceError.EMAIL_NOT_CONFIGURED);
         }
     }
 }

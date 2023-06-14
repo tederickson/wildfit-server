@@ -17,6 +17,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.env.Environment;
+import org.springframework.mail.javamail.JavaMailSender;
 
 @SpringBootTest
 class CreateUserHandlerTest extends AbstractHandlerTest {
@@ -24,6 +26,10 @@ class CreateUserHandlerTest extends AbstractHandlerTest {
     UserProfileRepository userProfileRepository;
     @Autowired
     VerificationTokenRepository verificationTokenRepository;
+    @Autowired
+    Environment environment;
+    @Autowired
+    JavaMailSender javaMailSender;
 
     @Test
     void nullParameters() {
@@ -39,6 +45,8 @@ class CreateUserHandlerTest extends AbstractHandlerTest {
                         .withUserRepository(userRepository)
                         .withUserProfileRepository(userProfileRepository)
                         .withVerificationTokenRepository(verificationTokenRepository)
+                        .withEnvironment(environment)
+                        .withJavaMailSender(javaMailSender)
                         .withEmail(EMAIL)
                         .withPassword(password)
                         .build().execute());
@@ -52,6 +60,8 @@ class CreateUserHandlerTest extends AbstractHandlerTest {
                         .withUserRepository(userRepository)
                         .withUserProfileRepository(userProfileRepository)
                         .withVerificationTokenRepository(verificationTokenRepository)
+                        .withEnvironment(environment)
+                        .withJavaMailSender(javaMailSender)
                         .withPassword("apple")
                         .withEmail(EMAIL)
                         .build().execute());
@@ -66,6 +76,8 @@ class CreateUserHandlerTest extends AbstractHandlerTest {
                         .withUserRepository(userRepository)
                         .withUserProfileRepository(userProfileRepository)
                         .withVerificationTokenRepository(verificationTokenRepository)
+                        .withEnvironment(environment)
+                        .withJavaMailSender(javaMailSender)
                         .withPassword(PASSWORD)
                         .withEmail(email)
                         .build().execute());
@@ -79,6 +91,8 @@ class CreateUserHandlerTest extends AbstractHandlerTest {
                         .withUserRepository(userRepository)
                         .withUserProfileRepository(userProfileRepository)
                         .withVerificationTokenRepository(verificationTokenRepository)
+                        .withEnvironment(environment)
+                        .withJavaMailSender(javaMailSender)
                         .withPassword(PASSWORD)
                         .withEmail("    ")
                         .build().execute());
@@ -91,6 +105,8 @@ class CreateUserHandlerTest extends AbstractHandlerTest {
                 .withUserRepository(userRepository)
                 .withUserProfileRepository(userProfileRepository)
                 .withVerificationTokenRepository(verificationTokenRepository)
+                .withEnvironment(environment)
+                .withJavaMailSender(javaMailSender)
                 .withPassword(PASSWORD)
                 .withEmail(EMAIL)
                 .build().execute();
@@ -116,6 +132,8 @@ class CreateUserHandlerTest extends AbstractHandlerTest {
                         .withUserRepository(userRepository)
                         .withUserProfileRepository(userProfileRepository)
                         .withVerificationTokenRepository(verificationTokenRepository)
+                        .withEnvironment(environment)
+                        .withJavaMailSender(javaMailSender)
                         .withPassword(PASSWORD)
                         .withEmail(EMAIL)
                         .build().execute());
