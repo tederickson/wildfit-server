@@ -1,6 +1,5 @@
 package com.wildfit.server.service.handler;
 
-
 import java.util.Objects;
 
 import com.wildfit.server.domain.UserDigest;
