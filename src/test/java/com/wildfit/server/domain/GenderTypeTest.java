@@ -11,6 +11,7 @@ class GenderTypeTest {
     void findByCode() {
         assertEquals("F", GenderType.FEMALE.getCode());
         assertEquals(GenderType.FEMALE, GenderType.findByCode("F"));
+        assertEquals(GenderType.FEMALE, GenderType.findByCode('F'));
     }
 
     @Test

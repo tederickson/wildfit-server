@@ -10,30 +10,30 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.Test;
 
-class CreateUserResponseTest {
+class RegisterUserResponseTest {
     @Test
     public void shouldHaveANoArgsConstructor() {
-        assertThat(CreateUserResponse.class, hasValidBeanConstructor());
+        assertThat(RegisterUserResponse.class, hasValidBeanConstructor());
     }
 
     @Test
     public void gettersAndSettersShouldWorkForEachProperty() {
-        assertThat(CreateUserResponse.class, hasValidGettersAndSetters());
+        assertThat(RegisterUserResponse.class, hasValidGettersAndSetters());
     }
 
     @Test
     public void allPropertiesShouldBeRepresentedInToStringOutput() {
-        assertThat(CreateUserResponse.class, hasValidBeanToString());
+        assertThat(RegisterUserResponse.class, hasValidBeanToString());
     }
 
     @Test
     public void equalsAndHashCode() {
-        EqualsVerifier.forClass(CreateUserResponse.class).suppress(Warning.NONFINAL_FIELDS).verify();
+        EqualsVerifier.forClass(RegisterUserResponse.class).suppress(Warning.NONFINAL_FIELDS).verify();
     }
 
     @Test
     void builder() {
-        final var request = CreateUserResponse.builder().withEmail("p").build();
-        assertEquals("p", request.getEmail());
+        final var request = RegisterUserResponse.builder().withMessage("p").build();
+        assertEquals("p", request.getMessage());
     }
 }

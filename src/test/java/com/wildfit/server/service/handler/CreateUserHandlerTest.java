@@ -103,6 +103,39 @@ class CreateUserHandlerTest extends AbstractHandlerTest {
         assertEquals(UserServiceError.MISSING_EMAIL, exception.getError());
     }
 
+    @ParameterizedTest
+    @NullAndEmptySource
+    void missingName(String name) {
+        final var exception = assertThrows(UserServiceException.class,
+                () -> CreateUserHandler.builder()
+                        .withUserRepository(userRepository)
+                        .withUserProfileRepository(userProfileRepository)
+                        .withVerificationTokenRepository(verificationTokenRepository)
+                        .withEnvironment(environment)
+                        .withJavaMailSender(javaMailSender)
+                        .withPassword(PASSWORD)
+                        .withEmail(EMAIL)
+                        .withName(name)
+                        .build().execute());
+        assertEquals(UserServiceError.INVALID_NAME, exception.getError());
+    }
+
+    @Test
+    void emptyName() {
+        final var exception = assertThrows(UserServiceException.class,
+                () -> CreateUserHandler.builder()
+                        .withUserRepository(userRepository)
+                        .withUserProfileRepository(userProfileRepository)
+                        .withVerificationTokenRepository(verificationTokenRepository)
+                        .withEnvironment(environment)
+                        .withJavaMailSender(javaMailSender)
+                        .withPassword(PASSWORD)
+                        .withEmail(EMAIL)
+                        .withName("    ")
+                        .build().execute());
+        assertEquals(UserServiceError.INVALID_NAME, exception.getError());
+    }
+
     @Test
     void execute() throws UserServiceException {
         final var response = CreateUserHandler.builder()
