@@ -8,6 +8,7 @@ import lombok.Data;
 public class FoodItem {
     private String food_name; //  Butter, Pure Irish, Unsalted,
     private String brand_name; //  Kerrygold,
+    private String brand_name_item_name; // Kerrygold Butter Sticks, Pure Irish, Unsalted
     private Integer serving_qty; //  1,
     private String serving_unit; //  tbsp,
     private Integer serving_weight_grams; //  14,
