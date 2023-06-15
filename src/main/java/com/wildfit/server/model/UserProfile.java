@@ -35,7 +35,8 @@ public final class UserProfile {
     private String name;
     private int age;
     private char gender;
-    private float height;
+    private int height_feet;
+    private int height_inches;
     private float weight;
 
     @Override
@@ -63,7 +64,8 @@ public final class UserProfile {
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 ", gender=" + gender +
-                ", height=" + height +
+                ", height_feet=" + height_feet +
+                ", height_inches=" + height_inches +
                 ", weight=" + weight +
                 '}';
     }

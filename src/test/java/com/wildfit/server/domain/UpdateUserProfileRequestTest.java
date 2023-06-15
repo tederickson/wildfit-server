@@ -38,7 +38,8 @@ class UpdateUserProfileRequestTest {
                 .withAge(39)
                 .withGender(GenderType.FEMALE)
                 .withWeight(185.7f)
-                .withHeight(65.23f)
+                .withHeightFeet(5)
+                .withHeightInches(7)
                 .build();
 
         assertEquals("Bob Jones III", updateUserProfileRequest.getName());

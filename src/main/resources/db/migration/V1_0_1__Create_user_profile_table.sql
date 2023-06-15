@@ -8,6 +8,7 @@ CREATE TABLE user_profile (
     name    varchar(256) NOT NULL,
     age     int,
     gender  char(1),
-    height  float,
+    height_feet     int,
+    height_inches   int,
     weight  float
 );

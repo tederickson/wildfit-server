@@ -36,7 +36,8 @@ public class UpdateUserProfileHandler {
             userProfile.setGender(userProfileRequest.getGender().getCodeAsCharacter());
         }
 
-        userProfile.setHeight(userProfileRequest.getHeight());
+        userProfile.setHeight_feet(userProfileRequest.getHeightFeet());
+        userProfile.setHeight_inches(userProfileRequest.getHeightInches());
         userProfile.setWeight(userProfileRequest.getWeight());
 
         final var saved = userProfileRepository.save(userProfile);

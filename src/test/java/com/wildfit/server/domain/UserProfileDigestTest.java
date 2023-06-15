@@ -51,7 +51,8 @@ class UserProfileDigestTest {
                 .withAge(39)
                 .withGender(GenderType.FEMALE)
                 .withWeight(185.7f)
-                .withHeight(65.23f)
+                .withHeightFeet (5)
+                .withHeightInches(3)
                 .build();
 
         assertEquals("email", userProfileDigest.getUser().getEmail());

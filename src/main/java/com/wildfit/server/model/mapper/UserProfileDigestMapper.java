@@ -15,7 +15,8 @@ public final class UserProfileDigestMapper {
                 .withUser(userDigest)
                 .withName(userProfile.getName())
                 .withAge(userProfile.getAge())
-                .withHeight(userProfile.getHeight())
+                .withHeightFeet(userProfile.getHeight_feet())
+                .withHeightInches(userProfile.getHeight_inches())
                 .withWeight(userProfile.getWeight());
 
         builder.withGender(GenderType.findByCode(userProfile.getGender()));

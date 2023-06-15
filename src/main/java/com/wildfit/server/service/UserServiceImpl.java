@@ -31,15 +31,15 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
     @Autowired
-    UserProfileRepository userProfileRepository;
+    private UserProfileRepository userProfileRepository;
     @Autowired
-    VerificationTokenRepository verificationTokenRepository;
+    private VerificationTokenRepository verificationTokenRepository;
     @Autowired
-    Environment environment;
+    private Environment environment;
     @Autowired
-    JavaMailSender javaMailSender;
+    private JavaMailSender javaMailSender;
 
     @Override
     public CreateUserResponse createUser(String email, String password, String name) throws UserServiceException {

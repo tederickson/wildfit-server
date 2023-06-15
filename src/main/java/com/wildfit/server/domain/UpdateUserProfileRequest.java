@@ -16,6 +16,7 @@ public final class UpdateUserProfileRequest {
     private String name;
     private int age;
     private GenderType gender;
-    private float height;
+    private int heightFeet;
+    private int heightInches;
     private float weight;
 }

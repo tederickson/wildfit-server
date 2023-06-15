@@ -80,7 +80,8 @@ class UpdateUserProfileHandlerTest extends AbstractHandlerTest {
                 .withAge(39)
                 .withGender(GenderType.MALE)
                 .withWeight(185.7f)
-                .withHeight(65.23f)
+                .withHeightFeet(5)
+                .withHeightInches(7)
                 .build();
 
         final var digest = UpdateUserProfileHandler.builder()
@@ -95,6 +96,7 @@ class UpdateUserProfileHandlerTest extends AbstractHandlerTest {
         assertEquals(39, digest.getAge());
         assertEquals(GenderType.MALE, digest.getGender());
         assertEquals(185.7f, digest.getWeight());
-        assertEquals(65.23f, digest.getHeight());
+        assertEquals(5, digest.getHeightFeet());
+        assertEquals(7, digest.getHeightInches());
     }
 }

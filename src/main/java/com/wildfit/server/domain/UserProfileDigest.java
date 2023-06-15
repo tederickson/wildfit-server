@@ -18,6 +18,7 @@ public final class UserProfileDigest {
     private String name;
     private int age;
     private GenderType gender;
-    private float height;
+    private int heightFeet;
+    private int heightInches;
     private float weight;
 }
