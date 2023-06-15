@@ -24,7 +24,7 @@ class NutritionixServiceImplTest {
         final var foodItemDigest = nutritionixService.getFoodWithBarcode("767707001258");
         System.out.println("foodItemDigest = " + foodItemDigest);
         assertNotNull(foodItemDigest);
-        assertEquals("Kerrygold", foodItemDigest.getBrand_name());
+        assertEquals("Kerrygold", foodItemDigest.getBrandName());
     }
 
     @ParameterizedTest

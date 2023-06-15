@@ -1,6 +1,7 @@
 package com.wildfit.server.service;
 
-import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 import com.wildfit.server.domain.FoodItemDigest;
 import com.wildfit.server.domain.SearchFoodResponse;
@@ -9,7 +10,9 @@ import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.FoodItems;
 import com.wildfit.server.model.NutritionixHeaderInfo;
+import com.wildfit.server.model.SearchedFoodItems;
 import com.wildfit.server.model.mapper.FoodItemDigestMapper;
+import com.wildfit.server.model.mapper.SearchedFoodItemsMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,19 +44,22 @@ public class NutritionixServiceImpl implements NutritionixService {
         final var restTemplate = new RestTemplate();
         final var headers = new HttpHeaders();
 
-        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         addNutritionixHeaders(headers);
 
         final var entity = new HttpEntity<String>(headers);
         final var url = NUTRITIONIX_URL + "v2/search/item?upc=" + barcode;
 
         try {
-            final var foodItems = restTemplate.exchange(url, HttpMethod.GET, entity,
-                    FoodItems.class).getBody();
-            if (foodItems.getFoods().length == 0) {
+            final var response = restTemplate.exchange(url, HttpMethod.GET, entity, FoodItems.class).getBody();
+            final var foodItems = Optional.ofNullable(response)
+                    .map(FoodItems::getFoods)
+                    .orElse(null);
+
+            if (foodItems == null || foodItems.length == 0) {
                 return FoodItemDigest.builder().build();
             }
-            return FoodItemDigestMapper.map(foodItems.getFoods()[0]);
+            return FoodItemDigestMapper.map(response.getFoods()[0]);
 
         } catch (HttpStatusCodeException e) {
             throw new NutritionixException(e.getStatusCode(), e);
@@ -68,7 +74,7 @@ public class NutritionixServiceImpl implements NutritionixService {
         final var restTemplate = new RestTemplate();
         final var headers = new HttpHeaders();
 
-        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         addNutritionixHeaders(headers);
 
         final var queryParameters = String.join("&",
@@ -79,8 +85,9 @@ public class NutritionixServiceImpl implements NutritionixService {
         log.info(url);
 
         try {
-            return restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<String>(headers),
-                    SearchFoodResponse.class).getBody();
+            final var response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<String>(headers),
+                    SearchedFoodItems.class).getBody();
+            return SearchedFoodItemsMapper.map(response);
         } catch (HttpStatusCodeException e) {
             throw new NutritionixException(e.getStatusCode(), e);
         }
