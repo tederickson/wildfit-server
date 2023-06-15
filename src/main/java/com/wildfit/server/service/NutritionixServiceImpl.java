@@ -1,12 +1,14 @@
 package com.wildfit.server.service;
 
 import java.util.Arrays;
-import com.wildfit.server.model.mapper.*;
+
 import com.wildfit.server.domain.FoodItemDigest;
+import com.wildfit.server.exception.NutritionixException;
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.FoodItems;
 import com.wildfit.server.model.NutritionixHeaderInfo;
+import com.wildfit.server.model.mapper.FoodItemDigestMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -14,7 +16,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -30,7 +32,7 @@ public class NutritionixServiceImpl implements NutritionixService {
     private NutritionixHeaderInfo nutritionixHeaderInfo;
 
     @Override
-    public FoodItemDigest getFoodWithBarcode(String barcode) throws UserServiceException {
+    public FoodItemDigest getFoodWithBarcode(String barcode) throws UserServiceException, NutritionixException {
         if (StringUtils.isAllBlank(barcode)) {
             throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
         }
@@ -49,10 +51,10 @@ public class NutritionixServiceImpl implements NutritionixService {
             if (foodItems.getFoods().length == 0) {
                 return FoodItemDigest.builder().build();
             }
-           return FoodItemDigestMapper.map(foodItems.getFoods()[0]);
+            return FoodItemDigestMapper.map(foodItems.getFoods()[0]);
 
-        } catch (RestClientException e) {
-            throw new UserServiceException(UserServiceError.NUTRITIONIX_FAILURE, e);
+        } catch (HttpStatusCodeException e) {
+            throw new NutritionixException(e.getStatusCode(), e);
         }
     }
 

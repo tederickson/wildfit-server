@@ -1,7 +1,7 @@
 package com.wildfit.server.manager;
 
 import com.wildfit.server.domain.FoodItemDigest;
-import com.wildfit.server.domain.UserProfileDigest;
+import com.wildfit.server.exception.NutritionixException;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.service.NutritionixService;
 import io.swagger.annotations.Api;
@@ -27,10 +27,11 @@ public class FoodController {
 
     @ApiOperation(value = "Get food matching barcode")
     @ApiResponses(value = { //
-            @ApiResponse(code = 200, message = "Get food", response = UserProfileDigest.class), //
+            @ApiResponse(code = 200, message = "Get food", response = FoodItemDigest.class), //
             @ApiResponse(code = 400, message = "Barcode not found")})
     @GetMapping("/fooditems/{barcode}")
-    public FoodItemDigest getFoodWithBarcode(@PathVariable("barcode") String barcode) throws UserServiceException {
+    public FoodItemDigest getFoodWithBarcode(@PathVariable("barcode") String barcode)
+            throws UserServiceException, NutritionixException {
         final var logMessage = String.join("|", "getFoodWithBarcode", barcode);
         log.info(logMessage);
 
