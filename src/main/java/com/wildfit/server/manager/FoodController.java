@@ -1,6 +1,7 @@
 package com.wildfit.server.manager;
 
 import com.wildfit.server.domain.FoodItemDigest;
+import com.wildfit.server.domain.SearchFoodResponse;
 import com.wildfit.server.exception.NutritionixException;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.service.NutritionixService;
@@ -12,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -36,5 +38,17 @@ public class FoodController {
         log.info(logMessage);
 
         return nutritionixService.getFoodWithBarcode(barcode);
+    }
+
+    @ApiOperation(value = "Get foods by description")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Get foods", response = SearchFoodResponse.class)})
+    @GetMapping("/fooditems")
+    public SearchFoodResponse getFoodsByQuery(@RequestParam(value = "description", required = true) String description)
+            throws UserServiceException, NutritionixException {
+        final var logMessage = String.join("|", "getFoodsByQuery", description);
+        log.info(logMessage);
+
+        return nutritionixService.getFoodsByQuery(description);
     }
 }
