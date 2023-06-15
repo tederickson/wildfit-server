@@ -14,7 +14,9 @@ public enum UserServiceError {
     USER_NOT_FOUND("User not found.", HttpStatus.NOT_FOUND),
     NOT_REGISTERED("Your account isn't active or hasn't been approved yet.", HttpStatus.BAD_REQUEST),
     EMAIL_NOT_CONFIGURED("The email server is not configured.", HttpStatus.PRECONDITION_FAILED),
-    INVALID_NAME("Missing name.", HttpStatus.BAD_REQUEST);
+    INVALID_NAME("Missing name.", HttpStatus.BAD_REQUEST),
+    NUTRITIONIX_FAILURE("Internal server failure.", HttpStatus.INTERNAL_SERVER_ERROR),
+    INVALID_PARAMETER("Invalid parameter.", HttpStatus.BAD_REQUEST);
 
     private final String message;
     private final HttpStatus httpStatus;

@@ -6,7 +6,11 @@ public class UserServiceException extends Exception {
 
     public UserServiceException(UserServiceError error) {
         super(error.getMessage());
+        this.error = error;
+    }
 
+    public UserServiceException(UserServiceError error, Throwable cause) {
+        super(error.getMessage(), cause);
         this.error = error;
     }
 }

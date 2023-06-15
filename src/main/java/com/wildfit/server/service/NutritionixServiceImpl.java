@@ -1,8 +1,21 @@
 package com.wildfit.server.service;
 
+import java.util.Arrays;
+import com.wildfit.server.model.mapper.*;
+import com.wildfit.server.domain.FoodItemDigest;
+import com.wildfit.server.exception.UserServiceError;
+import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.model.FoodItems;
 import com.wildfit.server.model.NutritionixHeaderInfo;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * The service calls Handlers to implement the functionality.
@@ -12,6 +25,40 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class NutritionixServiceImpl implements NutritionixService {
+    private final String NUTRITIONIX_URL = "https://trackapi.nutritionix.com/";
     @Autowired
     private NutritionixHeaderInfo nutritionixHeaderInfo;
+
+    @Override
+    public FoodItemDigest getFoodWithBarcode(String barcode) throws UserServiceException {
+        if (StringUtils.isAllBlank(barcode)) {
+            throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
+        }
+        final var restTemplate = new RestTemplate();
+        final var headers = new HttpHeaders();
+
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        addNutritionixHeaders(headers);
+
+        final var entity = new HttpEntity<String>(headers);
+        final var url = NUTRITIONIX_URL + "v2/search/item?upc=" + barcode;
+
+        try {
+            final var foodItems = restTemplate.exchange(url, HttpMethod.GET, entity,
+                    FoodItems.class).getBody();
+            if (foodItems.getFoods().length == 0) {
+                return FoodItemDigest.builder().build();
+            }
+           return FoodItemDigestMapper.map(foodItems.getFoods()[0]);
+
+        } catch (RestClientException e) {
+            throw new UserServiceException(UserServiceError.NUTRITIONIX_FAILURE, e);
+        }
+    }
+
+    private void addNutritionixHeaders(HttpHeaders headers) {
+        headers.add("x-app-id", nutritionixHeaderInfo.getAppId());
+        headers.add("x-app-key", nutritionixHeaderInfo.getAppKey());
+        headers.add("x-remote-user-id", nutritionixHeaderInfo.getRemoteUserId());
+    }
 }
