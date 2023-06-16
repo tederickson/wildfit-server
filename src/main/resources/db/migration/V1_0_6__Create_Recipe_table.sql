@@ -1,7 +1,7 @@
 CREATE TABLE Recipe (
     id bigint NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
-      created_by bigint NOT NULL,
+      email varchar(100) NOT NULL,
       introduction varchar(600) ,
       name varchar(256) NOT NULL,
       prep_time_min int NOT NULL,

@@ -8,24 +8,11 @@ import java.util.Date;
 
 import com.wildfit.server.model.User;
 import com.wildfit.server.model.UserStatus;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class UserRepositoryTest {
-
-    private static final String PASSWORD = "encodedPassword";
-    private static final String EMAIL = "bob@somewhere.com";
-
-    @Autowired
-    UserRepository userRepository;
-
-    @AfterEach
-    void tearDown() {
-        userRepository.deleteAll();
-    }
+class UserRepositoryTest extends AbstractRepositoryTest {
 
     @Test
     void findByEmail() {

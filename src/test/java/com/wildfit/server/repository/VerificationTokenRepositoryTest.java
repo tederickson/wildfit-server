@@ -11,26 +11,17 @@ import java.util.Date;
 import com.wildfit.server.model.User;
 import com.wildfit.server.model.UserStatus;
 import com.wildfit.server.model.VerificationToken;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class VerificationTokenRepositoryTest {
-    private static final String EMAIL = "bob@somewhere.com";
-    private static final String PASSWORD = "encodedPassword";
+class VerificationTokenRepositoryTest extends AbstractRepositoryTest {
+
     private static final String TOKEN = "ApplePieToken3";
 
     @Autowired
-    UserRepository userRepository;
-    @Autowired
     VerificationTokenRepository verificationTokenRepository;
-
-    @AfterEach
-    void tearDown() {
-        userRepository.deleteAll();
-    }
 
     @Test
     public void findByToken_notFound() {

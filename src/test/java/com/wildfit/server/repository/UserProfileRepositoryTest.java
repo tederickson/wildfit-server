@@ -9,26 +9,16 @@ import java.util.Date;
 import com.wildfit.server.model.User;
 import com.wildfit.server.model.UserProfile;
 import com.wildfit.server.model.UserStatus;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class UserProfileRepositoryTest {
+class UserProfileRepositoryTest extends AbstractRepositoryTest {
     private static final String USER_NAME = "Bob Tester";
-    private static final String EMAIL = "bob@somewhere.com";
-    private static final String PASSWORD = "encodedPassword";
 
-    @Autowired
-    UserRepository userRepository;
     @Autowired
     UserProfileRepository userProfileRepository;
-
-    @AfterEach
-    void tearDown() {
-        userRepository.deleteAll();
-    }
 
     @Test
     void findByUserName() {
