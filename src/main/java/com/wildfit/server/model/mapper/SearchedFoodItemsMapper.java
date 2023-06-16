@@ -3,8 +3,8 @@ package com.wildfit.server.model.mapper;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-import com.wildfit.server.domain.*;
-import com.wildfit.server.model.*;
+import com.wildfit.server.domain.SearchFoodResponse;
+import com.wildfit.server.model.SearchedFoodItems;
 
 public class SearchedFoodItemsMapper {
     private SearchedFoodItemsMapper() {
