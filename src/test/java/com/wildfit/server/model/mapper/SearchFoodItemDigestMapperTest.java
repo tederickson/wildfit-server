@@ -78,23 +78,64 @@ class SearchFoodItemDigestMapperTest {
         assertNotNull(searchedFoodItems);
         assertNull(searchedFoodItems.getCommon());
         final var item = SearchFoodItemDigestMapper.map(searchedFoodItems.getBranded()[1]);
-        /* https://trackapi.nutritionix.com/v2/search/instant?query=spinach&branded_type=2&branded=true&common=false
-                {
-                    "food_name": "Baby Spinach, Organic",
-                    "serving_unit": "cups",
-                    "nix_brand_id": "51db37c9176fe9790a8995fb",
-                    "brand_name_item_name": "Earthbound Farm Baby Spinach, Organic",
-                    "serving_qty": 2,
-                    "nf_calories": 25,
-                    "photo": {
-                    "thumb": "https://nutritionix-api.s3.amazonaws.com/5d3d4a6b242f7f2c633e90e1.jpeg"
-                },
-                    "brand_name": "Earthbound Farm",
-                    "region": 1,
-                    "brand_type": 2,
-                    "nix_item_id": "53cd1c1d9628b8892a249eb1",
-                    "locale": "en_US"
-                },
+        /* https://trackapi.nutritionix.com/v2/search/instant?query=spinach&branded_type=2&branded=true&common=false&detailed=true
+    {
+      "food_name": "Baby Spinach, Organic",
+      "nix_brand_id": "51db37c9176fe9790a8995fb",
+      "photo": {
+        "thumb": "https://nutritionix-api.s3.amazonaws.com/5d3d4a6b242f7f2c633e90e1.jpeg"
+      },
+      "brand_name": "Earthbound Farm",
+      "full_nutrients": [
+        {
+          "value": 2,
+          "attr_id": 203
+        },
+        {
+          "value": 0,
+          "attr_id": 204
+        },
+        {
+          "value": 3,
+          "attr_id": 205
+        },
+        {
+          "value": 25,
+          "attr_id": 208
+        },
+        {
+          "value": 2,
+          "attr_id": 291
+        },
+        {
+          "value": 80,
+          "attr_id": 301
+        },
+        {
+          "value": 2.3,
+          "attr_id": 303
+        },
+        {
+          "value": 470,
+          "attr_id": 306
+        },
+        {
+          "value": 65,
+          "attr_id": 307
+        }
+      ],
+      "serving_weight_grams": 85,
+      "nix_item_id": "53cd1c1d9628b8892a249eb1",
+      "nf_metric_qty": 85,
+      "serving_unit": "cups",
+      "brand_name_item_name": "Earthbound Farm Baby Spinach, Organic",
+      "serving_qty": 2,
+      "nf_calories": 25,
+      "region": 1,
+      "brand_type": 2,
+      "nf_metric_uom": "g",
+      "locale": "en_US"
+    },
          */
         assertEquals("Baby Spinach, Organic", item.getFoodName());
         assertEquals("cups", item.getServingUnit());
