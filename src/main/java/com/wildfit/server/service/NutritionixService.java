@@ -8,5 +8,7 @@ import com.wildfit.server.exception.UserServiceException;
 public interface NutritionixService {
     FoodItemDigest getFoodWithBarcode(String barcode) throws UserServiceException, NutritionixException;
 
+    FoodItemDigest getFoodWithId(String nixItemId) throws UserServiceException, NutritionixException;
+
     SearchFoodResponse getFoodsByQuery(String description) throws UserServiceException, NutritionixException;
 }

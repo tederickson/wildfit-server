@@ -51,15 +51,47 @@ public class NutritionixServiceImpl implements NutritionixService {
         final var url = NUTRITIONIX_URL + "v2/search/item?upc=" + barcode;
 
         try {
-            final var response = restTemplate.exchange(url, HttpMethod.GET, entity, FoodItems.class).getBody();
-            final var foodItems = Optional.ofNullable(response)
+            final var foodItems = restTemplate.exchange(url, HttpMethod.GET, entity, FoodItems.class).getBody();
+            final var numFoods = Optional.ofNullable(foodItems)
                     .map(FoodItems::getFoods)
-                    .orElse(null);
+                    .map(x -> x.length)
+                    .orElse(0);
 
-            if (foodItems == null || foodItems.length == 0) {
+            if (numFoods == 0) {
                 return FoodItemDigest.builder().build();
             }
-            return FoodItemDigestMapper.map(response.getFoods()[0]);
+            return FoodItemDigestMapper.map(foodItems.getFoods()[0]);
+
+        } catch (HttpStatusCodeException e) {
+            throw new NutritionixException(e.getStatusCode(), e);
+        }
+    }
+
+    @Override
+    public FoodItemDigest getFoodWithId(String nixItemId) throws UserServiceException, NutritionixException {
+        if (StringUtils.isAllBlank(nixItemId)) {
+            throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
+        }
+        final var restTemplate = new RestTemplate();
+        final var headers = new HttpHeaders();
+
+        headers.setAccept(List.of(MediaType.APPLICATION_JSON));
+        addNutritionixHeaders(headers);
+
+        final var entity = new HttpEntity<String>(headers);
+        final var url = NUTRITIONIX_URL + "v2/search/item?nix_item_id=" + nixItemId;
+
+        try {
+            final var foodItems = restTemplate.exchange(url, HttpMethod.GET, entity, FoodItems.class).getBody();
+            final var numFoods = Optional.ofNullable(foodItems)
+                    .map(FoodItems::getFoods)
+                    .map(x -> x.length)
+                    .orElse(0);
+
+            if (numFoods == 0) {
+                return FoodItemDigest.builder().build();
+            }
+            return FoodItemDigestMapper.map(foodItems.getFoods()[0]);
 
         } catch (HttpStatusCodeException e) {
             throw new NutritionixException(e.getStatusCode(), e);

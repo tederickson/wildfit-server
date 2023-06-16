@@ -1,0 +1,111 @@
+{
+  "foods": [
+    {
+      "food_name": "Butter, Pure Irish, Unsalted",
+      "brand_name": "Kerrygold",
+      "serving_qty": 1,
+      "serving_unit": "tbsp",
+      "serving_weight_grams": 14,
+      "nf_metric_qty": 14,
+      "nf_metric_uom": "g",
+      "nf_calories": 100,
+      "nf_total_fat": 12,
+      "nf_saturated_fat": 8,
+      "nf_cholesterol": 30,
+      "nf_sodium": 0,
+      "nf_total_carbohydrate": 0,
+      "nf_dietary_fiber": null,
+      "nf_sugars": null,
+      "nf_protein": 0,
+      "nf_potassium": null,
+      "nf_p": null,
+      "full_nutrients": [
+        {
+          "attr_id": 203,
+          "value": 0
+        },
+        {
+          "attr_id": 204,
+          "value": 12
+        },
+        {
+          "attr_id": 205,
+          "value": 0
+        },
+        {
+          "attr_id": 208,
+          "value": 100
+        },
+        {
+          "attr_id": 307,
+          "value": 0
+        },
+        {
+          "attr_id": 601,
+          "value": 30
+        },
+        {
+          "attr_id": 606,
+          "value": 8
+        }
+      ],
+      "nix_brand_name": "Kerrygold",
+      "nix_brand_id": "51db37b7176fe9790a8989b4",
+      "nix_item_name": "Butter, Pure Irish, Unsalted",
+      "nix_item_id": "52a15041d122497b50000a75",
+      "metadata": {},
+      "source": 8,
+      "ndb_no": null,
+      "tags": null,
+      "alt_measures": null,
+      "lat": null,
+      "lng": null,
+      "photo": {
+        "thumb": "https://assets.syndigo.com/292e4d9d-0ab6-4084-9979-83c6ace9f7b1",
+        "highres": null,
+        "is_user_uploaded": false
+      },
+      "note": null,
+      "class_code": null,
+      "brick_code": null,
+      "tag_id": null,
+      "updated_at": "2023-03-15T08:30:11+00:00",
+      "nf_ingredient_statement": "Pasteurized Cream, Skimmed Milk, Cultures.",
+      "claims": [
+        "Atkins 20",
+        "Atkins 40",
+        "Atkins 100",
+        "Atkins Friendly",
+        "Low Carb",
+        "Carb Friendly",
+        "Ketogenic Diet",
+        "Sodium Free",
+        "Very Low Sodium",
+        "Low Sodium",
+        "No Wheat Ingredients",
+        "No Soy Ingredients",
+        "No Fish Ingredients",
+        "No Crustacean Shellfish Ingredients",
+        "No Molluscan Shellfish Ingredients",
+        "No Tree Nut Ingredients",
+        "No Peanut Ingredients",
+        "No Egg Ingredients",
+        "No Added Sugars",
+        "No Artificial Sweeteners",
+        "No Artificial Colors",
+        "No Artificial Flavors",
+        "No Gluten Ingredients",
+        "No High Fructose Corn Syrup",
+        "No Added Salt",
+        "No Artificial Preservatives",
+        "No Artificial Ingredients",
+        "Vegetarian",
+        "Pescatarian",
+        "Whole Food",
+        "5 Ingredients or Less",
+        "Sugar Free"
+      ],
+      "taxonomy_node_id": "db4f3fc1-09d2-4e6f-a26c-13418f79c14b"
+    }
+  ]
+}

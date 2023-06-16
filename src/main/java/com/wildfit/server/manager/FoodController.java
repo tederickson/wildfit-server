@@ -27,11 +27,24 @@ public class FoodController {
     @Autowired
     private NutritionixService nutritionixService;
 
-    @ApiOperation(value = "Get food matching barcode")
+    @ApiOperation(value = "Get food by id")
     @ApiResponses(value = { //
             @ApiResponse(code = 200, message = "Get food", response = FoodItemDigest.class), //
             @ApiResponse(code = 400, message = "Barcode not found")})
-    @GetMapping("/fooditems/{barcode}")
+    @GetMapping("/fooditems/{id}")
+    public FoodItemDigest getFoodWithId(@PathVariable("id") String id)
+            throws UserServiceException, NutritionixException {
+        final var logMessage = String.join("|", "getFoodWithId", id);
+        log.info(logMessage);
+
+        return nutritionixService.getFoodWithId(id);
+    }
+
+    @ApiOperation(value = "Get food by barcode")
+    @ApiResponses(value = { //
+            @ApiResponse(code = 200, message = "Get food", response = FoodItemDigest.class), //
+            @ApiResponse(code = 400, message = "Barcode not found")})
+    @GetMapping("/fooditems/barcodes/{barcode}")
     public FoodItemDigest getFoodWithBarcode(@PathVariable("barcode") String barcode)
             throws UserServiceException, NutritionixException {
         final var logMessage = String.join("|", "getFoodWithBarcode", barcode);
