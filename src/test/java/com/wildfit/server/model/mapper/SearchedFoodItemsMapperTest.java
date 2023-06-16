@@ -34,7 +34,7 @@ class SearchedFoodItemsMapperTest {
 
     @Test
     void readResponse() throws IOException {
-        String json = Files.readString(grilledCheeseSearch.getFile().toPath());
+        final var json = Files.readString(grilledCheeseSearch.getFile().toPath());
         final var searchedFoodItems = jacksonTester.parse(json).getObject();
 
         assertNotNull(searchedFoodItems);
