@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Slf4j
 @Api(description = "Authentication API")
+@RequestMapping("v1/auth")
 public class AuthenticationController {
     @Autowired
     private UserService userService;
@@ -32,7 +34,7 @@ public class AuthenticationController {
     @ApiResponses(value = { //
             @ApiResponse(code = 200, message = "Confirm user email account", response = RegisterUserResponse.class), //
             @ApiResponse(code = 400, message = "Confirmation code not found")})
-    @GetMapping("/auth/register/{confirmCode}")
+    @GetMapping("/register/{confirmCode}")
     public RegisterUserResponse register(@PathVariable(value = "confirmCode") String confirmCode) throws UserServiceException {
         final var logMessage = String.join("|", "register", confirmCode);
         log.info(logMessage);
@@ -44,7 +46,7 @@ public class AuthenticationController {
     @ApiResponses(value = { //
             @ApiResponse(code = 200, message = "Successfully logged in user", response = UserDigest.class), //
             @ApiResponse(code = 400, message = "Invalid user name and/or password")})
-    @PostMapping("/auth/login")
+    @PostMapping("/login")
     public UserDigest login(@RequestBody LoginRequest request) throws UserServiceException {
         final var logMessage = String.join("|", "login", request.toString());
         log.info(logMessage);

@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Slf4j
 @Api(description = "Food API")
+@RequestMapping("v1/fooditems")
 public class FoodController {
     @Autowired
     private NutritionixService nutritionixService;
@@ -31,7 +33,7 @@ public class FoodController {
     @ApiResponses(value = { //
             @ApiResponse(code = 200, message = "Get food", response = FoodItemDigest.class), //
             @ApiResponse(code = 400, message = "Barcode not found")})
-    @GetMapping("/fooditems/{id}")
+    @GetMapping("/{id}")
     public FoodItemDigest getFoodWithId(@PathVariable("id") String id)
             throws UserServiceException, NutritionixException {
         final var logMessage = String.join("|", "getFoodWithId", id);
@@ -44,7 +46,7 @@ public class FoodController {
     @ApiResponses(value = { //
             @ApiResponse(code = 200, message = "Get food", response = FoodItemDigest.class), //
             @ApiResponse(code = 400, message = "Barcode not found")})
-    @GetMapping("/fooditems/barcodes/{barcode}")
+    @GetMapping("/barcodes/{barcode}")
     public FoodItemDigest getFoodWithBarcode(@PathVariable("barcode") String barcode)
             throws UserServiceException, NutritionixException {
         final var logMessage = String.join("|", "getFoodWithBarcode", barcode);
@@ -56,7 +58,7 @@ public class FoodController {
     @ApiOperation(value = "Get foods by description")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Get foods", response = SearchFoodResponse.class)})
-    @GetMapping("/fooditems")
+    @GetMapping()
     public SearchFoodResponse getFoodsByQuery(@RequestParam(value = "description", required = true) String description)
             throws UserServiceException, NutritionixException {
         final var logMessage = String.join("|", "getFoodsByQuery", description);

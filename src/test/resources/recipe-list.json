@@ -1,0 +1,2043 @@
+{
+  "recipes": [
+    {
+      "id": "811e88c4-cb26-4383-85fb-027d313ad5e5",
+      "public_id": null,
+      "user_id": "ZxEgWL30Rp9GOly",
+      "name": "Spinach and Fennel",
+      "source": 4,
+      "serving_unit": "Serving",
+      "serving_qty": 4,
+      "directions": "1- chop spinach \n2- slice fennel \n3 - quarter shrooms\n\nThrow into a pan with salt and pepper.\nCook medium high until done",
+      "ingredients": [
+        {
+          "food_name": "spinach",
+          "brand_name": null,
+          "serving_qty": 1,
+          "serving_unit": "cup",
+          "serving_weight_grams": 30,
+          "nf_calories": 6.9,
+          "nf_total_fat": 0.12,
+          "nf_saturated_fat": 0.02,
+          "nf_cholesterol": 0,
+          "nf_sodium": 23.7,
+          "nf_total_carbohydrate": 1.09,
+          "nf_dietary_fiber": 0.66,
+          "nf_sugars": 0.13,
+          "nf_protein": 0.86,
+          "nf_potassium": 167.4,
+          "nf_p": 14.7,
+          "full_nutrients": [
+            {
+              "attr_id": 203,
+              "value": 0.858
+            },
+            {
+              "attr_id": 204,
+              "value": 0.117
+            },
+            {
+              "attr_id": 205,
+              "value": 1.089
+            },
+            {
+              "attr_id": 207,
+              "value": 0.516
+            },
+            {
+              "attr_id": 208,
+              "value": 6.9
+            },
+            {
+              "attr_id": 210,
+              "value": 0.021
+            },
+            {
+              "attr_id": 211,
+              "value": 0.033
+            },
+            {
+              "attr_id": 212,
+              "value": 0.045
+            },
+            {
+              "attr_id": 213,
+              "value": 0
+            },
+            {
+              "attr_id": 214,
+              "value": 0
+            },
+            {
+              "attr_id": 221,
+              "value": 0
+            },
+            {
+              "attr_id": 255,
+              "value": 27.42
+            },
+            {
+              "attr_id": 262,
+              "value": 0
+            },
+            {
+              "attr_id": 263,
+              "value": 0
+            },
+            {
+              "attr_id": 268,
+              "value": 29.1
+            },
+            {
+              "attr_id": 269,
+              "value": 0.126
+            },
+            {
+              "attr_id": 287,
+              "value": 0.03
+            },
+            {
+              "attr_id": 291,
+              "value": 0.66
+            },
+            {
+              "attr_id": 301,
+              "value": 29.7
+            },
+            {
+              "attr_id": 303,
+              "value": 0.813
+            },
+            {
+              "attr_id": 304,
+              "value": 23.7
+            },
+            {
+              "attr_id": 305,
+              "value": 14.7
+            },
+            {
+              "attr_id": 306,
+              "value": 167.4
+            },
+            {
+              "attr_id": 307,
+              "value": 23.7
+            },
+            {
+              "attr_id": 309,
+              "value": 0.159
+            },
+            {
+              "attr_id": 312,
+              "value": 0.039
+            },
+            {
+              "attr_id": 315,
+              "value": 0.2691
+            },
+            {
+              "attr_id": 317,
+              "value": 0.3
+            },
+            {
+              "attr_id": 318,
+              "value": 2813.1
+            },
+            {
+              "attr_id": 319,
+              "value": 0
+            },
+            {
+              "attr_id": 320,
+              "value": 140.7
+            },
+            {
+              "attr_id": 321,
+              "value": 1687.8
+            },
+            {
+              "attr_id": 322,
+              "value": 0
+            },
+            {
+              "attr_id": 323,
+              "value": 0.609
+            },
+            {
+              "attr_id": 324,
+              "value": 0
+            },
+            {
+              "attr_id": 328,
+              "value": 0
+            },
+            {
+              "attr_id": 334,
+              "value": 0
+            },
+            {
+              "attr_id": 337,
+              "value": 0
+            },
+            {
+              "attr_id": 338,
+              "value": 3659.4
+            },
+            {
+              "attr_id": 341,
+              "value": 0
+            },
+            {
+              "attr_id": 342,
+              "value": 0.054
+            },
+            {
+              "attr_id": 343,
+              "value": 0
+            },
+            {
+              "attr_id": 344,
+              "value": 0
+            },
+            {
+              "attr_id": 345,
+              "value": 0
+            },
+            {
+              "attr_id": 346,
+              "value": 0
+            },
+            {
+              "attr_id": 347,
+              "value": 0
+            },
+            {
+              "attr_id": 401,
+              "value": 8.43
+            },
+            {
+              "attr_id": 404,
+              "value": 0.0234
+            },
+            {
+              "attr_id": 405,
+              "value": 0.0567
+            },
+            {
+              "attr_id": 406,
+              "value": 0.2172
+            },
+            {
+              "attr_id": 410,
+              "value": 0.0195
+            },
+            {
+              "attr_id": 415,
+              "value": 0.0585
+            },
+            {
+              "attr_id": 417,
+              "value": 58.2
+            },
+            {
+              "attr_id": 418,
+              "value": 0
+            },
+            {
+              "attr_id": 421,
+              "value": 5.79
+            },
+            {
+              "attr_id": 430,
+              "value": 144.87
+            },
+            {
+              "attr_id": 431,
+              "value": 0
+            },
+            {
+              "attr_id": 432,
+              "value": 58.2
+            },
+            {
+              "attr_id": 435,
+              "value": 58.2
+            },
+            {
+              "attr_id": 454,
+              "value": 30.78
+            },
+            {
+              "attr_id": 501,
+              "value": 0.0117
+            },
+            {
+              "attr_id": 502,
+              "value": 0.0366
+            },
+            {
+              "attr_id": 503,
+              "value": 0.0441
+            },
+            {
+              "attr_id": 504,
+              "value": 0.0669
+            },
+            {
+              "attr_id": 505,
+              "value": 0.0522
+            },
+            {
+              "attr_id": 506,
+              "value": 0.0159
+            },
+            {
+              "attr_id": 507,
+              "value": 0.0105
+            },
+            {
+              "attr_id": 508,
+              "value": 0.0387
+            },
+            {
+              "attr_id": 509,
+              "value": 0.0324
+            },
+            {
+              "attr_id": 510,
+              "value": 0.0483
+            },
+            {
+              "attr_id": 511,
+              "value": 0.0486
+            },
+            {
+              "attr_id": 512,
+              "value": 0.0192
+            },
+            {
+              "attr_id": 513,
+              "value": 0.0426
+            },
+            {
+              "attr_id": 514,
+              "value": 0.072
+            },
+            {
+              "attr_id": 515,
+              "value": 0.1029
+            },
+            {
+              "attr_id": 516,
+              "value": 0.0402
+            },
+            {
+              "attr_id": 517,
+              "value": 0.0336
+            },
+            {
+              "attr_id": 518,
+              "value": 0.0312
+            },
+            {
+              "attr_id": 601,
+              "value": 0
+            },
+            {
+              "attr_id": 605,
+              "value": 0
+            },
+            {
+              "attr_id": 606,
+              "value": 0.0189
+            },
+            {
+              "attr_id": 607,
+              "value": 0
+            },
+            {
+              "attr_id": 608,
+              "value": 0
+            },
+            {
+              "attr_id": 609,
+              "value": 0
+            },
+            {
+              "attr_id": 610,
+              "value": 0
+            },
+            {
+              "attr_id": 611,
+              "value": 0
+            },
+            {
+              "attr_id": 612,
+              "value": 0.003
+            },
+            {
+              "attr_id": 613,
+              "value": 0.0147
+            },
+            {
+              "attr_id": 614,
+              "value": 0.0012
+            },
+            {
+              "attr_id": 617,
+              "value": 0.0015
+            },
+            {
+              "attr_id": 618,
+              "value": 0.0078
+            },
+            {
+              "attr_id": 619,
+              "value": 0.0414
+            },
+            {
+              "attr_id": 620,
+              "value": 0
+            },
+            {
+              "attr_id": 621,
+              "value": 0
+            },
+            {
+              "attr_id": 626,
+              "value": 0.0015
+            },
+            {
+              "attr_id": 627,
+              "value": 0
+            },
+            {
+              "attr_id": 628,
+              "value": 0
+            },
+            {
+              "attr_id": 629,
+              "value": 0
+            },
+            {
+              "attr_id": 630,
+              "value": 0
+            },
+            {
+              "attr_id": 631,
+              "value": 0
+            },
+            {
+              "attr_id": 636,
+              "value": 2.7
+            },
+            {
+              "attr_id": 645,
+              "value": 0.003
+            },
+            {
+              "attr_id": 646,
+              "value": 0.0495
+            }
+          ],
+          "nix_brand_name": null,
+          "nix_brand_id": null,
+          "nix_item_name": null,
+          "nix_item_id": null,
+          "upc": null,
+          "consumed_at": "2023-06-15T20:23:15+00:00",
+          "metadata": {
+            "is_raw_food": true,
+            "original_input": "1 cup spinach"
+          },
+          "source": 1,
+          "ndb_no": 11457,
+          "tags": {
+            "item": "spinach",
+            "measure": "cup",
+            "quantity": "1.0",
+            "food_group": 4,
+            "tag_id": 263
+          },
+          "alt_measures": [
+            {
+              "serving_weight": 30,
+              "seq": null,
+              "measure": "cup",
+              "qty": 1
+            },
+            {
+              "serving_weight": 284,
+              "measure": "package (10 oz)",
+              "seq": 4,
+              "qty": 1
+            },
+            {
+              "serving_weight": 10,
+              "measure": "leaf",
+              "seq": 3,
+              "qty": 1
+            },
+            {
+              "serving_weight": 340,
+              "measure": "bunch",
+              "seq": 2,
+              "qty": 1
+            },
+            {
+              "serving_weight": 30,
+              "measure": "cup",
+              "seq": 1,
+              "qty": 1
+            },
+            {
+              "serving_weight": 90,
+              "measure": "cups",
+              "seq": 80,
+              "qty": 3
+            },
+            {
+              "serving_weight": 113.4,
+              "measure": "oz",
+              "seq": 81,
+              "qty": 4
+            },
+            {
+              "serving_weight": 100,
+              "measure": "g",
+              "seq": null,
+              "qty": 100
+            },
+            {
+              "serving_weight": 0.63,
+              "measure": "tsp",
+              "seq": 101,
+              "qty": 1
+            },
+            {
+              "serving_weight": 1.88,
+              "measure": "tbsp",
+              "seq": 102,
+              "qty": 1
+            }
+          ],
+          "lat": null,
+          "lng": null,
+          "meal_type": 3,
+          "photo": {
+            "thumb": "https://nix-tag-images.s3.amazonaws.com/263_thumb.jpg",
+            "highres": "https://nix-tag-images.s3.amazonaws.com/263_highres.jpg",
+            "is_user_uploaded": false
+          },
+          "sub_recipe": null,
+          "class_code": null,
+          "brick_code": null,
+          "tag_id": null,
+          "nf_metric_qty": null,
+          "nf_metric_uom": null,
+          "created_at": "2023-06-15T20:27:04+00:00",
+          "natural_query_id": null,
+          "ingredients": null,
+          "alexa": false,
+          "taxonomy_node_id": null,
+          "last_modified": null
+        },
+        {
+          "food_name": "mushroom",
+          "brand_name": null,
+          "serving_qty": 1,
+          "serving_unit": "cup",
+          "serving_weight_grams": 78.67,
+          "nf_calories": 17.31,
+          "nf_total_fat": 0.27,
+          "nf_saturated_fat": 0.04,
+          "nf_cholesterol": 0,
+          "nf_sodium": 3.93,
+          "nf_total_carbohydrate": 2.56,
+          "nf_dietary_fiber": 0.79,
+          "nf_sugars": 1.56,
+          "nf_protein": 2.43,
+          "nf_potassium": 250.16,
+          "nf_p": 67.65,
+          "full_nutrients": [
+            {
+              "attr_id": 203,
+              "value": 2.4308
+            },
+            {
+              "attr_id": 204,
+              "value": 0.2675
+            },
+            {
+              "attr_id": 205,
+              "value": 2.5645
+            },
+            {
+              "attr_id": 207,
+              "value": 0.6687
+            },
+            {
+              "attr_id": 208,
+              "value": 17.3067
+            },
+            {
+              "attr_id": 209,
+              "value": 0
+            },
+            {
+              "attr_id": 210,
+              "value": 0
+            },
+            {
+              "attr_id": 211,
+              "value": 1.1643
+            },
+            {
+              "attr_id": 212,
+              "value": 0.1337
+            },
+            {
+              "attr_id": 213,
+              "value": 0
+            },
+            {
+              "attr_id": 214,
+              "value": 0
+            },
+            {
+              "attr_id": 221,
+              "value": 0
+            },
+            {
+              "attr_id": 255,
+              "value": 72.7273
+            },
+            {
+              "attr_id": 262,
+              "value": 0
+            },
+            {
+              "attr_id": 263,
+              "value": 0
+            },
+            {
+              "attr_id": 268,
+              "value": 73.16
+            },
+            {
+              "attr_id": 269,
+              "value": 1.5576
+            },
+            {
+              "attr_id": 287,
+              "value": 0
+            },
+            {
+              "attr_id": 291,
+              "value": 0.7867
+            },
+            {
+              "attr_id": 301,
+              "value": 2.36
+            },
+            {
+              "attr_id": 303,
+              "value": 0.3933
+            },
+            {
+              "attr_id": 304,
+              "value": 7.08
+            },
+            {
+              "attr_id": 305,
+              "value": 67.6533
+            },
+            {
+              "attr_id": 306,
+              "value": 250.16
+            },
+            {
+              "attr_id": 307,
+              "value": 3.9333
+            },
+            {
+              "attr_id": 309,
+              "value": 0.4091
+            },
+            {
+              "attr_id": 312,
+              "value": 0.2502
+            },
+            {
+              "attr_id": 315,
+              "value": 0.037
+            },
+            {
+              "attr_id": 317,
+              "value": 7.316
+            },
+            {
+              "attr_id": 318,
+              "value": 0
+            },
+            {
+              "attr_id": 319,
+              "value": 0
+            },
+            {
+              "attr_id": 320,
+              "value": 0
+            },
+            {
+              "attr_id": 321,
+              "value": 0
+            },
+            {
+              "attr_id": 322,
+              "value": 0
+            },
+            {
+              "attr_id": 323,
+              "value": 0.0079
+            },
+            {
+              "attr_id": 324,
+              "value": 5.5067
+            },
+            {
+              "attr_id": 325,
+              "value": 0.1573
+            },
+            {
+              "attr_id": 326,
+              "value": 0
+            },
+            {
+              "attr_id": 328,
+              "value": 0.1573
+            },
+            {
+              "attr_id": 334,
+              "value": 0
+            },
+            {
+              "attr_id": 337,
+              "value": 0
+            },
+            {
+              "attr_id": 338,
+              "value": 0
+            },
+            {
+              "attr_id": 341,
+              "value": 0.0079
+            },
+            {
+              "attr_id": 342,
+              "value": 0.0079
+            },
+            {
+              "attr_id": 343,
+              "value": 0.0079
+            },
+            {
+              "attr_id": 344,
+              "value": 0.0393
+            },
+            {
+              "attr_id": 345,
+              "value": 0
+            },
+            {
+              "attr_id": 346,
+              "value": 0
+            },
+            {
+              "attr_id": 347,
+              "value": 0
+            },
+            {
+              "attr_id": 401,
+              "value": 1.652
+            },
+            {
+              "attr_id": 404,
+              "value": 0.0637
+            },
+            {
+              "attr_id": 405,
+              "value": 0.3162
+            },
+            {
+              "attr_id": 406,
+              "value": 2.8375
+            },
+            {
+              "attr_id": 410,
+              "value": 1.1776
+            },
+            {
+              "attr_id": 415,
+              "value": 0.0818
+            },
+            {
+              "attr_id": 417,
+              "value": 13.3733
+            },
+            {
+              "attr_id": 418,
+              "value": 0.0315
+            },
+            {
+              "attr_id": 421,
+              "value": 13.6093
+            },
+            {
+              "attr_id": 428,
+              "value": 0
+            },
+            {
+              "attr_id": 429,
+              "value": 0.7867
+            },
+            {
+              "attr_id": 430,
+              "value": 0
+            },
+            {
+              "attr_id": 431,
+              "value": 0
+            },
+            {
+              "attr_id": 432,
+              "value": 13.3733
+            },
+            {
+              "attr_id": 435,
+              "value": 13.3733
+            },
+            {
+              "attr_id": 454,
+              "value": 7.3947
+            },
+            {
+              "attr_id": 501,
+              "value": 0.0275
+            },
+            {
+              "attr_id": 502,
+              "value": 0.0842
+            },
+            {
+              "attr_id": 503,
+              "value": 0.0598
+            },
+            {
+              "attr_id": 504,
+              "value": 0.0944
+            },
+            {
+              "attr_id": 505,
+              "value": 0.0842
+            },
+            {
+              "attr_id": 506,
+              "value": 0.0244
+            },
+            {
+              "attr_id": 507,
+              "value": 0.0094
+            },
+            {
+              "attr_id": 508,
+              "value": 0.0669
+            },
+            {
+              "attr_id": 509,
+              "value": 0.0346
+            },
+            {
+              "attr_id": 510,
+              "value": 0.1825
+            },
+            {
+              "attr_id": 511,
+              "value": 0.0614
+            },
+            {
+              "attr_id": 512,
+              "value": 0.0448
+            },
+            {
+              "attr_id": 513,
+              "value": 0.1566
+            },
+            {
+              "attr_id": 514,
+              "value": 0.1534
+            },
+            {
+              "attr_id": 515,
+              "value": 0.2698
+            },
+            {
+              "attr_id": 516,
+              "value": 0.0724
+            },
+            {
+              "attr_id": 517,
+              "value": 0.0598
+            },
+            {
+              "attr_id": 518,
+              "value": 0.074
+            },
+            {
+              "attr_id": 601,
+              "value": 0
+            },
+            {
+              "attr_id": 605,
+              "value": 0
+            },
+            {
+              "attr_id": 606,
+              "value": 0.0393
+            },
+            {
+              "attr_id": 607,
+              "value": 0
+            },
+            {
+              "attr_id": 608,
+              "value": 0
+            },
+            {
+              "attr_id": 609,
+              "value": 0
+            },
+            {
+              "attr_id": 610,
+              "value": 0
+            },
+            {
+              "attr_id": 611,
+              "value": 0
+            },
+            {
+              "attr_id": 612,
+              "value": 0
+            },
+            {
+              "attr_id": 613,
+              "value": 0.0315
+            },
+            {
+              "attr_id": 614,
+              "value": 0.0079
+            },
+            {
+              "attr_id": 615,
+              "value": 0
+            },
+            {
+              "attr_id": 617,
+              "value": 0
+            },
+            {
+              "attr_id": 618,
+              "value": 0.1259
+            },
+            {
+              "attr_id": 619,
+              "value": 0
+            },
+            {
+              "attr_id": 620,
+              "value": 0
+            },
+            {
+              "attr_id": 621,
+              "value": 0
+            },
+            {
+              "attr_id": 624,
+              "value": 0
+            },
+            {
+              "attr_id": 625,
+              "value": 0
+            },
+            {
+              "attr_id": 626,
+              "value": 0
+            },
+            {
+              "attr_id": 627,
+              "value": 0
+            },
+            {
+              "attr_id": 628,
+              "value": 0
+            },
+            {
+              "attr_id": 629,
+              "value": 0
+            },
+            {
+              "attr_id": 630,
+              "value": 0
+            },
+            {
+              "attr_id": 631,
+              "value": 0
+            },
+            {
+              "attr_id": 638,
+              "value": 0
+            },
+            {
+              "attr_id": 639,
+              "value": 1.5733
+            },
+            {
+              "attr_id": 641,
+              "value": 0
+            },
+            {
+              "attr_id": 645,
+              "value": 0
+            },
+            {
+              "attr_id": 646,
+              "value": 0.1259
+            },
+            {
+              "attr_id": 652,
+              "value": 0
+            },
+            {
+              "attr_id": 653,
+              "value": 0
+            },
+            {
+              "attr_id": 654,
+              "value": 0
+            },
+            {
+              "attr_id": 671,
+              "value": 0
+            },
+            {
+              "attr_id": 672,
+              "value": 0
+            },
+            {
+              "attr_id": 687,
+              "value": 0
+            },
+            {
+              "attr_id": 689,
+              "value": 0
+            },
+            {
+              "attr_id": 697,
+              "value": 0
+            },
+            {
+              "attr_id": 857,
+              "value": 0
+            },
+            {
+              "attr_id": 858,
+              "value": 0
+            }
+          ],
+          "nix_brand_name": null,
+          "nix_brand_id": null,
+          "nix_item_name": null,
+          "nix_item_id": null,
+          "upc": null,
+          "consumed_at": "2023-06-15T20:23:39+00:00",
+          "metadata": {
+            "is_raw_food": true,
+            "original_input": "1 cup mushroom"
+          },
+          "source": 1,
+          "ndb_no": 11260,
+          "tags": {
+            "item": "mushroom",
+            "measure": "cup",
+            "quantity": "1.0",
+            "food_group": 4,
+            "tag_id": 148
+          },
+          "alt_measures": [
+            {
+              "serving_weight": 78.67,
+              "seq": null,
+              "measure": "cup",
+              "qty": 1
+            },
+            {
+              "serving_weight": 35,
+              "measure": "cup pieces",
+              "seq": 7,
+              "qty": 0.5
+            },
+            {
+              "serving_weight": 10,
+              "measure": "small",
+              "seq": 6,
+              "qty": 1
+            },
+            {
+              "serving_weight": 6,
+              "measure": "slice",
+              "seq": 5,
+              "qty": 1
+            },
+            {
+              "serving_weight": 18,
+              "measure": "medium",
+              "seq": 4,
+              "qty": 1
+            },
+            {
+              "serving_weight": 23,
+              "measure": "large",
+              "seq": 3,
+              "qty": 1
+            },
+            {
+              "serving_weight": 96,
+              "measure": "cup, whole",
+              "seq": 2,
+              "qty": 1
+            },
+            {
+              "serving_weight": 70,
+              "measure": "cup, pieces or slices",
+              "seq": 1,
+              "qty": 1
+            },
+            {
+              "serving_weight": 100,
+              "measure": "g",
+              "seq": null,
+              "qty": 100
+            },
+            {
+              "serving_weight": 28.3495,
+              "measure": "wt. oz",
+              "seq": null,
+              "qty": 1
+            }
+          ],
+          "lat": null,
+          "lng": null,
+          "meal_type": 3,
+          "photo": {
+            "thumb": "https://nix-tag-images.s3.amazonaws.com/148_thumb.jpg",
+            "highres": "https://nix-tag-images.s3.amazonaws.com/148_highres.jpg",
+            "is_user_uploaded": false
+          },
+          "sub_recipe": null,
+          "class_code": null,
+          "brick_code": null,
+          "tag_id": null,
+          "nf_metric_qty": null,
+          "nf_metric_uom": null,
+          "created_at": "2023-06-15T20:27:04+00:00",
+          "natural_query_id": null,
+          "ingredients": null,
+          "alexa": false,
+          "taxonomy_node_id": null,
+          "last_modified": null
+        },
+        {
+          "food_name": "fennel",
+          "brand_name": null,
+          "serving_qty": 1,
+          "serving_unit": "cup",
+          "serving_weight_grams": 87,
+          "nf_calories": 26.97,
+          "nf_total_fat": 0.17,
+          "nf_saturated_fat": 0.08,
+          "nf_cholesterol": 0,
+          "nf_sodium": 45.24,
+          "nf_total_carbohydrate": 6.35,
+          "nf_dietary_fiber": 2.7,
+          "nf_sugars": 3.42,
+          "nf_protein": 1.08,
+          "nf_potassium": 360.18,
+          "nf_p": 43.5,
+          "full_nutrients": [
+            {
+              "attr_id": 203,
+              "value": 1.0788
+            },
+            {
+              "attr_id": 204,
+              "value": 0.174
+            },
+            {
+              "attr_id": 205,
+              "value": 6.351
+            },
+            {
+              "attr_id": 207,
+              "value": 0.9135
+            },
+            {
+              "attr_id": 208,
+              "value": 26.97
+            },
+            {
+              "attr_id": 221,
+              "value": 0
+            },
+            {
+              "attr_id": 255,
+              "value": 78.4827
+            },
+            {
+              "attr_id": 262,
+              "value": 0
+            },
+            {
+              "attr_id": 263,
+              "value": 0
+            },
+            {
+              "attr_id": 268,
+              "value": 112.23
+            },
+            {
+              "attr_id": 269,
+              "value": 3.4191
+            },
+            {
+              "attr_id": 291,
+              "value": 2.697
+            },
+            {
+              "attr_id": 301,
+              "value": 42.63
+            },
+            {
+              "attr_id": 303,
+              "value": 0.6351
+            },
+            {
+              "attr_id": 304,
+              "value": 14.79
+            },
+            {
+              "attr_id": 305,
+              "value": 43.5
+            },
+            {
+              "attr_id": 306,
+              "value": 360.18
+            },
+            {
+              "attr_id": 307,
+              "value": 45.24
+            },
+            {
+              "attr_id": 309,
+              "value": 0.174
+            },
+            {
+              "attr_id": 312,
+              "value": 0.0574
+            },
+            {
+              "attr_id": 315,
+              "value": 0.1662
+            },
+            {
+              "attr_id": 317,
+              "value": 0.609
+            },
+            {
+              "attr_id": 318,
+              "value": 837.81
+            },
+            {
+              "attr_id": 319,
+              "value": 0
+            },
+            {
+              "attr_id": 320,
+              "value": 41.76
+            },
+            {
+              "attr_id": 321,
+              "value": 502.86
+            },
+            {
+              "attr_id": 322,
+              "value": 0
+            },
+            {
+              "attr_id": 323,
+              "value": 0.5046
+            },
+            {
+              "attr_id": 324,
+              "value": 0
+            },
+            {
+              "attr_id": 328,
+              "value": 0
+            },
+            {
+              "attr_id": 334,
+              "value": 0
+            },
+            {
+              "attr_id": 337,
+              "value": 0
+            },
+            {
+              "attr_id": 338,
+              "value": 528.09
+            },
+            {
+              "attr_id": 401,
+              "value": 10.44
+            },
+            {
+              "attr_id": 404,
+              "value": 0.0087
+            },
+            {
+              "attr_id": 405,
+              "value": 0.0278
+            },
+            {
+              "attr_id": 406,
+              "value": 0.5568
+            },
+            {
+              "attr_id": 410,
+              "value": 0.2018
+            },
+            {
+              "attr_id": 415,
+              "value": 0.0409
+            },
+            {
+              "attr_id": 417,
+              "value": 23.49
+            },
+            {
+              "attr_id": 418,
+              "value": 0
+            },
+            {
+              "attr_id": 421,
+              "value": 11.484
+            },
+            {
+              "attr_id": 430,
+              "value": 54.636
+            },
+            {
+              "attr_id": 431,
+              "value": 0
+            },
+            {
+              "attr_id": 432,
+              "value": 23.49
+            },
+            {
+              "attr_id": 435,
+              "value": 23.49
+            },
+            {
+              "attr_id": 601,
+              "value": 0
+            },
+            {
+              "attr_id": 605,
+              "value": 0
+            },
+            {
+              "attr_id": 606,
+              "value": 0.0783
+            },
+            {
+              "attr_id": 607,
+              "value": 0
+            },
+            {
+              "attr_id": 608,
+              "value": 0
+            },
+            {
+              "attr_id": 609,
+              "value": 0
+            },
+            {
+              "attr_id": 610,
+              "value": 0
+            },
+            {
+              "attr_id": 611,
+              "value": 0
+            },
+            {
+              "attr_id": 612,
+              "value": 0.0017
+            },
+            {
+              "attr_id": 613,
+              "value": 0.0687
+            },
+            {
+              "attr_id": 614,
+              "value": 0.0078
+            },
+            {
+              "attr_id": 617,
+              "value": 0.0566
+            },
+            {
+              "attr_id": 618,
+              "value": 0.147
+            },
+            {
+              "attr_id": 619,
+              "value": 0
+            },
+            {
+              "attr_id": 620,
+              "value": 0
+            },
+            {
+              "attr_id": 621,
+              "value": 0
+            },
+            {
+              "attr_id": 626,
+              "value": 0.0017
+            },
+            {
+              "attr_id": 627,
+              "value": 0
+            },
+            {
+              "attr_id": 628,
+              "value": 0
+            },
+            {
+              "attr_id": 629,
+              "value": 0
+            },
+            {
+              "attr_id": 630,
+              "value": 0
+            },
+            {
+              "attr_id": 631,
+              "value": 0
+            },
+            {
+              "attr_id": 645,
+              "value": 0.0592
+            },
+            {
+              "attr_id": 646,
+              "value": 0.147
+            }
+          ],
+          "nix_brand_name": null,
+          "nix_brand_id": null,
+          "nix_item_name": null,
+          "nix_item_id": null,
+          "upc": null,
+          "consumed_at": "2023-06-15T20:23:56+00:00",
+          "metadata": {
+            "is_raw_food": false,
+            "original_input": "1 cup fennel"
+          },
+          "source": 1,
+          "ndb_no": 11957,
+          "tags": {
+            "item": "fennel bulb",
+            "measure": "cup",
+            "quantity": "1.0",
+            "food_group": 4,
+            "tag_id": 2126
+          },
+          "alt_measures": [
+            {
+              "serving_weight": 87,
+              "seq": null,
+              "measure": "cup",
+              "qty": 1
+            },
+            {
+              "serving_weight": 234,
+              "measure": "bulb",
+              "seq": 2,
+              "qty": 1
+            },
+            {
+              "serving_weight": 87,
+              "measure": "cup, sliced",
+              "seq": 1,
+              "qty": 1
+            },
+            {
+              "serving_weight": 100,
+              "measure": "g",
+              "seq": null,
+              "qty": 100
+            },
+            {
+              "serving_weight": 28.3495,
+              "measure": "wt. oz",
+              "seq": null,
+              "qty": 1
+            }
+          ],
+          "lat": null,
+          "lng": null,
+          "meal_type": 3,
+          "photo": {
+            "thumb": "https://nix-tag-images.s3.amazonaws.com/2126_thumb.jpg",
+            "highres": "https://nix-tag-images.s3.amazonaws.com/2126_highres.jpg",
+            "is_user_uploaded": false
+          },
+          "sub_recipe": null,
+          "class_code": null,
+          "brick_code": null,
+          "tag_id": null,
+          "nf_metric_qty": null,
+          "nf_metric_uom": null,
+          "created_at": "2023-06-15T20:27:04+00:00",
+          "natural_query_id": null,
+          "ingredients": null,
+          "alexa": false,
+          "taxonomy_node_id": null,
+          "last_modified": null
+        }
+      ],
+      "sections": [],
+      "photo": {
+        "thumb": "https://d2eawub7utcl6.cloudfront.net/images/nix-apple-grey.png",
+        "highres": null,
+        "is_user_uploaded": false
+      },
+      "prep_time_min": 3,
+      "cook_time_min": 11,
+      "is_public": 0,
+      "created_at": "2023-06-15T20:27:04+00:00",
+      "updated_at": "2023-06-15T20:27:04+00:00",
+      "serving_weight_grams": 195.67000000000002,
+      "full_nutrients": [
+        {
+          "attr_id": 203,
+          "value": 4.3676
+        },
+        {
+          "attr_id": 204,
+          "value": 0.5585
+        },
+        {
+          "attr_id": 205,
+          "value": 10.0045
+        },
+        {
+          "attr_id": 207,
+          "value": 2.0982
+        },
+        {
+          "attr_id": 208,
+          "value": 51.1767
+        },
+        {
+          "attr_id": 209,
+          "value": 0
+        },
+        {
+          "attr_id": 210,
+          "value": 0.021
+        },
+        {
+          "attr_id": 211,
+          "value": 1.1972999999999998
+        },
+        {
+          "attr_id": 212,
+          "value": 0.17870000000000003
+        },
+        {
+          "attr_id": 213,
+          "value": 0
+        },
+        {
+          "attr_id": 214,
+          "value": 0
+        },
+        {
+          "attr_id": 221,
+          "value": 0
+        },
+        {
+          "attr_id": 255,
+          "value": 178.63
+        },
+        {
+          "attr_id": 262,
+          "value": 0
+        },
+        {
+          "attr_id": 263,
+          "value": 0
+        },
+        {
+          "attr_id": 268,
+          "value": 214.49
+        },
+        {
+          "attr_id": 269,
+          "value": 5.1027000000000005
+        },
+        {
+          "attr_id": 287,
+          "value": 0.03
+        },
+        {
+          "attr_id": 291,
+          "value": 4.1437
+        },
+        {
+          "attr_id": 301,
+          "value": 74.69
+        },
+        {
+          "attr_id": 303,
+          "value": 1.8414
+        },
+        {
+          "attr_id": 304,
+          "value": 45.57
+        },
+        {
+          "attr_id": 305,
+          "value": 125.8533
+        },
+        {
+          "attr_id": 306,
+          "value": 777.74
+        },
+        {
+          "attr_id": 307,
+          "value": 72.8733
+        },
+        {
+          "attr_id": 309,
+          "value": 0.7421
+        },
+        {
+          "attr_id": 312,
+          "value": 0.34659999999999996
+        },
+        {
+          "attr_id": 315,
+          "value": 0.47229999999999994
+        },
+        {
+          "attr_id": 317,
+          "value": 8.225
+        },
+        {
+          "attr_id": 318,
+          "value": 3650.91
+        },
+        {
+          "attr_id": 319,
+          "value": 0
+        },
+        {
+          "attr_id": 320,
+          "value": 182.45999999999998
+        },
+        {
+          "attr_id": 321,
+          "value": 2190.66
+        },
+        {
+          "attr_id": 322,
+          "value": 0
+        },
+        {
+          "attr_id": 323,
+          "value": 1.1215000000000002
+        },
+        {
+          "attr_id": 324,
+          "value": 5.5067
+        },
+        {
+          "attr_id": 325,
+          "value": 0.1573
+        },
+        {
+          "attr_id": 326,
+          "value": 0
+        },
+        {
+          "attr_id": 328,
+          "value": 0.1573
+        },
+        {
+          "attr_id": 334,
+          "value": 0
+        },
+        {
+          "attr_id": 337,
+          "value": 0
+        },
+        {
+          "attr_id": 338,
+          "value": 4187.49
+        },
+        {
+          "attr_id": 341,
+          "value": 0.0079
+        },
+        {
+          "attr_id": 342,
+          "value": 0.0619
+        },
+        {
+          "attr_id": 343,
+          "value": 0.0079
+        },
+        {
+          "attr_id": 344,
+          "value": 0.0393
+        },
+        {
+          "attr_id": 345,
+          "value": 0
+        },
+        {
+          "attr_id": 346,
+          "value": 0
+        },
+        {
+          "attr_id": 347,
+          "value": 0
+        },
+        {
+          "attr_id": 401,
+          "value": 20.522
+        },
+        {
+          "attr_id": 404,
+          "value": 0.09580000000000001
+        },
+        {
+          "attr_id": 405,
+          "value": 0.4007
+        },
+        {
+          "attr_id": 406,
+          "value": 3.6115
+        },
+        {
+          "attr_id": 410,
+          "value": 1.3989
+        },
+        {
+          "attr_id": 415,
+          "value": 0.1812
+        },
+        {
+          "attr_id": 417,
+          "value": 95.0633
+        },
+        {
+          "attr_id": 418,
+          "value": 0.0315
+        },
+        {
+          "attr_id": 421,
+          "value": 30.8833
+        },
+        {
+          "attr_id": 428,
+          "value": 0
+        },
+        {
+          "attr_id": 429,
+          "value": 0.7867
+        },
+        {
+          "attr_id": 430,
+          "value": 199.506
+        },
+        {
+          "attr_id": 431,
+          "value": 0
+        },
+        {
+          "attr_id": 432,
+          "value": 95.0633
+        },
+        {
+          "attr_id": 435,
+          "value": 95.0633
+        },
+        {
+          "attr_id": 454,
+          "value": 38.1747
+        },
+        {
+          "attr_id": 501,
+          "value": 0.0392
+        },
+        {
+          "attr_id": 502,
+          "value": 0.12079999999999999
+        },
+        {
+          "attr_id": 503,
+          "value": 0.10389999999999999
+        },
+        {
+          "attr_id": 504,
+          "value": 0.1613
+        },
+        {
+          "attr_id": 505,
+          "value": 0.1364
+        },
+        {
+          "attr_id": 506,
+          "value": 0.0403
+        },
+        {
+          "attr_id": 507,
+          "value": 0.0199
+        },
+        {
+          "attr_id": 508,
+          "value": 0.1056
+        },
+        {
+          "attr_id": 509,
+          "value": 0.067
+        },
+        {
+          "attr_id": 510,
+          "value": 0.2308
+        },
+        {
+          "attr_id": 511,
+          "value": 0.11
+        },
+        {
+          "attr_id": 512,
+          "value": 0.064
+        },
+        {
+          "attr_id": 513,
+          "value": 0.1992
+        },
+        {
+          "attr_id": 514,
+          "value": 0.2254
+        },
+        {
+          "attr_id": 515,
+          "value": 0.3727
+        },
+        {
+          "attr_id": 516,
+          "value": 0.1126
+        },
+        {
+          "attr_id": 517,
+          "value": 0.0934
+        },
+        {
+          "attr_id": 518,
+          "value": 0.10519999999999999
+        },
+        {
+          "attr_id": 601,
+          "value": 0
+        },
+        {
+          "attr_id": 605,
+          "value": 0
+        },
+        {
+          "attr_id": 606,
+          "value": 0.1365
+        },
+        {
+          "attr_id": 607,
+          "value": 0
+        },
+        {
+          "attr_id": 608,
+          "value": 0
+        },
+        {
+          "attr_id": 609,
+          "value": 0
+        },
+        {
+          "attr_id": 610,
+          "value": 0
+        },
+        {
+          "attr_id": 611,
+          "value": 0
+        },
+        {
+          "attr_id": 612,
+          "value": 0.0047
+        },
+        {
+          "attr_id": 613,
+          "value": 0.1149
+        },
+        {
+          "attr_id": 614,
+          "value": 0.0169
+        },
+        {
+          "attr_id": 615,
+          "value": 0
+        },
+        {
+          "attr_id": 617,
+          "value": 0.0581
+        },
+        {
+          "attr_id": 618,
+          "value": 0.2807
+        },
+        {
+          "attr_id": 619,
+          "value": 0.0414
+        },
+        {
+          "attr_id": 620,
+          "value": 0
+        },
+        {
+          "attr_id": 621,
+          "value": 0
+        },
+        {
+          "attr_id": 624,
+          "value": 0
+        },
+        {
+          "attr_id": 625,
+          "value": 0
+        },
+        {
+          "attr_id": 626,
+          "value": 0.0031999999999999997
+        },
+        {
+          "attr_id": 627,
+          "value": 0
+        },
+        {
+          "attr_id": 628,
+          "value": 0
+        },
+        {
+          "attr_id": 629,
+          "value": 0
+        },
+        {
+          "attr_id": 630,
+          "value": 0
+        },
+        {
+          "attr_id": 631,
+          "value": 0
+        },
+        {
+          "attr_id": 636,
+          "value": 2.7
+        },
+        {
+          "attr_id": 638,
+          "value": 0
+        },
+        {
+          "attr_id": 639,
+          "value": 1.5733
+        },
+        {
+          "attr_id": 641,
+          "value": 0
+        },
+        {
+          "attr_id": 645,
+          "value": 0.062200000000000005
+        },
+        {
+          "attr_id": 646,
+          "value": 0.3224
+        },
+        {
+          "attr_id": 652,
+          "value": 0
+        },
+        {
+          "attr_id": 653,
+          "value": 0
+        },
+        {
+          "attr_id": 654,
+          "value": 0
+        },
+        {
+          "attr_id": 671,
+          "value": 0
+        },
+        {
+          "attr_id": 672,
+          "value": 0
+        },
+        {
+          "attr_id": 687,
+          "value": 0
+        },
+        {
+          "attr_id": 689,
+          "value": 0
+        },
+        {
+          "attr_id": 697,
+          "value": 0
+        },
+        {
+          "attr_id": 857,
+          "value": 0
+        },
+        {
+          "attr_id": 858,
+          "value": 0
+        }
+      ]
+    }
+  ]
+}
