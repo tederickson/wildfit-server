@@ -28,7 +28,7 @@ public class FoodItemDigest {
     private Integer sugars; //  null,
     private Integer protein; //  0,
     private Integer potassium; //  null,
-    // private Integer nf_p; //  null,
+    private Integer phosphorus; //  null,
     private String nixBrandName; //  Kerrygold,
     private String nixBrandId; //  51db37b7176fe9790a8989b4,
     private String nixItemId; //  52a15041d122497b50000a75,

@@ -29,7 +29,7 @@ public final class FoodItemDigestMapper {
                     .withSugars(food.getNf_sugars())
                     .withProtein(food.getNf_protein())
                     .withPotassium(food.getNf_potassium())
-                    //  .withNf_p(food.getNf_p())
+                    .withPhosphorus(food.getNf_p())
                     .withNixBrandName(food.getNix_brand_name())
                     .withNixBrandId(food.getNix_brand_id())
                     .withNixItemId(food.getNix_item_id())
