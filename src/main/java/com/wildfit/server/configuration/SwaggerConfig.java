@@ -24,8 +24,8 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
 
     private ApiInfo metaData() {
         return new ApiInfoBuilder()
-                .title("WILDFIT REST API")
-                .description("REST API for WILDFIT server")
+                .title("WILDFIT API")
+                .description("REST API for WILDFIT application")
                 //                .version("2.0.0")
                 //                .license("Apache License Version 2.0")
                 //                .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0")
