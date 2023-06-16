@@ -20,6 +20,9 @@ class SearchFoodItemDigestMapperTest {
     @Value("classpath:search-instant-grilled-cheese.json")
     Resource grilledCheeseSearch;
 
+    @Value("classpath:search-instant-spinach-branded.json")
+    Resource spinachSearch;
+
     @Autowired
     private JacksonTester<SearchedFoodItems> jacksonTester;
 
@@ -38,7 +41,7 @@ class SearchFoodItemDigestMapperTest {
         assertNotNull(searchedFoodItems);
         final var firstItem = SearchFoodItemDigestMapper.map(searchedFoodItems.getBranded()[0]);
 
-        /*
+        /* https://trackapi.nutritionix.com/v2/search/instant?query=grilled cheese&branded_type=2
               {
                 "food_name": "Cheese, Grilled Cheese Inspired Blend",
                 "serving_unit": "bars",
@@ -65,5 +68,42 @@ class SearchFoodItemDigestMapperTest {
         assertEquals("https://assets.syndigo.com/dfe0e8d1-9a82-4d40-9e57-20d9f2bb8128", firstItem.getPhoto().getThumb());
         assertEquals("Just the Cheese", firstItem.getBrandName());
         assertEquals("64818be2239bce0008ba8b8b", firstItem.getNixItemId());
+    }
+
+    @Test
+    void readResponseBrandedOnly() throws IOException {
+        String json = Files.readString(spinachSearch.getFile().toPath());
+        final var searchedFoodItems = jacksonTester.parse(json).getObject();
+
+        assertNotNull(searchedFoodItems);
+        assertNull(searchedFoodItems.getCommon());
+        final var item = SearchFoodItemDigestMapper.map(searchedFoodItems.getBranded()[1]);
+        /* https://trackapi.nutritionix.com/v2/search/instant?query=spinach&branded_type=2&branded=true&common=false
+                {
+                    "food_name": "Baby Spinach, Organic",
+                    "serving_unit": "cups",
+                    "nix_brand_id": "51db37c9176fe9790a8995fb",
+                    "brand_name_item_name": "Earthbound Farm Baby Spinach, Organic",
+                    "serving_qty": 2,
+                    "nf_calories": 25,
+                    "photo": {
+                    "thumb": "https://nutritionix-api.s3.amazonaws.com/5d3d4a6b242f7f2c633e90e1.jpeg"
+                },
+                    "brand_name": "Earthbound Farm",
+                    "region": 1,
+                    "brand_type": 2,
+                    "nix_item_id": "53cd1c1d9628b8892a249eb1",
+                    "locale": "en_US"
+                },
+         */
+        assertEquals("Baby Spinach, Organic", item.getFoodName());
+        assertEquals("cups", item.getServingUnit());
+        assertEquals("51db37c9176fe9790a8995fb", item.getNixBrandId());
+        assertEquals("Earthbound Farm Baby Spinach, Organic", item.getBrandNameItemName());
+        assertEquals(2, item.getServingQty());
+        assertEquals(25, item.getCalories());
+        assertEquals("https://nutritionix-api.s3.amazonaws.com/5d3d4a6b242f7f2c633e90e1.jpeg", item.getPhoto().getThumb());
+        assertEquals("Earthbound Farm", item.getBrandName());
+        assertEquals("53cd1c1d9628b8892a249eb1", item.getNixItemId());
     }
 }
