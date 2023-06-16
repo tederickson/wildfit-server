@@ -5,7 +5,6 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SearchedFoodItems {
-    private SearchedFoodItem[] common;
-    private SearchedFoodItem[] branded;
+public class Photo {
+    private String thumb; //  "https://nix-tag-images.s3.amazonaws.com/1763_thumb.jpg"
 }

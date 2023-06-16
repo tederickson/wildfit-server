@@ -8,6 +8,6 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SearchFoodResponse {
-    private List<FoodItemDigest> common;
-    private List<FoodItemDigest> branded;
+    private List<SearchFoodItemDigest> common;
+    private List<SearchFoodItemDigest> branded;
 }
