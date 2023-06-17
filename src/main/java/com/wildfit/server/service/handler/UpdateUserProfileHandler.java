@@ -22,7 +22,7 @@ public class UpdateUserProfileHandler {
 
     public UserProfileDigest execute() throws UserServiceException {
         validate();
-        log.info(userProfileRequest.toString());
+        log.info(userId + "|" + userProfileRequest);
 
         final var user = userRepository.findById(userId).orElseThrow(() ->
                 new UserServiceException(UserServiceError.USER_NOT_FOUND));
