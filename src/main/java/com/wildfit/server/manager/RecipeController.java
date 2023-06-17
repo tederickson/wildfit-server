@@ -1,17 +1,16 @@
 package com.wildfit.server.manager;
 
-import com.wildfit.server.domain.RegisterUserResponse;
+import com.wildfit.server.domain.RecipeListDigest;
 import com.wildfit.server.exception.UserServiceException;
-import com.wildfit.server.service.UserService;
+import com.wildfit.server.service.RecipeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -24,17 +23,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("v1/recipes")
 public class RecipeController {
     @Autowired
-    private UserService userService;
+    private RecipeService recipeService;
 
-    @ApiOperation(value = "Confirm User Email")
-    @ApiResponses(value = { //
-            @ApiResponse(code = 200, message = "Confirm user email account", response = RegisterUserResponse.class), //
-            @ApiResponse(code = 400, message = "Confirmation code not found")})
-    @GetMapping("/{confirmCode}")
-    public RegisterUserResponse register(@PathVariable(value = "confirmCode") String confirmCode) throws UserServiceException {
-        final var logMessage = String.join("|", "register", confirmCode);
+    @ApiOperation(value = "Retrieve recipes for a specific season")
+    //    @ApiResponses(value = {
+    //            @ApiResponse(code = 200, message = "Retrieve recipes", response = RegisterUserResponse.class)})
+    @GetMapping("/{season}")
+    public RecipeListDigest retrieveRecipesForSeason(@PathVariable(value = "season") String season,
+                                                     @RequestParam(value = "page", defaultValue = "0") Integer page,
+                                                     @RequestParam(value = "pageSize", defaultValue = "30") Integer pageSize)
+            throws UserServiceException {
+
+        final var logMessage = String.join("|", "retrieveRecipesForSeason", season,
+                page.toString(), pageSize.toString());
         log.info(logMessage);
 
-        return userService.confirmUser(confirmCode);
+        final var pageable = PageMapper.map(page, pageSize);
+
+        return recipeService.listBySeason(season, pageable);
     }
 }

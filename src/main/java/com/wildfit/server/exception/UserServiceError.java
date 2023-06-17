@@ -15,7 +15,9 @@ public enum UserServiceError {
     NOT_REGISTERED("Your account isn't active or hasn't been approved yet.", HttpStatus.BAD_REQUEST),
     EMAIL_NOT_CONFIGURED("The email server is not configured.", HttpStatus.PRECONDITION_FAILED),
     INVALID_NAME("Missing name.", HttpStatus.BAD_REQUEST),
-    INVALID_PARAMETER("Invalid parameter.", HttpStatus.BAD_REQUEST);
+    INVALID_PARAMETER("Invalid parameter.", HttpStatus.BAD_REQUEST),
+    INVALID_PAGE_SIZE("Invalid page size", HttpStatus.BAD_REQUEST),
+    INVALID_PAGE_OFFSET("Invalid page number", HttpStatus.BAD_REQUEST);
 
     private final String message;
     private final HttpStatus httpStatus;
