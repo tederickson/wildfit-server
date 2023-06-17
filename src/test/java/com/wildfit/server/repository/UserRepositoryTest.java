@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Date;
-
 import com.wildfit.server.model.User;
 import com.wildfit.server.model.UserStatus;
 import org.junit.jupiter.api.Test;
@@ -26,7 +24,7 @@ class UserRepositoryTest extends AbstractRepositoryTest {
     void findByEmail_withUser() {
         final var user = User.builder()
                 .withStatus(UserStatus.FREE.getCode())
-                .withCreateDate(new Date())
+                .withCreateDate(java.time.LocalDate.now())
                 .withPassword(PASSWORD)
                 .withEmail(EMAIL).build();
         final var saved = userRepository.save(user);

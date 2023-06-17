@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.util.Date;
-
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.User;
@@ -97,7 +95,7 @@ class LoginHandlerTest extends AbstractHandlerTest {
 
     @Test
     void execute() throws UserServiceException {
-        createUser(true);
+        final var user = createUser(true);
         final var response = LoginHandler.builder()
                 .withUserRepository(userRepository)
                 .withPassword(PASSWORD)
@@ -106,6 +104,7 @@ class LoginHandlerTest extends AbstractHandlerTest {
 
         assertNotNull(response);
         assertEquals(EMAIL, response.getEmail());
+        assertEquals(user.getId(), response.getId());
     }
 
     private User createUser(boolean enabled) {
@@ -115,7 +114,7 @@ class LoginHandlerTest extends AbstractHandlerTest {
         final var encodedPassword = PasswordEncodeDecode.encode(PASSWORD);
         final var user = User.builder()
                 .withStatus(UserStatus.FREE.getCode())
-                .withCreateDate(new Date())
+                .withCreateDate(java.time.LocalDate.now())
                 .withPassword(encodedPassword)
                 .withEmail(EMAIL)
                 .withEnabled(enabled)

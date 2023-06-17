@@ -51,7 +51,7 @@ class UserProfileDigestTest {
                 .withAge(39)
                 .withGender(GenderType.FEMALE)
                 .withWeight(185.7f)
-                .withHeightFeet (5)
+                .withHeightFeet(5)
                 .withHeightInches(3)
                 .build();
 

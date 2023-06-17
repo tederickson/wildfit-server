@@ -26,9 +26,9 @@ public class GetUserProfileHandler {
         final var user = userRepository.findById(userId)
                 .orElseThrow(() -> new UserServiceException(UserServiceError.USER_NOT_FOUND));
 
-        final var userProfile  = userProfileRepository.findByUser(user);
+        final var userProfile = userProfileRepository.findByUser(user);
 
-        return UserProfileDigestMapper.map(userProfile );
+        return UserProfileDigestMapper.map(userProfile);
     }
 
     private void validate() throws UserServiceException {

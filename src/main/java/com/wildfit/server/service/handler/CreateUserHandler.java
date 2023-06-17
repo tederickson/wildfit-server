@@ -1,6 +1,5 @@
 package com.wildfit.server.service.handler;
 
-import java.util.Date;
 import java.util.Objects;
 
 import com.wildfit.server.domain.CreateUserResponse;
@@ -51,7 +50,7 @@ public class CreateUserHandler {
 
         final var user = User.builder()
                 .withStatus(UserStatus.FREE.getCode())
-                .withCreateDate(new Date())
+                .withCreateDate(java.time.LocalDate.now())
                 .withPassword(encodedPassword)
                 .withEmail(email)
                 .withEnabled(false)

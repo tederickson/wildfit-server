@@ -8,6 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import com.google.code.beanmatchers.BeanMatchers;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
@@ -23,6 +26,8 @@ class VerificationTokenTest {
 
             return user;
         }, User.class);
+        BeanMatchers.registerValueGenerator(LocalDate::now, LocalDate.class);
+        BeanMatchers.registerValueGenerator(LocalDateTime::now, LocalDateTime.class);
     }
 
     @Test

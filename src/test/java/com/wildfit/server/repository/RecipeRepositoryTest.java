@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.util.Date;
 import java.util.List;
 
 import com.wildfit.server.model.Recipe;
@@ -44,7 +43,7 @@ class RecipeRepositoryTest {
                 .withSeason(SEASON)
                 .withEmail(EMAIL)
                 .withName("Test Recipe")
-                .withCreated(new Date())
+                .withCreated(java.time.LocalDateTime.now())
                 .withInstructions("instructions")
                 .withIntroduction("introduction")
                 .withPrepTimeMin(3)

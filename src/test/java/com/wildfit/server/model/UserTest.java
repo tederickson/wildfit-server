@@ -5,11 +5,19 @@ import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanToStringExcl
 import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSettersExcluding;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import java.time.LocalDate;
+
+import com.google.code.beanmatchers.BeanMatchers;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class UserTest {
+    @BeforeAll
+    static void setUp() {
+        BeanMatchers.registerValueGenerator(LocalDate::now, LocalDate.class);
+    }
 
     @Test
     public void shouldHaveANoArgsConstructor() {

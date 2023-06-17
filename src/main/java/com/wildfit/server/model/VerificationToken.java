@@ -9,8 +9,7 @@ import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import lombok.Getter;
@@ -30,18 +29,10 @@ final public class VerificationToken {
     private User user;
 
     private String token;
-    private Date expiryDate;
-
-    private Date calculateExpirationDate() {
-        final var cal = Calendar.getInstance();
-
-        cal.add(Calendar.DATE, 1);
-
-        return new Date(cal.getTime().getTime());
-    }
+    private LocalDateTime expiryDate;
 
     public VerificationToken() {
-        expiryDate = calculateExpirationDate();
+        expiryDate = LocalDateTime.now().plusDays(1);
     }
 
     public VerificationToken(String token, User user) {

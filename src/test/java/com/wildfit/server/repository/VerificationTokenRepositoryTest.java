@@ -4,9 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDate;
 
 import com.wildfit.server.model.User;
 import com.wildfit.server.model.UserStatus;
@@ -32,7 +30,7 @@ class VerificationTokenRepositoryTest extends AbstractRepositoryTest {
     public void findByToken() {
         final var user = User.builder()
                 .withStatus(UserStatus.FREE.getCode())
-                .withCreateDate(new Date())
+                .withCreateDate(java.time.LocalDate.now())
                 .withPassword(PASSWORD)
                 .withEmail(EMAIL).build();
 
@@ -48,14 +46,7 @@ class VerificationTokenRepositoryTest extends AbstractRepositoryTest {
         assertEquals(dbUser, dbVerificationToken.getUser());
         assertEquals(TOKEN, dbVerificationToken.getToken());
 
-        final var calendar = Calendar.getInstance();
-        calendar.add(Calendar.DATE, 1);
-
-        final var dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-        final var tomorrowAsText = dateFormat.format(calendar.getTime());
-        final var expirationAsText = dateFormat.format(dbVerificationToken.getExpiryDate());
-
-        assertEquals(tomorrowAsText, expirationAsText);
+        final var tomorrow = LocalDate.now().plusDays(1);
+        assertEquals(tomorrow, dbVerificationToken.getExpiryDate().toLocalDate());
     }
 }

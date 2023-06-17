@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Date;
-
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.User;
@@ -47,7 +45,7 @@ class DeleteUserHandlerTest extends AbstractHandlerTest {
     void execute() throws UserServiceException {
         final var user = User.builder()
                 .withStatus(UserStatus.FREE.getCode())
-                .withCreateDate(new Date())
+                .withCreateDate(java.time.LocalDate.now())
                 .withPassword(PASSWORD)
                 .withEmail(EMAIL).build();
 

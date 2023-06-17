@@ -1,15 +1,12 @@
 package com.wildfit.server.model;
 
-import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 import lombok.AllArgsConstructor;
@@ -34,9 +31,7 @@ public final class User {
     private String password;
     private String status;
 
-    @Basic
-    @Temporal(TemporalType.DATE)
-    private Date createDate;
+    private LocalDate createDate;
 
     private boolean enabled;
 
