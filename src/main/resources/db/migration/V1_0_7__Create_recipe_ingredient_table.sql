@@ -5,7 +5,6 @@ CREATE TABLE recipe_ingredient (
     FOREIGN KEY (recipe_id) REFERENCES user(id)
     ON DELETE CASCADE,
 
-    name            varchar(256) NOT NULL,
     food_name       varchar(256) NOT NULL,
     brand_name      varchar(256) NOT NULL,
     nix_item_id     varchar(256) NOT NULL,
