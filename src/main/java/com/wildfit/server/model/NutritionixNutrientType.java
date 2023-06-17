@@ -21,17 +21,17 @@ public enum NutritionixNutrientType {
     FATRN(605, "FATRN", "Fatty acids, total trans", "g", "nf_trans_fatty_acid"),
     FASAT(606, "FASAT", "Fatty acids, total saturated", "g", "nf_saturated_fat");
 
-    final int attr_id;
-    final String usda_tag;
-    final String name;
-    final String unit;
-    final String bulk_csv_field;
+    private final int attrId;
+    private final String usdaTag;
+    private final String description;
+    private final String unit;
+    private final String bulkCsvField;
 
-    NutritionixNutrientType(int attr_id, String usda_tag, String name, String unit, String bulk_csv_field) {
-        this.attr_id = attr_id;
-        this.usda_tag = usda_tag;
-        this.name = name;
+    NutritionixNutrientType(int attrId, String usdaTag, String description, String unit, String bulkCsvField) {
+        this.attrId = attrId;
+        this.usdaTag = usdaTag;
+        this.description = description;
         this.unit = unit;
-        this.bulk_csv_field = bulk_csv_field;
+        this.bulkCsvField = bulkCsvField;
     }
 }
