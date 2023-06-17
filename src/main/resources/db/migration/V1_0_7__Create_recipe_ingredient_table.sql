@@ -13,5 +13,15 @@ CREATE TABLE recipe_ingredient (
     serving_qty     int NOT NULL,
     serving_unit    varchar(10) NOT NULL,
     serving_weight_grams    int NOT NULL,
-    calories        float NOT NULL
+    nf_calories int,
+    nf_total_fat int,
+    nf_saturated_fat int,
+    nf_cholesterol int,
+    nf_sodium int,
+    nf_total_carbohydrate int,
+    nf_dietary_fiber int,
+    nf_sugars int,
+    nf_protein int,
+    nf_potassium int,
+    nf_p int
 );
