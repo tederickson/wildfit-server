@@ -146,5 +146,7 @@ class SearchFoodItemDigestMapperTest {
         assertEquals("https://nutritionix-api.s3.amazonaws.com/5d3d4a6b242f7f2c633e90e1.jpeg", item.getPhoto().getThumb());
         assertEquals("Earthbound Farm", item.getBrandName());
         assertEquals("53cd1c1d9628b8892a249eb1", item.getNixItemId());
+        assertEquals(25.0, item.getCalories(), 0.01);
+        assertEquals(3.0, item.getTotalCarbohydrate(), 0.01);
     }
 }

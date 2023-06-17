@@ -34,4 +34,13 @@ public enum NutritionixNutrientType {
         this.unit = unit;
         this.bulkCsvField = bulkCsvField;
     }
+
+    public static NutritionixNutrientType findByAttrId(int attrId) {
+        for (var value : values()) {
+            if (value.attrId == attrId) {
+                return value;
+            }
+        }
+        return null;
+    }
 }

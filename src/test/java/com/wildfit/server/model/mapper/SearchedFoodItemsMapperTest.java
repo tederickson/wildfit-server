@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import java.io.IOException;
 import java.nio.file.Files;
 
-import com.wildfit.server.domain.PhotoDigest;
 import com.wildfit.server.model.SearchedFoodItems;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +52,11 @@ class SearchedFoodItemsMapperTest {
          *       "tag_name": "grilled cheese",
          *       "serving_qty": 1,
          *       "common_type": null,
+         *       "full_nutrients": [
+         *         {
+         *           "value": 11.736,
+         *           "attr_id": 203
+         *         }, ...
          *       "tag_id": "1763",
          *       "photo": {
          *         "thumb": "https://nix-tag-images.s3.amazonaws.com/1763_thumb.jpg"
@@ -61,13 +65,11 @@ class SearchedFoodItemsMapperTest {
          *     },
          */
         final var firstCommon = searchFoodItemDigest.getCommon().get(0);
-        final var expected = com.wildfit.server.domain.SearchFoodItemDigest.builder()
-                .withFoodName("grilled cheese")
-                .withServingUnit("sandwich")
-                .withServingQty(1)
-                .withPhoto(PhotoDigest.builder()
-                        .withThumb("https://nix-tag-images.s3.amazonaws.com/1763_thumb.jpg").build())
-                .build();
-        assertEquals(expected, firstCommon);
+
+        assertEquals("grilled cheese", firstCommon.getFoodName());
+        assertEquals("sandwich", firstCommon.getServingUnit());
+        assertEquals(1, firstCommon.getServingQty());
+        assertEquals("https://nix-tag-images.s3.amazonaws.com/1763_thumb.jpg", firstCommon.getPhoto().getThumb());
+        assertEquals(365.76, firstCommon.getCalories(), 0.01);
     }
 }
