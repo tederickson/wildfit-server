@@ -30,7 +30,8 @@ public class SearchFoodItemDigest {
     private Float calcium;
     private Float iron;
     private Float vitaminD;
-    private Float addedSugars; private Float transFattyAcid;
+    private Float addedSugars;
+    private Float transFattyAcid;
     private String nixBrandName; //  Kerrygold,
     private String nixBrandId; //  51db37b7176fe9790a8989b4,
     private String nixItemId; //  52a15041d122497b50000a75,
