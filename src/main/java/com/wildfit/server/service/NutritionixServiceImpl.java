@@ -1,6 +1,5 @@
 package com.wildfit.server.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import com.wildfit.server.domain.FoodItemDigest;
@@ -33,6 +32,7 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class NutritionixServiceImpl implements NutritionixService {
     private final String NUTRITIONIX_URL = "https://trackapi.nutritionix.com/";
+
     @Autowired
     private NutritionixHeaderInfo nutritionixHeaderInfo;
 
@@ -42,12 +42,7 @@ public class NutritionixServiceImpl implements NutritionixService {
             throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
         }
         final var restTemplate = new RestTemplate();
-        final var headers = new HttpHeaders();
-
-        headers.setAccept(List.of(MediaType.APPLICATION_JSON));
-        addNutritionixHeaders(headers);
-
-        final var entity = new HttpEntity<String>(headers);
+        final var entity = new HttpEntity<String>(getHeaders());
         final var url = NUTRITIONIX_URL + "v2/search/item?upc=" + barcode;
 
         try {
@@ -63,6 +58,7 @@ public class NutritionixServiceImpl implements NutritionixService {
             return FoodItemDigestMapper.map(foodItems.getFoods()[0]);
 
         } catch (HttpStatusCodeException e) {
+            log.error(url);
             throw new NutritionixException(e.getStatusCode(), e);
         }
     }
@@ -73,13 +69,9 @@ public class NutritionixServiceImpl implements NutritionixService {
             throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
         }
         final var restTemplate = new RestTemplate();
-        final var headers = new HttpHeaders();
-
-        headers.setAccept(List.of(MediaType.APPLICATION_JSON));
-        addNutritionixHeaders(headers);
-
-        final var entity = new HttpEntity<String>(headers);
+        final var entity = new HttpEntity<String>(getHeaders());
         final var url = NUTRITIONIX_URL + "v2/search/item?nix_item_id=" + nixItemId;
+        log.info(url);
 
         try {
             final var foodItems = restTemplate.exchange(url, HttpMethod.GET, entity, FoodItems.class).getBody();
@@ -94,6 +86,7 @@ public class NutritionixServiceImpl implements NutritionixService {
             return FoodItemDigestMapper.map(foodItems.getFoods()[0]);
 
         } catch (HttpStatusCodeException e) {
+            log.error(url);
             throw new NutritionixException(e.getStatusCode(), e);
         }
     }
@@ -104,10 +97,7 @@ public class NutritionixServiceImpl implements NutritionixService {
             throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
         }
         final var restTemplate = new RestTemplate();
-        final var headers = new HttpHeaders();
-
-        headers.setAccept(List.of(MediaType.APPLICATION_JSON));
-        addNutritionixHeaders(headers);
+        final var entity = new HttpEntity<String>(getHeaders());
 
         final var queryParameters = String.join("&",
                 "query=" + description,
@@ -120,17 +110,22 @@ public class NutritionixServiceImpl implements NutritionixService {
         log.info(url);
 
         try {
-            final var response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<String>(headers),
-                    SearchedFoodItems.class).getBody();
+            final var response = restTemplate.exchange(url, HttpMethod.GET, entity, SearchedFoodItems.class).getBody();
             return SearchedFoodItemsMapper.map(response);
         } catch (HttpStatusCodeException e) {
+            log.error(url);
             throw new NutritionixException(e.getStatusCode(), e);
         }
     }
 
-    private void addNutritionixHeaders(HttpHeaders headers) {
+    private HttpHeaders getHeaders() {
+        final var headers = new HttpHeaders();
+
+        headers.setAccept(java.util.List.of(MediaType.APPLICATION_JSON));
         headers.add("x-app-id", nutritionixHeaderInfo.getAppId());
         headers.add("x-app-key", nutritionixHeaderInfo.getAppKey());
         headers.add("x-remote-user-id", nutritionixHeaderInfo.getRemoteUserId());
+
+        return headers;
     }
 }
