@@ -6,4 +6,6 @@ import org.springframework.data.domain.Pageable;
 
 public interface RecipeService {
     RecipeListDigest listBySeason(String season, Pageable pageable) throws UserServiceException;
+
+    void deleteRecipe(Long id, Long userId)throws UserServiceException;
 }
