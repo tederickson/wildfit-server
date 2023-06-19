@@ -5,8 +5,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -40,6 +42,9 @@ public class Recipe {
 
     private LocalDateTime created;
     private LocalDateTime updated;
+
+    @OneToMany(mappedBy = "recipe")
+    private Set<RecipeIngredient> recipeIngredients;
 
     @Override
     public boolean equals(Object o) {
