@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class AbstractHandlerTest {
     protected static final String PASSWORD = "Super2023!";
-    protected static final String EMAIL = "ted.erickson@comcast.net";
+    protected static final String EMAIL = "tederickson35@gmail.com";
     protected static final String NAME = "Ted Erickson";
 
     @Autowired

@@ -1,8 +1,9 @@
 package com.wildfit.server.manager;
 
 import com.wildfit.server.domain.CreateUserResponse;
-import com.wildfit.server.domain.*;
+import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.RecipeListDigest;
+import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.service.RecipeService;
 import io.swagger.annotations.Api;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -71,5 +73,19 @@ public class RecipeController {
         log.info(logMessage);
 
         return recipeService.createRecipe(userId, request);
+    }
+
+    @ApiOperation(value = "Update Recipe")
+    @ApiResponses(value = { //
+            @ApiResponse(code = 200, message = "Recipe updated"), //
+            @ApiResponse(code = 400, message = "Recipe not found"),
+            @ApiResponse(code = 401, message = "Not authorized to update recipe")})
+    @PutMapping("/{id}/userIds/{userId}")
+    public RecipeDigest updateRecipe(@PathVariable("userId") Long userId,
+                                     @RequestBody RecipeDigest request) throws UserServiceException {
+        final var logMessage = String.join("|", "updateRecipe", userId.toString(), request.toString());
+        log.info(logMessage);
+
+        return recipeService.updateRecipe(userId, request);
     }
 }

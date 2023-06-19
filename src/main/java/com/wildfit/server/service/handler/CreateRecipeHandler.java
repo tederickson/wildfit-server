@@ -45,7 +45,6 @@ public class CreateRecipeHandler {
         Objects.requireNonNull(userRepository, "userRepository");
         Objects.requireNonNull(recipeRepository, "recipeRepository");
 
-
         if (userId == null) {
             throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
         }

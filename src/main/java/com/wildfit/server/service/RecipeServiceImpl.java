@@ -9,6 +9,7 @@ import com.wildfit.server.repository.UserRepository;
 import com.wildfit.server.service.handler.CreateRecipeHandler;
 import com.wildfit.server.service.handler.DeleteRecipeHandler;
 import com.wildfit.server.service.handler.ListBySeasonHandler;
+import com.wildfit.server.service.handler.UpdateRecipeHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,15 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public RecipeDigest createRecipe(Long userId, RecipeDigest request) throws UserServiceException {
         return CreateRecipeHandler.builder().withUserRepository(userRepository)
+                .withRecipeRepository(recipeRepository)
+                .withUserId(userId)
+                .withRequest(request)
+                .build().execute();
+    }
+
+    @Override
+    public RecipeDigest updateRecipe(Long userId, RecipeDigest request) throws UserServiceException {
+        return UpdateRecipeHandler.builder().withUserRepository(userRepository)
                 .withRecipeRepository(recipeRepository)
                 .withUserId(userId)
                 .withRequest(request)

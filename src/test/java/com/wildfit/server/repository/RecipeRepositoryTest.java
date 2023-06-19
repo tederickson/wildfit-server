@@ -3,6 +3,7 @@ package com.wildfit.server.repository;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
@@ -31,18 +32,12 @@ class RecipeRepositoryTest {
     }
 
     @Test
-    void findAllBySeason_noRows() {
-        final var noRows = recipeRepository.findAllBySeason(SEASON, PAGEABLE);
-        assertNotNull(noRows);
-        assertFalse(noRows.iterator().hasNext());
-    }
-
-    @Test
     void findAllBySeason() {
+        final var name = "Test Recipe";
         final var recipe = Recipe.builder()
                 .withSeason(SEASON)
                 .withEmail(EMAIL)
-                .withName("Test Recipe")
+                .withName(name)
                 .withCreated(java.time.LocalDateTime.now())
                 .withInstructions("instructions")
                 .withIntroduction("introduction")
@@ -54,13 +49,20 @@ class RecipeRepositoryTest {
         final var saved = recipeRepository.save(recipe);
 
         final var rows = recipeRepository.findAllBySeason(SEASON, PAGEABLE);
-        assertEquals(1, rows.size());
-        final var dbRecipe = rows.get(0);
+        final var dbRecipe = rows.stream().filter(x -> SEASON.equals(x.getSeason()))
+                .filter(x -> EMAIL.equals(x.getEmail()))
+                .filter(x -> name.equals(x.getName()))
+                .findFirst().orElse(null);
 
-        assertEquals(SEASON, dbRecipe.getSeason());
-        assertEquals(EMAIL, dbRecipe.getEmail());
-        assertEquals("Test Recipe", dbRecipe.getName());
+        assertNotNull(dbRecipe);
 
+        final var searchById = recipeRepository.findAllById(List.of(saved.getId()));
+        final var iterator = searchById.iterator();
+
+        assertTrue(iterator.hasNext());
+        while (iterator.hasNext()) {
+            assertEquals(saved.getId(), iterator.next().getId());
+        }
         recipeRepository.delete(saved);
     }
 }

@@ -12,4 +12,6 @@ public interface RecipeService {
     void deleteRecipe(Long id, Long userId) throws UserServiceException;
 
     RecipeDigest createRecipe(Long userId, RecipeDigest request) throws UserServiceException;
+
+    RecipeDigest updateRecipe(Long userId, RecipeDigest request) throws UserServiceException;
 }
