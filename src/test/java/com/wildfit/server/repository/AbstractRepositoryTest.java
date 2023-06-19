@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class AbstractRepositoryTest {
     protected static final String PASSWORD = "Super2023!";
-    protected static final String EMAIL = "ted.erickson@comcast.net";
+    protected static final String EMAIL = "tederickson35@gmail.com";
 
     @Autowired
     UserRepository userRepository;
