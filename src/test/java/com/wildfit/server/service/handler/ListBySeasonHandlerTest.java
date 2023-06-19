@@ -51,7 +51,8 @@ class ListBySeasonHandlerTest extends AbstractRecipeHandlerTest {
                 .build().execute();
         assertNotNull(testRecipe);
 
-        final var response = ListBySeasonHandler.builder().withSeason(SeasonType.SPRING)
+        final var response = ListBySeasonHandler.builder()
+                .withSeason(SeasonType.SPRING)
                 .withPageable(PageRequest.of(0, 100))
                 .withRecipeRepository(recipeRepository)
                 .build()

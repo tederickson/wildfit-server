@@ -40,4 +40,39 @@ public class Recipe {
 
     private LocalDateTime created;
     private LocalDateTime updated;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Recipe recipe = (Recipe) o;
+        return id == recipe.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", introduction='" + introduction + '\'' +
+                ", name='" + name + '\'' +
+                ", season='" + season + '\'' +
+                ", prepTimeMin=" + prepTimeMin +
+                ", cookTimeMin=" + cookTimeMin +
+                ", servingUnit='" + servingUnit + '\'' +
+                ", servingQty=" + servingQty +
+                ", instructions='" + instructions + '\'' +
+                ", created=" + created +
+                ", updated=" + updated +
+                '}';
+    }
 }
