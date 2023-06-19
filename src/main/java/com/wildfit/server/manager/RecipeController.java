@@ -1,5 +1,7 @@
 package com.wildfit.server.manager;
 
+import com.wildfit.server.domain.CreateUserResponse;
+import com.wildfit.server.domain.*;
 import com.wildfit.server.domain.RecipeListDigest;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.service.RecipeService;
@@ -12,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,12 +34,12 @@ public class RecipeController {
 
     @ApiOperation(value = "Retrieve recipes for a specific season")
     @GetMapping("/{season}")
-    public RecipeListDigest retrieveRecipesForSeason(@PathVariable(value = "season") String season,
+    public RecipeListDigest retrieveRecipesForSeason(@PathVariable(value = "season") SeasonType season,
                                                      @RequestParam(value = "page", defaultValue = "0") Integer page,
                                                      @RequestParam(value = "pageSize", defaultValue = "30") Integer pageSize)
             throws UserServiceException {
 
-        final var logMessage = String.join("|", "retrieveRecipesForSeason", season,
+        final var logMessage = String.join("|", "retrieveRecipesForSeason", season.toString(),
                 page.toString(), pageSize.toString());
         log.info(logMessage);
 
@@ -55,5 +59,17 @@ public class RecipeController {
         log.info(logMessage);
 
         recipeService.deleteRecipe(id, userId);
+    }
+
+    @ApiOperation(value = "Create Recipe")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully created recipe", response = CreateUserResponse.class)})
+    @PostMapping("/userIds/{userId}")
+    public RecipeDigest createRecipe(@PathVariable("userId") Long userId,
+                                     @RequestBody RecipeDigest request) throws UserServiceException {
+        final var logMessage = String.join("|", "createRecipe", userId.toString(), request.toString());
+        log.info(logMessage);
+
+        return recipeService.createRecipe(userId, request);
     }
 }

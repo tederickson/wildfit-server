@@ -1,11 +1,15 @@
 package com.wildfit.server.service;
 
+import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.RecipeListDigest;
+import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.exception.UserServiceException;
 import org.springframework.data.domain.Pageable;
 
 public interface RecipeService {
-    RecipeListDigest listBySeason(String season, Pageable pageable) throws UserServiceException;
+    RecipeListDigest listBySeason(SeasonType season, Pageable pageable) throws UserServiceException;
 
-    void deleteRecipe(Long id, Long userId)throws UserServiceException;
+    void deleteRecipe(Long id, Long userId) throws UserServiceException;
+
+    RecipeDigest createRecipe(Long userId, RecipeDigest request) throws UserServiceException;
 }

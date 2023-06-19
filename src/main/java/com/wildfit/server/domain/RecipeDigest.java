@@ -13,7 +13,7 @@ public class RecipeDigest {
     private long id;
 
     private String name;
-    private String season;
+    private SeasonType season;
 
     private int prepTimeMin;
     private int cookTimeMin;
