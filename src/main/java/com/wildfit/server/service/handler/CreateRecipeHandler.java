@@ -1,11 +1,13 @@
 package com.wildfit.server.service.handler;
 
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.Recipe;
+import com.wildfit.server.model.mapper.InstructionGroupMapper;
 import com.wildfit.server.model.mapper.RecipeMapper;
 import com.wildfit.server.repository.RecipeRepository;
 import com.wildfit.server.repository.UserRepository;
@@ -24,8 +26,9 @@ public class CreateRecipeHandler {
 
         final var user = userRepository.findById(userId)
                 .orElseThrow(() -> new UserServiceException(UserServiceError.USER_NOT_FOUND));
+
+        //  final var recipe = createRecipe(request, user.getEmail());
         final var recipe = Recipe.builder()
-                .withId(request.getId())
                 .withEmail(user.getEmail())
                 .withIntroduction(request.getIntroduction())
                 .withName(request.getName())
@@ -34,11 +37,18 @@ public class CreateRecipeHandler {
                 .withCookTimeMin(request.getCookTimeMin())
                 .withServingUnit(request.getServingUnit())
                 .withServingQty(request.getServingQty())
-                .withInstructions(request.getInstructions())
                 .withCreated(java.time.LocalDateTime.now())
                 .build();
 
-        return RecipeMapper.map(recipeRepository.save(recipe));
+        final var dbRecipe = recipeRepository.save(recipe);
+        if (request.getInstructionGroups() != null) {
+            final var instructionGroups = request.getInstructionGroups().stream()
+                    .map(instructionGroupDigest -> InstructionGroupMapper.create(dbRecipe, instructionGroupDigest))
+                    .collect(Collectors.toSet());
+            dbRecipe.setInstructionGroups(instructionGroups);
+        }
+
+        return RecipeMapper.map(recipeRepository.save(dbRecipe));
     }
 
     private void validate() throws UserServiceException {

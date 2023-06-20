@@ -1,5 +1,7 @@
 package com.wildfit.server.domain;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,5 +24,5 @@ public class RecipeDigest {
     private int servingQty;
 
     private String introduction;
-    private String instructions;
+    private List<InstructionGroupDigest> instructionGroups;
 }

@@ -1,6 +1,8 @@
 package com.wildfit.server.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,12 +40,13 @@ public class Recipe {
     private String servingUnit;
     private int servingQty;
 
-    private String instructions;
-
     private LocalDateTime created;
     private LocalDateTime updated;
 
-    @OneToMany(mappedBy = "recipe")
+    @OneToMany(mappedBy = "recipe", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<InstructionGroup> instructionGroups;
+
+    @OneToMany(mappedBy = "recipe", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<RecipeIngredient> recipeIngredients;
 
     @Override
@@ -75,7 +78,6 @@ public class Recipe {
                 ", cookTimeMin=" + cookTimeMin +
                 ", servingUnit='" + servingUnit + '\'' +
                 ", servingQty=" + servingQty +
-                ", instructions='" + instructions + '\'' +
                 ", created=" + created +
                 ", updated=" + updated +
                 '}';

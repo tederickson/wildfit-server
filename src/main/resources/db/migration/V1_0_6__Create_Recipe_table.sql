@@ -9,7 +9,6 @@ CREATE TABLE Recipe (
       season varchar(10) NOT NULL,
       serving_unit varchar(10) NOT NULL,
       serving_qty int NOT NULL,
-      instructions varchar(2000) NOT NULL,
       created datetime NOT NULL,
       updated datetime,
 
