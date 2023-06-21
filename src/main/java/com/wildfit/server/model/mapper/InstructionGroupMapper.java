@@ -19,6 +19,7 @@ public class InstructionGroupMapper {
 
     public static InstructionGroupDigest map(InstructionGroup instructionGroup) {
         final var builder = InstructionGroupDigest.builder()
+                .withId(instructionGroup.getId())
                 .withInstructionGroupNumber(instructionGroup.getInstructionGroupNumber())
                 .withName(instructionGroup.getName());
 

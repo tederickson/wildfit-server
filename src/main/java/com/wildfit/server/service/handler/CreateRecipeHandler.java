@@ -39,15 +39,15 @@ public class CreateRecipeHandler {
                 .withCreated(java.time.LocalDateTime.now())
                 .build();
 
-        final var dbRecipe = recipeRepository.save(recipe);
         if (request.getInstructionGroups() != null) {
             final var instructionGroups = request.getInstructionGroups().stream()
-                    .map(instructionGroupDigest -> InstructionGroupMapper.create(dbRecipe, instructionGroupDigest))
+                    .map(instructionGroupDigest -> InstructionGroupMapper.create(recipe, instructionGroupDigest))
                     .collect(Collectors.toSet());
-            dbRecipe.setInstructionGroups(instructionGroups);
+            recipe.setInstructionGroups(instructionGroups);
         }
+        final var dbRecipe = recipeRepository.save(recipe);
 
-        return RecipeMapper.map(recipeRepository.save(dbRecipe));
+        return RecipeMapper.map(dbRecipe);
     }
 
     private void validate() throws UserServiceException {

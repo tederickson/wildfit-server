@@ -69,7 +69,41 @@ class UpdateRecipeHandlerTest extends AbstractRecipeHandlerTest {
         final var response = updateRecipe(testRecipe);
 
         assertEquals("blah blah blah", response.getIntroduction());
+        assertEquals(1, response.getInstructionGroups().size());
         assertEquals(4, response.getInstructionGroups().get(0).getInstructions().size());
+    }
+
+    @Test
+    void addInstructionGroup() throws UserServiceException {
+        final var instructionGroup = InstructionGroupDigest.builder()
+                .withInstructionGroupNumber(1)
+                .withInstructions(List.of(step1, step2)).build();
+        final var recipe = RecipeDigest.builder()
+                .withName(NAME)
+                .withSeason(SeasonType.FALL)
+                .withIntroduction(INTRODUCTION)
+                .withPrepTimeMin(5)
+                .withCookTimeMin(15)
+                .withServingQty(4)
+                .withServingUnit("serving")
+                .withInstructionGroups(List.of(instructionGroup))
+                .build();
+
+        createRecipe(recipe);
+
+        final var instructionGroup2 = InstructionGroupDigest.builder()
+                .withInstructionGroupNumber(2)
+                .withInstructions(List.of(step3, step4)).build();
+
+        testRecipe.getInstructionGroups().add(instructionGroup2);
+        final var response = updateRecipe(testRecipe);
+
+        // Verify the first group did not change
+        final var originalInstructionGroup = response.getInstructionGroups().get(0);
+        assertEquals(testRecipe.getInstructionGroups().get(0), originalInstructionGroup);
+
+        assertEquals(2, response.getInstructionGroups().size());
+        assertEquals(2, response.getInstructionGroups().get(1).getInstructions().size());
     }
 
     private RecipeDigest updateRecipe(RecipeDigest testRecipe) throws UserServiceException {
@@ -80,6 +114,4 @@ class UpdateRecipeHandlerTest extends AbstractRecipeHandlerTest {
                 .withRequest(testRecipe)
                 .build().execute();
     }
-
-
 }

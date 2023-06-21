@@ -10,6 +10,7 @@ public class InstructionMapper {
 
     public static InstructionDigest map(Instruction instruction) {
         return InstructionDigest.builder()
+                .withId(instruction.getId())
                 .withStepNumber(instruction.getStepNumber())
                 .withInstruction(instruction.getText()).build();
     }

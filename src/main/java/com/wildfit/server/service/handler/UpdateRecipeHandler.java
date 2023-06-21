@@ -32,45 +32,46 @@ public class UpdateRecipeHandler {
         final var recipe = recipeRepository.findById(request.getId())
                 .orElseThrow(() -> new UserServiceException(UserServiceError.RECIPE_NOT_FOUND));
 
-        if (recipe.getEmail().equals(user.getEmail())) {
-            recipe.setIntroduction(request.getIntroduction());
-            recipe.setName(request.getName());
-            recipe.setSeason(request.getSeason().getCode());
-            recipe.setPrepTimeMin(request.getPrepTimeMin());
-            recipe.setCookTimeMin(request.getCookTimeMin());
-            recipe.setServingUnit(request.getServingUnit());
-            recipe.setServingQty(request.getServingQty());
-            recipe.setUpdated(java.time.LocalDateTime.now());
-
-            if (request.getInstructionGroups() == null) {
-                recipe.setInstructionGroups(null);
-            } else {
-                Set<InstructionGroup> instructionGroups = new HashSet<>();
-
-                for (var instructionGroupDigest : request.getInstructionGroups()) {
-                    if (instructionGroupDigest.getId() == null) {
-                        instructionGroups.add(InstructionGroupMapper.create(recipe, instructionGroupDigest));
-                    } else {
-                        final var instructionGroup = recipe.getInstructionGroups().stream()
-                                .filter(x -> instructionGroupDigest.getId().equals(x.getId())).findFirst()
-                                .orElse(null);
-                        if (instructionGroup == null) {
-                            log.error("Unable to find id " + instructionGroupDigest.getId());
-                            throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
-                        }
-                        instructionGroups.add(InstructionGroupMapper.update(instructionGroup, instructionGroupDigest));
-                    }
-                }
-
-                recipe.setInstructionGroups(instructionGroups);
-            }
-
-            recipeRepository.save(recipe);
-        } else {
+        if (!recipe.getEmail().equals(user.getEmail())) {
             throw new UserServiceException(UserServiceError.NOT_AUTHORIZED);
         }
+        recipe.setIntroduction(request.getIntroduction());
+        recipe.setName(request.getName());
+        recipe.setSeason(request.getSeason().getCode());
+        recipe.setPrepTimeMin(request.getPrepTimeMin());
+        recipe.setCookTimeMin(request.getCookTimeMin());
+        recipe.setServingUnit(request.getServingUnit());
+        recipe.setServingQty(request.getServingQty());
+        recipe.setUpdated(java.time.LocalDateTime.now());
 
-        return RecipeMapper.map(recipeRepository.save(recipe));
+        if (request.getInstructionGroups() == null) {
+            recipe.setInstructionGroups(null);
+        } else {
+            Set<InstructionGroup> instructionGroups = new HashSet<>();
+
+            for (var instructionGroupDigest : request.getInstructionGroups()) {
+                if (instructionGroupDigest.getId() == null) {
+                    instructionGroups.add(InstructionGroupMapper.create(recipe, instructionGroupDigest));
+                } else {
+                    final var instructionGroup = recipe.getInstructionGroups().stream()
+                            .filter(x -> instructionGroupDigest.getId().equals(x.getId())).findFirst()
+                            .orElse(null);
+                    if (instructionGroup == null) {
+                        log.error("Unable to find id " + instructionGroupDigest.getId());
+                        throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
+                    }
+                    instructionGroups.add(InstructionGroupMapper.update(instructionGroup, instructionGroupDigest));
+                }
+            }
+
+            recipe.setInstructionGroups(instructionGroups);
+        }
+
+        recipeRepository.save(recipe);
+
+        final var updatedRecipe = recipeRepository.findById(request.getId())
+                .orElseThrow(() -> new UserServiceException(UserServiceError.RECIPE_NOT_FOUND));
+        return RecipeMapper.map(updatedRecipe);
     }
 
     private void validate() throws UserServiceException {

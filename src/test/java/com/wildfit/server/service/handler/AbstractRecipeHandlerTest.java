@@ -37,6 +37,7 @@ public class AbstractRecipeHandlerTest extends AbstractHandlerTest {
     void tearDown() {
         if (testRecipe != null) {
             recipeRepository.deleteById(testRecipe.getId());
+            testRecipe = null;
         }
 
         super.tearDown();
