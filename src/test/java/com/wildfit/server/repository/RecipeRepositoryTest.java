@@ -33,13 +33,12 @@ class RecipeRepositoryTest {
 
     @Test
     void findAllBySeason() {
-        final var name = "Test Recipe";
+        final var name = "RecipeRepositoryTest Test Recipe";
         final var recipe = Recipe.builder()
                 .withSeason(SEASON)
                 .withEmail(EMAIL)
                 .withName(name)
                 .withCreated(java.time.LocalDateTime.now())
-                .withInstructions("instructions")
                 .withIntroduction("introduction")
                 .withPrepTimeMin(3)
                 .withCookTimeMin(14)
