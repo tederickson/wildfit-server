@@ -1,13 +1,10 @@
 package com.wildfit.server.service.handler;
 
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
-import com.wildfit.server.model.Recipe;
-import com.wildfit.server.model.mapper.InstructionGroupMapper;
 import com.wildfit.server.model.mapper.RecipeMapper;
 import com.wildfit.server.repository.RecipeRepository;
 import com.wildfit.server.repository.UserRepository;
@@ -27,24 +24,7 @@ public class CreateRecipeHandler {
         final var user = userRepository.findById(userId)
                 .orElseThrow(() -> new UserServiceException(UserServiceError.USER_NOT_FOUND));
 
-        final var recipe = Recipe.builder()
-                .withEmail(user.getEmail())
-                .withIntroduction(request.getIntroduction())
-                .withName(request.getName())
-                .withSeason(request.getSeason().getCode())
-                .withPrepTimeMin(request.getPrepTimeMin())
-                .withCookTimeMin(request.getCookTimeMin())
-                .withServingUnit(request.getServingUnit())
-                .withServingQty(request.getServingQty())
-                .withCreated(java.time.LocalDateTime.now())
-                .build();
-
-        if (request.getInstructionGroups() != null) {
-            final var instructionGroups = request.getInstructionGroups().stream()
-                    .map(instructionGroupDigest -> InstructionGroupMapper.create(recipe, instructionGroupDigest))
-                    .collect(Collectors.toSet());
-            recipe.setInstructionGroups(instructionGroups);
-        }
+        final var recipe = RecipeMapper.create(request, user.getEmail());
         final var dbRecipe = recipeRepository.save(recipe);
 
         return RecipeMapper.map(dbRecipe);
