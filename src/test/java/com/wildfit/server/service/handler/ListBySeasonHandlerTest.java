@@ -1,7 +1,6 @@
 package com.wildfit.server.service.handler;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -27,12 +26,7 @@ class ListBySeasonHandlerTest extends AbstractRecipeHandlerTest {
                 .withServingQty(4)
                 .withServingUnit("serving")
                 .build();
-        final var testRecipe = CreateRecipeHandler.builder().withUserRepository(userRepository)
-                .withRecipeRepository(recipeRepository)
-                .withUserId(userId)
-                .withRequest(recipe)
-                .build().execute();
-        assertNotNull(testRecipe);
+        createRecipe(recipe);
 
         final var response = ListBySeasonHandler.builder()
                 .withSeason(SeasonType.SPRING)
@@ -43,8 +37,6 @@ class ListBySeasonHandlerTest extends AbstractRecipeHandlerTest {
 
         final var foundRecipe = response.getRecipes().stream().filter(x -> x.getId() == testRecipe.getId()).findFirst();
         assertTrue(foundRecipe.isPresent());
-
-        recipeRepository.deleteById(testRecipe.getId());
     }
 
     @Test

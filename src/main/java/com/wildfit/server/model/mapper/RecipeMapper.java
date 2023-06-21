@@ -36,6 +36,20 @@ public final class RecipeMapper {
         return builder.build();
     }
 
+    public static RecipeDigest list(Recipe recipe) {
+        final var builder = RecipeDigest.builder()
+                .withId(recipe.getId())
+                .withIntroduction(recipe.getIntroduction())
+                .withName(recipe.getName())
+                .withSeason(SeasonType.findByCode(recipe.getSeason()))
+                .withPrepTimeMin(recipe.getPrepTimeMin())
+                .withCookTimeMin(recipe.getCookTimeMin())
+                .withServingUnit(recipe.getServingUnit())
+                .withServingQty(recipe.getServingQty());
+
+        return builder.build();
+    }
+
     public static Recipe create(RecipeDigest request, String email) {
         final var recipe = Recipe.builder()
                 .withEmail(email)

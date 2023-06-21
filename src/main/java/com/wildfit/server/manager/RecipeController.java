@@ -35,7 +35,7 @@ public class RecipeController {
     private RecipeService recipeService;
 
     @ApiOperation(value = "Retrieve recipes for a specific season")
-    @GetMapping("/{season}")
+    @GetMapping("/seasons/{season}")
     public RecipeListDigest retrieveRecipesForSeason(@PathVariable(value = "season") SeasonType season,
                                                      @RequestParam(value = "page", defaultValue = "0") Integer page,
                                                      @RequestParam(value = "pageSize", defaultValue = "30") Integer pageSize)
@@ -48,6 +48,16 @@ public class RecipeController {
         final var pageable = PageMapper.map(page, pageSize);
 
         return recipeService.listBySeason(season, pageable);
+    }
+
+    @ApiOperation(value = "Retrieve recipe")
+    @GetMapping("/{id}")
+    public RecipeDigest retrieveRecipe(@PathVariable(value = "id") Long id) throws UserServiceException {
+
+        final var logMessage = String.join("|", "retrieveRecipe", id.toString());
+        log.info(logMessage);
+
+        return recipeService.retrieveRecipe(id);
     }
 
     @ApiOperation(value = "Delete Recipe")

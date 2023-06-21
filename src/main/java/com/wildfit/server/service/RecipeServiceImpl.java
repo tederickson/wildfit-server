@@ -8,6 +8,7 @@ import com.wildfit.server.repository.RecipeRepository;
 import com.wildfit.server.repository.UserRepository;
 import com.wildfit.server.service.handler.CreateRecipeHandler;
 import com.wildfit.server.service.handler.DeleteRecipeHandler;
+import com.wildfit.server.service.handler.GetRecipeHandler;
 import com.wildfit.server.service.handler.ListBySeasonHandler;
 import com.wildfit.server.service.handler.UpdateRecipeHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,14 @@ public class RecipeServiceImpl implements RecipeService {
                 .withRecipeRepository(recipeRepository)
                 .withSeason(season)
                 .withPageable(pageable)
+                .build().execute();
+    }
+
+    @Override
+    public RecipeDigest retrieveRecipe(Long id) throws UserServiceException {
+        return GetRecipeHandler.builder()
+                .withRecipeRepository(recipeRepository)
+                .withRecipeId(id)
                 .build().execute();
     }
 
