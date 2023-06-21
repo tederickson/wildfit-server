@@ -18,9 +18,11 @@ Run the following command in a terminal window:
 mvn spring-boot:run -Dspring-boot.run.profiles=dev
 ```
 
-## Config
+# Config
+
 Only the application.properties file is stored in Git.  
 The rest are local files to prevent leaking sensitive information.
+
 * src/main/resources/application.properties
     * Common configuration values
 * src/main/resources/application-dev.properties
@@ -32,8 +34,8 @@ The rest are local files to prevent leaking sensitive information.
 
 Required HEADERS when accessing Nutritionix V2 API endpoints:
 
-* x-app-id: Your app ID issued from developer.nutritionix.com)
-* x-app-key: Your app key issued from developer.nutritionix.com)
+* x-app-id: Your app ID issued from developer.nutritionix.com
+* x-app-key: Your app key issued from developer.nutritionix.com
 * x-remote-user-id:  A unique identifier to represent the end-user who is accessing the Nutritionix API. If in
   development mode, set this to 0. This is used for billing purposes to determine the number of active users your app
   has.
