@@ -12,7 +12,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class InstructionGroupDigest {
+    private Long id;
     private Integer instructionGroupNumber;
     private String name;
-    List<InstructionDigest> instructions;
+    private List<InstructionDigest> instructions;
 }

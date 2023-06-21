@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class InstructionDigest {
-    private int stepNumber;
+    private Long id;
+    private Integer stepNumber;
     private String instruction;
 }

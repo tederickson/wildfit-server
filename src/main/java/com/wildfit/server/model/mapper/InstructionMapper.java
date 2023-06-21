@@ -21,4 +21,11 @@ public class InstructionMapper {
                 .withText(instructionDigest.getInstruction())
                 .build();
     }
+
+    public static Instruction update(Instruction instruction, InstructionDigest instructionDigest) {
+        instruction.setStepNumber(instructionDigest.getStepNumber());
+        instruction.setText(instructionDigest.getInstruction());
+
+        return instruction;
+    }
 }

@@ -27,7 +27,6 @@ public class CreateRecipeHandler {
         final var user = userRepository.findById(userId)
                 .orElseThrow(() -> new UserServiceException(UserServiceError.USER_NOT_FOUND));
 
-        //  final var recipe = createRecipe(request, user.getEmail());
         final var recipe = Recipe.builder()
                 .withEmail(user.getEmail())
                 .withIntroduction(request.getIntroduction())

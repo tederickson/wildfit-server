@@ -1,11 +1,18 @@
 package com.wildfit.server.model.mapper;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import com.wildfit.server.domain.InstructionGroupDigest;
+import com.wildfit.server.exception.UserServiceError;
+import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.model.Instruction;
 import com.wildfit.server.model.InstructionGroup;
 import com.wildfit.server.model.Recipe;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class InstructionGroupMapper {
     private InstructionGroupMapper() {
     }
@@ -36,6 +43,37 @@ public class InstructionGroupMapper {
             instructionGroup.setInstructions(instructions
             );
         }
+        return instructionGroup;
+    }
+
+    public static InstructionGroup update(InstructionGroup instructionGroup,
+                                          InstructionGroupDigest instructionGroupDigest)
+            throws UserServiceException {
+        instructionGroup.setInstructionGroupNumber(instructionGroupDigest.getInstructionGroupNumber());
+        instructionGroup.setName(instructionGroupDigest.getName());
+
+        if (instructionGroupDigest.getInstructions() == null) {
+            instructionGroup.setInstructions(null);
+        } else {
+            List<Instruction> instructions = new ArrayList<>();
+
+            for (var instructionDigest : instructionGroupDigest.getInstructions()) {
+                if (instructionDigest.getId() == null) {
+                    instructions.add(InstructionMapper.create(instructionGroup, instructionDigest));
+                } else {
+                    final var instruction = instructionGroup.getInstructions().stream()
+                            .filter(x -> instructionDigest.getId().equals(x.getId())).findFirst()
+                            .orElse(null);
+                    if (instruction == null) {
+                        log.error("Unable to find id " + instructionDigest.getId());
+                        throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
+                    }
+                    instructions.add(InstructionMapper.update(instruction, instructionDigest));
+                }
+            }
+            instructionGroup.setInstructions(instructions);
+        }
+
         return instructionGroup;
     }
 }
