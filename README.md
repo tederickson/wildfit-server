@@ -43,3 +43,8 @@ Required HEADERS when accessing Nutritionix V2 API endpoints:
 Please note, when authenticating with the API, you must send the x-app-id and x-app-key params as headers, and not as
 query string parameters.
 
+# Test
+
+run `mvn test -Dspring.profiles.active=dev` to run all JUnit tests.
+
+The current test environment utilizes SpringBootTest, JsonTest and Mockito to achieve a 93% test coverage.
