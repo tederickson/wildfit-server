@@ -28,5 +28,7 @@ CREATE TABLE recipe_ingredient (
     nf_cholesterol  float,
     nf_trans_fatty_acid float,
     nf_saturated_fat    float,
-    photo_thumbnail varchar(256)
+    photo_thumbnail varchar(256),
+
+    KEY recipe_idx1 (recipe_id)
 );

@@ -4,5 +4,7 @@ CREATE TABLE instruction_group (
     recipe_id bigint NOT NULL,  -- Recipe.id
 
     instruction_group_number    int NOT NULL,
-    name                        varchar(256)
+    name                        varchar(256),
+
+    KEY recipe_idx1 (recipe_id)
 );

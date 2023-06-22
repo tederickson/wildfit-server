@@ -14,9 +14,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 @Builder(setterPrefix = "with")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -54,17 +56,5 @@ public final class User {
     @Override
     public int hashCode() {
         return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", status='" + status + '\'' +
-                ", createDate=" + createDate +
-                ", enabled=" + enabled +
-                '}';
     }
 }
