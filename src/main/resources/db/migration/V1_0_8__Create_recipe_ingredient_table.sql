@@ -1,9 +1,8 @@
 CREATE TABLE recipe_ingredient (
     id bigint NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
-    recipe_id bigint NOT NULL,
-    FOREIGN KEY (recipe_id) REFERENCES user(id)
-    ON DELETE CASCADE,
+    recipe_id bigint NOT NULL,                  -- Recipe.id
+    instruction_group_id bigint NOT NULL,       -- InstructionGroup.id
 
     food_name       varchar(256) NOT NULL,
     brand_name      varchar(256),
