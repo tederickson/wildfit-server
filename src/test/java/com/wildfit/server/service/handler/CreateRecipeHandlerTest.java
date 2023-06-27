@@ -1,12 +1,12 @@
 package com.wildfit.server.service.handler;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
+import com.google.common.collect.Iterables;
 import com.wildfit.server.domain.InstructionDigest;
 import com.wildfit.server.domain.InstructionGroupDigest;
 import com.wildfit.server.domain.RecipeDigest;
@@ -65,22 +65,23 @@ class CreateRecipeHandlerTest extends AbstractRecipeHandlerTest {
             final var response = CreateRecipeHandler.builder()
                     .withUserRepository(userRepository)
                     .withRecipeRepository(recipeRepository)
+                    .withInstructionGroupRepository(instructionGroupRepository)
                     .withUserId(userId)
                     .withRequest(recipe)
                     .build().execute();
             assertNotNull(response);
 
-            final var dbRecipe = recipeRepository.findById(response.getId()).orElseThrow();
+            final var dbRecipeId = response.getId();
+            final var dbRecipe = recipeRepository.findById(dbRecipeId).orElseThrow();
+            assertEquals(name, dbRecipe.getName());
+            assertEquals(SeasonType.SPRING.getCode(), dbRecipe.getSeason());
 
-            assertEquals(1, dbRecipe.getInstructionGroups().size());
+            final var dbInstructionGroup = Iterables.getOnlyElement(instructionGroupRepository.findByRecipeId(dbRecipeId));
 
-            for (var dbInstructionGroup : dbRecipe.getInstructionGroups()) {
-                assertFalse(dbInstructionGroup.getInstructions().isEmpty());
-
-                for (var dbInstruction : dbInstructionGroup.getInstructions()) {
-                    assertTrue(dbInstruction.getStepNumber() > 0);
-                    assertNotNull(dbInstruction.getText());
-                }
+            for (var dbInstruction : dbInstructionGroup.getInstructions()) {
+                assertEquals(dbInstructionGroup, dbInstruction.getInstructionGroup());
+                assertTrue(dbInstruction.getStepNumber() > 0);
+                assertNotNull(dbInstruction.getText());
             }
         }
     }

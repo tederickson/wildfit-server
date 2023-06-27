@@ -35,14 +35,13 @@ public class InstructionGroupMapper {
         final var instructionGroup = InstructionGroup.builder()
                 .withInstructionGroupNumber(digest.getInstructionGroupNumber())
                 .withName(digest.getName())
-                .withRecipe(recipe).build();
+                .withRecipeId(recipe.getId()).build();
 
         if (digest.getInstructions() != null) {
             final var instructions = digest.getInstructions().stream()
                     .map(instructionDigest -> InstructionMapper.create(instructionGroup, instructionDigest))
                     .collect(Collectors.toList());
-            instructionGroup.setInstructions(instructions
-            );
+            instructionGroup.setInstructions(instructions);
         }
         return instructionGroup;
     }

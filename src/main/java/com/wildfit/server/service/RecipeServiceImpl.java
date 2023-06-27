@@ -4,6 +4,7 @@ import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.RecipeListDigest;
 import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.repository.InstructionGroupRepository;
 import com.wildfit.server.repository.RecipeRepository;
 import com.wildfit.server.repository.UserRepository;
 import com.wildfit.server.service.handler.CreateRecipeHandler;
@@ -21,6 +22,8 @@ public class RecipeServiceImpl implements RecipeService {
     private UserRepository userRepository;
     @Autowired
     private RecipeRepository recipeRepository;
+    @Autowired
+    private InstructionGroupRepository instructionGroupRepository;
 
     @Override
     public RecipeListDigest listBySeason(SeasonType season, Pageable pageable) throws UserServiceException {
@@ -43,6 +46,7 @@ public class RecipeServiceImpl implements RecipeService {
     public void deleteRecipe(Long id, Long userId) throws UserServiceException {
         DeleteRecipeHandler.builder().withUserRepository(userRepository)
                 .withRecipeRepository(recipeRepository)
+                .withInstructionGroupRepository(instructionGroupRepository)
                 .withUserId(userId)
                 .withRecipeId(id)
                 .build().execute();
@@ -52,6 +56,7 @@ public class RecipeServiceImpl implements RecipeService {
     public RecipeDigest createRecipe(Long userId, RecipeDigest request) throws UserServiceException {
         return CreateRecipeHandler.builder().withUserRepository(userRepository)
                 .withRecipeRepository(recipeRepository)
+                .withInstructionGroupRepository(instructionGroupRepository)
                 .withUserId(userId)
                 .withRequest(request)
                 .build().execute();
@@ -61,6 +66,7 @@ public class RecipeServiceImpl implements RecipeService {
     public RecipeDigest updateRecipe(Long userId, RecipeDigest request) throws UserServiceException {
         return UpdateRecipeHandler.builder().withUserRepository(userRepository)
                 .withRecipeRepository(recipeRepository)
+                .withInstructionGroupRepository(instructionGroupRepository)
                 .withUserId(userId)
                 .withRequest(request)
                 .build().execute();

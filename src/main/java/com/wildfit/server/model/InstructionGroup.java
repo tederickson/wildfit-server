@@ -23,13 +23,13 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "INSTRUCTION_GROUP", indexes = {@Index(name = "recipe_idx1", columnList = "recipe_id")})
+@Table(name = "INSTRUCTION_GROUP", indexes = {@Index(name = "recipe_idx1", columnList = "recipeId")})
 public class InstructionGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private long recipe_id; // Recipe.id
+    private long recipeId; // Recipe.id
 
     private int instructionGroupNumber;
     private String name;
@@ -58,7 +58,7 @@ public class InstructionGroup {
     public String toString() {
         return "InstructionGroup{" +
                 "id=" + id +
-                ", recipe_id=" + recipe_id +
+                ", recipe_id=" + recipeId +
                 ", instructionGroupNumber=" + instructionGroupNumber +
                 ", name='" + name + '\'' +
                 '}';

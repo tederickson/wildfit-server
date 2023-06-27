@@ -21,14 +21,14 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "recipe_ingredient", indexes = {@Index(name = "recipe_idx1", columnList = "recipe_id")})
+@Table(name = "recipe_ingredient", indexes = {@Index(name = "recipe_idx1", columnList = "recipeId")})
 public class RecipeIngredient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private long recipe_id;                  // Recipe.id
-    private long instruction_group_id;       // InstructionGroup.id
+    private long recipeId;                 // Recipe.id
+    private long instructionGroupId;       // InstructionGroup.id
 
     private String food_name; //  Butter, Pure Irish, Unsalted,
     private String brand_name; //  Kerrygold,

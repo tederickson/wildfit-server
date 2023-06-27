@@ -4,6 +4,7 @@ import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.User;
 import com.wildfit.server.model.UserStatus;
+import com.wildfit.server.repository.InstructionGroupRepository;
 import com.wildfit.server.repository.RecipeRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,6 +17,8 @@ public class AbstractRecipeHandlerTest extends AbstractHandlerTest {
 
     @Autowired
     protected RecipeRepository recipeRepository;
+    @Autowired
+    protected InstructionGroupRepository instructionGroupRepository;
 
     @BeforeEach
     void setUp() {
