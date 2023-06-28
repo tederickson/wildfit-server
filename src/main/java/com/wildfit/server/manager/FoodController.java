@@ -61,11 +61,9 @@ public class FoodController {
             @ApiResponse(code = 200, message = "Get foods", response = SearchFoodResponse.class)})
     @GetMapping(produces = "application/json")
     public SearchFoodResponse getFoodsByQuery(@RequestParam(name = "description") String description,
-                                              @RequestParam(name = "serving_unit", required = false) String servingUnit,
-                                              @RequestParam(name = "serving_quantity", required = false) String servingQuantity)
+                                              @RequestParam(name = "serving_unit", required = false) String servingUnit)
             throws UserServiceException, NutritionixException {
-        final var logMessage = String.join("|", "getFoodsByQuery",
-                description, servingUnit, servingQuantity);
+        final var logMessage = String.join("|", "getFoodsByQuery", description, servingUnit);
         log.info(logMessage);
 
         return nutritionixService.getFoodsByQuery(description, servingUnit);
