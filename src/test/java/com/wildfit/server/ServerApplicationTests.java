@@ -8,6 +8,7 @@ class ServerApplicationTests {
 
     @Test
     void contextLoads() {
+        // Running this test verifies the context loads
     }
 
 }

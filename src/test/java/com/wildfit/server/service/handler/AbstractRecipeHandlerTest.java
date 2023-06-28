@@ -7,6 +7,7 @@ import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.User;
 import com.wildfit.server.model.UserStatus;
 import com.wildfit.server.repository.InstructionGroupRepository;
+import com.wildfit.server.repository.InstructionRepository;
 import com.wildfit.server.repository.RecipeRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,6 +22,8 @@ public class AbstractRecipeHandlerTest extends AbstractHandlerTest {
     protected RecipeRepository recipeRepository;
     @Autowired
     protected InstructionGroupRepository instructionGroupRepository;
+    @Autowired
+    protected InstructionRepository instructionRepository;
 
     @BeforeEach
     void setUp() {
@@ -42,6 +45,11 @@ public class AbstractRecipeHandlerTest extends AbstractHandlerTest {
     void tearDown() {
         if (testRecipe != null) {
             recipeRepository.deleteById(testRecipe.getId());
+            final var instructionGroups = instructionGroupRepository.findByRecipeId(testRecipe.getId());
+            if (!instructionGroups.isEmpty()) {
+                instructionGroupRepository.deleteAll(instructionGroups);
+            }
+
             testRecipe = null;
         }
 

@@ -5,6 +5,7 @@ import com.wildfit.server.domain.RecipeListDigest;
 import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.repository.InstructionGroupRepository;
+import com.wildfit.server.repository.InstructionRepository;
 import com.wildfit.server.repository.RecipeRepository;
 import com.wildfit.server.repository.UserRepository;
 import com.wildfit.server.service.handler.CreateRecipeHandler;
@@ -24,6 +25,8 @@ public class RecipeServiceImpl implements RecipeService {
     private RecipeRepository recipeRepository;
     @Autowired
     private InstructionGroupRepository instructionGroupRepository;
+    @Autowired
+    private InstructionRepository instructionRepository;
 
     @Override
     public RecipeListDigest listBySeason(SeasonType season, Pageable pageable) throws UserServiceException {
@@ -38,6 +41,7 @@ public class RecipeServiceImpl implements RecipeService {
     public RecipeDigest retrieveRecipe(Long id) throws UserServiceException {
         return GetRecipeHandler.builder()
                 .withRecipeRepository(recipeRepository)
+                .withInstructionGroupRepository(instructionGroupRepository)
                 .withRecipeId(id)
                 .build().execute();
     }

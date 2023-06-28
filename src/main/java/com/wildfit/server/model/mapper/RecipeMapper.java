@@ -1,5 +1,6 @@
 package com.wildfit.server.model.mapper;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -53,7 +54,7 @@ public final class RecipeMapper {
                 .withCookTimeMin(request.getCookTimeMin())
                 .withServingUnit(request.getServingUnit())
                 .withServingQty(request.getServingQty())
-                .withCreated(java.time.LocalDateTime.now())
+                .withCreated(LocalDateTime.now())
                 .build();
     }
 
@@ -66,6 +67,6 @@ public final class RecipeMapper {
         recipe.setCookTimeMin(request.getCookTimeMin());
         recipe.setServingUnit(request.getServingUnit());
         recipe.setServingQty(request.getServingQty());
-        recipe.setUpdated(java.time.LocalDateTime.now());
+        recipe.setUpdated(LocalDateTime.now());
     }
 }

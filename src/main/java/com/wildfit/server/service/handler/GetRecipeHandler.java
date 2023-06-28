@@ -6,6 +6,7 @@ import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.mapper.RecipeMapper;
+import com.wildfit.server.repository.InstructionGroupRepository;
 import com.wildfit.server.repository.RecipeRepository;
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @Builder(setterPrefix = "with")
 public class GetRecipeHandler {
     private final RecipeRepository recipeRepository;
+    private final InstructionGroupRepository instructionGroupRepository;
     private final Long recipeId;
 
     public RecipeDigest execute() throws UserServiceException {
@@ -22,11 +24,12 @@ public class GetRecipeHandler {
         final var recipe = recipeRepository.findById(recipeId)
                 .orElseThrow(() -> new UserServiceException(UserServiceError.RECIPE_NOT_FOUND));
 
-        return RecipeMapper.map(recipe);
+        return RecipeMapper.map(recipe, instructionGroupRepository.findByRecipeId(recipe.getId()));
     }
 
     private void validate() throws UserServiceException {
         Objects.requireNonNull(recipeRepository, "recipeRepository");
+        Objects.requireNonNull(instructionGroupRepository, "instructionGroupRepository");
 
         if (recipeId == null) {
             throw new UserServiceException(UserServiceError.INVALID_PARAMETER);

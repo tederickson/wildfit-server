@@ -152,11 +152,60 @@ class UpdateRecipeHandlerTest extends AbstractRecipeHandlerTest {
         assertEquals(testRecipe, response);
     }
 
+    @Test
+    void removeInstruction() throws UserServiceException {
+        final var instructionGroup = InstructionGroupDigest.builder()
+                .withInstructionGroupNumber(1)
+                .withInstructions(List.of(step1, step2, step3, step4)).build();
+        final var recipe = RecipeDigest.builder()
+                .withName(NAME)
+                .withSeason(SeasonType.FALL)
+                .withIntroduction(INTRODUCTION)
+                .withPrepTimeMin(5)
+                .withCookTimeMin(15)
+                .withServingQty(4)
+                .withServingUnit("serving")
+                .withInstructionGroups(List.of(instructionGroup))
+                .build();
+
+        createRecipe(recipe);
+
+        testRecipe.getInstructionGroups().get(0).getInstructions().remove(2);
+        final var response = updateRecipe(testRecipe);
+
+        assertEquals(testRecipe, response);
+    }
+
+    @Test
+    void updateInstruction() throws UserServiceException {
+        final var instructionGroup = InstructionGroupDigest.builder()
+                .withInstructionGroupNumber(1)
+                .withInstructions(List.of(step1, step2, step3, step4)).build();
+        final var recipe = RecipeDigest.builder()
+                .withName(NAME)
+                .withSeason(SeasonType.FALL)
+                .withIntroduction(INTRODUCTION)
+                .withPrepTimeMin(5)
+                .withCookTimeMin(15)
+                .withServingQty(4)
+                .withServingUnit("serving")
+                .withInstructionGroups(List.of(instructionGroup))
+                .build();
+
+        createRecipe(recipe);
+
+        testRecipe.getInstructionGroups().get(0).getInstructions().get(2).setInstruction("CHANGED!");
+        final var response = updateRecipe(testRecipe);
+
+        assertEquals(testRecipe, response);
+    }
+
     private RecipeDigest updateRecipe(RecipeDigest testRecipe) throws UserServiceException {
         return UpdateRecipeHandler.builder()
                 .withUserRepository(userRepository)
                 .withRecipeRepository(recipeRepository)
                 .withInstructionGroupRepository(instructionGroupRepository)
+                .withInstructionRepository(instructionRepository)
                 .withUserId(userId)
                 .withRequest(testRecipe)
                 .build().execute();

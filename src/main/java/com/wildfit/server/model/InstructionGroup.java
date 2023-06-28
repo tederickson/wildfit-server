@@ -34,7 +34,7 @@ public class InstructionGroup {
     private int instructionGroupNumber;
     private String name;
 
-    @OneToMany(mappedBy = "instructionGroup", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "instructionGroup", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Instruction> instructions;
 
     @Override
@@ -62,5 +62,9 @@ public class InstructionGroup {
                 ", instructionGroupNumber=" + instructionGroupNumber +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    public void deleteInstruction(Instruction entity) {
+        instructions.remove(entity);
     }
 }
