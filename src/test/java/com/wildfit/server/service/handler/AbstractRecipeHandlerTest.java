@@ -1,5 +1,7 @@
 package com.wildfit.server.service.handler;
 
+import java.time.LocalDate;
+
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.User;
@@ -27,7 +29,7 @@ public class AbstractRecipeHandlerTest extends AbstractHandlerTest {
         if (CollectionUtils.isEmpty(users)) {
             final var user = User.builder()
                     .withStatus(UserStatus.FREE.getCode())
-                    .withCreateDate(java.time.LocalDate.now())
+                    .withCreateDate(LocalDate.now())
                     .withPassword(PASSWORD)
                     .withEmail(EMAIL).build();
             final var dbUser = userRepository.save(user);
@@ -50,6 +52,7 @@ public class AbstractRecipeHandlerTest extends AbstractHandlerTest {
         testRecipe = CreateRecipeHandler.builder()
                 .withUserRepository(userRepository)
                 .withRecipeRepository(recipeRepository)
+                .withInstructionGroupRepository(instructionGroupRepository)
                 .withUserId(userId)
                 .withRequest(recipe)
                 .build().execute();

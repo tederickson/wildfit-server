@@ -68,9 +68,19 @@ class UpdateRecipeHandlerTest extends AbstractRecipeHandlerTest {
 
         final var response = updateRecipe(testRecipe);
 
-        assertEquals("blah blah blah", response.getIntroduction());
-        assertEquals(1, response.getInstructionGroups().size());
-        assertEquals(4, response.getInstructionGroups().get(0).getInstructions().size());
+        // Update the ids of step3 and step4
+        final var dbInstructionGroups = instructionGroupRepository.findByRecipeId(testRecipe.getId());
+
+        for (var dbInstructionGroup : dbInstructionGroups) {
+            for (var instruction : dbInstructionGroup.getInstructions()) {
+                switch (instruction.getStepNumber()) {
+                    case 3 -> step3.setId(instruction.getId());
+                    case 4 -> step4.setId(instruction.getId());
+                }
+            }
+        }
+
+        assertEquals(testRecipe, response);
     }
 
     @Test
@@ -98,18 +108,55 @@ class UpdateRecipeHandlerTest extends AbstractRecipeHandlerTest {
         testRecipe.getInstructionGroups().add(instructionGroup2);
         final var response = updateRecipe(testRecipe);
 
-        // Verify the first group did not change
-        final var originalInstructionGroup = response.getInstructionGroups().get(0);
-        assertEquals(testRecipe.getInstructionGroups().get(0), originalInstructionGroup);
+        // Update the ids of instruction group 2
+        final var dbInstructionGroups = instructionGroupRepository.findByRecipeId(testRecipe.getId());
 
-        assertEquals(2, response.getInstructionGroups().size());
-        assertEquals(2, response.getInstructionGroups().get(1).getInstructions().size());
+        for (var dbInstructionGroup : dbInstructionGroups) {
+            if (dbInstructionGroup.getInstructionGroupNumber() == 2) {
+                final var group2 = testRecipe.getInstructionGroups().get(1);
+                group2.setId(dbInstructionGroup.getId());
+
+                for (var instruction : dbInstructionGroup.getInstructions()) {
+                    switch (instruction.getStepNumber()) {
+                        case 3 -> step3.setId(instruction.getId());
+                        case 4 -> step4.setId(instruction.getId());
+                    }
+                }
+            }
+        }
+
+        assertEquals(testRecipe, response);
+    }
+
+    @Test
+    void removeInstructionGroup() throws UserServiceException {
+        final var instructionGroup = InstructionGroupDigest.builder()
+                .withInstructionGroupNumber(1)
+                .withInstructions(List.of(step1, step2)).build();
+        final var recipe = RecipeDigest.builder()
+                .withName(NAME)
+                .withSeason(SeasonType.FALL)
+                .withIntroduction(INTRODUCTION)
+                .withPrepTimeMin(5)
+                .withCookTimeMin(15)
+                .withServingQty(4)
+                .withServingUnit("serving")
+                .withInstructionGroups(List.of(instructionGroup))
+                .build();
+
+        createRecipe(recipe);
+
+        testRecipe.setInstructionGroups(List.of());
+        final var response = updateRecipe(testRecipe);
+
+        assertEquals(testRecipe, response);
     }
 
     private RecipeDigest updateRecipe(RecipeDigest testRecipe) throws UserServiceException {
         return UpdateRecipeHandler.builder()
                 .withUserRepository(userRepository)
                 .withRecipeRepository(recipeRepository)
+                .withInstructionGroupRepository(instructionGroupRepository)
                 .withUserId(userId)
                 .withRequest(testRecipe)
                 .build().execute();
