@@ -41,7 +41,7 @@ public class UserAdminController {
             @ApiResponse(code = 201, message = "Successfully created user", response = CreateUserResponse.class), //
             @ApiResponse(code = 400, message = "Invalid user name and/or password or user already exists"),
             @ApiResponse(code = 412, message = "Email not configured")})
-    @PostMapping()
+    @PostMapping(produces = "application/json")
     @ResponseStatus(code = HttpStatus.CREATED)
     public CreateUserResponse createUser(@RequestBody CreateUserRequest request) throws UserServiceException {
         final var logMessage = String.join("|", "createUser", request.toString());
@@ -54,7 +54,7 @@ public class UserAdminController {
     @ApiResponses(value = { //
             @ApiResponse(code = 200, message = "Get user", response = UserProfileDigest.class), //
             @ApiResponse(code = 400, message = "User id not found")})
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = "application/json")
     public UserProfileDigest getUser(@PathVariable("id") Long id) throws UserServiceException {
         final var logMessage = String.join("|", "getUser", id.toString());
         log.info(logMessage);
@@ -66,7 +66,7 @@ public class UserAdminController {
     @ApiResponses(value = { //
             @ApiResponse(code = 200, message = "Update user", response = UserProfileDigest.class), //
             @ApiResponse(code = 400, message = "User id not found")})
-    @PutMapping("/{id}")
+    @PutMapping(value = "/{id}", produces = "application/json")
     public UserProfileDigest updateUserProfile(@PathVariable("id") Long id,
                                                @RequestBody UpdateUserProfileRequest request) throws UserServiceException {
         final var logMessage = String.join("|", "updateUserProfile", id.toString(), request.toString());
@@ -79,7 +79,7 @@ public class UserAdminController {
     @ApiResponses(value = { //
             @ApiResponse(code = 200, message = "User deleted"), //
             @ApiResponse(code = 400, message = "User id not found")})
-    @DeleteMapping("/{id}")
+    @DeleteMapping(value = "/{id}")
     public void deleteUser(@PathVariable("id") Long id) throws UserServiceException {
         final var logMessage = String.join("|", "deleteUser", id.toString());
         log.info(logMessage);
@@ -91,7 +91,7 @@ public class UserAdminController {
     @ApiResponses(value = { //
             @ApiResponse(code = 200, message = "Successfully changed password"), //
             @ApiResponse(code = 400, message = "Invalid user id and/or password")})
-    @PostMapping("/{id}/change-password")
+    @PostMapping(value = "/{id}/change-password")
     public void changePassword(@PathVariable("id") Long id, @RequestBody ChangePasswordRequest request) throws UserServiceException {
         final var logMessage = String.join("|", "changePassword", id.toString(), request.toString());
         log.info(logMessage);

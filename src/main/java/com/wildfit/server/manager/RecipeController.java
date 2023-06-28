@@ -35,7 +35,7 @@ public class RecipeController {
     private RecipeService recipeService;
 
     @ApiOperation(value = "Retrieve recipes for a specific season")
-    @GetMapping("/seasons/{season}")
+    @GetMapping(value = "/seasons/{season}", produces = "application/json")
     public RecipeListDigest retrieveRecipesForSeason(@PathVariable(value = "season") SeasonType season,
                                                      @RequestParam(value = "page", defaultValue = "0") Integer page,
                                                      @RequestParam(value = "pageSize", defaultValue = "30") Integer pageSize)
@@ -51,7 +51,7 @@ public class RecipeController {
     }
 
     @ApiOperation(value = "Retrieve recipe")
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = "application/json")
     public RecipeDigest retrieveRecipe(@PathVariable(value = "id") Long id) throws UserServiceException {
 
         final var logMessage = String.join("|", "retrieveRecipe", id.toString());
@@ -65,7 +65,7 @@ public class RecipeController {
             @ApiResponse(code = 200, message = "Recipe deleted"), //
             @ApiResponse(code = 400, message = "Recipe not found"),
             @ApiResponse(code = 401, message = "Not authorized to delete recipe")})
-    @DeleteMapping("/{id}/userIds/{userId}")
+    @DeleteMapping(value = "/{id}/userIds/{userId}")
     public void deleteRecipe(@PathVariable("id") Long id, @PathVariable("userId") Long userId) throws UserServiceException {
         final var logMessage = String.join("|", "deleteRecipe", id.toString(), userId.toString());
         log.info(logMessage);
@@ -76,7 +76,7 @@ public class RecipeController {
     @ApiOperation(value = "Create Recipe")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully created recipe", response = CreateUserResponse.class)})
-    @PostMapping("/userIds/{userId}")
+    @PostMapping(value = "/userIds/{userId}", produces = "application/json")
     public RecipeDigest createRecipe(@PathVariable("userId") Long userId,
                                      @RequestBody RecipeDigest request) throws UserServiceException {
         final var logMessage = String.join("|", "createRecipe", userId.toString(), request.toString());
@@ -90,7 +90,7 @@ public class RecipeController {
             @ApiResponse(code = 200, message = "Recipe updated"), //
             @ApiResponse(code = 400, message = "Recipe not found"),
             @ApiResponse(code = 401, message = "Not authorized to update recipe")})
-    @PutMapping("/{id}/userIds/{userId}")
+    @PutMapping(value = "/{id}/userIds/{userId}", produces = "application/json")
     public RecipeDigest updateRecipe(@PathVariable("userId") Long userId,
                                      @RequestBody RecipeDigest request) throws UserServiceException {
         final var logMessage = String.join("|", "updateRecipe", userId.toString(), request.toString());

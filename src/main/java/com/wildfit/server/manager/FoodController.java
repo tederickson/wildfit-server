@@ -33,7 +33,7 @@ public class FoodController {
     @ApiResponses(value = { //
             @ApiResponse(code = 200, message = "Get food", response = FoodItemDigest.class), //
             @ApiResponse(code = 400, message = "Barcode not found")})
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = "application/json")
     public FoodItemDigest getFoodWithId(@PathVariable("id") String id)
             throws UserServiceException, NutritionixException {
         final var logMessage = String.join("|", "getFoodWithId", id);
@@ -46,7 +46,7 @@ public class FoodController {
     @ApiResponses(value = { //
             @ApiResponse(code = 200, message = "Get food", response = FoodItemDigest.class), //
             @ApiResponse(code = 400, message = "Barcode not found")})
-    @GetMapping("/barcodes/{barcode}")
+    @GetMapping(value = "/barcodes/{barcode}", produces = "application/json")
     public FoodItemDigest getFoodWithBarcode(@PathVariable("barcode") String barcode)
             throws UserServiceException, NutritionixException {
         final var logMessage = String.join("|", "getFoodWithBarcode", barcode);
@@ -58,7 +58,7 @@ public class FoodController {
     @ApiOperation(value = "Get foods by description")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Get foods", response = SearchFoodResponse.class)})
-    @GetMapping()
+    @GetMapping(produces = "application/json")
     public SearchFoodResponse getFoodsByQuery(@RequestParam(value = "description") String description)
             throws UserServiceException, NutritionixException {
         final var logMessage = String.join("|", "getFoodsByQuery", description);

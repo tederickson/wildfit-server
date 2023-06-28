@@ -34,7 +34,7 @@ public class AuthenticationController {
     @ApiResponses(value = { //
             @ApiResponse(code = 200, message = "Confirm user email account", response = RegisterUserResponse.class), //
             @ApiResponse(code = 400, message = "Confirmation code not found")})
-    @GetMapping("/register/{confirmCode}")
+    @GetMapping(value = "/register/{confirmCode}", produces = "application/json")
     public RegisterUserResponse register(@PathVariable(value = "confirmCode") String confirmCode) throws UserServiceException {
         final var logMessage = String.join("|", "register", confirmCode);
         log.info(logMessage);
@@ -46,7 +46,7 @@ public class AuthenticationController {
     @ApiResponses(value = { //
             @ApiResponse(code = 200, message = "Successfully logged in user", response = UserDigest.class), //
             @ApiResponse(code = 400, message = "Invalid user name and/or password")})
-    @PostMapping("/login")
+    @PostMapping(value = "/login", produces = "application/json")
     public UserDigest login(@RequestBody LoginRequest request) throws UserServiceException {
         final var logMessage = String.join("|", "login", request.toString());
         log.info(logMessage);
