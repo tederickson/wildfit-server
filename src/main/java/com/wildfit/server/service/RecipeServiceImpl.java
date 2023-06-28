@@ -1,5 +1,6 @@
 package com.wildfit.server.service;
 
+import com.wildfit.server.domain.IngredientDigest;
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.RecipeListDigest;
 import com.wildfit.server.domain.SeasonType;
@@ -74,5 +75,12 @@ public class RecipeServiceImpl implements RecipeService {
                 .withUserId(userId)
                 .withRequest(request)
                 .build().execute();
+    }
+
+    @Override
+    public IngredientDigest createRecipeIngredient(Long userId, Long id, Long recipeGroup, IngredientDigest request)
+            throws UserServiceException {
+
+        return request;
     }
 }

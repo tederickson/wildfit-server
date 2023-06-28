@@ -53,7 +53,7 @@ public class UserAdminController {
     @ApiOperation(value = "Get User Profile")
     @ApiResponses(value = { //
             @ApiResponse(code = 200, message = "Get user", response = UserProfileDigest.class), //
-            @ApiResponse(code = 400, message = "User id not found")})
+            @ApiResponse(code = 404, message = "User id not found")})
     @GetMapping(value = "/{id}", produces = "application/json")
     public UserProfileDigest getUser(@PathVariable("id") Long id) throws UserServiceException {
         final var logMessage = String.join("|", "getUser", id.toString());
@@ -65,7 +65,7 @@ public class UserAdminController {
     @ApiOperation(value = "Update User Profile")
     @ApiResponses(value = { //
             @ApiResponse(code = 200, message = "Update user", response = UserProfileDigest.class), //
-            @ApiResponse(code = 400, message = "User id not found")})
+            @ApiResponse(code = 404, message = "User id not found")})
     @PutMapping(value = "/{id}", produces = "application/json")
     public UserProfileDigest updateUserProfile(@PathVariable("id") Long id,
                                                @RequestBody UpdateUserProfileRequest request) throws UserServiceException {
@@ -78,7 +78,7 @@ public class UserAdminController {
     @ApiOperation(value = "Delete User")
     @ApiResponses(value = { //
             @ApiResponse(code = 200, message = "User deleted"), //
-            @ApiResponse(code = 400, message = "User id not found")})
+            @ApiResponse(code = 404, message = "User id not found")})
     @DeleteMapping(value = "/{id}")
     public void deleteUser(@PathVariable("id") Long id) throws UserServiceException {
         final var logMessage = String.join("|", "deleteUser", id.toString());

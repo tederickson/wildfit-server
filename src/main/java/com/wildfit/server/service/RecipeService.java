@@ -1,5 +1,6 @@
 package com.wildfit.server.service;
 
+import com.wildfit.server.domain.IngredientDigest;
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.RecipeListDigest;
 import com.wildfit.server.domain.SeasonType;
@@ -17,4 +18,7 @@ public interface RecipeService {
     RecipeDigest createRecipe(Long userId, RecipeDigest request) throws UserServiceException;
 
     RecipeDigest updateRecipe(Long userId, RecipeDigest request) throws UserServiceException;
+
+    IngredientDigest createRecipeIngredient(Long userId, Long id, Long recipeGroup, IngredientDigest request)
+            throws UserServiceException;
 }

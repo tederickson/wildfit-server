@@ -33,7 +33,7 @@ public class AuthenticationController {
     @ApiOperation(value = "Confirm User Email")
     @ApiResponses(value = { //
             @ApiResponse(code = 200, message = "Confirm user email account", response = RegisterUserResponse.class), //
-            @ApiResponse(code = 400, message = "Confirmation code not found")})
+            @ApiResponse(code = 404, message = "Confirmation code not found")})
     @GetMapping(value = "/register/{confirmCode}", produces = "application/json")
     public RegisterUserResponse register(@PathVariable(value = "confirmCode") String confirmCode) throws UserServiceException {
         final var logMessage = String.join("|", "register", confirmCode);

@@ -1,6 +1,6 @@
 package com.wildfit.server.manager;
 
-import com.wildfit.server.domain.CreateUserResponse;
+import com.wildfit.server.domain.IngredientDigest;
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.RecipeListDigest;
 import com.wildfit.server.domain.SeasonType;
@@ -63,7 +63,7 @@ public class RecipeController {
     @ApiOperation(value = "Delete Recipe")
     @ApiResponses(value = { //
             @ApiResponse(code = 200, message = "Recipe deleted"), //
-            @ApiResponse(code = 400, message = "Recipe not found"),
+            @ApiResponse(code = 404, message = "Recipe not found"),
             @ApiResponse(code = 401, message = "Not authorized to delete recipe")})
     @DeleteMapping(value = "/{id}/userIds/{userId}")
     public void deleteRecipe(@PathVariable("id") Long id, @PathVariable("userId") Long userId) throws UserServiceException {
@@ -75,7 +75,7 @@ public class RecipeController {
 
     @ApiOperation(value = "Create Recipe")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successfully created recipe", response = CreateUserResponse.class)})
+            @ApiResponse(code = 200, message = "Successfully created recipe", response = RecipeDigest.class)})
     @PostMapping(value = "/userIds/{userId}", produces = "application/json")
     public RecipeDigest createRecipe(@PathVariable("userId") Long userId,
                                      @RequestBody RecipeDigest request) throws UserServiceException {
@@ -88,14 +88,38 @@ public class RecipeController {
     @ApiOperation(value = "Update Recipe")
     @ApiResponses(value = { //
             @ApiResponse(code = 200, message = "Recipe updated"), //
-            @ApiResponse(code = 400, message = "Recipe not found"),
+            @ApiResponse(code = 404, message = "Recipe not found"),
             @ApiResponse(code = 401, message = "Not authorized to update recipe")})
     @PutMapping(value = "/{id}/userIds/{userId}", produces = "application/json")
-    public RecipeDigest updateRecipe(@PathVariable("userId") Long userId,
+    public RecipeDigest updateRecipe(@PathVariable("id") Long id,
+                                     @PathVariable("userId") Long userId,
                                      @RequestBody RecipeDigest request) throws UserServiceException {
-        final var logMessage = String.join("|", "updateRecipe", userId.toString(), request.toString());
+        final var logMessage = String.join("|", "updateRecipe",
+                id.toString(), userId.toString(), request.toString());
         log.info(logMessage);
 
+        if (!id.equals(request.getId())) {
+            log.error(id + " does not match " + request.getId());
+            throw new UserServiceException(com.wildfit.server.exception.UserServiceError.INVALID_PARAMETER);
+        }
+
         return recipeService.updateRecipe(userId, request);
+    }
+
+    @ApiOperation(value = "Add ingredient to the recipe")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully added ingredient", response = IngredientDigest.class),
+            @ApiResponse(code = 404, message = "Recipe not found"),
+            @ApiResponse(code = 401, message = "Not authorized to update recipe")})
+    @PostMapping(value = "/{id}/userIds/{userId}/recipeGroups/{recipeGroup}", produces = "application/json")
+    public IngredientDigest createRecipeIngredient(@PathVariable("id") Long id,
+                                                   @PathVariable("userId") Long userId,
+                                                   @PathVariable("recipeGroup") Long recipeGroup,
+                                                   @RequestBody IngredientDigest request) throws UserServiceException {
+        final var logMessage = String.join("|", "createRecipeIngredient",
+                id.toString(), userId.toString(), recipeGroup.toString(), request.toString());
+        log.info(logMessage);
+
+        return recipeService.createRecipeIngredient(userId, id, recipeGroup, request);
     }
 }

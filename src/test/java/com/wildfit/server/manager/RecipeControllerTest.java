@@ -1,12 +1,15 @@
 package com.wildfit.server.manager;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.RecipeListDigest;
 import com.wildfit.server.domain.SeasonType;
+import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.service.RecipeService;
 import org.junit.jupiter.api.Test;
@@ -58,7 +61,17 @@ class RecipeControllerTest {
     void updateRecipe() throws UserServiceException {
         when(recipeService.updateRecipe(any(), any())).thenReturn(RecipeDigest.builder().build());
 
-        final var response = recipeController.updateRecipe(userId, RecipeDigest.builder().build());
+        final var recipeId = 123L;
+        final var response = recipeController.updateRecipe(recipeId, userId,
+                RecipeDigest.builder().withId(recipeId).build());
         assertNotNull(response);
+    }
+
+    @Test
+    void updateRecipe_idsDoNotMatch() {
+        final var recipeId = 123L;
+        final var exception = assertThrows(UserServiceException.class,
+                () -> recipeController.updateRecipe(recipeId, userId, RecipeDigest.builder().build()));
+        assertEquals(UserServiceError.INVALID_PARAMETER, exception.getError());
     }
 }

@@ -9,13 +9,19 @@ import lombok.NoArgsConstructor;
 @Builder(setterPrefix = "with")
 @NoArgsConstructor
 @AllArgsConstructor
-public class SearchFoodItemDigest {
+public class IngredientDigest {
+    private long id;
 
     private String foodName; //  Butter, Pure Irish, Unsalted,
     private String brandName; //  Kerrygold,
     private String brandNameItemName;
     private Integer servingQty; //  1,
     private String servingUnit; //  tbsp,
+    private Integer ingredientServingQty; //  1,
+    private String ingredientServingUnit; //  tbsp,
+    private Integer servingWeightGrams; //  14,
+    private Integer metricQty; //  14,
+    private String metricUom; //  g,
     private Float calories; //  100,
     private Float totalFat; //  12,
     private Float saturatedFat; //  8,
