@@ -1,6 +1,7 @@
 package com.wildfit.server.manager;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import com.wildfit.server.domain.FoodItemDigest;
@@ -42,10 +43,11 @@ class FoodControllerTest {
     @Test
     void getFoodsByQuery() throws UserServiceException, NutritionixException {
         final var description = "blah de blah, blah blah";
+        String servingUnit = null;
 
-        when(nutritionixService.getFoodsByQuery(description)).thenReturn(new SearchFoodResponse());
+        when(nutritionixService.getFoodsByQuery(any(), any())).thenReturn(new SearchFoodResponse());
 
-        final var response = nutritionixService.getFoodsByQuery(description);
+        final var response = nutritionixService.getFoodsByQuery(description, servingUnit);
         assertNotNull(response);
     }
 }

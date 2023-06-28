@@ -1,5 +1,6 @@
 package com.wildfit.server.service;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 import com.wildfit.server.domain.FoodItemDigest;
@@ -9,6 +10,7 @@ import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.FoodItems;
 import com.wildfit.server.model.NutritionixHeaderInfo;
+import com.wildfit.server.model.SearchedFoodItem;
 import com.wildfit.server.model.SearchedFoodItems;
 import com.wildfit.server.model.mapper.FoodItemDigestMapper;
 import com.wildfit.server.model.mapper.SearchedFoodItemsMapper;
@@ -92,7 +94,8 @@ public class NutritionixServiceImpl implements NutritionixService {
     }
 
     @Override
-    public SearchFoodResponse getFoodsByQuery(String description) throws UserServiceException, NutritionixException {
+    public SearchFoodResponse getFoodsByQuery(String description, String servingUnit)
+            throws UserServiceException, NutritionixException {
         if (StringUtils.isAllBlank(description)) {
             throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
         }
@@ -111,11 +114,29 @@ public class NutritionixServiceImpl implements NutritionixService {
 
         try {
             final var response = restTemplate.exchange(url, HttpMethod.GET, entity, SearchedFoodItems.class).getBody();
-            return SearchedFoodItemsMapper.map(response);
+            if (response == null) {
+                throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
+            }
+            if (servingUnit == null) {
+                return SearchedFoodItemsMapper.map(response);
+            }
+
+            final var searchedFoodItems = new SearchedFoodItems();
+
+            searchedFoodItems.setCommon(filter(response.getCommon(), servingUnit));
+            searchedFoodItems.setBranded(filter(response.getBranded(), servingUnit));
+            return SearchedFoodItemsMapper.map(searchedFoodItems);
+
         } catch (HttpStatusCodeException e) {
             log.error(url);
             throw new NutritionixException(e.getStatusCode(), e);
         }
+    }
+
+    private SearchedFoodItem[] filter(SearchedFoodItem[] foodItems, String servingUnit) {
+        return Arrays.stream(foodItems)
+                .filter(x -> servingUnit.equals(x.getServing_unit()))
+                .toArray(SearchedFoodItem[]::new);
     }
 
     private HttpHeaders getHeaders() {

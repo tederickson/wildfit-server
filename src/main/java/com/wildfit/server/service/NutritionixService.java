@@ -10,5 +10,5 @@ public interface NutritionixService {
 
     FoodItemDigest getFoodWithId(String nixItemId) throws UserServiceException, NutritionixException;
 
-    SearchFoodResponse getFoodsByQuery(String description) throws UserServiceException, NutritionixException;
+    SearchFoodResponse getFoodsByQuery(String description, String servingUnit) throws UserServiceException, NutritionixException;
 }
