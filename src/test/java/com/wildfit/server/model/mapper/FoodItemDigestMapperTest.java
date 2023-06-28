@@ -8,7 +8,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 import com.wildfit.server.domain.PhotoDigest;
+import com.wildfit.server.model.FoodItem;
 import com.wildfit.server.model.FoodItems;
+import com.wildfit.server.model.SearchedFoodItem;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,8 +28,17 @@ class FoodItemDigestMapperTest {
     private JacksonTester<FoodItems> jacksonTester;
 
     @Test
-    void nullParameters() {
-        final var foodItemDigest = FoodItemDigestMapper.map(null);
+    void null_FoodItem() {
+        FoodItem food = null;
+        final var foodItemDigest = FoodItemDigestMapper.map(food);
+        assertNotNull(foodItemDigest);
+        assertNull(foodItemDigest.getFoodName());
+    }
+
+    @Test
+    void null_SearchedFoodItem() {
+        SearchedFoodItem food = null;
+        final var foodItemDigest = FoodItemDigestMapper.map(food);
         assertNotNull(foodItemDigest);
         assertNull(foodItemDigest.getFoodName());
     }
