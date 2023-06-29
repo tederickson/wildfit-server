@@ -11,18 +11,12 @@ import com.wildfit.server.model.InstructionGroup;
 import com.wildfit.server.model.mapper.InstructionGroupMapper;
 import com.wildfit.server.model.mapper.RecipeMapper;
 import com.wildfit.server.repository.InstructionGroupRepository;
-import com.wildfit.server.repository.RecipeRepository;
-import com.wildfit.server.repository.UserRepository;
-import lombok.Builder;
+import lombok.experimental.SuperBuilder;
 
-@Builder(setterPrefix = "with")
-public class CreateRecipeHandler {
-    private final RecipeRepository recipeRepository;
+@SuperBuilder(setterPrefix = "with")
+public class CreateRecipeHandler extends AbstractRecipeHandler {
     private final InstructionGroupRepository instructionGroupRepository;
-    private final UserRepository userRepository;
-
     private final RecipeDigest request;
-    private final Long userId;
 
     public RecipeDigest execute() throws UserServiceException {
         validate();
@@ -44,14 +38,10 @@ public class CreateRecipeHandler {
         return RecipeMapper.map(dbRecipe, instructionGroups);
     }
 
-    private void validate() throws UserServiceException {
-        Objects.requireNonNull(userRepository, "userRepository");
-        Objects.requireNonNull(recipeRepository, "recipeRepository");
+    protected void validate() throws UserServiceException {
+        super.validate();
         Objects.requireNonNull(instructionGroupRepository, "instructionGroupRepository");
 
-        if (userId == null) {
-            throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
-        }
         if (request == null) {
             throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
         }
