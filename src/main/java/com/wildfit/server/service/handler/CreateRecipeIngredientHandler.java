@@ -5,7 +5,6 @@ import java.util.Objects;
 import com.wildfit.server.domain.IngredientDigest;
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
-import com.wildfit.server.model.RecipeIngredient;
 import com.wildfit.server.model.mapper.RecipeIngredientMapper;
 import com.wildfit.server.repository.InstructionGroupRepository;
 import com.wildfit.server.repository.RecipeIngredientRepository;
@@ -29,10 +28,7 @@ public class CreateRecipeIngredientHandler extends AbstractRecipeHandler {
         instructionGroupRepository.findById(recipeGroupId)
                 .orElseThrow(() -> new UserServiceException(UserServiceError.RECIPE_GROUP_NOT_FOUND));
 
-        RecipeIngredient recipeIngredient = RecipeIngredientMapper.create(request);
-
-        recipeIngredient.setRecipeId(recipeId);
-        recipeIngredient.setInstructionGroupId(recipeGroupId);
+        final var recipeIngredient = RecipeIngredientMapper.create(request, recipeId, recipeGroupId);
 
         return RecipeIngredientMapper.map(recipeIngredientRepository.save(recipeIngredient));
     }
