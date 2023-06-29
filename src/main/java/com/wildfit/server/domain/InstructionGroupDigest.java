@@ -16,4 +16,5 @@ public final class InstructionGroupDigest {
     private Integer instructionGroupNumber;
     private String name;
     private List<InstructionDigest> instructions;
+    private List<IngredientDigest> ingredients;
 }

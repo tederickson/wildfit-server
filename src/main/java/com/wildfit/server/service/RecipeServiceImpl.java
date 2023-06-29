@@ -47,6 +47,7 @@ public class RecipeServiceImpl implements RecipeService {
         return GetRecipeHandler.builder()
                 .withRecipeRepository(recipeRepository)
                 .withInstructionGroupRepository(instructionGroupRepository)
+                .withRecipeIngredientRepository(recipeIngredientRepository)
                 .withRecipeId(recipeId)
                 .build().execute();
     }

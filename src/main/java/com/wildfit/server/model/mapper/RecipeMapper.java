@@ -8,6 +8,7 @@ import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.model.InstructionGroup;
 import com.wildfit.server.model.Recipe;
+import com.wildfit.server.model.RecipeIngredient;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -44,6 +45,32 @@ public final class RecipeMapper {
         return builder.build();
     }
 
+    public static RecipeDigest map(Recipe recipe,
+                                   Collection<InstructionGroup> instructionGroups,
+                                   Collection<RecipeIngredient> recipeIngredients) {
+        final var builder = getBuilder(recipe);
+
+        if (instructionGroups != null) {
+            builder.withInstructionGroups(instructionGroups.stream()
+                    .map(InstructionGroupMapper::map)
+                    .collect(Collectors.toList()));
+        }
+        final var recipeDigest = builder.build();
+        if (recipeIngredients != null) {
+            // Attach the recipe ingredients to the appropriate recipe group
+            for (var recipeGroup : recipeDigest.getInstructionGroups()) {
+                final var recipeGroupId = recipeGroup.getId();
+                final var ingredients = recipeIngredients.stream()
+                        .filter(x -> x.getInstructionGroupId() == recipeGroupId)
+                        .map(RecipeIngredientMapper::map)
+                        .collect(Collectors.toList());
+                recipeGroup.setIngredients(ingredients);
+            }
+        }
+
+        return recipeDigest;
+    }
+
     public static Recipe create(RecipeDigest request, String email) {
         return Recipe.builder()
                 .withEmail(email)
@@ -69,4 +96,6 @@ public final class RecipeMapper {
         recipe.setServingQty(request.getServingQty());
         recipe.setUpdated(LocalDateTime.now());
     }
+
+
 }
