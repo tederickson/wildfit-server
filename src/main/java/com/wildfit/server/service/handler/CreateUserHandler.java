@@ -81,7 +81,7 @@ public class CreateUserHandler {
                 "Thank you for signing up for access to the WILDFIT application, your account has been created.",
                 "",
                 "To activate your account, please visit:",
-                "http://localhost:8080/auth/register/" + verificationToken.getToken(),
+                "http://localhost:8080/v1/auth/register/" + verificationToken.getToken(),
                 "",
                 "Your account will automatically be approved once you click this URL. " +
                         "If you have problems activating your account please contact support (support@wildfit.com).",
