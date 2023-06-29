@@ -22,6 +22,8 @@ public class CreateRecipeIngredientHandler extends AbstractRecipeHandler {
     private final IngredientDigest request;
 
     public IngredientDigest execute() throws UserServiceException {
+        validate();
+
         // Validate recipeId and recipeGroupId
         getAuthorizedRecipe(recipeId);
         instructionGroupRepository.findById(recipeGroupId)

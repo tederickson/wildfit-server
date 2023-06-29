@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
-import com.wildfit.server.domain.InstructionDigest;
 import com.wildfit.server.domain.InstructionGroupDigest;
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.SeasonType;
@@ -16,32 +15,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 class UpdateRecipeHandlerTest extends AbstractRecipeHandlerTest {
 
     static final String NAME = "UpdateRecipeHandlerTest";
-
-    static final InstructionDigest step1 = InstructionDigest.builder().withStepNumber(1)
-            .withInstruction("Heat the oil in a heavy frying pan over medium-high heat, then cook the beef " +
-                    "until it’s " +
-                    "cooked through and starting to brown, breaking apart with a turner as it cooks.").build();
-    static final InstructionDigest step2 = InstructionDigest.builder().withStepNumber(2)
-            .withInstruction("While beef cooks, mix together the fish sauce, chili sauce, and water in a " +
-                    "small bowl. Zest the skin " +
-                    "of the lime and squeeze the juice. (You may need two limes to get enough juice, " +
-                    "but only use " +
-                    "the zest from one lime.) Thinly slice the green onions and chop the cilantro. " +
-                    "Most iceberg lettuce does not need washing as long as you remove the outer leaves. " +
-                    "Cut out the core and cut the lettuce into quarters to make 'cups' to hold the beef " +
-                    "mixture.").build();
-    final InstructionDigest step3 = InstructionDigest.builder().withStepNumber(3)
-            .withInstruction("When the beef is done, add the chili sauce mixture and let it sizzle until " +
-                    "the water has evaporated, " +
-                    "stirring a few times to get the flavor mixed through the meat. Turn off the heat and " +
-                    "stir in " +
-                    "the lime zest, lime juice, sliced green onions, and chopped cilantro.").build();
-    final InstructionDigest step4 = InstructionDigest.builder().withStepNumber(4)
-            .withInstruction("Serve meat mixture with iceberg lettuce leaves. Fill with beef and wrap " +
-                    "around it. Eaten with your hands.").build();
-
-    static final String INTRODUCTION = "These lettuce wraps are so easy and full of flavor! " +
-            "They make a great side dish, or are perfect for a healthy spring approved recipe.";
 
     @Test
     void execute() throws UserServiceException {
