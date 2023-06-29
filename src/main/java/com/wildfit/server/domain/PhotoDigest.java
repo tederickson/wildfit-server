@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @Builder(setterPrefix = "with")
 @NoArgsConstructor
 @AllArgsConstructor
-public class PhotoDigest {
+public final class PhotoDigest {
     private String thumb;
 }

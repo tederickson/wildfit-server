@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder(setterPrefix = "with")
 @NoArgsConstructor
 @AllArgsConstructor
-public class RecipeDigest {
+public final class RecipeDigest {
     private long id;
 
     private String name;

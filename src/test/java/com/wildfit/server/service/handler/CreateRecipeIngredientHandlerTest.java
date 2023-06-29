@@ -14,6 +14,7 @@ import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -95,6 +96,17 @@ class CreateRecipeIngredientHandlerTest extends AbstractRecipeHandlerTest {
                 .withTransFattyAcid(transFattyAcid)
                 .withVitaminD(vitaminD)
                 .build();
+    }
+
+    @AfterEach
+    void tearDown() {
+        if (testRecipe != null) {
+            final var ingredients = recipeIngredientRepository.findByRecipeId(testRecipe.getId());
+
+            recipeIngredientRepository.deleteAll(ingredients);
+        }
+
+        super.tearDown();
     }
 
     @Test
@@ -202,5 +214,10 @@ class CreateRecipeIngredientHandlerTest extends AbstractRecipeHandlerTest {
                 .build().execute();
         assertNotNull(response);
 
+        ingredientDigest.setId(response.getId());
+        ingredientDigest.setRecipeId(testRecipe.getId());
+        ingredientDigest.setInstructionGroupId(recipeGroupId);
+
+        assertEquals(ingredientDigest, response);
     }
 }
