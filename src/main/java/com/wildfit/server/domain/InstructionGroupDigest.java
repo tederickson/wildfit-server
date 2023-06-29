@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder(setterPrefix = "with")
 @NoArgsConstructor
 @AllArgsConstructor
-public class InstructionGroupDigest {
+public final class InstructionGroupDigest {
     private Long id;
     private Integer instructionGroupNumber;
     private String name;

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder(setterPrefix = "with")
 @NoArgsConstructor
 @AllArgsConstructor
-public class IngredientDigest {
+public final class IngredientDigest {
     private long id;
     private long recipeId;
     private long instructionGroupId;

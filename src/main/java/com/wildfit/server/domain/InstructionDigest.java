@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder(setterPrefix = "with")
 @NoArgsConstructor
 @AllArgsConstructor
-public class InstructionDigest {
+public final class InstructionDigest {
     private Long id;
     private Integer stepNumber;
     private String instruction;

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder(setterPrefix = "with")
 @NoArgsConstructor
 @AllArgsConstructor
-public class FoodItemDigest {
+public final class FoodItemDigest {
     private String foodName; //  Butter, Pure Irish, Unsalted,
     private String brandName; //  Kerrygold,
     private String brandNameItemName;
