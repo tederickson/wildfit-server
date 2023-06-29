@@ -61,7 +61,6 @@ public class MapperTemplate {
                 from.getSimpleName() + " " + fromInstance + ", " +
                 to.getSimpleName() + " " + toInstance + ") {");
         for (var fieldSuffix : getFieldSuffixes(from)) {
-            // instruction.setStepNumber(instructionDigest.getStepNumber());
             System.out.println(toInstance + ".set" + fieldSuffix + "(" + fromInstance + ".get" + fieldSuffix + "());");
         }
 
