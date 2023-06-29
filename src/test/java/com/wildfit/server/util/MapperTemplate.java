@@ -53,8 +53,26 @@ public class MapperTemplate {
         System.out.println("}");
     }
 
+    public static void update(final Class<?> from, Class<?> to) {
+        final var fromInstance = getInstanceName(from);
+        final var toInstance = getInstanceName(to);
+
+        System.out.println("public static " + to.getSimpleName() + " update(" +
+                from.getSimpleName() + " " + fromInstance + ", " +
+                to.getSimpleName() + " " + toInstance + ") {");
+        for (var fieldSuffix : getFieldSuffixes(from)) {
+            // instruction.setStepNumber(instructionDigest.getStepNumber());
+            System.out.println(toInstance + ".set" + fieldSuffix + "(" + fromInstance + ".get" + fieldSuffix + "());");
+        }
+
+        System.out.println();
+        System.out.println("return " + toInstance + ";");
+        System.out.println("}");
+    }
+
     public static void main(String[] args) {
         MapperTemplate.transform(RecipeIngredient.class, "IngredientDigest");
         MapperTemplate.create(IngredientDigest.class, "RecipeIngredient");
+        MapperTemplate.update(IngredientDigest.class, RecipeIngredient.class);
     }
 }
