@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class IngredientDigest {
     private long id;
+    private long recipeId;
+    private long instructionGroupId;
 
     private String foodName; //  Butter, Pure Irish, Unsalted,
     private String brandName; //  Kerrygold,

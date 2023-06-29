@@ -1,0 +1,55 @@
+package com.wildfit.server.service.handler;
+
+import java.util.Objects;
+
+import com.wildfit.server.domain.IngredientDigest;
+import com.wildfit.server.exception.UserServiceError;
+import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.model.RecipeIngredient;
+import com.wildfit.server.model.mapper.RecipeIngredientMapper;
+import com.wildfit.server.repository.InstructionGroupRepository;
+import com.wildfit.server.repository.RecipeIngredientRepository;
+import lombok.experimental.SuperBuilder;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@SuperBuilder(setterPrefix = "with")
+public class CreateRecipeIngredientHandler extends AbstractRecipeHandler {
+    private final InstructionGroupRepository instructionGroupRepository;
+    private final RecipeIngredientRepository recipeIngredientRepository;
+    private final Long recipeId;
+    private final Long recipeGroupId;
+    private final IngredientDigest request;
+
+    public IngredientDigest execute() throws UserServiceException {
+        // Validate recipeId and recipeGroupId
+        getAuthorizedRecipe(recipeId);
+        instructionGroupRepository.findById(recipeGroupId)
+                .orElseThrow(() -> new UserServiceException(UserServiceError.RECIPE_GROUP_NOT_FOUND));
+
+        RecipeIngredient recipeIngredient = RecipeIngredientMapper.create(request);
+
+        recipeIngredient.setRecipeId(recipeId);
+        recipeIngredient.setInstructionGroupId(recipeGroupId);
+
+        return RecipeIngredientMapper.map(recipeIngredientRepository.save(recipeIngredient));
+    }
+
+    protected void validate() throws UserServiceException {
+        super.validate();
+        Objects.requireNonNull(instructionGroupRepository, "instructionGroupRepository");
+        Objects.requireNonNull(recipeIngredientRepository, "recipeIngredientRepository");
+
+        if (request == null) {
+            throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
+        }
+        if (recipeGroupId == null) {
+            throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
+        }
+        if (recipeId == null) {
+            throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
+        }
+    }
+
+
+}

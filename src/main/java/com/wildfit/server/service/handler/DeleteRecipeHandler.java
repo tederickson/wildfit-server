@@ -24,6 +24,7 @@ public class DeleteRecipeHandler extends AbstractRecipeHandler {
     }
 
     protected void validate() throws UserServiceException {
+        super.validate();
         Objects.requireNonNull(instructionGroupRepository, "instructionGroupRepository");
 
         if (recipeId == null) {

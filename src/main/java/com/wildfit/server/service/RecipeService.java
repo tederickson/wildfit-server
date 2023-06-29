@@ -11,14 +11,14 @@ public interface RecipeService {
     RecipeListDigest listBySeason(SeasonType season, Pageable pageable) throws UserServiceException;
 
     RecipeDigest
-    retrieveRecipe(Long id) throws UserServiceException;
+    retrieveRecipe(Long recipeId) throws UserServiceException;
 
-    void deleteRecipe(Long id, Long userId) throws UserServiceException;
+    void deleteRecipe(Long recipeId, Long userId) throws UserServiceException;
 
     RecipeDigest createRecipe(Long userId, RecipeDigest request) throws UserServiceException;
 
     RecipeDigest updateRecipe(Long userId, RecipeDigest request) throws UserServiceException;
 
-    IngredientDigest createRecipeIngredient(Long userId, Long id, Long recipeGroup, IngredientDigest request)
+    IngredientDigest createRecipeIngredient(Long userId, Long recipeId, Long recipeGroupId, IngredientDigest request)
             throws UserServiceException;
 }
