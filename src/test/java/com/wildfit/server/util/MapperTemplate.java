@@ -9,7 +9,7 @@ import com.wildfit.server.model.RecipeIngredient;
 
 public class MapperTemplate {
 
-    private static Set<String> getFieldSuffixes(final Class from) {
+    private static Set<String> getFieldSuffixes(final Class<?> from) {
         final var fieldSuffixes = new TreeSet<String>();
 
         for (Field field : from.getDeclaredFields()) {
@@ -19,13 +19,13 @@ public class MapperTemplate {
         return fieldSuffixes;
     }
 
-    private static String getInstanceName(final Class from) {
+    private static String getInstanceName(final Class<?> from) {
         final var name = from.getSimpleName();
 
         return name.substring(0, 1).toLowerCase() + name.substring(1);
     }
 
-    public static void transform(final Class from, String to) {
+    public static void transform(final Class<?> from, String to) {
         final var instanceName = getInstanceName(from);
 
         System.out.println("public static " + to + " map(" +
@@ -39,7 +39,7 @@ public class MapperTemplate {
         System.out.println("}");
     }
 
-    public static void create(final Class from, String to) {
+    public static void create(final Class<?> from, String to) {
         final var instanceName = getInstanceName(from);
 
         System.out.println("public static " + to + " create(" +
