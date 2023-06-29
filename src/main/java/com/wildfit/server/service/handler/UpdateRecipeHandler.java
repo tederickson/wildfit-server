@@ -17,33 +17,21 @@ import com.wildfit.server.model.mapper.InstructionGroupMapper;
 import com.wildfit.server.model.mapper.RecipeMapper;
 import com.wildfit.server.repository.InstructionGroupRepository;
 import com.wildfit.server.repository.InstructionRepository;
-import com.wildfit.server.repository.RecipeRepository;
-import com.wildfit.server.repository.UserRepository;
-import lombok.Builder;
+import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Builder(setterPrefix = "with")
-public class UpdateRecipeHandler {
-    private final RecipeRepository recipeRepository;
-    private final UserRepository userRepository;
+@SuperBuilder(setterPrefix = "with")
+public class UpdateRecipeHandler extends AbstractRecipeHandler {
     private final InstructionGroupRepository instructionGroupRepository;
     private final InstructionRepository instructionRepository;
 
     private final RecipeDigest request;
-    private final Long userId;
 
     public RecipeDigest execute() throws UserServiceException {
         validate();
 
-        final var user = userRepository.findById(userId)
-                .orElseThrow(() -> new UserServiceException(UserServiceError.USER_NOT_FOUND));
-        final var dbRecipe = recipeRepository.findById(request.getId())
-                .orElseThrow(() -> new UserServiceException(UserServiceError.RECIPE_NOT_FOUND));
-
-        if (!dbRecipe.getEmail().equals(user.getEmail())) {
-            throw new UserServiceException(UserServiceError.NOT_AUTHORIZED);
-        }
+        final var dbRecipe = getAuthorizedRecipe(request.getId());
         RecipeMapper.update(dbRecipe, request);
 
         recipeRepository.save(dbRecipe);
@@ -107,15 +95,12 @@ public class UpdateRecipeHandler {
         }
     }
 
-    private void validate() throws UserServiceException {
-        Objects.requireNonNull(userRepository, "userRepository");
-        Objects.requireNonNull(recipeRepository, "recipeRepository");
+    protected void validate() throws UserServiceException {
+        super.validate();
+
         Objects.requireNonNull(instructionGroupRepository, "instructionGroupRepository");
         Objects.requireNonNull(instructionRepository, "instructionRepository");
 
-        if (userId == null) {
-            throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
-        }
         if (request == null) {
             throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
         }
