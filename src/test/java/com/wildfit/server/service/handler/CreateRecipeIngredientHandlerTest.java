@@ -26,12 +26,12 @@ class CreateRecipeIngredientHandlerTest extends AbstractRecipeHandlerTest {
     static final String foodName = "Butter, Pure Irish, Unsalted";
     static final String brandName = "Kerrygold";
     static final String brandNameItemName = "Pasteurized Cream, Skimmed Milk, Cultures.";
-    static final Integer servingQty = 1;
+    static final Float servingQty = 1f;
     static final String servingUnit = "tbsp";
-    static final Integer ingredientServingQty = 3;
+    static final Float ingredientServingQty = 3f;
     static final String ingredientServingUnit = "tablespoon";
-    static final Integer servingWeightGrams = 18;
-    static final Integer metricQty = 14;
+    static final Float servingWeightGrams = 18f;
+    static final Float metricQty = 14f;
     static final String metricUom = "g";
     static final Float calories = 100f;
     static final Float totalFat = 12f;
@@ -96,17 +96,6 @@ class CreateRecipeIngredientHandlerTest extends AbstractRecipeHandlerTest {
                 .withTransFattyAcid(transFattyAcid)
                 .withVitaminD(vitaminD)
                 .build();
-    }
-
-    @AfterEach
-    void tearDown() {
-        if (testRecipe != null) {
-            final var ingredients = recipeIngredientRepository.findByRecipeId(testRecipe.getId());
-
-            recipeIngredientRepository.deleteAll(ingredients);
-        }
-
-        super.tearDown();
     }
 
     @Test

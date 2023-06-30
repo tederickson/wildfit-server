@@ -75,10 +75,12 @@ public class AbstractRecipeHandlerTest extends AbstractHandlerTest {
     void tearDown() {
         if (testRecipe != null) {
             recipeRepository.deleteById(testRecipe.getId());
+
             final var instructionGroups = instructionGroupRepository.findByRecipeId(testRecipe.getId());
-            if (!instructionGroups.isEmpty()) {
-                instructionGroupRepository.deleteAll(instructionGroups);
-            }
+            instructionGroupRepository.deleteAll(instructionGroups);
+
+            final var ingredients = recipeIngredientRepository.findByRecipeId(testRecipe.getId());
+            recipeIngredientRepository.deleteAll(ingredients);
 
             testRecipe = null;
         }

@@ -9,10 +9,10 @@ public class FoodItem {
     private String food_name; //  Butter, Pure Irish, Unsalted,
     private String brand_name; //  Kerrygold,
     private String brand_name_item_name; // Kerrygold Butter Sticks, Pure Irish, Unsalted
-    private Integer serving_qty; //  1,
+    private Float serving_qty; //  1,
     private String serving_unit; //  tbsp,
-    private Integer serving_weight_grams; //  14,
-    private Integer nf_metric_qty; //  14,
+    private Float serving_weight_grams; //  14,
+    private Float nf_metric_qty; //  14,
     private String nf_metric_uom; //  g,
     private Float nf_calories; //  100,
     private Float nf_total_fat; //  12,

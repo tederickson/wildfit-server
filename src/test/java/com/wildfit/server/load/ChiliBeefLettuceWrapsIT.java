@@ -93,52 +93,52 @@ class ChiliBeefLettuceWrapsIT extends CommonRecipe {
             var foodItems = getFoodItems("load/coconut_oil.json");
             var foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
 
-            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 2, "tsp");
+            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 2f, "tsp");
 
             foodItems = getFoodItems("load/lean_ground_beef.json");
             foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
 
-            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 1, "lb");
+            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 1f, "lb");
 
             foodItems = getFoodItems("load/fish_sauce.json");
             foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
 
-            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 1, "tbsp");
+            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 1f, "tbsp");
 
             foodItems = getFoodItems("load/chili_sauce.json");
             foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
 
-            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 2, "tbsp");
+            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 2f, "tbsp");
 
             foodItems = getFoodItems("load/water.json");
             foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
 
-            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 2, "tbsp");
+            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 2f, "tbsp");
 
             foodItems = getFoodItems("load/lime_zest.json");
             foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
 
-            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 1, "large");
+            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 1f, "large");
 
             foodItems = getFoodItems("load/lime_juice.json");
             foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
 
-            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 1, "tbsp");
+            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 1f, "tbsp");
 
             foodItems = getFoodItems("load/green_onion.json");
             foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
 
-            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 1, "cup");
+            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 1f, "cup");
 
             foodItems = getFoodItems("load/cilantro.json");
             foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
 
-            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 1, "cup");
+            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 1f, "cup");
 
             foodItems = getFoodItems("load/iceberg_lettuce.json");
             foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
 
-            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 1, "cup");
+            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 1f, "cup");
         }
     }
 }

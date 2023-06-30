@@ -34,40 +34,40 @@ public class RecipeIngredient {
     private long instructionGroupId;       // InstructionGroup.id
 
     @Column(name = "food_name")
-    private String foodName; //  Butter, Pure Irish, Unsalted,
+    private String foodName;
     @Column(name = "brand_name")
-    private String brandName; //  Kerrygold,
+    private String brandName;
     @Column(name = "brand_name_item_name")
     private String brandNameItemName;
     @Column(name = "serving_qty")
-    private Integer servingQty; //  1,
+    private Float servingQty;
     @Column(name = "serving_unit")
-    private String servingUnit; //  tbsp,
+    private String servingUnit;
     @Column(name = "ingredient_serving_qty")
-    private Integer ingredientServingQty; //  1,
+    private Float ingredientServingQty;
     @Column(name = "ingredient_serving_unit")
-    private String ingredientServingUnit; //  tbsp,
+    private String ingredientServingUnit;
     @Column(name = "serving_weight_grams")
-    private Integer servingWeightGrams; //  14,
+    private Float servingWeightGrams;
     @Column(name = "metric_qty")
-    private Integer metricQty; //  14,
+    private Float metricQty;
     @Column(name = "metric_uom")
-    private String metricUom; //  g,
-    private Float calories; //  100,
+    private String metricUom;
+    private Float calories;
     @Column(name = "total_fat")
-    private Float totalFat; //  12,
+    private Float totalFat;
     @Column(name = "saturated_fat")
-    private Float saturatedFat; //  8,
-    private Float cholesterol; //  30,
-    private Float sodium; //  0,
+    private Float saturatedFat;
+    private Float cholesterol;
+    private Float sodium;
     @Column(name = "total_carbohydrate")
-    private Float totalCarbohydrate; //  0,
+    private Float totalCarbohydrate;
     @Column(name = "dietary_fiber")
-    private Float dietaryFiber; //  null,
-    private Float sugars; //  null,
-    private Float protein; //  0,
-    private Float potassium; //  null,
-    private Float phosphorus; //  null,
+    private Float dietaryFiber;
+    private Float sugars;
+    private Float protein;
+    private Float potassium;
+    private Float phosphorus;
     private Float calcium;
     private Float iron;
     @Column(name = "vitamin_d")
@@ -77,11 +77,11 @@ public class RecipeIngredient {
     @Column(name = "trans_fatty_acid")
     private Float transFattyAcid;
     @Column(name = "nix_brand_name")
-    private String nixBrandName; //  Kerrygold,
+    private String nixBrandName;
     @Column(name = "nix_brand_id")
-    private String nixBrandId; //  51db37b7176fe9790a8989b4,
+    private String nixBrandId;
     @Column(name = "nix_item_id")
-    private String nixItemId; //  52a15041d122497b50000a75,
+    private String nixItemId;
 
     private String photo_thumbnail;
 

@@ -59,7 +59,7 @@ public abstract class CommonRecipe {
     }
 
     protected void addIngredient(long dbRecipeId, Long dbRecipeGroupId, FoodItemDigest foodItemDigest,
-                                 Integer ingredientServingQty,
+                                 Float ingredientServingQty,
                                  String ingredientServingUnit) throws UserServiceException {
         CreateRecipeIngredientHandler.builder()
                 .withUserRepository(userRepository)
