@@ -10,6 +10,7 @@ import com.wildfit.server.repository.InstructionGroupRepository;
 import com.wildfit.server.repository.RecipeIngredientRepository;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 @Slf4j
 @SuperBuilder(setterPrefix = "with")
@@ -39,6 +40,9 @@ public class CreateRecipeIngredientHandler extends AbstractRecipeHandler {
         Objects.requireNonNull(recipeIngredientRepository, "recipeIngredientRepository");
 
         if (request == null) {
+            throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
+        }
+        if (StringUtils.trimToNull(request.getFoodName()) == null) {
             throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
         }
         if (recipeGroupId == null) {

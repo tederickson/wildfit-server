@@ -58,7 +58,7 @@ public class RecipeIngredientMapper {
                 .withCholesterol(ingredientDigest.getCholesterol())
                 .withDescription(ingredientDigest.getDescription())
                 .withDietaryFiber(ingredientDigest.getDietaryFiber())
-                .withFoodName(ingredientDigest.getFoodName())
+                .withFoodName(ingredientDigest.getFoodName().trim().toLowerCase())
                 // .withId(ingredientDigest.getId())
                 .withIngredientServingQty(ingredientDigest.getIngredientServingQty())
                 .withIngredientServingUnit(ingredientDigest.getIngredientServingUnit())

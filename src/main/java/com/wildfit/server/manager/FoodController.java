@@ -56,7 +56,7 @@ public class FoodController {
     }
 
     @ApiOperation(value = "Get foods by description. You can provide a description of '2 tsp coconut oil' " +
-            "or you can narrow the search by setting serving_unit='tsp'.")
+            "and you can narrow the search by setting serving_unit='tsp'.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Get foods", response = SearchFoodResponse.class)})
     @GetMapping(produces = "application/json")

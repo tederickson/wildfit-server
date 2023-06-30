@@ -15,6 +15,7 @@ import com.wildfit.server.service.handler.CreateRecipeIngredientHandler;
 import com.wildfit.server.service.handler.DeleteRecipeHandler;
 import com.wildfit.server.service.handler.DeleteRecipeIngredientHandler;
 import com.wildfit.server.service.handler.GetRecipeHandler;
+import com.wildfit.server.service.handler.ListBySeasonAndIngredientHandler;
 import com.wildfit.server.service.handler.ListBySeasonHandler;
 import com.wildfit.server.service.handler.UpdateRecipeHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,18 @@ public class RecipeServiceImpl implements RecipeService {
         return ListBySeasonHandler.builder()
                 .withRecipeRepository(recipeRepository)
                 .withSeason(season)
+                .withPageable(pageable)
+                .build().execute();
+    }
+
+    @Override
+    public RecipeListDigest listBySeasonAndIngredient(SeasonType season, String ingredientName, Pageable pageable)
+            throws UserServiceException {
+        return ListBySeasonAndIngredientHandler.builder()
+                .withRecipeRepository(recipeRepository)
+                .withRecipeIngredientRepository(recipeIngredientRepository)
+                .withSeason(season)
+                .withIngredientName(ingredientName)
                 .withPageable(pageable)
                 .build().execute();
     }

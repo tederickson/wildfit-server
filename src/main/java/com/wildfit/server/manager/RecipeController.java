@@ -50,6 +50,23 @@ public class RecipeController {
         return recipeService.listBySeason(season, pageable);
     }
 
+    @ApiOperation(value = "Retrieve all recipes for a specific season that include a specific food")
+    @GetMapping(value = "/seasons/{season}/ingredients/{ingredientName}", produces = "application/json")
+    public RecipeListDigest listBySeasonAndIngredient(
+            @PathVariable(value = "season") SeasonType season,
+            @PathVariable(value = "ingredientName") String ingredientName,
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "pageSize", defaultValue = "30") Integer pageSize) throws UserServiceException {
+
+        final var logMessage = String.join("|", "retrieveRecipesForSeasonAndFood", season.toString(),
+                ingredientName, page.toString(), pageSize.toString());
+        log.info(logMessage);
+
+        final var pageable = PageMapper.map(page, pageSize);
+
+        return recipeService.listBySeasonAndIngredient(season, ingredientName, pageable);
+    }
+
     @ApiOperation(value = "Retrieve recipe")
     @GetMapping(value = "/{id}", produces = "application/json")
     public RecipeDigest retrieveRecipe(@PathVariable(value = "id") Long id) throws UserServiceException {
