@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+import com.wildfit.server.domain.IngredientDigest;
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.RecipeListDigest;
 import com.wildfit.server.domain.SeasonType;
@@ -19,6 +20,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class RecipeControllerTest {
+    static final Long recipeId = 123L;
     static final Long userId = -23L;
 
     @Mock
@@ -30,8 +32,8 @@ class RecipeControllerTest {
     @Test
     void retrieveRecipesForSeason() throws UserServiceException {
         when(recipeService.listBySeason(any(), any())).thenReturn(new RecipeListDigest());
-        final var response = recipeController.retrieveRecipesForSeason(SeasonType.WINTER, 12, 40);
 
+        final var response = recipeController.retrieveRecipesForSeason(SeasonType.WINTER, 12, 40);
         assertNotNull(response);
     }
 
@@ -40,7 +42,6 @@ class RecipeControllerTest {
         when(recipeService.retrieveRecipe(any())).thenReturn(RecipeDigest.builder().build());
 
         final var response = recipeController.retrieveRecipe(15L);
-
         assertNotNull(response);
     }
 
@@ -61,7 +62,6 @@ class RecipeControllerTest {
     void updateRecipe() throws UserServiceException {
         when(recipeService.updateRecipe(any(), any())).thenReturn(RecipeDigest.builder().build());
 
-        final var recipeId = 123L;
         final var response = recipeController.updateRecipe(recipeId, userId,
                 RecipeDigest.builder().withId(recipeId).build());
         assertNotNull(response);
@@ -69,9 +69,23 @@ class RecipeControllerTest {
 
     @Test
     void updateRecipe_idsDoNotMatch() {
-        final var recipeId = 123L;
         final var exception = assertThrows(UserServiceException.class,
                 () -> recipeController.updateRecipe(recipeId, userId, RecipeDigest.builder().build()));
         assertEquals(UserServiceError.INVALID_PARAMETER, exception.getError());
+    }
+
+    @Test
+    void createRecipeIngredient() throws UserServiceException {
+        when(recipeService.createRecipeIngredient(any(), any(), any(), any()))
+                .thenReturn(IngredientDigest.builder().build());
+
+        final var response = recipeController.createRecipeIngredient(recipeId, userId, 404L,
+                IngredientDigest.builder().build());
+        assertNotNull(response);
+    }
+
+    @Test
+    void deleteRecipeIngredient() throws UserServiceException {
+        recipeController.deleteRecipeIngredient(recipeId, userId, 2539L);
     }
 }
