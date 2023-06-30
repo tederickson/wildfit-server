@@ -13,7 +13,7 @@ public interface RecipeRepository extends PagingAndSortingRepository<Recipe, Lon
     List<Recipe> findAllBySeasonAndName(String season, String name, Pageable pageable);
 
     @Query(value = "SELECT r.* " +
-            "from Recipe r, recipe_ingredient ri " +
+            "FROM Recipe r, recipe_ingredient ri " +
             "WHERE r.season=?1 " +
             "AND r.id = ri.recipe_id " +
             "AND ri.food_name =?2", nativeQuery = true)
