@@ -36,5 +36,6 @@ CREATE TABLE recipe_ingredient (
     nix_item_id     varchar(100),
     photo_thumbnail varchar(100),
 
-    KEY recipe_idx1 (recipe_id)
+    KEY recipe_idx1 (recipe_id),
+    KEY food_name_idx (food_name)
 );

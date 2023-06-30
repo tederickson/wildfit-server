@@ -22,7 +22,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "recipe_ingredient", indexes = {@Index(name = "recipe_idx1", columnList = "recipe_id")})
+@Table(name = "recipe_ingredient", indexes = {
+        @Index(name = "recipe_idx1", columnList = "recipe_id"),
+        @Index(name = "food_name_idx", columnList = "food_name")})
 public class RecipeIngredient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
