@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import java.util.List;
 
 import com.google.common.collect.Iterables;
@@ -12,6 +13,9 @@ import com.wildfit.server.domain.InstructionGroupDigest;
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.model.FoodItems;
+import com.wildfit.server.model.mapper.FoodItemDigestMapper;
+import com.wildfit.server.model.mapper.IngredientDigestMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
@@ -20,9 +24,10 @@ import org.springframework.data.domain.PageRequest;
 class CreateRecipeHandlerTest extends AbstractRecipeHandlerTest {
 
     @Test
-    void chiliBeefLettuceWraps() throws UserServiceException {
+    void chiliBeefLettuceWraps() throws UserServiceException, java.io.IOException {
+        final var season = SeasonType.SPRING;
         final var name = "Chili Beef Lettuce Wraps";
-        final var exists = recipeRepository.findAllBySeasonAndName(SeasonType.SPRING.getCode(), name, PageRequest.of(0, 10));
+        final var exists = recipeRepository.findAllBySeasonAndName(season.getCode(), name, PageRequest.of(0, 10));
 
         if (exists.isEmpty()) {
             final var step1 = InstructionDigest.builder().withStepNumber(1)
@@ -53,7 +58,7 @@ class CreateRecipeHandlerTest extends AbstractRecipeHandlerTest {
                     .withInstructions(List.of(step1, step2, step3, step4)).build();
             final var recipe = RecipeDigest.builder()
                     .withName(name)
-                    .withSeason(SeasonType.SPRING)
+                    .withSeason(season)
                     .withIntroduction("These lettuce wraps are so easy and full of flavor! " +
                             "They make a great side dish, or are perfect for a healthy spring approved recipe.")
                     .withPrepTimeMin(5)
@@ -72,6 +77,7 @@ class CreateRecipeHandlerTest extends AbstractRecipeHandlerTest {
             assertNotNull(response);
 
             final var dbRecipeId = response.getId();
+            final var dbRecipeGroupId = Iterables.getOnlyElement(response.getInstructionGroups()).getId();
             final var dbRecipe = recipeRepository.findById(dbRecipeId).orElseThrow();
             assertEquals(name, dbRecipe.getName());
             assertEquals(SeasonType.SPRING.getCode(), dbRecipe.getSeason());
@@ -83,6 +89,30 @@ class CreateRecipeHandlerTest extends AbstractRecipeHandlerTest {
                 assertTrue(dbInstruction.getStepNumber() > 0);
                 assertNotNull(dbInstruction.getText());
             }
+
+            var foodItems = getFoodItems("load/coconut_oil.json");
+            var foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
+
+            var ingredient = CreateRecipeIngredientHandler.builder()
+                    .withUserRepository(userRepository)
+                    .withRecipeRepository(recipeRepository)
+                    .withInstructionGroupRepository(instructionGroupRepository)
+                    .withRecipeIngredientRepository(recipeIngredientRepository)
+                    .withUserId(userId)
+                    .withRecipeId(dbRecipeId)
+                    .withRecipeGroupId(dbRecipeGroupId)
+                    .withRequest(IngredientDigestMapper.create(foodItemDigest, 2, "tsp"))
+                    .build().execute();
+            assertNotNull(ingredient);
+            assertEquals("coconut oil", ingredient.getFoodName());
+        }
+    }
+
+    private FoodItems getFoodItems(String fileName) throws IOException {
+        try (var in = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName)) {
+            final var mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+
+            return mapper.readValue(in, FoodItems.class);
         }
     }
 }
