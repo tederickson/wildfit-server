@@ -1,0 +1,470 @@
+{
+  "foods": [
+    {
+      "food_name": "lean ground beef",
+      "brand_name": null,
+      "serving_qty": 1,
+      "serving_unit": "lb",
+      "serving_weight_grams": 453.59,
+      "nf_calories": 1043.26,
+      "nf_total_fat": 54.61,
+      "nf_saturated_fat": 21.37,
+      "nf_cholesterol": 403.7,
+      "nf_sodium": 394.63,
+      "nf_total_carbohydrate": 0,
+      "nf_dietary_fiber": 0,
+      "nf_sugars": 0,
+      "nf_protein": 129.05,
+      "nf_potassium": 1964.05,
+      "nf_p": 1133.98,
+      "full_nutrients": [
+        {
+          "attr_id": 203,
+          "value": 129.0469
+        },
+        {
+          "attr_id": 204,
+          "value": 54.6125
+        },
+        {
+          "attr_id": 205,
+          "value": 0
+        },
+        {
+          "attr_id": 207,
+          "value": 5.806
+        },
+        {
+          "attr_id": 208,
+          "value": 1043.2616
+        },
+        {
+          "attr_id": 221,
+          "value": 0
+        },
+        {
+          "attr_id": 255,
+          "value": 265.7142
+        },
+        {
+          "attr_id": 262,
+          "value": 0
+        },
+        {
+          "attr_id": 263,
+          "value": 0
+        },
+        {
+          "attr_id": 268,
+          "value": 4368.091
+        },
+        {
+          "attr_id": 269,
+          "value": 0
+        },
+        {
+          "attr_id": 291,
+          "value": 0
+        },
+        {
+          "attr_id": 301,
+          "value": 72.5747
+        },
+        {
+          "attr_id": 303,
+          "value": 13.9706
+        },
+        {
+          "attr_id": 304,
+          "value": 122.4698
+        },
+        {
+          "attr_id": 305,
+          "value": 1133.98
+        },
+        {
+          "attr_id": 306,
+          "value": 1964.0534
+        },
+        {
+          "attr_id": 307,
+          "value": 394.625
+        },
+        {
+          "attr_id": 309,
+          "value": 31.0257
+        },
+        {
+          "attr_id": 312,
+          "value": 0.4491
+        },
+        {
+          "attr_id": 315,
+          "value": 0.059
+        },
+        {
+          "attr_id": 317,
+          "value": 97.9759
+        },
+        {
+          "attr_id": 318,
+          "value": 40.8233
+        },
+        {
+          "attr_id": 319,
+          "value": 13.6078
+        },
+        {
+          "attr_id": 320,
+          "value": 13.6078
+        },
+        {
+          "attr_id": 321,
+          "value": 0
+        },
+        {
+          "attr_id": 322,
+          "value": 0
+        },
+        {
+          "attr_id": 323,
+          "value": 0.5443
+        },
+        {
+          "attr_id": 324,
+          "value": 9.0718
+        },
+        {
+          "attr_id": 326,
+          "value": 0
+        },
+        {
+          "attr_id": 328,
+          "value": 0
+        },
+        {
+          "attr_id": 334,
+          "value": 0
+        },
+        {
+          "attr_id": 337,
+          "value": 0
+        },
+        {
+          "attr_id": 338,
+          "value": 0
+        },
+        {
+          "attr_id": 401,
+          "value": 0
+        },
+        {
+          "attr_id": 404,
+          "value": 0.1951
+        },
+        {
+          "attr_id": 405,
+          "value": 0.8664
+        },
+        {
+          "attr_id": 406,
+          "value": 30.8624
+        },
+        {
+          "attr_id": 410,
+          "value": 3.6605
+        },
+        {
+          "attr_id": 415,
+          "value": 1.9414
+        },
+        {
+          "attr_id": 417,
+          "value": 36.2874
+        },
+        {
+          "attr_id": 418,
+          "value": 12.7006
+        },
+        {
+          "attr_id": 421,
+          "value": 414.5831
+        },
+        {
+          "attr_id": 429,
+          "value": 0
+        },
+        {
+          "attr_id": 430,
+          "value": 5.4431
+        },
+        {
+          "attr_id": 431,
+          "value": 0
+        },
+        {
+          "attr_id": 432,
+          "value": 36.2874
+        },
+        {
+          "attr_id": 435,
+          "value": 36.2874
+        },
+        {
+          "attr_id": 454,
+          "value": 39.4625
+        },
+        {
+          "attr_id": 501,
+          "value": 0.6532
+        },
+        {
+          "attr_id": 502,
+          "value": 4.9895
+        },
+        {
+          "attr_id": 503,
+          "value": 5.7017
+        },
+        {
+          "attr_id": 504,
+          "value": 10.0561
+        },
+        {
+          "attr_id": 505,
+          "value": 10.6821
+        },
+        {
+          "attr_id": 506,
+          "value": 3.3158
+        },
+        {
+          "attr_id": 507,
+          "value": 1.329
+        },
+        {
+          "attr_id": 508,
+          "value": 5.0303
+        },
+        {
+          "attr_id": 509,
+          "value": 3.9689
+        },
+        {
+          "attr_id": 510,
+          "value": 6.3367
+        },
+        {
+          "attr_id": 511,
+          "value": 8.3915
+        },
+        {
+          "attr_id": 512,
+          "value": 4.1912
+        },
+        {
+          "attr_id": 513,
+          "value": 8.0785
+        },
+        {
+          "attr_id": 514,
+          "value": 11.612
+        },
+        {
+          "attr_id": 515,
+          "value": 19.3366
+        },
+        {
+          "attr_id": 516,
+          "value": 8.7543
+        },
+        {
+          "attr_id": 517,
+          "value": 6.5726
+        },
+        {
+          "attr_id": 518,
+          "value": 5.1619
+        },
+        {
+          "attr_id": 601,
+          "value": 403.6969
+        },
+        {
+          "attr_id": 605,
+          "value": 1.6284
+        },
+        {
+          "attr_id": 606,
+          "value": 21.3733
+        },
+        {
+          "attr_id": 607,
+          "value": 0
+        },
+        {
+          "attr_id": 608,
+          "value": 0
+        },
+        {
+          "attr_id": 609,
+          "value": 0
+        },
+        {
+          "attr_id": 610,
+          "value": 0
+        },
+        {
+          "attr_id": 611,
+          "value": 0.0272
+        },
+        {
+          "attr_id": 612,
+          "value": 1.5468
+        },
+        {
+          "attr_id": 613,
+          "value": 12.061
+        },
+        {
+          "attr_id": 614,
+          "value": 6.8311
+        },
+        {
+          "attr_id": 615,
+          "value": 0.0408
+        },
+        {
+          "attr_id": 617,
+          "value": 1.6284
+        },
+        {
+          "attr_id": 618,
+          "value": 1.4651
+        },
+        {
+          "attr_id": 619,
+          "value": 0.0408
+        },
+        {
+          "attr_id": 620,
+          "value": 0.2087
+        },
+        {
+          "attr_id": 621,
+          "value": 0
+        },
+        {
+          "attr_id": 625,
+          "value": 0.4218
+        },
+        {
+          "attr_id": 626,
+          "value": 1.9913
+        },
+        {
+          "attr_id": 627,
+          "value": 0
+        },
+        {
+          "attr_id": 628,
+          "value": 0.2041
+        },
+        {
+          "attr_id": 629,
+          "value": 0
+        },
+        {
+          "attr_id": 630,
+          "value": 0
+        },
+        {
+          "attr_id": 631,
+          "value": 0
+        },
+        {
+          "attr_id": 645,
+          "value": 22.8293
+        },
+        {
+          "attr_id": 646,
+          "value": 1.9414
+        },
+        {
+          "attr_id": 652,
+          "value": 0.2631
+        },
+        {
+          "attr_id": 653,
+          "value": 0.6078
+        },
+        {
+          "attr_id": 663,
+          "value": 1.6284
+        },
+        {
+          "attr_id": 685,
+          "value": 0.0408
+        },
+        {
+          "attr_id": 687,
+          "value": 0.508
+        },
+        {
+          "attr_id": 693,
+          "value": 1.6284
+        }
+      ],
+      "nix_brand_name": null,
+      "nix_brand_id": null,
+      "nix_item_name": null,
+      "nix_item_id": null,
+      "upc": null,
+      "consumed_at": "2023-06-30T05:45:04+00:00",
+      "metadata": {
+        "is_raw_food": false
+      },
+      "source": 1,
+      "ndb_no": 23565,
+      "tags": {
+        "item": "lean ground beef",
+        "measure": "lb",
+        "quantity": "1.0",
+        "food_group": 2,
+        "tag_id": 1869
+      },
+      "alt_measures": [
+        {
+          "serving_weight": 154,
+          "measure": "portion ( yield from 1/2 lb raw meat )",
+          "seq": 2,
+          "qty": 1
+        },
+        {
+          "serving_weight": 85,
+          "measure": "oz",
+          "seq": 1,
+          "qty": 3
+        },
+        {
+          "serving_weight": 100,
+          "measure": "g",
+          "seq": null,
+          "qty": 100
+        }
+      ],
+      "lat": null,
+      "lng": null,
+      "meal_type": 5,
+      "photo": {
+        "thumb": "https://nix-tag-images.s3.amazonaws.com/1869_thumb.jpg",
+        "highres": "https://nix-tag-images.s3.amazonaws.com/1869_highres.jpg",
+        "is_user_uploaded": false
+      },
+      "sub_recipe": null,
+      "class_code": null,
+      "brick_code": null,
+      "tag_id": null
+    }
+  ]
+}
