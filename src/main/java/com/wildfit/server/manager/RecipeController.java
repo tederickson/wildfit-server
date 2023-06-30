@@ -122,4 +122,20 @@ public class RecipeController {
 
         return recipeService.createRecipeIngredient(userId, id, recipeGroupId, request);
     }
+
+    @ApiOperation(value = "Delete ingredient from the recipe")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully removed ingredient"),
+            @ApiResponse(code = 404, message = "Recipe not found"),
+            @ApiResponse(code = 401, message = "Not authorized to update recipe")})
+    @PostMapping(value = "/{id}/users/{userId}/ingredients/{ingredientId}", produces = "application/json")
+    public void deleteRecipeIngredient(@PathVariable("id") Long id,
+                                       @PathVariable("userId") Long userId,
+                                       @PathVariable("ingredientId") Long ingredientId) throws UserServiceException {
+        final var logMessage = String.join("|", "deleteRecipeIngredient",
+                id.toString(), userId.toString(), ingredientId.toString());
+        log.info(logMessage);
+
+        recipeService.deleteRecipeIngredient(userId, id, ingredientId);
+    }
 }

@@ -13,6 +13,7 @@ import com.wildfit.server.repository.UserRepository;
 import com.wildfit.server.service.handler.CreateRecipeHandler;
 import com.wildfit.server.service.handler.CreateRecipeIngredientHandler;
 import com.wildfit.server.service.handler.DeleteRecipeHandler;
+import com.wildfit.server.service.handler.DeleteRecipeIngredientHandler;
 import com.wildfit.server.service.handler.GetRecipeHandler;
 import com.wildfit.server.service.handler.ListBySeasonHandler;
 import com.wildfit.server.service.handler.UpdateRecipeHandler;
@@ -97,6 +98,18 @@ public class RecipeServiceImpl implements RecipeService {
                 .withRequest(request)
                 .withRecipeGroupId(recipeGroupId)
                 .withRecipeId(recipeId)
+                .build().execute();
+    }
+
+    @Override
+    public void deleteRecipeIngredient(Long userId, Long recipeId, Long ingredientId) throws UserServiceException {
+        DeleteRecipeIngredientHandler.builder()
+                .withUserRepository(userRepository)
+                .withRecipeRepository(recipeRepository)
+                .withRecipeIngredientRepository(recipeIngredientRepository)
+                .withUserId(userId)
+                .withRecipeId(recipeId)
+                .withIngredientId(ingredientId)
                 .build().execute();
     }
 }

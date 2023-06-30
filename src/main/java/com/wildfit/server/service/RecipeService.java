@@ -21,4 +21,6 @@ public interface RecipeService {
 
     IngredientDigest createRecipeIngredient(Long userId, Long recipeId, Long recipeGroupId, IngredientDigest request)
             throws UserServiceException;
+
+    void deleteRecipeIngredient(Long userId, Long recipeId, Long ingredientId) throws UserServiceException;
 }

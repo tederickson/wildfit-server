@@ -48,6 +48,4 @@ public class CreateRecipeIngredientHandler extends AbstractRecipeHandler {
             throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
         }
     }
-
-
 }

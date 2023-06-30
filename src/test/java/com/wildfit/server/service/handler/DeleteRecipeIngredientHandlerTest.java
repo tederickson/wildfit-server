@@ -13,21 +13,128 @@ import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CreateRecipeIngredientHandlerTest extends AbstractRecipeHandlerTest {
-    static final String NAME = "CreateRecipeIngredientHandlerTest";
+class DeleteRecipeIngredientHandlerTest extends AbstractRecipeHandlerTest {
+    static final String NAME = "DeleteRecipeIngredientHandlerTest";
 
-    private IngredientDigest ingredientDigest;
+    @Test
+    void nullParameters() {
+        assertThrows(NullPointerException.class,
+                () -> DeleteRecipeIngredientHandler.builder().build().execute());
+    }
 
-    @BeforeEach
-    void setUp() {
-        super.setUp();
+    @Test
+    void missingUserId() {
+        final var exception = assertThrows(UserServiceException.class,
+                () -> DeleteRecipeIngredientHandler.builder()
+                        .withUserRepository(userRepository)
+                        .withRecipeRepository(recipeRepository)
+                        .withRecipeIngredientRepository(recipeIngredientRepository)
+                        .withRecipeId(-1L)
+                        .withIngredientId(-89L)
+                        .build().execute());
+        assertEquals(UserServiceError.INVALID_PARAMETER, exception.getError());
+    }
 
-        ingredientDigest = IngredientDigest.builder()
+    @Test
+    void missingRecipeId() {
+        final var exception = assertThrows(UserServiceException.class,
+                () -> DeleteRecipeIngredientHandler.builder()
+                        .withUserRepository(userRepository)
+                        .withRecipeRepository(recipeRepository)
+                        .withRecipeIngredientRepository(recipeIngredientRepository)
+                        .withUserId(-15L)
+                        .withIngredientId(-89L)
+                        .build().execute());
+        assertEquals(UserServiceError.INVALID_PARAMETER, exception.getError());
+    }
+
+    @Test
+    void missingIngredientId() {
+        final var exception = assertThrows(UserServiceException.class,
+                () -> DeleteRecipeIngredientHandler.builder()
+                        .withUserRepository(userRepository)
+                        .withRecipeRepository(recipeRepository)
+                        .withRecipeIngredientRepository(recipeIngredientRepository)
+                        .withUserId(-15L)
+                        .withRecipeId(-1L)
+                        .build().execute());
+        assertEquals(UserServiceError.INVALID_PARAMETER, exception.getError());
+    }
+
+    @Test
+    void userNotFound() {
+        final var exception = assertThrows(UserServiceException.class,
+                () -> DeleteRecipeIngredientHandler.builder()
+                        .withUserRepository(userRepository)
+                        .withRecipeRepository(recipeRepository)
+                        .withRecipeIngredientRepository(recipeIngredientRepository)
+                        .withUserId(-14L)
+                        .withRecipeId(-1L)
+                        .withIngredientId(-89L)
+                        .build().execute());
+
+        assertEquals(UserServiceError.USER_NOT_FOUND, exception.getError());
+    }
+
+    @Test
+    void ingredientNotFound() throws UserServiceException {
+        final var instructionGroup = InstructionGroupDigest.builder()
+                .withInstructionGroupNumber(1)
+                .withInstructions(List.of(step1, step2)).build();
+        final var recipe = RecipeDigest.builder()
+                .withName(NAME)
+                .withSeason(SeasonType.SPRING)
+                .withIntroduction(INTRODUCTION)
+                .withPrepTimeMin(5)
+                .withCookTimeMin(15)
+                .withServingQty(4)
+                .withServingUnit("serving")
+                .withInstructionGroups(List.of(instructionGroup))
+                .build();
+
+        createRecipe(recipe);
+
+        final var exception = assertThrows(org.springframework.dao.EmptyResultDataAccessException.class,
+                () -> DeleteRecipeIngredientHandler.builder()
+                        .withUserRepository(userRepository)
+                        .withRecipeRepository(recipeRepository)
+                        .withRecipeIngredientRepository(recipeIngredientRepository)
+                        .withUserId(userId)
+                        .withRecipeId(testRecipe.getId())
+                        .withIngredientId(-89L)
+                        .build().execute());
+
+        assertEquals("No class com.wildfit.server.model.RecipeIngredient entity with id -89 exists!",
+                exception.getMessage());
+    }
+
+    @Test
+    void execute() throws UserServiceException {
+        final var instructionGroup = InstructionGroupDigest.builder()
+                .withInstructionGroupNumber(1)
+                .withInstructions(List.of(step1, step2)).build();
+        final var recipe = RecipeDigest.builder()
+                .withName(NAME)
+                .withSeason(SeasonType.SPRING)
+                .withIntroduction(INTRODUCTION)
+                .withPrepTimeMin(5)
+                .withCookTimeMin(15)
+                .withServingQty(4)
+                .withServingUnit("serving")
+                .withInstructionGroups(List.of(instructionGroup))
+                .build();
+
+        createRecipe(recipe);
+
+        final var dbInstructionGroup = Iterables.getOnlyElement(testRecipe.getInstructionGroups());
+        final var recipeGroupId = dbInstructionGroup.getId();
+        assertNotNull(recipeGroupId);
+
+        final var ingredientDigest = IngredientDigest.builder()
                 .withAddedSugars(addedSugars)
                 .withBrandName(brandName)
                 .withBrandNameItemName(brandNameItemName)
@@ -63,145 +170,6 @@ class CreateRecipeIngredientHandlerTest extends AbstractRecipeHandlerTest {
                 .withTransFattyAcid(transFattyAcid)
                 .withVitaminD(vitaminD)
                 .build();
-    }
-
-    @Test
-    void nullParameters() {
-        assertThrows(NullPointerException.class,
-                () -> CreateRecipeIngredientHandler.builder().build().execute());
-    }
-
-    @Test
-    void missingUserId() {
-        final var exception = assertThrows(UserServiceException.class,
-                () -> CreateRecipeIngredientHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withRecipeRepository(recipeRepository)
-                        .withInstructionGroupRepository(instructionGroupRepository)
-                        .withRecipeIngredientRepository(recipeIngredientRepository)
-                        .withRecipeId(-1L)
-                        .withRecipeGroupId(-89L)
-                        .withRequest(ingredientDigest)
-                        .build().execute());
-        assertEquals(UserServiceError.INVALID_PARAMETER, exception.getError());
-    }
-
-    @Test
-    void missingRecipeId() {
-        final var exception = assertThrows(UserServiceException.class,
-                () -> CreateRecipeIngredientHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withRecipeRepository(recipeRepository)
-                        .withInstructionGroupRepository(instructionGroupRepository)
-                        .withRecipeIngredientRepository(recipeIngredientRepository)
-                        .withUserId(-32L)
-                        .withRecipeGroupId(-89L)
-                        .withRequest(ingredientDigest)
-                        .build().execute());
-        assertEquals(UserServiceError.INVALID_PARAMETER, exception.getError());
-    }
-
-    @Test
-    void missingRecipeGroupId() {
-        final var exception = assertThrows(UserServiceException.class,
-                () -> CreateRecipeIngredientHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withRecipeRepository(recipeRepository)
-                        .withInstructionGroupRepository(instructionGroupRepository)
-                        .withRecipeIngredientRepository(recipeIngredientRepository)
-                        .withUserId(-32L)
-                        .withRecipeId(-1L)
-                        .withRequest(ingredientDigest)
-                        .build().execute());
-        assertEquals(UserServiceError.INVALID_PARAMETER, exception.getError());
-    }
-
-    @Test
-    void missingRequest() {
-        final var exception = assertThrows(UserServiceException.class,
-                () -> CreateRecipeIngredientHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withRecipeRepository(recipeRepository)
-                        .withInstructionGroupRepository(instructionGroupRepository)
-                        .withRecipeIngredientRepository(recipeIngredientRepository)
-                        .withUserId(-32L)
-                        .withRecipeId(-1L)
-                        .withRecipeGroupId(-89L)
-                        .build().execute());
-        assertEquals(UserServiceError.INVALID_PARAMETER, exception.getError());
-    }
-
-    @Test
-    void userNotFound() {
-        final var exception = assertThrows(UserServiceException.class,
-                () -> CreateRecipeIngredientHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withRecipeRepository(recipeRepository)
-                        .withInstructionGroupRepository(instructionGroupRepository)
-                        .withRecipeIngredientRepository(recipeIngredientRepository)
-                        .withUserId(-14L)
-                        .withRecipeId(-1L)
-                        .withRecipeGroupId(-89L)
-                        .withRequest(ingredientDigest)
-                        .build().execute());
-
-        assertEquals(UserServiceError.USER_NOT_FOUND, exception.getError());
-    }
-
-    @Test
-    void recipeGroupNotFound() throws UserServiceException {
-        final var instructionGroup = InstructionGroupDigest.builder()
-                .withInstructionGroupNumber(1)
-                .withInstructions(List.of(step1, step2)).build();
-        final var recipe = RecipeDigest.builder()
-                .withName(NAME)
-                .withSeason(SeasonType.SPRING)
-                .withIntroduction(INTRODUCTION)
-                .withPrepTimeMin(5)
-                .withCookTimeMin(15)
-                .withServingQty(4)
-                .withServingUnit("serving")
-                .withInstructionGroups(List.of(instructionGroup))
-                .build();
-
-        createRecipe(recipe);
-
-        final var exception = assertThrows(UserServiceException.class,
-                () -> CreateRecipeIngredientHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withRecipeRepository(recipeRepository)
-                        .withInstructionGroupRepository(instructionGroupRepository)
-                        .withRecipeIngredientRepository(recipeIngredientRepository)
-                        .withUserId(userId)
-                        .withRecipeId(testRecipe.getId())
-                        .withRecipeGroupId(-89L)
-                        .withRequest(ingredientDigest)
-                        .build().execute());
-
-        assertEquals(UserServiceError.RECIPE_GROUP_NOT_FOUND, exception.getError());
-    }
-
-    @Test
-    void execute() throws UserServiceException {
-        final var instructionGroup = InstructionGroupDigest.builder()
-                .withInstructionGroupNumber(1)
-                .withInstructions(List.of(step1, step2)).build();
-        final var recipe = RecipeDigest.builder()
-                .withName(NAME)
-                .withSeason(SeasonType.SPRING)
-                .withIntroduction(INTRODUCTION)
-                .withPrepTimeMin(5)
-                .withCookTimeMin(15)
-                .withServingQty(4)
-                .withServingUnit("serving")
-                .withInstructionGroups(List.of(instructionGroup))
-                .build();
-
-        createRecipe(recipe);
-
-        final var dbInstructionGroup = Iterables.getOnlyElement(testRecipe.getInstructionGroups());
-        final var recipeGroupId = dbInstructionGroup.getId();
-        assertNotNull(recipeGroupId);
 
         final var response = CreateRecipeIngredientHandler.builder()
                 .withUserRepository(userRepository)
@@ -215,10 +183,32 @@ class CreateRecipeIngredientHandlerTest extends AbstractRecipeHandlerTest {
                 .build().execute();
         assertNotNull(response);
 
-        ingredientDigest.setId(response.getId());
-        ingredientDigest.setRecipeId(testRecipe.getId());
-        ingredientDigest.setInstructionGroupId(recipeGroupId);
 
-        assertEquals(ingredientDigest, response);
+        var recipeDigest = GetRecipeHandler.builder()
+                .withRecipeRepository(recipeRepository)
+                .withInstructionGroupRepository(instructionGroupRepository)
+                .withRecipeIngredientRepository(recipeIngredientRepository)
+                .withRecipeId(testRecipe.getId())
+                .build().execute();
+
+        assertEquals(1, recipeDigest.getInstructionGroups().get(0).getIngredients().size());
+
+        DeleteRecipeIngredientHandler.builder()
+                .withUserRepository(userRepository)
+                .withRecipeRepository(recipeRepository)
+                .withRecipeIngredientRepository(recipeIngredientRepository)
+                .withUserId(userId)
+                .withRecipeId(testRecipe.getId())
+                .withIngredientId(response.getId())
+                .build().execute();
+
+        recipeDigest = GetRecipeHandler.builder()
+                .withRecipeRepository(recipeRepository)
+                .withInstructionGroupRepository(instructionGroupRepository)
+                .withRecipeIngredientRepository(recipeIngredientRepository)
+                .withRecipeId(testRecipe.getId())
+                .build().execute();
+
+        assertEquals(0, recipeDigest.getInstructionGroups().get(0).getIngredients().size());
     }
 }
