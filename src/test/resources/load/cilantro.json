@@ -1,42 +1,42 @@
 {
   "foods": [
     {
-      "food_name": "chopped cilantro",
+      "food_name": "cilantro",
       "brand_name": null,
-      "serving_qty": 1,
+      "serving_qty": 0.5,
       "serving_unit": "cup",
-      "serving_weight_grams": 16,
-      "nf_calories": 3.68,
-      "nf_total_fat": 0.08,
+      "serving_weight_grams": 8,
+      "nf_calories": 1.84,
+      "nf_total_fat": 0.04,
       "nf_saturated_fat": 0,
       "nf_cholesterol": 0,
-      "nf_sodium": 7.36,
-      "nf_total_carbohydrate": 0.59,
-      "nf_dietary_fiber": 0.45,
-      "nf_sugars": 0.14,
-      "nf_protein": 0.34,
-      "nf_potassium": 83.36,
-      "nf_p": 7.68,
+      "nf_sodium": 3.68,
+      "nf_total_carbohydrate": 0.29,
+      "nf_dietary_fiber": 0.22,
+      "nf_sugars": 0.07,
+      "nf_protein": 0.17,
+      "nf_potassium": 41.68,
+      "nf_p": 3.84,
       "full_nutrients": [
         {
           "attr_id": 203,
-          "value": 0.3408
+          "value": 0.1704
         },
         {
           "attr_id": 204,
-          "value": 0.0832
+          "value": 0.0416
         },
         {
           "attr_id": 205,
-          "value": 0.5872
+          "value": 0.2936
         },
         {
           "attr_id": 207,
-          "value": 0.2352
+          "value": 0.1176
         },
         {
           "attr_id": 208,
-          "value": 3.68
+          "value": 1.84
         },
         {
           "attr_id": 221,
@@ -44,7 +44,7 @@
         },
         {
           "attr_id": 255,
-          "value": 14.7536
+          "value": 7.3768
         },
         {
           "attr_id": 262,
@@ -56,59 +56,59 @@
         },
         {
           "attr_id": 268,
-          "value": 15.2
+          "value": 7.6
         },
         {
           "attr_id": 269,
-          "value": 0.1392
+          "value": 0.0696
         },
         {
           "attr_id": 291,
-          "value": 0.448
+          "value": 0.224
         },
         {
           "attr_id": 301,
-          "value": 10.72
+          "value": 5.36
         },
         {
           "attr_id": 303,
-          "value": 0.2832
+          "value": 0.1416
         },
         {
           "attr_id": 304,
-          "value": 4.16
+          "value": 2.08
         },
         {
           "attr_id": 305,
-          "value": 7.68
+          "value": 3.84
         },
         {
           "attr_id": 306,
-          "value": 83.36
+          "value": 41.68
         },
         {
           "attr_id": 307,
-          "value": 7.36
+          "value": 3.68
         },
         {
           "attr_id": 309,
-          "value": 0.08
+          "value": 0.04
         },
         {
           "attr_id": 312,
-          "value": 0.036
+          "value": 0.018
         },
         {
           "attr_id": 315,
-          "value": 0.0682
+          "value": 0.0341
         },
         {
           "attr_id": 317,
-          "value": 0.144
+          "value": 0.072
         },
         {
           "attr_id": 318,
-          "value": 1079.68
+          "value": 539.84
         },
         {
           "attr_id": 319,
@@ -116,19 +116,19 @@
         },
         {
           "attr_id": 320,
-          "value": 53.92
+          "value": 26.96
         },
         {
           "attr_id": 321,
-          "value": 628.8
+          "value": 314.4
         },
         {
           "attr_id": 322,
-          "value": 5.76
+          "value": 2.88
         },
         {
           "attr_id": 323,
-          "value": 0.4
+          "value": 0.2
         },
         {
           "attr_id": 324,
@@ -140,7 +140,7 @@
         },
         {
           "attr_id": 334,
-          "value": 32.32
+          "value": 16.16
         },
         {
           "attr_id": 337,
@@ -148,35 +148,35 @@
         },
         {
           "attr_id": 338,
-          "value": 138.4
+          "value": 69.2
         },
         {
           "attr_id": 401,
-          "value": 4.32
+          "value": 2.16
         },
         {
           "attr_id": 404,
-          "value": 0.0107
+          "value": 0.0054
         },
         {
           "attr_id": 405,
-          "value": 0.0259
+          "value": 0.013
         },
         {
           "attr_id": 406,
-          "value": 0.1782
+          "value": 0.0891
         },
         {
           "attr_id": 410,
-          "value": 0.0912
+          "value": 0.0456
         },
         {
           "attr_id": 415,
-          "value": 0.0238
+          "value": 0.0119
         },
         {
           "attr_id": 417,
-          "value": 9.92
+          "value": 4.96
         },
         {
           "attr_id": 418,
@@ -184,11 +184,11 @@
         },
         {
           "attr_id": 421,
-          "value": 2.048
+          "value": 1.024
         },
         {
           "attr_id": 430,
-          "value": 49.6
+          "value": 24.8
         },
         {
           "attr_id": 431,
@@ -196,11 +196,11 @@
         },
         {
           "attr_id": 432,
-          "value": 9.92
+          "value": 4.96
         },
         {
           "attr_id": 435,
-          "value": 9.92
+          "value": 4.96
         },
         {
           "attr_id": 601,
@@ -212,7 +212,7 @@
         },
         {
           "attr_id": 606,
-          "value": 0.0022
+          "value": 0.0011
         },
         {
           "attr_id": 607,
@@ -240,19 +240,19 @@
         },
         {
           "attr_id": 613,
-          "value": 0.0019
+          "value": 0.001
         },
         {
           "attr_id": 614,
-          "value": 0.0002
+          "value": 0.0001
         },
         {
           "attr_id": 617,
-          "value": 0.0437
+          "value": 0.0218
         },
         {
           "attr_id": 618,
-          "value": 0.0064
+          "value": 0.0032
         },
         {
           "attr_id": 619,
@@ -268,7 +268,7 @@
         },
         {
           "attr_id": 626,
-          "value": 0.0003
+          "value": 0.0002
         },
         {
           "attr_id": 627,
@@ -292,11 +292,11 @@
         },
         {
           "attr_id": 636,
-          "value": 0.8
+          "value": 0.4
         },
         {
           "attr_id": 638,
-          "value": 0.48
+          "value": 0.24
         },
         {
           "attr_id": 639,
@@ -304,15 +304,15 @@
         },
         {
           "attr_id": 641,
-          "value": 0.32
+          "value": 0.16
         },
         {
           "attr_id": 645,
-          "value": 0.044
+          "value": 0.022
         },
         {
           "attr_id": 646,
-          "value": 0.0064
+          "value": 0.0032
         }
       ],
       "nix_brand_name": null,
@@ -320,7 +320,7 @@
       "nix_item_name": null,
       "nix_item_id": null,
       "upc": null,
-      "consumed_at": "2023-06-30T06:18:58+00:00",
+      "consumed_at": "2023-06-30T15:05:50+00:00",
       "metadata": {
         "is_raw_food": false
       },
@@ -329,7 +329,7 @@
       "tags": {
         "item": "cilantro",
         "measure": "cup",
-        "quantity": "1.0",
+        "quantity": "0.5",
         "food_group": 4,
         "tag_id": 480
       },
@@ -385,7 +385,7 @@
       ],
       "lat": null,
       "lng": null,
-      "meal_type": 5,
+      "meal_type": 3,
       "photo": {
         "thumb": "https://nix-tag-images.s3.amazonaws.com/480_thumb.jpg",
         "highres": "https://nix-tag-images.s3.amazonaws.com/480_highres.jpg",

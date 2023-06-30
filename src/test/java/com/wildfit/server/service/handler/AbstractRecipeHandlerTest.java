@@ -1,5 +1,7 @@
 package com.wildfit.server.service.handler;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.time.LocalDate;
 
 import com.wildfit.server.domain.InstructionDigest;
@@ -59,16 +61,16 @@ public class AbstractRecipeHandlerTest extends AbstractHandlerTest {
     void setUp() {
         final var users = userRepository.findByEmail(EMAIL);
 
-        if (CollectionUtils.isEmpty(users)) {
-            final var user = User.builder()
-                    .withStatus(UserStatus.FREE.getCode())
-                    .withCreateDate(LocalDate.now())
-                    .withPassword(PASSWORD)
-                    .withEmail(EMAIL).build();
-            final var dbUser = userRepository.save(user);
+        assertTrue(CollectionUtils.isEmpty(users));
 
-            userId = dbUser.getId();
-        }
+        final var user = User.builder()
+                .withStatus(UserStatus.FREE.getCode())
+                .withCreateDate(LocalDate.now())
+                .withPassword("encoded password")
+                .withEmail(EMAIL).build();
+        final var dbUser = userRepository.save(user);
+
+        userId = dbUser.getId();
     }
 
     @AfterEach

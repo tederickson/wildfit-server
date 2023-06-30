@@ -21,8 +21,7 @@ import org.springframework.util.CollectionUtils;
 public abstract class CommonRecipe {
     protected static Long userId;
 
-    protected static final String PASSWORD = "Super2023!";
-    protected static final String EMAIL = "tederickson35@gmail.com";
+    protected static final String EMAIL = "wildfit@wildfit.prototype.com";
 
     @Autowired
     protected UserRepository userRepository;
@@ -41,11 +40,13 @@ public abstract class CommonRecipe {
             final var user = User.builder()
                     .withStatus(UserStatus.FREE.getCode())
                     .withCreateDate(LocalDate.now())
-                    .withPassword(PASSWORD)
+                    .withPassword("encoded password")
                     .withEmail(EMAIL).build();
             final var dbUser = userRepository.save(user);
 
             userId = dbUser.getId();
+        } else {
+            userId = users.get(0).getId();
         }
     }
 
@@ -56,6 +57,16 @@ public abstract class CommonRecipe {
 
             return mapper.readValue(in, FoodItems.class);
         }
+    }
+
+    protected void addIngredient(long dbRecipeId, Long dbRecipeGroupId, FoodItemDigest foodItemDigest,
+                                 Integer ingredientServingQty,
+                                 String ingredientServingUnit) throws UserServiceException {
+        addIngredient(dbRecipeId,
+                dbRecipeGroupId,
+                foodItemDigest,
+                ingredientServingQty.floatValue(),
+                ingredientServingUnit);
     }
 
     protected void addIngredient(long dbRecipeId, Long dbRecipeGroupId, FoodItemDigest foodItemDigest,
