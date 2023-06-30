@@ -61,17 +61,20 @@ public abstract class CommonRecipe {
 
     protected void addIngredient(long dbRecipeId, Long dbRecipeGroupId, FoodItemDigest foodItemDigest,
                                  Integer ingredientServingQty,
-                                 String ingredientServingUnit) throws UserServiceException {
+                                 String ingredientServingUnit,
+                                 String description) throws UserServiceException {
         addIngredient(dbRecipeId,
                 dbRecipeGroupId,
                 foodItemDigest,
                 ingredientServingQty.floatValue(),
-                ingredientServingUnit);
+                ingredientServingUnit,
+                description);
     }
 
     protected void addIngredient(long dbRecipeId, Long dbRecipeGroupId, FoodItemDigest foodItemDigest,
                                  Float ingredientServingQty,
-                                 String ingredientServingUnit) throws UserServiceException {
+                                 String ingredientServingUnit,
+                                 String description) throws UserServiceException {
         CreateRecipeIngredientHandler.builder()
                 .withUserRepository(userRepository)
                 .withRecipeRepository(recipeRepository)
@@ -81,6 +84,7 @@ public abstract class CommonRecipe {
                 .withRecipeId(dbRecipeId)
                 .withRecipeGroupId(dbRecipeGroupId)
                 .withRequest(IngredientDigestMapper.create(foodItemDigest,
+                        description,
                         ingredientServingQty,
                         ingredientServingUnit))
                 .build().execute();

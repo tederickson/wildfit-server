@@ -68,7 +68,8 @@ class CreateRecipeHandlerTest extends AbstractRecipeHandlerTest {
                 .withUserId(userId)
                 .withRecipeId(dbRecipeId)
                 .withRecipeGroupId(dbRecipeGroupId)
-                .withRequest(IngredientDigestMapper.create(foodItemDigest, 2f, "tsp"))
+                .withRequest(IngredientDigestMapper.create(foodItemDigest,
+                        "2 tsp neutral-flavored oil like coconut, avocado or walnut", 2f, "tsp"))
                 .build().execute();
         assertNotNull(ingredient);
         assertEquals("coconut oil", ingredient.getFoodName());
@@ -84,7 +85,8 @@ class CreateRecipeHandlerTest extends AbstractRecipeHandlerTest {
                 .withUserId(userId)
                 .withRecipeId(dbRecipeId)
                 .withRecipeGroupId(dbRecipeGroupId)
-                .withRequest(IngredientDigestMapper.create(foodItemDigest, 0.25f, "cup"))
+                .withRequest(IngredientDigestMapper.create(foodItemDigest,
+                        "1/2 cup chopped cilantro", 0.25f, "cup"))
                 .build().execute();
         assertNotNull(ingredient);
         assertEquals("cilantro", ingredient.getFoodName());

@@ -8,11 +8,13 @@ public class IngredientDigestMapper {
     }
 
     public static IngredientDigest create(FoodItemDigest foodItemDigest,
+                                          String description,
                                           Float ingredientServingQty,
                                           String ingredientServingUnit) {
         return IngredientDigest.builder()
                 .withIngredientServingQty(ingredientServingQty)
                 .withIngredientServingUnit(ingredientServingUnit)
+                .withDescription(description)
 
                 .withAddedSugars(foodItemDigest.getAddedSugars())
                 .withBrandName(foodItemDigest.getBrandName())

@@ -17,6 +17,7 @@ public class RecipeIngredientMapper {
                 .withCalcium(recipeIngredient.getCalcium())
                 .withCalories(recipeIngredient.getCalories())
                 .withCholesterol(recipeIngredient.getCholesterol())
+                .withDescription(recipeIngredient.getDescription())
                 .withDietaryFiber(recipeIngredient.getDietaryFiber())
                 .withFoodName(recipeIngredient.getFoodName())
                 .withId(recipeIngredient.getId())
@@ -55,6 +56,7 @@ public class RecipeIngredientMapper {
                 .withCalcium(ingredientDigest.getCalcium())
                 .withCalories(ingredientDigest.getCalories())
                 .withCholesterol(ingredientDigest.getCholesterol())
+                .withDescription(ingredientDigest.getDescription())
                 .withDietaryFiber(ingredientDigest.getDietaryFiber())
                 .withFoodName(ingredientDigest.getFoodName())
                 // .withId(ingredientDigest.getId())
@@ -92,6 +94,7 @@ public class RecipeIngredientMapper {
         recipeIngredient.setCalcium(ingredientDigest.getCalcium());
         recipeIngredient.setCalories(ingredientDigest.getCalories());
         recipeIngredient.setCholesterol(ingredientDigest.getCholesterol());
+        recipeIngredient.setDescription(ingredientDigest.getDescription());
         recipeIngredient.setDietaryFiber(ingredientDigest.getDietaryFiber());
         recipeIngredient.setFoodName(ingredientDigest.getFoodName());
         // recipeIngredient.setId(ingredientDigest.getId())
@@ -122,5 +125,4 @@ public class RecipeIngredientMapper {
 
         return recipeIngredient;
     }
-
 }

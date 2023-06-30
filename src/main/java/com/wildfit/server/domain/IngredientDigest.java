@@ -15,6 +15,7 @@ public final class IngredientDigest {
     private long instructionGroupId;
 
     private String foodName;
+    private String description;
     private String brandName;
     private String brandNameItemName;
     private Float servingQty;

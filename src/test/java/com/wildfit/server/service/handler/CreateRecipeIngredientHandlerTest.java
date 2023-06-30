@@ -23,6 +23,7 @@ class CreateRecipeIngredientHandlerTest extends AbstractRecipeHandlerTest {
     static final String NAME = "CreateRecipeIngredientHandlerTest";
 
     static final String foodName = "Butter, Pure Irish, Unsalted";
+    static final String description = "1-2 teaspoons Kerrygold unsalted butter";
     static final String brandName = "Kerrygold";
     static final String brandNameItemName = "Pasteurized Cream, Skimmed Milk, Cultures.";
     static final Float servingQty = 1f;
@@ -67,6 +68,7 @@ class CreateRecipeIngredientHandlerTest extends AbstractRecipeHandlerTest {
                 .withCalcium(calcium)
                 .withCalories(calories)
                 .withCholesterol(cholesterol)
+                .withDescription(description)
                 .withDietaryFiber(dietaryFiber)
                 .withFoodName(foodName)
 

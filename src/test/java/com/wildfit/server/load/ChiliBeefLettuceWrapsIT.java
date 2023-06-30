@@ -92,43 +92,53 @@ class ChiliBeefLettuceWrapsIT extends CommonRecipe {
 
             var foodItems = getFoodItems("load/coconut_oil.json");
             var foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
-            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 2, "tsp");
+            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 2, "tsp",
+                    "2 tsp neutral-flavored oil like coconut, avocado or walnut");
 
             foodItems = getFoodItems("load/lean_ground_beef.json");
             foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
-            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 1, "lb");
+            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 1, "lb",
+                    "1 lb lean ground beef");
 
             foodItems = getFoodItems("load/fish_sauce.json");
             foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
-            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 1, "tbsp");
+            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 1, "tbsp",
+                    "1 tbsp fish sauce");
 
             foodItems = getFoodItems("load/chili_sauce.json");
             foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
-            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 2, "tbsp");
+            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 2, "tbsp",
+                    "1-2 tbsp chili sauce (depending on how much heat you want)");
 
             foodItems = getFoodItems("load/water.json");
             foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
-            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 2, "tbsp");
+            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 2, "tbsp",
+                    "2 tbsp water");
 
             foodItems = getFoodItems("load/lime_zest.json");
             foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
-            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 1, "large");
+            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 1, "large",
+                    "Zest from one large lime");
 
             foodItems = getFoodItems("load/lime_juice.json");
             foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
-            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 1, "tbsp");
+            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 1, "tbsp",
+                    "Juice from one large lime (about 1.5 tbsp juice) – leave out for WildFit Spring");
 
             foodItems = getFoodItems("load/green_onion.json");
             foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
-            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 1, "cup");
+            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 1, "cup",
+                    "1/4 cup thinly sliced green onion (or double that amount if you’re not using the cilantro)");
 
             foodItems = getFoodItems("load/cilantro.json");
             foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
-            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 0.5f, "cup");
+            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 0.5f, "cup",
+                    "1/2 cup chopped cilantro");
 
             foodItems = getFoodItems("load/iceberg_lettuce.json");
             foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
-            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 1, "head");
+            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 1, "head",
+                    "1-2 heads iceberg lettuce, washed and cut into cups");
         }
     }
 }

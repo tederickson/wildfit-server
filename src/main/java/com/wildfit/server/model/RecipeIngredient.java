@@ -35,6 +35,7 @@ public class RecipeIngredient {
 
     @Column(name = "food_name")
     private String foodName;
+    private String description;
     @Column(name = "brand_name")
     private String brandName;
     @Column(name = "brand_name_item_name")
