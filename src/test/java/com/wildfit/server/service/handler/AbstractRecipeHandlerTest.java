@@ -46,7 +46,7 @@ public class AbstractRecipeHandlerTest extends AbstractHandlerTest {
     static final String INTRODUCTION = "These lettuce wraps are so easy and full of flavor! " +
             "They make a great side dish, or are perfect for a healthy spring approved recipe.";
 
-    static final String foodName = "Butter, Pure Irish, Unsalted";
+    static final String foodName = "butter, pure irish, unsalted";
     static final String description = "1-2 teaspoons Kerrygold unsalted butter";
     static final String brandName = "Kerrygold";
     static final String brandNameItemName = "Pasteurized Cream, Skimmed Milk, Cultures.";
