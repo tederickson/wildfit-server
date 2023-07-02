@@ -9,9 +9,9 @@ CREATE TABLE recipe_ingredient (
     brand_name      varchar(100),
     brand_name_item_name     varchar(100),
     serving_qty     float,
-    serving_unit    varchar(10),
+    serving_unit    varchar(50),                    -- 'medium with 3 inch diameter, blah, blah
     ingredient_serving_qty  float NOT NULL,
-    ingredient_serving_unit varchar(20) NOT NULL,
+    ingredient_serving_unit varchar(50) NOT NULL,   -- 'medium with 3 inch diameter, blah, blah
     serving_weight_grams    float,
     metric_qty  float,
     metric_uom  varchar(20),
