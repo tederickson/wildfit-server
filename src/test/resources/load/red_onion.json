@@ -1,0 +1,526 @@
+{
+  "foods": [
+    {
+      "food_name": "red onion",
+      "brand_name": null,
+      "serving_qty": 1,
+      "serving_unit": "small",
+      "serving_weight_grams": 60,
+      "nf_calories": 26.4,
+      "nf_total_fat": 0.11,
+      "nf_saturated_fat": 0.02,
+      "nf_cholesterol": 0,
+      "nf_sodium": 1.8,
+      "nf_total_carbohydrate": 6.09,
+      "nf_dietary_fiber": 0.84,
+      "nf_sugars": 2.84,
+      "nf_protein": 0.82,
+      "nf_potassium": 99.6,
+      "nf_p": 21,
+      "full_nutrients": [
+        {
+          "attr_id": 203,
+          "value": 0.816
+        },
+        {
+          "attr_id": 204,
+          "value": 0.114
+        },
+        {
+          "attr_id": 205,
+          "value": 6.09
+        },
+        {
+          "attr_id": 207,
+          "value": 0.264
+        },
+        {
+          "attr_id": 208,
+          "value": 26.4
+        },
+        {
+          "attr_id": 210,
+          "value": 0.66
+        },
+        {
+          "attr_id": 211,
+          "value": 1.314
+        },
+        {
+          "attr_id": 212,
+          "value": 0.864
+        },
+        {
+          "attr_id": 213,
+          "value": 0
+        },
+        {
+          "attr_id": 214,
+          "value": 0
+        },
+        {
+          "attr_id": 221,
+          "value": 0
+        },
+        {
+          "attr_id": 255,
+          "value": 52.716
+        },
+        {
+          "attr_id": 262,
+          "value": 0
+        },
+        {
+          "attr_id": 263,
+          "value": 0
+        },
+        {
+          "attr_id": 268,
+          "value": 110.4
+        },
+        {
+          "attr_id": 269,
+          "value": 2.838
+        },
+        {
+          "attr_id": 287,
+          "value": 0
+        },
+        {
+          "attr_id": 291,
+          "value": 0.84
+        },
+        {
+          "attr_id": 301,
+          "value": 13.2
+        },
+        {
+          "attr_id": 303,
+          "value": 0.144
+        },
+        {
+          "attr_id": 304,
+          "value": 6.6
+        },
+        {
+          "attr_id": 305,
+          "value": 21
+        },
+        {
+          "attr_id": 306,
+          "value": 99.6
+        },
+        {
+          "attr_id": 307,
+          "value": 1.8
+        },
+        {
+          "attr_id": 309,
+          "value": 0.126
+        },
+        {
+          "attr_id": 312,
+          "value": 0.0402
+        },
+        {
+          "attr_id": 315,
+          "value": 0.0918
+        },
+        {
+          "attr_id": 317,
+          "value": 0.36
+        },
+        {
+          "attr_id": 318,
+          "value": 1.2
+        },
+        {
+          "attr_id": 319,
+          "value": 0
+        },
+        {
+          "attr_id": 320,
+          "value": 0
+        },
+        {
+          "attr_id": 321,
+          "value": 0.6
+        },
+        {
+          "attr_id": 322,
+          "value": 0
+        },
+        {
+          "attr_id": 323,
+          "value": 0.012
+        },
+        {
+          "attr_id": 324,
+          "value": 0
+        },
+        {
+          "attr_id": 328,
+          "value": 0
+        },
+        {
+          "attr_id": 334,
+          "value": 0
+        },
+        {
+          "attr_id": 337,
+          "value": 0
+        },
+        {
+          "attr_id": 338,
+          "value": 2.4
+        },
+        {
+          "attr_id": 341,
+          "value": 0
+        },
+        {
+          "attr_id": 342,
+          "value": 0
+        },
+        {
+          "attr_id": 343,
+          "value": 0
+        },
+        {
+          "attr_id": 401,
+          "value": 3.12
+        },
+        {
+          "attr_id": 404,
+          "value": 0.0252
+        },
+        {
+          "attr_id": 405,
+          "value": 0.0138
+        },
+        {
+          "attr_id": 406,
+          "value": 0.099
+        },
+        {
+          "attr_id": 410,
+          "value": 0.0678
+        },
+        {
+          "attr_id": 415,
+          "value": 0.0774
+        },
+        {
+          "attr_id": 417,
+          "value": 9
+        },
+        {
+          "attr_id": 418,
+          "value": 0
+        },
+        {
+          "attr_id": 421,
+          "value": 4.08
+        },
+        {
+          "attr_id": 430,
+          "value": 0.3
+        },
+        {
+          "attr_id": 431,
+          "value": 0
+        },
+        {
+          "attr_id": 432,
+          "value": 9
+        },
+        {
+          "attr_id": 435,
+          "value": 9
+        },
+        {
+          "attr_id": 501,
+          "value": 0.012
+        },
+        {
+          "attr_id": 502,
+          "value": 0.0198
+        },
+        {
+          "attr_id": 503,
+          "value": 0.0288
+        },
+        {
+          "attr_id": 504,
+          "value": 0.0288
+        },
+        {
+          "attr_id": 505,
+          "value": 0.039
+        },
+        {
+          "attr_id": 506,
+          "value": 0.0066
+        },
+        {
+          "attr_id": 507,
+          "value": 0.0144
+        },
+        {
+          "attr_id": 508,
+          "value": 0.021
+        },
+        {
+          "attr_id": 509,
+          "value": 0.0204
+        },
+        {
+          "attr_id": 510,
+          "value": 0.0186
+        },
+        {
+          "attr_id": 511,
+          "value": 0.1098
+        },
+        {
+          "attr_id": 512,
+          "value": 0.0132
+        },
+        {
+          "attr_id": 513,
+          "value": 0.0228
+        },
+        {
+          "attr_id": 514,
+          "value": 0.0444
+        },
+        {
+          "attr_id": 515,
+          "value": 0.132
+        },
+        {
+          "attr_id": 516,
+          "value": 0.0342
+        },
+        {
+          "attr_id": 517,
+          "value": 0.0252
+        },
+        {
+          "attr_id": 518,
+          "value": 0.024
+        },
+        {
+          "attr_id": 601,
+          "value": 0
+        },
+        {
+          "attr_id": 605,
+          "value": 0
+        },
+        {
+          "attr_id": 606,
+          "value": 0.0186
+        },
+        {
+          "attr_id": 607,
+          "value": 0
+        },
+        {
+          "attr_id": 608,
+          "value": 0
+        },
+        {
+          "attr_id": 609,
+          "value": 0
+        },
+        {
+          "attr_id": 610,
+          "value": 0
+        },
+        {
+          "attr_id": 611,
+          "value": 0
+        },
+        {
+          "attr_id": 612,
+          "value": 0.0006
+        },
+        {
+          "attr_id": 613,
+          "value": 0.0168
+        },
+        {
+          "attr_id": 614,
+          "value": 0.0012
+        },
+        {
+          "attr_id": 617,
+          "value": 0.0162
+        },
+        {
+          "attr_id": 618,
+          "value": 0.042
+        },
+        {
+          "attr_id": 619,
+          "value": 0.0024
+        },
+        {
+          "attr_id": 620,
+          "value": 0
+        },
+        {
+          "attr_id": 621,
+          "value": 0
+        },
+        {
+          "attr_id": 626,
+          "value": 0
+        },
+        {
+          "attr_id": 627,
+          "value": 0
+        },
+        {
+          "attr_id": 628,
+          "value": 0
+        },
+        {
+          "attr_id": 629,
+          "value": 0
+        },
+        {
+          "attr_id": 630,
+          "value": 0
+        },
+        {
+          "attr_id": 631,
+          "value": 0
+        },
+        {
+          "attr_id": 636,
+          "value": 10.8
+        },
+        {
+          "attr_id": 645,
+          "value": 0.0162
+        },
+        {
+          "attr_id": 646,
+          "value": 0.0438
+        }
+      ],
+      "nix_brand_name": null,
+      "nix_brand_id": null,
+      "nix_item_name": null,
+      "nix_item_id": null,
+      "upc": null,
+      "consumed_at": "2023-07-02T06:52:02+00:00",
+      "metadata": {
+        "is_raw_food": false
+      },
+      "source": 1,
+      "ndb_no": 11283,
+      "tags": {
+        "item": "red onion",
+        "measure": "small",
+        "quantity": null,
+        "food_group": 4,
+        "tag_id": 8573
+      },
+      "alt_measures": [
+        {
+          "serving_weight": 8,
+          "measure": "slice, thin",
+          "seq": 8,
+          "qty": 1
+        },
+        {
+          "serving_weight": 60,
+          "measure": "small",
+          "seq": 7,
+          "qty": 1
+        },
+        {
+          "serving_weight": 12,
+          "measure": "slice, medium (1/8\" thick)",
+          "seq": 6,
+          "qty": 1
+        },
+        {
+          "serving_weight": 94,
+          "measure": "medium",
+          "seq": 5,
+          "qty": 1
+        },
+        {
+          "serving_weight": 32,
+          "measure": "slice, large (1/4\" thick)",
+          "seq": 4,
+          "qty": 1
+        },
+        {
+          "serving_weight": 128,
+          "measure": "large",
+          "seq": 3,
+          "qty": 1
+        },
+        {
+          "serving_weight": 15,
+          "measure": "tbsp chopped",
+          "seq": 2,
+          "qty": 1
+        },
+        {
+          "serving_weight": 210,
+          "measure": "cup",
+          "seq": 1,
+          "qty": 1
+        },
+        {
+          "serving_weight": 240,
+          "measure": "cup, chopped",
+          "seq": 80,
+          "qty": 1
+        },
+        {
+          "serving_weight": 100,
+          "measure": "g",
+          "seq": null,
+          "qty": 100
+        },
+        {
+          "serving_weight": 28.3495,
+          "measure": "wt. oz",
+          "seq": null,
+          "qty": 1
+        },
+        {
+          "serving_weight": 4.38,
+          "measure": "tsp",
+          "seq": 101,
+          "qty": 1
+        },
+        {
+          "serving_weight": 13.13,
+          "measure": "tbsp",
+          "seq": 102,
+          "qty": 1
+        }
+      ],
+      "lat": null,
+      "lng": null,
+      "meal_type": 5,
+      "photo": {
+        "thumb": "https://nix-tag-images.s3.amazonaws.com/8573_thumb.jpg",
+        "highres": "https://nix-tag-images.s3.amazonaws.com/8573_highres.jpg",
+        "is_user_uploaded": false
+      },
+      "sub_recipe": null,
+      "class_code": null,
+      "brick_code": null,
+      "tag_id": null
+    }
+  ]
+}
