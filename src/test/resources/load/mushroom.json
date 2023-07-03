@@ -1,0 +1,458 @@
+{
+  "foods": [
+    {
+      "food_name": "mushroom",
+      "brand_name": null,
+      "serving_qty": 100,
+      "serving_unit": "g",
+      "serving_weight_grams": 100,
+      "nf_calories": 28,
+      "nf_total_fat": 0.47,
+      "nf_saturated_fat": 0.06,
+      "nf_cholesterol": 0,
+      "nf_sodium": 2,
+      "nf_total_carbohydrate": 5.29,
+      "nf_dietary_fiber": 2.2,
+      "nf_sugars": 2.34,
+      "nf_protein": 2.17,
+      "nf_potassium": 356,
+      "nf_p": 87,
+      "full_nutrients": [
+        {
+          "attr_id": 203,
+          "value": 2.17
+        },
+        {
+          "attr_id": 204,
+          "value": 0.47
+        },
+        {
+          "attr_id": 205,
+          "value": 5.29
+        },
+        {
+          "attr_id": 207,
+          "value": 0.99
+        },
+        {
+          "attr_id": 208,
+          "value": 28
+        },
+        {
+          "attr_id": 221,
+          "value": 0
+        },
+        {
+          "attr_id": 255,
+          "value": 91.08
+        },
+        {
+          "attr_id": 262,
+          "value": 0
+        },
+        {
+          "attr_id": 263,
+          "value": 0
+        },
+        {
+          "attr_id": 268,
+          "value": 117
+        },
+        {
+          "attr_id": 269,
+          "value": 2.34
+        },
+        {
+          "attr_id": 291,
+          "value": 2.2
+        },
+        {
+          "attr_id": 301,
+          "value": 6
+        },
+        {
+          "attr_id": 303,
+          "value": 1.74
+        },
+        {
+          "attr_id": 304,
+          "value": 12
+        },
+        {
+          "attr_id": 305,
+          "value": 87
+        },
+        {
+          "attr_id": 306,
+          "value": 356
+        },
+        {
+          "attr_id": 307,
+          "value": 2
+        },
+        {
+          "attr_id": 309,
+          "value": 0.87
+        },
+        {
+          "attr_id": 312,
+          "value": 0.504
+        },
+        {
+          "attr_id": 315,
+          "value": 0.115
+        },
+        {
+          "attr_id": 317,
+          "value": 11.9
+        },
+        {
+          "attr_id": 318,
+          "value": 0
+        },
+        {
+          "attr_id": 319,
+          "value": 0
+        },
+        {
+          "attr_id": 320,
+          "value": 0
+        },
+        {
+          "attr_id": 321,
+          "value": 0
+        },
+        {
+          "attr_id": 322,
+          "value": 0
+        },
+        {
+          "attr_id": 323,
+          "value": 0.01
+        },
+        {
+          "attr_id": 324,
+          "value": 8
+        },
+        {
+          "attr_id": 325,
+          "value": 0.2
+        },
+        {
+          "attr_id": 326,
+          "value": 0
+        },
+        {
+          "attr_id": 328,
+          "value": 0.2
+        },
+        {
+          "attr_id": 334,
+          "value": 0
+        },
+        {
+          "attr_id": 337,
+          "value": 0
+        },
+        {
+          "attr_id": 338,
+          "value": 0
+        },
+        {
+          "attr_id": 401,
+          "value": 4
+        },
+        {
+          "attr_id": 404,
+          "value": 0.073
+        },
+        {
+          "attr_id": 405,
+          "value": 0.3
+        },
+        {
+          "attr_id": 406,
+          "value": 4.46
+        },
+        {
+          "attr_id": 410,
+          "value": 2.16
+        },
+        {
+          "attr_id": 415,
+          "value": 0.095
+        },
+        {
+          "attr_id": 417,
+          "value": 18
+        },
+        {
+          "attr_id": 418,
+          "value": 0
+        },
+        {
+          "attr_id": 421,
+          "value": 20.4
+        },
+        {
+          "attr_id": 430,
+          "value": 0
+        },
+        {
+          "attr_id": 431,
+          "value": 0
+        },
+        {
+          "attr_id": 432,
+          "value": 18
+        },
+        {
+          "attr_id": 435,
+          "value": 18
+        },
+        {
+          "attr_id": 501,
+          "value": 0.024
+        },
+        {
+          "attr_id": 502,
+          "value": 0.075
+        },
+        {
+          "attr_id": 503,
+          "value": 0.053
+        },
+        {
+          "attr_id": 504,
+          "value": 0.084
+        },
+        {
+          "attr_id": 505,
+          "value": 0.075
+        },
+        {
+          "attr_id": 506,
+          "value": 0.022
+        },
+        {
+          "attr_id": 507,
+          "value": 0.009
+        },
+        {
+          "attr_id": 508,
+          "value": 0.06
+        },
+        {
+          "attr_id": 509,
+          "value": 0.031
+        },
+        {
+          "attr_id": 510,
+          "value": 0.163
+        },
+        {
+          "attr_id": 511,
+          "value": 0.055
+        },
+        {
+          "attr_id": 512,
+          "value": 0.04
+        },
+        {
+          "attr_id": 513,
+          "value": 0.14
+        },
+        {
+          "attr_id": 514,
+          "value": 0.137
+        },
+        {
+          "attr_id": 515,
+          "value": 0.24
+        },
+        {
+          "attr_id": 516,
+          "value": 0.064
+        },
+        {
+          "attr_id": 517,
+          "value": 0.053
+        },
+        {
+          "attr_id": 518,
+          "value": 0.066
+        },
+        {
+          "attr_id": 601,
+          "value": 0
+        },
+        {
+          "attr_id": 605,
+          "value": 0
+        },
+        {
+          "attr_id": 606,
+          "value": 0.061
+        },
+        {
+          "attr_id": 607,
+          "value": 0
+        },
+        {
+          "attr_id": 608,
+          "value": 0
+        },
+        {
+          "attr_id": 609,
+          "value": 0
+        },
+        {
+          "attr_id": 610,
+          "value": 0.001
+        },
+        {
+          "attr_id": 611,
+          "value": 0.005
+        },
+        {
+          "attr_id": 612,
+          "value": 0.002
+        },
+        {
+          "attr_id": 613,
+          "value": 0.03
+        },
+        {
+          "attr_id": 614,
+          "value": 0.01
+        },
+        {
+          "attr_id": 617,
+          "value": 0.007
+        },
+        {
+          "attr_id": 618,
+          "value": 0.179
+        },
+        {
+          "attr_id": 619,
+          "value": 0.001
+        },
+        {
+          "attr_id": 620,
+          "value": 0
+        },
+        {
+          "attr_id": 621,
+          "value": 0
+        },
+        {
+          "attr_id": 626,
+          "value": 0
+        },
+        {
+          "attr_id": 627,
+          "value": 0
+        },
+        {
+          "attr_id": 628,
+          "value": 0
+        },
+        {
+          "attr_id": 629,
+          "value": 0
+        },
+        {
+          "attr_id": 630,
+          "value": 0
+        },
+        {
+          "attr_id": 631,
+          "value": 0
+        },
+        {
+          "attr_id": 645,
+          "value": 0.008
+        },
+        {
+          "attr_id": 646,
+          "value": 0.183
+        }
+      ],
+      "nix_brand_name": null,
+      "nix_brand_id": null,
+      "nix_item_name": null,
+      "nix_item_id": null,
+      "upc": null,
+      "consumed_at": "2023-07-03T17:17:37+00:00",
+      "metadata": {
+        "is_raw_food": false
+      },
+      "source": 1,
+      "ndb_no": 11261,
+      "tags": {
+        "item": "mushroom",
+        "measure": "g",
+        "quantity": "100.0",
+        "food_group": 4,
+        "tag_id": 148
+      },
+      "alt_measures": [
+        {
+          "serving_weight": 12,
+          "measure": "mushroom",
+          "seq": 3,
+          "qty": 1
+        },
+        {
+          "serving_weight": 9.8,
+          "measure": "tbsp",
+          "seq": 2,
+          "qty": 1
+        },
+        {
+          "serving_weight": 156,
+          "measure": "cup pieces",
+          "seq": 1,
+          "qty": 1
+        },
+        {
+          "serving_weight": 100,
+          "measure": "g",
+          "seq": null,
+          "qty": 100
+        },
+        {
+          "serving_weight": 28.3495,
+          "measure": "wt. oz",
+          "seq": null,
+          "qty": 1
+        },
+        {
+          "serving_weight": 156.8,
+          "measure": "cup",
+          "seq": 100,
+          "qty": 1
+        },
+        {
+          "serving_weight": 3.27,
+          "measure": "tsp",
+          "seq": 101,
+          "qty": 1
+        }
+      ],
+      "lat": null,
+      "lng": null,
+      "meal_type": 3,
+      "photo": {
+        "thumb": "https://nix-tag-images.s3.amazonaws.com/148_thumb.jpg",
+        "highres": "https://nix-tag-images.s3.amazonaws.com/148_highres.jpg",
+        "is_user_uploaded": false
+      },
+      "sub_recipe": null,
+      "class_code": null,
+      "brick_code": null,
+      "tag_id": null
+    }
+  ]
+}
