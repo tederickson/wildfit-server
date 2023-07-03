@@ -16,5 +16,6 @@ public class SearchedFoodItem {
     private String nix_brand_id; //  51db37b7176fe9790a8989b4,
     private String nix_item_id; //  52a15041d122497b50000a75,
     private Photo photo;
+    private String tag_id;
     private Nutrient[] full_nutrients;
 }

@@ -1,7 +1,10 @@
 package com.wildfit.server.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 import com.wildfit.server.domain.FoodItemDigest;
 import com.wildfit.server.domain.SearchFoodResponse;
@@ -117,20 +120,47 @@ public class NutritionixServiceImpl implements NutritionixService {
             if (response == null) {
                 throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
             }
+
+            // How do I filter out duplicate common foods from the /search/instant endpoint?
+            // To provide the best experience to the end user, it is recommended to filter common food results
+            // on “tag_id”. Common foods with the same tag_id have identical nutrition
+            // (ex. “Blackberry” and “Blackberries”).
+            // For best results, filter the results to show only one food per tag_id. Generally, the first one will
+            // be the most relevant based on the user search query.
+            SearchedFoodItem[] common = filterByTagId(response.getCommon());
+            SearchedFoodItem[] branded = response.getBranded();
+
             if (servingUnit == null) {
-                return SearchedFoodItemsMapper.map(response);
+                final var updatedResponse = new SearchedFoodItems();
+                updatedResponse.setCommon(common);
+                updatedResponse.setBranded(branded);
+
+                return SearchedFoodItemsMapper.map(updatedResponse);
             }
 
             final var searchedFoodItems = new SearchedFoodItems();
 
-            searchedFoodItems.setCommon(filter(response.getCommon(), servingUnit));
-            searchedFoodItems.setBranded(filter(response.getBranded(), servingUnit));
+            searchedFoodItems.setCommon(filter(common, servingUnit));
+            searchedFoodItems.setBranded(filter(branded, servingUnit));
             return SearchedFoodItemsMapper.map(searchedFoodItems);
 
         } catch (HttpStatusCodeException e) {
             log.error(url);
             throw new NutritionixException(e.getStatusCode(), e);
         }
+    }
+
+    private SearchedFoodItem[] filterByTagId(SearchedFoodItem[] common) {
+        final var uniqueTags = new ArrayList<SearchedFoodItem>();
+        final Set tagIds = new HashSet<String>();
+
+        for (var foodItem : common) {
+            if (tagIds.add(foodItem.getTag_id())) {
+                uniqueTags.add(foodItem);
+            }
+        }
+
+        return uniqueTags.toArray(new SearchedFoodItem[0]);
     }
 
     private SearchedFoodItem[] filter(SearchedFoodItem[] foodItems, String servingUnit) {
