@@ -43,11 +43,9 @@ class FoodControllerTest {
     @Test
     void getFoodsByQuery() throws UserServiceException, NutritionixException {
         final var description = "blah de blah, blah blah";
-        String servingUnit = null;
+        when(nutritionixService.getFoodsByQuery(any())).thenReturn(new SearchFoodResponse());
 
-        when(nutritionixService.getFoodsByQuery(any(), any())).thenReturn(new SearchFoodResponse());
-
-        final var response = nutritionixService.getFoodsByQuery(description, servingUnit);
+        final var response = nutritionixService.getFoodsByQuery(description);
         assertNotNull(response);
     }
 }

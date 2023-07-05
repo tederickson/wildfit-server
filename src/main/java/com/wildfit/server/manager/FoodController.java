@@ -59,18 +59,16 @@ public class FoodController {
         return nutritionixService.getFoodWithBarcode(barcode);
     }
 
-    @ApiOperation(value = "Get foods by description. You can provide a description of '2 tsp coconut oil' " +
-            "and you can narrow the search by setting serving_unit='tsp'.")
+    @ApiOperation(value = "Get foods by description such as 'coconut oil', 'kerrygold butter'.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Get foods", response = SearchFoodResponse.class)})
     @GetMapping(produces = "application/json")
-    public SearchFoodResponse getFoodsByQuery(@RequestParam(name = "description") String description,
-                                              @RequestParam(name = "serving_unit", required = false) String servingUnit)
+    public SearchFoodResponse getFoodsByQuery(@RequestParam(name = "description") String description)
             throws UserServiceException, NutritionixException {
-        final var logMessage = String.join("|", "getFoodsByQuery", description, servingUnit);
+        final var logMessage = String.join("|", "getFoodsByQuery", description);
         log.info(logMessage);
 
-        return nutritionixService.getFoodsByQuery(description, servingUnit);
+        return nutritionixService.getFoodsByQuery(description);
     }
 
     @ApiOperation(value = "Get recipe nutrition.")
