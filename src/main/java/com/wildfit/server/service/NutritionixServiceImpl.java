@@ -1,10 +1,6 @@
 package com.wildfit.server.service;
 
-import java.util.List;
-
 import com.wildfit.server.domain.FoodItemDigest;
-import com.wildfit.server.domain.InstructionGroupDigest;
-import com.wildfit.server.domain.ParseRecipeRequest;
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.SearchFoodResponse;
 import com.wildfit.server.exception.NutritionixException;
@@ -54,22 +50,11 @@ public class NutritionixServiceImpl implements NutritionixService {
     }
 
     @Override
-    public FoodItemDigest getRecipeNutrition(RecipeDigest recipeDigest) throws UserServiceException, NutritionixException {
-        final var parseRecipeRequest = new ParseRecipeRequest();
-        parseRecipeRequest.setAggregate(recipeDigest.getName());
-        parseRecipeRequest.setNum_servings(recipeDigest.getServingQty());
-
-        recipeDigest.getInstructionGroups().stream()
-                .map(InstructionGroupDigest::getIngredients)
-                .flatMap(List::stream)
-                .forEach((ingredient) -> parseRecipeRequest.addIngredient(
-                        ingredient.getServingQty(),
-                        ingredient.getServingUnit(),
-                        ingredient.getFoodName()));
-
+    public FoodItemDigest getRecipeNutrition(RecipeDigest recipeDigest)
+            throws UserServiceException, NutritionixException {
         return GetRecipeNutritionHandler.builder()
                 .withNutritionixHeaderInfo(nutritionixHeaderInfo)
-                .withParseRecipeRequest(parseRecipeRequest)
+                .withRecipeDigest(recipeDigest)
                 .build().execute();
     }
 

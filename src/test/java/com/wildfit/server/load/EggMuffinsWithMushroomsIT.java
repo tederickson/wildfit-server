@@ -91,13 +91,13 @@ public class EggMuffinsWithMushroomsIT extends CommonRecipe {
 
             foodItems = getFoodItems("load/salt.json");
             foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
-            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 0.25f, "tsp",
-                    "1/4 teaspoon salt (adjust to your preference)");
+            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 0.125f, "tsp",
+                    "1/8 teaspoon salt (adjust to your preference)");
 
             foodItems = getFoodItems("load/pepper.json");
             foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
-            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 0.25f, "tsp",
-                    "1/4 teaspoon pepper (adjust to your preference)");
+            addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 0.125f, "tsp",
+                    "1/8 teaspoon pepper (adjust to your preference)");
 
             foodItems = getFoodItems("load/butter.json");
             foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
