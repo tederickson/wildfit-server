@@ -8,7 +8,7 @@ import com.wildfit.server.repository.InstructionGroupRepository;
 import lombok.experimental.SuperBuilder;
 
 @SuperBuilder(setterPrefix = "with")
-public class DeleteRecipeHandler extends AbstractRecipeHandler {
+public class DeleteRecipeHandler extends CommonRecipeHandler {
     private final InstructionGroupRepository instructionGroupRepository;
 
     private final String season;

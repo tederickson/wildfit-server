@@ -15,7 +15,7 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ChangePasswordHandlerTest extends AbstractHandlerTest {
+class ChangePasswordHandlerTest extends CommonHandlerTest {
 
     private static final Long USER_ID = 1222L;
 

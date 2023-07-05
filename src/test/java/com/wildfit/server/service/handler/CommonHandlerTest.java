@@ -4,7 +4,7 @@ import com.wildfit.server.repository.UserRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class AbstractHandlerTest {
+public class CommonHandlerTest {
     protected static final String PASSWORD = "SuperCaliTest2023!"; // Must be 8 - 20 characters
     protected static final String EMAIL = "tederickson35@gmail.com";
     protected static final String NAME = "Ted Erickson";

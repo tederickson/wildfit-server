@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @SuperBuilder(setterPrefix = "with")
-public class DeleteRecipeIngredientHandler extends AbstractRecipeHandler {
+public class DeleteRecipeIngredientHandler extends CommonRecipeHandler {
     private final RecipeIngredientRepository recipeIngredientRepository;
     private final Long recipeId;
     private final Long ingredientId;

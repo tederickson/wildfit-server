@@ -19,7 +19,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 
-public class AbstractRecipeHandlerTest extends AbstractHandlerTest {
+public class CommonRecipeHandlerTest extends CommonHandlerTest {
     static final InstructionDigest step1 = InstructionDigest.builder().withStepNumber(1)
             .withInstruction("Heat the oil in a heavy frying pan over medium-high heat, then cook the beef " +
                     "until it’s " +

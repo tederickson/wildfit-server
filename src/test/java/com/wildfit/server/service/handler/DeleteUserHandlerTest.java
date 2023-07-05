@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DeleteUserHandlerTest extends AbstractHandlerTest {
+class DeleteUserHandlerTest extends CommonHandlerTest {
 
     @Test
     void nullParameters() {

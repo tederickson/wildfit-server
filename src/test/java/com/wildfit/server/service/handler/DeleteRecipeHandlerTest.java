@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DeleteRecipeHandlerTest extends AbstractRecipeHandlerTest {
+class DeleteRecipeHandlerTest extends CommonRecipeHandlerTest {
     @Test
     void nullParameters() {
         assertThrows(NullPointerException.class,

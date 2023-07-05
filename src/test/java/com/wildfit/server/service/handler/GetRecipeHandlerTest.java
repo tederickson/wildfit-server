@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class GetRecipeHandlerTest extends AbstractRecipeHandlerTest {
+class GetRecipeHandlerTest extends CommonRecipeHandlerTest {
     static final String NAME = "GetRecipeHandlerTest";
 
     @Test

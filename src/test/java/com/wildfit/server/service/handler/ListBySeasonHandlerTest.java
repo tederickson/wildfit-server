@@ -13,7 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 
 @SpringBootTest
-class ListBySeasonHandlerTest extends AbstractRecipeHandlerTest {
+class ListBySeasonHandlerTest extends CommonRecipeHandlerTest {
 
     @Test
     void execute() throws UserServiceException {

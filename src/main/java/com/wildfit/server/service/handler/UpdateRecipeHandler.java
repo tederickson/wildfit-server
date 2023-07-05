@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @SuperBuilder(setterPrefix = "with")
-public class UpdateRecipeHandler extends AbstractRecipeHandler {
+public class UpdateRecipeHandler extends CommonRecipeHandler {
     private final InstructionGroupRepository instructionGroupRepository;
     private final InstructionRepository instructionRepository;
 

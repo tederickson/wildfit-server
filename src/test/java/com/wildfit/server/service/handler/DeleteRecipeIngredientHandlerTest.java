@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DeleteRecipeIngredientHandlerTest extends AbstractRecipeHandlerTest {
+class DeleteRecipeIngredientHandlerTest extends CommonRecipeHandlerTest {
     static final String NAME = "DeleteRecipeIngredientHandlerTest";
 
     @Test

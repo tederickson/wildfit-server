@@ -10,7 +10,7 @@ import com.wildfit.server.repository.UserRepository;
 import lombok.experimental.SuperBuilder;
 
 @SuperBuilder(setterPrefix = "with")
-public class AbstractRecipeHandler {
+public class CommonRecipeHandler {
     protected final RecipeRepository recipeRepository;
     protected final UserRepository userRepository;
 

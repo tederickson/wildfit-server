@@ -19,7 +19,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.JavaMailSender;
 
 @SpringBootTest
-class CreateUserHandlerTest extends AbstractHandlerTest {
+class CreateUserHandlerTest extends CommonHandlerTest {
     @Autowired
     UserProfileRepository userProfileRepository;
     @Autowired

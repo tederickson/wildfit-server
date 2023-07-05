@@ -10,10 +10,10 @@ import org.springframework.data.domain.Pageable;
 public interface RecipeService {
     RecipeListDigest listBySeason(SeasonType season, Pageable pageable) throws UserServiceException;
 
-    RecipeListDigest listBySeasonAndIngredient(SeasonType season, String ingredientName, Pageable pageable) throws UserServiceException;
+    RecipeListDigest listBySeasonAndIngredient(SeasonType season, String ingredientName, Pageable pageable)
+            throws UserServiceException;
 
-    RecipeDigest
-    retrieveRecipe(Long recipeId) throws UserServiceException;
+    RecipeDigest retrieveRecipe(Long recipeId) throws UserServiceException;
 
     void deleteRecipe(Long recipeId, Long userId) throws UserServiceException;
 

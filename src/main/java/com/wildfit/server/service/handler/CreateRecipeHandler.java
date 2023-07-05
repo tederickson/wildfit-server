@@ -14,7 +14,7 @@ import com.wildfit.server.repository.InstructionGroupRepository;
 import lombok.experimental.SuperBuilder;
 
 @SuperBuilder(setterPrefix = "with")
-public class CreateRecipeHandler extends AbstractRecipeHandler {
+public class CreateRecipeHandler extends CommonRecipeHandler {
     private final InstructionGroupRepository instructionGroupRepository;
     private final RecipeDigest request;
 

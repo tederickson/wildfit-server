@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CreateRecipeHandlerTest extends AbstractRecipeHandlerTest {
+class CreateRecipeHandlerTest extends CommonRecipeHandlerTest {
 
     @Test
     void execute() throws UserServiceException, java.io.IOException {

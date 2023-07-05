@@ -15,7 +15,7 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class LoginHandlerTest extends AbstractHandlerTest {
+class LoginHandlerTest extends CommonHandlerTest {
 
     @Test
     void nullParameters() {

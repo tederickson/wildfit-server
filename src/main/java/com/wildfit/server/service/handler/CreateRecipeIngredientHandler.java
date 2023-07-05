@@ -14,7 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 
 @Slf4j
 @SuperBuilder(setterPrefix = "with")
-public class CreateRecipeIngredientHandler extends AbstractRecipeHandler {
+public class CreateRecipeIngredientHandler extends CommonRecipeHandler {
     private final InstructionGroupRepository instructionGroupRepository;
     private final RecipeIngredientRepository recipeIngredientRepository;
     private final Long recipeId;

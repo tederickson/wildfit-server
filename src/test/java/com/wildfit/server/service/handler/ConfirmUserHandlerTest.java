@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ConfirmUserHandlerTest extends AbstractHandlerTest {
+class ConfirmUserHandlerTest extends CommonHandlerTest {
 
     private static final String CONFIRMATION_CODE = "Apples";
 

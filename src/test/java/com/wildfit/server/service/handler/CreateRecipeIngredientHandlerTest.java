@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CreateRecipeIngredientHandlerTest extends AbstractRecipeHandlerTest {
+class CreateRecipeIngredientHandlerTest extends CommonRecipeHandlerTest {
     static final String NAME = "CreateRecipeIngredientHandlerTest";
 
     private IngredientDigest ingredientDigest;

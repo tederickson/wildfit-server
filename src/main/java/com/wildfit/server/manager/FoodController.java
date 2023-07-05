@@ -1,10 +1,12 @@
 package com.wildfit.server.manager;
 
 import com.wildfit.server.domain.FoodItemDigest;
+import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.SearchFoodResponse;
 import com.wildfit.server.exception.NutritionixException;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.service.NutritionixService;
+import com.wildfit.server.service.RecipeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -28,11 +30,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class FoodController {
     @Autowired
     private NutritionixService nutritionixService;
+    @Autowired
+    private RecipeService recipeService;
 
     @ApiOperation(value = "Get food by id")
     @ApiResponses(value = { //
             @ApiResponse(code = 200, message = "Get food", response = FoodItemDigest.class), //
-            @ApiResponse(code = 400, message = "Barcode not found")})
+            @ApiResponse(code = 400, message = "Nutritionix id not found")})
     @GetMapping(value = "/{id}", produces = "application/json")
     public FoodItemDigest getFoodWithId(@PathVariable("id") String id)
             throws UserServiceException, NutritionixException {
@@ -67,5 +71,18 @@ public class FoodController {
         log.info(logMessage);
 
         return nutritionixService.getFoodsByQuery(description, servingUnit);
+    }
+
+    @ApiOperation(value = "Get recipe nutrition.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Get recipe nutrition", response = FoodItemDigest.class)})
+    @GetMapping(value = "/recipes/{recipeId}", produces = "application/json")
+    public FoodItemDigest getRecipeNutrition(@RequestParam(name = "recipeId") Long recipeId)
+            throws UserServiceException, NutritionixException {
+        final var logMessage = String.join("|", "getRecipeNutrition", recipeId.toString());
+        log.info(logMessage);
+
+        RecipeDigest recipeDigest = recipeService.retrieveRecipe(recipeId);
+        return nutritionixService.getRecipeNutrition(recipeDigest);
     }
 }

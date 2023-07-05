@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
 import com.wildfit.server.domain.FoodItemDigest;
+import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.SearchFoodResponse;
 import com.wildfit.server.exception.NutritionixException;
 import com.wildfit.server.exception.UserServiceError;
@@ -150,9 +150,14 @@ public class NutritionixServiceImpl implements NutritionixService {
         }
     }
 
+    @Override
+    public FoodItemDigest getRecipeNutrition(RecipeDigest recipeDigest) throws UserServiceException, NutritionixException {
+        return null;
+    }
+
     private SearchedFoodItem[] filterByTagId(SearchedFoodItem[] common) {
         final var uniqueTags = new ArrayList<SearchedFoodItem>();
-        final Set tagIds = new HashSet<String>();
+        final var tagIds = new HashSet<String>();
 
         for (var foodItem : common) {
             if (tagIds.add(foodItem.getTag_id())) {
@@ -175,7 +180,7 @@ public class NutritionixServiceImpl implements NutritionixService {
         headers.setAccept(java.util.List.of(MediaType.APPLICATION_JSON));
         headers.add("x-app-id", nutritionixHeaderInfo.getAppId());
         headers.add("x-app-key", nutritionixHeaderInfo.getAppKey());
-        headers.add("x-remote-user-id", nutritionixHeaderInfo.getRemoteUserId());
+        //  headers.add("x-remote-user-id", nutritionixHeaderInfo.getRemoteUserId())
 
         return headers;
     }
