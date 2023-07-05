@@ -23,7 +23,7 @@ public class GetFoodsByQueryHandler extends AbstractNutritionixHandler<SearchFoo
     @Override
     protected SearchFoodResponse executeInHandler() {
         final var restTemplate = new RestTemplate();
-        final var entity = new HttpEntity<String>(getHeaders());
+        final var entity = new HttpEntity<>(getHeaders());
 
         final var queryParameters = String.join("&",
                 "query=" + description,

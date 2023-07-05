@@ -3,6 +3,7 @@ package com.wildfit.server.service.handler;
 import java.util.Objects;
 
 import com.wildfit.server.domain.FoodItemDigest;
+import com.wildfit.server.domain.ParseRecipeRequest;
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.FoodItems;
@@ -14,17 +15,17 @@ import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 
 @SuperBuilder(setterPrefix = "with")
-public class GetFoodWithBarcodeHandler extends AbstractNutritionixHandler<FoodItemDigest> {
-    private final String barcode;
+public class GetRecipeNutritionHandler extends AbstractNutritionixHandler<FoodItemDigest> {
+    private final ParseRecipeRequest parseRecipeRequest;
 
     @Override
-    public FoodItemDigest executeInHandler() {
+    protected FoodItemDigest executeInHandler() {
         final var restTemplate = new RestTemplate();
-        final var entity = new HttpEntity<>(getHeaders());
+        final var entity = new HttpEntity<>(parseRecipeRequest, getHeaders());
 
-        url = NUTRITIONIX_URL + "v2/search/item?upc=" + barcode;
+        url = NUTRITIONIX_URL + "v2/natural/nutrients";
 
-        final var foodItems = restTemplate.exchange(url, HttpMethod.GET, entity, FoodItems.class).getBody();
+        final var foodItems = restTemplate.exchange(url, HttpMethod.POST, entity, FoodItems.class).getBody();
         Objects.requireNonNull(foodItems, "foodItems");
 
         return FoodItemDigestMapper.map(foodItems.getFoods()[0]);
@@ -34,8 +35,14 @@ public class GetFoodWithBarcodeHandler extends AbstractNutritionixHandler<FoodIt
     protected void validate() throws UserServiceException {
         super.validate();
 
-        if (StringUtils.isAllBlank(barcode)) {
+        Objects.requireNonNull(parseRecipeRequest, "parseRecipeRequest");
+
+        if (StringUtils.isAllBlank(parseRecipeRequest.getQuery())) {
             throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
         }
+        if (StringUtils.isAllBlank(parseRecipeRequest.getAggregate())) {
+            throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
+        }
+        Objects.requireNonNull(parseRecipeRequest.getNum_servings(), "parseRecipeRequest.getNum_servings()");
     }
 }

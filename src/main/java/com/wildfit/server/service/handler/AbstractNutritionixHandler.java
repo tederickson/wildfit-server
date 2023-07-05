@@ -24,7 +24,6 @@ public abstract class AbstractNutritionixHandler<T> {
 
     public T execute() throws UserServiceException, NutritionixException {
         validate();
-        log.info(url);
 
         try {
             return executeInHandler();

@@ -59,7 +59,7 @@ public class FoodController {
         return nutritionixService.getFoodWithBarcode(barcode);
     }
 
-    @ApiOperation(value = "Get foods by description such as 'coconut oil', 'kerrygold butter'.")
+    @ApiOperation(value = "Get foods by description such as 'coconut oil', 'kerrygold butter'")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Get foods", response = SearchFoodResponse.class)})
     @GetMapping(produces = "application/json")
@@ -71,7 +71,7 @@ public class FoodController {
         return nutritionixService.getFoodsByQuery(description);
     }
 
-    @ApiOperation(value = "Get recipe nutrition.")
+    @ApiOperation(value = "Get nutrition per serving for recipe")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Get recipe nutrition", response = FoodItemDigest.class)})
     @GetMapping(value = "/recipes/{recipeId}", produces = "application/json")

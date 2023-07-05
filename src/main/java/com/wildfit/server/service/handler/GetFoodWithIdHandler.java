@@ -20,7 +20,7 @@ public class GetFoodWithIdHandler extends AbstractNutritionixHandler<FoodItemDig
     @Override
     protected FoodItemDigest executeInHandler() {
         final var restTemplate = new RestTemplate();
-        final var entity = new HttpEntity<String>(getHeaders());
+        final var entity = new HttpEntity<>(getHeaders());
         url = NUTRITIONIX_URL + "v2/search/item?nix_item_id=" + nixItemId;
 
         final var foodItems = restTemplate.exchange(url, HttpMethod.GET, entity, FoodItems.class).getBody();
