@@ -14,16 +14,14 @@ import com.wildfit.server.service.handler.GetFoodWithBarcodeHandler;
 import com.wildfit.server.service.handler.GetFoodWithIdHandler;
 import com.wildfit.server.service.handler.GetFoodsByQueryHandler;
 import com.wildfit.server.service.handler.GetRecipeNutritionHandler;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  * The service calls Handlers to implement the functionality.
- * This provides loose coupling, allows several people to work on the service without merge collisions
- * and provides a lightweight service.
+ * This provides loose coupling, a lightweight service, separation of concerns, and allows several people to work on
+ * the same service without merge collisions.
  */
-@Slf4j
 @Service
 public class NutritionixServiceImpl implements NutritionixService {
 

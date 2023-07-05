@@ -23,10 +23,9 @@ import org.springframework.stereotype.Service;
 
 /**
  * The service calls Handlers to implement the functionality.
- * This provides loose coupling, allows several people to work on the service without merge collisions
- * and provides a lightweight service.
+ * This provides loose coupling, a lightweight service, separation of concerns, and allows several people to work on
+ * the same service without merge collisions.
  */
-
 @Service
 public class UserServiceImpl implements UserService {
 

@@ -22,6 +22,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+/**
+ * The service calls Handlers to implement the functionality.
+ * This provides loose coupling, a lightweight service, separation of concerns, and allows several people to work on
+ * the same service without merge collisions.
+ */
 @Service
 public class RecipeServiceImpl implements RecipeService {
     @Autowired
