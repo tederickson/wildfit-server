@@ -6,6 +6,7 @@ import com.wildfit.server.domain.UpdateUserProfileRequest;
 import com.wildfit.server.domain.UserProfileDigest;
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.model.Gender;
 import com.wildfit.server.model.mapper.UserProfileDigestMapper;
 import com.wildfit.server.repository.UserProfileRepository;
 import com.wildfit.server.repository.UserRepository;
@@ -33,7 +34,8 @@ public class UpdateUserProfileHandler {
         userProfile.setAge(userProfileRequest.getAge());
 
         if (userProfileRequest.getGender() != null) {
-            userProfile.setGender(userProfileRequest.getGender().getCodeAsCharacter());
+            final var gender = Gender.valueOf(userProfileRequest.getGender().name());
+            userProfile.setGender(gender.getCodeAsCharacter());
         }
 
         userProfile.setHeight_feet(userProfileRequest.getHeightFeet());
