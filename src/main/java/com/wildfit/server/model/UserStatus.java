@@ -1,7 +1,5 @@
 package com.wildfit.server.model;
 
-import java.util.Arrays;
-
 import com.wildfit.server.domain.UserStatusType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,7 +12,12 @@ public enum UserStatus {
     final String code;
 
     public static UserStatus findByCode(String code) {
-        return Arrays.stream(UserStatus.values()).filter(x -> x.code.equals(code)).findFirst().orElse(null);
+        for (var value : values()) {
+            if (value.code.equals(code)) {
+                return value;
+            }
+        }
+        return null;
     }
 
     public UserStatusType toUserStatusType() {
