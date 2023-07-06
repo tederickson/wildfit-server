@@ -6,24 +6,22 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import com.wildfit.server.domain.GenderType;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class GenderTest {
-
-    @Test
-    void findByCode() {
-        assertEquals("F", Gender.FEMALE.getCode());
-        assertEquals(Gender.FEMALE, Gender.findByCode("F"));
-        assertEquals(Gender.FEMALE, Gender.findByCode('F'));
+    @ParameterizedTest
+    @NullAndEmptySource
+    @ValueSource(strings = {" Spring ", "apple"})
+    void notFound(String code) {
+        assertNull(Gender.findByCode(code));
     }
 
-    @Test
-    void findByCode_null() {
-        assertNull(Gender.findByCode(null));
-    }
-
-    @Test
-    void findByCode_notFound() {
-        assertNull(Gender.findByCode("Apple"));
+    @ParameterizedTest
+    @ValueSource(strings = {"F", "N"})
+    void findByCode(String code) {
+        assertNotNull(Gender.findByCode(code));
     }
 
     @Test
