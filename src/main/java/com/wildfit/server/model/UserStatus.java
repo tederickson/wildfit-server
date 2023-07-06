@@ -6,9 +6,6 @@ import com.wildfit.server.domain.UserStatusType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-/**
- * Tied to {@link UserStatusType}.
- */
 @Getter
 @AllArgsConstructor
 public enum UserStatus {
@@ -18,5 +15,9 @@ public enum UserStatus {
 
     public static UserStatus findByCode(String code) {
         return Arrays.stream(UserStatus.values()).filter(x -> x.code.equals(code)).findFirst().orElse(null);
+    }
+
+    public UserStatusType toUserStatusType() {
+        return UserStatusType.valueOf(name());
     }
 }

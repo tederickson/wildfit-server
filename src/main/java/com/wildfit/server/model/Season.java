@@ -4,9 +4,6 @@ import com.wildfit.server.domain.SeasonType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-/**
- * Tied to {@link SeasonType}.
- */
 @AllArgsConstructor
 @Getter
 public enum Season {
