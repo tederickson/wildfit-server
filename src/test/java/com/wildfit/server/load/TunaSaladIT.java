@@ -13,6 +13,7 @@ import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.FoodItems;
+import com.wildfit.server.model.Season;
 import com.wildfit.server.model.mapper.FoodItemDigestMapper;
 import com.wildfit.server.service.handler.CreateRecipeHandler;
 import org.junit.jupiter.api.Test;
@@ -32,7 +33,7 @@ class TunaSaladIT extends CommonRecipe {
 
     @Test
     void tunaSaladWithAppleAndCelerySummer() throws UserServiceException, IOException {
-        final var season = SeasonType.SUMMER;
+        final var season = Season.SUMMER;
         final var name = "Tuna salad with apple and celery (Summer)";
         final var exists = recipeRepository.findAllBySeasonAndName(season.getCode(), name, PageRequest.of(0, 10));
 
@@ -50,7 +51,7 @@ class TunaSaladIT extends CommonRecipe {
                     .withInstructions(List.of(STEP_1, step2, STEP_3, STEP_4)).build();
             final var recipe = RecipeDigest.builder()
                     .withName(name)
-                    .withSeason(season)
+                    .withSeason(season.toSeasonType())
                     .withIntroduction("Tuna is one of the staples in our household. We eat it all the time, because " +
                             "it is simple and can be eaten for breakfast, lunch, dinner and snack. ")
                     .withPrepTimeMin(15)
@@ -73,7 +74,7 @@ class TunaSaladIT extends CommonRecipe {
             for (var dbRecipeGroup : response.getInstructionGroups()) {
                 switch (dbRecipeGroup.getInstructionGroupNumber()) {
                     case 1 -> dressingIngredients(dbRecipeId, dbRecipeGroup.getId());
-                    case 2 -> saladIngredients(dbRecipeId, dbRecipeGroup.getId(), season);
+                    case 2 -> saladIngredients(dbRecipeId, dbRecipeGroup.getId(), season.toSeasonType());
                     default -> fail("not expecting step " + dbRecipeGroup);
                 }
             }
@@ -82,7 +83,7 @@ class TunaSaladIT extends CommonRecipe {
 
     @Test
     void tunaSaladWithAppleAndCelerySpring() throws UserServiceException, IOException {
-        final var season = SeasonType.SPRING;
+        final var season = Season.SPRING;
         final var name = "Tuna salad";
         final var exists = recipeRepository.findAllBySeasonAndName(season.getCode(), name, PageRequest.of(0, 10));
 
@@ -99,7 +100,7 @@ class TunaSaladIT extends CommonRecipe {
                     .withInstructions(List.of(STEP_1, step2, STEP_3, STEP_4)).build();
             final var recipe = RecipeDigest.builder()
                     .withName(name)
-                    .withSeason(season)
+                    .withSeason(season.toSeasonType())
                     .withIntroduction("Tuna is one of the staples in our household. We eat it all the time, because " +
                             "it is simple and can be eaten for breakfast, lunch, dinner and snack. ")
                     .withPrepTimeMin(15)
@@ -122,7 +123,7 @@ class TunaSaladIT extends CommonRecipe {
             for (var dbRecipeGroup : response.getInstructionGroups()) {
                 switch (dbRecipeGroup.getInstructionGroupNumber()) {
                     case 1 -> dressingIngredients(dbRecipeId, dbRecipeGroup.getId());
-                    case 2 -> saladIngredients(dbRecipeId, dbRecipeGroup.getId(), season);
+                    case 2 -> saladIngredients(dbRecipeId, dbRecipeGroup.getId(), season.toSeasonType());
                     default -> fail("not expecting step " + dbRecipeGroup);
                 }
             }

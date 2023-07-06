@@ -1,0 +1,30 @@
+package com.wildfit.server.model;
+
+import com.wildfit.server.domain.SeasonType;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+/**
+ * Tied to {@link SeasonType}.
+ */
+@AllArgsConstructor
+@Getter
+public enum Season {
+    SPRING("Spring"), SUMMER("Summer"), FALL("Fall"), WINTER("Winter");
+
+    private final String code;
+
+    public static Season findByCode(String code) {
+        for (var value : values()) {
+            if (value.code.equals(code)) {
+                return value;
+            }
+        }
+        return null;
+    }
+
+    public SeasonType toSeasonType() {
+        return SeasonType.valueOf(name());
+    }
+
+}

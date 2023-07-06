@@ -6,6 +6,7 @@ import com.wildfit.server.domain.RecipeListDigest;
 import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.model.Season;
 import com.wildfit.server.model.mapper.RecipeListMapper;
 import com.wildfit.server.repository.RecipeIngredientRepository;
 import com.wildfit.server.repository.RecipeRepository;
@@ -24,7 +25,8 @@ public class ListBySeasonAndIngredientHandler {
     public RecipeListDigest execute() throws UserServiceException {
         validate();
 
-        final var results = recipeRepository.findAllBySeasonAndIngredientName(season.getCode(), ingredientName, pageable);
+        final var season1 = Season.valueOf(season.name());
+        final var results = recipeRepository.findAllBySeasonAndIngredientName(season1.getCode(), ingredientName, pageable);
 
         return RecipeListMapper.map(results);
     }

@@ -9,8 +9,8 @@ import com.google.common.collect.Iterables;
 import com.wildfit.server.domain.InstructionDigest;
 import com.wildfit.server.domain.InstructionGroupDigest;
 import com.wildfit.server.domain.RecipeDigest;
-import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.model.Season;
 import com.wildfit.server.model.mapper.FoodItemDigestMapper;
 import com.wildfit.server.service.handler.CreateRecipeHandler;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,7 @@ import org.springframework.data.domain.PageRequest;
 public class EggMuffinsWithMushroomsIT extends CommonRecipe {
     @Test
     void spring() throws UserServiceException, IOException {
-        final var season = SeasonType.SPRING;
+        final var season = Season.SPRING;
         final var name = "Egg muffins with mushrooms and herbs";
         final var exists = recipeRepository.findAllBySeasonAndName(season.getCode(), name, PageRequest.of(0, 10));
 
@@ -43,7 +43,7 @@ public class EggMuffinsWithMushroomsIT extends CommonRecipe {
                     .withInstructions(List.of(step1, step2, step3, step4, step5)).build();
             final var recipe = RecipeDigest.builder()
                     .withName(name)
-                    .withSeason(season)
+                    .withSeason(season.toSeasonType())
                     .withIntroduction("Perfect for batch cooking, breakfast, lunch, dinner and snack. " +
                             "High in protein, fat and nutrients. Low in carbs.")
                     .withPrepTimeMin(15)

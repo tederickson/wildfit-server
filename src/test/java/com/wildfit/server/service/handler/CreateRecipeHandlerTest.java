@@ -13,6 +13,7 @@ import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.FoodItems;
+import com.wildfit.server.model.Season;
 import com.wildfit.server.model.mapper.FoodItemDigestMapper;
 import com.wildfit.server.model.mapper.IngredientDigestMapper;
 import org.junit.jupiter.api.Test;
@@ -47,7 +48,7 @@ class CreateRecipeHandlerTest extends CommonRecipeHandlerTest {
         final var dbRecipeGroupId = Iterables.getOnlyElement(testRecipe.getInstructionGroups()).getId();
         final var dbRecipe = recipeRepository.findById(dbRecipeId).orElseThrow();
         assertEquals(name, dbRecipe.getName());
-        assertEquals(SeasonType.SPRING.getCode(), dbRecipe.getSeason());
+        assertEquals(Season.SPRING.getCode(), dbRecipe.getSeason());
 
         final var dbInstructionGroup = Iterables.getOnlyElement(instructionGroupRepository.findByRecipeId(dbRecipeId));
 

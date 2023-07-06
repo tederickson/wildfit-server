@@ -1,24 +1,35 @@
-package com.wildfit.server.domain;
+package com.wildfit.server.model;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import com.wildfit.server.domain.SeasonType;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class SeasonTypeTest {
+class SeasonTest {
+    @Test
+    void tiedToSeasonType() {
+        for (var enm : SeasonType.values()) {
+            Season.valueOf(enm.name());
+        }
+        for (var enm : Season.values()) {
+            assertNotNull(enm.toSeasonType());
+        }
+    }
 
     @ParameterizedTest
     @NullAndEmptySource
     @ValueSource(strings = {" Spring ", "apple"})
     void notFound(String code) {
-        assertNull(SeasonType.findByCode(code));
+        assertNull(Season.findByCode(code));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"Spring", "Fall"})
     void findByCode(String code) {
-        assertNotNull(SeasonType.findByCode(code));
+        assertNotNull(Season.findByCode(code));
     }
 }

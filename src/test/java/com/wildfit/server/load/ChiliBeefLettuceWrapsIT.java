@@ -11,8 +11,8 @@ import com.google.common.collect.Iterables;
 import com.wildfit.server.domain.InstructionDigest;
 import com.wildfit.server.domain.InstructionGroupDigest;
 import com.wildfit.server.domain.RecipeDigest;
-import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.model.Season;
 import com.wildfit.server.model.mapper.FoodItemDigestMapper;
 import com.wildfit.server.service.handler.CreateRecipeHandler;
 import org.junit.jupiter.api.Test;
@@ -24,7 +24,7 @@ class ChiliBeefLettuceWrapsIT extends CommonRecipe {
 
     @Test
     void chiliBeefLettuceWrapsSummer() throws UserServiceException, IOException {
-        final var season = SeasonType.SUMMER;
+        final var season = Season.SUMMER;
         final var name = "Chili Beef Lettuce Wraps (Summer)";
         final var exists = recipeRepository.findAllBySeasonAndName(season.getCode(), name, PageRequest.of(0, 10));
 
@@ -57,7 +57,7 @@ class ChiliBeefLettuceWrapsIT extends CommonRecipe {
                     .withInstructions(List.of(step1, step2, step3, step4)).build();
             final var recipe = RecipeDigest.builder()
                     .withName(name)
-                    .withSeason(season)
+                    .withSeason(season.toSeasonType())
                     .withIntroduction("These lettuce wraps are so easy and full of flavor! " +
                             "They make a great side dish, or are perfect for a healthy Summer approved recipe.")
                     .withPrepTimeMin(5)
@@ -143,7 +143,7 @@ class ChiliBeefLettuceWrapsIT extends CommonRecipe {
 
     @Test
     void chiliBeefLettuceWrapsSpring() throws UserServiceException, IOException {
-        final var season = SeasonType.SPRING;
+        final var season = Season.SPRING;
         final var name = "Chili Beef Lettuce Wraps (Spring)";
         final var exists = recipeRepository.findAllBySeasonAndName(season.getCode(), name, PageRequest.of(0, 10));
 
@@ -172,7 +172,7 @@ class ChiliBeefLettuceWrapsIT extends CommonRecipe {
                     .withInstructions(List.of(step1, step2, step3, step4)).build();
             final var recipe = RecipeDigest.builder()
                     .withName(name)
-                    .withSeason(season)
+                    .withSeason(season.toSeasonType())
                     .withIntroduction("These lettuce wraps are so easy and full of flavor! " +
                             "They make a great side dish, or are perfect for a healthy Spring approved recipe.")
                     .withPrepTimeMin(5)
