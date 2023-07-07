@@ -7,8 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -20,8 +18,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class ManagerAdvice extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(UserServiceException.class)
-    protected ResponseEntity<ErrorData> serviceExceptionHandler(UserServiceException ex, WebRequest request) {
+    protected ResponseEntity<ErrorData> userServiceExceptionHandler(UserServiceException ex, WebRequest request) {
+        log.error(request.getDescription(false));
         log.error("UserServiceException", ex);
+
         final var userServiceException = ex.getError();
         final var error = ErrorData.builder()
                 .withMessage(userServiceException.getMessage())
@@ -32,7 +32,8 @@ public class ManagerAdvice extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(NutritionixException.class)
-    protected ResponseEntity<ErrorData> serviceExceptionHandler(NutritionixException ex, WebRequest request) {
+    protected ResponseEntity<ErrorData> nutritionixExceptionHandler(NutritionixException ex, WebRequest request) {
+        log.error(request.getDescription(false));
         log.error("NutritionixException", ex);
 
         final var error = ErrorData.builder()
@@ -42,11 +43,4 @@ public class ManagerAdvice extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(error, ex.getStatus());
     }
 
-    @ResponseBody
-    @ExceptionHandler(IllegalArgumentException.class)
-    @ResponseStatus(org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR)
-    String defaultExceptionHandler(Exception ex) {
-        log.warn("Unexpected exception", ex);
-        return ex.getMessage();
-    }
 }
