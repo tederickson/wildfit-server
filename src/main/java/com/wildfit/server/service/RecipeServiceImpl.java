@@ -4,6 +4,7 @@ import com.wildfit.server.domain.IngredientDigest;
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.RecipeListDigest;
 import com.wildfit.server.domain.SeasonType;
+import com.wildfit.server.domain.UpdateIngredientRequest;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.repository.InstructionGroupRepository;
 import com.wildfit.server.repository.InstructionRepository;
@@ -18,6 +19,7 @@ import com.wildfit.server.service.handler.GetRecipeHandler;
 import com.wildfit.server.service.handler.ListBySeasonAndIngredientHandler;
 import com.wildfit.server.service.handler.ListBySeasonHandler;
 import com.wildfit.server.service.handler.UpdateRecipeHandler;
+import com.wildfit.server.service.handler.UpdateRecipeIngredientHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -122,6 +124,19 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public void deleteRecipeIngredient(Long userId, Long recipeId, Long ingredientId) throws UserServiceException {
         DeleteRecipeIngredientHandler.builder()
+                .withUserRepository(userRepository)
+                .withRecipeRepository(recipeRepository)
+                .withRecipeIngredientRepository(recipeIngredientRepository)
+                .withUserId(userId)
+                .withRecipeId(recipeId)
+                .withIngredientId(ingredientId)
+                .build().execute();
+    }
+
+    @Override
+    public IngredientDigest updateRecipeIngredient(Long userId, Long recipeId, Long ingredientId,
+                                                   UpdateIngredientRequest request) throws UserServiceException {
+        return UpdateRecipeIngredientHandler.builder()
                 .withUserRepository(userRepository)
                 .withRecipeRepository(recipeRepository)
                 .withRecipeIngredientRepository(recipeIngredientRepository)

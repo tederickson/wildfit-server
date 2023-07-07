@@ -4,6 +4,7 @@ import com.wildfit.server.domain.IngredientDigest;
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.RecipeListDigest;
 import com.wildfit.server.domain.SeasonType;
+import com.wildfit.server.domain.UpdateIngredientRequest;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.service.RecipeService;
 import io.swagger.annotations.Api;
@@ -68,8 +69,8 @@ public class RecipeController {
     }
 
     @ApiOperation(value = "Retrieve recipe")
-    @GetMapping(value = "/{id}", produces = "application/json")
-    public RecipeDigest retrieveRecipe(@PathVariable(value = "id") Long id) throws UserServiceException {
+    @GetMapping(value = "/{recipeId}", produces = "application/json")
+    public RecipeDigest retrieveRecipe(@PathVariable(value = "recipeId") Long id) throws UserServiceException {
 
         final var logMessage = String.join("|", "retrieveRecipe", id.toString());
         log.info(logMessage);
@@ -82,8 +83,9 @@ public class RecipeController {
             @ApiResponse(code = 200, message = "Recipe deleted"), //
             @ApiResponse(code = 404, message = "Recipe not found"),
             @ApiResponse(code = 401, message = "Not authorized to delete recipe")})
-    @DeleteMapping(value = "/{id}/users/{userId}")
-    public void deleteRecipe(@PathVariable("id") Long id, @PathVariable("userId") Long userId) throws UserServiceException {
+    @DeleteMapping(value = "/{recipeId}/users/{userId}")
+    public void deleteRecipe(@PathVariable("recipeId") Long id, @PathVariable("userId") Long userId)
+            throws UserServiceException {
         final var logMessage = String.join("|", "deleteRecipe", id.toString(), userId.toString());
         log.info(logMessage);
 
@@ -107,8 +109,8 @@ public class RecipeController {
             @ApiResponse(code = 200, message = "Recipe updated"), //
             @ApiResponse(code = 404, message = "Recipe not found"),
             @ApiResponse(code = 401, message = "Not authorized to update recipe")})
-    @PutMapping(value = "/{id}/users/{userId}", produces = "application/json")
-    public RecipeDigest updateRecipe(@PathVariable("id") Long id,
+    @PutMapping(value = "/{recipeId}/users/{userId}", produces = "application/json")
+    public RecipeDigest updateRecipe(@PathVariable("recipeId") Long id,
                                      @PathVariable("userId") Long userId,
                                      @RequestBody RecipeDigest request) throws UserServiceException {
         final var logMessage = String.join("|", "updateRecipe",
@@ -128,8 +130,8 @@ public class RecipeController {
             @ApiResponse(code = 200, message = "Successfully added ingredient", response = IngredientDigest.class),
             @ApiResponse(code = 404, message = "Recipe not found"),
             @ApiResponse(code = 401, message = "Not authorized to update recipe")})
-    @PostMapping(value = "/{id}/users/{userId}/recipeGroups/{recipeGroupId}", produces = "application/json")
-    public IngredientDigest createRecipeIngredient(@PathVariable("id") Long id,
+    @PostMapping(value = "/{recipeId}/users/{userId}/recipeGroups/{recipeGroupId}", produces = "application/json")
+    public IngredientDigest createRecipeIngredient(@PathVariable("recipeId") Long id,
                                                    @PathVariable("userId") Long userId,
                                                    @PathVariable("recipeGroupId") Long recipeGroupId,
                                                    @RequestBody IngredientDigest request) throws UserServiceException {
@@ -140,19 +142,36 @@ public class RecipeController {
         return recipeService.createRecipeIngredient(userId, id, recipeGroupId, request);
     }
 
+    @ApiOperation(value = "Update recipe ingredient")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully updated ingredient", response = IngredientDigest.class),
+            @ApiResponse(code = 404, message = "Recipe not found"),
+            @ApiResponse(code = 401, message = "Not authorized to update recipe")})
+    @PutMapping(value = "/{recipeId}/users/{userId}/ingredients/{ingredientId}", produces = "application/json")
+    public IngredientDigest updateRecipeIngredient(@PathVariable("recipeId") Long recipeId,
+                                                   @PathVariable("userId") Long userId,
+                                                   @PathVariable("ingredientId") Long ingredientId,
+                                                   @RequestBody UpdateIngredientRequest request) throws UserServiceException {
+        final var logMessage = String.join("|", "updateRecipeIngredient",
+                recipeId.toString(), userId.toString(), ingredientId.toString(), request.toString());
+        log.info(logMessage);
+
+        return recipeService.updateRecipeIngredient(userId, recipeId, ingredientId, request);
+    }
+
     @ApiOperation(value = "Delete ingredient from the recipe")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully removed ingredient"),
             @ApiResponse(code = 404, message = "Recipe not found"),
             @ApiResponse(code = 401, message = "Not authorized to update recipe")})
-    @DeleteMapping(value = "/{id}/users/{userId}/ingredients/{ingredientId}", produces = "application/json")
-    public void deleteRecipeIngredient(@PathVariable("id") Long id,
+    @DeleteMapping(value = "/{recipeId}/users/{userId}/ingredients/{ingredientId}", produces = "application/json")
+    public void deleteRecipeIngredient(@PathVariable("recipeId") Long recipeId,
                                        @PathVariable("userId") Long userId,
                                        @PathVariable("ingredientId") Long ingredientId) throws UserServiceException {
         final var logMessage = String.join("|", "deleteRecipeIngredient",
-                id.toString(), userId.toString(), ingredientId.toString());
+                recipeId.toString(), userId.toString(), ingredientId.toString());
         log.info(logMessage);
 
-        recipeService.deleteRecipeIngredient(userId, id, ingredientId);
+        recipeService.deleteRecipeIngredient(userId, recipeId, ingredientId);
     }
 }

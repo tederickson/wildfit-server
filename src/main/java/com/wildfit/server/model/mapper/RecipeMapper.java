@@ -9,9 +9,7 @@ import com.wildfit.server.model.InstructionGroup;
 import com.wildfit.server.model.Recipe;
 import com.wildfit.server.model.RecipeIngredient;
 import com.wildfit.server.model.Season;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 public final class RecipeMapper {
     private RecipeMapper() {
     }

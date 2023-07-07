@@ -1,11 +1,10 @@
 package com.wildfit.server.model.mapper;
 
 import com.wildfit.server.domain.IngredientDigest;
+import com.wildfit.server.domain.UpdateIngredientRequest;
 import com.wildfit.server.model.RecipeIngredient;
 import com.wildfit.server.model.RecipeIngredientType;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 public class RecipeIngredientMapper {
     private RecipeIngredientMapper() {
     }
@@ -92,5 +91,14 @@ public class RecipeIngredientMapper {
                 .withTransFattyAcid(ingredientDigest.getTransFattyAcid())
                 .withVitaminD(ingredientDigest.getVitaminD())
                 .build();
+    }
+
+    public static void update(UpdateIngredientRequest request, RecipeIngredient recipeIngredient) {
+        recipeIngredient.setDescription(request.getDescription());
+        recipeIngredient.setIngredientServingQty(request.getIngredientServingQty());
+        recipeIngredient.setIngredientServingUnit(request.getIngredientServingUnit());
+
+        final var recipeIngredientType = RecipeIngredientType.map(request.getIngredientType());
+        recipeIngredient.setIngredientType(recipeIngredientType.getCode());
     }
 }

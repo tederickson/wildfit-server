@@ -17,7 +17,8 @@ public enum UserServiceError {
     EXISTING_USER("User exists.", HttpStatus.BAD_REQUEST),
     USER_NOT_FOUND("User not found.", HttpStatus.NOT_FOUND),
     RECIPE_NOT_FOUND("Recipe not found.", HttpStatus.NOT_FOUND),
-    RECIPE_GROUP_NOT_FOUND("Recipe not found.", HttpStatus.NOT_FOUND),
+    RECIPE_GROUP_NOT_FOUND("Recipe group not found.", HttpStatus.NOT_FOUND),
+    INGREDIENT_NOT_FOUND("Recipe ingredient not found.", HttpStatus.NOT_FOUND),
     NOT_REGISTERED("Your account isn't active or hasn't been approved yet.", HttpStatus.BAD_REQUEST),
     NOT_AUTHORIZED("Your account not authorized.", HttpStatus.UNAUTHORIZED),
     EMAIL_NOT_CONFIGURED("The email server is not configured.", HttpStatus.PRECONDITION_FAILED);
