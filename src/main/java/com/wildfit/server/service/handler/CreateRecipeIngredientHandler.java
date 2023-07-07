@@ -9,10 +9,8 @@ import com.wildfit.server.model.mapper.RecipeIngredientMapper;
 import com.wildfit.server.repository.InstructionGroupRepository;
 import com.wildfit.server.repository.RecipeIngredientRepository;
 import lombok.experimental.SuperBuilder;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
-@Slf4j
 @SuperBuilder(setterPrefix = "with")
 public class CreateRecipeIngredientHandler extends CommonRecipeHandler {
     private final InstructionGroupRepository instructionGroupRepository;
