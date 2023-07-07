@@ -10,15 +10,17 @@ import com.wildfit.server.domain.IngredientDigest;
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.RecipeListDigest;
 import com.wildfit.server.domain.SeasonType;
+import com.wildfit.server.domain.UpdateIngredientRequest;
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.service.RecipeService;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class RecipeControllerTest {
     static final Long recipeId = 123L;
     static final Long userId = -23L;
@@ -41,7 +43,8 @@ class RecipeControllerTest {
     void listBySeasonAndIngredient() throws UserServiceException {
         when(recipeService.listBySeasonAndIngredient(any(), any(), any())).thenReturn(new RecipeListDigest());
 
-        final var response = recipeController.listBySeasonAndIngredient(SeasonType.WINTER, "iceberg lettuce", 3, 40);
+        final var response = recipeController.listBySeasonAndIngredient(SeasonType.WINTER,
+                "iceberg lettuce", 3, 40);
         assertNotNull(response);
     }
 
@@ -95,5 +98,15 @@ class RecipeControllerTest {
     @Test
     void deleteRecipeIngredient() throws UserServiceException {
         recipeController.deleteRecipeIngredient(recipeId, userId, 2539L);
+    }
+
+    @Test
+    void updateRecipeIngredient() throws UserServiceException {
+        when(recipeService.updateRecipeIngredient(any(), any(), any(), any()))
+                .thenReturn(IngredientDigest.builder().build());
+
+        final var response = recipeController.updateRecipeIngredient(recipeId, userId, 404L,
+                UpdateIngredientRequest.builder().build());
+        assertNotNull(response);
     }
 }
