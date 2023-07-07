@@ -15,10 +15,14 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class SeasonTest {
     @Test
-    void tiedToSeasonType() {
+    void map() {
         for (var enm : SeasonType.values()) {
-            Season.valueOf(enm.name());
+            assertNotNull(Season.map(enm));
         }
+    }
+
+    @Test
+    void toSeasonType() {
         for (var enm : Season.values()) {
             assertNotNull(enm.toSeasonType());
         }

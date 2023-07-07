@@ -25,8 +25,8 @@ public class ListBySeasonAndIngredientHandler {
     public RecipeListDigest execute() throws UserServiceException {
         validate();
 
-        final var season1 = Season.valueOf(season.name());
-        final var results = recipeRepository.findAllBySeasonAndIngredientName(season1.getCode(), ingredientName, pageable);
+        final var results = recipeRepository.findAllBySeasonAndIngredientName(Season.map(season).getCode(),
+                ingredientName, pageable);
 
         return RecipeListMapper.map(results);
     }

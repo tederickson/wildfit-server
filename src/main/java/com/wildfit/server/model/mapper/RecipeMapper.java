@@ -74,7 +74,7 @@ public final class RecipeMapper {
     }
 
     public static Recipe create(RecipeDigest request, String email) {
-        final var season = Season.valueOf(request.getSeason().name());
+        final var season = Season.map(request.getSeason());
 
         return Recipe.builder()
                 .withEmail(email)
@@ -90,7 +90,7 @@ public final class RecipeMapper {
     }
 
     public static void update(Recipe recipe, RecipeDigest request) {
-        final var season = Season.valueOf(request.getSeason().name());
+        final var season = Season.map(request.getSeason());
 
         // Never change the email address
         recipe.setIntroduction(request.getIntroduction());

@@ -33,10 +33,14 @@ class GenderTest {
     }
 
     @Test
-    void tiedToGenderType() {
+    void map() {
         for (var enm : GenderType.values()) {
-            Gender.valueOf(enm.name());
+            assertNotNull(Gender.map(enm));
         }
+    }
+
+    @Test
+    void toGenderType() {
         for (var enm : Gender.values()) {
             assertNotNull(enm.toGenderType());
         }

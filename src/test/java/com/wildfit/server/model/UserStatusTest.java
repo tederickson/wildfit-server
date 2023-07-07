@@ -16,12 +16,16 @@ import org.junit.jupiter.params.provider.ValueSource;
 class UserStatusTest {
 
     @Test
-    void tiedToUserStatusType() {
+    void toUserStatusType() {
         for (var enm : UserStatus.values()) {
             assertNotNull(enm.toUserStatusType());
         }
+    }
+
+    @Test
+    void tiedToUserStatusType() {
         for (var enm : UserStatusType.values()) {
-            UserStatus.valueOf(enm.name());
+            assertNotNull(UserStatus.map(enm));
         }
     }
 

@@ -20,6 +20,10 @@ public enum Season {
         return null;
     }
 
+    public static Season map(SeasonType genderType) {
+        return valueOf(genderType.name());
+    }
+
     public SeasonType toSeasonType() {
         return SeasonType.valueOf(name());
     }

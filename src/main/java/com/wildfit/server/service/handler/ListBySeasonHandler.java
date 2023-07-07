@@ -21,9 +21,7 @@ public class ListBySeasonHandler {
     public RecipeListDigest execute() throws UserServiceException {
         validate();
 
-        final var season1 = Season.valueOf(season.name());
-
-        return RecipeListMapper.map(recipeRepository.findAllBySeason(season1.getCode(), pageable));
+        return RecipeListMapper.map(recipeRepository.findAllBySeason(Season.map(season).getCode(), pageable));
     }
 
     private void validate() throws UserServiceException {

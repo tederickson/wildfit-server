@@ -34,7 +34,7 @@ public class UpdateUserProfileHandler {
         userProfile.setAge(userProfileRequest.getAge());
 
         if (userProfileRequest.getGender() != null) {
-            final var gender = Gender.valueOf(userProfileRequest.getGender().name());
+            final var gender = Gender.map(userProfileRequest.getGender());
             userProfile.setGender(gender.getCodeAsCharacter());
         }
 

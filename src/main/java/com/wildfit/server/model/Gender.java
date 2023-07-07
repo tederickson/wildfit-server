@@ -24,6 +24,10 @@ public enum Gender {
         return findByCode(String.valueOf(code));
     }
 
+    public static Gender map(GenderType genderType) {
+        return valueOf(genderType.name());
+    }
+
     public char getCodeAsCharacter() {
         return code.charAt(0);
     }

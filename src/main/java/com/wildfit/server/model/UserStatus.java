@@ -20,6 +20,10 @@ public enum UserStatus {
         return null;
     }
 
+    public static UserStatus map(UserStatusType userStatusType) {
+        return valueOf(userStatusType.name());
+    }
+
     public UserStatusType toUserStatusType() {
         return UserStatusType.valueOf(name());
     }
