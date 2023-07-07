@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.google.common.collect.Iterables;
+import com.wildfit.server.domain.IngredientType;
 import com.wildfit.server.domain.InstructionDigest;
 import com.wildfit.server.domain.InstructionGroupDigest;
 import com.wildfit.server.domain.RecipeDigest;
@@ -67,42 +68,44 @@ public class EggMuffinsWithMushroomsIT extends CommonRecipe {
             var foodItems = getFoodItems("load/egg.json");
             var foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
             addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 8, "large",
-                    "8 large eggs");
+                    "8 large eggs", IngredientType.DAIRY);
 
             foodItems = getFoodItems("load/bacon_bits.json");
             foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
             addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 100, "g",
-                    "100g bacon bits (or more)");
+                    "100g bacon bits (or more)", IngredientType.NONE);
 
             foodItems = getFoodItems("load/red_onion.json");
             foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
             addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 0.5f, "medium",
-                    "2-3 spring onions or 1/2 onion, chopped");
+                    "2-3 spring onions or 1/2 onion, chopped", IngredientType.PRODUCE);
 
             foodItems = getFoodItems("load/mushroom.json");
             foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
             addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 100, "g",
-                    "100g mushrooms, diced");
+                    "100g mushrooms, diced", IngredientType.PRODUCE);
 
             foodItems = getFoodItems("load/thyme.json");
             foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
             addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 6, "sprig",
-                    "green herb sprigs (parsley, dill, coriander, basil, thyme, chives are my go-to herbs)");
+                    "green herb sprigs (parsley, dill, coriander, basil, thyme, chives are my go-to herbs)",
+                    IngredientType.PRODUCE);
 
             foodItems = getFoodItems("load/salt.json");
             foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
             addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 0.125f, "tsp",
-                    "1/8 teaspoon salt (adjust to your preference)");
+                    "1/8 teaspoon salt (adjust to your preference)",
+                    IngredientType.SPICE);
 
             foodItems = getFoodItems("load/pepper.json");
             foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
             addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 0.125f, "tsp",
-                    "1/8 teaspoon pepper (adjust to your preference)");
+                    "1/8 teaspoon pepper (adjust to your preference)", IngredientType.SPICE);
 
             foodItems = getFoodItems("load/butter.json");
             foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
             addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 1, "tbsp",
-                    "1 tablespoon of butter or olive oil to grease your muffin tin");
+                    "1 tablespoon of butter or olive oil to grease your muffin tin", IngredientType.DAIRY);
         }
     }
 }

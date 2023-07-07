@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import com.google.common.collect.Iterables;
 import com.wildfit.server.domain.FoodItemDigest;
+import com.wildfit.server.domain.IngredientType;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.FoodItems;
 import com.wildfit.server.model.mapper.IngredientDigestMapper;
@@ -48,19 +49,22 @@ public abstract class CommonRecipe {
     protected void addIngredient(long dbRecipeId, Long dbRecipeGroupId, FoodItemDigest foodItemDigest,
                                  Integer ingredientServingQty,
                                  String ingredientServingUnit,
-                                 String description) throws UserServiceException {
+                                 String description,
+                                 IngredientType ingredientType) throws UserServiceException {
         addIngredient(dbRecipeId,
                 dbRecipeGroupId,
                 foodItemDigest,
                 ingredientServingQty.floatValue(),
                 ingredientServingUnit,
-                description);
+                description,
+                ingredientType);
     }
 
     protected void addIngredient(long dbRecipeId, Long dbRecipeGroupId, FoodItemDigest foodItemDigest,
                                  Float ingredientServingQty,
                                  String ingredientServingUnit,
-                                 String description) throws UserServiceException {
+                                 String description,
+                                 IngredientType ingredientType) throws UserServiceException {
         CreateRecipeIngredientHandler.builder()
                 .withUserRepository(userRepository)
                 .withRecipeRepository(recipeRepository)
@@ -72,7 +76,8 @@ public abstract class CommonRecipe {
                 .withRequest(IngredientDigestMapper.create(foodItemDigest,
                         description,
                         ingredientServingQty,
-                        ingredientServingUnit))
+                        ingredientServingUnit,
+                        ingredientType))
                 .build().execute();
     }
 }

@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.google.common.collect.Iterables;
+import com.wildfit.server.domain.IngredientType;
 import com.wildfit.server.domain.InstructionGroupDigest;
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.SeasonType;
@@ -70,7 +71,7 @@ class CreateRecipeHandlerTest extends CommonRecipeHandlerTest {
                 .withRecipeId(dbRecipeId)
                 .withRecipeGroupId(dbRecipeGroupId)
                 .withRequest(IngredientDigestMapper.create(foodItemDigest,
-                        "2 tsp neutral-flavored oil like coconut, avocado or walnut", 2f, "tsp"))
+                        "2 tsp neutral-flavored oil like coconut, avocado or walnut", 2f, "tsp", null))
                 .build().execute();
         assertNotNull(ingredient);
         assertEquals("coconut oil", ingredient.getFoodName());
@@ -87,7 +88,8 @@ class CreateRecipeHandlerTest extends CommonRecipeHandlerTest {
                 .withRecipeId(dbRecipeId)
                 .withRecipeGroupId(dbRecipeGroupId)
                 .withRequest(IngredientDigestMapper.create(foodItemDigest,
-                        "1/2 cup chopped cilantro", 0.25f, "cup"))
+                        "1/2 cup chopped cilantro", 0.25f, "cup",
+                        IngredientType.PRODUCE))
                 .build().execute();
         assertNotNull(ingredient);
         assertEquals("cilantro", ingredient.getFoodName());

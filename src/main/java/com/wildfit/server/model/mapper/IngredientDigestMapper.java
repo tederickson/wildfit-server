@@ -2,6 +2,7 @@ package com.wildfit.server.model.mapper;
 
 import com.wildfit.server.domain.FoodItemDigest;
 import com.wildfit.server.domain.IngredientDigest;
+import com.wildfit.server.domain.IngredientType;
 
 public class IngredientDigestMapper {
     private IngredientDigestMapper() {
@@ -10,7 +11,8 @@ public class IngredientDigestMapper {
     public static IngredientDigest create(FoodItemDigest foodItemDigest,
                                           String description,
                                           Float ingredientServingQty,
-                                          String ingredientServingUnit) {
+                                          String ingredientServingUnit,
+                                          IngredientType ingredientType) {
         return IngredientDigest.builder()
                 .withIngredientServingQty(ingredientServingQty)
                 .withIngredientServingUnit(ingredientServingUnit)
@@ -24,6 +26,7 @@ public class IngredientDigestMapper {
                 .withCholesterol(foodItemDigest.getCholesterol())
                 .withDietaryFiber(foodItemDigest.getDietaryFiber())
                 .withFoodName(foodItemDigest.getFoodName())
+                .withIngredientType(ingredientType)
                 .withIron(foodItemDigest.getIron())
                 .withMetricQty(foodItemDigest.getMetricQty())
                 .withMetricUom(foodItemDigest.getMetricUom())

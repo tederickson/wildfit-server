@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.wildfit.server.domain.FoodItemDigest;
+import com.wildfit.server.domain.IngredientType;
 import com.wildfit.server.domain.InstructionDigest;
 import com.wildfit.server.domain.InstructionGroupDigest;
 import com.wildfit.server.domain.RecipeDigest;
@@ -137,56 +138,56 @@ class TunaSaladIT extends CommonRecipe {
         foodItems = getFoodItems("load/mayo.json");
         foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
         addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 1, "tbsp",
-                "1 tbsp sugar-free mayonnaise");
+                "1 tbsp sugar-free mayonnaise", null);
 
         foodItems = getFoodItems("load/greek_yoghurt.json");
         foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
         addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 1, "tbsp",
-                "1 tbsp Greek yoghurt");
+                "1 tbsp Greek yoghurt", IngredientType.DAIRY);
 
         foodItems = getFoodItems("load/salt.json");
         foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
         addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 0.125f, "tsp",
-                "1/8 teaspoon salt (adjust to your preference)");
+                "1/8 teaspoon salt (adjust to your preference)", IngredientType.SPICE);
 
         foodItems = getFoodItems("load/pepper.json");
         foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
         addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 0.125f, "tsp",
-                "1/8 teaspoon pepper (adjust to your preference)");
+                "1/8 teaspoon pepper (adjust to your preference)", IngredientType.SPICE);
     }
 
     private void saladIngredients(long dbRecipeId, long dbRecipeGroupId, SeasonType season) throws IOException, UserServiceException {
         var foodItems = getFoodItems("load/tuna_in_water.json");
         var foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
         addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 2, "can",
-                "2 cans of tuna in water, drained");
+                "2 cans of tuna in water, drained", null);
 
         if (SeasonType.SUMMER.equals(season)) {
             foodItems = getFoodItems("load/apple.json");
             foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
             addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 0.5f, "apple",
-                    "1/2 apple");
+                    "1/2 apple", IngredientType.PRODUCE);
         }
 
         foodItems = getFoodItems("load/celery.json");
         foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
         addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 1, "stalk",
-                "1 stalk celery");
+                "1 stalk celery", IngredientType.PRODUCE);
 
         foodItems = getFoodItems("load/capers.json");
         foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
         addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 1, "tbsp",
-                "1 tbsp capers");
+                "1 tbsp capers", null);
 
         foodItems = getFoodItems("load/red_onion.json");
         foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
         addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 1, "onion",
-                "1 spring onion or a small red onion, finely chopped");
+                "1 spring onion or a small red onion, finely chopped", IngredientType.PRODUCE);
 
         foodItems = getFoodItems("load/cornichon.json");
         foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
         addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 4, "cornichon",
-                "4 cornichon (small sugar free pickled cucumbers)");
+                "4 cornichon (small sugar free pickled cucumbers)", null);
     }
 
 }
