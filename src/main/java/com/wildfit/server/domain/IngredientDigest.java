@@ -45,4 +45,5 @@ public final class IngredientDigest {
     private String nixBrandId;
     private String nixItemId;
     private PhotoDigest photo;
+    private IngredientType ingredientType;
 }

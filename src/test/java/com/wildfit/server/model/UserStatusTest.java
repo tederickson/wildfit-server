@@ -1,7 +1,11 @@
 package com.wildfit.server.model;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import com.wildfit.server.domain.UserStatusType;
 import org.junit.jupiter.api.Test;
@@ -32,5 +36,12 @@ class UserStatusTest {
     @ValueSource(strings = {"F", "P"})
     void findByCode(String code) {
         assertNotNull(UserStatus.findByCode(code));
+    }
+
+    @Test
+    void distinctCodes() {
+        final var values = UserStatus.values();
+        final var codes = Arrays.stream(values).map(UserStatus::getCode).collect(Collectors.toSet());
+        assertEquals(values.length, codes.size());
     }
 }

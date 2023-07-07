@@ -4,14 +4,16 @@ CREATE TABLE recipe_ingredient (
     recipe_id bigint NOT NULL,                  -- Recipe.id
     instruction_group_id bigint NOT NULL,       -- InstructionGroup.id
 
+    ingredient_type varchar(2) NOT NULL,
+
     food_name       varchar(100) NOT NULL,
     description     varchar(256) NOT NULL,
     brand_name      varchar(100),
     brand_name_item_name     varchar(100),
     serving_qty     float,
-    serving_unit    varchar(50),                    -- 'medium with 3 inch diameter, blah, blah
+    serving_unit    varchar(50),
     ingredient_serving_qty  float NOT NULL,
-    ingredient_serving_unit varchar(50) NOT NULL,   -- 'medium with 3 inch diameter, blah, blah
+    ingredient_serving_unit varchar(50) NOT NULL,
     serving_weight_grams    float,
     metric_qty  float,
     metric_uom  varchar(20),

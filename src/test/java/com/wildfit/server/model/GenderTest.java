@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 import com.wildfit.server.domain.GenderType;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -37,5 +40,12 @@ class GenderTest {
         for (var enm : Gender.values()) {
             assertNotNull(enm.toGenderType());
         }
+    }
+
+    @Test
+    void distinctCodes() {
+        final var values = Gender.values();
+        final var codes = Arrays.stream(values).map(Gender::getCode).collect(Collectors.toSet());
+        assertEquals(values.length, codes.size());
     }
 }
