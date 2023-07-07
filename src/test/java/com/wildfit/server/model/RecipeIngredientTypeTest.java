@@ -17,11 +17,15 @@ class RecipeIngredientTypeTest {
 
     @Test
     void toIngredientType() {
-        for (var enm : IngredientType.values()) {
-            RecipeIngredientType.valueOf(enm.name());
-        }
         for (var enm : RecipeIngredientType.values()) {
             assertNotNull(enm.toIngredientType());
+        }
+    }
+
+    @Test
+    void map() {
+        for (var enm : IngredientType.values()) {
+            assertNotNull(RecipeIngredientType.map(enm));
         }
     }
 

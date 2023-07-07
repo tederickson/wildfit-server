@@ -2,6 +2,7 @@ package com.wildfit.server.model.mapper;
 
 import com.wildfit.server.domain.IngredientDigest;
 import com.wildfit.server.model.RecipeIngredient;
+import com.wildfit.server.model.RecipeIngredientType;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -10,6 +11,8 @@ public class RecipeIngredientMapper {
     }
 
     public static IngredientDigest map(RecipeIngredient recipeIngredient) {
+        final var recipeIngredientType = RecipeIngredientType.findByCode(recipeIngredient.getIngredientType());
+
         return IngredientDigest.builder()
                 .withAddedSugars(recipeIngredient.getAddedSugars())
                 .withBrandName(recipeIngredient.getBrandName())
@@ -23,6 +26,7 @@ public class RecipeIngredientMapper {
                 .withId(recipeIngredient.getId())
                 .withIngredientServingQty(recipeIngredient.getIngredientServingQty())
                 .withIngredientServingUnit(recipeIngredient.getIngredientServingUnit())
+                .withIngredientType(recipeIngredientType.toIngredientType())
                 .withInstructionGroupId(recipeIngredient.getInstructionGroupId())
                 .withIron(recipeIngredient.getIron())
                 .withMetricQty(recipeIngredient.getMetricQty())
@@ -31,7 +35,7 @@ public class RecipeIngredientMapper {
                 .withNixBrandName(recipeIngredient.getNixBrandName())
                 .withNixItemId(recipeIngredient.getNixItemId())
                 .withPhosphorus(recipeIngredient.getPhosphorus())
-                .withPhoto(PhotoDigestMapper.map(recipeIngredient.getPhoto_thumbnail()))
+                .withPhoto(PhotoDigestMapper.map(recipeIngredient.getPhotoThumbnail()))
                 .withPotassium(recipeIngredient.getPotassium())
                 .withProtein(recipeIngredient.getProtein())
                 .withRecipeId(recipeIngredient.getRecipeId())
@@ -49,6 +53,8 @@ public class RecipeIngredientMapper {
     }
 
     public static RecipeIngredient create(IngredientDigest ingredientDigest, Long recipeId, Long recipeGroupId) {
+        final var recipeIngredientType = RecipeIngredientType.map(ingredientDigest.getIngredientType());
+
         return RecipeIngredient.builder()
                 .withAddedSugars(ingredientDigest.getAddedSugars())
                 .withBrandName(ingredientDigest.getBrandName())
@@ -62,6 +68,7 @@ public class RecipeIngredientMapper {
                 // .withId(ingredientDigest.getId())
                 .withIngredientServingQty(ingredientDigest.getIngredientServingQty())
                 .withIngredientServingUnit(ingredientDigest.getIngredientServingUnit())
+                .withIngredientType(recipeIngredientType.getCode())
                 .withInstructionGroupId(recipeGroupId)
                 .withIron(ingredientDigest.getIron())
                 .withMetricQty(ingredientDigest.getMetricQty())
@@ -70,7 +77,7 @@ public class RecipeIngredientMapper {
                 .withNixBrandName(ingredientDigest.getNixBrandName())
                 .withNixItemId(ingredientDigest.getNixItemId())
                 .withPhosphorus(ingredientDigest.getPhosphorus())
-                .withPhoto_thumbnail(ingredientDigest.getPhoto() == null ? null : ingredientDigest.getPhoto().getThumb())
+                .withPhotoThumbnail(ingredientDigest.getPhoto() == null ? null : ingredientDigest.getPhoto().getThumb())
                 .withPotassium(ingredientDigest.getPotassium())
                 .withProtein(ingredientDigest.getProtein())
                 .withRecipeId(recipeId)
@@ -85,44 +92,5 @@ public class RecipeIngredientMapper {
                 .withTransFattyAcid(ingredientDigest.getTransFattyAcid())
                 .withVitaminD(ingredientDigest.getVitaminD())
                 .build();
-    }
-
-    public static RecipeIngredient update(IngredientDigest ingredientDigest, RecipeIngredient recipeIngredient) {
-        recipeIngredient.setAddedSugars(ingredientDigest.getAddedSugars());
-        recipeIngredient.setBrandName(ingredientDigest.getBrandName());
-        recipeIngredient.setBrandNameItemName(ingredientDigest.getBrandNameItemName());
-        recipeIngredient.setCalcium(ingredientDigest.getCalcium());
-        recipeIngredient.setCalories(ingredientDigest.getCalories());
-        recipeIngredient.setCholesterol(ingredientDigest.getCholesterol());
-        recipeIngredient.setDescription(ingredientDigest.getDescription());
-        recipeIngredient.setDietaryFiber(ingredientDigest.getDietaryFiber());
-        recipeIngredient.setFoodName(ingredientDigest.getFoodName());
-        // recipeIngredient.setId(ingredientDigest.getId())
-        recipeIngredient.setIngredientServingQty(ingredientDigest.getIngredientServingQty());
-        recipeIngredient.setIngredientServingUnit(ingredientDigest.getIngredientServingUnit());
-        // recipeIngredient.setInstructionGroupId(ingredientDigest.getInstructionGroupId());
-        recipeIngredient.setIron(ingredientDigest.getIron());
-        recipeIngredient.setMetricQty(ingredientDigest.getMetricQty());
-        recipeIngredient.setMetricUom(ingredientDigest.getMetricUom());
-        recipeIngredient.setNixBrandId(ingredientDigest.getNixBrandId());
-        recipeIngredient.setNixBrandName(ingredientDigest.getNixBrandName());
-        recipeIngredient.setNixItemId(ingredientDigest.getNixItemId());
-        recipeIngredient.setPhosphorus(ingredientDigest.getPhosphorus());
-        recipeIngredient.setPhoto_thumbnail(ingredientDigest.getPhoto() == null ? null : ingredientDigest.getPhoto().getThumb());
-        recipeIngredient.setPotassium(ingredientDigest.getPotassium());
-        recipeIngredient.setProtein(ingredientDigest.getProtein());
-        // recipeIngredient.setRecipeId(ingredientDigest.getRecipeId())
-        recipeIngredient.setSaturatedFat(ingredientDigest.getSaturatedFat());
-        recipeIngredient.setServingQty(ingredientDigest.getServingQty());
-        recipeIngredient.setServingUnit(ingredientDigest.getServingUnit());
-        recipeIngredient.setServingWeightGrams(ingredientDigest.getServingWeightGrams());
-        recipeIngredient.setSodium(ingredientDigest.getSodium());
-        recipeIngredient.setSugars(ingredientDigest.getSugars());
-        recipeIngredient.setTotalCarbohydrate(ingredientDigest.getTotalCarbohydrate());
-        recipeIngredient.setTotalFat(ingredientDigest.getTotalFat());
-        recipeIngredient.setTransFattyAcid(ingredientDigest.getTransFattyAcid());
-        recipeIngredient.setVitaminD(ingredientDigest.getVitaminD());
-
-        return recipeIngredient;
     }
 }

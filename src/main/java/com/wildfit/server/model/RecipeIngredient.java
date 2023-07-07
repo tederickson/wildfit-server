@@ -85,8 +85,11 @@ public class RecipeIngredient {
     private String nixBrandId;
     @Column(name = "nix_item_id")
     private String nixItemId;
+    @Column(name = "photo_thumbnail")
+    private String photoThumbnail;
 
-    private String photo_thumbnail;
+    @Column(name = "ingredient_type")
+    private String ingredientType;
 
     @Override
     public boolean equals(Object o) {

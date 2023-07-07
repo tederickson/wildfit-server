@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.google.common.collect.Iterables;
 import com.wildfit.server.domain.IngredientDigest;
+import com.wildfit.server.domain.IngredientType;
 import com.wildfit.server.domain.InstructionGroupDigest;
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.SeasonType;
@@ -62,6 +63,7 @@ class CreateRecipeIngredientHandlerTest extends CommonRecipeHandlerTest {
                 .withTotalFat(totalFat)
                 .withTransFattyAcid(transFattyAcid)
                 .withVitaminD(vitaminD)
+                .withIngredientType(IngredientType.DAIRY)
                 .build();
     }
 
