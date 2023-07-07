@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-import com.wildfit.server.domain.FoodItemDigest;
+import com.wildfit.server.domain.*;
 import com.wildfit.server.domain.SearchFoodResponse;
 import com.wildfit.server.exception.NutritionixException;
 import com.wildfit.server.exception.UserServiceException;
-import com.wildfit.server.service.NutritionixService;
+import com.wildfit.server.service.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -19,6 +19,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 class FoodControllerTest {
     @Mock
     private NutritionixService nutritionixService;
+    @Mock
+    private RecipeService recipeService;
 
     @InjectMocks
     FoodController foodController;
@@ -46,7 +48,16 @@ class FoodControllerTest {
         final var description = "blah de blah, blah blah";
         when(nutritionixService.getFoodsByQuery(any())).thenReturn(new SearchFoodResponse());
 
-        final var response = nutritionixService.getFoodsByQuery(description);
+        final var response = foodController.getFoodsByQuery(description);
+        assertNotNull(response);
+    }
+
+    @Test
+    void getRecipeNutrition() throws UserServiceException, NutritionixException {
+        when(recipeService.retrieveRecipe(any())).thenReturn(RecipeDigest.builder().build());
+        when(nutritionixService.getRecipeNutrition(any())).thenReturn(FoodItemDigest.builder().build());
+
+        final var response = foodController.getRecipeNutrition(12L);
         assertNotNull(response);
     }
 }

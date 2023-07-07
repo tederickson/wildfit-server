@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+import com.wildfit.server.domain.ChangePasswordRequest;
 import com.wildfit.server.domain.CreateUserRequest;
 import com.wildfit.server.domain.CreateUserResponse;
 import com.wildfit.server.domain.UpdateUserProfileRequest;
@@ -60,6 +61,6 @@ class UserAdminControllerTest {
 
     @Test
     void changePassword() throws UserServiceException {
-        userService.changePassword(userId, "request.getPassword()");
+        userAdminController.changePassword(userId, ChangePasswordRequest.builder().build());
     }
 }
