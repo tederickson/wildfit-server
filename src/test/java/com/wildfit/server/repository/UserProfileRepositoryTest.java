@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 import com.wildfit.server.model.User;
@@ -32,7 +33,7 @@ class UserProfileRepositoryTest extends AbstractRepositoryTest {
     void findByEmail_withUser() {
         final var user = User.builder()
                 .withStatus(UserStatus.FREE.getCode())
-                .withCreateDate(java.time.LocalDate.now())
+                .withCreateDate(LocalDate.now())
                 .withPassword(PASSWORD)
                 .withUuid(UUID.randomUUID().toString())
                 .withEmail(EMAIL).build();
