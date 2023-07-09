@@ -11,6 +11,7 @@ public final class CreateUserResponseMapper {
         return CreateUserResponse.builder()
                 .withId(user.getId())
                 .withEmail(user.getEmail())
+                .withUuid(user.getUuid())
                 .build();
     }
 }

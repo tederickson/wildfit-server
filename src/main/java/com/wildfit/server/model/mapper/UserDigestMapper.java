@@ -21,6 +21,7 @@ public final class UserDigestMapper {
                 .withId(user.getId())
                 .withEmail(user.getEmail())
                 .withStatus(status)
+                .withUuid(user.getUuid())
                 .build();
     }
 }

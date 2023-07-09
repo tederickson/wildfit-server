@@ -32,6 +32,7 @@ class UserDigestMapperTest {
         assertEquals(MAIL, digest.getEmail());
         assertEquals(UserStatusType.FREE, digest.getStatus());
         assertEquals(12314L, digest.getId());
+        assertEquals(user.getUuid(), digest.getUuid());
     }
 
     @Test
@@ -48,5 +49,6 @@ class UserDigestMapperTest {
 
         assertNull(digest.getEmail());
         assertNull(digest.getStatus());
+        assertNull(digest.getUuid());
     }
 }

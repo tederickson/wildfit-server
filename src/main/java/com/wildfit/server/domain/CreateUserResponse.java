@@ -16,4 +16,5 @@ public final class CreateUserResponse {
 
     @JsonDeserialize(using = CustomStringDeserializer.class)
     private String email;
+    private String uuid;
 }
