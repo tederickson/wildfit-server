@@ -4,11 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-import com.wildfit.server.domain.*;
+import com.wildfit.server.domain.FoodItemDigest;
+import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.SearchFoodResponse;
 import com.wildfit.server.exception.NutritionixException;
 import com.wildfit.server.exception.UserServiceException;
-import com.wildfit.server.service.*;
+import com.wildfit.server.service.NutritionixService;
+import com.wildfit.server.service.RecipeService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

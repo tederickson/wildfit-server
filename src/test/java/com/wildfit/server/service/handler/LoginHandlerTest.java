@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.util.UUID;
+
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.User;
@@ -117,6 +119,7 @@ class LoginHandlerTest extends CommonHandlerTest {
                 .withCreateDate(java.time.LocalDate.now())
                 .withPassword(encodedPassword)
                 .withEmail(EMAIL)
+                .withUuid(UUID.randomUUID().toString())
                 .withEnabled(enabled)
                 .build();
         final var saved = userRepository.save(user);

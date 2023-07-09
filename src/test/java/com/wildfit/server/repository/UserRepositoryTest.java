@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.UUID;
+
 import com.wildfit.server.model.User;
 import com.wildfit.server.model.UserStatus;
 import org.junit.jupiter.api.Test;
@@ -26,6 +28,7 @@ class UserRepositoryTest extends AbstractRepositoryTest {
                 .withStatus(UserStatus.FREE.getCode())
                 .withCreateDate(java.time.LocalDate.now())
                 .withPassword(PASSWORD)
+                .withUuid(UUID.randomUUID().toString())
                 .withEmail(EMAIL).build();
         final var saved = userRepository.save(user);
         assertNotNull(saved);

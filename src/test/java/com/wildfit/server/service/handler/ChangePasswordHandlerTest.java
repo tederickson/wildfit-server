@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.UUID;
+
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.User;
@@ -64,6 +66,7 @@ class ChangePasswordHandlerTest extends CommonHandlerTest {
                 .withStatus(UserStatus.FREE.getCode())
                 .withCreateDate(java.time.LocalDate.now())
                 .withPassword("encoded password")
+                .withUuid(UUID.randomUUID().toString())
                 .withEmail(EMAIL).build();
         final var saved = userRepository.save(user);
         assertNotNull(saved);

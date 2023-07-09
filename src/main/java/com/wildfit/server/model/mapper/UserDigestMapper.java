@@ -11,7 +11,8 @@ public final class UserDigestMapper {
     }
 
     public static UserDigest map(User user) {
-        final var status = Optional.ofNullable(user.getUserStatus())
+        final var status = Optional.ofNullable(user)
+                .map(User::getUserStatus)
                 .map(Enum::name)
                 .map(UserStatusType::valueOf)
                 .orElse(null);

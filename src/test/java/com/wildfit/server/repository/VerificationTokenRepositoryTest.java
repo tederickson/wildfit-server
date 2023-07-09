@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 import com.wildfit.server.model.User;
 import com.wildfit.server.model.UserStatus;
@@ -32,6 +33,7 @@ class VerificationTokenRepositoryTest extends AbstractRepositoryTest {
                 .withStatus(UserStatus.FREE.getCode())
                 .withCreateDate(java.time.LocalDate.now())
                 .withPassword(PASSWORD)
+                .withUuid(UUID.randomUUID().toString())
                 .withEmail(EMAIL).build();
 
         final var dbUser = userRepository.save(user);

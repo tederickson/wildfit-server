@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.UUID;
+
 import com.wildfit.server.domain.GenderType;
 import com.wildfit.server.domain.UpdateUserProfileRequest;
 import com.wildfit.server.exception.UserServiceError;
@@ -67,6 +69,7 @@ class UpdateUserProfileHandlerTest extends CommonHandlerTest {
                 .withStatus(UserStatus.PREMIUM.getCode())
                 .withCreateDate(java.time.LocalDate.now())
                 .withPassword(PASSWORD)
+                .withUuid(UUID.randomUUID().toString())
                 .withEmail(EMAIL).build();
         final var saved = userProfileRepository.save(UserProfile.builder()
                 .withUser(user)
