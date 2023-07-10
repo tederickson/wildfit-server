@@ -34,7 +34,12 @@ class UserRepositoryTest extends AbstractRepositoryTest {
     }
 
     @Test
-    void findByUniqueUserid_withUser() {
+    void findByUniqueUserId() {
+        assertTrue(userRepository.findByUuid("bob").isEmpty());
+    }
+
+    @Test
+    void findByUniqueUserId_withUser() {
         final var saved = userRepository.save(USER);
         assertNotNull(saved);
 
