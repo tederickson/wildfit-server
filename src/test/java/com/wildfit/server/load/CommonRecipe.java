@@ -2,7 +2,6 @@ package com.wildfit.server.load;
 
 import java.io.IOException;
 
-import com.google.common.collect.Iterables;
 import com.wildfit.server.domain.FoodItemDigest;
 import com.wildfit.server.domain.IngredientType;
 import com.wildfit.server.exception.UserServiceException;
@@ -20,6 +19,7 @@ public abstract class CommonRecipe {
     protected static Long userId;
 
     protected static final String EMAIL = "wildfit@wildfit.prototype.com";
+    protected static final String UUID = "6ec5ad9e-248b-40b0-aa0f-6f099b12e5ea";
 
     @Autowired
     protected UserRepository userRepository;
@@ -32,9 +32,9 @@ public abstract class CommonRecipe {
 
     @BeforeEach
     void setUp() {
-        final var users = userRepository.findByEmail(EMAIL);
+        final var user = userRepository.findByUuid(UUID).orElseThrow();
 
-        userId = Iterables.getOnlyElement(users).getId();
+        userId = user.getId();
     }
 
     // Use https://trackapi.nutritionix.com/v2/natural/nutrients to create JSON files
