@@ -22,7 +22,7 @@ class UserProfileRepositoryTest extends AbstractRepositoryTest {
     UserProfileRepository userProfileRepository;
 
     @Test
-    void findByUserName() {
+    void findByEmail() {
         final var users = userRepository.findByEmail(EMAIL);
 
         assertNotNull(users);
