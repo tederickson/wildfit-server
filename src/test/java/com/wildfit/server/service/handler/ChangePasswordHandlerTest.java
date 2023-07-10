@@ -19,7 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class ChangePasswordHandlerTest extends CommonHandlerTest {
 
-    private static final Long USER_ID = 1222L;
+    private static final String USER_ID = "1222L";
 
     @Test
     void nullParameters() {
@@ -74,7 +74,7 @@ class ChangePasswordHandlerTest extends CommonHandlerTest {
         ChangePasswordHandler.builder()
                 .withUserRepository(userRepository)
                 .withPassword(PASSWORD)
-                .withUserId(saved.getId())
+                .withUserId(saved.getUuid())
                 .build().execute();
 
         final var updatedUser = userRepository.findById(saved.getId()).orElseThrow();

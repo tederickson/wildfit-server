@@ -45,7 +45,7 @@ class GetUserProfileHandlerTest extends CommonHandlerTest {
                 () -> GetUserProfileHandler.builder()
                         .withUserRepository(userRepository)
                         .withUserProfileRepository(userProfileRepository)
-                        .withUserId(-14L)
+                        .withUserId("-14L")
                         .build().execute());
         assertEquals(UserServiceError.USER_NOT_FOUND, exception.getError());
     }
@@ -73,7 +73,7 @@ class GetUserProfileHandlerTest extends CommonHandlerTest {
         final var digest = GetUserProfileHandler.builder()
                 .withUserRepository(userRepository)
                 .withUserProfileRepository(userProfileRepository)
-                .withUserId(saved.getUser().getId())
+                .withUserId(saved.getUser().getUuid())
                 .build().execute();
 
         assertEquals(EMAIL, digest.getUser().getEmail());

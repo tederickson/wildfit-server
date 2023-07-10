@@ -46,7 +46,7 @@ class UpdateUserProfileHandlerTest extends CommonHandlerTest {
                 () -> UpdateUserProfileHandler.builder()
                         .withUserRepository(userRepository)
                         .withUserProfileRepository(userProfileRepository)
-                        .withUserId(123L)
+                        .withUserId("123L")
                         .withUserProfileRequest(null)
                         .build().execute());
     }
@@ -57,7 +57,7 @@ class UpdateUserProfileHandlerTest extends CommonHandlerTest {
                 () -> UpdateUserProfileHandler.builder()
                         .withUserRepository(userRepository)
                         .withUserProfileRepository(userProfileRepository)
-                        .withUserId(-14L)
+                        .withUserId("-14L")
                         .withUserProfileRequest(UpdateUserProfileRequest.builder().build())
                         .build().execute());
         assertEquals(UserServiceError.USER_NOT_FOUND, exception.getError());
@@ -88,7 +88,7 @@ class UpdateUserProfileHandlerTest extends CommonHandlerTest {
         final var digest = UpdateUserProfileHandler.builder()
                 .withUserRepository(userRepository)
                 .withUserProfileRepository(userProfileRepository)
-                .withUserId(saved.getUser().getId())
+                .withUserId(saved.getUser().getUuid())
                 .withUserProfileRequest(updateUserProfileRequest)
                 .build().execute();
 

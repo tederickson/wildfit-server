@@ -38,7 +38,7 @@ class DeleteUserHandlerTest extends CommonHandlerTest {
         final var exception = assertThrows(UserServiceException.class,
                 () -> DeleteUserHandler.builder()
                         .withUserRepository(userRepository)
-                        .withUserId(-14L)
+                        .withUserId("-14L")
                         .build().execute());
         assertEquals(UserServiceError.USER_NOT_FOUND, exception.getError());
     }
@@ -57,7 +57,7 @@ class DeleteUserHandlerTest extends CommonHandlerTest {
 
         DeleteUserHandler.builder()
                 .withUserRepository(userRepository)
-                .withUserId(saved.getId())
+                .withUserId(saved.getUuid())
                 .build().execute();
 
         final var users = userRepository.findByEmail(EMAIL);

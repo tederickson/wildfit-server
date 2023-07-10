@@ -17,18 +17,18 @@ public class GetUserProfileHandler {
 
     final UserRepository userRepository;
     final UserProfileRepository userProfileRepository;
-    final Long userId;
+    final String userId;
 
     public UserProfileDigest execute() throws UserServiceException {
         log.info("GetUserProfileHandler(" + userId + ")");
         validate();
 
-        final var user = userRepository.findById(userId)
+        final var user = userRepository.findByUuid(userId)
                 .orElseThrow(() -> new UserServiceException(UserServiceError.USER_NOT_FOUND));
 
-        final var userProfile = userProfileRepository.findByUser(user);
+        final var userProfile = userProfileRepository.findByUser(user).orElse(null);
 
-        return UserProfileDigestMapper.map(userProfile);
+        return UserProfileDigestMapper.map(user, userProfile);
     }
 
     private void validate() throws UserServiceException {

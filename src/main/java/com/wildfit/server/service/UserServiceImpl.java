@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(Long userId) throws UserServiceException {
+    public void deleteUser(String userId) throws UserServiceException {
         DeleteUserHandler.builder()
                 .withUserRepository(userRepository)
                 .withUserId(userId)
@@ -63,10 +63,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void changePassword(Long id, String password) throws UserServiceException {
+    public void changePassword(String userId, String password) throws UserServiceException {
         ChangePasswordHandler.builder()
                 .withUserRepository(userRepository)
-                .withUserId(id)
+                .withUserId(userId)
                 .withPassword(password)
                 .build().execute();
     }
@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserProfileDigest getUserProfile(Long userId) throws UserServiceException {
+    public UserProfileDigest getUserProfile(String userId) throws UserServiceException {
         return GetUserProfileHandler.builder()
                 .withUserRepository(userRepository)
                 .withUserProfileRepository(userProfileRepository)
@@ -90,11 +90,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserProfileDigest updateUserProfile(Long id, UpdateUserProfileRequest request) throws UserServiceException {
+    public UserProfileDigest updateUserProfile(String userId, UpdateUserProfileRequest request)
+            throws UserServiceException {
         return UpdateUserProfileHandler.builder()
                 .withUserRepository(userRepository)
                 .withUserProfileRepository(userProfileRepository)
-                .withUserId(id)
+                .withUserId(userId)
                 .withUserProfileRequest(request)
                 .build().execute();
     }

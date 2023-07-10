@@ -19,7 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 class UserAdminControllerTest {
-    static final Long userId = -23L;
+    static final String userId = "1nv4L1d";
 
     @Mock
     private UserService userService;

@@ -30,28 +30,22 @@ public class UpdateUserProfileHandler {
         final var user = userRepository.findByUuid(userId).orElseThrow(() ->
                 new UserServiceException(UserServiceError.USER_NOT_FOUND));
 
-        var dbUserProfile = userProfileRepository.findByUser(user);
-        if (dbUserProfile == null) {
-            final var userProfile = UserProfile.builder()
-                    .withUser(user)
-                    .withName(userProfileRequest.getName())
-                    .build();
-            dbUserProfile = userProfileRepository.save(userProfile);
-        }
+        final var userProfile = userProfileRepository.findByUser(user)
+                .orElse(UserProfile.builder().withUser(user).build());
 
-        dbUserProfile.setName(userProfileRequest.getName());
-        dbUserProfile.setAge(userProfileRequest.getAge());
+        userProfile.setName(userProfileRequest.getName());
+        userProfile.setAge(userProfileRequest.getAge());
 
         if (userProfileRequest.getGender() != null) {
             final var gender = Gender.map(userProfileRequest.getGender());
-            dbUserProfile.setGender(gender.getCodeAsCharacter());
+            userProfile.setGender(gender.getCodeAsCharacter());
         }
 
-        dbUserProfile.setHeight_feet(userProfileRequest.getHeightFeet());
-        dbUserProfile.setHeight_inches(userProfileRequest.getHeightInches());
-        dbUserProfile.setWeight(userProfileRequest.getWeight());
+        userProfile.setHeight_feet(userProfileRequest.getHeightFeet());
+        userProfile.setHeight_inches(userProfileRequest.getHeightInches());
+        userProfile.setWeight(userProfileRequest.getWeight());
 
-        final var saved = userProfileRepository.save(dbUserProfile);
+        final var saved = userProfileRepository.save(userProfile);
 
         return UserProfileDigestMapper.map(user, saved);
     }
