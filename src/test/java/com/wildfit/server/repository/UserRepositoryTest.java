@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.wildfit.server.model.User;
 import com.wildfit.server.model.UserStatus;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,12 +21,7 @@ class UserRepositoryTest extends AbstractRepositoryTest {
 
     @Test
     void findByEmail_withUser() {
-        final var user = User.builder()
-                .withStatus(UserStatus.FREE.getCode())
-                .withCreateDate(java.time.LocalDate.now())
-                .withPassword(PASSWORD)
-                .withEmail(EMAIL).build();
-        final var saved = userRepository.save(user);
+        final var saved = userRepository.save(USER);
         assertNotNull(saved);
 
         final var users = userRepository.findByEmail(EMAIL);
@@ -37,5 +31,24 @@ class UserRepositoryTest extends AbstractRepositoryTest {
 
         assertEquals(EMAIL, retrieved.getEmail());
         assertEquals(UserStatus.FREE, retrieved.getUserStatus());
+    }
+
+    @Test
+    void findByUniqueUserId() {
+        assertTrue(userRepository.findByUuid("bob").isEmpty());
+    }
+
+    @Test
+    void findByUniqueUserId_withUser() {
+        final var saved = userRepository.save(USER);
+        assertNotNull(saved);
+
+        final var user = userRepository.findByUuid(saved.getUuid())
+                .orElse(null);
+
+
+        assertNotNull(user);
+        assertEquals(EMAIL, user.getEmail());
+        assertEquals(UserStatus.FREE, user.getUserStatus());
     }
 }

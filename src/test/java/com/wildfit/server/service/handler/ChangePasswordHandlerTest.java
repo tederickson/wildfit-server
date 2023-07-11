@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.UUID;
+
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.User;
@@ -17,7 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class ChangePasswordHandlerTest extends CommonHandlerTest {
 
-    private static final Long USER_ID = 1222L;
+    private static final String USER_ID = "1222L";
 
     @Test
     void nullParameters() {
@@ -64,6 +66,7 @@ class ChangePasswordHandlerTest extends CommonHandlerTest {
                 .withStatus(UserStatus.FREE.getCode())
                 .withCreateDate(java.time.LocalDate.now())
                 .withPassword("encoded password")
+                .withUuid(UUID.randomUUID().toString())
                 .withEmail(EMAIL).build();
         final var saved = userRepository.save(user);
         assertNotNull(saved);
@@ -71,7 +74,7 @@ class ChangePasswordHandlerTest extends CommonHandlerTest {
         ChangePasswordHandler.builder()
                 .withUserRepository(userRepository)
                 .withPassword(PASSWORD)
-                .withUserId(saved.getId())
+                .withUserId(saved.getUuid())
                 .build().execute();
 
         final var updatedUser = userRepository.findById(saved.getId()).orElseThrow();

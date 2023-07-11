@@ -1,6 +1,7 @@
 package com.wildfit.server.service.handler;
 
 import java.util.Objects;
+import java.util.UUID;
 
 import com.wildfit.server.domain.CreateUserResponse;
 import com.wildfit.server.exception.UserServiceError;
@@ -54,8 +55,10 @@ public class CreateUserHandler {
                 .withPassword(encodedPassword)
                 .withEmail(email)
                 .withEnabled(false)
+                .withUuid(UUID.randomUUID().toString())
                 .build();
-        final var userProfile = UserProfile.builder().withUser(user)
+        final var dbUser = userRepository.save(user);
+        final var userProfile = UserProfile.builder().withUser(dbUser)
                 .withName(name)
                 .build();
 

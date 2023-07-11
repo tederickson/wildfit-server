@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDate;
+import java.util.UUID;
+
 import com.wildfit.server.model.User;
 import com.wildfit.server.model.UserProfile;
 import com.wildfit.server.model.UserStatus;
@@ -19,7 +22,7 @@ class UserProfileRepositoryTest extends AbstractRepositoryTest {
     UserProfileRepository userProfileRepository;
 
     @Test
-    void findByUserName() {
+    void findByEmail() {
         final var users = userRepository.findByEmail(EMAIL);
 
         assertNotNull(users);
@@ -30,11 +33,13 @@ class UserProfileRepositoryTest extends AbstractRepositoryTest {
     void findByEmail_withUser() {
         final var user = User.builder()
                 .withStatus(UserStatus.FREE.getCode())
-                .withCreateDate(java.time.LocalDate.now())
+                .withCreateDate(LocalDate.now())
                 .withPassword(PASSWORD)
+                .withUuid(UUID.randomUUID().toString())
                 .withEmail(EMAIL).build();
+        final var dbUser = userRepository.save(user);
         final var userProfile = UserProfile.builder()
-                .withUser(user)
+                .withUser(dbUser)
                 .withName(USER_NAME)
                 .build();
 
@@ -50,7 +55,7 @@ class UserProfileRepositoryTest extends AbstractRepositoryTest {
         assertEquals(EMAIL, retrieved.getEmail());
         assertEquals(UserStatus.FREE, retrieved.getUserStatus());
 
-        final var retrievedProfile = userProfileRepository.findByUser(users.get(0));
+        final var retrievedProfile = userProfileRepository.findByUser(users.get(0)).orElseThrow();
 
         assertEquals(EMAIL, retrievedProfile.getUser().getEmail());
         assertEquals(USER_NAME, retrievedProfile.getName());

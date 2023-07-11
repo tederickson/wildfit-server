@@ -11,7 +11,7 @@ import org.springframework.util.StringUtils;
 @Builder(setterPrefix = "with")
 public class ChangePasswordHandler {
     final UserRepository userRepository;
-    final Long userId;
+    final String userId;
     final String password;
 
     public void execute() throws UserServiceException {
@@ -22,7 +22,7 @@ public class ChangePasswordHandler {
         }
         final var encodedPassword = PasswordEncodeDecode.encode(password);
 
-        final var user = userRepository.findById(userId)
+        final var user = userRepository.findByUuid(userId)
                 .orElseThrow(() -> new UserServiceException(UserServiceError.USER_NOT_FOUND));
 
         user.setPassword(encodedPassword);

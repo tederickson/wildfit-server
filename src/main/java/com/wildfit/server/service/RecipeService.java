@@ -16,17 +16,17 @@ public interface RecipeService {
 
     RecipeDigest retrieveRecipe(Long recipeId) throws UserServiceException;
 
-    void deleteRecipe(Long recipeId, Long userId) throws UserServiceException;
+    void deleteRecipe(Long recipeId, String userId) throws UserServiceException;
 
-    RecipeDigest createRecipe(Long userId, RecipeDigest request) throws UserServiceException;
+    RecipeDigest createRecipe(String userId, RecipeDigest request) throws UserServiceException;
 
-    RecipeDigest updateRecipe(Long userId, RecipeDigest request) throws UserServiceException;
+    RecipeDigest updateRecipe(String userId, RecipeDigest request) throws UserServiceException;
 
-    IngredientDigest createRecipeIngredient(Long userId, Long recipeId, Long recipeGroupId, IngredientDigest request)
+    IngredientDigest createRecipeIngredient(String userId, Long recipeId, Long recipeGroupId, IngredientDigest request)
             throws UserServiceException;
 
-    void deleteRecipeIngredient(Long userId, Long recipeId, Long ingredientId) throws UserServiceException;
+    void deleteRecipeIngredient(String userId, Long recipeId, Long ingredientId) throws UserServiceException;
 
-    IngredientDigest updateRecipeIngredient(Long userId, Long recipeId, Long ingredientId,
+    IngredientDigest updateRecipeIngredient(String userId, Long recipeId, Long ingredientId,
                                             UpdateIngredientRequest request) throws UserServiceException;
 }

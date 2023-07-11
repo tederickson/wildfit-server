@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.UUID;
+
 import com.wildfit.server.domain.GenderType;
 import com.wildfit.server.domain.UpdateUserProfileRequest;
 import com.wildfit.server.exception.UserServiceError;
@@ -44,7 +46,7 @@ class UpdateUserProfileHandlerTest extends CommonHandlerTest {
                 () -> UpdateUserProfileHandler.builder()
                         .withUserRepository(userRepository)
                         .withUserProfileRepository(userProfileRepository)
-                        .withUserId(123L)
+                        .withUserId("123L")
                         .withUserProfileRequest(null)
                         .build().execute());
     }
@@ -55,8 +57,8 @@ class UpdateUserProfileHandlerTest extends CommonHandlerTest {
                 () -> UpdateUserProfileHandler.builder()
                         .withUserRepository(userRepository)
                         .withUserProfileRepository(userProfileRepository)
-                        .withUserId(-14L)
-                        .withUserProfileRequest(UpdateUserProfileRequest.builder().build())
+                        .withUserId("-14L")
+                        .withUserProfileRequest(UpdateUserProfileRequest.builder().withName(NAME).build())
                         .build().execute());
         assertEquals(UserServiceError.USER_NOT_FOUND, exception.getError());
     }
@@ -67,9 +69,11 @@ class UpdateUserProfileHandlerTest extends CommonHandlerTest {
                 .withStatus(UserStatus.PREMIUM.getCode())
                 .withCreateDate(java.time.LocalDate.now())
                 .withPassword(PASSWORD)
+                .withUuid(UUID.randomUUID().toString())
                 .withEmail(EMAIL).build();
+        final var dbUser = userRepository.save(user);
         final var saved = userProfileRepository.save(UserProfile.builder()
-                .withUser(user)
+                .withUser(dbUser)
                 .withName(NAME).build());
         assertNotNull(saved);
 
@@ -85,7 +89,7 @@ class UpdateUserProfileHandlerTest extends CommonHandlerTest {
         final var digest = UpdateUserProfileHandler.builder()
                 .withUserRepository(userRepository)
                 .withUserProfileRepository(userProfileRepository)
-                .withUserId(saved.getUser().getId())
+                .withUserId(saved.getUser().getUuid())
                 .withUserProfileRequest(updateUserProfileRequest)
                 .build().execute();
 

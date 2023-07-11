@@ -11,16 +11,15 @@ import lombok.Builder;
 public class DeleteUserHandler {
 
     final UserRepository userRepository;
-    final Long userId;
+    final String userId;
 
     public void execute() throws UserServiceException {
         validate();
 
-        try {
-            userRepository.deleteById(userId);
-        } catch (Exception e) {
-            throw new UserServiceException(UserServiceError.USER_NOT_FOUND);
-        }
+        final var user = userRepository.findByUuid(userId)
+                .orElseThrow(() -> new UserServiceException(UserServiceError.USER_NOT_FOUND));
+
+        userRepository.delete(user);
     }
 
     private void validate() throws UserServiceException {

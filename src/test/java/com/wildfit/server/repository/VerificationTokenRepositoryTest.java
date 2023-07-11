@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.time.LocalDate;
 
-import com.wildfit.server.model.User;
-import com.wildfit.server.model.UserStatus;
 import com.wildfit.server.model.VerificationToken;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +26,7 @@ class VerificationTokenRepositoryTest extends AbstractRepositoryTest {
 
     @Test
     public void findByToken() {
-        final var user = User.builder()
-                .withStatus(UserStatus.FREE.getCode())
-                .withCreateDate(java.time.LocalDate.now())
-                .withPassword(PASSWORD)
-                .withEmail(EMAIL).build();
-
-        final var dbUser = userRepository.save(user);
+        final var dbUser = userRepository.save(USER);
 
         assertNotNull(dbUser);
 

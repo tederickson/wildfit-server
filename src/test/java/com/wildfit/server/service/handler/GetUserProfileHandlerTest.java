@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.UUID;
+
 import com.wildfit.server.domain.GenderType;
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
@@ -43,7 +45,7 @@ class GetUserProfileHandlerTest extends CommonHandlerTest {
                 () -> GetUserProfileHandler.builder()
                         .withUserRepository(userRepository)
                         .withUserProfileRepository(userProfileRepository)
-                        .withUserId(-14L)
+                        .withUserId("-14L")
                         .build().execute());
         assertEquals(UserServiceError.USER_NOT_FOUND, exception.getError());
     }
@@ -54,8 +56,10 @@ class GetUserProfileHandlerTest extends CommonHandlerTest {
                 .withStatus(UserStatus.FREE.getCode())
                 .withCreateDate(java.time.LocalDate.now())
                 .withPassword(PASSWORD)
+                .withUuid(UUID.randomUUID().toString())
                 .withEmail(EMAIL).build();
-        final var userProfile = UserProfile.builder().withUser(user)
+        final var dbUser = userRepository.save(user);
+        final var userProfile = UserProfile.builder().withUser(dbUser)
                 .withName(NAME)
                 .withAge(39)
                 .withGender('M')
@@ -70,7 +74,7 @@ class GetUserProfileHandlerTest extends CommonHandlerTest {
         final var digest = GetUserProfileHandler.builder()
                 .withUserRepository(userRepository)
                 .withUserProfileRepository(userProfileRepository)
-                .withUserId(saved.getUser().getId())
+                .withUserId(saved.getUser().getUuid())
                 .build().execute();
 
         assertEquals(EMAIL, digest.getUser().getEmail());

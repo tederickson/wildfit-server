@@ -65,7 +65,7 @@ class TunaSaladIT extends CommonRecipe {
                     .withUserRepository(userRepository)
                     .withRecipeRepository(recipeRepository)
                     .withInstructionGroupRepository(instructionGroupRepository)
-                    .withUserId(userId)
+                    .withUserId(UUID)
                     .withRequest(recipe)
                     .build().execute();
             assertNotNull(response);
@@ -114,7 +114,7 @@ class TunaSaladIT extends CommonRecipe {
                     .withUserRepository(userRepository)
                     .withRecipeRepository(recipeRepository)
                     .withInstructionGroupRepository(instructionGroupRepository)
-                    .withUserId(userId)
+                    .withUserId(UUID)
                     .withRequest(recipe)
                     .build().execute();
             assertNotNull(response);

@@ -3,6 +3,7 @@ package com.wildfit.server.service.handler;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 import com.wildfit.server.domain.InstructionDigest;
 import com.wildfit.server.domain.PhotoDigest;
@@ -79,7 +80,7 @@ public class CommonRecipeHandlerTest extends CommonHandlerTest {
     static final PhotoDigest photo = PhotoDigest.builder()
             .withThumb("https://nutritionix-api.s3.amazonaws.com/62ee4a5ea58c4000088c940a.jpeg").build();
 
-    protected static Long userId;
+    protected static String userId;
     protected static RecipeDigest testRecipe;
 
     @Autowired
@@ -101,10 +102,11 @@ public class CommonRecipeHandlerTest extends CommonHandlerTest {
                 .withStatus(UserStatus.FREE.getCode())
                 .withCreateDate(LocalDate.now())
                 .withPassword("encoded password")
+                .withUuid(UUID.randomUUID().toString())
                 .withEmail(EMAIL).build();
         final var dbUser = userRepository.save(user);
 
-        userId = dbUser.getId();
+        userId = dbUser.getUuid();
     }
 
     @AfterEach

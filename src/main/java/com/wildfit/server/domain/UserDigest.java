@@ -15,5 +15,6 @@ public final class UserDigest {
     private long id;
     @JsonDeserialize(using = CustomStringDeserializer.class)
     private String email;
+    private String uuid;
     private UserStatusType status;
 }

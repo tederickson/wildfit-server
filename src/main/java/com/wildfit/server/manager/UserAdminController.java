@@ -55,8 +55,8 @@ public class UserAdminController {
             @ApiResponse(code = 200, message = "Get user", response = UserProfileDigest.class), //
             @ApiResponse(code = 404, message = "User id not found")})
     @GetMapping(value = "/{id}", produces = "application/json")
-    public UserProfileDigest getUser(@PathVariable("id") Long id) throws UserServiceException {
-        final var logMessage = String.join("|", "getUser", id.toString());
+    public UserProfileDigest getUser(@PathVariable("id") String id) throws UserServiceException {
+        final var logMessage = String.join("|", "getUser", id);
         log.info(logMessage);
 
         return userService.getUserProfile(id);
@@ -67,9 +67,9 @@ public class UserAdminController {
             @ApiResponse(code = 200, message = "Update user", response = UserProfileDigest.class), //
             @ApiResponse(code = 404, message = "User id not found")})
     @PutMapping(value = "/{id}", produces = "application/json")
-    public UserProfileDigest updateUserProfile(@PathVariable("id") Long id,
+    public UserProfileDigest updateUserProfile(@PathVariable("id") String id,
                                                @RequestBody UpdateUserProfileRequest request) throws UserServiceException {
-        final var logMessage = String.join("|", "updateUserProfile", id.toString(), request.toString());
+        final var logMessage = String.join("|", "updateUserProfile", id, request.toString());
         log.info(logMessage);
 
         return userService.updateUserProfile(id, request);
@@ -80,8 +80,8 @@ public class UserAdminController {
             @ApiResponse(code = 200, message = "User deleted"), //
             @ApiResponse(code = 404, message = "User id not found")})
     @DeleteMapping(value = "/{id}")
-    public void deleteUser(@PathVariable("id") Long id) throws UserServiceException {
-        final var logMessage = String.join("|", "deleteUser", id.toString());
+    public void deleteUser(@PathVariable("id") String id) throws UserServiceException {
+        final var logMessage = String.join("|", "deleteUser", id);
         log.info(logMessage);
 
         userService.deleteUser(id);
@@ -92,8 +92,9 @@ public class UserAdminController {
             @ApiResponse(code = 200, message = "Successfully changed password"), //
             @ApiResponse(code = 400, message = "Invalid user id and/or password")})
     @PostMapping(value = "/{id}/change-password")
-    public void changePassword(@PathVariable("id") Long id, @RequestBody ChangePasswordRequest request) throws UserServiceException {
-        final var logMessage = String.join("|", "changePassword", id.toString(), request.toString());
+    public void changePassword(@PathVariable("id") String id, @RequestBody ChangePasswordRequest request)
+            throws UserServiceException {
+        final var logMessage = String.join("|", "changePassword", id, request.toString());
         log.info(logMessage);
 
         userService.changePassword(id, request.getPassword());

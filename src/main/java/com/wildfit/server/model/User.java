@@ -23,7 +23,10 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "USER", indexes = {@Index(name = "user_idx1", columnList = "email")})
+@Table(name = "USER", indexes = {
+        @Index(name = "user_idx1", columnList = "email"),
+        @Index(name = "user_idx2", columnList = "uuid")
+})
 public final class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,6 +35,7 @@ public final class User {
     private String email;
     private String password;
     private String status;
+    private String uuid;
 
     private LocalDate createDate;
 

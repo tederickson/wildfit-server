@@ -21,7 +21,7 @@ public class CreateRecipeHandler extends CommonRecipeHandler {
     public RecipeDigest execute() throws UserServiceException {
         validate();
 
-        final var user = userRepository.findById(userId)
+        final var user = userRepository.findByUuid(userId)
                 .orElseThrow(() -> new UserServiceException(UserServiceError.USER_NOT_FOUND));
 
         final var recipe = RecipeMapper.create(request, user.getEmail());

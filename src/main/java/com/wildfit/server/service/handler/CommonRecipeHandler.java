@@ -14,10 +14,10 @@ public class CommonRecipeHandler {
     protected final RecipeRepository recipeRepository;
     protected final UserRepository userRepository;
 
-    protected final Long userId;
+    protected final String userId;
 
     protected Recipe getAuthorizedRecipe(Long recipeId) throws UserServiceException {
-        final var user = userRepository.findById(userId)
+        final var user = userRepository.findByUuid(userId)
                 .orElseThrow(() -> new UserServiceException(UserServiceError.USER_NOT_FOUND));
         final var dbRecipe = recipeRepository.findById(recipeId)
                 .orElseThrow(() -> new UserServiceException(UserServiceError.RECIPE_NOT_FOUND));

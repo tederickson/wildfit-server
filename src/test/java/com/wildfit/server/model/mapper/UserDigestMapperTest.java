@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.time.LocalDate;
+import java.util.UUID;
+
 import com.wildfit.server.domain.UserStatusType;
 import com.wildfit.server.model.User;
 import com.wildfit.server.model.UserStatus;
@@ -19,8 +22,9 @@ class UserDigestMapperTest {
                 .withId(12314L)
                 .withEmail(MAIL)
                 .withStatus(UserStatus.FREE.getCode())
-                .withCreateDate(java.time.LocalDate.now())
+                .withCreateDate(LocalDate.now())
                 .withPassword("encodedPassword")
+                .withUuid(UUID.randomUUID().toString())
                 .build();
 
         final var digest = UserDigestMapper.map(user);
@@ -28,6 +32,7 @@ class UserDigestMapperTest {
         assertEquals(MAIL, digest.getEmail());
         assertEquals(UserStatusType.FREE, digest.getStatus());
         assertEquals(12314L, digest.getId());
+        assertEquals(user.getUuid(), digest.getUuid());
     }
 
     @Test
@@ -44,5 +49,6 @@ class UserDigestMapperTest {
 
         assertNull(digest.getEmail());
         assertNull(digest.getStatus());
+        assertNull(digest.getUuid());
     }
 }

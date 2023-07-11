@@ -84,7 +84,7 @@ public class RecipeController {
             @ApiResponse(code = 404, message = "Recipe not found"),
             @ApiResponse(code = 401, message = "Not authorized to delete recipe")})
     @DeleteMapping(value = "/{recipeId}/users/{userId}")
-    public void deleteRecipe(@PathVariable("recipeId") Long id, @PathVariable("userId") Long userId)
+    public void deleteRecipe(@PathVariable("recipeId") Long id, @PathVariable("userId") String userId)
             throws UserServiceException {
         final var logMessage = String.join("|", "deleteRecipe", id.toString(), userId.toString());
         log.info(logMessage);
@@ -96,9 +96,9 @@ public class RecipeController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully created recipe", response = RecipeDigest.class)})
     @PostMapping(value = "/users/{userId}", produces = "application/json")
-    public RecipeDigest createRecipe(@PathVariable("userId") Long userId,
+    public RecipeDigest createRecipe(@PathVariable("userId") String userId,
                                      @RequestBody RecipeDigest request) throws UserServiceException {
-        final var logMessage = String.join("|", "createRecipe", userId.toString(), request.toString());
+        final var logMessage = String.join("|", "createRecipe", userId, request.toString());
         log.info(logMessage);
 
         return recipeService.createRecipe(userId, request);
@@ -111,10 +111,10 @@ public class RecipeController {
             @ApiResponse(code = 401, message = "Not authorized to update recipe")})
     @PutMapping(value = "/{recipeId}/users/{userId}", produces = "application/json")
     public RecipeDigest updateRecipe(@PathVariable("recipeId") Long id,
-                                     @PathVariable("userId") Long userId,
+                                     @PathVariable("userId") String userId,
                                      @RequestBody RecipeDigest request) throws UserServiceException {
         final var logMessage = String.join("|", "updateRecipe",
-                id.toString(), userId.toString(), request.toString());
+                id.toString(), userId, request.toString());
         log.info(logMessage);
 
         if (!id.equals(request.getId())) {
@@ -132,11 +132,11 @@ public class RecipeController {
             @ApiResponse(code = 401, message = "Not authorized to update recipe")})
     @PostMapping(value = "/{recipeId}/users/{userId}/recipeGroups/{recipeGroupId}", produces = "application/json")
     public IngredientDigest createRecipeIngredient(@PathVariable("recipeId") Long id,
-                                                   @PathVariable("userId") Long userId,
+                                                   @PathVariable("userId") String userId,
                                                    @PathVariable("recipeGroupId") Long recipeGroupId,
                                                    @RequestBody IngredientDigest request) throws UserServiceException {
         final var logMessage = String.join("|", "createRecipeIngredient",
-                id.toString(), userId.toString(), recipeGroupId.toString(), request.toString());
+                id.toString(), userId, recipeGroupId.toString(), request.toString());
         log.info(logMessage);
 
         return recipeService.createRecipeIngredient(userId, id, recipeGroupId, request);
@@ -149,11 +149,11 @@ public class RecipeController {
             @ApiResponse(code = 401, message = "Not authorized to update recipe")})
     @PutMapping(value = "/{recipeId}/users/{userId}/ingredients/{ingredientId}", produces = "application/json")
     public IngredientDigest updateRecipeIngredient(@PathVariable("recipeId") Long recipeId,
-                                                   @PathVariable("userId") Long userId,
+                                                   @PathVariable("userId") String userId,
                                                    @PathVariable("ingredientId") Long ingredientId,
                                                    @RequestBody UpdateIngredientRequest request) throws UserServiceException {
         final var logMessage = String.join("|", "updateRecipeIngredient",
-                recipeId.toString(), userId.toString(), ingredientId.toString(), request.toString());
+                recipeId.toString(), userId, ingredientId.toString(), request.toString());
         log.info(logMessage);
 
         return recipeService.updateRecipeIngredient(userId, recipeId, ingredientId, request);
@@ -166,10 +166,10 @@ public class RecipeController {
             @ApiResponse(code = 401, message = "Not authorized to update recipe")})
     @DeleteMapping(value = "/{recipeId}/users/{userId}/ingredients/{ingredientId}", produces = "application/json")
     public void deleteRecipeIngredient(@PathVariable("recipeId") Long recipeId,
-                                       @PathVariable("userId") Long userId,
+                                       @PathVariable("userId") String userId,
                                        @PathVariable("ingredientId") Long ingredientId) throws UserServiceException {
         final var logMessage = String.join("|", "deleteRecipeIngredient",
-                recipeId.toString(), userId.toString(), ingredientId.toString());
+                recipeId.toString(), userId, ingredientId.toString());
         log.info(logMessage);
 
         recipeService.deleteRecipeIngredient(userId, recipeId, ingredientId);

@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.UUID;
+
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.User;
@@ -36,7 +38,7 @@ class DeleteUserHandlerTest extends CommonHandlerTest {
         final var exception = assertThrows(UserServiceException.class,
                 () -> DeleteUserHandler.builder()
                         .withUserRepository(userRepository)
-                        .withUserId(-14L)
+                        .withUserId("-14L")
                         .build().execute());
         assertEquals(UserServiceError.USER_NOT_FOUND, exception.getError());
     }
@@ -47,6 +49,7 @@ class DeleteUserHandlerTest extends CommonHandlerTest {
                 .withStatus(UserStatus.FREE.getCode())
                 .withCreateDate(java.time.LocalDate.now())
                 .withPassword(PASSWORD)
+                .withUuid(UUID.randomUUID().toString())
                 .withEmail(EMAIL).build();
 
         final var saved = userRepository.save(user);
@@ -54,7 +57,7 @@ class DeleteUserHandlerTest extends CommonHandlerTest {
 
         DeleteUserHandler.builder()
                 .withUserRepository(userRepository)
-                .withUserId(saved.getId())
+                .withUserId(saved.getUuid())
                 .build().execute();
 
         final var users = userRepository.findByEmail(EMAIL);

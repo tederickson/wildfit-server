@@ -10,13 +10,13 @@ import com.wildfit.server.exception.UserServiceException;
 public interface UserService {
     CreateUserResponse createUser(String email, String password, String name) throws UserServiceException;
 
-    void deleteUser(Long userId) throws UserServiceException;
+    void deleteUser(String userId) throws UserServiceException;
 
-    void changePassword(Long id, String password) throws UserServiceException;
+    void changePassword(String userId, String password) throws UserServiceException;
 
-    UserProfileDigest getUserProfile(Long userId) throws UserServiceException;
+    UserProfileDigest getUserProfile(String userId) throws UserServiceException;
 
-    UserProfileDigest updateUserProfile(Long id, UpdateUserProfileRequest request) throws UserServiceException;
+    UserProfileDigest updateUserProfile(String userId, UpdateUserProfileRequest request) throws UserServiceException;
 
     RegisterUserResponse confirmUser(String confirmationCode) throws UserServiceException;
 
