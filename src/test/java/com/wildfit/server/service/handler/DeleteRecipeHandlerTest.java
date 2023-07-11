@@ -44,7 +44,7 @@ class DeleteRecipeHandlerTest extends CommonRecipeHandlerTest {
                         .withUserRepository(userRepository)
                         .withRecipeRepository(recipeRepository)
                         .withInstructionGroupRepository(instructionGroupRepository)
-                        .withUserId(-14L)
+                        .withUserId("-14L")
                         .withRecipeId(-1L)
                         .build().execute());
         assertEquals(UserServiceError.USER_NOT_FOUND, exception.getError());

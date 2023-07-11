@@ -37,8 +37,9 @@ class UserProfileRepositoryTest extends AbstractRepositoryTest {
                 .withPassword(PASSWORD)
                 .withUuid(UUID.randomUUID().toString())
                 .withEmail(EMAIL).build();
+        final var dbUser = userRepository.save(user);
         final var userProfile = UserProfile.builder()
-                .withUser(user)
+                .withUser(dbUser)
                 .withName(USER_NAME)
                 .build();
 

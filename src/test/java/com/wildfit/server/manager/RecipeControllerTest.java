@@ -23,7 +23,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 class RecipeControllerTest {
     static final Long recipeId = 123L;
-    static final Long userId = -23L;
+    static final String userId = "abra-cadabra";
 
     @Mock
     private RecipeService recipeService;

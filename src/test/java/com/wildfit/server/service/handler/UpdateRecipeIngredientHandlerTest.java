@@ -95,7 +95,7 @@ class UpdateRecipeIngredientHandlerTest extends CommonRecipeHandlerTest {
                         .withUserRepository(userRepository)
                         .withRecipeRepository(recipeRepository)
                         .withRecipeIngredientRepository(recipeIngredientRepository)
-                        .withUserId(-32L)
+                        .withUserId("-32L")
                         .withIngredientId(-89L)
                         .withRequest(UpdateIngredientRequest.builder().build())
                         .build().execute());
@@ -109,7 +109,7 @@ class UpdateRecipeIngredientHandlerTest extends CommonRecipeHandlerTest {
                         .withUserRepository(userRepository)
                         .withRecipeRepository(recipeRepository)
                         .withRecipeIngredientRepository(recipeIngredientRepository)
-                        .withUserId(-32L)
+                        .withUserId("-32L")
                         .withRecipeId(-1L)
                         .withRequest(UpdateIngredientRequest.builder().build())
                         .build().execute());
@@ -123,7 +123,7 @@ class UpdateRecipeIngredientHandlerTest extends CommonRecipeHandlerTest {
                         .withUserRepository(userRepository)
                         .withRecipeRepository(recipeRepository)
                         .withRecipeIngredientRepository(recipeIngredientRepository)
-                        .withUserId(-32L)
+                        .withUserId("-32L")
                         .withRecipeId(-1L)
                         .withIngredientId(-89L)
                         .build().execute());
@@ -137,7 +137,7 @@ class UpdateRecipeIngredientHandlerTest extends CommonRecipeHandlerTest {
                         .withUserRepository(userRepository)
                         .withRecipeRepository(recipeRepository)
                         .withRecipeIngredientRepository(recipeIngredientRepository)
-                        .withUserId(-14L)
+                        .withUserId("-14L")
                         .withRecipeId(-1L)
                         .withIngredientId(-89L)
                         .withRequest(UpdateIngredientRequest.builder().build())

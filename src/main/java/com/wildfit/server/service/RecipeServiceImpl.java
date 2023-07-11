@@ -74,7 +74,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public void deleteRecipe(Long recipeId, Long userId) throws UserServiceException {
+    public void deleteRecipe(Long recipeId, String userId) throws UserServiceException {
         DeleteRecipeHandler.builder()
                 .withUserRepository(userRepository)
                 .withRecipeRepository(recipeRepository)
@@ -85,7 +85,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public RecipeDigest createRecipe(Long userId, RecipeDigest request) throws UserServiceException {
+    public RecipeDigest createRecipe(String userId, RecipeDigest request) throws UserServiceException {
         return CreateRecipeHandler.builder()
                 .withUserRepository(userRepository)
                 .withRecipeRepository(recipeRepository)
@@ -96,7 +96,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public RecipeDigest updateRecipe(Long userId, RecipeDigest request) throws UserServiceException {
+    public RecipeDigest updateRecipe(String userId, RecipeDigest request) throws UserServiceException {
         return UpdateRecipeHandler.builder()
                 .withUserRepository(userRepository)
                 .withRecipeRepository(recipeRepository)
@@ -107,7 +107,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public IngredientDigest createRecipeIngredient(Long userId, Long recipeId, Long recipeGroupId, IngredientDigest request)
+    public IngredientDigest createRecipeIngredient(String userId, Long recipeId, Long recipeGroupId, IngredientDigest request)
             throws UserServiceException {
         return CreateRecipeIngredientHandler.builder()
                 .withUserRepository(userRepository)
@@ -122,7 +122,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public void deleteRecipeIngredient(Long userId, Long recipeId, Long ingredientId) throws UserServiceException {
+    public void deleteRecipeIngredient(String userId, Long recipeId, Long ingredientId) throws UserServiceException {
         DeleteRecipeIngredientHandler.builder()
                 .withUserRepository(userRepository)
                 .withRecipeRepository(recipeRepository)
@@ -134,7 +134,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public IngredientDigest updateRecipeIngredient(Long userId, Long recipeId, Long ingredientId,
+    public IngredientDigest updateRecipeIngredient(String userId, Long recipeId, Long ingredientId,
                                                    UpdateIngredientRequest request) throws UserServiceException {
         return UpdateRecipeIngredientHandler.builder()
                 .withUserRepository(userRepository)

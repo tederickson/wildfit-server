@@ -58,7 +58,7 @@ class UpdateUserProfileHandlerTest extends CommonHandlerTest {
                         .withUserRepository(userRepository)
                         .withUserProfileRepository(userProfileRepository)
                         .withUserId("-14L")
-                        .withUserProfileRequest(UpdateUserProfileRequest.builder().build())
+                        .withUserProfileRequest(UpdateUserProfileRequest.builder().withName(NAME).build())
                         .build().execute());
         assertEquals(UserServiceError.USER_NOT_FOUND, exception.getError());
     }
@@ -71,8 +71,9 @@ class UpdateUserProfileHandlerTest extends CommonHandlerTest {
                 .withPassword(PASSWORD)
                 .withUuid(UUID.randomUUID().toString())
                 .withEmail(EMAIL).build();
+        final var dbUser = userRepository.save(user);
         final var saved = userProfileRepository.save(UserProfile.builder()
-                .withUser(user)
+                .withUser(dbUser)
                 .withName(NAME).build());
         assertNotNull(saved);
 

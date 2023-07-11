@@ -80,7 +80,7 @@ public class CommonRecipeHandlerTest extends CommonHandlerTest {
     static final PhotoDigest photo = PhotoDigest.builder()
             .withThumb("https://nutritionix-api.s3.amazonaws.com/62ee4a5ea58c4000088c940a.jpeg").build();
 
-    protected static Long userId;
+    protected static String userId;
     protected static RecipeDigest testRecipe;
 
     @Autowired
@@ -106,7 +106,7 @@ public class CommonRecipeHandlerTest extends CommonHandlerTest {
                 .withEmail(EMAIL).build();
         final var dbUser = userRepository.save(user);
 
-        userId = dbUser.getId();
+        userId = dbUser.getUuid();
     }
 
     @AfterEach

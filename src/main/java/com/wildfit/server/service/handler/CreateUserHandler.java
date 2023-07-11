@@ -57,7 +57,8 @@ public class CreateUserHandler {
                 .withEnabled(false)
                 .withUuid(UUID.randomUUID().toString())
                 .build();
-        final var userProfile = UserProfile.builder().withUser(user)
+        final var dbUser = userRepository.save(user);
+        final var userProfile = UserProfile.builder().withUser(dbUser)
                 .withName(name)
                 .build();
 

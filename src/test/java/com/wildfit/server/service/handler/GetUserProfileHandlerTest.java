@@ -58,7 +58,8 @@ class GetUserProfileHandlerTest extends CommonHandlerTest {
                 .withPassword(PASSWORD)
                 .withUuid(UUID.randomUUID().toString())
                 .withEmail(EMAIL).build();
-        final var userProfile = UserProfile.builder().withUser(user)
+        final var dbUser = userRepository.save(user);
+        final var userProfile = UserProfile.builder().withUser(dbUser)
                 .withName(NAME)
                 .withAge(39)
                 .withGender('M')

@@ -46,7 +46,7 @@ class DeleteRecipeIngredientHandlerTest extends CommonRecipeHandlerTest {
                         .withUserRepository(userRepository)
                         .withRecipeRepository(recipeRepository)
                         .withRecipeIngredientRepository(recipeIngredientRepository)
-                        .withUserId(-15L)
+                        .withUserId("-15L")
                         .withIngredientId(-89L)
                         .build().execute());
         assertEquals(UserServiceError.INVALID_PARAMETER, exception.getError());
@@ -59,7 +59,7 @@ class DeleteRecipeIngredientHandlerTest extends CommonRecipeHandlerTest {
                         .withUserRepository(userRepository)
                         .withRecipeRepository(recipeRepository)
                         .withRecipeIngredientRepository(recipeIngredientRepository)
-                        .withUserId(-15L)
+                        .withUserId("-15L")
                         .withRecipeId(-1L)
                         .build().execute());
         assertEquals(UserServiceError.INVALID_PARAMETER, exception.getError());
@@ -72,7 +72,7 @@ class DeleteRecipeIngredientHandlerTest extends CommonRecipeHandlerTest {
                         .withUserRepository(userRepository)
                         .withRecipeRepository(recipeRepository)
                         .withRecipeIngredientRepository(recipeIngredientRepository)
-                        .withUserId(-14L)
+                        .withUserId("-14L")
                         .withRecipeId(-1L)
                         .withIngredientId(-89L)
                         .build().execute());

@@ -57,7 +57,7 @@ public class EggMuffinsWithMushroomsIT extends CommonRecipe {
                     .withUserRepository(userRepository)
                     .withRecipeRepository(recipeRepository)
                     .withInstructionGroupRepository(instructionGroupRepository)
-                    .withUserId(userId)
+                    .withUserId(UUID)
                     .withRequest(recipe)
                     .build().execute();
             assertNotNull(response);

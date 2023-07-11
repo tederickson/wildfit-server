@@ -96,7 +96,7 @@ class CreateRecipeIngredientHandlerTest extends CommonRecipeHandlerTest {
                         .withRecipeRepository(recipeRepository)
                         .withInstructionGroupRepository(instructionGroupRepository)
                         .withRecipeIngredientRepository(recipeIngredientRepository)
-                        .withUserId(-32L)
+                        .withUserId("-32L")
                         .withRecipeGroupId(-89L)
                         .withRequest(ingredientDigest)
                         .build().execute());
@@ -111,7 +111,7 @@ class CreateRecipeIngredientHandlerTest extends CommonRecipeHandlerTest {
                         .withRecipeRepository(recipeRepository)
                         .withInstructionGroupRepository(instructionGroupRepository)
                         .withRecipeIngredientRepository(recipeIngredientRepository)
-                        .withUserId(-32L)
+                        .withUserId("-32L")
                         .withRecipeId(-1L)
                         .withRequest(ingredientDigest)
                         .build().execute());
@@ -126,7 +126,7 @@ class CreateRecipeIngredientHandlerTest extends CommonRecipeHandlerTest {
                         .withRecipeRepository(recipeRepository)
                         .withInstructionGroupRepository(instructionGroupRepository)
                         .withRecipeIngredientRepository(recipeIngredientRepository)
-                        .withUserId(-32L)
+                        .withUserId("-32L")
                         .withRecipeId(-1L)
                         .withRecipeGroupId(-89L)
                         .build().execute());
@@ -141,7 +141,7 @@ class CreateRecipeIngredientHandlerTest extends CommonRecipeHandlerTest {
                         .withRecipeRepository(recipeRepository)
                         .withInstructionGroupRepository(instructionGroupRepository)
                         .withRecipeIngredientRepository(recipeIngredientRepository)
-                        .withUserId(-14L)
+                        .withUserId("-14L")
                         .withRecipeId(-1L)
                         .withRecipeGroupId(-89L)
                         .withRequest(ingredientDigest)
