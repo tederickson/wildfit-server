@@ -6,5 +6,5 @@ CREATE TABLE instruction (
     ON DELETE CASCADE,
 
     step_number   int NOT NULL,
-    text     varchar(600) NOT NULL
+    text          TEXT (600) NOT NULL
 );

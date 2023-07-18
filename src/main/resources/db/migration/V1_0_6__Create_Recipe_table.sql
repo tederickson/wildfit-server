@@ -2,8 +2,8 @@ CREATE TABLE Recipe (
     id bigint NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
       email varchar(100) NOT NULL,
-      introduction varchar(600) ,
-      name varchar(256) NOT NULL,
+      introduction TEXT (600) ,
+      name varchar(255) NOT NULL,
       prep_time_min int NOT NULL,
       cook_time_min int NOT NULL,
       season varchar(10) NOT NULL,

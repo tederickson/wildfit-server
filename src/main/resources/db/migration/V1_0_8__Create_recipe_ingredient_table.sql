@@ -7,7 +7,7 @@ CREATE TABLE recipe_ingredient (
     ingredient_type varchar(2) NOT NULL,
 
     food_name       varchar(100) NOT NULL,
-    description     varchar(256) NOT NULL,
+    description     varchar(255) NOT NULL,
     brand_name      varchar(100),
     brand_name_item_name     varchar(100),
     serving_qty     float,

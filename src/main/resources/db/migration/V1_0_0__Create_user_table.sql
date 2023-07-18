@@ -1,7 +1,7 @@
 CREATE TABLE user (
     id bigint NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
-    password    varchar(256) NOT NULL,
+    password    varchar(255) NOT NULL,
     uuid        varchar(40)  NOT NULL,
     email       varchar(100) NOT NULL,
     status      varchar(2)   NOT NULL,
