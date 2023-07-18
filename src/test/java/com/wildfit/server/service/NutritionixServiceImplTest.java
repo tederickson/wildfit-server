@@ -52,6 +52,6 @@ class NutritionixServiceImplTest {
         }
         final var exception = assertThrows(NutritionixException.class,
                 () -> nutritionixService.getFoodWithBarcode("327594"));
-        assertEquals(HttpStatus.NOT_FOUND, exception.getStatus());
+        assertEquals(HttpStatus.NOT_FOUND, exception.getStatusCode());
     }
 }

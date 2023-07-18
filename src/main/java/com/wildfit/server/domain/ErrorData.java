@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public final class ErrorData {
     private String message;
     private String errorCode;
+    private Integer nutritionixStatusCode;
 }

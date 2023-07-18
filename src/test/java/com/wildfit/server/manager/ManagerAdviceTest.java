@@ -47,10 +47,13 @@ class ManagerAdviceTest {
         final var exception = new NutritionixException(e.getStatusCode(), e);
         final var response = managerAdvice.nutritionixExceptionHandler(exception, webRequest);
 
-        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
         assertNotNull(response.getBody());
-        assertNull(response.getBody().getErrorCode());
-        assertTrue(response.getBody().getMessage().contains("BAD_REQUEST"));
-    }
 
+        final var errorData = response.getBody();
+
+        assertNull(errorData.getErrorCode());
+        assertTrue(errorData.getMessage().contains("BAD_REQUEST"));
+        assertEquals(400, errorData.getNutritionixStatusCode());
+    }
 }

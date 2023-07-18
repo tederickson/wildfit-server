@@ -1,14 +1,14 @@
 package com.wildfit.server.exception;
 
 import lombok.Getter;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 
 @Getter
 public class NutritionixException extends Exception {
-    final HttpStatus status;
+    final HttpStatusCode statusCode;
 
-    public NutritionixException(HttpStatus status, Throwable cause) {
+    public NutritionixException(HttpStatusCode statusCode, Throwable cause) {
         super(cause);
-        this.status = status;
+        this.statusCode = statusCode;
     }
 }

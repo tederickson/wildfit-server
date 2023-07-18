@@ -4,6 +4,7 @@ import com.wildfit.server.domain.ErrorData;
 import com.wildfit.server.exception.NutritionixException;
 import com.wildfit.server.exception.UserServiceException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -38,9 +39,10 @@ public class ManagerAdvice extends ResponseEntityExceptionHandler {
 
         final var error = ErrorData.builder()
                 .withMessage(ex.getMessage())
+                .withNutritionixStatusCode(ex.getStatusCode().value())
                 .build();
 
-        return new ResponseEntity<>(error, ex.getStatus());
+        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }

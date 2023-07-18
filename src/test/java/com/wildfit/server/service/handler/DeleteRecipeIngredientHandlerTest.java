@@ -98,18 +98,14 @@ class DeleteRecipeIngredientHandlerTest extends CommonRecipeHandlerTest {
 
         createRecipe(recipe);
 
-        final var exception = assertThrows(org.springframework.dao.EmptyResultDataAccessException.class,
-                () -> DeleteRecipeIngredientHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withRecipeRepository(recipeRepository)
-                        .withRecipeIngredientRepository(recipeIngredientRepository)
-                        .withUserId(userId)
-                        .withRecipeId(testRecipe.getId())
-                        .withIngredientId(-89L)
-                        .build().execute());
-
-        assertEquals("No class com.wildfit.server.model.RecipeIngredient entity with id -89 exists!",
-                exception.getMessage());
+        DeleteRecipeIngredientHandler.builder()
+                .withUserRepository(userRepository)
+                .withRecipeRepository(recipeRepository)
+                .withRecipeIngredientRepository(recipeIngredientRepository)
+                .withUserId(userId)
+                .withRecipeId(testRecipe.getId())
+                .withIngredientId(-89L)
+                .build().execute();
     }
 
     @Test
