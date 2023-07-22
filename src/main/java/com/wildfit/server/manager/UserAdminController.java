@@ -7,10 +7,10 @@ import com.wildfit.server.domain.UpdateUserProfileRequest;
 import com.wildfit.server.domain.UserProfileDigest;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.service.UserService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,17 +30,17 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @Slf4j
-@Api(description = "User Administration API")
+@Tag(name = "User Administration API")
 @RequestMapping("v1/users")
 public class UserAdminController {
     @Autowired
     private UserService userService;
 
-    @ApiOperation(value = "Create User")
+    @Operation(summary = "Create User")
     @ApiResponses(value = { //
-            @ApiResponse(code = 201, message = "Successfully created user", response = CreateUserResponse.class), //
-            @ApiResponse(code = 400, message = "Invalid user name and/or password or user already exists"),
-            @ApiResponse(code = 412, message = "Email not configured")})
+            @ApiResponse(responseCode = "201", description = "Successfully created user"), //
+            @ApiResponse(responseCode = "400", description = "Invalid user name and/or password or user already exists"),
+            @ApiResponse(responseCode = "412", description = "Email not configured")})
     @PostMapping(produces = "application/json")
     @ResponseStatus(code = HttpStatus.CREATED)
     public CreateUserResponse createUser(@RequestBody CreateUserRequest request) throws UserServiceException {
@@ -50,10 +50,10 @@ public class UserAdminController {
         return userService.createUser(request.getEmail(), request.getPassword(), request.getName());
     }
 
-    @ApiOperation(value = "Get User Profile")
+    @Operation(summary = "Get User Profile")
     @ApiResponses(value = { //
-            @ApiResponse(code = 200, message = "Get user", response = UserProfileDigest.class), //
-            @ApiResponse(code = 404, message = "User id not found")})
+            @ApiResponse(responseCode = "200", description = "Get user"), //
+            @ApiResponse(responseCode = "404", description = "User id not found")})
     @GetMapping(value = "/{id}", produces = "application/json")
     public UserProfileDigest getUser(@PathVariable("id") String id) throws UserServiceException {
         final var logMessage = String.join("|", "getUser", id);
@@ -62,23 +62,24 @@ public class UserAdminController {
         return userService.getUserProfile(id);
     }
 
-    @ApiOperation(value = "Update User Profile")
+    @Operation(summary = "Update User Profile")
     @ApiResponses(value = { //
-            @ApiResponse(code = 200, message = "Update user", response = UserProfileDigest.class), //
-            @ApiResponse(code = 404, message = "User id not found")})
+            @ApiResponse(responseCode = "200", description = "Update user"), //
+            @ApiResponse(responseCode = "404", description = "User id not found")})
     @PutMapping(value = "/{id}", produces = "application/json")
     public UserProfileDigest updateUserProfile(@PathVariable("id") String id,
-                                               @RequestBody UpdateUserProfileRequest request) throws UserServiceException {
+                                               @RequestBody UpdateUserProfileRequest request)
+            throws UserServiceException {
         final var logMessage = String.join("|", "updateUserProfile", id, request.toString());
         log.info(logMessage);
 
         return userService.updateUserProfile(id, request);
     }
 
-    @ApiOperation(value = "Delete User")
+    @Operation(summary = "Delete User")
     @ApiResponses(value = { //
-            @ApiResponse(code = 200, message = "User deleted"), //
-            @ApiResponse(code = 404, message = "User id not found")})
+            @ApiResponse(responseCode = "200", description = "User deleted"), //
+            @ApiResponse(responseCode = "404", description = "User id not found")})
     @DeleteMapping(value = "/{id}")
     public void deleteUser(@PathVariable("id") String id) throws UserServiceException {
         final var logMessage = String.join("|", "deleteUser", id);
@@ -87,10 +88,10 @@ public class UserAdminController {
         userService.deleteUser(id);
     }
 
-    @ApiOperation(value = "Change Password")
+    @Operation(summary = "Change Password")
     @ApiResponses(value = { //
-            @ApiResponse(code = 200, message = "Successfully changed password"), //
-            @ApiResponse(code = 400, message = "Invalid user id and/or password")})
+            @ApiResponse(responseCode = "200", description = "Successfully changed password"), //
+            @ApiResponse(responseCode = "400", description = "Invalid user id and/or password")})
     @PostMapping(value = "/{id}/change-password")
     public void changePassword(@PathVariable("id") String id, @RequestBody ChangePasswordRequest request)
             throws UserServiceException {

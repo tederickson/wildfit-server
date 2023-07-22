@@ -7,10 +7,10 @@ import com.wildfit.server.exception.NutritionixException;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.service.NutritionixService;
 import com.wildfit.server.service.RecipeService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @Slf4j
-@Api(description = "Food API")
+@Tag(name = "Food API")
 @RequestMapping("v1/fooditems")
 public class FoodController {
     @Autowired
@@ -33,10 +33,10 @@ public class FoodController {
     @Autowired
     private RecipeService recipeService;
 
-    @ApiOperation(value = "Get food by id")
+    @Operation(summary = "Get food by id")
     @ApiResponses(value = { //
-            @ApiResponse(code = 200, message = "Get food", response = FoodItemDigest.class), //
-            @ApiResponse(code = 400, message = "Nutritionix id not found")})
+            @ApiResponse(responseCode = "200", description = "Get food"), //
+            @ApiResponse(responseCode = "400", description = "Nutritionix id not found")})
     @GetMapping(value = "/{id}", produces = "application/json")
     public FoodItemDigest getFoodWithId(@PathVariable("id") String id)
             throws UserServiceException, NutritionixException {
@@ -46,10 +46,10 @@ public class FoodController {
         return nutritionixService.getFoodWithId(id);
     }
 
-    @ApiOperation(value = "Get food by barcode")
+    @Operation(summary = "Get food by barcode")
     @ApiResponses(value = { //
-            @ApiResponse(code = 200, message = "Get food", response = FoodItemDigest.class), //
-            @ApiResponse(code = 400, message = "Barcode not found")})
+            @ApiResponse(responseCode = "200", description = "Get food"), //
+            @ApiResponse(responseCode = "400", description = "Barcode not found")})
     @GetMapping(value = "/barcodes/{barcode}", produces = "application/json")
     public FoodItemDigest getFoodWithBarcode(@PathVariable("barcode") String barcode)
             throws UserServiceException, NutritionixException {
@@ -59,9 +59,9 @@ public class FoodController {
         return nutritionixService.getFoodWithBarcode(barcode);
     }
 
-    @ApiOperation(value = "Get foods by description such as 'coconut oil', 'kerrygold butter'")
+    @Operation(summary = "Get foods by description such as 'coconut oil', 'kerrygold butter'")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Get foods", response = SearchFoodResponse.class)})
+            @ApiResponse(responseCode = "200", description = "Get foods")})
     @GetMapping(produces = "application/json")
     public SearchFoodResponse getFoodsByQuery(@RequestParam(name = "description") String description)
             throws UserServiceException, NutritionixException {
@@ -71,9 +71,9 @@ public class FoodController {
         return nutritionixService.getFoodsByQuery(description);
     }
 
-    @ApiOperation(value = "Get nutrition per serving for recipe")
+    @Operation(summary = "Get nutrition per serving for recipe")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Get recipe nutrition", response = FoodItemDigest.class)})
+            @ApiResponse(responseCode = "200", description = "Get recipe nutrition")})
     @GetMapping(value = "/recipes/{recipeId}", produces = "application/json")
     public FoodItemDigest getRecipeNutrition(@RequestParam(name = "recipeId") Long recipeId)
             throws UserServiceException, NutritionixException {

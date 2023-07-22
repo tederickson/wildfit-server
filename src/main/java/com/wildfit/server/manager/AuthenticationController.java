@@ -5,10 +5,10 @@ import com.wildfit.server.domain.RegisterUserResponse;
 import com.wildfit.server.domain.UserDigest;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.service.UserService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,29 +24,30 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @Slf4j
-@Api(description = "Authentication API")
+@Tag(name = "Authentication API")
 @RequestMapping("v1/auth")
 public class AuthenticationController {
     @Autowired
     private UserService userService;
 
-    @ApiOperation(value = "Confirm User Email")
+    @Operation(summary = "Confirm User Email")
     @ApiResponses(value = { //
-            @ApiResponse(code = 200, message = "Confirm user email account", response = RegisterUserResponse.class), //
-            @ApiResponse(code = 404, message = "Confirmation code not found")})
-    @GetMapping(value = "/register/{confirmCode}", produces = "application/json")
-    public RegisterUserResponse register(@PathVariable(value = "confirmCode") String confirmCode) throws UserServiceException {
+            @ApiResponse(responseCode = "200", description = "Confirm user email account"), //
+            @ApiResponse(responseCode = "404", description = "Confirmation code not found")})
+    @GetMapping("/register/{confirmCode}")
+    public RegisterUserResponse register(@PathVariable("confirmCode") String confirmCode)
+            throws UserServiceException {
         final var logMessage = String.join("|", "register", confirmCode);
         log.info(logMessage);
 
         return userService.confirmUser(confirmCode);
     }
 
-    @ApiOperation(value = "Log in User")
+    @Operation(summary = "Log in User")
     @ApiResponses(value = { //
-            @ApiResponse(code = 200, message = "Successfully logged in user", response = UserDigest.class), //
-            @ApiResponse(code = 400, message = "Invalid user name and/or password")})
-    @PostMapping(value = "/login", produces = "application/json")
+            @ApiResponse(responseCode = "200", description = "Successfully logged in user"), //
+            @ApiResponse(responseCode = "400", description = "Invalid user name and/or password")})
+    @PostMapping("/login")
     public UserDigest login(@RequestBody LoginRequest request) throws UserServiceException {
         final var logMessage = String.join("|", "login", request.toString());
         log.info(logMessage);

@@ -7,10 +7,10 @@ import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.domain.UpdateIngredientRequest;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.service.RecipeService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,13 +29,13 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @Slf4j
-@Api(description = "Recipe API")
+@Tag(name = "Recipe API")
 @RequestMapping("v1/recipes")
 public class RecipeController {
     @Autowired
     private RecipeService recipeService;
 
-    @ApiOperation(value = "Retrieve recipes for a specific season")
+    @Operation(summary = "Retrieve recipes for a specific season")
     @GetMapping(value = "/seasons/{season}", produces = "application/json")
     public RecipeListDigest retrieveRecipesForSeason(@PathVariable(value = "season") SeasonType season,
                                                      @RequestParam(value = "page", defaultValue = "0") Integer page,
@@ -51,7 +51,7 @@ public class RecipeController {
         return recipeService.listBySeason(season, pageable);
     }
 
-    @ApiOperation(value = "Retrieve all recipes for a specific season that include a specific food")
+    @Operation(summary = "Retrieve all recipes for a specific season that include a specific food")
     @GetMapping(value = "/seasons/{season}/ingredients/{ingredientName}", produces = "application/json")
     public RecipeListDigest listBySeasonAndIngredient(
             @PathVariable(value = "season") SeasonType season,
@@ -68,7 +68,7 @@ public class RecipeController {
         return recipeService.listBySeasonAndIngredient(season, ingredientName, pageable);
     }
 
-    @ApiOperation(value = "Retrieve recipe")
+    @Operation(summary = "Retrieve recipe")
     @GetMapping(value = "/{recipeId}", produces = "application/json")
     public RecipeDigest retrieveRecipe(@PathVariable(value = "recipeId") Long id) throws UserServiceException {
 
@@ -78,11 +78,11 @@ public class RecipeController {
         return recipeService.retrieveRecipe(id);
     }
 
-    @ApiOperation(value = "Delete Recipe")
+    @Operation(summary = "Delete Recipe")
     @ApiResponses(value = { //
-            @ApiResponse(code = 200, message = "Recipe deleted"), //
-            @ApiResponse(code = 404, message = "Recipe not found"),
-            @ApiResponse(code = 401, message = "Not authorized to delete recipe")})
+            @ApiResponse(responseCode = "200", description = "Recipe deleted"), //
+            @ApiResponse(responseCode = "404", description = "Recipe not found"),
+            @ApiResponse(responseCode = "401", description = "Not authorized to delete recipe")})
     @DeleteMapping(value = "/{recipeId}/users/{userId}")
     public void deleteRecipe(@PathVariable("recipeId") Long id, @PathVariable("userId") String userId)
             throws UserServiceException {
@@ -92,9 +92,9 @@ public class RecipeController {
         recipeService.deleteRecipe(id, userId);
     }
 
-    @ApiOperation(value = "Create Recipe")
+    @Operation(summary = "Create Recipe")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successfully created recipe", response = RecipeDigest.class)})
+            @ApiResponse(responseCode = "200", description = "Successfully created recipe")})
     @PostMapping(value = "/users/{userId}", produces = "application/json")
     public RecipeDigest createRecipe(@PathVariable("userId") String userId,
                                      @RequestBody RecipeDigest request) throws UserServiceException {
@@ -104,11 +104,11 @@ public class RecipeController {
         return recipeService.createRecipe(userId, request);
     }
 
-    @ApiOperation(value = "Update Recipe")
+    @Operation(summary = "Update Recipe")
     @ApiResponses(value = { //
-            @ApiResponse(code = 200, message = "Recipe updated"), //
-            @ApiResponse(code = 404, message = "Recipe not found"),
-            @ApiResponse(code = 401, message = "Not authorized to update recipe")})
+            @ApiResponse(responseCode = "200", description = "Recipe updated"), //
+            @ApiResponse(responseCode = "404", description = "Recipe not found"),
+            @ApiResponse(responseCode = "401", description = "Not authorized to update recipe")})
     @PutMapping(value = "/{recipeId}/users/{userId}", produces = "application/json")
     public RecipeDigest updateRecipe(@PathVariable("recipeId") Long id,
                                      @PathVariable("userId") String userId,
@@ -125,11 +125,11 @@ public class RecipeController {
         return recipeService.updateRecipe(userId, request);
     }
 
-    @ApiOperation(value = "Add ingredient to the recipe")
+    @Operation(summary = "Add ingredient to the recipe")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successfully added ingredient", response = IngredientDigest.class),
-            @ApiResponse(code = 404, message = "Recipe not found"),
-            @ApiResponse(code = 401, message = "Not authorized to update recipe")})
+            @ApiResponse(responseCode = "200", description = "Successfully added ingredient"),
+            @ApiResponse(responseCode = "404", description = "Recipe not found"),
+            @ApiResponse(responseCode = "401", description = "Not authorized to update recipe")})
     @PostMapping(value = "/{recipeId}/users/{userId}/recipeGroups/{recipeGroupId}", produces = "application/json")
     public IngredientDigest createRecipeIngredient(@PathVariable("recipeId") Long id,
                                                    @PathVariable("userId") String userId,
@@ -142,16 +142,17 @@ public class RecipeController {
         return recipeService.createRecipeIngredient(userId, id, recipeGroupId, request);
     }
 
-    @ApiOperation(value = "Update recipe ingredient")
+    @Operation(summary = "Update recipe ingredient")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successfully updated ingredient", response = IngredientDigest.class),
-            @ApiResponse(code = 404, message = "Recipe not found"),
-            @ApiResponse(code = 401, message = "Not authorized to update recipe")})
+            @ApiResponse(responseCode = "200", description = "Successfully updated ingredient"),
+            @ApiResponse(responseCode = "404", description = "Recipe not found"),
+            @ApiResponse(responseCode = "401", description = "Not authorized to update recipe")})
     @PutMapping(value = "/{recipeId}/users/{userId}/ingredients/{ingredientId}", produces = "application/json")
     public IngredientDigest updateRecipeIngredient(@PathVariable("recipeId") Long recipeId,
                                                    @PathVariable("userId") String userId,
                                                    @PathVariable("ingredientId") Long ingredientId,
-                                                   @RequestBody UpdateIngredientRequest request) throws UserServiceException {
+                                                   @RequestBody UpdateIngredientRequest request)
+            throws UserServiceException {
         final var logMessage = String.join("|", "updateRecipeIngredient",
                 recipeId.toString(), userId, ingredientId.toString(), request.toString());
         log.info(logMessage);
@@ -159,11 +160,11 @@ public class RecipeController {
         return recipeService.updateRecipeIngredient(userId, recipeId, ingredientId, request);
     }
 
-    @ApiOperation(value = "Delete ingredient from the recipe")
+    @Operation(summary = "Delete ingredient from the recipe")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successfully removed ingredient"),
-            @ApiResponse(code = 404, message = "Recipe not found"),
-            @ApiResponse(code = 401, message = "Not authorized to update recipe")})
+            @ApiResponse(responseCode = "200", description = "Successfully removed ingredient"),
+            @ApiResponse(responseCode = "404", description = "Recipe not found"),
+            @ApiResponse(responseCode = "401", description = "Not authorized to update recipe")})
     @DeleteMapping(value = "/{recipeId}/users/{userId}/ingredients/{ingredientId}", produces = "application/json")
     public void deleteRecipeIngredient(@PathVariable("recipeId") Long recipeId,
                                        @PathVariable("userId") String userId,
