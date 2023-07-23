@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SearchedFoodItem {
+public final class SearchedFoodItem {
     private String food_name; //  Butter, Pure Irish, Unsalted,
     private String brand_name; //  Kerrygold,
     private String brand_name_item_name; // Kerrygold Butter Sticks, Pure Irish, Unsalted
