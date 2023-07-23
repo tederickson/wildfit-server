@@ -7,7 +7,7 @@ import com.wildfit.server.domain.RecipeListDigest;
 import com.wildfit.server.model.Recipe;
 
 public class RecipeListMapper {
-    public RecipeListMapper() {
+    private RecipeListMapper() {
     }
 
     public static RecipeListDigest map(List<Recipe> recipes) {
