@@ -58,7 +58,7 @@ public class InstructionGroup {
     public String toString() {
         return "InstructionGroup{" +
                 "id=" + id +
-                ", recipe_id=" + recipeId +
+                ", recipeId=" + recipeId +
                 ", instructionGroupNumber=" + instructionGroupNumber +
                 ", name='" + name + '\'' +
                 '}';

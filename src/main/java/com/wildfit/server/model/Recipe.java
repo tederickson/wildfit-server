@@ -23,7 +23,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Entity
 @Table(name = "RECIPE", indexes = {@Index(name = "season_idx", columnList = "season")})
-public class Recipe {
+public final class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
