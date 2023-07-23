@@ -11,8 +11,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,11 +29,11 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @Slf4j
+@RequiredArgsConstructor
 @Tag(name = "Recipe API")
 @RequestMapping("v1/recipes")
 public class RecipeController {
-    @Autowired
-    private RecipeService recipeService;
+    private final RecipeService recipeService;
 
     @Operation(summary = "Retrieve recipes for a specific season")
     @GetMapping(value = "/seasons/{season}", produces = "application/json")
@@ -86,7 +86,7 @@ public class RecipeController {
     @DeleteMapping(value = "/{recipeId}/users/{userId}")
     public void deleteRecipe(@PathVariable("recipeId") Long id, @PathVariable("userId") String userId)
             throws UserServiceException {
-        final var logMessage = String.join("|", "deleteRecipe", id.toString(), userId.toString());
+        final var logMessage = String.join("|", "deleteRecipe", id.toString(), userId);
         log.info(logMessage);
 
         recipeService.deleteRecipe(id, userId);

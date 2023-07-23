@@ -10,7 +10,7 @@ import com.wildfit.server.service.handler.GetFoodWithBarcodeHandler;
 import com.wildfit.server.service.handler.GetFoodWithIdHandler;
 import com.wildfit.server.service.handler.GetFoodsByQueryHandler;
 import com.wildfit.server.service.handler.GetRecipeNutritionHandler;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
@@ -19,43 +19,42 @@ import org.springframework.stereotype.Service;
  * the same service without merge collisions.
  */
 @Service
+@RequiredArgsConstructor
 public class NutritionixServiceImpl implements NutritionixService {
-
-    @Autowired
-    private NutritionixHeaderInfo nutritionixHeaderInfo;
+    private final NutritionixHeaderInfo nutritionixHeaderInfo;
 
     @Override
     public FoodItemDigest getFoodWithBarcode(String barcode) throws UserServiceException, NutritionixException {
         return GetFoodWithBarcodeHandler.builder()
-                .withNutritionixHeaderInfo(nutritionixHeaderInfo)
-                .withBarcode(barcode)
-                .build().execute();
+                                        .withNutritionixHeaderInfo(nutritionixHeaderInfo)
+                                        .withBarcode(barcode)
+                                        .build().execute();
     }
 
     @Override
     public FoodItemDigest getFoodWithId(String nixItemId) throws UserServiceException, NutritionixException {
         return GetFoodWithIdHandler.builder()
-                .withNutritionixHeaderInfo(nutritionixHeaderInfo)
-                .withNixItemId(nixItemId)
-                .build().execute();
+                                   .withNutritionixHeaderInfo(nutritionixHeaderInfo)
+                                   .withNixItemId(nixItemId)
+                                   .build().execute();
     }
 
     @Override
     public SearchFoodResponse getFoodsByQuery(String description)
             throws UserServiceException, NutritionixException {
         return GetFoodsByQueryHandler.builder()
-                .withNutritionixHeaderInfo(nutritionixHeaderInfo)
-                .withDescription(description)
-                .build().execute();
+                                     .withNutritionixHeaderInfo(nutritionixHeaderInfo)
+                                     .withDescription(description)
+                                     .build().execute();
     }
 
     @Override
     public FoodItemDigest getRecipeNutrition(RecipeDigest recipeDigest)
             throws UserServiceException, NutritionixException {
         return GetRecipeNutritionHandler.builder()
-                .withNutritionixHeaderInfo(nutritionixHeaderInfo)
-                .withRecipeDigest(recipeDigest)
-                .build().execute();
+                                        .withNutritionixHeaderInfo(nutritionixHeaderInfo)
+                                        .withRecipeDigest(recipeDigest)
+                                        .build().execute();
     }
 
 }

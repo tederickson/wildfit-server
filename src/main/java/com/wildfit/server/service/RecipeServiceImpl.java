@@ -7,7 +7,6 @@ import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.domain.UpdateIngredientRequest;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.repository.InstructionGroupRepository;
-import com.wildfit.server.repository.InstructionRepository;
 import com.wildfit.server.repository.RecipeIngredientRepository;
 import com.wildfit.server.repository.RecipeRepository;
 import com.wildfit.server.repository.UserRepository;
@@ -20,7 +19,7 @@ import com.wildfit.server.service.handler.ListBySeasonAndIngredientHandler;
 import com.wildfit.server.service.handler.ListBySeasonHandler;
 import com.wildfit.server.service.handler.UpdateRecipeHandler;
 import com.wildfit.server.service.handler.UpdateRecipeIngredientHandler;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -30,119 +29,115 @@ import org.springframework.stereotype.Service;
  * the same service without merge collisions.
  */
 @Service
+@RequiredArgsConstructor
 public class RecipeServiceImpl implements RecipeService {
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private RecipeRepository recipeRepository;
-    @Autowired
-    private InstructionGroupRepository instructionGroupRepository;
-    @Autowired
-    private InstructionRepository instructionRepository;
-    @Autowired
-    private RecipeIngredientRepository recipeIngredientRepository;
+    private final UserRepository userRepository;
+    private final RecipeRepository recipeRepository;
+    private final InstructionGroupRepository instructionGroupRepository;
+    private final RecipeIngredientRepository recipeIngredientRepository;
 
     @Override
     public RecipeListDigest listBySeason(SeasonType season, Pageable pageable) throws UserServiceException {
         return ListBySeasonHandler.builder()
-                .withRecipeRepository(recipeRepository)
-                .withSeason(season)
-                .withPageable(pageable)
-                .build().execute();
+                                  .withRecipeRepository(recipeRepository)
+                                  .withSeason(season)
+                                  .withPageable(pageable)
+                                  .build().execute();
     }
 
     @Override
     public RecipeListDigest listBySeasonAndIngredient(SeasonType season, String ingredientName, Pageable pageable)
             throws UserServiceException {
         return ListBySeasonAndIngredientHandler.builder()
-                .withRecipeRepository(recipeRepository)
-                .withRecipeIngredientRepository(recipeIngredientRepository)
-                .withSeason(season)
-                .withIngredientName(ingredientName)
-                .withPageable(pageable)
-                .build().execute();
+                                               .withRecipeRepository(recipeRepository)
+                                               .withRecipeIngredientRepository(recipeIngredientRepository)
+                                               .withSeason(season)
+                                               .withIngredientName(ingredientName)
+                                               .withPageable(pageable)
+                                               .build().execute();
     }
 
     @Override
     public RecipeDigest retrieveRecipe(Long recipeId) throws UserServiceException {
         return GetRecipeHandler.builder()
-                .withRecipeRepository(recipeRepository)
-                .withInstructionGroupRepository(instructionGroupRepository)
-                .withRecipeIngredientRepository(recipeIngredientRepository)
-                .withRecipeId(recipeId)
-                .build().execute();
+                               .withRecipeRepository(recipeRepository)
+                               .withInstructionGroupRepository(instructionGroupRepository)
+                               .withRecipeIngredientRepository(recipeIngredientRepository)
+                               .withRecipeId(recipeId)
+                               .build().execute();
     }
 
     @Override
     public void deleteRecipe(Long recipeId, String userId) throws UserServiceException {
         DeleteRecipeHandler.builder()
-                .withUserRepository(userRepository)
-                .withRecipeRepository(recipeRepository)
-                .withInstructionGroupRepository(instructionGroupRepository)
-                .withUserId(userId)
-                .withRecipeId(recipeId)
-                .build().execute();
+                           .withUserRepository(userRepository)
+                           .withRecipeRepository(recipeRepository)
+                           .withInstructionGroupRepository(instructionGroupRepository)
+                           .withUserId(userId)
+                           .withRecipeId(recipeId)
+                           .build().execute();
     }
 
     @Override
     public RecipeDigest createRecipe(String userId, RecipeDigest request) throws UserServiceException {
         return CreateRecipeHandler.builder()
-                .withUserRepository(userRepository)
-                .withRecipeRepository(recipeRepository)
-                .withInstructionGroupRepository(instructionGroupRepository)
-                .withUserId(userId)
-                .withRequest(request)
-                .build().execute();
+                                  .withUserRepository(userRepository)
+                                  .withRecipeRepository(recipeRepository)
+                                  .withInstructionGroupRepository(instructionGroupRepository)
+                                  .withUserId(userId)
+                                  .withRequest(request)
+                                  .build().execute();
     }
 
     @Override
     public RecipeDigest updateRecipe(String userId, RecipeDigest request) throws UserServiceException {
         return UpdateRecipeHandler.builder()
-                .withUserRepository(userRepository)
-                .withRecipeRepository(recipeRepository)
-                .withInstructionGroupRepository(instructionGroupRepository)
-                .withUserId(userId)
-                .withRequest(request)
-                .build().execute();
+                                  .withUserRepository(userRepository)
+                                  .withRecipeRepository(recipeRepository)
+                                  .withInstructionGroupRepository(instructionGroupRepository)
+                                  .withUserId(userId)
+                                  .withRequest(request)
+                                  .build().execute();
     }
 
     @Override
-    public IngredientDigest createRecipeIngredient(String userId, Long recipeId, Long recipeGroupId, IngredientDigest request)
+    public IngredientDigest createRecipeIngredient(String userId, Long recipeId, Long recipeGroupId,
+                                                   IngredientDigest request)
             throws UserServiceException {
         return CreateRecipeIngredientHandler.builder()
-                .withUserRepository(userRepository)
-                .withRecipeRepository(recipeRepository)
-                .withInstructionGroupRepository(instructionGroupRepository)
-                .withRecipeIngredientRepository(recipeIngredientRepository)
-                .withUserId(userId)
-                .withRequest(request)
-                .withRecipeGroupId(recipeGroupId)
-                .withRecipeId(recipeId)
-                .build().execute();
+                                            .withUserRepository(userRepository)
+                                            .withRecipeRepository(recipeRepository)
+                                            .withInstructionGroupRepository(instructionGroupRepository)
+                                            .withRecipeIngredientRepository(recipeIngredientRepository)
+                                            .withUserId(userId)
+                                            .withRequest(request)
+                                            .withRecipeGroupId(recipeGroupId)
+                                            .withRecipeId(recipeId)
+                                            .build().execute();
     }
 
     @Override
     public void deleteRecipeIngredient(String userId, Long recipeId, Long ingredientId) throws UserServiceException {
         DeleteRecipeIngredientHandler.builder()
-                .withUserRepository(userRepository)
-                .withRecipeRepository(recipeRepository)
-                .withRecipeIngredientRepository(recipeIngredientRepository)
-                .withUserId(userId)
-                .withRecipeId(recipeId)
-                .withIngredientId(ingredientId)
-                .build().execute();
+                                     .withUserRepository(userRepository)
+                                     .withRecipeRepository(recipeRepository)
+                                     .withRecipeIngredientRepository(recipeIngredientRepository)
+                                     .withUserId(userId)
+                                     .withRecipeId(recipeId)
+                                     .withIngredientId(ingredientId)
+                                     .build().execute();
     }
 
     @Override
     public IngredientDigest updateRecipeIngredient(String userId, Long recipeId, Long ingredientId,
                                                    UpdateIngredientRequest request) throws UserServiceException {
         return UpdateRecipeIngredientHandler.builder()
-                .withUserRepository(userRepository)
-                .withRecipeRepository(recipeRepository)
-                .withRecipeIngredientRepository(recipeIngredientRepository)
-                .withUserId(userId)
-                .withRecipeId(recipeId)
-                .withIngredientId(ingredientId)
-                .build().execute();
+                                            .withUserRepository(userRepository)
+                                            .withRecipeRepository(recipeRepository)
+                                            .withRecipeIngredientRepository(recipeIngredientRepository)
+                                            .withUserId(userId)
+                                            .withRecipeId(recipeId)
+                                            .withIngredientId(ingredientId)
+                                            .build().execute();
     }
 }
