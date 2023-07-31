@@ -44,7 +44,7 @@ class UserRepositoryTest extends AbstractRepositoryTest {
         assertNotNull(saved);
 
         final var user = userRepository.findByUuid(saved.getUuid())
-                .orElse(null);
+                                       .orElse(null);
 
 
         assertNotNull(user);

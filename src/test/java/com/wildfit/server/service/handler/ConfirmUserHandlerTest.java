@@ -38,10 +38,10 @@ class ConfirmUserHandlerTest extends CommonHandlerTest {
     void invalidConfirmationCode(String confirmationCode) {
         final var exception = assertThrows(UserServiceException.class,
                 () -> ConfirmUserHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withVerificationTokenRepository(verificationTokenRepository)
-                        .withConfirmationCode(confirmationCode)
-                        .build().execute());
+                                        .withUserRepository(userRepository)
+                                        .withVerificationTokenRepository(verificationTokenRepository)
+                                        .withConfirmationCode(confirmationCode)
+                                        .build().execute());
         assertEquals(UserServiceError.INVALID_CONFIRMATION_CODE, exception.getError());
     }
 
@@ -51,10 +51,10 @@ class ConfirmUserHandlerTest extends CommonHandlerTest {
 
         final var exception = assertThrows(UserServiceException.class,
                 () -> ConfirmUserHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withVerificationTokenRepository(verificationTokenRepository)
-                        .withConfirmationCode("BugsBunny")
-                        .build().execute());
+                                        .withUserRepository(userRepository)
+                                        .withVerificationTokenRepository(verificationTokenRepository)
+                                        .withConfirmationCode("BugsBunny")
+                                        .build().execute());
         assertEquals(UserServiceError.INVALID_CONFIRMATION_CODE, exception.getError());
     }
 
@@ -63,10 +63,10 @@ class ConfirmUserHandlerTest extends CommonHandlerTest {
         final User saved = createUser();
 
         ConfirmUserHandler.builder()
-                .withUserRepository(userRepository)
-                .withVerificationTokenRepository(verificationTokenRepository)
-                .withConfirmationCode(CONFIRMATION_CODE)
-                .build().execute();
+                          .withUserRepository(userRepository)
+                          .withVerificationTokenRepository(verificationTokenRepository)
+                          .withConfirmationCode(CONFIRMATION_CODE)
+                          .build().execute();
 
         final var updatedUser = userRepository.findById(saved.getId()).orElseThrow();
         assertEquals(UserStatus.FREE, updatedUser.getUserStatus());
@@ -75,11 +75,11 @@ class ConfirmUserHandlerTest extends CommonHandlerTest {
 
     private User createUser() {
         final var user = User.builder()
-                .withStatus(UserStatus.FREE.getCode())
-                .withCreateDate(java.time.LocalDate.now())
-                .withPassword("encoded password")
-                .withUuid(UUID.randomUUID().toString())
-                .withEmail(EMAIL).build();
+                             .withStatus(UserStatus.FREE.getCode())
+                             .withCreateDate(java.time.LocalDate.now())
+                             .withPassword("encoded password")
+                             .withUuid(UUID.randomUUID().toString())
+                             .withEmail(EMAIL).build();
         final var saved = userRepository.save(user);
         assertNotNull(saved);
 

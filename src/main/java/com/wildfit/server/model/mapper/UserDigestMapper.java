@@ -12,16 +12,16 @@ public final class UserDigestMapper {
 
     public static UserDigest map(User user) {
         final var status = Optional.ofNullable(user)
-                .map(User::getUserStatus)
-                .map(Enum::name)
-                .map(UserStatusType::valueOf)
-                .orElse(null);
+                                   .map(User::getUserStatus)
+                                   .map(Enum::name)
+                                   .map(UserStatusType::valueOf)
+                                   .orElse(null);
 
         return UserDigest.builder()
-                .withId(user.getId())
-                .withEmail(user.getEmail())
-                .withStatus(status)
-                .withUuid(user.getUuid())
-                .build();
+                         .withId(user.getId())
+                         .withEmail(user.getEmail())
+                         .withStatus(status)
+                         .withUuid(user.getUuid())
+                         .build();
     }
 }

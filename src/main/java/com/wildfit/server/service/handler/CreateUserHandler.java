@@ -50,17 +50,17 @@ public class CreateUserHandler {
         }
 
         final var user = User.builder()
-                .withStatus(UserStatus.FREE.getCode())
-                .withCreateDate(java.time.LocalDate.now())
-                .withPassword(encodedPassword)
-                .withEmail(email)
-                .withEnabled(false)
-                .withUuid(UUID.randomUUID().toString())
-                .build();
+                             .withStatus(UserStatus.FREE.getCode())
+                             .withCreateDate(java.time.LocalDate.now())
+                             .withPassword(encodedPassword)
+                             .withEmail(email)
+                             .withEnabled(false)
+                             .withUuid(UUID.randomUUID().toString())
+                             .build();
         final var dbUser = userRepository.save(user);
         final var userProfile = UserProfile.builder().withUser(dbUser)
-                .withName(name)
-                .build();
+                                           .withName(name)
+                                           .build();
 
         final var saved = userProfileRepository.save(userProfile);
 

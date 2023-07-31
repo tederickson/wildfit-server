@@ -34,13 +34,13 @@ class UpdateUserProfileRequestTest {
     @Test
     void builder() {
         final var updateUserProfileRequest = UpdateUserProfileRequest.builder()
-                .withName("Bob Jones III")
-                .withAge(39)
-                .withGender(GenderType.FEMALE)
-                .withWeight(185.7f)
-                .withHeightFeet(5)
-                .withHeightInches(7)
-                .build();
+                                                                     .withName("Bob Jones III")
+                                                                     .withAge(39)
+                                                                     .withGender(GenderType.FEMALE)
+                                                                     .withWeight(185.7f)
+                                                                     .withHeightFeet(5)
+                                                                     .withHeightInches(7)
+                                                                     .build();
 
         assertEquals("Bob Jones III", updateUserProfileRequest.getName());
         assertEquals(39, updateUserProfileRequest.getAge());

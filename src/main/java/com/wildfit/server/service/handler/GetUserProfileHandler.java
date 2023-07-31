@@ -24,7 +24,7 @@ public class GetUserProfileHandler {
         validate();
 
         final var user = userRepository.findByUuid(userId)
-                .orElseThrow(() -> new UserServiceException(UserServiceError.USER_NOT_FOUND));
+                                       .orElseThrow(() -> new UserServiceException(UserServiceError.USER_NOT_FOUND));
 
         final var userProfile = userProfileRepository.findByUser(user).orElse(null);
 

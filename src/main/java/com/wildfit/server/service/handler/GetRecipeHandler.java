@@ -24,7 +24,8 @@ public class GetRecipeHandler {
         validate();
 
         final var recipe = recipeRepository.findById(recipeId)
-                .orElseThrow(() -> new UserServiceException(UserServiceError.RECIPE_NOT_FOUND));
+                                           .orElseThrow(
+                                                   () -> new UserServiceException(UserServiceError.RECIPE_NOT_FOUND));
 
         return RecipeMapper.map(recipe,
                 instructionGroupRepository.findByRecipeId(recipeId),

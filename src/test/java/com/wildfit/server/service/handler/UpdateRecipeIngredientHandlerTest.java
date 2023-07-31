@@ -30,42 +30,17 @@ class UpdateRecipeIngredientHandlerTest extends CommonRecipeHandlerTest {
         super.setUp();
 
         ingredientDigest = IngredientDigest.builder()
-                .withAddedSugars(addedSugars)
-                .withBrandName(brandName)
-                .withBrandNameItemName(brandNameItemName)
-                .withCalcium(calcium)
-                .withCalories(calories)
-                .withCholesterol(cholesterol)
-                .withDescription(description)
-                .withDietaryFiber(dietaryFiber)
-                .withFoodName(foodName)
+                                           .withDescription(description)
+                                           .withFoodName(foodName)
 
-                .withIngredientServingQty(ingredientServingQty)
-                .withIngredientServingUnit(ingredientServingUnit)
+                                           .withIngredientServingQty(ingredientServingQty)
+                                           .withIngredientServingUnit(ingredientServingUnit)
 
-                .withIron(iron)
-                .withMetricQty(metricQty)
-                .withMetricUom(metricUom)
-                .withNixBrandId(nixBrandId)
-                .withNixBrandName(nixBrandName)
-                .withNixItemId(nixItemId)
-                .withPhosphorus(phosphorus)
-                .withPhoto(photo)
-                .withPotassium(potassium)
-                .withProtein(protein)
+                                           .withServingQty(servingQty)
+                                           .withServingUnit(servingUnit)
 
-                .withSaturatedFat(saturatedFat)
-                .withServingQty(servingQty)
-                .withServingUnit(servingUnit)
-                .withServingWeightGrams(servingWeightGrams)
-                .withSodium(sodium)
-                .withSugars(sugars)
-                .withTotalCarbohydrate(totalCarbohydrate)
-                .withTotalFat(totalFat)
-                .withTransFattyAcid(transFattyAcid)
-                .withVitaminD(vitaminD)
-                .withIngredientType(IngredientType.DAIRY)
-                .build();
+                                           .withIngredientType(IngredientType.DAIRY)
+                                           .build();
     }
 
     @Test
@@ -78,13 +53,13 @@ class UpdateRecipeIngredientHandlerTest extends CommonRecipeHandlerTest {
     void missingUserId() {
         final var exception = assertThrows(UserServiceException.class,
                 () -> UpdateRecipeIngredientHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withRecipeRepository(recipeRepository)
-                        .withRecipeIngredientRepository(recipeIngredientRepository)
-                        .withRecipeId(-1L)
-                        .withIngredientId(-89L)
-                        .withRequest(UpdateIngredientRequest.builder().build())
-                        .build().execute());
+                                                   .withUserRepository(userRepository)
+                                                   .withRecipeRepository(recipeRepository)
+                                                   .withRecipeIngredientRepository(recipeIngredientRepository)
+                                                   .withRecipeId(-1L)
+                                                   .withIngredientId(-89L)
+                                                   .withRequest(UpdateIngredientRequest.builder().build())
+                                                   .build().execute());
         assertEquals(UserServiceError.INVALID_PARAMETER, exception.getError());
     }
 
@@ -92,13 +67,13 @@ class UpdateRecipeIngredientHandlerTest extends CommonRecipeHandlerTest {
     void missingRecipeId() {
         final var exception = assertThrows(UserServiceException.class,
                 () -> UpdateRecipeIngredientHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withRecipeRepository(recipeRepository)
-                        .withRecipeIngredientRepository(recipeIngredientRepository)
-                        .withUserId("-32L")
-                        .withIngredientId(-89L)
-                        .withRequest(UpdateIngredientRequest.builder().build())
-                        .build().execute());
+                                                   .withUserRepository(userRepository)
+                                                   .withRecipeRepository(recipeRepository)
+                                                   .withRecipeIngredientRepository(recipeIngredientRepository)
+                                                   .withUserId("-32L")
+                                                   .withIngredientId(-89L)
+                                                   .withRequest(UpdateIngredientRequest.builder().build())
+                                                   .build().execute());
         assertEquals(UserServiceError.INVALID_PARAMETER, exception.getError());
     }
 
@@ -106,13 +81,13 @@ class UpdateRecipeIngredientHandlerTest extends CommonRecipeHandlerTest {
     void missingIngredientId() {
         final var exception = assertThrows(UserServiceException.class,
                 () -> UpdateRecipeIngredientHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withRecipeRepository(recipeRepository)
-                        .withRecipeIngredientRepository(recipeIngredientRepository)
-                        .withUserId("-32L")
-                        .withRecipeId(-1L)
-                        .withRequest(UpdateIngredientRequest.builder().build())
-                        .build().execute());
+                                                   .withUserRepository(userRepository)
+                                                   .withRecipeRepository(recipeRepository)
+                                                   .withRecipeIngredientRepository(recipeIngredientRepository)
+                                                   .withUserId("-32L")
+                                                   .withRecipeId(-1L)
+                                                   .withRequest(UpdateIngredientRequest.builder().build())
+                                                   .build().execute());
         assertEquals(UserServiceError.INVALID_PARAMETER, exception.getError());
     }
 
@@ -120,13 +95,13 @@ class UpdateRecipeIngredientHandlerTest extends CommonRecipeHandlerTest {
     void missingRequest() {
         final var exception = assertThrows(UserServiceException.class,
                 () -> UpdateRecipeIngredientHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withRecipeRepository(recipeRepository)
-                        .withRecipeIngredientRepository(recipeIngredientRepository)
-                        .withUserId("-32L")
-                        .withRecipeId(-1L)
-                        .withIngredientId(-89L)
-                        .build().execute());
+                                                   .withUserRepository(userRepository)
+                                                   .withRecipeRepository(recipeRepository)
+                                                   .withRecipeIngredientRepository(recipeIngredientRepository)
+                                                   .withUserId("-32L")
+                                                   .withRecipeId(-1L)
+                                                   .withIngredientId(-89L)
+                                                   .build().execute());
         assertEquals(UserServiceError.INVALID_PARAMETER, exception.getError());
     }
 
@@ -134,14 +109,14 @@ class UpdateRecipeIngredientHandlerTest extends CommonRecipeHandlerTest {
     void userNotFound() {
         final var exception = assertThrows(UserServiceException.class,
                 () -> UpdateRecipeIngredientHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withRecipeRepository(recipeRepository)
-                        .withRecipeIngredientRepository(recipeIngredientRepository)
-                        .withUserId("-14L")
-                        .withRecipeId(-1L)
-                        .withIngredientId(-89L)
-                        .withRequest(UpdateIngredientRequest.builder().build())
-                        .build().execute());
+                                                   .withUserRepository(userRepository)
+                                                   .withRecipeRepository(recipeRepository)
+                                                   .withRecipeIngredientRepository(recipeIngredientRepository)
+                                                   .withUserId("-14L")
+                                                   .withRecipeId(-1L)
+                                                   .withIngredientId(-89L)
+                                                   .withRequest(UpdateIngredientRequest.builder().build())
+                                                   .build().execute());
 
         assertEquals(UserServiceError.USER_NOT_FOUND, exception.getError());
     }
@@ -150,14 +125,14 @@ class UpdateRecipeIngredientHandlerTest extends CommonRecipeHandlerTest {
     void recipeNotFound() {
         final var exception = assertThrows(UserServiceException.class,
                 () -> UpdateRecipeIngredientHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withRecipeRepository(recipeRepository)
-                        .withRecipeIngredientRepository(recipeIngredientRepository)
-                        .withUserId(userId)
-                        .withRecipeId(-1L)
-                        .withIngredientId(-89L)
-                        .withRequest(UpdateIngredientRequest.builder().build())
-                        .build().execute());
+                                                   .withUserRepository(userRepository)
+                                                   .withRecipeRepository(recipeRepository)
+                                                   .withRecipeIngredientRepository(recipeIngredientRepository)
+                                                   .withUserId(userId)
+                                                   .withRecipeId(-1L)
+                                                   .withIngredientId(-89L)
+                                                   .withRequest(UpdateIngredientRequest.builder().build())
+                                                   .build().execute());
 
         assertEquals(UserServiceError.RECIPE_NOT_FOUND, exception.getError());
     }
@@ -165,18 +140,18 @@ class UpdateRecipeIngredientHandlerTest extends CommonRecipeHandlerTest {
     @Test
     void execute() throws UserServiceException {
         final var instructionGroup = InstructionGroupDigest.builder()
-                .withInstructionGroupNumber(1)
-                .withInstructions(List.of(step1, step2)).build();
+                                                           .withInstructionGroupNumber(1)
+                                                           .withInstructions(List.of(step1, step2)).build();
         final var recipe = RecipeDigest.builder()
-                .withName(NAME)
-                .withSeason(SeasonType.SPRING)
-                .withIntroduction(INTRODUCTION)
-                .withPrepTimeMin(5)
-                .withCookTimeMin(15)
-                .withServingQty(4)
-                .withServingUnit("serving")
-                .withInstructionGroups(List.of(instructionGroup))
-                .build();
+                                       .withName(NAME)
+                                       .withSeason(SeasonType.SPRING)
+                                       .withIntroduction(INTRODUCTION)
+                                       .withPrepTimeMin(5)
+                                       .withCookTimeMin(15)
+                                       .withServingQty(4)
+                                       .withServingUnit("serving")
+                                       .withInstructionGroups(List.of(instructionGroup))
+                                       .build();
 
         createRecipe(recipe);
 
@@ -185,37 +160,38 @@ class UpdateRecipeIngredientHandlerTest extends CommonRecipeHandlerTest {
         assertNotNull(recipeGroupId);
 
         final var ingredient = CreateRecipeIngredientHandler.builder()
-                .withUserRepository(userRepository)
-                .withRecipeRepository(recipeRepository)
-                .withInstructionGroupRepository(instructionGroupRepository)
-                .withRecipeIngredientRepository(recipeIngredientRepository)
-                .withUserId(userId)
-                .withRecipeId(testRecipe.getId())
-                .withRecipeGroupId(recipeGroupId)
-                .withRequest(ingredientDigest)
-                .build().execute();
+                                                            .withUserRepository(userRepository)
+                                                            .withRecipeRepository(recipeRepository)
+                                                            .withInstructionGroupRepository(instructionGroupRepository)
+                                                            .withRecipeIngredientRepository(recipeIngredientRepository)
+                                                            .withUserId(userId)
+                                                            .withRecipeId(testRecipe.getId())
+                                                            .withRecipeGroupId(recipeGroupId)
+                                                            .withRequest(ingredientDigest)
+                                                            .build().execute();
         assertNotNull(ingredient);
 
         final var updateIngredientRequest = UpdateIngredientRequest.builder()
-                .withDescription("Updated Description")
-                .withIngredientServingQty(1.11f)
-                .withIngredientServingUnit("banana")
-                .withIngredientType(IngredientType.PRODUCE)
-                .build();
+                                                                   .withDescription("Updated Description")
+                                                                   .withIngredientServingQty(1.11f)
+                                                                   .withIngredientServingUnit("banana")
+                                                                   .withIngredientType(IngredientType.PRODUCE)
+                                                                   .build();
         ingredient.setDescription("Updated Description");
         ingredient.setIngredientServingQty(1.11f);
         ingredient.setIngredientServingUnit("banana");
         ingredient.setIngredientType(IngredientType.PRODUCE);
 
         final var updatedIngredient = UpdateRecipeIngredientHandler.builder()
-                .withUserRepository(userRepository)
-                .withRecipeRepository(recipeRepository)
-                .withRecipeIngredientRepository(recipeIngredientRepository)
-                .withUserId(userId)
-                .withRecipeId(testRecipe.getId())
-                .withIngredientId(ingredient.getId())
-                .withRequest(updateIngredientRequest)
-                .build().execute();
+                                                                   .withUserRepository(userRepository)
+                                                                   .withRecipeRepository(recipeRepository)
+                                                                   .withRecipeIngredientRepository(
+                                                                           recipeIngredientRepository)
+                                                                   .withUserId(userId)
+                                                                   .withRecipeId(testRecipe.getId())
+                                                                   .withIngredientId(ingredient.getId())
+                                                                   .withRequest(updateIngredientRequest)
+                                                                   .build().execute();
 
         assertEquals(ingredient, updatedIngredient);
     }

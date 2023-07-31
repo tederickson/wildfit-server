@@ -35,23 +35,23 @@ class RecipeRepositoryTest {
     void findAllBySeason() {
         final var name = "RecipeRepositoryTest Test Recipe";
         final var recipe = Recipe.builder()
-                .withSeason(SEASON)
-                .withEmail(EMAIL)
-                .withName(name)
-                .withCreated(java.time.LocalDateTime.now())
-                .withIntroduction("introduction")
-                .withPrepTimeMin(3)
-                .withCookTimeMin(14)
-                .withServingUnit("serving")
-                .withServingQty(4)
-                .build();
+                                 .withSeason(SEASON)
+                                 .withEmail(EMAIL)
+                                 .withName(name)
+                                 .withCreated(java.time.LocalDateTime.now())
+                                 .withIntroduction("introduction")
+                                 .withPrepTimeMin(3)
+                                 .withCookTimeMin(14)
+                                 .withServingUnit("serving")
+                                 .withServingQty(4)
+                                 .build();
         final var saved = recipeRepository.save(recipe);
 
         final var rows = recipeRepository.findAllBySeason(SEASON, PAGEABLE);
         final var dbRecipe = rows.stream().filter(x -> SEASON.equals(x.getSeason()))
-                .filter(x -> EMAIL.equals(x.getEmail()))
-                .filter(x -> name.equals(x.getName()))
-                .findFirst().orElse(null);
+                                 .filter(x -> EMAIL.equals(x.getEmail()))
+                                 .filter(x -> name.equals(x.getName()))
+                                 .findFirst().orElse(null);
 
         assertNotNull(dbRecipe);
 

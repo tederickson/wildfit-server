@@ -28,38 +28,48 @@ public class EggMuffinsWithMushroomsIT extends CommonRecipe {
 
         if (exists.isEmpty()) {
             final var step1 = InstructionDigest.builder().withStepNumber(1)
-                    .withInstruction("Preheat the oven to 350F.").build();
+                                               .withInstruction("Preheat the oven to 350F.").build();
             final var step2 = InstructionDigest.builder().withStepNumber(2)
-                    .withInstruction("Sauté the bacon bits with the onion if you are using red or yellow onion.").build();
+                                               .withInstruction(
+                                                       "Sauté the bacon bits with the onion if you are using red or yellow onion.")
+                                               .build();
             final var step3 = InstructionDigest.builder().withStepNumber(3)
-                    .withInstruction("Whisk the eggs and add all the ingredients, but save a few herbs to decorate.").build();
+                                               .withInstruction(
+                                                       "Whisk the eggs and add all the ingredients, but save a few herbs to decorate.")
+                                               .build();
             final var step4 = InstructionDigest.builder().withStepNumber(4)
-                    .withInstruction("Grease the muffin tin and pour in the mixture to fill up to 2/3 " +
-                            "(they will raise a bit).").build();
+                                               .withInstruction(
+                                                       "Grease the muffin tin and pour in the mixture to fill up to 2/3 " +
+                                                               "(they will raise a bit).").build();
             final var step5 = InstructionDigest.builder().withStepNumber(5)
-                    .withInstruction("Bake for about 25 mins. Check at 20 mins. I like my eggs muffins soft, " +
-                            "but if you are batch cooking, they need to cook through.").build();
+                                               .withInstruction(
+                                                       "Bake for about 25 mins. Check at 20 mins. I like my eggs muffins soft, " +
+                                                               "but if you are batch cooking, they need to cook through.")
+                                               .build();
             final var instructionGroup1 = InstructionGroupDigest.builder()
-                    .withInstructionGroupNumber(2)
-                    .withInstructions(List.of(step1, step2, step3, step4, step5)).build();
+                                                                .withInstructionGroupNumber(2)
+                                                                .withInstructions(
+                                                                        List.of(step1, step2, step3, step4, step5))
+                                                                .build();
             final var recipe = RecipeDigest.builder()
-                    .withName(name)
-                    .withSeason(season.toSeasonType())
-                    .withIntroduction("Perfect for batch cooking, breakfast, lunch, dinner and snack. " +
-                            "High in protein, fat and nutrients. Low in carbs.")
-                    .withPrepTimeMin(15)
-                    .withCookTimeMin(25)
-                    .withServingQty(6)
-                    .withServingUnit("serving")
-                    .withInstructionGroups(List.of(instructionGroup1))
-                    .build();
+                                           .withName(name)
+                                           .withSeason(season.toSeasonType())
+                                           .withIntroduction(
+                                                   "Perfect for batch cooking, breakfast, lunch, dinner and snack. " +
+                                                           "High in protein, fat and nutrients. Low in carbs.")
+                                           .withPrepTimeMin(15)
+                                           .withCookTimeMin(25)
+                                           .withServingQty(6)
+                                           .withServingUnit("serving")
+                                           .withInstructionGroups(List.of(instructionGroup1))
+                                           .build();
             final var response = CreateRecipeHandler.builder()
-                    .withUserRepository(userRepository)
-                    .withRecipeRepository(recipeRepository)
-                    .withInstructionGroupRepository(instructionGroupRepository)
-                    .withUserId(UUID)
-                    .withRequest(recipe)
-                    .build().execute();
+                                                    .withUserRepository(userRepository)
+                                                    .withRecipeRepository(recipeRepository)
+                                                    .withInstructionGroupRepository(instructionGroupRepository)
+                                                    .withUserId(UUID)
+                                                    .withRequest(recipe)
+                                                    .build().execute();
             assertNotNull(response);
 
             final var dbRecipeId = response.getId();

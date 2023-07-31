@@ -31,8 +31,8 @@ public class ConfirmUserHandler {
         userRepository.save(user);
 
         return RegisterUserResponse.builder()
-                .withMessage("Your account is active.")
-                .build();
+                                   .withMessage("Your account is active.")
+                                   .build();
     }
 
     private void validate() throws UserServiceException {

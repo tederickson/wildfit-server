@@ -25,12 +25,18 @@ import org.springframework.data.domain.PageRequest;
 class TunaSaladIT extends CommonRecipe {
 
     public static final InstructionDigest STEP_1 = InstructionDigest.builder().withStepNumber(1)
-            .withInstruction("Put the tuna in a bowl and break it up with a fork.").build();
+                                                                    .withInstruction(
+                                                                            "Put the tuna in a bowl and break it up with a fork.")
+                                                                    .build();
     public static final InstructionDigest STEP_3 = InstructionDigest.builder().withStepNumber(3)
-            .withInstruction("Add the finely chopped onion and the capers. " +
-                    "Mix it together with the dressing ingredients and done.").build();
+                                                                    .withInstruction(
+                                                                            "Add the finely chopped onion and the capers. " +
+                                                                                    "Mix it together with the dressing ingredients and done.")
+                                                                    .build();
     public static final InstructionDigest STEP_4 = InstructionDigest.builder().withStepNumber(4)
-            .withInstruction("You can add any fresh herb you like. Dill goes especially well with tuna.").build();
+                                                                    .withInstruction(
+                                                                            "You can add any fresh herb you like. Dill goes especially well with tuna.")
+                                                                    .build();
 
     @Test
     void tunaSaladWithAppleAndCelerySummer() throws UserServiceException, IOException {
@@ -40,34 +46,38 @@ class TunaSaladIT extends CommonRecipe {
 
         if (exists.isEmpty()) {
             final var step2 = InstructionDigest.builder().withStepNumber(2)
-                    .withInstruction("Slice the celery and the apples to the same thickness. Chop the pickles small. ").build();
+                                               .withInstruction(
+                                                       "Slice the celery and the apples to the same thickness. Chop the pickles small. ")
+                                               .build();
 
 
             final var instructionGroup1 = InstructionGroupDigest.builder()
-                    .withInstructionGroupNumber(1)
-                    .withName("Dressing").build();
+                                                                .withInstructionGroupNumber(1)
+                                                                .withName("Dressing").build();
             final var instructionGroup2 = InstructionGroupDigest.builder()
-                    .withInstructionGroupNumber(2)
-                    .withName("Salad")
-                    .withInstructions(List.of(STEP_1, step2, STEP_3, STEP_4)).build();
+                                                                .withInstructionGroupNumber(2)
+                                                                .withName("Salad")
+                                                                .withInstructions(
+                                                                        List.of(STEP_1, step2, STEP_3, STEP_4)).build();
             final var recipe = RecipeDigest.builder()
-                    .withName(name)
-                    .withSeason(season.toSeasonType())
-                    .withIntroduction("Tuna is one of the staples in our household. We eat it all the time, because " +
-                            "it is simple and can be eaten for breakfast, lunch, dinner and snack. ")
-                    .withPrepTimeMin(15)
-                    .withCookTimeMin(0)
-                    .withServingQty(4)
-                    .withServingUnit("serving")
-                    .withInstructionGroups(List.of(instructionGroup1, instructionGroup2))
-                    .build();
+                                           .withName(name)
+                                           .withSeason(season.toSeasonType())
+                                           .withIntroduction(
+                                                   "Tuna is one of the staples in our household. We eat it all the time, because " +
+                                                           "it is simple and can be eaten for breakfast, lunch, dinner and snack. ")
+                                           .withPrepTimeMin(15)
+                                           .withCookTimeMin(0)
+                                           .withServingQty(4)
+                                           .withServingUnit("serving")
+                                           .withInstructionGroups(List.of(instructionGroup1, instructionGroup2))
+                                           .build();
             final var response = CreateRecipeHandler.builder()
-                    .withUserRepository(userRepository)
-                    .withRecipeRepository(recipeRepository)
-                    .withInstructionGroupRepository(instructionGroupRepository)
-                    .withUserId(UUID)
-                    .withRequest(recipe)
-                    .build().execute();
+                                                    .withUserRepository(userRepository)
+                                                    .withRecipeRepository(recipeRepository)
+                                                    .withInstructionGroupRepository(instructionGroupRepository)
+                                                    .withUserId(UUID)
+                                                    .withRequest(recipe)
+                                                    .build().execute();
             assertNotNull(response);
 
             final var dbRecipeId = response.getId();
@@ -90,33 +100,37 @@ class TunaSaladIT extends CommonRecipe {
 
         if (exists.isEmpty()) {
             final var step2 = InstructionDigest.builder().withStepNumber(2)
-                    .withInstruction("Dice the pickles and the celery to the same thickness.").build();
+                                               .withInstruction(
+                                                       "Dice the pickles and the celery to the same thickness.")
+                                               .build();
 
             final var instructionGroup1 = InstructionGroupDigest.builder()
-                    .withInstructionGroupNumber(1)
-                    .withName("Dressing").build();
+                                                                .withInstructionGroupNumber(1)
+                                                                .withName("Dressing").build();
             final var instructionGroup2 = InstructionGroupDigest.builder()
-                    .withInstructionGroupNumber(2)
-                    .withName("Salad")
-                    .withInstructions(List.of(STEP_1, step2, STEP_3, STEP_4)).build();
+                                                                .withInstructionGroupNumber(2)
+                                                                .withName("Salad")
+                                                                .withInstructions(
+                                                                        List.of(STEP_1, step2, STEP_3, STEP_4)).build();
             final var recipe = RecipeDigest.builder()
-                    .withName(name)
-                    .withSeason(season.toSeasonType())
-                    .withIntroduction("Tuna is one of the staples in our household. We eat it all the time, because " +
-                            "it is simple and can be eaten for breakfast, lunch, dinner and snack. ")
-                    .withPrepTimeMin(15)
-                    .withCookTimeMin(0)
-                    .withServingQty(4)
-                    .withServingUnit("serving")
-                    .withInstructionGroups(List.of(instructionGroup1, instructionGroup2))
-                    .build();
+                                           .withName(name)
+                                           .withSeason(season.toSeasonType())
+                                           .withIntroduction(
+                                                   "Tuna is one of the staples in our household. We eat it all the time, because " +
+                                                           "it is simple and can be eaten for breakfast, lunch, dinner and snack. ")
+                                           .withPrepTimeMin(15)
+                                           .withCookTimeMin(0)
+                                           .withServingQty(4)
+                                           .withServingUnit("serving")
+                                           .withInstructionGroups(List.of(instructionGroup1, instructionGroup2))
+                                           .build();
             final var response = CreateRecipeHandler.builder()
-                    .withUserRepository(userRepository)
-                    .withRecipeRepository(recipeRepository)
-                    .withInstructionGroupRepository(instructionGroupRepository)
-                    .withUserId(UUID)
-                    .withRequest(recipe)
-                    .build().execute();
+                                                    .withUserRepository(userRepository)
+                                                    .withRecipeRepository(recipeRepository)
+                                                    .withInstructionGroupRepository(instructionGroupRepository)
+                                                    .withUserId(UUID)
+                                                    .withRequest(recipe)
+                                                    .build().execute();
             assertNotNull(response);
 
             final var dbRecipeId = response.getId();
@@ -156,7 +170,8 @@ class TunaSaladIT extends CommonRecipe {
                 "1/8 teaspoon pepper (adjust to your preference)", IngredientType.SPICE);
     }
 
-    private void saladIngredients(long dbRecipeId, long dbRecipeGroupId, SeasonType season) throws IOException, UserServiceException {
+    private void saladIngredients(long dbRecipeId, long dbRecipeGroupId, SeasonType season)
+            throws IOException, UserServiceException {
         var foodItems = getFoodItems("load/tuna_in_water.json");
         var foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
         addIngredient(dbRecipeId, dbRecipeGroupId, foodItemDigest, 2, "can",

@@ -19,28 +19,30 @@ public class InstructionGroupMapper {
 
     public static InstructionGroupDigest map(InstructionGroup instructionGroup) {
         final var builder = InstructionGroupDigest.builder()
-                .withId(instructionGroup.getId())
-                .withInstructionGroupNumber(instructionGroup.getInstructionGroupNumber())
-                .withName(instructionGroup.getName());
+                                                  .withId(instructionGroup.getId())
+                                                  .withInstructionGroupNumber(
+                                                          instructionGroup.getInstructionGroupNumber())
+                                                  .withName(instructionGroup.getName());
 
         if (instructionGroup.getInstructions() != null) {
             builder.withInstructions(
                     instructionGroup.getInstructions().stream().map(InstructionMapper::map)
-                            .collect(Collectors.toList()));
+                                    .collect(Collectors.toList()));
         }
         return builder.build();
     }
 
     public static InstructionGroup create(Recipe recipe, InstructionGroupDigest digest) {
         final var instructionGroup = InstructionGroup.builder()
-                .withInstructionGroupNumber(digest.getInstructionGroupNumber())
-                .withName(digest.getName())
-                .withRecipeId(recipe.getId()).build();
+                                                     .withInstructionGroupNumber(digest.getInstructionGroupNumber())
+                                                     .withName(digest.getName())
+                                                     .withRecipeId(recipe.getId()).build();
 
         if (digest.getInstructions() != null) {
             final var instructions = digest.getInstructions().stream()
-                    .map(instructionDigest -> InstructionMapper.create(instructionGroup, instructionDigest))
-                    .collect(Collectors.toList());
+                                           .map(instructionDigest -> InstructionMapper.create(instructionGroup,
+                                                   instructionDigest))
+                                           .collect(Collectors.toList());
             instructionGroup.setInstructions(instructions);
         }
         return instructionGroup;
@@ -62,8 +64,9 @@ public class InstructionGroupMapper {
                     instructions.add(InstructionMapper.create(instructionGroup, instructionDigest));
                 } else {
                     final var instruction = instructionGroup.getInstructions().stream()
-                            .filter(x -> instructionDigest.getId().equals(x.getId())).findFirst()
-                            .orElse(null);
+                                                            .filter(x -> instructionDigest.getId().equals(x.getId()))
+                                                            .findFirst()
+                                                            .orElse(null);
                     if (instruction == null) {
                         log.error("Unable to find id " + instructionDigest.getId());
                         throw new UserServiceException(UserServiceError.INVALID_PARAMETER);

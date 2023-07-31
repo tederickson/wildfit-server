@@ -32,16 +32,16 @@ class UserProfileRepositoryTest extends AbstractRepositoryTest {
     @Test
     void findByEmail_withUser() {
         final var user = User.builder()
-                .withStatus(UserStatus.FREE.getCode())
-                .withCreateDate(LocalDate.now())
-                .withPassword(PASSWORD)
-                .withUuid(UUID.randomUUID().toString())
-                .withEmail(EMAIL).build();
+                             .withStatus(UserStatus.FREE.getCode())
+                             .withCreateDate(LocalDate.now())
+                             .withPassword(PASSWORD)
+                             .withUuid(UUID.randomUUID().toString())
+                             .withEmail(EMAIL).build();
         final var dbUser = userRepository.save(user);
         final var userProfile = UserProfile.builder()
-                .withUser(dbUser)
-                .withName(USER_NAME)
-                .build();
+                                           .withUser(dbUser)
+                                           .withName(USER_NAME)
+                                           .build();
 
         final var saved = userProfileRepository.save(userProfile);
 

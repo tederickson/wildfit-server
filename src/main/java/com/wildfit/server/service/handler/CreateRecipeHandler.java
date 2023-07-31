@@ -22,7 +22,7 @@ public class CreateRecipeHandler extends CommonRecipeHandler {
         validate();
 
         final var user = userRepository.findByUuid(userId)
-                .orElseThrow(() -> new UserServiceException(UserServiceError.USER_NOT_FOUND));
+                                       .orElseThrow(() -> new UserServiceException(UserServiceError.USER_NOT_FOUND));
 
         final var recipe = RecipeMapper.create(request, user.getEmail());
         final var dbRecipe = recipeRepository.save(recipe);
@@ -30,9 +30,10 @@ public class CreateRecipeHandler extends CommonRecipeHandler {
         List<InstructionGroup> instructionGroups = null;
         if (request.getInstructionGroups() != null) {
             instructionGroups = request.getInstructionGroups().stream()
-                    .map(instructionGroupDigest -> InstructionGroupMapper.create(dbRecipe, instructionGroupDigest))
-                    .map(instructionGroupRepository::save)
-                    .collect(Collectors.toList());
+                                       .map(instructionGroupDigest -> InstructionGroupMapper.create(dbRecipe,
+                                               instructionGroupDigest))
+                                       .map(instructionGroupRepository::save)
+                                       .collect(Collectors.toList());
         }
 
         return RecipeMapper.map(dbRecipe, instructionGroups);

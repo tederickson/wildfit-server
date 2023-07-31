@@ -12,11 +12,11 @@ public class AbstractRepositoryTest {
     protected static final String PASSWORD = "Super2023!";
     protected static final String EMAIL = "tederickson35@gmail.com";
     protected static final User USER = User.builder()
-            .withStatus(UserStatus.FREE.getCode())
-            .withCreateDate(LocalDate.now())
-            .withPassword(PASSWORD)
-            .withUuid(UUID.randomUUID().toString())
-            .withEmail(EMAIL).build();
+                                           .withStatus(UserStatus.FREE.getCode())
+                                           .withCreateDate(LocalDate.now())
+                                           .withPassword(PASSWORD)
+                                           .withUuid(UUID.randomUUID().toString())
+                                           .withEmail(EMAIL).build();
 
     @Autowired
     UserRepository userRepository;

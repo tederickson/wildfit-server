@@ -43,8 +43,8 @@ class UserDigestTest {
     @Test
     void builder() {
         final var digest = UserDigest.builder()
-                .withEmail("email")
-                .build();
+                                     .withEmail("email")
+                                     .build();
 
         assertEquals("email", digest.getEmail());
     }

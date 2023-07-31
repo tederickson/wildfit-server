@@ -10,17 +10,17 @@ public class InstructionMapper {
 
     public static InstructionDigest map(Instruction instruction) {
         return InstructionDigest.builder()
-                .withId(instruction.getId())
-                .withStepNumber(instruction.getStepNumber())
-                .withInstruction(instruction.getText()).build();
+                                .withId(instruction.getId())
+                                .withStepNumber(instruction.getStepNumber())
+                                .withInstruction(instruction.getText()).build();
     }
 
     public static Instruction create(InstructionGroup instructionGroup, InstructionDigest instructionDigest) {
         return Instruction.builder()
-                .withInstructionGroup(instructionGroup)
-                .withStepNumber(instructionDigest.getStepNumber())
-                .withText(instructionDigest.getInstruction())
-                .build();
+                          .withInstructionGroup(instructionGroup)
+                          .withStepNumber(instructionDigest.getStepNumber())
+                          .withText(instructionDigest.getInstruction())
+                          .build();
     }
 
     public static Instruction update(Instruction instruction, InstructionDigest instructionDigest) {

@@ -26,12 +26,12 @@ public class GetRecipeNutritionHandler extends AbstractNutritionixHandler<FoodIt
         parseRecipeRequest.setNum_servings(recipeDigest.getServingQty());
 
         recipeDigest.getInstructionGroups().stream()
-                .map(InstructionGroupDigest::getIngredients)
-                .flatMap(List::stream)
-                .forEach((ingredient) -> parseRecipeRequest.addIngredient(
-                        ingredient.getIngredientServingQty(),
-                        ingredient.getIngredientServingUnit(),
-                        ingredient.getFoodName()));
+                    .map(InstructionGroupDigest::getIngredients)
+                    .flatMap(List::stream)
+                    .forEach((ingredient) -> parseRecipeRequest.addIngredient(
+                            ingredient.getIngredientServingQty(),
+                            ingredient.getIngredientServingUnit(),
+                            ingredient.getFoodName()));
 
         final var restTemplate = new RestTemplate();
         final var entity = new HttpEntity<>(parseRecipeRequest, getHeaders());

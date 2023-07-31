@@ -25,7 +25,7 @@ public class CreateRecipeIngredientHandler extends CommonRecipeHandler {
         // Validate recipeId and recipeGroupId
         getAuthorizedRecipe(recipeId);
         instructionGroupRepository.findById(recipeGroupId)
-                .orElseThrow(() -> new UserServiceException(UserServiceError.RECIPE_GROUP_NOT_FOUND));
+                                  .orElseThrow(() -> new UserServiceException(UserServiceError.RECIPE_GROUP_NOT_FOUND));
 
         final var recipeIngredient = RecipeIngredientMapper.create(request, recipeId, recipeGroupId);
 

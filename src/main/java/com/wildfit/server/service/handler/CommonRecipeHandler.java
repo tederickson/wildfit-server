@@ -18,9 +18,10 @@ public class CommonRecipeHandler {
 
     protected Recipe getAuthorizedRecipe(Long recipeId) throws UserServiceException {
         final var user = userRepository.findByUuid(userId)
-                .orElseThrow(() -> new UserServiceException(UserServiceError.USER_NOT_FOUND));
+                                       .orElseThrow(() -> new UserServiceException(UserServiceError.USER_NOT_FOUND));
         final var dbRecipe = recipeRepository.findById(recipeId)
-                .orElseThrow(() -> new UserServiceException(UserServiceError.RECIPE_NOT_FOUND));
+                                             .orElseThrow(
+                                                     () -> new UserServiceException(UserServiceError.RECIPE_NOT_FOUND));
 
         if (!dbRecipe.getEmail().equals(user.getEmail())) {
             throw new UserServiceException(UserServiceError.NOT_AUTHORIZED);
