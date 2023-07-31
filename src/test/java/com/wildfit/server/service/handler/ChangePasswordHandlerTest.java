@@ -32,10 +32,10 @@ class ChangePasswordHandlerTest extends CommonHandlerTest {
     void nullPassword(String password) {
         final var exception = assertThrows(UserServiceException.class,
                 () -> ChangePasswordHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withUserId(USER_ID)
-                        .withPassword(password)
-                        .build().execute());
+                                           .withUserRepository(userRepository)
+                                           .withUserId(USER_ID)
+                                           .withPassword(password)
+                                           .build().execute());
         assertEquals(UserServiceError.INVALID_PASSWORD, exception.getError());
     }
 
@@ -43,10 +43,10 @@ class ChangePasswordHandlerTest extends CommonHandlerTest {
     void invalidPassword() {
         final var exception = assertThrows(UserServiceException.class,
                 () -> ChangePasswordHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withPassword("apple")
-                        .withUserId(USER_ID)
-                        .build().execute());
+                                           .withUserRepository(userRepository)
+                                           .withPassword("apple")
+                                           .withUserId(USER_ID)
+                                           .build().execute());
         assertEquals(UserServiceError.INVALID_PASSWORD, exception.getError());
     }
 
@@ -54,28 +54,28 @@ class ChangePasswordHandlerTest extends CommonHandlerTest {
     void missingId() {
         final var exception = assertThrows(UserServiceException.class,
                 () -> ChangePasswordHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withPassword(PASSWORD)
-                        .build().execute());
+                                           .withUserRepository(userRepository)
+                                           .withPassword(PASSWORD)
+                                           .build().execute());
         assertEquals(UserServiceError.USER_NOT_FOUND, exception.getError());
     }
 
     @Test
     void execute() throws UserServiceException {
         final var user = User.builder()
-                .withStatus(UserStatus.FREE.getCode())
-                .withCreateDate(java.time.LocalDate.now())
-                .withPassword("encoded password")
-                .withUuid(UUID.randomUUID().toString())
-                .withEmail(EMAIL).build();
+                             .withStatus(UserStatus.FREE.getCode())
+                             .withCreateDate(java.time.LocalDate.now())
+                             .withPassword("encoded password")
+                             .withUuid(UUID.randomUUID().toString())
+                             .withEmail(EMAIL).build();
         final var saved = userRepository.save(user);
         assertNotNull(saved);
 
         ChangePasswordHandler.builder()
-                .withUserRepository(userRepository)
-                .withPassword(PASSWORD)
-                .withUserId(saved.getUuid())
-                .build().execute();
+                             .withUserRepository(userRepository)
+                             .withPassword(PASSWORD)
+                             .withUserId(saved.getUuid())
+                             .build().execute();
 
         final var updatedUser = userRepository.findById(saved.getId()).orElseThrow();
         assertNotSame(saved.getPassword(), updatedUser.getPassword());

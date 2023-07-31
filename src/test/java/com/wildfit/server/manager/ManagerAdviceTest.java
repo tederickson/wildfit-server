@@ -35,9 +35,9 @@ class ManagerAdviceTest {
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
 
         ErrorData expected = ErrorData.builder()
-                .withMessage(UserServiceError.USER_NOT_FOUND.getMessage())
-                .withErrorCode(UserServiceError.USER_NOT_FOUND.name())
-                .build();
+                                      .withMessage(UserServiceError.USER_NOT_FOUND.getMessage())
+                                      .withErrorCode(UserServiceError.USER_NOT_FOUND.name())
+                                      .build();
         assertEquals(expected, response.getBody());
     }
 

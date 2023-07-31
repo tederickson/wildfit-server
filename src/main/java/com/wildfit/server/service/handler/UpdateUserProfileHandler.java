@@ -31,7 +31,7 @@ public class UpdateUserProfileHandler {
                 new UserServiceException(UserServiceError.USER_NOT_FOUND));
 
         final var userProfile = userProfileRepository.findByUser(user)
-                .orElse(UserProfile.builder().withUser(user).build());
+                                                     .orElse(UserProfile.builder().withUser(user).build());
 
         userProfile.setName(userProfileRequest.getName());
         userProfile.setAge(userProfileRequest.getAge());

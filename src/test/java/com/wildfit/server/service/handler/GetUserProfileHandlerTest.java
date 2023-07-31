@@ -32,10 +32,10 @@ class GetUserProfileHandlerTest extends CommonHandlerTest {
     void missingId() {
         final var exception = assertThrows(UserServiceException.class,
                 () -> GetUserProfileHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withUserProfileRepository(userProfileRepository)
-                        .withUserId(null)
-                        .build().execute());
+                                           .withUserRepository(userRepository)
+                                           .withUserProfileRepository(userProfileRepository)
+                                           .withUserId(null)
+                                           .build().execute());
         assertEquals(UserServiceError.USER_NOT_FOUND, exception.getError());
     }
 
@@ -43,39 +43,39 @@ class GetUserProfileHandlerTest extends CommonHandlerTest {
     void userNotFound() {
         final var exception = assertThrows(UserServiceException.class,
                 () -> GetUserProfileHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withUserProfileRepository(userProfileRepository)
-                        .withUserId("-14L")
-                        .build().execute());
+                                           .withUserRepository(userRepository)
+                                           .withUserProfileRepository(userProfileRepository)
+                                           .withUserId("-14L")
+                                           .build().execute());
         assertEquals(UserServiceError.USER_NOT_FOUND, exception.getError());
     }
 
     @Test
     void execute() throws UserServiceException {
         final var user = User.builder()
-                .withStatus(UserStatus.FREE.getCode())
-                .withCreateDate(java.time.LocalDate.now())
-                .withPassword(PASSWORD)
-                .withUuid(UUID.randomUUID().toString())
-                .withEmail(EMAIL).build();
+                             .withStatus(UserStatus.FREE.getCode())
+                             .withCreateDate(java.time.LocalDate.now())
+                             .withPassword(PASSWORD)
+                             .withUuid(UUID.randomUUID().toString())
+                             .withEmail(EMAIL).build();
         final var dbUser = userRepository.save(user);
         final var userProfile = UserProfile.builder().withUser(dbUser)
-                .withName(NAME)
-                .withAge(39)
-                .withGender('M')
-                .withWeight(185.7f)
-                .withHeight_feet(5)
-                .withHeight_inches(2)
-                .build();
+                                           .withName(NAME)
+                                           .withAge(39)
+                                           .withGender('M')
+                                           .withWeight(185.7f)
+                                           .withHeight_feet(5)
+                                           .withHeight_inches(2)
+                                           .build();
 
         final var saved = userProfileRepository.save(userProfile);
         assertNotNull(saved);
 
         final var digest = GetUserProfileHandler.builder()
-                .withUserRepository(userRepository)
-                .withUserProfileRepository(userProfileRepository)
-                .withUserId(saved.getUser().getUuid())
-                .build().execute();
+                                                .withUserRepository(userRepository)
+                                                .withUserProfileRepository(userProfileRepository)
+                                                .withUserId(saved.getUser().getUuid())
+                                                .build().execute();
 
         assertEquals(EMAIL, digest.getUser().getEmail());
         assertEquals(39, digest.getAge());

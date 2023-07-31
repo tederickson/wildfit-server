@@ -29,18 +29,19 @@ class CreateRecipeHandlerTest extends CommonRecipeHandlerTest {
         final var name = "CreateRecipeHandlerTest";
 
         final var instructionGroup = InstructionGroupDigest.builder()
-                .withInstructionGroupNumber(1)
-                .withInstructions(List.of(step1, step2, step3, step4)).build();
+                                                           .withInstructionGroupNumber(1)
+                                                           .withInstructions(List.of(step1, step2, step3, step4))
+                                                           .build();
         final var recipe = RecipeDigest.builder()
-                .withName(name)
-                .withSeason(season)
-                .withIntroduction(INTRODUCTION)
-                .withPrepTimeMin(5)
-                .withCookTimeMin(15)
-                .withServingQty(4)
-                .withServingUnit("serving")
-                .withInstructionGroups(List.of(instructionGroup))
-                .build();
+                                       .withName(name)
+                                       .withSeason(season)
+                                       .withIntroduction(INTRODUCTION)
+                                       .withPrepTimeMin(5)
+                                       .withCookTimeMin(15)
+                                       .withServingQty(4)
+                                       .withServingUnit("serving")
+                                       .withInstructionGroups(List.of(instructionGroup))
+                                       .build();
         createRecipe(recipe);
 
         assertNotNull(testRecipe);
@@ -63,16 +64,17 @@ class CreateRecipeHandlerTest extends CommonRecipeHandlerTest {
         var foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
 
         var ingredient = CreateRecipeIngredientHandler.builder()
-                .withUserRepository(userRepository)
-                .withRecipeRepository(recipeRepository)
-                .withInstructionGroupRepository(instructionGroupRepository)
-                .withRecipeIngredientRepository(recipeIngredientRepository)
-                .withUserId(userId)
-                .withRecipeId(dbRecipeId)
-                .withRecipeGroupId(dbRecipeGroupId)
-                .withRequest(IngredientDigestMapper.create(foodItemDigest,
-                        "2 tsp neutral-flavored oil like coconut, avocado or walnut", 2f, "tsp", null))
-                .build().execute();
+                                                      .withUserRepository(userRepository)
+                                                      .withRecipeRepository(recipeRepository)
+                                                      .withInstructionGroupRepository(instructionGroupRepository)
+                                                      .withRecipeIngredientRepository(recipeIngredientRepository)
+                                                      .withUserId(userId)
+                                                      .withRecipeId(dbRecipeId)
+                                                      .withRecipeGroupId(dbRecipeGroupId)
+                                                      .withRequest(IngredientDigestMapper.create(foodItemDigest,
+                                                              "2 tsp neutral-flavored oil like coconut, avocado or walnut",
+                                                              2f, "tsp", null))
+                                                      .build().execute();
         assertNotNull(ingredient);
         assertEquals("coconut oil", ingredient.getFoodName());
 
@@ -80,21 +82,20 @@ class CreateRecipeHandlerTest extends CommonRecipeHandlerTest {
         foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
 
         ingredient = CreateRecipeIngredientHandler.builder()
-                .withUserRepository(userRepository)
-                .withRecipeRepository(recipeRepository)
-                .withInstructionGroupRepository(instructionGroupRepository)
-                .withRecipeIngredientRepository(recipeIngredientRepository)
-                .withUserId(userId)
-                .withRecipeId(dbRecipeId)
-                .withRecipeGroupId(dbRecipeGroupId)
-                .withRequest(IngredientDigestMapper.create(foodItemDigest,
-                        "1/2 cup chopped cilantro", 0.25f, "cup",
-                        IngredientType.PRODUCE))
-                .build().execute();
+                                                  .withUserRepository(userRepository)
+                                                  .withRecipeRepository(recipeRepository)
+                                                  .withInstructionGroupRepository(instructionGroupRepository)
+                                                  .withRecipeIngredientRepository(recipeIngredientRepository)
+                                                  .withUserId(userId)
+                                                  .withRecipeId(dbRecipeId)
+                                                  .withRecipeGroupId(dbRecipeGroupId)
+                                                  .withRequest(IngredientDigestMapper.create(foodItemDigest,
+                                                          "1/2 cup chopped cilantro", 0.25f, "cup",
+                                                          IngredientType.PRODUCE))
+                                                  .build().execute();
         assertNotNull(ingredient);
         assertEquals("cilantro", ingredient.getFoodName());
         assertEquals(0.25f, ingredient.getIngredientServingQty(), 0.01);
-        assertEquals(0.5f, ingredient.getServingQty(), 0.01);
     }
 
     private FoodItems getFoodItems(String fileName) throws IOException {

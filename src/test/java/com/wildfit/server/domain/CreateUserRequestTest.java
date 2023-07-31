@@ -34,9 +34,9 @@ class CreateUserRequestTest {
     @Test
     void builder() {
         final var request = CreateUserRequest.builder()
-                .withEmail("email")
-                .withPassword("p")
-                .build();
+                                             .withEmail("email")
+                                             .withPassword("p")
+                                             .build();
         assertEquals("email", request.getEmail());
         assertEquals("p", request.getPassword());
     }

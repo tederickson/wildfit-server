@@ -37,7 +37,7 @@ class UserTest {
     @Test
     public void equalsAndHashCode() {
         EqualsVerifier.forClass(User.class)
-                .suppress(Warning.NONFINAL_FIELDS)
-                .suppress(Warning.SURROGATE_KEY).verify();
+                      .suppress(Warning.NONFINAL_FIELDS)
+                      .suppress(Warning.SURROGATE_KEY).verify();
     }
 }

@@ -63,18 +63,18 @@ public abstract class CommonRecipe {
                                  String description,
                                  IngredientType ingredientType) throws UserServiceException {
         CreateRecipeIngredientHandler.builder()
-                .withUserRepository(userRepository)
-                .withRecipeRepository(recipeRepository)
-                .withInstructionGroupRepository(instructionGroupRepository)
-                .withRecipeIngredientRepository(recipeIngredientRepository)
-                .withUserId(UUID)
-                .withRecipeId(dbRecipeId)
-                .withRecipeGroupId(dbRecipeGroupId)
-                .withRequest(IngredientDigestMapper.create(foodItemDigest,
-                        description,
-                        ingredientServingQty,
-                        ingredientServingUnit,
-                        ingredientType))
-                .build().execute();
+                                     .withUserRepository(userRepository)
+                                     .withRecipeRepository(recipeRepository)
+                                     .withInstructionGroupRepository(instructionGroupRepository)
+                                     .withRecipeIngredientRepository(recipeIngredientRepository)
+                                     .withUserId(UUID)
+                                     .withRecipeId(dbRecipeId)
+                                     .withRecipeGroupId(dbRecipeGroupId)
+                                     .withRequest(IngredientDigestMapper.create(foodItemDigest,
+                                             description,
+                                             ingredientServingQty,
+                                             ingredientServingUnit,
+                                             ingredientType))
+                                     .build().execute();
     }
 }

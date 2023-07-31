@@ -19,18 +19,18 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
     @Test
     void execute() throws UserServiceException {
         final var instructionGroup = InstructionGroupDigest.builder()
-                .withInstructionGroupNumber(1)
-                .withInstructions(List.of(step1, step2)).build();
+                                                           .withInstructionGroupNumber(1)
+                                                           .withInstructions(List.of(step1, step2)).build();
         final var recipe = RecipeDigest.builder()
-                .withName(NAME)
-                .withSeason(SeasonType.SPRING)
-                .withIntroduction(INTRODUCTION)
-                .withPrepTimeMin(5)
-                .withCookTimeMin(15)
-                .withServingQty(4)
-                .withServingUnit("serving")
-                .withInstructionGroups(List.of(instructionGroup))
-                .build();
+                                       .withName(NAME)
+                                       .withSeason(SeasonType.SPRING)
+                                       .withIntroduction(INTRODUCTION)
+                                       .withPrepTimeMin(5)
+                                       .withCookTimeMin(15)
+                                       .withServingQty(4)
+                                       .withServingUnit("serving")
+                                       .withInstructionGroups(List.of(instructionGroup))
+                                       .build();
 
         createRecipe(recipe);
 
@@ -59,24 +59,24 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
     @Test
     void addInstructionGroup() throws UserServiceException {
         final var instructionGroup = InstructionGroupDigest.builder()
-                .withInstructionGroupNumber(1)
-                .withInstructions(List.of(step1, step2)).build();
+                                                           .withInstructionGroupNumber(1)
+                                                           .withInstructions(List.of(step1, step2)).build();
         final var recipe = RecipeDigest.builder()
-                .withName(NAME)
-                .withSeason(SeasonType.FALL)
-                .withIntroduction(INTRODUCTION)
-                .withPrepTimeMin(5)
-                .withCookTimeMin(15)
-                .withServingQty(4)
-                .withServingUnit("serving")
-                .withInstructionGroups(List.of(instructionGroup))
-                .build();
+                                       .withName(NAME)
+                                       .withSeason(SeasonType.FALL)
+                                       .withIntroduction(INTRODUCTION)
+                                       .withPrepTimeMin(5)
+                                       .withCookTimeMin(15)
+                                       .withServingQty(4)
+                                       .withServingUnit("serving")
+                                       .withInstructionGroups(List.of(instructionGroup))
+                                       .build();
 
         createRecipe(recipe);
 
         final var instructionGroup2 = InstructionGroupDigest.builder()
-                .withInstructionGroupNumber(2)
-                .withInstructions(List.of(step3, step4)).build();
+                                                            .withInstructionGroupNumber(2)
+                                                            .withInstructions(List.of(step3, step4)).build();
 
         testRecipe.getInstructionGroups().add(instructionGroup2);
         final var response = updateRecipe(testRecipe);
@@ -104,18 +104,18 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
     @Test
     void removeInstructionGroup() throws UserServiceException {
         final var instructionGroup = InstructionGroupDigest.builder()
-                .withInstructionGroupNumber(1)
-                .withInstructions(List.of(step1, step2)).build();
+                                                           .withInstructionGroupNumber(1)
+                                                           .withInstructions(List.of(step1, step2)).build();
         final var recipe = RecipeDigest.builder()
-                .withName(NAME)
-                .withSeason(SeasonType.FALL)
-                .withIntroduction(INTRODUCTION)
-                .withPrepTimeMin(5)
-                .withCookTimeMin(15)
-                .withServingQty(4)
-                .withServingUnit("serving")
-                .withInstructionGroups(List.of(instructionGroup))
-                .build();
+                                       .withName(NAME)
+                                       .withSeason(SeasonType.FALL)
+                                       .withIntroduction(INTRODUCTION)
+                                       .withPrepTimeMin(5)
+                                       .withCookTimeMin(15)
+                                       .withServingQty(4)
+                                       .withServingUnit("serving")
+                                       .withInstructionGroups(List.of(instructionGroup))
+                                       .build();
 
         createRecipe(recipe);
 
@@ -128,18 +128,19 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
     @Test
     void removeInstruction() throws UserServiceException {
         final var instructionGroup = InstructionGroupDigest.builder()
-                .withInstructionGroupNumber(1)
-                .withInstructions(List.of(step1, step2, step3, step4)).build();
+                                                           .withInstructionGroupNumber(1)
+                                                           .withInstructions(List.of(step1, step2, step3, step4))
+                                                           .build();
         final var recipe = RecipeDigest.builder()
-                .withName(NAME)
-                .withSeason(SeasonType.FALL)
-                .withIntroduction(INTRODUCTION)
-                .withPrepTimeMin(5)
-                .withCookTimeMin(15)
-                .withServingQty(4)
-                .withServingUnit("serving")
-                .withInstructionGroups(List.of(instructionGroup))
-                .build();
+                                       .withName(NAME)
+                                       .withSeason(SeasonType.FALL)
+                                       .withIntroduction(INTRODUCTION)
+                                       .withPrepTimeMin(5)
+                                       .withCookTimeMin(15)
+                                       .withServingQty(4)
+                                       .withServingUnit("serving")
+                                       .withInstructionGroups(List.of(instructionGroup))
+                                       .build();
 
         createRecipe(recipe);
 
@@ -152,18 +153,19 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
     @Test
     void updateInstruction() throws UserServiceException {
         final var instructionGroup = InstructionGroupDigest.builder()
-                .withInstructionGroupNumber(1)
-                .withInstructions(List.of(step1, step2, step3, step4)).build();
+                                                           .withInstructionGroupNumber(1)
+                                                           .withInstructions(List.of(step1, step2, step3, step4))
+                                                           .build();
         final var recipe = RecipeDigest.builder()
-                .withName(NAME)
-                .withSeason(SeasonType.FALL)
-                .withIntroduction(INTRODUCTION)
-                .withPrepTimeMin(5)
-                .withCookTimeMin(15)
-                .withServingQty(4)
-                .withServingUnit("serving")
-                .withInstructionGroups(List.of(instructionGroup))
-                .build();
+                                       .withName(NAME)
+                                       .withSeason(SeasonType.FALL)
+                                       .withIntroduction(INTRODUCTION)
+                                       .withPrepTimeMin(5)
+                                       .withCookTimeMin(15)
+                                       .withServingQty(4)
+                                       .withServingUnit("serving")
+                                       .withInstructionGroups(List.of(instructionGroup))
+                                       .build();
 
         createRecipe(recipe);
 
@@ -175,12 +177,12 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
 
     private RecipeDigest updateRecipe(RecipeDigest testRecipe) throws UserServiceException {
         return UpdateRecipeHandler.builder()
-                .withUserRepository(userRepository)
-                .withRecipeRepository(recipeRepository)
-                .withInstructionGroupRepository(instructionGroupRepository)
-                .withInstructionRepository(instructionRepository)
-                .withUserId(userId)
-                .withRequest(testRecipe)
-                .build().execute();
+                                  .withUserRepository(userRepository)
+                                  .withRecipeRepository(recipeRepository)
+                                  .withInstructionGroupRepository(instructionGroupRepository)
+                                  .withInstructionRepository(instructionRepository)
+                                  .withUserId(userId)
+                                  .withRequest(testRecipe)
+                                  .build().execute();
     }
 }

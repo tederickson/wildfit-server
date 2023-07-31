@@ -16,28 +16,28 @@ public final class FoodItemDigestMapper {
 
         if (food != null) {
             builder.withFoodName(food.getFood_name())
-                    .withBrandName(food.getBrand_name())
-                    .withBrandNameItemName(food.getBrand_name_item_name())
-                    .withServingQty(food.getServing_qty())
-                    .withServingUnit(food.getServing_unit())
-                    .withServingWeightGrams(food.getServing_weight_grams())
-                    .withMetricQty(food.getNf_metric_qty())
-                    .withMetricUom(food.getNf_metric_uom())
-                    .withCalories(food.getNf_calories())
-                    .withTotalFat(food.getNf_total_fat())
-                    .withSaturatedFat(food.getNf_saturated_fat())
-                    .withCholesterol(food.getNf_cholesterol())
-                    .withSodium(food.getNf_sodium())
-                    .withTotalCarbohydrate(food.getNf_total_carbohydrate())
-                    .withDietaryFiber(food.getNf_dietary_fiber())
-                    .withSugars(food.getNf_sugars())
-                    .withProtein(food.getNf_protein())
-                    .withPotassium(food.getNf_potassium())
-                    .withPhosphorus(food.getNf_p())
-                    .withNixBrandName(food.getNix_brand_name())
-                    .withNixBrandId(food.getNix_brand_id())
-                    .withNixItemId(food.getNix_item_id())
-                    .withPhoto(PhotoDigestMapper.map(food.getPhoto()));
+                   .withBrandName(food.getBrand_name())
+                   .withBrandNameItemName(food.getBrand_name_item_name())
+                   .withServingQty(food.getServing_qty())
+                   .withServingUnit(food.getServing_unit())
+                   .withServingWeightGrams(food.getServing_weight_grams())
+                   .withMetricQty(food.getNf_metric_qty())
+                   .withMetricUom(food.getNf_metric_uom())
+                   .withCalories(food.getNf_calories())
+                   .withTotalFat(food.getNf_total_fat())
+                   .withSaturatedFat(food.getNf_saturated_fat())
+                   .withCholesterol(food.getNf_cholesterol())
+                   .withSodium(food.getNf_sodium())
+                   .withTotalCarbohydrate(food.getNf_total_carbohydrate())
+                   .withDietaryFiber(food.getNf_dietary_fiber())
+                   .withSugars(food.getNf_sugars())
+                   .withProtein(food.getNf_protein())
+                   .withPotassium(food.getNf_potassium())
+                   .withPhosphorus(food.getNf_p())
+                   .withNixBrandName(food.getNix_brand_name())
+                   .withNixBrandId(food.getNix_brand_id())
+                   .withNixItemId(food.getNix_item_id())
+                   .withPhoto(PhotoDigestMapper.map(food.getPhoto()));
 
             if (food.getFull_nutrients() != null) {
                 for (var nutrient : food.getFull_nutrients()) {
@@ -106,14 +106,14 @@ public final class FoodItemDigestMapper {
 
         if (food != null) {
             builder.withFoodName(food.getFood_name())
-                    .withBrandName(food.getBrand_name())
-                    .withBrandNameItemName(food.getBrand_name_item_name())
-                    .withServingQty(food.getServing_qty())
-                    .withServingUnit(food.getServing_unit())
-                    .withNixBrandName(food.getNix_brand_name())
-                    .withNixBrandId(food.getNix_brand_id())
-                    .withNixItemId(food.getNix_item_id())
-                    .withPhoto(PhotoDigestMapper.map(food.getPhoto()));
+                   .withBrandName(food.getBrand_name())
+                   .withBrandNameItemName(food.getBrand_name_item_name())
+                   .withServingQty(food.getServing_qty())
+                   .withServingUnit(food.getServing_unit())
+                   .withNixBrandName(food.getNix_brand_name())
+                   .withNixBrandId(food.getNix_brand_id())
+                   .withNixItemId(food.getNix_item_id())
+                   .withPhoto(PhotoDigestMapper.map(food.getPhoto()));
 
             if (food.getFull_nutrients() != null) {
                 for (var nutrient : food.getFull_nutrients()) {

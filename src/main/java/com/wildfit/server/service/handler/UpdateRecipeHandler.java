@@ -40,7 +40,8 @@ public class UpdateRecipeHandler extends CommonRecipeHandler {
         deleteInstructions();
 
         final var dbInstructionGroupMap = instructionGroupRepository.findByRecipeId(request.getId()).stream()
-                .collect(Collectors.toMap(InstructionGroup::getId, Function.identity()));
+                                                                    .collect(Collectors.toMap(InstructionGroup::getId,
+                                                                            Function.identity()));
 
         if (request.getInstructionGroups() != null) {
             for (var instructionGroupDigest : request.getInstructionGroups()) {
@@ -48,25 +49,27 @@ public class UpdateRecipeHandler extends CommonRecipeHandler {
                     instructionGroupRepository.save(InstructionGroupMapper.create(dbRecipe, instructionGroupDigest));
                 } else {
                     final var dbInstructionGroup = dbInstructionGroupMap.get(instructionGroupDigest.getId());
-                    instructionGroupRepository.save(InstructionGroupMapper.update(dbInstructionGroup, instructionGroupDigest));
+                    instructionGroupRepository.save(
+                            InstructionGroupMapper.update(dbInstructionGroup, instructionGroupDigest));
                 }
             }
         }
 
         final var updatedRecipe = recipeRepository.findById(request.getId())
-                .orElseThrow(() -> new UserServiceException(UserServiceError.RECIPE_NOT_FOUND));
+                                                  .orElseThrow(() -> new UserServiceException(
+                                                          UserServiceError.RECIPE_NOT_FOUND));
 
         return RecipeMapper.map(updatedRecipe, instructionGroupRepository.findByRecipeId(request.getId()));
     }
 
     private void deleteInstructionGroups() {
         final var dbInstructions = instructionGroupRepository.findByRecipeId(request.getId()).stream()
-                .map(InstructionGroup::getId)
-                .collect(Collectors.toSet());
+                                                             .map(InstructionGroup::getId)
+                                                             .collect(Collectors.toSet());
         final var instructions = request.getInstructionGroups().stream()
-                .map(InstructionGroupDigest::getId)
-                .filter(Objects::nonNull)
-                .collect(Collectors.toSet());
+                                        .map(InstructionGroupDigest::getId)
+                                        .filter(Objects::nonNull)
+                                        .collect(Collectors.toSet());
         final var deleteRows = new HashSet<>(dbInstructions);
         deleteRows.removeAll(instructions);
 
@@ -78,15 +81,16 @@ public class UpdateRecipeHandler extends CommonRecipeHandler {
 
     private void deleteInstructions() {
         final var dbInstructionMap = instructionGroupRepository.findByRecipeId(request.getId()).stream()
-                .map(InstructionGroup::getInstructions)
-                .flatMap(List::stream)
-                .collect(Collectors.toMap(Instruction::getId, Function.identity()));
+                                                               .map(InstructionGroup::getInstructions)
+                                                               .flatMap(List::stream)
+                                                               .collect(Collectors.toMap(Instruction::getId,
+                                                                       Function.identity()));
         request.getInstructionGroups().stream()
-                .map(InstructionGroupDigest::getInstructions)
-                .flatMap(List::stream)
-                .map(InstructionDigest::getId)
-                .filter(Objects::nonNull)
-                .forEach(dbInstructionMap::remove);
+               .map(InstructionGroupDigest::getInstructions)
+               .flatMap(List::stream)
+               .map(InstructionDigest::getId)
+               .filter(Objects::nonNull)
+               .forEach(dbInstructionMap::remove);
 
         for (var entity : dbInstructionMap.values()) {
             final var parentEntity = entity.getInstructionGroup();

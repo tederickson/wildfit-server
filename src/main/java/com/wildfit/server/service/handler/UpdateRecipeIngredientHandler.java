@@ -22,7 +22,8 @@ public class UpdateRecipeIngredientHandler extends CommonRecipeHandler {
         getAuthorizedRecipe(recipeId);
 
         final var ingredient = recipeIngredientRepository.findById(ingredientId)
-                .orElseThrow(() -> new UserServiceException(UserServiceError.INGREDIENT_NOT_FOUND));
+                                                         .orElseThrow(() -> new UserServiceException(
+                                                                 UserServiceError.INGREDIENT_NOT_FOUND));
 
         RecipeIngredientMapper.update(request, ingredient);
 

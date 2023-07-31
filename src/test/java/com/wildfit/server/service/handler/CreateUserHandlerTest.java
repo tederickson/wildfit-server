@@ -42,15 +42,15 @@ class CreateUserHandlerTest extends CommonHandlerTest {
     void nullPassword(String password) {
         final var exception = assertThrows(UserServiceException.class,
                 () -> CreateUserHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withUserProfileRepository(userProfileRepository)
-                        .withVerificationTokenRepository(verificationTokenRepository)
-                        .withEnvironment(environment)
-                        .withJavaMailSender(javaMailSender)
-                        .withEmail(EMAIL)
-                        .withPassword(password)
-                        .withName(NAME)
-                        .build().execute());
+                                       .withUserRepository(userRepository)
+                                       .withUserProfileRepository(userProfileRepository)
+                                       .withVerificationTokenRepository(verificationTokenRepository)
+                                       .withEnvironment(environment)
+                                       .withJavaMailSender(javaMailSender)
+                                       .withEmail(EMAIL)
+                                       .withPassword(password)
+                                       .withName(NAME)
+                                       .build().execute());
         assertEquals(UserServiceError.INVALID_PASSWORD, exception.getError());
     }
 
@@ -58,15 +58,15 @@ class CreateUserHandlerTest extends CommonHandlerTest {
     void invalidPassword() {
         final var exception = assertThrows(UserServiceException.class,
                 () -> CreateUserHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withUserProfileRepository(userProfileRepository)
-                        .withVerificationTokenRepository(verificationTokenRepository)
-                        .withEnvironment(environment)
-                        .withJavaMailSender(javaMailSender)
-                        .withPassword("apple")
-                        .withEmail(EMAIL)
-                        .withName(NAME)
-                        .build().execute());
+                                       .withUserRepository(userRepository)
+                                       .withUserProfileRepository(userProfileRepository)
+                                       .withVerificationTokenRepository(verificationTokenRepository)
+                                       .withEnvironment(environment)
+                                       .withJavaMailSender(javaMailSender)
+                                       .withPassword("apple")
+                                       .withEmail(EMAIL)
+                                       .withName(NAME)
+                                       .build().execute());
         assertEquals(UserServiceError.INVALID_PASSWORD, exception.getError());
     }
 
@@ -75,15 +75,15 @@ class CreateUserHandlerTest extends CommonHandlerTest {
     void missingEmail(String email) {
         final var exception = assertThrows(UserServiceException.class,
                 () -> CreateUserHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withUserProfileRepository(userProfileRepository)
-                        .withVerificationTokenRepository(verificationTokenRepository)
-                        .withEnvironment(environment)
-                        .withJavaMailSender(javaMailSender)
-                        .withPassword(PASSWORD)
-                        .withEmail(email)
-                        .withName(NAME)
-                        .build().execute());
+                                       .withUserRepository(userRepository)
+                                       .withUserProfileRepository(userProfileRepository)
+                                       .withVerificationTokenRepository(verificationTokenRepository)
+                                       .withEnvironment(environment)
+                                       .withJavaMailSender(javaMailSender)
+                                       .withPassword(PASSWORD)
+                                       .withEmail(email)
+                                       .withName(NAME)
+                                       .build().execute());
         assertEquals(UserServiceError.MISSING_EMAIL, exception.getError());
     }
 
@@ -91,15 +91,15 @@ class CreateUserHandlerTest extends CommonHandlerTest {
     void emptyEmail() {
         final var exception = assertThrows(UserServiceException.class,
                 () -> CreateUserHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withUserProfileRepository(userProfileRepository)
-                        .withVerificationTokenRepository(verificationTokenRepository)
-                        .withEnvironment(environment)
-                        .withJavaMailSender(javaMailSender)
-                        .withPassword(PASSWORD)
-                        .withEmail("    ")
-                        .withName(NAME)
-                        .build().execute());
+                                       .withUserRepository(userRepository)
+                                       .withUserProfileRepository(userProfileRepository)
+                                       .withVerificationTokenRepository(verificationTokenRepository)
+                                       .withEnvironment(environment)
+                                       .withJavaMailSender(javaMailSender)
+                                       .withPassword(PASSWORD)
+                                       .withEmail("    ")
+                                       .withName(NAME)
+                                       .build().execute());
         assertEquals(UserServiceError.MISSING_EMAIL, exception.getError());
     }
 
@@ -108,15 +108,15 @@ class CreateUserHandlerTest extends CommonHandlerTest {
     void missingName(String name) {
         final var exception = assertThrows(UserServiceException.class,
                 () -> CreateUserHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withUserProfileRepository(userProfileRepository)
-                        .withVerificationTokenRepository(verificationTokenRepository)
-                        .withEnvironment(environment)
-                        .withJavaMailSender(javaMailSender)
-                        .withPassword(PASSWORD)
-                        .withEmail(EMAIL)
-                        .withName(name)
-                        .build().execute());
+                                       .withUserRepository(userRepository)
+                                       .withUserProfileRepository(userProfileRepository)
+                                       .withVerificationTokenRepository(verificationTokenRepository)
+                                       .withEnvironment(environment)
+                                       .withJavaMailSender(javaMailSender)
+                                       .withPassword(PASSWORD)
+                                       .withEmail(EMAIL)
+                                       .withName(name)
+                                       .build().execute());
         assertEquals(UserServiceError.INVALID_NAME, exception.getError());
     }
 
@@ -124,30 +124,30 @@ class CreateUserHandlerTest extends CommonHandlerTest {
     void emptyName() {
         final var exception = assertThrows(UserServiceException.class,
                 () -> CreateUserHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withUserProfileRepository(userProfileRepository)
-                        .withVerificationTokenRepository(verificationTokenRepository)
-                        .withEnvironment(environment)
-                        .withJavaMailSender(javaMailSender)
-                        .withPassword(PASSWORD)
-                        .withEmail(EMAIL)
-                        .withName("    ")
-                        .build().execute());
+                                       .withUserRepository(userRepository)
+                                       .withUserProfileRepository(userProfileRepository)
+                                       .withVerificationTokenRepository(verificationTokenRepository)
+                                       .withEnvironment(environment)
+                                       .withJavaMailSender(javaMailSender)
+                                       .withPassword(PASSWORD)
+                                       .withEmail(EMAIL)
+                                       .withName("    ")
+                                       .build().execute());
         assertEquals(UserServiceError.INVALID_NAME, exception.getError());
     }
 
     @Test
     void execute() throws UserServiceException {
         final var response = CreateUserHandler.builder()
-                .withUserRepository(userRepository)
-                .withUserProfileRepository(userProfileRepository)
-                .withVerificationTokenRepository(verificationTokenRepository)
-                .withEnvironment(environment)
-                .withJavaMailSender(javaMailSender)
-                .withPassword(PASSWORD)
-                .withEmail(EMAIL)
-                .withName(NAME)
-                .build().execute();
+                                              .withUserRepository(userRepository)
+                                              .withUserProfileRepository(userProfileRepository)
+                                              .withVerificationTokenRepository(verificationTokenRepository)
+                                              .withEnvironment(environment)
+                                              .withJavaMailSender(javaMailSender)
+                                              .withPassword(PASSWORD)
+                                              .withEmail(EMAIL)
+                                              .withName(NAME)
+                                              .build().execute();
 
         assertEquals(EMAIL, response.getEmail());
 
@@ -158,25 +158,25 @@ class CreateUserHandlerTest extends CommonHandlerTest {
     @Test
     void userAlreadyExists() {
         final var user = User.builder()
-                .withStatus(UserStatus.FREE.getCode())
-                .withCreateDate(java.time.LocalDate.now())
-                .withPassword("encoded password")
-                .withUuid(UUID.randomUUID().toString())
-                .withEmail(EMAIL).build();
+                             .withStatus(UserStatus.FREE.getCode())
+                             .withCreateDate(java.time.LocalDate.now())
+                             .withPassword("encoded password")
+                             .withUuid(UUID.randomUUID().toString())
+                             .withEmail(EMAIL).build();
         final var saved = userRepository.save(user);
         assertNotNull(saved);
 
         final var exception = assertThrows(UserServiceException.class,
                 () -> CreateUserHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withUserProfileRepository(userProfileRepository)
-                        .withVerificationTokenRepository(verificationTokenRepository)
-                        .withEnvironment(environment)
-                        .withJavaMailSender(javaMailSender)
-                        .withPassword(PASSWORD)
-                        .withEmail(EMAIL)
-                        .withName(NAME)
-                        .build().execute());
+                                       .withUserRepository(userRepository)
+                                       .withUserProfileRepository(userProfileRepository)
+                                       .withVerificationTokenRepository(verificationTokenRepository)
+                                       .withEnvironment(environment)
+                                       .withJavaMailSender(javaMailSender)
+                                       .withPassword(PASSWORD)
+                                       .withEmail(EMAIL)
+                                       .withName(NAME)
+                                       .build().execute());
 
         assertEquals(UserServiceError.EXISTING_USER, exception.getError());
     }

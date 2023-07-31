@@ -19,13 +19,13 @@ class UserDigestMapperTest {
     @Test
     void map() {
         final var user = User.builder()
-                .withId(12314L)
-                .withEmail(MAIL)
-                .withStatus(UserStatus.FREE.getCode())
-                .withCreateDate(LocalDate.now())
-                .withPassword("encodedPassword")
-                .withUuid(UUID.randomUUID().toString())
-                .build();
+                             .withId(12314L)
+                             .withEmail(MAIL)
+                             .withStatus(UserStatus.FREE.getCode())
+                             .withCreateDate(LocalDate.now())
+                             .withPassword("encodedPassword")
+                             .withUuid(UUID.randomUUID().toString())
+                             .build();
 
         final var digest = UserDigestMapper.map(user);
 

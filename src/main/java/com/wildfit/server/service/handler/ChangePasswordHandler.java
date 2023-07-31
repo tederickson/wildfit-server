@@ -23,7 +23,7 @@ public class ChangePasswordHandler {
         final var encodedPassword = PasswordEncodeDecode.encode(password);
 
         final var user = userRepository.findByUuid(userId)
-                .orElseThrow(() -> new UserServiceException(UserServiceError.USER_NOT_FOUND));
+                                       .orElseThrow(() -> new UserServiceException(UserServiceError.USER_NOT_FOUND));
 
         user.setPassword(encodedPassword);
         userRepository.save(user);

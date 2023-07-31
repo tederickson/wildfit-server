@@ -16,12 +16,12 @@ public class SearchedFoodItemsMapper {
         if (searchedFoodItems != null) {
             response.setBranded(
                     Arrays.stream(searchedFoodItems.getBranded())
-                            .map(FoodItemDigestMapper::map)
-                            .collect(Collectors.toList()));
+                          .map(FoodItemDigestMapper::map)
+                          .collect(Collectors.toList()));
             response.setCommon(
                     Arrays.stream(searchedFoodItems.getCommon())
-                            .map(FoodItemDigestMapper::map)
-                            .collect(Collectors.toList()));
+                          .map(FoodItemDigestMapper::map)
+                          .collect(Collectors.toList()));
         }
 
         return response;

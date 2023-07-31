@@ -14,10 +14,10 @@ import org.junit.jupiter.api.Test;
 
 class UserProfileDigestTest {
     final static UserDigest userDigest = UserDigest.builder()
-            .withId(123L)
-            .withEmail("email")
-            .withStatus(UserStatusType.PREMIUM)
-            .build();
+                                                   .withId(123L)
+                                                   .withEmail("email")
+                                                   .withStatus(UserStatusType.PREMIUM)
+                                                   .build();
 
     @BeforeAll
     public static void init() {
@@ -47,13 +47,13 @@ class UserProfileDigestTest {
     @Test
     void builder() {
         final var userProfileDigest = UserProfileDigest.builder()
-                .withUser(userDigest)
-                .withAge(39)
-                .withGender(GenderType.FEMALE)
-                .withWeight(185.7f)
-                .withHeightFeet(5)
-                .withHeightInches(3)
-                .build();
+                                                       .withUser(userDigest)
+                                                       .withAge(39)
+                                                       .withGender(GenderType.FEMALE)
+                                                       .withWeight(185.7f)
+                                                       .withHeightFeet(5)
+                                                       .withHeightInches(3)
+                                                       .build();
 
         assertEquals("email", userProfileDigest.getUser().getEmail());
         assertEquals(39, userProfileDigest.getAge());

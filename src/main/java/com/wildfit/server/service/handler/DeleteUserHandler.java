@@ -17,7 +17,7 @@ public class DeleteUserHandler {
         validate();
 
         final var user = userRepository.findByUuid(userId)
-                .orElseThrow(() -> new UserServiceException(UserServiceError.USER_NOT_FOUND));
+                                       .orElseThrow(() -> new UserServiceException(UserServiceError.USER_NOT_FOUND));
 
         userRepository.delete(user);
     }

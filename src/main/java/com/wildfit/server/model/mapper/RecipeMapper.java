@@ -24,14 +24,14 @@ public final class RecipeMapper {
         final var season = Season.findByCode(recipe.getSeason());
 
         return RecipeDigest.builder()
-                .withId(recipe.getId())
-                .withIntroduction(recipe.getIntroduction())
-                .withName(recipe.getName())
-                .withSeason(season == null ? null : season.toSeasonType())
-                .withPrepTimeMin(recipe.getPrepTimeMin())
-                .withCookTimeMin(recipe.getCookTimeMin())
-                .withServingUnit(recipe.getServingUnit())
-                .withServingQty(recipe.getServingQty());
+                           .withId(recipe.getId())
+                           .withIntroduction(recipe.getIntroduction())
+                           .withName(recipe.getName())
+                           .withSeason(season == null ? null : season.toSeasonType())
+                           .withPrepTimeMin(recipe.getPrepTimeMin())
+                           .withCookTimeMin(recipe.getCookTimeMin())
+                           .withServingUnit(recipe.getServingUnit())
+                           .withServingQty(recipe.getServingQty());
     }
 
     public static RecipeDigest map(Recipe recipe, Collection<InstructionGroup> instructionGroups) {
@@ -39,7 +39,8 @@ public final class RecipeMapper {
 
         if (instructionGroups != null) {
             builder.withInstructionGroups(instructionGroups.stream()
-                    .map(InstructionGroupMapper::map).collect(Collectors.toList()));
+                                                           .map(InstructionGroupMapper::map)
+                                                           .collect(Collectors.toList()));
         }
 
         return builder.build();
@@ -52,8 +53,8 @@ public final class RecipeMapper {
 
         if (instructionGroups != null) {
             builder.withInstructionGroups(instructionGroups.stream()
-                    .map(InstructionGroupMapper::map)
-                    .collect(Collectors.toList()));
+                                                           .map(InstructionGroupMapper::map)
+                                                           .collect(Collectors.toList()));
         }
         final var recipeDigest = builder.build();
         if (recipeIngredients != null) {
@@ -61,9 +62,9 @@ public final class RecipeMapper {
             for (var recipeGroup : recipeDigest.getInstructionGroups()) {
                 final var recipeGroupId = recipeGroup.getId();
                 final var ingredients = recipeIngredients.stream()
-                        .filter(x -> x.getInstructionGroupId() == recipeGroupId)
-                        .map(RecipeIngredientMapper::map)
-                        .collect(Collectors.toList());
+                                                         .filter(x -> x.getInstructionGroupId() == recipeGroupId)
+                                                         .map(RecipeIngredientMapper::map)
+                                                         .collect(Collectors.toList());
                 recipeGroup.setIngredients(ingredients);
             }
         }
@@ -75,16 +76,16 @@ public final class RecipeMapper {
         final var season = Season.map(request.getSeason());
 
         return Recipe.builder()
-                .withEmail(email)
-                .withIntroduction(request.getIntroduction())
-                .withName(request.getName())
-                .withSeason(season.getCode())
-                .withPrepTimeMin(request.getPrepTimeMin())
-                .withCookTimeMin(request.getCookTimeMin())
-                .withServingUnit(request.getServingUnit())
-                .withServingQty(request.getServingQty())
-                .withCreated(LocalDateTime.now())
-                .build();
+                     .withEmail(email)
+                     .withIntroduction(request.getIntroduction())
+                     .withName(request.getName())
+                     .withSeason(season.getCode())
+                     .withPrepTimeMin(request.getPrepTimeMin())
+                     .withCookTimeMin(request.getCookTimeMin())
+                     .withServingUnit(request.getServingUnit())
+                     .withServingQty(request.getServingQty())
+                     .withCreated(LocalDateTime.now())
+                     .build();
     }
 
     public static void update(Recipe recipe, RecipeDigest request) {

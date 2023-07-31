@@ -1,7 +1,5 @@
 package com.wildfit.server.service.handler;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -22,27 +20,34 @@ import org.springframework.util.CollectionUtils;
 
 public class CommonRecipeHandlerTest extends CommonHandlerTest {
     static final InstructionDigest step1 = InstructionDigest.builder().withStepNumber(1)
-            .withInstruction("Heat the oil in a heavy frying pan over medium-high heat, then cook the beef " +
-                    "until it’s " +
-                    "cooked through and starting to brown, breaking apart with a turner as it cooks.").build();
+                                                            .withInstruction(
+                                                                    "Heat the oil in a heavy frying pan over medium-high heat, then cook the beef " +
+                                                                            "until it’s " +
+                                                                            "cooked through and starting to brown, breaking apart with a turner as it cooks.")
+                                                            .build();
     static final InstructionDigest step2 = InstructionDigest.builder().withStepNumber(2)
-            .withInstruction("While beef cooks, mix together the fish sauce, chili sauce, and water in a " +
-                    "small bowl. Zest the skin " +
-                    "of the lime and squeeze the juice. (You may need two limes to get enough juice, " +
-                    "but only use " +
-                    "the zest from one lime.) Thinly slice the green onions and chop the cilantro. " +
-                    "Most iceberg lettuce does not need washing as long as you remove the outer leaves. " +
-                    "Cut out the core and cut the lettuce into quarters to make 'cups' to hold the beef " +
-                    "mixture.").build();
+                                                            .withInstruction(
+                                                                    "While beef cooks, mix together the fish sauce, chili sauce, and water in a " +
+                                                                            "small bowl. Zest the skin " +
+                                                                            "of the lime and squeeze the juice. (You may need two limes to get enough juice, " +
+                                                                            "but only use " +
+                                                                            "the zest from one lime.) Thinly slice the green onions and chop the cilantro. " +
+                                                                            "Most iceberg lettuce does not need washing as long as you remove the outer leaves. " +
+                                                                            "Cut out the core and cut the lettuce into quarters to make 'cups' to hold the beef " +
+                                                                            "mixture.").build();
     static final InstructionDigest step3 = InstructionDigest.builder().withStepNumber(3)
-            .withInstruction("When the beef is done, add the chili sauce mixture and let it sizzle until " +
-                    "the water has evaporated, " +
-                    "stirring a few times to get the flavor mixed through the meat. Turn off the heat and " +
-                    "stir in " +
-                    "the lime zest, lime juice, sliced green onions, and chopped cilantro.").build();
+                                                            .withInstruction(
+                                                                    "When the beef is done, add the chili sauce mixture and let it sizzle until " +
+                                                                            "the water has evaporated, " +
+                                                                            "stirring a few times to get the flavor mixed through the meat. Turn off the heat and " +
+                                                                            "stir in " +
+                                                                            "the lime zest, lime juice, sliced green onions, and chopped cilantro.")
+                                                            .build();
     static final InstructionDigest step4 = InstructionDigest.builder().withStepNumber(4)
-            .withInstruction("Serve meat mixture with iceberg lettuce leaves. Fill with beef and wrap " +
-                    "around it. Eaten with your hands.").build();
+                                                            .withInstruction(
+                                                                    "Serve meat mixture with iceberg lettuce leaves. Fill with beef and wrap " +
+                                                                            "around it. Eaten with your hands.")
+                                                            .build();
 
     static final String INTRODUCTION = "These lettuce wraps are so easy and full of flavor! " +
             "They make a great side dish, or are perfect for a healthy spring approved recipe.";
@@ -78,7 +83,9 @@ public class CommonRecipeHandlerTest extends CommonHandlerTest {
     static final String nixBrandId = "51db37b7176fe9790a8989b4";
     static final String nixItemId = "52a15041d122497b50000a75";
     static final PhotoDigest photo = PhotoDigest.builder()
-            .withThumb("https://nutritionix-api.s3.amazonaws.com/62ee4a5ea58c4000088c940a.jpeg").build();
+                                                .withThumb(
+                                                        "https://nutritionix-api.s3.amazonaws.com/62ee4a5ea58c4000088c940a.jpeg")
+                                                .build();
 
     protected static String userId;
     protected static RecipeDigest testRecipe;
@@ -96,17 +103,20 @@ public class CommonRecipeHandlerTest extends CommonHandlerTest {
     void setUp() {
         final var users = userRepository.findByEmail(EMAIL);
 
-        assertTrue(CollectionUtils.isEmpty(users));
+        if (CollectionUtils.isEmpty(users)) {
 
-        final var user = User.builder()
-                .withStatus(UserStatus.FREE.getCode())
-                .withCreateDate(LocalDate.now())
-                .withPassword("encoded password")
-                .withUuid(UUID.randomUUID().toString())
-                .withEmail(EMAIL).build();
-        final var dbUser = userRepository.save(user);
+            final var user = User.builder()
+                                 .withStatus(UserStatus.FREE.getCode())
+                                 .withCreateDate(LocalDate.now())
+                                 .withPassword("encoded password")
+                                 .withUuid(UUID.randomUUID().toString())
+                                 .withEmail(EMAIL).build();
+            final var dbUser = userRepository.save(user);
 
-        userId = dbUser.getUuid();
+            userId = dbUser.getUuid();
+        } else {
+            userId = users.get(0).getUuid();
+        }
     }
 
     @AfterEach
@@ -128,11 +138,11 @@ public class CommonRecipeHandlerTest extends CommonHandlerTest {
 
     protected void createRecipe(RecipeDigest recipe) throws UserServiceException {
         testRecipe = CreateRecipeHandler.builder()
-                .withUserRepository(userRepository)
-                .withRecipeRepository(recipeRepository)
-                .withInstructionGroupRepository(instructionGroupRepository)
-                .withUserId(userId)
-                .withRequest(recipe)
-                .build().execute();
+                                        .withUserRepository(userRepository)
+                                        .withRecipeRepository(recipeRepository)
+                                        .withInstructionGroupRepository(instructionGroupRepository)
+                                        .withUserId(userId)
+                                        .withRequest(recipe)
+                                        .build().execute();
     }
 }

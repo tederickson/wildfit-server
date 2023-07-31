@@ -35,7 +35,8 @@ public class GetFoodsByQueryHandler extends AbstractNutritionixHandler<SearchFoo
         url = NUTRITIONIX_URL + "v2/search/instant?" + queryParameters;
 
 
-        final var searchedFoodItems = restTemplate.exchange(url, HttpMethod.GET, entity, SearchedFoodItems.class).getBody();
+        final var searchedFoodItems = restTemplate.exchange(url, HttpMethod.GET, entity, SearchedFoodItems.class)
+                                                  .getBody();
         Objects.requireNonNull(searchedFoodItems, "searchedFoodItems");
 
         // How do I filter out duplicate common foods from the /search/instant endpoint?

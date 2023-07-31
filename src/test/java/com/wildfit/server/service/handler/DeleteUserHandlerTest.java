@@ -27,9 +27,9 @@ class DeleteUserHandlerTest extends CommonHandlerTest {
     void missingId() {
         final var exception = assertThrows(UserServiceException.class,
                 () -> DeleteUserHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withUserId(null)
-                        .build().execute());
+                                       .withUserRepository(userRepository)
+                                       .withUserId(null)
+                                       .build().execute());
         assertEquals(UserServiceError.USER_NOT_FOUND, exception.getError());
     }
 
@@ -37,28 +37,28 @@ class DeleteUserHandlerTest extends CommonHandlerTest {
     void userNotFound() {
         final var exception = assertThrows(UserServiceException.class,
                 () -> DeleteUserHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withUserId("-14L")
-                        .build().execute());
+                                       .withUserRepository(userRepository)
+                                       .withUserId("-14L")
+                                       .build().execute());
         assertEquals(UserServiceError.USER_NOT_FOUND, exception.getError());
     }
 
     @Test
     void execute() throws UserServiceException {
         final var user = User.builder()
-                .withStatus(UserStatus.FREE.getCode())
-                .withCreateDate(java.time.LocalDate.now())
-                .withPassword(PASSWORD)
-                .withUuid(UUID.randomUUID().toString())
-                .withEmail(EMAIL).build();
+                             .withStatus(UserStatus.FREE.getCode())
+                             .withCreateDate(java.time.LocalDate.now())
+                             .withPassword(PASSWORD)
+                             .withUuid(UUID.randomUUID().toString())
+                             .withEmail(EMAIL).build();
 
         final var saved = userRepository.save(user);
         assertNotNull(saved);
 
         DeleteUserHandler.builder()
-                .withUserRepository(userRepository)
-                .withUserId(saved.getUuid())
-                .build().execute();
+                         .withUserRepository(userRepository)
+                         .withUserId(saved.getUuid())
+                         .build().execute();
 
         final var users = userRepository.findByEmail(EMAIL);
         assertTrue(users.isEmpty());

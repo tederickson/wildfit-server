@@ -25,9 +25,9 @@ public class ManagerAdvice extends ResponseEntityExceptionHandler {
 
         final var userServiceException = ex.getError();
         final var error = ErrorData.builder()
-                .withMessage(userServiceException.getMessage())
-                .withErrorCode(userServiceException.name())
-                .build();
+                                   .withMessage(userServiceException.getMessage())
+                                   .withErrorCode(userServiceException.name())
+                                   .build();
 
         return new ResponseEntity<>(error, userServiceException.getHttpStatus());
     }
@@ -38,9 +38,9 @@ public class ManagerAdvice extends ResponseEntityExceptionHandler {
         log.error("NutritionixException", ex);
 
         final var error = ErrorData.builder()
-                .withMessage(ex.getMessage())
-                .withNutritionixStatusCode(ex.getStatusCode().value())
-                .build();
+                                   .withMessage(ex.getMessage())
+                                   .withNutritionixStatusCode(ex.getStatusCode().value())
+                                   .build();
 
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }

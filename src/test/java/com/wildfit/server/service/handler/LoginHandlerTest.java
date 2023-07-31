@@ -30,10 +30,10 @@ class LoginHandlerTest extends CommonHandlerTest {
     void nullPassword(String password) {
         final var exception = assertThrows(UserServiceException.class,
                 () -> LoginHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withEmail(EMAIL)
-                        .withPassword(password)
-                        .build().execute());
+                                  .withUserRepository(userRepository)
+                                  .withEmail(EMAIL)
+                                  .withPassword(password)
+                                  .build().execute());
         assertEquals(UserServiceError.INVALID_PASSWORD, exception.getError());
     }
 
@@ -42,10 +42,10 @@ class LoginHandlerTest extends CommonHandlerTest {
     void missingEmail(String email) {
         final var exception = assertThrows(UserServiceException.class,
                 () -> LoginHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withPassword(PASSWORD)
-                        .withEmail(email)
-                        .build().execute());
+                                  .withUserRepository(userRepository)
+                                  .withPassword(PASSWORD)
+                                  .withEmail(email)
+                                  .build().execute());
         assertEquals(UserServiceError.MISSING_EMAIL, exception.getError());
     }
 
@@ -53,10 +53,10 @@ class LoginHandlerTest extends CommonHandlerTest {
     void emptyEmail() {
         final var exception = assertThrows(UserServiceException.class,
                 () -> LoginHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withPassword(PASSWORD)
-                        .withEmail("    ")
-                        .build().execute());
+                                  .withUserRepository(userRepository)
+                                  .withPassword(PASSWORD)
+                                  .withEmail("    ")
+                                  .build().execute());
         assertEquals(UserServiceError.MISSING_EMAIL, exception.getError());
     }
 
@@ -64,10 +64,10 @@ class LoginHandlerTest extends CommonHandlerTest {
     void userNotFound() {
         final var exception = assertThrows(UserServiceException.class,
                 () -> LoginHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withPassword(PASSWORD)
-                        .withEmail(EMAIL)
-                        .build().execute());
+                                  .withUserRepository(userRepository)
+                                  .withPassword(PASSWORD)
+                                  .withEmail(EMAIL)
+                                  .build().execute());
         assertEquals(UserServiceError.USER_NOT_FOUND, exception.getError());
     }
 
@@ -76,10 +76,10 @@ class LoginHandlerTest extends CommonHandlerTest {
         createUser(false);
         final var exception = assertThrows(UserServiceException.class,
                 () -> LoginHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withPassword(PASSWORD)
-                        .withEmail(EMAIL)
-                        .build().execute());
+                                  .withUserRepository(userRepository)
+                                  .withPassword(PASSWORD)
+                                  .withEmail(EMAIL)
+                                  .build().execute());
         assertEquals(UserServiceError.NOT_REGISTERED, exception.getError());
     }
 
@@ -88,10 +88,10 @@ class LoginHandlerTest extends CommonHandlerTest {
         createUser(true);
         final var exception = assertThrows(UserServiceException.class,
                 () -> LoginHandler.builder()
-                        .withUserRepository(userRepository)
-                        .withPassword("AndLo792134*")
-                        .withEmail(EMAIL)
-                        .build().execute());
+                                  .withUserRepository(userRepository)
+                                  .withPassword("AndLo792134*")
+                                  .withEmail(EMAIL)
+                                  .build().execute());
         assertEquals(UserServiceError.USER_NOT_FOUND, exception.getError());
     }
 
@@ -99,10 +99,10 @@ class LoginHandlerTest extends CommonHandlerTest {
     void execute() throws UserServiceException {
         final var user = createUser(true);
         final var response = LoginHandler.builder()
-                .withUserRepository(userRepository)
-                .withPassword(PASSWORD)
-                .withEmail(EMAIL)
-                .build().execute();
+                                         .withUserRepository(userRepository)
+                                         .withPassword(PASSWORD)
+                                         .withEmail(EMAIL)
+                                         .build().execute();
 
         assertNotNull(response);
         assertEquals(EMAIL, response.getEmail());
@@ -115,13 +115,13 @@ class LoginHandlerTest extends CommonHandlerTest {
         }
         final var encodedPassword = PasswordEncodeDecode.encode(PASSWORD);
         final var user = User.builder()
-                .withStatus(UserStatus.FREE.getCode())
-                .withCreateDate(java.time.LocalDate.now())
-                .withPassword(encodedPassword)
-                .withEmail(EMAIL)
-                .withUuid(UUID.randomUUID().toString())
-                .withEnabled(enabled)
-                .build();
+                             .withStatus(UserStatus.FREE.getCode())
+                             .withCreateDate(java.time.LocalDate.now())
+                             .withPassword(encodedPassword)
+                             .withEmail(EMAIL)
+                             .withUuid(UUID.randomUUID().toString())
+                             .withEnabled(enabled)
+                             .build();
         final var saved = userRepository.save(user);
         assertNotNull(saved);
 
