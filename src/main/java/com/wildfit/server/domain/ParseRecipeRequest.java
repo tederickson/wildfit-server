@@ -13,7 +13,14 @@ public final class ParseRecipeRequest {
     private Integer num_servings;
 
     public void addIngredient(Float servingQty, String servingUnit, String foodName) {
-        final var ingredient = String.join(" ", servingQty.toString(), servingUnit, foodName);
+        String ingredient;
+
+        if (servingUnit == null) {
+            ingredient = String.format("%s %s", servingQty, foodName);
+
+        } else {
+            ingredient = String.format("%s %s %s", servingQty, servingUnit, foodName);
+        }
 
         if (query == null) {
             query = ingredient;

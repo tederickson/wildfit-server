@@ -10,7 +10,7 @@ CREATE TABLE recipe_ingredient (
     description     varchar(255) NOT NULL,
 
     ingredient_serving_qty  float NOT NULL,
-    ingredient_serving_unit varchar(50) NOT NULL,
+    ingredient_serving_unit varchar(50),
 
     KEY recipe_idx1 (recipe_id),
     KEY food_name_idx (food_name)
