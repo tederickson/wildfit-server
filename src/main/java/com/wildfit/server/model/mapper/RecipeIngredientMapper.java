@@ -21,8 +21,6 @@ public class RecipeIngredientMapper {
                                .withIngredientType(recipeIngredientType.toIngredientType())
                                .withInstructionGroupId(recipeIngredient.getInstructionGroupId())
                                .withRecipeId(recipeIngredient.getRecipeId())
-                               .withServingQty(recipeIngredient.getServingQty())
-                               .withServingUnit(recipeIngredient.getServingUnit())
                                .build();
     }
 
@@ -37,8 +35,6 @@ public class RecipeIngredientMapper {
                                .withIngredientType(recipeIngredientType.getCode())
                                .withInstructionGroupId(recipeGroupId)
                                .withRecipeId(recipeId)
-                               .withServingQty(ingredientDigest.getServingQty())
-                               .withServingUnit(ingredientDigest.getServingUnit())
                                .build();
     }
 

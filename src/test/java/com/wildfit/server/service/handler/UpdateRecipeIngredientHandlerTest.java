@@ -32,13 +32,8 @@ class UpdateRecipeIngredientHandlerTest extends CommonRecipeHandlerTest {
         ingredientDigest = IngredientDigest.builder()
                                            .withDescription(description)
                                            .withFoodName(foodName)
-
                                            .withIngredientServingQty(ingredientServingQty)
                                            .withIngredientServingUnit(ingredientServingUnit)
-
-                                           .withServingQty(servingQty)
-                                           .withServingUnit(servingUnit)
-
                                            .withIngredientType(IngredientType.DAIRY)
                                            .build();
     }

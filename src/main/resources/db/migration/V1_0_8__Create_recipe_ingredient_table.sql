@@ -9,8 +9,6 @@ CREATE TABLE recipe_ingredient (
     food_name       varchar(100) NOT NULL,
     description     varchar(255) NOT NULL,
 
-    serving_qty     float,
-    serving_unit    varchar(50),
     ingredient_serving_qty  float NOT NULL,
     ingredient_serving_unit varchar(50) NOT NULL,
 

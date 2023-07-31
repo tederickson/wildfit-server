@@ -11,10 +11,12 @@ import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.FoodItems;
 import com.wildfit.server.model.mapper.FoodItemDigestMapper;
 import lombok.experimental.SuperBuilder;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 
+@Slf4j
 @SuperBuilder(setterPrefix = "with")
 public class GetRecipeNutritionHandler extends AbstractNutritionixHandler<FoodItemDigest> {
     private final RecipeDigest recipeDigest;
@@ -32,6 +34,9 @@ public class GetRecipeNutritionHandler extends AbstractNutritionixHandler<FoodIt
                             ingredient.getIngredientServingQty(),
                             ingredient.getIngredientServingUnit(),
                             ingredient.getFoodName()));
+
+        log.info("{}, {} servings\n{}", recipeDigest.getName(), parseRecipeRequest.getNum_servings(),
+                parseRecipeRequest.getQuery());
 
         final var restTemplate = new RestTemplate();
         final var entity = new HttpEntity<>(parseRecipeRequest, getHeaders());

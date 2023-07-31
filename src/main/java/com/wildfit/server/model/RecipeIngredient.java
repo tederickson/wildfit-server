@@ -38,10 +38,6 @@ public final class RecipeIngredient {
     private String foodName;
     private String description;
 
-    @Column(name = "serving_qty")
-    private Float servingQty;
-    @Column(name = "serving_unit")
-    private String servingUnit;
     @Column(name = "ingredient_serving_qty")
     private Float ingredientServingQty;
     @Column(name = "ingredient_serving_unit")

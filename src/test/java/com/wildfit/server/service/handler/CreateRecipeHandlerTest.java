@@ -96,7 +96,6 @@ class CreateRecipeHandlerTest extends CommonRecipeHandlerTest {
         assertNotNull(ingredient);
         assertEquals("cilantro", ingredient.getFoodName());
         assertEquals(0.25f, ingredient.getIngredientServingQty(), 0.01);
-        assertEquals(0.5f, ingredient.getServingQty(), 0.01);
     }
 
     private FoodItems getFoodItems(String fileName) throws IOException {

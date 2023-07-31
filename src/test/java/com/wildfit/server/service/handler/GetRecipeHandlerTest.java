@@ -74,8 +74,6 @@ class GetRecipeHandlerTest extends CommonRecipeHandlerTest {
                                                      .withFoodName(foodName)
                                                      .withIngredientServingQty(ingredientServingQty)
                                                      .withIngredientServingUnit(ingredientServingUnit)
-                                                     .withServingQty(servingQty)
-                                                     .withServingUnit(servingUnit)
                                                      .build();
 
         final var response = CreateRecipeIngredientHandler.builder()

@@ -17,8 +17,6 @@ public final class IngredientDigest {
     private String foodName;
     private String description;
 
-    private Float servingQty;
-    private String servingUnit;
     private Float ingredientServingQty;
     private String ingredientServingUnit;
 

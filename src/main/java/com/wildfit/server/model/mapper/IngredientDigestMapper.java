@@ -19,8 +19,6 @@ public class IngredientDigestMapper {
                                .withDescription(description)
                                .withFoodName(foodItemDigest.getFoodName())
                                .withIngredientType(ingredientType)
-                               .withServingQty(foodItemDigest.getServingQty())
-                               .withServingUnit(foodItemDigest.getServingUnit())
                                .build();
     }
 }

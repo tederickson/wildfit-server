@@ -33,8 +33,6 @@ class CreateRecipeIngredientHandlerTest extends CommonRecipeHandlerTest {
                                            .withFoodName(foodName)
                                            .withIngredientServingQty(ingredientServingQty)
                                            .withIngredientServingUnit(ingredientServingUnit)
-                                           .withServingQty(servingQty)
-                                           .withServingUnit(servingUnit)
                                            .withIngredientType(IngredientType.DAIRY)
                                            .build();
     }
