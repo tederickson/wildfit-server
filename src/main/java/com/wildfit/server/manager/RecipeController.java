@@ -69,10 +69,10 @@ public class RecipeController {
     }
 
     @Operation(summary = "Retrieve all recipes for a specific season and name")
-    @GetMapping(value = "/seasons/{season}/names/{name}", produces = "application/json")
+    @GetMapping(value = "/seasons/{season}/names/{recipeName}", produces = "application/json")
     public RecipeListDigest listBySeasonAndName(
             @PathVariable(value = "season") SeasonType season,
-            @PathVariable(value = "name") String recipeName,
+            @PathVariable(value = "recipeName") String recipeName,
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "pageSize", defaultValue = "30") Integer pageSize) throws UserServiceException {
 
