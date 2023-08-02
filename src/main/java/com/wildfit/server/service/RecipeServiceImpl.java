@@ -16,6 +16,7 @@ import com.wildfit.server.service.handler.DeleteRecipeHandler;
 import com.wildfit.server.service.handler.DeleteRecipeIngredientHandler;
 import com.wildfit.server.service.handler.GetRecipeHandler;
 import com.wildfit.server.service.handler.ListBySeasonAndIngredientHandler;
+import com.wildfit.server.service.handler.ListBySeasonAndNameHandler;
 import com.wildfit.server.service.handler.ListBySeasonHandler;
 import com.wildfit.server.service.handler.UpdateRecipeHandler;
 import com.wildfit.server.service.handler.UpdateRecipeIngredientHandler;
@@ -55,6 +56,18 @@ public class RecipeServiceImpl implements RecipeService {
                                                .withIngredientName(ingredientName)
                                                .withPageable(pageable)
                                                .build().execute();
+    }
+
+    @Override
+    public RecipeListDigest listBySeasonAndName(SeasonType season, String recipeName, Pageable pageable)
+            throws UserServiceException {
+        return ListBySeasonAndNameHandler.builder()
+                                         .withRecipeRepository(recipeRepository)
+                                         .withRecipeIngredientRepository(recipeIngredientRepository)
+                                         .withSeason(season)
+                                         .withRecipeName(recipeName)
+                                         .withPageable(pageable)
+                                         .build().execute();
     }
 
     @Override

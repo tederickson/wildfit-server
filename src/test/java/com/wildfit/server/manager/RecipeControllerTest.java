@@ -49,6 +49,15 @@ class RecipeControllerTest {
     }
 
     @Test
+    void listBySeasonAndName() throws UserServiceException {
+        when(recipeService.listBySeasonAndName(any(), any(), any())).thenReturn(new RecipeListDigest());
+
+        final var response = recipeController.listBySeasonAndName(SeasonType.WINTER,
+                "lettuce wraps", 3, 40);
+        assertNotNull(response);
+    }
+
+    @Test
     void retrieveRecipe() throws UserServiceException {
         when(recipeService.retrieveRecipe(any())).thenReturn(RecipeDigest.builder().build());
 

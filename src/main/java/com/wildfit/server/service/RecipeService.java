@@ -14,6 +14,9 @@ public interface RecipeService {
     RecipeListDigest listBySeasonAndIngredient(SeasonType season, String ingredientName, Pageable pageable)
             throws UserServiceException;
 
+    RecipeListDigest listBySeasonAndName(SeasonType season, String recipeName, Pageable pageable)
+            throws UserServiceException;
+
     RecipeDigest retrieveRecipe(Long recipeId) throws UserServiceException;
 
     void deleteRecipe(Long recipeId, String userId) throws UserServiceException;
