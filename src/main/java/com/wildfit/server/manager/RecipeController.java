@@ -69,7 +69,7 @@ public class RecipeController {
     }
 
     @Operation(summary = "Retrieve all recipes for a specific season and name")
-    @GetMapping(value = "/seasons/{season}/name/{name}", produces = "application/json")
+    @GetMapping(value = "/seasons/{season}/names/{name}", produces = "application/json")
     public RecipeListDigest listBySeasonAndName(
             @PathVariable(value = "season") SeasonType season,
             @PathVariable(value = "name") String recipeName,
