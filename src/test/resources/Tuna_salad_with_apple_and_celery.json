@@ -1,0 +1,112 @@
+{
+  "name": "Tuna salad with apple and celery",
+  "season": "SUMMER",
+  "prepTimeMin": 15,
+  "cookTimeMin": 0,
+  "servingUnit": "serving",
+  "servingQty": 4,
+  "introduction": "Tuna is one of the staples in our household. \nWe eat it all the time, because it is simple and can be eaten for breakfast, lunch, dinner or snack.",
+  "instructionGroups": [
+    {
+      "instructionGroupNumber": 0,
+      "name": "Salad",
+      "instructions": [
+        {
+          "stepNumber": 1,
+          "instruction": "Put the tuna in a bowl and break it up with a fork."
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Slice the celery and the apples to the same thickness. Chop the pickles small. "
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Add the finely chopped onion and the capers. \nMix it together with the dressing ingredients and done."
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "You can add any fresh herb you like. Dill goes especially well with tuna."
+        }
+      ],
+      "ingredients": [
+        {
+          "foodName": "tuna in water",
+          "description": "2 cans of tuna in water, drained",
+          "ingredientServingQty": 2,
+          "ingredientServingUnit": "can",
+          "ingredientType": null
+        },
+        {
+          "foodName": "apple",
+          "description": "1/2 apple",
+          "ingredientServingQty": 0.5,
+          "ingredientServingUnit": "apple",
+          "ingredientType": "PRODUCE"
+        },
+        {
+          "foodName": "celery",
+          "description": "1 stalk celery",
+          "ingredientServingQty": 1,
+          "ingredientServingUnit": "stalk",
+          "ingredientType": "PRODUCE"
+        },
+        {
+          "foodName": "capers",
+          "description": "1 tbsp capers",
+          "ingredientServingQty": 1,
+          "ingredientServingUnit": "tbsp",
+          "ingredientType": null
+        },
+        {
+          "foodName": "red onion",
+          "description": "1 spring onion or a small red onion, finely chopped",
+          "ingredientServingQty": 1,
+          "ingredientServingUnit": "onion",
+          "ingredientType": "PRODUCE"
+        },
+        {
+          "foodName": "cornichon",
+          "description": "4 cornichon (small sugar free pickled cucumbers)",
+          "ingredientServingQty": 4,
+          "ingredientServingUnit": "cornichon",
+          "ingredientType": null
+        }
+      ]
+    },
+    {
+      "instructionGroupNumber": 1,
+      "name": "Dressing",
+      "instructions": [],
+      "ingredients": [
+        {
+          "foodName": "sugar-free mayonnaise",
+          "description": "1 tbsp sugar-free mayonnaise",
+          "ingredientServingQty": 1,
+          "ingredientServingUnit": "tbsp",
+          "ingredientType": null
+        },
+        {
+          "foodName": "plain Greek yogurt",
+          "description": "1 tbsp Greek yoghurt",
+          "ingredientServingQty": 1,
+          "ingredientServingUnit": "tbsp",
+          "ingredientType": "DAIRY"
+        },
+        {
+          "foodName": "salt",
+          "description": "1/8 teaspoon salt (adjust to your preference)",
+          "ingredientServingQty": 0.125,
+          "ingredientServingUnit": "tsp",
+          "ingredientType": "SPICE"
+        },
+        {
+          "foodName": "pepper",
+          "description": "1/8 teaspoon pepper (adjust to your preference)",
+          "ingredientServingQty": 0.125,
+          "ingredientServingUnit": "tsp",
+          "ingredientType": "SPICE"
+        }
+      ]
+    }
+  ]
+}
