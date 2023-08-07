@@ -141,6 +141,7 @@ public class CommonRecipeHandlerTest extends CommonHandlerTest {
                                         .withUserRepository(userRepository)
                                         .withRecipeRepository(recipeRepository)
                                         .withInstructionGroupRepository(instructionGroupRepository)
+                                        .withRecipeIngredientRepository(recipeIngredientRepository)
                                         .withUserId(userId)
                                         .withRequest(recipe)
                                         .build().execute();
