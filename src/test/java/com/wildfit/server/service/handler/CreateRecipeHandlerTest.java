@@ -3,16 +3,17 @@ package com.wildfit.server.service.handler;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
 import java.util.List;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Iterables;
 import com.wildfit.server.domain.IngredientType;
 import com.wildfit.server.domain.InstructionGroupDigest;
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.SeasonType;
-import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.FoodItems;
 import com.wildfit.server.model.Season;
 import com.wildfit.server.model.mapper.FoodItemDigestMapper;
@@ -24,7 +25,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 class CreateRecipeHandlerTest extends CommonRecipeHandlerTest {
 
     @Test
-    void execute() throws UserServiceException, java.io.IOException {
+    void execute() throws Exception {
         final var season = SeasonType.SPRING;
         final var name = "CreateRecipeHandlerTest";
 
@@ -98,11 +99,59 @@ class CreateRecipeHandlerTest extends CommonRecipeHandlerTest {
         assertEquals(0.25f, ingredient.getIngredientServingQty(), 0.01);
     }
 
+    @Test
+    public void processTuna_salad() throws Exception {
+        final var digest = getRecipeDigest("Tuna_salad.json");
+        validateTunaSalad(digest);
+
+        createRecipe(digest);
+
+        validateTunaSalad(testRecipe);
+    }
+
+    private static void validateTunaSalad(com.wildfit.server.domain.RecipeDigest digest) {
+        assertNotNull(digest);
+
+        assertEquals("Tuna salad", digest.getName());
+        assertEquals(com.wildfit.server.domain.SeasonType.SPRING, digest.getSeason());
+        assertEquals(15, digest.getPrepTimeMin());
+        assertEquals(0, digest.getCookTimeMin());
+        assertEquals("serving", digest.getServingUnit());
+        assertEquals(4, digest.getServingQty());
+        assertEquals("Tuna is one of the staples in our household. \nWe eat it all the time, " +
+                        "because it is simple and can be eaten for breakfast, lunch, dinner or snack.",
+                digest.getIntroduction());
+
+        assertEquals(2, digest.getInstructionGroups().size());
+
+        for (var instructionGroup : digest.getInstructionGroups()) {
+            switch (instructionGroup.getName()) {
+                case "Salad" -> {
+                    assertEquals(4, instructionGroup.getInstructions().size());
+                    assertEquals(5, instructionGroup.getIngredients().size());
+                }
+                case "Dressing" -> {
+                    assertEquals(0, instructionGroup.getInstructions().size());
+                    assertEquals(4, instructionGroup.getIngredients().size());
+                }
+                default -> fail(instructionGroup.getName());
+            }
+        }
+    }
+
     private FoodItems getFoodItems(String fileName) throws IOException {
         try (var in = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName)) {
-            final var mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+            final var mapper = new ObjectMapper();
 
             return mapper.readValue(in, FoodItems.class);
+        }
+    }
+
+    private RecipeDigest getRecipeDigest(String fileName) throws IOException {
+        try (var in = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName)) {
+            final var mapper = new ObjectMapper();
+
+            return mapper.readValue(in, RecipeDigest.class);
         }
     }
 }
