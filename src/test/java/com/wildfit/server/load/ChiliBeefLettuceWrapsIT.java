@@ -78,6 +78,7 @@ class ChiliBeefLettuceWrapsIT extends CommonRecipe {
                                                     .withUserRepository(userRepository)
                                                     .withRecipeRepository(recipeRepository)
                                                     .withInstructionGroupRepository(instructionGroupRepository)
+                                                    .withRecipeIngredientRepository(recipeIngredientRepository)
                                                     .withUserId(UUID)
                                                     .withRequest(recipe)
                                                     .build().execute();
@@ -205,6 +206,7 @@ class ChiliBeefLettuceWrapsIT extends CommonRecipe {
                                                     .withUserRepository(userRepository)
                                                     .withRecipeRepository(recipeRepository)
                                                     .withInstructionGroupRepository(instructionGroupRepository)
+                                                    .withRecipeIngredientRepository(recipeIngredientRepository)
                                                     .withUserId(UUID)
                                                     .withRequest(recipe)
                                                     .build().execute();
