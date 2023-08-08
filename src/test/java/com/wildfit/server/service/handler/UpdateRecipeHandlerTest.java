@@ -1,6 +1,6 @@
 package com.wildfit.server.service.handler;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
@@ -181,6 +181,7 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
                                   .withRecipeRepository(recipeRepository)
                                   .withInstructionGroupRepository(instructionGroupRepository)
                                   .withInstructionRepository(instructionRepository)
+                                  .withRecipeIngredientRepository(recipeIngredientRepository)
                                   .withUserId(userId)
                                   .withRequest(testRecipe)
                                   .build().execute();

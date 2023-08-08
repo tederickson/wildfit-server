@@ -17,6 +17,7 @@ import com.wildfit.server.model.mapper.InstructionGroupMapper;
 import com.wildfit.server.model.mapper.RecipeMapper;
 import com.wildfit.server.repository.InstructionGroupRepository;
 import com.wildfit.server.repository.InstructionRepository;
+import com.wildfit.server.repository.RecipeIngredientRepository;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,6 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 public class UpdateRecipeHandler extends CommonRecipeHandler {
     private final InstructionGroupRepository instructionGroupRepository;
     private final InstructionRepository instructionRepository;
+    private final RecipeIngredientRepository recipeIngredientRepository;
 
     private final RecipeDigest request;
 
@@ -59,7 +61,9 @@ public class UpdateRecipeHandler extends CommonRecipeHandler {
                                                   .orElseThrow(() -> new UserServiceException(
                                                           UserServiceError.RECIPE_NOT_FOUND));
 
-        return RecipeMapper.map(updatedRecipe, instructionGroupRepository.findByRecipeId(request.getId()));
+        return RecipeMapper.map(updatedRecipe,
+                instructionGroupRepository.findByRecipeId(request.getId()),
+                recipeIngredientRepository.findByRecipeId(request.getId()));
     }
 
     private void deleteInstructionGroups() {
@@ -104,6 +108,7 @@ public class UpdateRecipeHandler extends CommonRecipeHandler {
 
         Objects.requireNonNull(instructionGroupRepository, "instructionGroupRepository");
         Objects.requireNonNull(instructionRepository, "instructionRepository");
+        Objects.requireNonNull(recipeIngredientRepository, "recipeIngredientRepository");
 
         if (request == null) {
             throw new UserServiceException(UserServiceError.INVALID_PARAMETER);

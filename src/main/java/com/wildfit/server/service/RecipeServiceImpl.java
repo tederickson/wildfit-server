@@ -109,6 +109,7 @@ public class RecipeServiceImpl implements RecipeService {
                                   .withUserRepository(userRepository)
                                   .withRecipeRepository(recipeRepository)
                                   .withInstructionGroupRepository(instructionGroupRepository)
+                                  .withRecipeIngredientRepository(recipeIngredientRepository)
                                   .withUserId(userId)
                                   .withRequest(request)
                                   .build().execute();
