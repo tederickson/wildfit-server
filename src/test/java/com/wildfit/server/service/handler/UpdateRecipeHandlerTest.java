@@ -1,6 +1,6 @@
 package com.wildfit.server.service.handler;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
@@ -76,7 +76,9 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
 
         final var instructionGroup2 = InstructionGroupDigest.builder()
                                                             .withInstructionGroupNumber(2)
-                                                            .withInstructions(List.of(step3, step4)).build();
+                                                            .withInstructions(List.of(step3, step4))
+                                                            .withIngredients(List.of())
+                                                            .build();
 
         testRecipe.getInstructionGroups().add(instructionGroup2);
         final var response = updateRecipe(testRecipe);
