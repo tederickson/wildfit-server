@@ -1,4 +1,5 @@
 {
+  "id": 1,
   "name": "Tuna salad with apple and celery",
   "season": "SUMMER",
   "prepTimeMin": 15,
@@ -8,35 +9,46 @@
   "introduction": "Tuna is one of the staples in our household. \nWe eat it all the time, because it is simple and can be eaten for breakfast, lunch, dinner or snack.",
   "instructionGroups": [
     {
+      "id": 1,
       "instructionGroupNumber": 0,
       "name": "Salad",
       "instructions": [
         {
+          "id": 1,
           "stepNumber": 1,
           "instruction": "Put the tuna in a bowl and break it up with a fork."
         },
         {
+          "id": 2,
           "stepNumber": 2,
           "instruction": "Slice the celery and the apples to the same thickness. Chop the pickles small. "
         },
         {
+          "id": 3,
           "stepNumber": 3,
           "instruction": "Add the finely chopped onion and the capers. \nMix it together with the dressing ingredients and done."
         },
         {
+          "id": 4,
           "stepNumber": 4,
           "instruction": "You can add any fresh herb you like. Dill goes especially well with tuna."
         }
       ],
       "ingredients": [
         {
+          "id": 1,
+          "recipeId": 1,
+          "instructionGroupId": 1,
           "foodName": "tuna in water",
           "description": "2 cans of tuna in water, drained",
           "ingredientServingQty": 2,
           "ingredientServingUnit": "can",
-          "ingredientType": null
+          "ingredientType": "NONE"
         },
         {
+          "id": 2,
+          "recipeId": 1,
+          "instructionGroupId": 1,
           "foodName": "apple",
           "description": "1/2 apple",
           "ingredientServingQty": 0.5,
@@ -44,6 +56,9 @@
           "ingredientType": "PRODUCE"
         },
         {
+          "id": 3,
+          "recipeId": 1,
+          "instructionGroupId": 1,
           "foodName": "celery",
           "description": "1 stalk celery",
           "ingredientServingQty": 1,
@@ -51,13 +66,19 @@
           "ingredientType": "PRODUCE"
         },
         {
+          "id": 4,
+          "recipeId": 1,
+          "instructionGroupId": 1,
           "foodName": "capers",
           "description": "1 tbsp capers",
           "ingredientServingQty": 1,
           "ingredientServingUnit": "tbsp",
-          "ingredientType": null
+          "ingredientType": "NONE"
         },
         {
+          "id": 5,
+          "recipeId": 1,
+          "instructionGroupId": 1,
           "foodName": "red onion",
           "description": "1 spring onion or a small red onion, finely chopped",
           "ingredientServingQty": 1,
@@ -65,34 +86,47 @@
           "ingredientType": "PRODUCE"
         },
         {
+          "id": 6,
+          "recipeId": 1,
+          "instructionGroupId": 1,
           "foodName": "cornichon",
           "description": "4 cornichon (small sugar free pickled cucumbers)",
           "ingredientServingQty": 4,
           "ingredientServingUnit": "cornichon",
-          "ingredientType": null
+          "ingredientType": "NONE"
         }
       ]
     },
     {
+      "id": 2,
       "instructionGroupNumber": 1,
       "name": "Dressing",
       "instructions": [],
       "ingredients": [
         {
+          "id": 7,
+          "recipeId": 1,
+          "instructionGroupId": 2,
           "foodName": "sugar-free mayonnaise",
           "description": "1 tbsp sugar-free mayonnaise",
           "ingredientServingQty": 1,
           "ingredientServingUnit": "tbsp",
-          "ingredientType": null
+          "ingredientType": "NONE"
         },
         {
-          "foodName": "plain Greek yogurt",
+          "id": 8,
+          "recipeId": 1,
+          "instructionGroupId": 2,
+          "foodName": "plain greek yogurt",
           "description": "1 tbsp Greek yoghurt",
           "ingredientServingQty": 1,
           "ingredientServingUnit": "tbsp",
           "ingredientType": "DAIRY"
         },
         {
+          "id": 9,
+          "recipeId": 1,
+          "instructionGroupId": 2,
           "foodName": "salt",
           "description": "1/8 teaspoon salt (adjust to your preference)",
           "ingredientServingQty": 0.125,
@@ -100,6 +134,9 @@
           "ingredientType": "SPICE"
         },
         {
+          "id": 10,
+          "recipeId": 1,
+          "instructionGroupId": 2,
           "foodName": "pepper",
           "description": "1/8 teaspoon pepper (adjust to your preference)",
           "ingredientServingQty": 0.125,
