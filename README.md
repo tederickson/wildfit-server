@@ -48,3 +48,31 @@ query string parameters.
 run `mvn test -Dspring.profiles.active=dev` to run all JUnit tests.
 
 The current test environment utilizes SpringBootTest, JsonTest and Mockito to achieve a 93% test coverage.
+
+# Database
+
+The original design had a table for recipe instructions and another table for ingredients.
+
+* 9 ingredients
+* 4 instructions
+
+Query for the ingredients and the instructions based on recipe id resulted in the cartesian product (4 * 9) of 36 rows.
+
+The way to solve this is by a joined table strategy:
+
+1. Use an abstract parent class
+2. Add an enum stored in the database as text depicting the child class type
+3. Use PrimaryKeyJoinColumn annotation and provide the same name in child classes
+
+Separate tables are created for the parent and child classes.
+
+The primary id of the child classes are the primary key of the parent class.  
+This ensures unique key values between the child classes.  
+Otherwise would need a compound index to ensure uniqueness.
+
+Storing the enum name is better than the default enum number because if someone inserts a
+new enum value the database does not have to be updated with the new number.
+
+Query for the parent class returns 13 rows.  
+Accessing the data returns 9 ingredients and 4 instructions.
+The enum provides efficient mapping of the database row to a Java class.

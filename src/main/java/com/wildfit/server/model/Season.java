@@ -9,7 +9,7 @@ import lombok.Getter;
 public enum Season {
     SPRING("Spring"), SUMMER("Summer"), FALL("Fall"), WINTER("Winter");
 
-    private final String code;
+    private final String code;  // TODO: Yank code
 
     public static Season findByCode(String code) {
         for (var value : values()) {

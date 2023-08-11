@@ -1,7 +1,9 @@
 package com.wildfit.server.model;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,6 +31,7 @@ public final class Recipe {
     private long id;
 
     private String email;
+    @Column(length = 600)
     private String introduction;
     private String name;
     private String season;
@@ -55,6 +58,6 @@ public final class Recipe {
 
     @Override
     public int hashCode() {
-        return java.util.Objects.hash(id);
+        return Objects.hash(id);
     }
 }
