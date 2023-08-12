@@ -32,7 +32,7 @@ public class RecipeGroup1 {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "recipe_group_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "recipe_id", referencedColumnName = "id", nullable = false)
     private Recipe1 recipe;
 
     @OneToMany(mappedBy = "recipeGroup", cascade = CascadeType.ALL, orphanRemoval = true)
