@@ -5,6 +5,7 @@ import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,13 +30,13 @@ public class RecipeGroup1 {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = GENERATOR_NAME)
     @SequenceGenerator(name = GENERATOR_NAME, sequenceName = SEQUENCE_NAME + "_seq", allocationSize = 1)
-    private long id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "recipe_id", referencedColumnName = "id", nullable = false)
     private Recipe1 recipe;
 
-    @OneToMany(mappedBy = "recipeGroup", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "recipeGroup", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CommonRecipe> commonRecipes;
 
     private int recipeGroupNumber;

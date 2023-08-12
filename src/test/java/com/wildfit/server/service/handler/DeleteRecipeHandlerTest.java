@@ -52,8 +52,7 @@ class DeleteRecipeHandlerTest extends CommonRecipeHandlerTest {
         final var exception = assertThrows(UserServiceException.class,
                 () -> DeleteRecipeHandler.builder()
                                          .withUserRepository(userRepository)
-                                         .withRecipeRepository(recipeRepository)
-                                         .withInstructionGroupRepository(instructionGroupRepository)
+                                         .withRecipe1Repository(recipe1Repository)
                                          .withRecipeId(-1L)
                                          .build().execute());
         assertEquals(UserServiceError.INVALID_PARAMETER, exception.getError());
@@ -64,8 +63,7 @@ class DeleteRecipeHandlerTest extends CommonRecipeHandlerTest {
         final var exception = assertThrows(UserServiceException.class,
                 () -> DeleteRecipeHandler.builder()
                                          .withUserRepository(userRepository)
-                                         .withRecipeRepository(recipeRepository)
-                                         .withInstructionGroupRepository(instructionGroupRepository)
+                                         .withRecipe1Repository(recipe1Repository)
                                          .withUserId("-14L")
                                          .withRecipeId(-1L)
                                          .build().execute());
@@ -90,8 +88,7 @@ class DeleteRecipeHandlerTest extends CommonRecipeHandlerTest {
         final var exception = assertThrows(UserServiceException.class,
                 () -> DeleteRecipeHandler.builder()
                                          .withUserRepository(userRepository)
-                                         .withRecipeRepository(recipeRepository)
-                                         .withInstructionGroupRepository(instructionGroupRepository)
+                                         .withRecipe1Repository(recipe1Repository)
                                          .withUserId(dbUser.getUuid())
                                          .withRecipeId(testRecipe.getId())
                                          .build().execute());
@@ -106,13 +103,11 @@ class DeleteRecipeHandlerTest extends CommonRecipeHandlerTest {
 
         DeleteRecipeHandler.builder()
                            .withUserRepository(userRepository)
-                           .withRecipeRepository(recipeRepository)
-                           .withInstructionGroupRepository(instructionGroupRepository)
+                           .withRecipe1Repository(recipe1Repository)
                            .withUserId(userId)
                            .withRecipeId(testRecipe.getId())
                            .build().execute();
 
-        assertTrue(recipeRepository.findById(testRecipe.getId()).isEmpty());
-        assertTrue(instructionGroupRepository.findByRecipeId(testRecipe.getId()).isEmpty());
+        assertTrue(recipe1Repository.findById(testRecipe.getId()).isEmpty());
     }
 }

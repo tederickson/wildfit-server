@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public final class CreateUserResponse {
-    private long id;
+    private Long id;
 
     @JsonDeserialize(using = CustomStringDeserializer.class)
     private String email;

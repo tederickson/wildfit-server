@@ -10,9 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public final class IngredientDigest {
-    private long id;
-    private long recipeId;
-    private long instructionGroupId;
+    private Long id;
 
     private String foodName;
     private String description;

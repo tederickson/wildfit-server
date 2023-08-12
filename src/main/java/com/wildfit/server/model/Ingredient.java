@@ -20,15 +20,18 @@ import lombok.experimental.Accessors;
 @PrimaryKeyJoinColumn(name = CommonRecipe.JOIN_KEY)
 public class Ingredient extends CommonRecipe {
     @Id
-    private long id; // shows up in database as CommonRecipe.JOIN_KEY
+    private Long id; // shows up in database as CommonRecipe.JOIN_KEY
     @Column(name = "food_name")
     private String foodName;
     private String description;
+
     @Column(name = "ingredient_serving_qty")
     private Float ingredientServingQty;
-    @Column(name = "ingredient_serving_unit")
+
+    @Column(name = "ingredient_serving_unit", length = 20)
     private String ingredientServingUnit;
-    @Column(name = "ingredient_type")
+
+    @Column(name = "ingredient_type", length = 20)
     private String ingredientType;
 
     public Ingredient() {
@@ -37,7 +40,9 @@ public class Ingredient extends CommonRecipe {
     }
 
     public Ingredient setIngredientType(IngredientType ingredientType) {
-        this.ingredientType = ingredientType.name();
+        if (ingredientType != null) {
+            this.ingredientType = ingredientType.toString();
+        }
         return this;
     }
 

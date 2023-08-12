@@ -4,22 +4,22 @@ import java.util.Objects;
 
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
-import com.wildfit.server.model.Recipe;
-import com.wildfit.server.repository.RecipeRepository;
+import com.wildfit.server.model.Recipe1;
+import com.wildfit.server.repository.Recipe1Repository;
 import com.wildfit.server.repository.UserRepository;
 import lombok.experimental.SuperBuilder;
 
 @SuperBuilder(setterPrefix = "with")
 public class CommonRecipeHandler {
-    protected final RecipeRepository recipeRepository;
+    protected final Recipe1Repository recipe1Repository;
     protected final UserRepository userRepository;
 
     protected final String userId;
 
-    protected Recipe getAuthorizedRecipe(Long recipeId) throws UserServiceException {
+    protected Recipe1 getAuthorizedRecipe(Long recipeId) throws UserServiceException {
         final var user = userRepository.findByUuid(userId)
                                        .orElseThrow(() -> new UserServiceException(UserServiceError.USER_NOT_FOUND));
-        final var dbRecipe = recipeRepository.findById(recipeId)
+        final var dbRecipe = recipe1Repository.findById(recipeId)
                                              .orElseThrow(
                                                      () -> new UserServiceException(UserServiceError.RECIPE_NOT_FOUND));
 
@@ -31,7 +31,7 @@ public class CommonRecipeHandler {
 
     protected void validate() throws UserServiceException {
         Objects.requireNonNull(userRepository, "userRepository");
-        Objects.requireNonNull(recipeRepository, "recipeRepository");
+        Objects.requireNonNull(recipe1Repository, "recipe1Repository");
 
         if (userId == null) {
             throw new UserServiceException(UserServiceError.INVALID_PARAMETER);

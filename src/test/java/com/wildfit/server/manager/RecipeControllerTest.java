@@ -35,7 +35,7 @@ class RecipeControllerTest {
     void retrieveRecipesForSeason() throws UserServiceException {
         when(recipeService.listBySeason(any(), any())).thenReturn(new RecipeListDigest());
 
-        final var response = recipeController.retrieveRecipesForSeason(SeasonType.WINTER, 12, 40);
+        final var response = recipeController.retrieveRecipesForSeason(SeasonType.FALL, 12, 40);
         assertNotNull(response);
     }
 
@@ -43,7 +43,7 @@ class RecipeControllerTest {
     void listBySeasonAndIngredient() throws UserServiceException {
         when(recipeService.listBySeasonAndIngredient(any(), any(), any())).thenReturn(new RecipeListDigest());
 
-        final var response = recipeController.listBySeasonAndIngredient(SeasonType.WINTER,
+        final var response = recipeController.listBySeasonAndIngredient(SeasonType.FALL,
                 "iceberg lettuce", 3, 40);
         assertNotNull(response);
     }
@@ -52,7 +52,7 @@ class RecipeControllerTest {
     void listBySeasonAndName() throws UserServiceException {
         when(recipeService.listBySeasonAndName(any(), any(), any())).thenReturn(new RecipeListDigest());
 
-        final var response = recipeController.listBySeasonAndName(SeasonType.WINTER,
+        final var response = recipeController.listBySeasonAndName(SeasonType.FALL,
                 "lettuce wraps", 3, 40);
         assertNotNull(response);
     }

@@ -8,10 +8,7 @@ import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.User;
 import com.wildfit.server.model.UserStatus;
-import com.wildfit.server.repository.InstructionGroupRepository;
-import com.wildfit.server.repository.InstructionRepository;
-import com.wildfit.server.repository.RecipeIngredientRepository;
-import com.wildfit.server.repository.RecipeRepository;
+import com.wildfit.server.repository.Recipe1Repository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,13 +58,7 @@ public class CommonRecipeHandlerTest extends CommonHandlerTest {
     protected static RecipeDigest testRecipe;
 
     @Autowired
-    protected RecipeRepository recipeRepository;
-    @Autowired
-    protected InstructionGroupRepository instructionGroupRepository;
-    @Autowired
-    protected InstructionRepository instructionRepository;
-    @Autowired
-    protected RecipeIngredientRepository recipeIngredientRepository;
+    protected Recipe1Repository recipe1Repository;
 
     @BeforeEach
     void setUp() {
@@ -92,13 +83,7 @@ public class CommonRecipeHandlerTest extends CommonHandlerTest {
     @AfterEach
     void tearDown() {
         if (testRecipe != null) {
-            recipeRepository.deleteById(testRecipe.getId());
-
-            final var instructionGroups = instructionGroupRepository.findByRecipeId(testRecipe.getId());
-            instructionGroupRepository.deleteAll(instructionGroups);
-
-            final var ingredients = recipeIngredientRepository.findByRecipeId(testRecipe.getId());
-            recipeIngredientRepository.deleteAll(ingredients);
+            recipe1Repository.deleteById(testRecipe.getId());
 
             testRecipe = null;
         }
@@ -109,9 +94,7 @@ public class CommonRecipeHandlerTest extends CommonHandlerTest {
     protected void createRecipe(RecipeDigest recipe) throws UserServiceException {
         testRecipe = CreateRecipeHandler.builder()
                                         .withUserRepository(userRepository)
-                                        .withRecipeRepository(recipeRepository)
-                                        .withInstructionGroupRepository(instructionGroupRepository)
-                                        .withRecipeIngredientRepository(recipeIngredientRepository)
+                                        .withRecipe1Repository(recipe1Repository)
                                         .withUserId(userId)
                                         .withRequest(recipe)
                                         .build().execute();

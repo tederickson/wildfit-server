@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-@Tag(name = "Recipe API")
+@Tag(name = "Recipe1 API")
 @RequestMapping("v1/recipes")
 public class RecipeController {
     private final RecipeService recipeService;
@@ -95,10 +95,10 @@ public class RecipeController {
         return recipeService.retrieveRecipe(id);
     }
 
-    @Operation(summary = "Delete Recipe")
+    @Operation(summary = "Delete Recipe1")
     @ApiResponses(value = { //
-            @ApiResponse(responseCode = "200", description = "Recipe deleted"), //
-            @ApiResponse(responseCode = "404", description = "Recipe not found"),
+            @ApiResponse(responseCode = "200", description = "Recipe1 deleted"), //
+            @ApiResponse(responseCode = "404", description = "Recipe1 not found"),
             @ApiResponse(responseCode = "401", description = "Not authorized to delete recipe")})
     @DeleteMapping(value = "/{recipeId}/users/{userId}")
     public void deleteRecipe(@PathVariable("recipeId") Long id, @PathVariable("userId") String userId)
@@ -109,7 +109,7 @@ public class RecipeController {
         recipeService.deleteRecipe(id, userId);
     }
 
-    @Operation(summary = "Create Recipe")
+    @Operation(summary = "Create Recipe1")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully created recipe")})
     @PostMapping(value = "/users/{userId}", produces = "application/json")
@@ -121,10 +121,10 @@ public class RecipeController {
         return recipeService.createRecipe(userId, request);
     }
 
-    @Operation(summary = "Update Recipe")
+    @Operation(summary = "Update Recipe1")
     @ApiResponses(value = { //
-            @ApiResponse(responseCode = "200", description = "Recipe updated"), //
-            @ApiResponse(responseCode = "404", description = "Recipe not found"),
+            @ApiResponse(responseCode = "200", description = "Recipe1 updated"), //
+            @ApiResponse(responseCode = "404", description = "Recipe1 not found"),
             @ApiResponse(responseCode = "401", description = "Not authorized to update recipe")})
     @PutMapping(value = "/{recipeId}/users/{userId}", produces = "application/json")
     public RecipeDigest updateRecipe(@PathVariable("recipeId") Long id,
@@ -145,7 +145,7 @@ public class RecipeController {
     @Operation(summary = "Add ingredient to the recipe")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully added ingredient"),
-            @ApiResponse(responseCode = "404", description = "Recipe not found"),
+            @ApiResponse(responseCode = "404", description = "Recipe1 not found"),
             @ApiResponse(responseCode = "401", description = "Not authorized to update recipe")})
     @PostMapping(value = "/{recipeId}/users/{userId}/recipeGroups/{recipeGroupId}", produces = "application/json")
     public IngredientDigest createRecipeIngredient(@PathVariable("recipeId") Long id,
@@ -162,7 +162,7 @@ public class RecipeController {
     @Operation(summary = "Update recipe ingredient")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully updated ingredient"),
-            @ApiResponse(responseCode = "404", description = "Recipe not found"),
+            @ApiResponse(responseCode = "404", description = "Recipe1 not found"),
             @ApiResponse(responseCode = "401", description = "Not authorized to update recipe")})
     @PutMapping(value = "/{recipeId}/users/{userId}/ingredients/{ingredientId}", produces = "application/json")
     public IngredientDigest updateRecipeIngredient(@PathVariable("recipeId") Long recipeId,
@@ -180,7 +180,7 @@ public class RecipeController {
     @Operation(summary = "Delete ingredient from the recipe")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully removed ingredient"),
-            @ApiResponse(responseCode = "404", description = "Recipe not found"),
+            @ApiResponse(responseCode = "404", description = "Recipe1 not found"),
             @ApiResponse(responseCode = "401", description = "Not authorized to update recipe")})
     @DeleteMapping(value = "/{recipeId}/users/{userId}/ingredients/{ingredientId}", produces = "application/json")
     public void deleteRecipeIngredient(@PathVariable("recipeId") Long recipeId,

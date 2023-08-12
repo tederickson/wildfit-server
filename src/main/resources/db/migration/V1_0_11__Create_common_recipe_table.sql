@@ -24,8 +24,8 @@ CREATE TABLE ingredient (
   description varchar(255) DEFAULT NULL,
   food_name varchar(255) DEFAULT NULL,
   ingredient_serving_qty float DEFAULT NULL,
-  ingredient_serving_unit varchar(255) DEFAULT NULL,
-  ingredient_type varchar(255) DEFAULT NULL,
+  ingredient_serving_unit varchar(20) DEFAULT NULL,
+  ingredient_type varchar(20) DEFAULT NULL,
   common_recipe_join_id bigint NOT NULL,
 
   PRIMARY KEY (common_recipe_join_id),

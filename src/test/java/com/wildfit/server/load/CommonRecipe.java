@@ -6,12 +6,8 @@ import com.wildfit.server.domain.FoodItemDigest;
 import com.wildfit.server.domain.IngredientType;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.FoodItems;
-import com.wildfit.server.model.mapper.IngredientDigestMapper;
-import com.wildfit.server.repository.InstructionGroupRepository;
-import com.wildfit.server.repository.RecipeIngredientRepository;
-import com.wildfit.server.repository.RecipeRepository;
+import com.wildfit.server.repository.Recipe1Repository;
 import com.wildfit.server.repository.UserRepository;
-import com.wildfit.server.service.handler.CreateRecipeIngredientHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -22,11 +18,7 @@ public abstract class CommonRecipe {
     @Autowired
     protected UserRepository userRepository;
     @Autowired
-    protected RecipeRepository recipeRepository;
-    @Autowired
-    protected InstructionGroupRepository instructionGroupRepository;
-    @Autowired
-    protected RecipeIngredientRepository recipeIngredientRepository;
+    protected Recipe1Repository recipe1Repository;
 
     @BeforeEach
     void setUp() {
@@ -61,20 +53,7 @@ public abstract class CommonRecipe {
                                  Float ingredientServingQty,
                                  String ingredientServingUnit,
                                  String description,
-                                 IngredientType ingredientType) throws UserServiceException {
-        CreateRecipeIngredientHandler.builder()
-                                     .withUserRepository(userRepository)
-                                     .withRecipeRepository(recipeRepository)
-                                     .withInstructionGroupRepository(instructionGroupRepository)
-                                     .withRecipeIngredientRepository(recipeIngredientRepository)
-                                     .withUserId(UUID)
-                                     .withRecipeId(dbRecipeId)
-                                     .withRecipeGroupId(dbRecipeGroupId)
-                                     .withRequest(IngredientDigestMapper.create(foodItemDigest,
-                                             description,
-                                             ingredientServingQty,
-                                             ingredientServingUnit,
-                                             ingredientType))
-                                     .build().execute();
+                                 IngredientType ingredientType) {
+        System.out.println("description = " + description);
     }
 }

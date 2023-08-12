@@ -1,7 +1,7 @@
 CREATE TABLE recipe_ingredient (
     id bigint NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
-    recipe_id bigint NOT NULL,                  -- Recipe.id
+    recipe_id bigint NOT NULL,                  -- Recipe1.id
     instruction_group_id bigint NOT NULL,       -- InstructionGroup.id
 
     ingredient_type varchar(2) NOT NULL,

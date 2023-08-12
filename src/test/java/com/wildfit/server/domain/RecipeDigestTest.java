@@ -3,8 +3,8 @@ package com.wildfit.server.domain;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanToString;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetters;
+import static com.wildfit.server.domain.SeasonType.FALL;
 import static com.wildfit.server.domain.SeasonType.SPRING;
-import static com.wildfit.server.domain.SeasonType.WINTER;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -43,8 +43,8 @@ class RecipeDigestTest {
 
     @Test
     void builder() {
-        final var request = RecipeDigest.builder().withSeason(WINTER).build();
-        assertEquals(WINTER, request.getSeason());
+        final var request = RecipeDigest.builder().withSeason(FALL).build();
+        assertEquals(FALL, request.getSeason());
     }
 
     @Test

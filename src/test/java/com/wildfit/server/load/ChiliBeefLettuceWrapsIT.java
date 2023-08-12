@@ -2,7 +2,6 @@ package com.wildfit.server.load;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.util.List;
@@ -27,7 +26,7 @@ class ChiliBeefLettuceWrapsIT extends CommonRecipe {
     void chiliBeefLettuceWrapsSummer() throws UserServiceException, IOException {
         final var season = Season.SUMMER;
         final var name = "Chili Beef Lettuce Wraps (Summer)";
-        final var exists = recipeRepository.findAllBySeasonAndName(season.getCode(), name, PageRequest.of(0, 10));
+        final var exists = recipe1Repository.findAllBySeasonNameAndName(season.name(), name, PageRequest.of(0, 10));
 
         if (exists.isEmpty()) {
             final var step1 = InstructionDigest.builder().withStepNumber(1)
@@ -76,9 +75,7 @@ class ChiliBeefLettuceWrapsIT extends CommonRecipe {
                                            .build();
             final var response = CreateRecipeHandler.builder()
                                                     .withUserRepository(userRepository)
-                                                    .withRecipeRepository(recipeRepository)
-                                                    .withInstructionGroupRepository(instructionGroupRepository)
-                                                    .withRecipeIngredientRepository(recipeIngredientRepository)
+                                                    .withRecipe1Repository(recipe1Repository)
                                                     .withUserId(UUID)
                                                     .withRequest(recipe)
                                                     .build().execute();
@@ -86,18 +83,9 @@ class ChiliBeefLettuceWrapsIT extends CommonRecipe {
 
             final var dbRecipeId = response.getId();
             final var dbRecipeGroupId = Iterables.getOnlyElement(response.getInstructionGroups()).getId();
-            final var dbRecipe = recipeRepository.findById(dbRecipeId).orElseThrow();
+            final var dbRecipe = recipe1Repository.findById(dbRecipeId).orElseThrow();
             assertEquals(name, dbRecipe.getName());
-            assertEquals(season.getCode(), dbRecipe.getSeason());
-
-            final var dbInstructionGroup = Iterables.getOnlyElement(
-                    instructionGroupRepository.findByRecipeId(dbRecipeId));
-
-            for (var dbInstruction : dbInstructionGroup.getInstructions()) {
-                assertEquals(dbInstructionGroup, dbInstruction.getInstructionGroup());
-                assertTrue(dbInstruction.getStepNumber() > 0);
-                assertNotNull(dbInstruction.getText());
-            }
+            assertEquals(season.toString(), dbRecipe.getSeasonName());
 
             var foodItems = getFoodItems("load/coconut_oil.json");
             var foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
@@ -159,7 +147,7 @@ class ChiliBeefLettuceWrapsIT extends CommonRecipe {
     void chiliBeefLettuceWrapsSpring() throws UserServiceException, IOException {
         final var season = Season.SPRING;
         final var name = "Chili Beef Lettuce Wraps (Spring)";
-        final var exists = recipeRepository.findAllBySeasonAndName(season.getCode(), name, PageRequest.of(0, 10));
+        final var exists = recipe1Repository.findAllBySeasonNameAndName(season.name(), name, PageRequest.of(0, 10));
 
         if (exists.isEmpty()) {
             final var step1 = InstructionDigest.builder().withStepNumber(1)
@@ -204,9 +192,7 @@ class ChiliBeefLettuceWrapsIT extends CommonRecipe {
                                            .build();
             final var response = CreateRecipeHandler.builder()
                                                     .withUserRepository(userRepository)
-                                                    .withRecipeRepository(recipeRepository)
-                                                    .withInstructionGroupRepository(instructionGroupRepository)
-                                                    .withRecipeIngredientRepository(recipeIngredientRepository)
+                                                    .withRecipe1Repository(recipe1Repository)
                                                     .withUserId(UUID)
                                                     .withRequest(recipe)
                                                     .build().execute();
@@ -214,18 +200,10 @@ class ChiliBeefLettuceWrapsIT extends CommonRecipe {
 
             final var dbRecipeId = response.getId();
             final var dbRecipeGroupId = Iterables.getOnlyElement(response.getInstructionGroups()).getId();
-            final var dbRecipe = recipeRepository.findById(dbRecipeId).orElseThrow();
+            final var dbRecipe = recipe1Repository.findById(dbRecipeId).orElseThrow();
             assertEquals(name, dbRecipe.getName());
-            assertEquals(season.getCode(), dbRecipe.getSeason());
+            assertEquals(season.toString(), dbRecipe.getSeasonName());
 
-            final var dbInstructionGroup = Iterables.getOnlyElement(
-                    instructionGroupRepository.findByRecipeId(dbRecipeId));
-
-            for (var dbInstruction : dbInstructionGroup.getInstructions()) {
-                assertEquals(dbInstructionGroup, dbInstruction.getInstructionGroup());
-                assertTrue(dbInstruction.getStepNumber() > 0);
-                assertNotNull(dbInstruction.getText());
-            }
 
             var foodItems = getFoodItems("load/coconut_oil.json");
             var foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);

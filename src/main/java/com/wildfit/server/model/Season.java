@@ -7,18 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum Season {
-    SPRING("Spring"), SUMMER("Summer"), FALL("Fall"), WINTER("Winter");
-
-    private final String code;  // TODO: Yank code
-
-    public static Season findByCode(String code) {
-        for (var value : values()) {
-            if (value.code.equals(code)) {
-                return value;
-            }
-        }
-        return null;
-    }
+    SPRING, SUMMER, FALL;
 
     public static Season map(SeasonType genderType) {
         return valueOf(genderType.name());

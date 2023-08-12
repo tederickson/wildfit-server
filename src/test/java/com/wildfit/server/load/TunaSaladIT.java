@@ -42,7 +42,7 @@ class TunaSaladIT extends CommonRecipe {
     void tunaSaladWithAppleAndCelerySummer() throws UserServiceException, IOException {
         final var season = Season.SUMMER;
         final var name = "Tuna salad with apple and celery (Summer)";
-        final var exists = recipeRepository.findAllBySeasonAndName(season.getCode(), name, PageRequest.of(0, 10));
+        final var exists = recipe1Repository.findAllBySeasonNameAndName(season.toString(), name, PageRequest.of(0, 10));
 
         if (exists.isEmpty()) {
             final var step2 = InstructionDigest.builder().withStepNumber(2)
@@ -73,9 +73,7 @@ class TunaSaladIT extends CommonRecipe {
                                            .build();
             final var response = CreateRecipeHandler.builder()
                                                     .withUserRepository(userRepository)
-                                                    .withRecipeRepository(recipeRepository)
-                                                    .withInstructionGroupRepository(instructionGroupRepository)
-                                                    .withRecipeIngredientRepository(recipeIngredientRepository)
+                                                    .withRecipe1Repository(recipe1Repository)
                                                     .withUserId(UUID)
                                                     .withRequest(recipe)
                                                     .build().execute();
@@ -97,7 +95,7 @@ class TunaSaladIT extends CommonRecipe {
     void tunaSaladWithAppleAndCelerySpring() throws UserServiceException, IOException {
         final var season = Season.SPRING;
         final var name = "Tuna salad";
-        final var exists = recipeRepository.findAllBySeasonAndName(season.getCode(), name, PageRequest.of(0, 10));
+        final var exists = recipe1Repository.findAllBySeasonNameAndName(season.toString(), name, PageRequest.of(0, 10));
 
         if (exists.isEmpty()) {
             final var step2 = InstructionDigest.builder().withStepNumber(2)
@@ -127,10 +125,8 @@ class TunaSaladIT extends CommonRecipe {
                                            .build();
             final var response = CreateRecipeHandler.builder()
                                                     .withUserRepository(userRepository)
-                                                    .withRecipeRepository(recipeRepository)
-                                                    .withInstructionGroupRepository(instructionGroupRepository)
-                                                    .withRecipeIngredientRepository(recipeIngredientRepository)
-                                                    .withUserId(UUID)
+                                                    .withRecipe1Repository(recipe1Repository)
+                                                     .withUserId(UUID)
                                                     .withRequest(recipe)
                                                     .build().execute();
             assertNotNull(response);

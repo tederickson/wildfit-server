@@ -1,7 +1,7 @@
 CREATE TABLE instruction_group (
     id bigint AUTO_INCREMENT PRIMARY KEY,
 
-    recipe_id bigint NOT NULL,  -- Recipe.id
+    recipe_id bigint NOT NULL,  -- Recipe1.id
 
     instruction_group_number    int NOT NULL,
     name                        varchar(255),

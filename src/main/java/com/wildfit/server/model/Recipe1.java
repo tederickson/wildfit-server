@@ -32,7 +32,7 @@ public final class Recipe1 {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = GENERATOR_NAME)
     @SequenceGenerator(name = GENERATOR_NAME, sequenceName = SEQUENCE_NAME + "_seq", allocationSize = 1)
-    private long id;
+    private Long id;
 
     private String email;
 
@@ -54,7 +54,7 @@ public final class Recipe1 {
     private LocalDateTime created;
     private LocalDateTime updated;
 
-    @OneToMany(mappedBy = "recipe", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "recipe", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RecipeGroup1> recipeGroups;
 
     public void add(RecipeGroup1 recipeGroup) {
@@ -64,13 +64,14 @@ public final class Recipe1 {
         recipeGroups.add(recipeGroup);
     }
 
-    public Recipe1 setSeasonName(Season season) {
-        this.seasonName = season.name();
+    public Recipe1 setSeasonName(String seasonName) {
+        this.seasonName = seasonName;
         return this;
     }
 
-    public Season getSeasonNameAsSeason() {
-        return Season.valueOf(seasonName);
+    public Recipe1 setSeasonName(Season season) {
+        this.seasonName = season.name();
+        return this;
     }
 
     public void assignAllParents() {
@@ -95,8 +96,8 @@ public final class Recipe1 {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Recipe1 recipe = (Recipe1) o;
-        return id == recipe.id;
+        Recipe1 recipe1 = (Recipe1) o;
+        return Objects.equals(id, recipe1.id);
     }
 
     @Override
@@ -106,6 +107,7 @@ public final class Recipe1 {
 
     @Override
     public String toString() {
+        final var size = recipeGroups == null ? 0 : recipeGroups.size();
         return "Recipe1{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
@@ -118,7 +120,7 @@ public final class Recipe1 {
                 ", servingQty=" + servingQty +
                 ", created=" + created +
                 ", updated=" + updated +
-                ", recipeGroups size=" + recipeGroups.size() +
+                ", recipeGroups size=" + size +
                 '}';
     }
 }

@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
-import com.wildfit.server.model.Recipe;
+import com.wildfit.server.model.Recipe1;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,46 +22,45 @@ class RecipeRepositoryTest {
     static final String SEASON = "Spring";
 
     @Autowired
-    RecipeRepository recipeRepository;
+    Recipe1Repository recipe1Repository;
 
     @Test
     void findAllById() {
-        final var noRows = recipeRepository.findAllById(List.of(-123L));
+        final var noRows = recipe1Repository.findAllById(List.of(-123L));
         assertNotNull(noRows);
         assertFalse(noRows.iterator().hasNext());
     }
 
     @Test
     void findAllBySeason() {
-        final var name = "RecipeRepositoryTest Test Recipe";
-        final var recipe = Recipe.builder()
-                                 .withSeason(SEASON)
-                                 .withEmail(EMAIL)
-                                 .withName(name)
-                                 .withCreated(java.time.LocalDateTime.now())
-                                 .withIntroduction("introduction")
-                                 .withPrepTimeMin(3)
-                                 .withCookTimeMin(14)
-                                 .withServingUnit("serving")
-                                 .withServingQty(4)
-                                 .build();
-        final var saved = recipeRepository.save(recipe);
+        final var name = "RecipeRepositoryTest Test Recipe1";
+        final var recipe = new Recipe1()
+                .setSeasonName(SEASON)
+                .setEmail(EMAIL)
+                .setName(name)
+                .setCreated(java.time.LocalDateTime.now())
+                .setIntroduction("introduction")
+                .setPrepTimeMin(3)
+                .setCookTimeMin(14)
+                .setServingUnit("serving")
+                .setServingQty(4);
+        final var saved = recipe1Repository.save(recipe);
 
-        final var rows = recipeRepository.findAllBySeason(SEASON, PAGEABLE);
-        final var dbRecipe = rows.stream().filter(x -> SEASON.equals(x.getSeason()))
+        final var rows = recipe1Repository.findAllBySeasonName(SEASON, PAGEABLE);
+        final var dbRecipe = rows.stream().filter(x -> SEASON.equals(x.getSeasonName()))
                                  .filter(x -> EMAIL.equals(x.getEmail()))
                                  .filter(x -> name.equals(x.getName()))
                                  .findFirst().orElse(null);
 
         assertNotNull(dbRecipe);
 
-        final var searchById = recipeRepository.findAllById(List.of(saved.getId()));
+        final var searchById = recipe1Repository.findAllById(List.of(saved.getId()));
         final var iterator = searchById.iterator();
 
         assertTrue(iterator.hasNext());
         while (iterator.hasNext()) {
             assertEquals(saved.getId(), iterator.next().getId());
         }
-        recipeRepository.delete(saved);
+        recipe1Repository.delete(saved);
     }
 }

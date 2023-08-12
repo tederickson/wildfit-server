@@ -9,7 +9,7 @@ import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.Instruction;
 import com.wildfit.server.model.InstructionGroup;
-import com.wildfit.server.model.Recipe;
+import com.wildfit.server.model.Recipe1;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -32,7 +32,7 @@ public class InstructionGroupMapper {
         return builder.build();
     }
 
-    public static InstructionGroup create(Recipe recipe, InstructionGroupDigest digest) {
+    public static InstructionGroup create(Recipe1 recipe, InstructionGroupDigest digest) {
         final var instructionGroup = InstructionGroup.builder()
                                                      .withInstructionGroupNumber(digest.getInstructionGroupNumber())
                                                      .withName(digest.getName())

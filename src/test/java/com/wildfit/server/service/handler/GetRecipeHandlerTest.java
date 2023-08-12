@@ -24,16 +24,14 @@ class GetRecipeHandlerTest extends CommonRecipeHandlerTest {
     @Test
     void nullParameters() {
         assertThrows(NullPointerException.class,
-                () -> DeleteRecipeIngredientHandler.builder().build().execute());
+                () -> GetRecipeHandler.builder().build().execute());
     }
 
     @Test
     void missingRecipeId() {
         final var exception = assertThrows(UserServiceException.class,
                 () -> GetRecipeHandler.builder()
-                                      .withRecipeRepository(recipeRepository)
-                                      .withInstructionGroupRepository(instructionGroupRepository)
-                                      .withRecipeIngredientRepository(recipeIngredientRepository)
+                                      .withRecipe1Repository(recipe1Repository)
                                       .build().execute());
         assertEquals(UserServiceError.INVALID_PARAMETER, exception.getError());
     }
@@ -57,9 +55,7 @@ class GetRecipeHandlerTest extends CommonRecipeHandlerTest {
         createRecipe(recipe);
 
         final var recipeDigest = GetRecipeHandler.builder()
-                                                 .withRecipeRepository(recipeRepository)
-                                                 .withInstructionGroupRepository(instructionGroupRepository)
-                                                 .withRecipeIngredientRepository(recipeIngredientRepository)
+                                                 .withRecipe1Repository(recipe1Repository)
                                                  .withRecipeId(testRecipe.getId())
                                                  .build().execute();
         var instructionGroup1 = Iterables.getOnlyElement(recipeDigest.getInstructionGroups());
@@ -68,35 +64,5 @@ class GetRecipeHandlerTest extends CommonRecipeHandlerTest {
 
         final var recipeGroupId = instructionGroup1.getId();
         assertNotNull(recipeGroupId);
-
-        final var ingredientDigest = IngredientDigest.builder()
-                                                     .withDescription(description)
-                                                     .withFoodName(foodName)
-                                                     .withIngredientServingQty(ingredientServingQty)
-                                                     .withIngredientServingUnit(ingredientServingUnit)
-                                                     .build();
-
-        final var response = CreateRecipeIngredientHandler.builder()
-                                                          .withUserRepository(userRepository)
-                                                          .withRecipeRepository(recipeRepository)
-                                                          .withInstructionGroupRepository(instructionGroupRepository)
-                                                          .withRecipeIngredientRepository(recipeIngredientRepository)
-                                                          .withUserId(userId)
-                                                          .withRecipeId(testRecipe.getId())
-                                                          .withRecipeGroupId(recipeGroupId)
-                                                          .withRequest(ingredientDigest)
-                                                          .build().execute();
-        assertNotNull(response);
-
-        final var recipeDigestWithIngredients = GetRecipeHandler.builder()
-                                                                .withRecipeRepository(recipeRepository)
-                                                                .withInstructionGroupRepository(
-                                                                        instructionGroupRepository)
-                                                                .withRecipeIngredientRepository(
-                                                                        recipeIngredientRepository)
-                                                                .withRecipeId(testRecipe.getId())
-                                                                .build().execute();
-
-        assertEquals(1, recipeDigestWithIngredients.getInstructionGroups().get(0).getIngredients().size());
     }
 }

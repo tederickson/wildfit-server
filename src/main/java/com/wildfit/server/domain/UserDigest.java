@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public final class UserDigest {
-    private long id;
+    private Long id;
     @JsonDeserialize(using = CustomStringDeserializer.class)
     private String email;
     private String uuid;

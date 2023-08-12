@@ -19,8 +19,9 @@ import lombok.experimental.Accessors;
 @PrimaryKeyJoinColumn(name = CommonRecipe.JOIN_KEY)
 public class Instruction1 extends CommonRecipe {
     @Id
-    private long id;  // shows up in database as CommonRecipe.JOIN_KEY
-    private int stepNumber;
+    private Long id;  // shows up in database as CommonRecipe.JOIN_KEY
+    private Integer stepNumber;
+
     @Column(length = 600, nullable = false)
     private String text;
 

@@ -29,7 +29,7 @@ public class InstructionGroup {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private long recipeId; // Recipe.id
+    private long recipeId; // Recipe1.id
 
     private int instructionGroupNumber;
     private String name;

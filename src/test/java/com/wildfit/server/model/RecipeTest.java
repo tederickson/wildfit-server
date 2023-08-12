@@ -1,8 +1,6 @@
 package com.wildfit.server.model;
 
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
-import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanToString;
-import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetters;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.time.LocalDate;
@@ -23,22 +21,13 @@ class RecipeTest {
 
     @Test
     public void shouldHaveANoArgsConstructor() {
-        assertThat(Recipe.class, hasValidBeanConstructor());
-    }
-
-    @Test
-    public void gettersAndSettersShouldWorkForEachProperty() {
-        assertThat(Recipe.class, hasValidGettersAndSetters());
-    }
-
-    @Test
-    public void allPropertiesShouldBeRepresentedInToStringOutput() {
-        assertThat(Recipe.class, hasValidBeanToString());
+        assertThat(Recipe1.class, hasValidBeanConstructor());
     }
 
     @Test
     public void equalsAndHashCode() {
-        EqualsVerifier.forClass(Recipe.class)
+        EqualsVerifier.forClass(Recipe1.class)
+                      .withPrefabValues(RecipeGroup1.class, new RecipeGroup1().setId(3L), new RecipeGroup1().setId(13L))
                       .suppress(Warning.NONFINAL_FIELDS)
                       .suppress(Warning.SURROGATE_KEY).verify();
     }

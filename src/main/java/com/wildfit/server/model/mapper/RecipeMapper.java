@@ -1,40 +1,48 @@
 package com.wildfit.server.model.mapper;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
+import com.wildfit.server.domain.InstructionGroupDigest;
 import com.wildfit.server.domain.RecipeDigest;
+import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.model.InstructionGroup;
-import com.wildfit.server.model.Recipe;
-import com.wildfit.server.model.RecipeIngredient;
+import com.wildfit.server.model.Recipe1;
 import com.wildfit.server.model.Season;
 
 public final class RecipeMapper {
     private RecipeMapper() {
     }
 
-    public static RecipeDigest map(Recipe recipe) {
+    public static RecipeDigest map(Recipe1 recipe) {
         final var builder = getBuilder(recipe);
 
-        return builder.build();
+        List<InstructionGroupDigest> instructionGroups = new ArrayList<>();
+
+        if (recipe.getRecipeGroups() != null) {
+            for (var recipeGroup : recipe.getRecipeGroups()) {
+                instructionGroups.add(RecipeGroup1Mapper.map(recipeGroup));
+            }
+        }
+        return builder.withInstructionGroups(instructionGroups).build();
     }
 
-    private static RecipeDigest.RecipeDigestBuilder getBuilder(Recipe recipe) {
-        final var season = Season.findByCode(recipe.getSeason());
-
+    private static RecipeDigest.RecipeDigestBuilder getBuilder(Recipe1 recipe) {
         return RecipeDigest.builder()
                            .withId(recipe.getId())
                            .withIntroduction(recipe.getIntroduction())
                            .withName(recipe.getName())
-                           .withSeason(season == null ? null : season.toSeasonType())
+                           .withSeason(SeasonType.valueOf(recipe.getSeasonName()))
                            .withPrepTimeMin(recipe.getPrepTimeMin())
                            .withCookTimeMin(recipe.getCookTimeMin())
                            .withServingUnit(recipe.getServingUnit())
                            .withServingQty(recipe.getServingQty());
     }
 
-    public static RecipeDigest map(Recipe recipe, Collection<InstructionGroup> instructionGroups) {
+    public static RecipeDigest map(Recipe1 recipe, Collection<InstructionGroup> instructionGroups) {
         final var builder = getBuilder(recipe);
 
         if (instructionGroups != null) {
@@ -46,60 +54,45 @@ public final class RecipeMapper {
         return builder.build();
     }
 
-    public static RecipeDigest map(Recipe recipe,
-                                   Collection<InstructionGroup> instructionGroups,
-                                   Collection<RecipeIngredient> recipeIngredients) {
-        final var builder = getBuilder(recipe);
+    public static Recipe1 create(RecipeDigest request, String email) {
+        final var season = Season.map(request.getSeason());
 
-        if (instructionGroups != null) {
-            builder.withInstructionGroups(instructionGroups.stream()
-                                                           .map(InstructionGroupMapper::map)
-                                                           .collect(Collectors.toList()));
-        }
-        final var recipeDigest = builder.build();
-        if (recipeIngredients != null) {
-            // Attach the recipe ingredients to the appropriate recipe group
-            for (var recipeGroup : recipeDigest.getInstructionGroups()) {
-                final var recipeGroupId = recipeGroup.getId();
-                final var ingredients = recipeIngredients.stream()
-                                                         .filter(x -> x.getInstructionGroupId() == recipeGroupId)
-                                                         .map(RecipeIngredientMapper::map)
-                                                         .collect(Collectors.toList());
-                recipeGroup.setIngredients(ingredients);
+        final var recipe = new Recipe1()
+                .setEmail(email)
+                .setIntroduction(request.getIntroduction())
+                .setName(request.getName())
+                .setSeasonName(season)
+                .setPrepTimeMin(request.getPrepTimeMin())
+                .setCookTimeMin(request.getCookTimeMin())
+                .setServingUnit(request.getServingUnit())
+                .setServingQty(request.getServingQty())
+                .setCreated(LocalDateTime.now());
+
+        if (request.getInstructionGroups() != null) {
+            for (var instructionGroup : request.getInstructionGroups()) {
+                recipe.add(RecipeGroup1Mapper.create(instructionGroup));
             }
         }
 
-        return recipeDigest;
+        recipe.assignAllParents();
+
+        return recipe;
     }
 
-    public static Recipe create(RecipeDigest request, String email) {
-        final var season = Season.map(request.getSeason());
-
-        return Recipe.builder()
-                     .withEmail(email)
-                     .withIntroduction(request.getIntroduction())
-                     .withName(request.getName())
-                     .withSeason(season.getCode())
-                     .withPrepTimeMin(request.getPrepTimeMin())
-                     .withCookTimeMin(request.getCookTimeMin())
-                     .withServingUnit(request.getServingUnit())
-                     .withServingQty(request.getServingQty())
-                     .withCreated(LocalDateTime.now())
-                     .build();
-    }
-
-    public static void update(Recipe recipe, RecipeDigest request) {
+    public static void update(Recipe1 recipe, RecipeDigest request) {
         final var season = Season.map(request.getSeason());
 
         // Never change the email address
-        recipe.setIntroduction(request.getIntroduction());
-        recipe.setName(request.getName());
-        recipe.setSeason(season.getCode());
-        recipe.setPrepTimeMin(request.getPrepTimeMin());
-        recipe.setCookTimeMin(request.getCookTimeMin());
-        recipe.setServingUnit(request.getServingUnit());
-        recipe.setServingQty(request.getServingQty());
-        recipe.setUpdated(LocalDateTime.now());
+        recipe.setIntroduction(request.getIntroduction())
+              .setName(request.getName())
+              .setSeasonName(season)
+              .setPrepTimeMin(request.getPrepTimeMin())
+              .setCookTimeMin(request.getCookTimeMin())
+              .setServingUnit(request.getServingUnit())
+              .setServingQty(request.getServingQty())
+              .setUpdated(LocalDateTime.now());
+
+        // TODO: finish update
     }
 
 

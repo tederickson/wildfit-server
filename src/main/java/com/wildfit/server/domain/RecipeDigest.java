@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public final class RecipeDigest {
-    private long id;
+    private Long id;
 
     private String name;
     private SeasonType season;

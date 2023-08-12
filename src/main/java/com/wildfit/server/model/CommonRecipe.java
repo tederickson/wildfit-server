@@ -27,7 +27,7 @@ public abstract class CommonRecipe {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = GENERATOR_NAME)
     @SequenceGenerator(name = GENERATOR_NAME, sequenceName = SEQUENCE_NAME + "_seq", allocationSize = 1)
-    private long id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "common_recipe_group_id", referencedColumnName = "id", nullable = false)
@@ -37,10 +37,6 @@ public abstract class CommonRecipe {
     private String type;
 
     public void setType(CommonRecipeType type) {
-        this.type = type.name();
-    }
-
-    public CommonRecipeType getTypeAsCommonRecipeType() {
-        return CommonRecipeType.valueOf(type);
+        this.type = type.toString();
     }
 }

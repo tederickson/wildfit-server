@@ -24,7 +24,7 @@ public class EggMuffinsWithMushroomsIT extends CommonRecipe {
     void spring() throws UserServiceException, IOException {
         final var season = Season.SPRING;
         final var name = "Egg muffins with mushrooms and herbs";
-        final var exists = recipeRepository.findAllBySeasonAndName(season.getCode(), name, PageRequest.of(0, 10));
+        final var exists = recipe1Repository.findAllBySeasonNameAndName(season.toString(), name, PageRequest.of(0, 10));
 
         if (exists.isEmpty()) {
             final var step1 = InstructionDigest.builder().withStepNumber(1)
@@ -65,9 +65,7 @@ public class EggMuffinsWithMushroomsIT extends CommonRecipe {
                                            .build();
             final var response = CreateRecipeHandler.builder()
                                                     .withUserRepository(userRepository)
-                                                    .withRecipeRepository(recipeRepository)
-                                                    .withInstructionGroupRepository(instructionGroupRepository)
-                                                    .withRecipeIngredientRepository(recipeIngredientRepository)
+                                                    .withRecipe1Repository(recipe1Repository)
                                                     .withUserId(UUID)
                                                     .withRequest(recipe)
                                                     .build().execute();

@@ -30,7 +30,7 @@ public final class RecipeIngredient {
     private long id;
 
     @Column(name = "recipe_id")
-    private long recipeId;                 // Recipe.id
+    private long recipeId;                 // Recipe1.id
     @Column(name = "instruction_group_id")
     private long instructionGroupId;       // InstructionGroup.id
 
