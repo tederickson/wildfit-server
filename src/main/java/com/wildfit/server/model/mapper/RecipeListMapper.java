@@ -4,13 +4,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.wildfit.server.domain.RecipeListDigest;
-import com.wildfit.server.model.Recipe1;
 
 public class RecipeListMapper {
     private RecipeListMapper() {
     }
 
-    public static RecipeListDigest map(List<Recipe1> recipes) {
+    public static RecipeListDigest map(List<com.wildfit.server.model.Recipe> recipes) {
         final var recipeListDigest = new RecipeListDigest();
 
         if (recipes == null) {

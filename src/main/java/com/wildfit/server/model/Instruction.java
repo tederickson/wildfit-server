@@ -17,7 +17,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @Entity
 @PrimaryKeyJoinColumn(name = CommonRecipe.JOIN_KEY)
-public class Instruction1 extends CommonRecipe {
+public class Instruction extends CommonRecipe {
     @Id
     private Long id;  // shows up in database as CommonRecipe.JOIN_KEY
     private Integer stepNumber;
@@ -25,7 +25,7 @@ public class Instruction1 extends CommonRecipe {
     @Column(length = 600, nullable = false)
     private String text;
 
-    public Instruction1() {
+    public Instruction() {
         super();
         setType(CommonRecipeType.INSTRUCTION);
     }
@@ -38,7 +38,7 @@ public class Instruction1 extends CommonRecipe {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Instruction1 that = (Instruction1) o;
+        Instruction that = (Instruction) o;
         return Objects.equals(id, that.id)
                 && Objects.equals(stepNumber, that.stepNumber)
                 && Objects.equals(text, that.text);

@@ -30,16 +30,16 @@ public class RecipeLoadTest {
     @Autowired
     Recipe1Repository recipe1Repository;
 
-    public static Instruction1 BEEF_STEP_1() {
-        return new Instruction1()
+    public static Instruction BEEF_STEP_1() {
+        return new Instruction()
                 .setStepNumber(1)
                 .setText("Heat the oil in a heavy frying pan over medium-high heat, then cook the beef " +
                         "until it’s " +
                         "cooked through and starting to brown, breaking apart with a turner as it cooks.");
     }
 
-    public static Instruction1 BEEF_STEP_2() {
-        return new Instruction1()
+    public static Instruction BEEF_STEP_2() {
+        return new Instruction()
                 .setStepNumber(2)
                 .setText("While beef cooks, mix together the fish sauce, chili sauce, and water in a " +
                         "small bowl. Zest the skin of the lime and squeeze the juice. " +
@@ -50,8 +50,8 @@ public class RecipeLoadTest {
                         "mixture.");
     }
 
-    public static Instruction1 BEEF_STEP_3() {
-        return new Instruction1()
+    public static Instruction BEEF_STEP_3() {
+        return new Instruction()
                 .setStepNumber(3)
                 .setText("When the beef is done, add the chili sauce mixture and let it sizzle until " +
                         "the water has evaporated, " +
@@ -60,15 +60,15 @@ public class RecipeLoadTest {
                         "the lime zest, lime juice, sliced green onions, and chopped cilantro.");
     }
 
-    public static Instruction1 BEEF_STEP_4() {
-        return new Instruction1()
+    public static Instruction BEEF_STEP_4() {
+        return new Instruction()
                 .setStepNumber(4)
                 .setText("Serve meat mixture with iceberg lettuce leaves. Fill with beef and wrap " +
                         "around it. Eaten with your hands.");
     }
 
-    private static Recipe1 buildMinimalRecipe() {
-        return new Recipe1()
+    private static Recipe buildMinimalRecipe() {
+        return new Recipe()
                 .setSeasonName(Season.SUMMER)
                 .setName(recipeName)
                 .setEmail(EMAIL)
@@ -100,15 +100,15 @@ public class RecipeLoadTest {
     void addRecipeGroup() {
         final var recipe = buildMinimalRecipe();
 
-        final RecipeGroup1 dressing = new RecipeGroup1()
+        final RecipeGroup dressing = new RecipeGroup()
                 .setRecipe(recipe)
                 .setName("Dressing")
                 .setRecipeGroupNumber(1);
-        final RecipeGroup1 salad = new RecipeGroup1()
+        final RecipeGroup salad = new RecipeGroup()
                 .setRecipe(recipe)
                 .setName("Salad")
                 .setRecipeGroupNumber(2);
-        final RecipeGroup1 beef = new RecipeGroup1()
+        final RecipeGroup beef = new RecipeGroup()
                 .setRecipe(recipe)
                 .setName("Chili Beef")
                 .setRecipeGroupNumber(3);
@@ -132,15 +132,15 @@ public class RecipeLoadTest {
     void addInstructions() {
         final var recipe = buildMinimalRecipe();
 
-        final RecipeGroup1 dressing = new RecipeGroup1()
+        final RecipeGroup dressing = new RecipeGroup()
                 .setRecipe(recipe)
                 .setName("Dressing")
                 .setRecipeGroupNumber(1);
-        final RecipeGroup1 salad = new RecipeGroup1()
+        final RecipeGroup salad = new RecipeGroup()
                 .setRecipe(recipe)
                 .setName("Salad")
                 .setRecipeGroupNumber(2);
-        final RecipeGroup1 beef = new RecipeGroup1()
+        final RecipeGroup beef = new RecipeGroup()
                 .setRecipe(recipe)
                 .setName("Chili Beef")
                 .setRecipeGroupNumber(3);
@@ -157,15 +157,15 @@ public class RecipeLoadTest {
         for (int i = 0; i < 4; i++) {
             final var recipe = buildMinimalRecipe();
 
-            final RecipeGroup1 dressing = new RecipeGroup1()
+            final RecipeGroup dressing = new RecipeGroup()
                     .setRecipe(recipe)
                     .setName("Dressing")
                     .setRecipeGroupNumber(1);
-            final RecipeGroup1 salad = new RecipeGroup1()
+            final RecipeGroup salad = new RecipeGroup()
                     .setRecipe(recipe)
                     .setName("Salad")
                     .setRecipeGroupNumber(2);
-            final RecipeGroup1 beef = new RecipeGroup1()
+            final RecipeGroup beef = new RecipeGroup()
                     .setRecipe(recipe)
                     .setName("Chili Beef")
                     .setRecipeGroupNumber(3);
@@ -181,19 +181,19 @@ public class RecipeLoadTest {
     void addInstructionsAndIngredients() {
         final var recipe = buildMinimalRecipe();
 
-        final RecipeGroup1 dressing = new RecipeGroup1()
+        final RecipeGroup dressing = new RecipeGroup()
                 .setRecipe(recipe)
                 .setName("Dressing")
                 .setRecipeGroupNumber(1);
         recipe.add(dressing);
 
-        final RecipeGroup1 salad = new RecipeGroup1()
+        final RecipeGroup salad = new RecipeGroup()
                 .setRecipe(recipe)
                 .setName("Salad")
                 .setRecipeGroupNumber(2);
         recipe.add(salad);
 
-        final RecipeGroup1 beef = new RecipeGroup1()
+        final RecipeGroup beef = new RecipeGroup()
                 .setRecipe(recipe)
                 .setName("Chili Beef")
                 .setRecipeGroupNumber(3);
@@ -226,21 +226,21 @@ public class RecipeLoadTest {
                 .setIngredientServingUnit("tsp")
                 .setIngredientType(IngredientType.SPICE);
 
-        Instruction1 mix = new Instruction1().setStepNumber(1).setText("Mix all ingredients.");
+        Instruction mix = new Instruction().setStepNumber(1).setText("Mix all ingredients.");
         List.of(MAYO, PLAIN_YOGURT, mix, SALT, PEPPER).forEach(dressing::add);
 
 
-        salad.add(new Instruction1()
+        salad.add(new Instruction()
                 .setStepNumber(1)
                 .setText("Put the tuna in a bowl and break it up with a fork."));
-        salad.add(new Instruction1()
+        salad.add(new Instruction()
                 .setStepNumber(2)
                 .setText("Slice the celery and the apples to the same thickness. Chop the pickles small."));
-        salad.add(new Instruction1()
+        salad.add(new Instruction()
                 .setStepNumber(3)
                 .setText("Add the finely chopped onion and the capers. \n" +
                         "Mix it together with the dressing ingredients and done."));
-        salad.add(new Instruction1()
+        salad.add(new Instruction()
                 .setStepNumber(4)
                 .setText("You can add any fresh herb you like. Dill goes especially well with tuna."));
 
@@ -277,7 +277,7 @@ public class RecipeLoadTest {
         saveRecipe(recipe);
     }
 
-    private Recipe1 saveRecipe(Recipe1 recipe) {
+    private Recipe saveRecipe(Recipe recipe) {
         recipe.assignAllParents();
 
         final var dbRecipe = recipe1Repository.save(recipe);

@@ -4,14 +4,14 @@ CREATE TABLE common_recipe (
      common_recipe_group_id BIGINT NOT NULL,
 
      KEY common_recipe_group_id_key (common_recipe_group_id),
-     CONSTRAINT common_recipe_fk FOREIGN KEY (common_recipe_group_id) REFERENCES recipe_group_1 (id)
+     CONSTRAINT common_recipe_fk FOREIGN KEY (common_recipe_group_id) REFERENCES recipe_group (id)
 );
 
 CREATE TABLE common_recipe_seq (next_val bigint DEFAULT NULL);
 
 INSERT INTO common_recipe_seq VALUES(10);
 
-CREATE TABLE instruction1 (
+CREATE TABLE instruction (
   step_number int NOT NULL,
   text varchar(600) NOT NULL,
   common_recipe_join_id bigint NOT NULL,

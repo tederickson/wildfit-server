@@ -2,16 +2,15 @@ package com.wildfit.server.repository;
 
 import java.util.List;
 
-import com.wildfit.server.model.Recipe1;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface Recipe1Repository extends PagingAndSortingRepository<Recipe1, Long>, CrudRepository<Recipe1, Long> {
-    List<Recipe1> findAllBySeasonName(String seasonName, Pageable pageable);
+public interface Recipe1Repository extends PagingAndSortingRepository<com.wildfit.server.model.Recipe, Long>, CrudRepository<com.wildfit.server.model.Recipe, Long> {
+    List<com.wildfit.server.model.Recipe> findAllBySeasonName(String seasonName, Pageable pageable);
 
-    List<Recipe1> findAllBySeasonNameAndName(String seasonName, String name, Pageable pageable);
+    List<com.wildfit.server.model.Recipe> findAllBySeasonNameAndName(String seasonName, String name, Pageable pageable);
 
     @Query(value = "SELECT r.* " +
             "FROM recipe_1 r, recipe_group_1 rg, ingredient ing, common_recipe cr " +
@@ -20,5 +19,5 @@ public interface Recipe1Repository extends PagingAndSortingRepository<Recipe1, L
             "AND rg.id = cr.common_recipe_group_id " +
             "AND cr.id = ing.common_recipe_join_id " +
             "AND ing.food_name =?2", nativeQuery = true)
-    List<Recipe1> findAllBySeasonAndIngredientName(String season, String ingredientName, Pageable pageable);
+    List<com.wildfit.server.model.Recipe> findAllBySeasonAndIngredientName(String season, String ingredientName, Pageable pageable);
 }

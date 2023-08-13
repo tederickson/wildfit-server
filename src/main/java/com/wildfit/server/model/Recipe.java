@@ -24,9 +24,9 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true)
 @Entity
-@Table(name = "RECIPE_1", indexes = {@Index(name = "RECIPE_1_season_idx", columnList = "season")})
-public final class Recipe1 {
-    final static String SEQUENCE_NAME = "RECIPE_1";
+@Table(name = "RECIPE", indexes = {@Index(name = "RECIPE_season_idx", columnList = "season")})
+public final class Recipe {
+    final static String SEQUENCE_NAME = "RECIPE";
     final static String GENERATOR_NAME = SEQUENCE_NAME + "_generator";
 
     @Id
@@ -55,21 +55,21 @@ public final class Recipe1 {
     private LocalDateTime updated;
 
     @OneToMany(mappedBy = "recipe", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<RecipeGroup1> recipeGroups;
+    private List<RecipeGroup> recipeGroups;
 
-    public void add(RecipeGroup1 recipeGroup) {
+    public void add(RecipeGroup recipeGroup) {
         if (recipeGroups == null) {
             recipeGroups = new ArrayList<>();
         }
         recipeGroups.add(recipeGroup);
     }
 
-    public Recipe1 setSeasonName(String seasonName) {
+    public Recipe setSeasonName(String seasonName) {
         this.seasonName = seasonName;
         return this;
     }
 
-    public Recipe1 setSeasonName(Season season) {
+    public Recipe setSeasonName(Season season) {
         this.seasonName = season.name();
         return this;
     }
@@ -96,8 +96,8 @@ public final class Recipe1 {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Recipe1 recipe1 = (Recipe1) o;
-        return Objects.equals(id, recipe1.id);
+        Recipe recipe = (Recipe) o;
+        return Objects.equals(id, recipe.id);
     }
 
     @Override

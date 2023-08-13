@@ -22,9 +22,9 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true)
 @Entity
-@Table(name = "RECIPE_GROUP_1")
-public class RecipeGroup1 {
-    private final static String SEQUENCE_NAME = "RECIPE_GROUP_1";
+@Table(name = "RECIPE_GROUP")
+public class RecipeGroup {
+    private final static String SEQUENCE_NAME = "RECIPE_GROUP";
     private final static String GENERATOR_NAME = SEQUENCE_NAME + "_generator";
 
     @Id
@@ -34,7 +34,7 @@ public class RecipeGroup1 {
 
     @ManyToOne
     @JoinColumn(name = "recipe_id", referencedColumnName = "id", nullable = false)
-    private Recipe1 recipe;
+    private Recipe recipe;
 
     @OneToMany(mappedBy = "recipeGroup", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CommonRecipe> commonRecipes;

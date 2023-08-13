@@ -31,7 +31,7 @@ public abstract class CommonRecipe {
 
     @ManyToOne
     @JoinColumn(name = "common_recipe_group_id", referencedColumnName = "id", nullable = false)
-    private RecipeGroup1 recipeGroup;
+    private RecipeGroup recipeGroup;
 
     @Column(length = 20, nullable = false)
     private String type;

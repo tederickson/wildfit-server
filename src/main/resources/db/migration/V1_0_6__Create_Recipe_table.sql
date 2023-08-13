@@ -1,4 +1,4 @@
-CREATE TABLE recipe_1 (
+CREATE TABLE recipe (
   id BIGINT auto_increment PRIMARY KEY,
   email VARCHAR(255) NOT NULL,
   introduction VARCHAR (600),
@@ -10,7 +10,7 @@ CREATE TABLE recipe_1 (
   serving_qty INT NOT NULL,
   created DATETIME NOT NULL,
   updated DATETIME,
-  KEY RECIPE_1_season_idx (season)
+  KEY RECIPE_season_idx (season)
 );
-CREATE TABLE recipe_1_seq (next_val BIGINT DEFAULT NULL);
-INSERT INTO recipe_1_seq VALUES (10);
+CREATE TABLE recipe_seq (next_val BIGINT DEFAULT NULL);
+INSERT INTO recipe_seq VALUES (10);

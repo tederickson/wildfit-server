@@ -13,15 +13,13 @@ import com.wildfit.server.domain.InstructionGroupDigest;
 import com.wildfit.server.model.CommonRecipe;
 import com.wildfit.server.model.CommonRecipeType;
 import com.wildfit.server.model.Ingredient;
-import com.wildfit.server.model.Instruction1;
-import com.wildfit.server.model.RecipeGroup1;
 
-public class RecipeGroup1Mapper {
-    private RecipeGroup1Mapper() {
+public class RecipeGroupMapper {
+    private RecipeGroupMapper() {
     }
 
-    public static RecipeGroup1 create(InstructionGroupDigest instructionGroup) {
-        final var recipeGroup = new RecipeGroup1()
+    public static com.wildfit.server.model.RecipeGroup create(InstructionGroupDigest instructionGroup) {
+        final var recipeGroup = new com.wildfit.server.model.RecipeGroup()
                 .setId(instructionGroup.getId())
                 .setName(instructionGroup.getName())
                 .setRecipeGroupNumber(instructionGroup.getInstructionGroupNumber());
@@ -38,7 +36,7 @@ public class RecipeGroup1Mapper {
         return recipeGroup;
     }
 
-    public static InstructionGroupDigest map(RecipeGroup1 recipeGroup) {
+    public static InstructionGroupDigest map(com.wildfit.server.model.RecipeGroup recipeGroup) {
         final var builder = InstructionGroupDigest.builder()
                                                   .withId(recipeGroup.getId())
                                                   .withName(recipeGroup.getName())
@@ -51,7 +49,7 @@ public class RecipeGroup1Mapper {
             final var type = com.wildfit.server.model.CommonRecipeType.valueOf(common.getType());
 
             if (CommonRecipeType.INSTRUCTION == type) {
-                instructions.add(InstructionMapper.createInstruction((Instruction1) common));
+                instructions.add(InstructionMapper.createInstruction((com.wildfit.server.model.Instruction) common));
             } else {
                 ingredients.add(IngredientDigestMapper.createIngredient((Ingredient) common));
             }
@@ -63,7 +61,7 @@ public class RecipeGroup1Mapper {
                 .build();
     }
 
-    public static RecipeGroup1 update(RecipeGroup1 existing, InstructionGroupDigest instructionGroup) {
+    public static com.wildfit.server.model.RecipeGroup update(com.wildfit.server.model.RecipeGroup existing, InstructionGroupDigest instructionGroup) {
         Map<Long, CommonRecipe> commonRecipeMap = new HashMap<>();
         if (existing.getCommonRecipes() != null) {
             commonRecipeMap = existing.getCommonRecipes().stream().collect(Collectors.toMap(
@@ -81,7 +79,7 @@ public class RecipeGroup1Mapper {
                     final var existingInstruction = commonRecipeMap.get(id);
                     Objects.requireNonNull(existingInstruction, "instruction with id " + id);
 
-                    existing.add(InstructionMapper.updateInstruction((Instruction1) existingInstruction, instruction));
+                    existing.add(InstructionMapper.updateInstruction((com.wildfit.server.model.Instruction) existingInstruction, instruction));
                 }
             }
         }

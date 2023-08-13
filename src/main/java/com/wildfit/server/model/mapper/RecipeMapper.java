@@ -11,15 +11,13 @@ import java.util.stream.Collectors;
 import com.wildfit.server.domain.InstructionGroupDigest;
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.SeasonType;
-import com.wildfit.server.model.Recipe1;
-import com.wildfit.server.model.RecipeGroup1;
 import com.wildfit.server.model.Season;
 
 public final class RecipeMapper {
     private RecipeMapper() {
     }
 
-    public static RecipeDigest map(Recipe1 recipe) {
+    public static RecipeDigest map(com.wildfit.server.model.Recipe recipe) {
         final var builder = RecipeDigest.builder()
                                         .withId(recipe.getId())
                                         .withIntroduction(recipe.getIntroduction())
@@ -33,16 +31,16 @@ public final class RecipeMapper {
 
         if (recipe.getRecipeGroups() != null) {
             for (var recipeGroup : recipe.getRecipeGroups()) {
-                instructionGroups.add(RecipeGroup1Mapper.map(recipeGroup));
+                instructionGroups.add(RecipeGroupMapper.map(recipeGroup));
             }
         }
         return builder.withInstructionGroups(instructionGroups).build();
     }
 
-    public static Recipe1 create(RecipeDigest request, String email) {
+    public static com.wildfit.server.model.Recipe create(RecipeDigest request, String email) {
         final var season = Season.map(request.getSeason());
 
-        final var recipe = new Recipe1()
+        final var recipe = new com.wildfit.server.model.Recipe()
                 .setEmail(email)
                 .setIntroduction(request.getIntroduction())
                 .setName(request.getName())
@@ -55,7 +53,7 @@ public final class RecipeMapper {
 
         if (request.getInstructionGroups() != null) {
             for (var instructionGroup : request.getInstructionGroups()) {
-                recipe.add(RecipeGroup1Mapper.create(instructionGroup));
+                recipe.add(RecipeGroupMapper.create(instructionGroup));
             }
         }
 
@@ -64,7 +62,7 @@ public final class RecipeMapper {
         return recipe;
     }
 
-    public static void update(Recipe1 recipe, RecipeDigest request) {
+    public static void update(com.wildfit.server.model.Recipe recipe, RecipeDigest request) {
         final var season = Season.map(request.getSeason());
 
         // Never change the email address
@@ -77,10 +75,10 @@ public final class RecipeMapper {
               .setServingQty(request.getServingQty())
               .setUpdated(LocalDateTime.now());
 
-        Map<Long, RecipeGroup1> recipeGroup1Map = new HashMap<>();
+        Map<Long, com.wildfit.server.model.RecipeGroup> recipeGroup1Map = new HashMap<>();
         if (recipe.getRecipeGroups() != null) {
             recipeGroup1Map = recipe.getRecipeGroups().stream().collect(Collectors.toMap(
-                    RecipeGroup1::getId, x -> x));
+                    com.wildfit.server.model.RecipeGroup::getId, x -> x));
         }
         recipe.setRecipeGroups(new ArrayList<>());
 
@@ -89,12 +87,12 @@ public final class RecipeMapper {
                 final var id = instructionGroup.getId();
 
                 if (id == null) {
-                    recipe.add(RecipeGroup1Mapper.create(instructionGroup));
+                    recipe.add(RecipeGroupMapper.create(instructionGroup));
                 } else {
                     final var existing = recipeGroup1Map.get(id);
                     Objects.requireNonNull(existing, "recipe group with id " + id);
 
-                    recipe.add(RecipeGroup1Mapper.update(existing, instructionGroup));
+                    recipe.add(RecipeGroupMapper.update(existing, instructionGroup));
                 }
             }
         }

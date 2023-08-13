@@ -21,13 +21,13 @@ class RecipeTest {
 
     @Test
     public void shouldHaveANoArgsConstructor() {
-        assertThat(Recipe1.class, hasValidBeanConstructor());
+        assertThat(Recipe.class, hasValidBeanConstructor());
     }
 
     @Test
     public void equalsAndHashCode() {
-        EqualsVerifier.forClass(Recipe1.class)
-                      .withPrefabValues(RecipeGroup1.class, new RecipeGroup1().setId(3L), new RecipeGroup1().setId(13L))
+        EqualsVerifier.forClass(Recipe.class)
+                      .withPrefabValues(RecipeGroup.class, new RecipeGroup().setId(3L), new RecipeGroup().setId(13L))
                       .suppress(Warning.NONFINAL_FIELDS)
                       .suppress(Warning.SURROGATE_KEY).verify();
     }

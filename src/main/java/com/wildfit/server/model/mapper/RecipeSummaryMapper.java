@@ -2,13 +2,12 @@ package com.wildfit.server.model.mapper;
 
 import com.wildfit.server.domain.RecipeSummaryDigest;
 import com.wildfit.server.domain.SeasonType;
-import com.wildfit.server.model.Recipe1;
 
 public class RecipeSummaryMapper {
     private RecipeSummaryMapper() {
     }
 
-    public static RecipeSummaryDigest map(Recipe1 recipe) {
+    public static RecipeSummaryDigest map(com.wildfit.server.model.Recipe recipe) {
         return RecipeSummaryDigest.builder()
                                   .withId(recipe.getId())
                                   .withIntroduction(recipe.getIntroduction())

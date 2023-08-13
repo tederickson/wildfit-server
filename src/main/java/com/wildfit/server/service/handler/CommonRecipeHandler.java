@@ -4,7 +4,6 @@ import java.util.Objects;
 
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
-import com.wildfit.server.model.Recipe1;
 import com.wildfit.server.repository.Recipe1Repository;
 import com.wildfit.server.repository.UserRepository;
 import lombok.experimental.SuperBuilder;
@@ -16,7 +15,7 @@ public class CommonRecipeHandler {
 
     protected final String userId;
 
-    protected Recipe1 getAuthorizedRecipe(Long recipeId) throws UserServiceException {
+    protected com.wildfit.server.model.Recipe getAuthorizedRecipe(Long recipeId) throws UserServiceException {
         final var user = userRepository.findByUuid(userId)
                                        .orElseThrow(() -> new UserServiceException(UserServiceError.USER_NOT_FOUND));
         final var dbRecipe = recipe1Repository.findById(recipeId)
