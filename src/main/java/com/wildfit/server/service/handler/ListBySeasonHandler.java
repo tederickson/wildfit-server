@@ -30,5 +30,8 @@ public class ListBySeasonHandler {
         if (season == null) {
             throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
         }
+        if (pageable == null) {
+            throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
+        }
     }
 }
