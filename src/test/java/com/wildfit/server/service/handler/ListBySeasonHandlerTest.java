@@ -46,4 +46,5 @@ class ListBySeasonHandlerTest extends CommonRecipeHandlerTest {
                                          .execute());
         assertEquals(UserServiceError.INVALID_PARAMETER, exception.getError());
     }
+
 }
