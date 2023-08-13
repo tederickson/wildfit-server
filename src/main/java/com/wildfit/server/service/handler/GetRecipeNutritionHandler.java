@@ -52,7 +52,8 @@ public class GetRecipeNutritionHandler extends AbstractNutritionixHandler<FoodIt
     @Override
     protected void validate() throws UserServiceException {
         super.validate();
-
-        Objects.requireNonNull(recipeDigest, "recipeDigest");
+        if (recipeDigest == null) {
+            throw new UserServiceException(com.wildfit.server.exception.UserServiceError.INVALID_PARAMETER);
+        }
     }
 }

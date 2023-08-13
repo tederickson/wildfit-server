@@ -29,20 +29,10 @@ class NutritionixServiceImplTest {
             return;
         }
         final var foodItemDigest = nutritionixService.getFoodWithBarcode("767707001258");
-        System.out.println("foodItemDigest = " + foodItemDigest);
+
+        nutritionixService.getFoodWithBarcode("767707001258");
         assertNotNull(foodItemDigest);
         assertEquals("Kerrygold", foodItemDigest.getBrandName());
-    }
-
-    @ParameterizedTest
-    @NullAndEmptySource
-    void nullBarcode(String barcode) {
-        if (bypassNutritionixService) {
-            return;
-        }
-        final var exception = assertThrows(UserServiceException.class,
-                () -> nutritionixService.getFoodWithBarcode(barcode));
-        assertEquals(UserServiceError.INVALID_PARAMETER, exception.getError());
     }
 
     @Test
@@ -53,5 +43,28 @@ class NutritionixServiceImplTest {
         final var exception = assertThrows(NutritionixException.class,
                 () -> nutritionixService.getFoodWithBarcode("327594"));
         assertEquals(HttpStatus.NOT_FOUND, exception.getStatusCode());
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    void nullBarcode(String barcode) {
+        final var exception = assertThrows(UserServiceException.class,
+                () -> nutritionixService.getFoodWithBarcode(barcode));
+        assertEquals(UserServiceError.INVALID_PARAMETER, exception.getError());
+    }
+
+    @Test
+    void getFoodWithId_badParameters() {
+        assertThrows(UserServiceException.class, () -> nutritionixService.getFoodWithId(null));
+    }
+
+    @Test
+    void getFoodsByQuery_badParameters() {
+        assertThrows(UserServiceException.class, () -> nutritionixService.getFoodsByQuery(null));
+    }
+
+    @Test
+    void getRecipeNutrition_badParameters() {
+        assertThrows(UserServiceException.class, () -> nutritionixService.getRecipeNutrition(null));
     }
 }
