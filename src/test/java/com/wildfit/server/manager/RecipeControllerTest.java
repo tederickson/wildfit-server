@@ -6,11 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-import com.wildfit.server.domain.IngredientDigest;
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.RecipeListDigest;
 import com.wildfit.server.domain.SeasonType;
-import com.wildfit.server.domain.UpdateIngredientRequest;
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.service.RecipeService;
@@ -24,12 +22,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 class RecipeControllerTest {
     static final Long recipeId = 123L;
     static final String userId = "abra-cadabra";
-
-    @Mock
-    private RecipeService recipeService;
-
     @InjectMocks
     RecipeController recipeController;
+    @Mock
+    private RecipeService recipeService;
 
     @Test
     void retrieveRecipesForSeason() throws UserServiceException {
@@ -94,28 +90,4 @@ class RecipeControllerTest {
         assertEquals(UserServiceError.INVALID_PARAMETER, exception.getError());
     }
 
-    @Test
-    void createRecipeIngredient() throws UserServiceException {
-        when(recipeService.createRecipeIngredient(any(), any(), any(), any()))
-                .thenReturn(IngredientDigest.builder().build());
-
-        final var response = recipeController.createRecipeIngredient(recipeId, userId, 404L,
-                IngredientDigest.builder().build());
-        assertNotNull(response);
-    }
-
-    @Test
-    void deleteRecipeIngredient() throws UserServiceException {
-        recipeController.deleteRecipeIngredient(recipeId, userId, 2539L);
-    }
-
-    @Test
-    void updateRecipeIngredient() throws UserServiceException {
-        when(recipeService.updateRecipeIngredient(any(), any(), any(), any()))
-                .thenReturn(IngredientDigest.builder().build());
-
-        final var response = recipeController.updateRecipeIngredient(recipeId, userId, 404L,
-                UpdateIngredientRequest.builder().build());
-        assertNotNull(response);
-    }
 }

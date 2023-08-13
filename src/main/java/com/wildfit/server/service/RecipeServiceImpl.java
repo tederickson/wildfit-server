@@ -1,10 +1,8 @@
 package com.wildfit.server.service;
 
-import com.wildfit.server.domain.IngredientDigest;
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.RecipeListDigest;
 import com.wildfit.server.domain.SeasonType;
-import com.wildfit.server.domain.UpdateIngredientRequest;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.repository.Recipe1Repository;
 import com.wildfit.server.repository.UserRepository;
@@ -97,23 +95,5 @@ public class RecipeServiceImpl implements RecipeService {
                                   .withUserId(userId)
                                   .withRequest(request)
                                   .build().execute();
-    }
-
-    @Override
-    public IngredientDigest createRecipeIngredient(String userId, Long recipeId, Long recipeGroupId,
-                                                   IngredientDigest request)
-            throws UserServiceException {
-        throw new NullPointerException("not implemented");
-    }
-
-    @Override
-    public void deleteRecipeIngredient(String userId, Long recipeId, Long ingredientId) throws UserServiceException {
-        throw new NullPointerException("not implemented");
-    }
-
-    @Override
-    public IngredientDigest updateRecipeIngredient(String userId, Long recipeId, Long ingredientId,
-                                                   UpdateIngredientRequest request) throws UserServiceException {
-        throw new NullPointerException("not implemented");
     }
 }

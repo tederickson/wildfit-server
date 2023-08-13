@@ -4,9 +4,6 @@ import java.lang.reflect.Field;
 import java.util.Set;
 import java.util.TreeSet;
 
-import com.wildfit.server.domain.IngredientDigest;
-import com.wildfit.server.model.RecipeIngredient;
-
 public class MapperTemplate {
 
     private static Set<String> getFieldSuffixes(final Class<?> from) {
@@ -70,8 +67,8 @@ public class MapperTemplate {
     }
 
     public static void main(String[] args) {
-        MapperTemplate.transform(RecipeIngredient.class, "IngredientDigest");
-        MapperTemplate.create(IngredientDigest.class, "RecipeIngredient");
-        MapperTemplate.update(IngredientDigest.class, RecipeIngredient.class);
+//        MapperTemplate.transform(RecipeIngredient.class, "IngredientDigest");
+//        MapperTemplate.create(IngredientDigest.class, "RecipeIngredient");
+//        MapperTemplate.update(IngredientDigest.class, RecipeIngredient.class);
     }
 }

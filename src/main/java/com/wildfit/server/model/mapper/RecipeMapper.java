@@ -2,14 +2,11 @@ package com.wildfit.server.model.mapper;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.wildfit.server.domain.InstructionGroupDigest;
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.SeasonType;
-import com.wildfit.server.model.InstructionGroup;
 import com.wildfit.server.model.Recipe1;
 import com.wildfit.server.model.Season;
 
@@ -42,17 +39,6 @@ public final class RecipeMapper {
                            .withServingQty(recipe.getServingQty());
     }
 
-    public static RecipeDigest map(Recipe1 recipe, Collection<InstructionGroup> instructionGroups) {
-        final var builder = getBuilder(recipe);
-
-        if (instructionGroups != null) {
-            builder.withInstructionGroups(instructionGroups.stream()
-                                                           .map(InstructionGroupMapper::map)
-                                                           .collect(Collectors.toList()));
-        }
-
-        return builder.build();
-    }
 
     public static Recipe1 create(RecipeDigest request, String email) {
         final var season = Season.map(request.getSeason());

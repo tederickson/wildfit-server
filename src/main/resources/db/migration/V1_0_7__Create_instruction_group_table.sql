@@ -1,14 +1,3 @@
-CREATE TABLE instruction_group (
-    id bigint AUTO_INCREMENT PRIMARY KEY,
-
-    recipe_id bigint NOT NULL,  -- Recipe1.id
-
-    instruction_group_number    int NOT NULL,
-    name                        varchar(255),
-
-    KEY recipe_idx1 (recipe_id)
-);
-
 CREATE TABLE recipe_group_1 (
      id                  BIGINT PRIMARY KEY,
      name                VARCHAR(255),
