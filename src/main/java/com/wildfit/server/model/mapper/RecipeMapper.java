@@ -2,12 +2,17 @@ package com.wildfit.server.model.mapper;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import com.wildfit.server.domain.InstructionGroupDigest;
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.model.Recipe1;
+import com.wildfit.server.model.RecipeGroup1;
 import com.wildfit.server.model.Season;
 
 public final class RecipeMapper {
@@ -72,7 +77,29 @@ public final class RecipeMapper {
               .setServingQty(request.getServingQty())
               .setUpdated(LocalDateTime.now());
 
-        // TODO: finish update
+        Map<Long, RecipeGroup1> recipeGroup1Map = new HashMap<>();
+        if (recipe.getRecipeGroups() != null) {
+            recipeGroup1Map = recipe.getRecipeGroups().stream().collect(Collectors.toMap(
+                    RecipeGroup1::getId, x -> x));
+        }
+        recipe.setRecipeGroups(new ArrayList<>());
+
+        if (request.getInstructionGroups() != null) {
+            for (var instructionGroup : request.getInstructionGroups()) {
+                final var id = instructionGroup.getId();
+
+                if (id == null) {
+                    recipe.add(RecipeGroup1Mapper.create(instructionGroup));
+                } else {
+                    final var existing = recipeGroup1Map.get(id);
+                    Objects.requireNonNull(existing, "recipe group with id " + id);
+
+                    recipe.add(RecipeGroup1Mapper.update(existing, instructionGroup));
+                }
+            }
+        }
+
+        recipe.assignAllParents();
     }
 
 

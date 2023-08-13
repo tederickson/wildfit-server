@@ -18,11 +18,8 @@ public class UpdateRecipeHandler extends CommonRecipeHandler {
         final var dbRecipe = getAuthorizedRecipe(request.getId());
         RecipeMapper.update(dbRecipe, request);
 
-        recipe1Repository.save(dbRecipe);
-
-        return null;
+        return RecipeMapper.map(recipe1Repository.save(dbRecipe));
     }
-
 
     protected void validate() throws UserServiceException {
         super.validate();

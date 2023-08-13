@@ -45,4 +45,15 @@ public class IngredientDigestMapper {
         }
         return builder.build();
     }
+
+    public static com.wildfit.server.model.CommonRecipe updateIngredient(
+            com.wildfit.server.model.Ingredient ingredient,
+            IngredientDigest ingredientDigest) {
+        return ingredient
+                .setFoodName(ingredientDigest.getFoodName())
+                .setDescription(ingredientDigest.getDescription())
+                .setIngredientServingQty(ingredientDigest.getIngredientServingQty())
+                .setIngredientServingUnit(ingredientDigest.getIngredientServingUnit())
+                .setIngredientType(ingredientDigest.getIngredientType());
+    }
 }
