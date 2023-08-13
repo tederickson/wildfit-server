@@ -38,5 +38,8 @@ public class ListBySeasonAndNameHandler {
         if (recipeName == null || StringUtils.trimToNull(recipeName) == null) {
             throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
         }
+        if (pageable == null) {
+            throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
+        }
     }
 }
