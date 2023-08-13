@@ -39,7 +39,9 @@ public class Instruction1 extends CommonRecipe {
             return false;
         }
         Instruction1 that = (Instruction1) o;
-        return id == that.id && stepNumber == that.stepNumber && Objects.equals(text, that.text);
+        return Objects.equals(id, that.id)
+                && Objects.equals(stepNumber, that.stepNumber)
+                && Objects.equals(text, that.text);
     }
 
     @Override

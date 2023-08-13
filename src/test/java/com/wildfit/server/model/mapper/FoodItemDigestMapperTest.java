@@ -8,9 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 import com.wildfit.server.domain.PhotoDigest;
-import com.wildfit.server.model.FoodItem;
 import com.wildfit.server.model.FoodItems;
-import com.wildfit.server.model.SearchedFoodItem;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,16 +27,14 @@ class FoodItemDigestMapperTest {
 
     @Test
     void null_FoodItem() {
-        FoodItem food = null;
-        final var foodItemDigest = FoodItemDigestMapper.map(food);
+        final var foodItemDigest = FoodItemDigestMapper.mapFoodItem(null);
         assertNotNull(foodItemDigest);
         assertNull(foodItemDigest.getFoodName());
     }
 
     @Test
     void null_SearchedFoodItem() {
-        SearchedFoodItem food = null;
-        final var foodItemDigest = FoodItemDigestMapper.map(food);
+        final var foodItemDigest = FoodItemDigestMapper.mapSearchedFoodItem(null);
         assertNotNull(foodItemDigest);
         assertNull(foodItemDigest.getFoodName());
     }
@@ -50,7 +46,7 @@ class FoodItemDigestMapperTest {
 
         assertEquals(1, foodItems.getFoods().length);
 
-        final var foodItemDigest = FoodItemDigestMapper.map(foodItems.getFoods()[0]);
+        final var foodItemDigest = FoodItemDigestMapper.mapFoodItem(foodItems.getFoods()[0]);
         final var expected = com.wildfit.server.domain.FoodItemDigest.builder()
                                                                      .withFoodName("Butter, Pure Irish, Unsalted")
                                                                      .withBrandName("Kerrygold")

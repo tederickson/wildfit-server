@@ -46,7 +46,7 @@ public class GetRecipeNutritionHandler extends AbstractNutritionixHandler<FoodIt
         final var foodItems = restTemplate.exchange(url, HttpMethod.POST, entity, FoodItems.class).getBody();
         Objects.requireNonNull(foodItems, "foodItems");
 
-        return FoodItemDigestMapper.map(foodItems.getFoods()[0]);
+        return FoodItemDigestMapper.mapFoodItem(foodItems.getFoods()[0]);
     }
 
     @Override

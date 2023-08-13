@@ -11,7 +11,7 @@ public final class FoodItemDigestMapper {
     private FoodItemDigestMapper() {
     }
 
-    public static FoodItemDigest map(FoodItem food) {
+    public static FoodItemDigest mapFoodItem(FoodItem food) {
         final var builder = FoodItemDigest.builder();
 
         if (food != null) {
@@ -101,7 +101,7 @@ public final class FoodItemDigestMapper {
         return builder.build();
     }
 
-    public static FoodItemDigest map(SearchedFoodItem food) {
+    public static FoodItemDigest mapSearchedFoodItem(SearchedFoodItem food) {
         final var builder = FoodItemDigest.builder();
 
         if (food != null) {

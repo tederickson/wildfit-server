@@ -42,4 +42,18 @@ class ParseRecipeRequestTest {
         parseRecipeRequest.addIngredient(1f, "cup", "cilantro");
         assertEquals("2.1 tsp coconut oil\n1.0 cup cilantro", parseRecipeRequest.getQuery());
     }
+
+    @Test
+    void addIngredient_missingServingUnit() {
+        final var parseRecipeRequest = new ParseRecipeRequest();
+        parseRecipeRequest.addIngredient(1f, null, "egg");
+        assertEquals("1.0 egg", parseRecipeRequest.getQuery());
+    }
+
+    @Test
+    void addIngredient_matchingServingUnit() {
+        final var parseRecipeRequest = new ParseRecipeRequest();
+        parseRecipeRequest.addIngredient(1f, "cantelope", "cantelope");
+        assertEquals("1.0 cantelope", parseRecipeRequest.getQuery());
+    }
 }
