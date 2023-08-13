@@ -48,12 +48,6 @@ public class CommonRecipeHandlerTest extends CommonHandlerTest {
     static final String INTRODUCTION = "These lettuce wraps are so easy and full of flavor! " +
             "They make a great side dish, or are perfect for a healthy spring approved recipe.";
 
-    static final String foodName = "butter, pure irish, unsalted";
-    static final String description = "1-2 teaspoons Kerrygold unsalted butter";
-
-    static final Float ingredientServingQty = 3f;
-    static final String ingredientServingUnit = "tablespoon";
-
     protected static String userId;
     protected static RecipeDigest testRecipe;
 
@@ -98,5 +92,13 @@ public class CommonRecipeHandlerTest extends CommonHandlerTest {
                                         .withUserId(userId)
                                         .withRequest(recipe)
                                         .build().execute();
+    }
+
+    protected com.wildfit.server.domain.RecipeDigest getRecipeDigest(String fileName) throws java.io.IOException {
+        try (var in = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName)) {
+            final var mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+
+            return mapper.readValue(in, com.wildfit.server.domain.RecipeDigest.class);
+        }
     }
 }

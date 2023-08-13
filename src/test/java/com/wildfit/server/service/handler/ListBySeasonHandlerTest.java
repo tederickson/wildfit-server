@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
@@ -16,16 +15,10 @@ import org.springframework.data.domain.PageRequest;
 class ListBySeasonHandlerTest extends CommonRecipeHandlerTest {
 
     @Test
-    void execute() throws UserServiceException {
-        final var recipe = RecipeDigest.builder()
-                                       .withName("TEST TEST TEST Chili Beef Lettuce Wraps")
-                                       .withSeason(SeasonType.SPRING)
-                                       .withIntroduction("TEST TEST TEST")
-                                       .withPrepTimeMin(5)
-                                       .withCookTimeMin(15)
-                                       .withServingQty(4)
-                                       .withServingUnit("serving")
-                                       .build();
+    void execute() throws Exception {
+        final var recipe = getRecipeDigest("Tuna_salad.json");
+        recipe.setName("TEST TEST TEST Chili Beef Lettuce Wraps");
+
         createRecipe(recipe);
 
         final var response = ListBySeasonHandler.builder()
@@ -35,8 +28,12 @@ class ListBySeasonHandlerTest extends CommonRecipeHandlerTest {
                                                 .build()
                                                 .execute();
 
-        final var foundRecipe = response.getRecipes().stream().filter(x -> x.getId() == testRecipe.getId()).findFirst();
+        final var foundRecipe = response.getRecipes().stream()
+                                        .filter(x -> x.getId().equals(testRecipe.getId()))
+                                        .findFirst();
         assertTrue(foundRecipe.isPresent());
+
+        assertEquals("TEST TEST TEST Chili Beef Lettuce Wraps", foundRecipe.get().getName());
     }
 
     @Test

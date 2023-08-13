@@ -1,0 +1,105 @@
+{
+  "name": "Chili Beef Lettuce Wraps (Summer)",
+  "season": "SUMMER",
+  "prepTimeMin": 5,
+  "cookTimeMin": 15,
+  "servingUnit": "serving",
+  "servingQty": 4,
+  "introduction": "These lettuce wraps are so easy and full of flavor!\nThey make a great side dish, or are perfect for a healthy Summer approved recipe.",
+  "instructionGroups": [
+    {
+      "instructionGroupNumber": 0,
+      "name": "",
+      "instructions": [
+        {
+          "stepNumber": 1,
+          "instruction": "Heat the oil in a heavy frying pan over medium-high heat, then cook the beef until it\u2019s cooked through and starting to brown, breaking apart with a turner as it cooks."
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "While beef cooks, mix together the fish sauce, chili sauce, and water in a small bowl. Zest the skin of the lime and squeeze the juice. (You may need two limes to get enough juice, but only use the zest from one lime.) Thinly slice the green onions and chop the cilantro. Most iceberg lettuce doesn\u2019t need washing, but remove the outer leaves. Cut out the core and cut the lettuce into quarters to make \"cups\" to hold the beef mixture."
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "When the beef is done, add the chilli sauce mixture and let it sizzle until the water has evaporated, stirring a few times to get the flavor mixed through the meat. Turn off the heat and stir in the lime zest, lime juice, sliced green onions, and chopped cilantro."
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Serve meat mixture with iceberg lettuce leaves. Fill with beef and wrap around it. Eaten with your hands."
+        }
+      ],
+      "ingredients": [
+        {
+          "foodName": "coconut oil",
+          "description": "2 tsp neutral-flavored oil like coconut, avocado or walnut",
+          "ingredientServingQty": 2,
+          "ingredientServingUnit": "tsp",
+          "ingredientType": null
+        },
+        {
+          "foodName": "lean ground beef",
+          "description": "1 lb lean ground beef",
+          "ingredientServingQty": 1,
+          "ingredientServingUnit": "lb",
+          "ingredientType": "MEAT"
+        },
+        {
+          "foodName": "fish sauce",
+          "description": "1 tbsp fish sauce",
+          "ingredientServingQty": 1,
+          "ingredientServingUnit": "tbsp",
+          "ingredientType": null
+        },
+        {
+          "foodName": "chili sauce",
+          "description": "1-2 tbsp chili sauce (depending on how much heat you want)",
+          "ingredientServingQty": 2,
+          "ingredientServingUnit": "tbsp",
+          "ingredientType": null
+        },
+        {
+          "foodName": "water",
+          "description": "2 tbsp water",
+          "ingredientServingQty": 2,
+          "ingredientServingUnit": "tbsp",
+          "ingredientType": null
+        },
+        {
+          "foodName": "lime zest",
+          "description": "zest from one large lime",
+          "ingredientServingQty": 1,
+          "ingredientServingUnit": "tsp",
+          "ingredientType": "PRODUCE"
+        },
+        {
+          "foodName": "lime juice",
+          "description": "juice from one large lime (about 1 \u00bd tbsp juice) \u2013 leave out for WildFit Spring",
+          "ingredientServingQty": 1.5,
+          "ingredientServingUnit": "tbsp",
+          "ingredientType": "PRODUCE"
+        },
+        {
+          "foodName": "green onion",
+          "description": "1/4 cup thinly sliced green onion (or double that amount if you\u2019re not using the cilantro)",
+          "ingredientServingQty": 0.25,
+          "ingredientServingUnit": "cup",
+          "ingredientType": "PRODUCE"
+        },
+        {
+          "foodName": "cilantro",
+          "description": "1/2  cup chopped cilantro",
+          "ingredientServingQty": 0.5,
+          "ingredientServingUnit": "cup",
+          "ingredientType": "PRODUCE"
+        },
+        {
+          "foodName": "iceberg lettuce",
+          "description": "1-2 heads iceberg lettuce, washed and cut into cups",
+          "ingredientServingQty": 2,
+          "ingredientServingUnit": "head",
+          "ingredientType": "PRODUCE"
+        }
+      ]
+    }
+  ]
+}

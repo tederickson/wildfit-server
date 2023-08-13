@@ -23,7 +23,7 @@ public class GetRecipeHandler {
                 .findById(recipeId)
                 .orElseThrow(() -> new UserServiceException(UserServiceError.RECIPE_NOT_FOUND));
 
-        return RecipeMapper.toSummary(recipe);
+        return RecipeMapper.map(recipe);
     }
 
     private void validate() throws UserServiceException {

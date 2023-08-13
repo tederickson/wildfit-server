@@ -18,7 +18,7 @@ public class CreateRecipeHandler extends CommonRecipeHandler {
 
         final var recipe = RecipeMapper.create(request, user.getEmail());
         final var saved = recipe1Repository.save(recipe);
-        return RecipeMapper.toSummary(saved);
+        return RecipeMapper.map(saved);
     }
 
     protected void validate() throws UserServiceException {

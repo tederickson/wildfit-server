@@ -11,9 +11,12 @@ public class RecipeListMapper {
     }
 
     public static RecipeListDigest map(List<Recipe1> recipes) {
-        RecipeListDigest recipeListDigest = new RecipeListDigest();
-        if (recipes != null) {
-            recipeListDigest.setRecipes(recipes.stream().map(RecipeMapper::toSummary).collect(Collectors.toList()));
+        final var recipeListDigest = new RecipeListDigest();
+
+        if (recipes == null) {
+            recipeListDigest.setRecipes(List.of());
+        } else {
+            recipeListDigest.setRecipes(recipes.stream().map(RecipeSummaryMapper::map).collect(Collectors.toList()));
         }
         return recipeListDigest;
     }

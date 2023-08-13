@@ -6,5 +6,5 @@ import lombok.Data;
 
 @Data
 public class RecipeListDigest {
-    private List<RecipeDigest> recipes;
+    private List<RecipeSummaryDigest> recipes;
 }

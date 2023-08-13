@@ -4,15 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.io.IOException;
 import java.util.List;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.Iterables;
 import com.wildfit.server.domain.InstructionGroupDigest;
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.SeasonType;
-import com.wildfit.server.model.FoodItems;
 import com.wildfit.server.model.Season;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -74,29 +70,18 @@ class CreateRecipeHandlerTest extends CommonRecipeHandlerTest {
         assertNotNull(testRecipe);
 
         final var dbRecipeId = testRecipe.getId();
-        final var dbRecipeGroupId = Iterables.getOnlyElement(testRecipe.getInstructionGroups()).getId();
         final var dbRecipe = recipe1Repository.findById(dbRecipeId).orElseThrow();
         assertEquals(name, dbRecipe.getName());
         assertEquals(Season.SPRING.name(), dbRecipe.getSeasonName());
-
-
     }
 
     @Test
-    public void processTuna_salad() throws Exception {
+    public void createRecipeWithInstructionsAndIngredients() throws Exception {
         final var digest = getRecipeDigest("Tuna_salad.json");
         validateTunaSalad(digest);
 
         createRecipe(digest);
 
         validateTunaSalad(testRecipe);
-    }
-
-    private RecipeDigest getRecipeDigest(String fileName) throws IOException {
-        try (var in = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName)) {
-            final var mapper = new ObjectMapper();
-
-            return mapper.readValue(in, RecipeDigest.class);
-        }
     }
 }
