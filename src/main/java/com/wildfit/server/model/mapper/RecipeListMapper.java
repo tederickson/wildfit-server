@@ -13,7 +13,7 @@ public class RecipeListMapper {
     public static RecipeListDigest map(List<Recipe1> recipes) {
         RecipeListDigest recipeListDigest = new RecipeListDigest();
         if (recipes != null) {
-            recipeListDigest.setRecipes(recipes.stream().map(RecipeMapper::map).collect(Collectors.toList()));
+            recipeListDigest.setRecipes(recipes.stream().map(RecipeMapper::toSummary).collect(Collectors.toList()));
         }
         return recipeListDigest;
     }

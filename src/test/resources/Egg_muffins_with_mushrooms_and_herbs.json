@@ -1,0 +1,95 @@
+{
+  "name": "Egg muffins with mushrooms and herbs",
+  "season": "SPRING",
+  "prepTimeMin": 15,
+  "cookTimeMin": 25,
+  "servingUnit": "serving",
+  "servingQty": 6,
+  "introduction": "Perfect for batch cooking, breakfast, lunch, dinner and snack. \nHigh in protein, fat and nutrients. Low in carbs.",
+  "instructionGroups": [
+    {
+      "instructionGroupNumber": 0,
+      "name": "",
+      "instructions": [
+        {
+          "stepNumber": 1,
+          "instruction": "Preheat the oven to 350F."
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Saut\u00e9 the bacon bits with the onion if you are using red or yellow onion."
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Whisk the eggs and add all the ingredients, but save a few herbs to decorate."
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Grease the muffin tin and pour in the mixture to fill up to 2/3 (they will raise a bit)."
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Bake for about 25 minutes. Check at 20 minutes. \nI like my eggs muffins soft, but if you are batch cooking, they need to cook through."
+        }
+      ],
+      "ingredients": [
+        {
+          "foodName": "large egg",
+          "description": "8 large eggs",
+          "ingredientServingQty": 8,
+          "ingredientServingUnit": "egg",
+          "ingredientType": null
+        },
+        {
+          "foodName": "bacon bits",
+          "description": "100g bacon bits (or more)",
+          "ingredientServingQty": 100,
+          "ingredientServingUnit": "g",
+          "ingredientType": null
+        },
+        {
+          "foodName": "red onion",
+          "description": "2-3 spring onions or 1/2 onion, chopped",
+          "ingredientServingQty": 0.5,
+          "ingredientServingUnit": "onion",
+          "ingredientType": "PRODUCE"
+        },
+        {
+          "foodName": "mushrooms",
+          "description": "100g mushrooms, diced",
+          "ingredientServingQty": 100,
+          "ingredientServingUnit": "g",
+          "ingredientType": "PRODUCE"
+        },
+        {
+          "foodName": "thyme",
+          "description": "green herb sprigs (parsley, dill, coriander, basil, thyme, chives are my go-to herbs)",
+          "ingredientServingQty": 6,
+          "ingredientServingUnit": "sprig",
+          "ingredientType": "PRODUCE"
+        },
+        {
+          "foodName": "butter",
+          "description": "1 tablespoon of butter or olive oil to grease your muffin tin",
+          "ingredientServingQty": 1,
+          "ingredientServingUnit": "tablespoon",
+          "ingredientType": "DAIRY"
+        },
+        {
+          "foodName": "salt",
+          "description": "1/8 teaspoon salt (adjust to your preference)",
+          "ingredientServingQty": 0.125,
+          "ingredientServingUnit": "tsp",
+          "ingredientType": "SPICE"
+        },
+        {
+          "foodName": "pepper",
+          "description": "1/8 teaspoon pepper (adjust to your preference)",
+          "ingredientServingQty": 0.125,
+          "ingredientServingUnit": "tsp",
+          "ingredientType": "SPICE"
+        }
+      ]
+    }
+  ]
+}

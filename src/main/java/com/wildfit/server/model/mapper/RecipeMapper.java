@@ -1,10 +1,7 @@
 package com.wildfit.server.model.mapper;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
-import com.wildfit.server.domain.InstructionGroupDigest;
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.model.Recipe1;
@@ -14,20 +11,7 @@ public final class RecipeMapper {
     private RecipeMapper() {
     }
 
-    public static RecipeDigest map(Recipe1 recipe) {
-        final var builder = getBuilder(recipe);
-
-        List<InstructionGroupDigest> instructionGroups = new ArrayList<>();
-
-        if (recipe.getRecipeGroups() != null) {
-            for (var recipeGroup : recipe.getRecipeGroups()) {
-                instructionGroups.add(RecipeGroup1Mapper.map(recipeGroup));
-            }
-        }
-        return builder.withInstructionGroups(instructionGroups).build();
-    }
-
-    private static RecipeDigest.RecipeDigestBuilder getBuilder(Recipe1 recipe) {
+    public static RecipeDigest toSummary(Recipe1 recipe) {
         return RecipeDigest.builder()
                            .withId(recipe.getId())
                            .withIntroduction(recipe.getIntroduction())
@@ -36,9 +20,8 @@ public final class RecipeMapper {
                            .withPrepTimeMin(recipe.getPrepTimeMin())
                            .withCookTimeMin(recipe.getCookTimeMin())
                            .withServingUnit(recipe.getServingUnit())
-                           .withServingQty(recipe.getServingQty());
+                           .withServingQty(recipe.getServingQty()).build();
     }
-
 
     public static Recipe1 create(RecipeDigest request, String email) {
         final var season = Season.map(request.getSeason());
