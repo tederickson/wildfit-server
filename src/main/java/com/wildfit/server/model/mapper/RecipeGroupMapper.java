@@ -46,9 +46,7 @@ public class RecipeGroupMapper {
         List<IngredientDigest> ingredients = new ArrayList<>();
 
         for (var common : recipeGroup.getCommonRecipes()) {
-            final var type = com.wildfit.server.model.CommonRecipeType.valueOf(common.getType());
-
-            if (CommonRecipeType.INSTRUCTION == type) {
+            if (CommonRecipeType.INSTRUCTION == common.getType()) {
                 instructions.add(InstructionMapper.createInstruction((com.wildfit.server.model.Instruction) common));
             } else {
                 ingredients.add(IngredientDigestMapper.createIngredient((Ingredient) common));
@@ -61,7 +59,8 @@ public class RecipeGroupMapper {
                 .build();
     }
 
-    public static com.wildfit.server.model.RecipeGroup update(com.wildfit.server.model.RecipeGroup existing, InstructionGroupDigest instructionGroup) {
+    public static com.wildfit.server.model.RecipeGroup update(com.wildfit.server.model.RecipeGroup existing,
+                                                              InstructionGroupDigest instructionGroup) {
         Map<Long, CommonRecipe> commonRecipeMap = new HashMap<>();
         if (existing.getCommonRecipes() != null) {
             commonRecipeMap = existing.getCommonRecipes().stream().collect(Collectors.toMap(
@@ -79,7 +78,8 @@ public class RecipeGroupMapper {
                     final var existingInstruction = commonRecipeMap.get(id);
                     Objects.requireNonNull(existingInstruction, "instruction with id " + id);
 
-                    existing.add(InstructionMapper.updateInstruction((com.wildfit.server.model.Instruction) existingInstruction, instruction));
+                    existing.add(InstructionMapper.updateInstruction(
+                            (com.wildfit.server.model.Instruction) existingInstruction, instruction));
                 }
             }
         }

@@ -30,21 +30,23 @@ public class IngredientDigestMapper {
                 .setDescription(StringUtils.trimToNull(ingredientDigest.getDescription()))
                 .setIngredientServingQty(ingredientDigest.getIngredientServingQty())
                 .setIngredientServingUnit(StringUtils.trimToNull(ingredientDigest.getIngredientServingUnit()))
-                .setIngredientType(ingredientDigest.getIngredientType());
+                .setIngredientType(getIngredientType(ingredientDigest));
+    }
+
+    private static IngredientType getIngredientType(IngredientDigest ingredientDigest) {
+        return ingredientDigest.getIngredientType() == null ? IngredientType.NONE :
+                ingredientDigest.getIngredientType();
     }
 
     public static IngredientDigest createIngredient(com.wildfit.server.model.Ingredient ingredient) {
-        final var builder = IngredientDigest.builder()
-                                            .withId(ingredient.getId())
-                                            .withFoodName(ingredient.getFoodName())
-                                            .withDescription(ingredient.getDescription())
-                                            .withIngredientServingQty(ingredient.getIngredientServingQty())
-                                            .withIngredientServingUnit(ingredient.getIngredientServingUnit());
-
-        if (ingredient.getIngredientType() != null) {
-            builder.withIngredientType(IngredientType.valueOf(ingredient.getIngredientType()));
-        }
-        return builder.build();
+        return IngredientDigest.builder()
+                               .withId(ingredient.getId())
+                               .withFoodName(ingredient.getFoodName())
+                               .withDescription(ingredient.getDescription())
+                               .withIngredientServingQty(ingredient.getIngredientServingQty())
+                               .withIngredientServingUnit(ingredient.getIngredientServingUnit())
+                               .withIngredientType(ingredient.getIngredientType())
+                               .build();
     }
 
     public static com.wildfit.server.model.Ingredient updateIngredient(
@@ -55,6 +57,6 @@ public class IngredientDigestMapper {
                 .setDescription(StringUtils.trimToNull(ingredientDigest.getDescription()))
                 .setIngredientServingQty(ingredientDigest.getIngredientServingQty())
                 .setIngredientServingUnit(StringUtils.trimToNull(ingredientDigest.getIngredientServingUnit()))
-                .setIngredientType(ingredientDigest.getIngredientType());
+                .setIngredientType(getIngredientType(ingredientDigest));
     }
 }

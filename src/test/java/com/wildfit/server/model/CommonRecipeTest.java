@@ -16,7 +16,7 @@ class CommonRecipeTest {
                 .setRecipeGroup(recipeGroup);
 
         assertEquals(recipeGroup, instruction.getRecipeGroup());
-        assertEquals(CommonRecipeType.INSTRUCTION.toString(), instruction.getType());
+        assertEquals(CommonRecipeType.INSTRUCTION, instruction.getType());
         assertEquals(3L, instruction.getId());
     }
 }

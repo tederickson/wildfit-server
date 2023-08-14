@@ -271,7 +271,8 @@ public class RecipeLoadTest {
         salad.add(new Ingredient().setFoodName("cornichon")
                                   .setDescription("4 cornichon (small sugar free pickled cucumbers)")
                                   .setIngredientServingQty(4f)
-                                  .setIngredientServingUnit("cornichon"));
+                                  .setIngredientServingUnit("cornichon")
+                                  .setIngredientType(IngredientType.NONE));
 
         saveRecipe(recipe);
     }

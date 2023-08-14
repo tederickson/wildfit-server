@@ -5,6 +5,8 @@ import java.util.Objects;
 import com.wildfit.server.domain.IngredientType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import lombok.Getter;
@@ -31,19 +33,13 @@ public class Ingredient extends CommonRecipe {
     @Column(name = "ingredient_serving_unit", length = 20)
     private String ingredientServingUnit;
 
-    @Column(name = "ingredient_type", length = 20)
-    private String ingredientType;
+    @Column(name = "ingredient_type", length = 20, nullable = false)
+    @Enumerated(EnumType.STRING)
+    private IngredientType ingredientType;
 
     public Ingredient() {
         super();
         setType(CommonRecipeType.INGREDIENT);
-    }
-
-    public Ingredient setIngredientType(IngredientType ingredientType) {
-        if (ingredientType != null) {
-            this.ingredientType = ingredientType.toString();
-        }
-        return this;
     }
 
     @Override
