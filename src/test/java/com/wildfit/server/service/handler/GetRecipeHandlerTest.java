@@ -30,7 +30,7 @@ class GetRecipeHandlerTest extends CommonRecipeHandlerTest {
     void missingRecipeId() {
         final var exception = assertThrows(UserServiceException.class,
                 () -> GetRecipeHandler.builder()
-                                      .withRecipe1Repository(recipe1Repository)
+                                      .withRecipeRepository(recipeRepository)
                                       .build().execute());
         assertEquals(UserServiceError.INVALID_PARAMETER, exception.getError());
     }
@@ -54,7 +54,7 @@ class GetRecipeHandlerTest extends CommonRecipeHandlerTest {
         createRecipe(recipe);
 
         final var recipeDigest = GetRecipeHandler.builder()
-                                                 .withRecipe1Repository(recipe1Repository)
+                                                 .withRecipeRepository(recipeRepository)
                                                  .withRecipeId(testRecipe.getId())
                                                  .build().execute();
         var instructionGroup1 = Iterables.getOnlyElement(recipeDigest.getInstructionGroups());

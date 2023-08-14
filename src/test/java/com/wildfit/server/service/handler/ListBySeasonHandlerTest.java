@@ -24,7 +24,7 @@ class ListBySeasonHandlerTest extends CommonRecipeHandlerTest {
         final var response = ListBySeasonHandler.builder()
                                                 .withSeason(SeasonType.SPRING)
                                                 .withPageable(PageRequest.of(0, 100))
-                                                .withRecipe1Repository(recipe1Repository)
+                                                .withRecipeRepository(recipeRepository)
                                                 .build()
                                                 .execute();
 
@@ -41,7 +41,18 @@ class ListBySeasonHandlerTest extends CommonRecipeHandlerTest {
         final var exception = assertThrows(UserServiceException.class,
                 () -> ListBySeasonHandler.builder()
                                          .withPageable(PageRequest.of(1, 100))
-                                         .withRecipe1Repository(recipe1Repository)
+                                         .withRecipeRepository(recipeRepository)
+                                         .build()
+                                         .execute());
+        assertEquals(UserServiceError.INVALID_PARAMETER, exception.getError());
+    }
+
+    @Test
+    void missingPageable() {
+        final var exception = assertThrows(UserServiceException.class,
+                () -> ListBySeasonHandler.builder()
+                                         .withSeason(SeasonType.SPRING)
+                                         .withRecipeRepository(recipeRepository)
                                          .build()
                                          .execute());
         assertEquals(UserServiceError.INVALID_PARAMETER, exception.getError());

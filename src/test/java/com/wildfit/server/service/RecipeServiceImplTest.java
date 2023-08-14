@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.exception.UserServiceException;
-import com.wildfit.server.repository.Recipe1Repository;
 import com.wildfit.server.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,13 +21,13 @@ class RecipeServiceImplTest {
     @Mock
     UserRepository userRepository;
     @Mock
-    Recipe1Repository recipe1Repository;
+    com.wildfit.server.repository.RecipeRepository recipeRepository;
 
     private RecipeService recipeService;
 
     @BeforeEach
     void setUp() {
-        recipeService = new RecipeServiceImpl(userRepository, recipe1Repository);
+        recipeService = new RecipeServiceImpl(userRepository, recipeRepository);
     }
 
     @Test

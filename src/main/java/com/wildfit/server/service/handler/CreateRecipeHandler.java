@@ -17,7 +17,7 @@ public class CreateRecipeHandler extends CommonRecipeHandler {
                                        .orElseThrow(() -> new UserServiceException(UserServiceError.USER_NOT_FOUND));
 
         final var recipe = RecipeMapper.create(request, user.getEmail());
-        final var saved = recipe1Repository.save(recipe);
+        final var saved = recipeRepository.save(recipe);
         return RecipeMapper.map(saved);
     }
 

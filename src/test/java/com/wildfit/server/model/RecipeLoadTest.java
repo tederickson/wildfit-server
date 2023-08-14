@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.wildfit.server.domain.IngredientType;
-import com.wildfit.server.repository.Recipe1Repository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,7 @@ public class RecipeLoadTest {
 
     static Long recipeId = null;
     @Autowired
-    Recipe1Repository recipe1Repository;
+    com.wildfit.server.repository.RecipeRepository recipeRepository;
 
     public static Instruction BEEF_STEP_1() {
         return new Instruction()
@@ -84,7 +83,7 @@ public class RecipeLoadTest {
     @AfterEach
     void tearDown() {
         if (recipeId != null) {
-            recipe1Repository.deleteById(recipeId);
+            recipeRepository.deleteById(recipeId);
         }
         recipeId = null;
     }
@@ -280,7 +279,7 @@ public class RecipeLoadTest {
     private Recipe saveRecipe(Recipe recipe) {
         recipe.assignAllParents();
 
-        final var dbRecipe = recipe1Repository.save(recipe);
+        final var dbRecipe = recipeRepository.save(recipe);
         recipeId = dbRecipe.getId();
 
         return dbRecipe;

@@ -10,7 +10,6 @@ import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.User;
 import com.wildfit.server.model.UserStatus;
-import com.wildfit.server.repository.Recipe1Repository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +53,7 @@ public class CommonRecipeHandlerTest extends CommonHandlerTest {
     protected static RecipeDigest testRecipe;
 
     @Autowired
-    protected Recipe1Repository recipe1Repository;
+    protected com.wildfit.server.repository.RecipeRepository recipeRepository;
 
     @BeforeEach
     void setUp() {
@@ -79,7 +78,7 @@ public class CommonRecipeHandlerTest extends CommonHandlerTest {
     @AfterEach
     void tearDown() {
         if (testRecipe != null) {
-            recipe1Repository.deleteById(testRecipe.getId());
+            recipeRepository.deleteById(testRecipe.getId());
 
             testRecipe = null;
         }
@@ -90,7 +89,7 @@ public class CommonRecipeHandlerTest extends CommonHandlerTest {
     protected void createRecipe(RecipeDigest recipe) throws UserServiceException {
         testRecipe = CreateRecipeHandler.builder()
                                         .withUserRepository(userRepository)
-                                        .withRecipe1Repository(recipe1Repository)
+                                        .withRecipeRepository(recipeRepository)
                                         .withUserId(userId)
                                         .withRequest(recipe)
                                         .build().execute();

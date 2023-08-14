@@ -1,6 +1,7 @@
 package com.wildfit.server.service.handler;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Collection;
 import java.util.List;
@@ -241,10 +242,45 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
         assertEquals(recipeInstructions.size() + recipe2Instructions.size(), responseInstructions.size());
     }
 
+    @Test
+    void updateRecipe_missingRequest() {
+        final var exception = assertThrows(UserServiceException.class,
+                () -> UpdateRecipeHandler.builder()
+                                         .withUserRepository(userRepository)
+                                         .withRecipeRepository(recipeRepository)
+                                         .withUserId(userId)
+                                         .build().execute());
+        assertEquals("Invalid parameter.", exception.getMessage());
+    }
+
+    @Test
+    void updateRecipe_missingUserId() {
+        final var exception = assertThrows(UserServiceException.class,
+                () -> UpdateRecipeHandler.builder()
+                                         .withUserRepository(userRepository)
+                                         .withRecipeRepository(recipeRepository)
+                                         .withRequest(RecipeDigest.builder()
+                                                                  .withSeason(SeasonType.SUMMER).build())
+                                         .build().execute());
+        assertEquals("Invalid parameter.", exception.getMessage());
+    }
+
+    @Test
+    void updateRecipe_missingSeason() {
+        final var exception = assertThrows(UserServiceException.class,
+                () -> UpdateRecipeHandler.builder()
+                                         .withUserRepository(userRepository)
+                                         .withRecipeRepository(recipeRepository)
+                                         .withUserId(userId)
+                                         .withRequest(RecipeDigest.builder().build())
+                                         .build().execute());
+        assertEquals("Invalid parameter.", exception.getMessage());
+    }
+
     private RecipeDigest updateRecipe(RecipeDigest testRecipe) throws UserServiceException {
         return UpdateRecipeHandler.builder()
                                   .withUserRepository(userRepository)
-                                  .withRecipe1Repository(recipe1Repository)
+                                  .withRecipeRepository(recipeRepository)
                                   .withUserId(userId)
                                   .withRequest(testRecipe)
                                   .build().execute();

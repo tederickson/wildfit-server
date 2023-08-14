@@ -4,7 +4,6 @@ import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.RecipeListDigest;
 import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.exception.UserServiceException;
-import com.wildfit.server.repository.Recipe1Repository;
 import com.wildfit.server.repository.UserRepository;
 import com.wildfit.server.service.handler.CreateRecipeHandler;
 import com.wildfit.server.service.handler.DeleteRecipeHandler;
@@ -26,12 +25,12 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class RecipeServiceImpl implements RecipeService {
     private final UserRepository userRepository;
-    private final Recipe1Repository recipe1Repository;
+    private final com.wildfit.server.repository.RecipeRepository recipeRepository;
 
     @Override
     public RecipeListDigest listBySeason(SeasonType season, Pageable pageable) throws UserServiceException {
         return ListBySeasonHandler.builder()
-                                  .withRecipe1Repository(recipe1Repository)
+                                  .withRecipeRepository(recipeRepository)
                                   .withSeason(season)
                                   .withPageable(pageable)
                                   .build().execute();
@@ -41,7 +40,7 @@ public class RecipeServiceImpl implements RecipeService {
     public RecipeListDigest listBySeasonAndIngredient(SeasonType season, String ingredientName, Pageable pageable)
             throws UserServiceException {
         return ListBySeasonAndIngredientHandler.builder()
-                                               .withRecipe1Repository(recipe1Repository)
+                                               .withRecipeRepository(recipeRepository)
                                                .withSeason(season)
                                                .withIngredientName(ingredientName)
                                                .withPageable(pageable)
@@ -52,7 +51,7 @@ public class RecipeServiceImpl implements RecipeService {
     public RecipeListDigest listBySeasonAndName(SeasonType season, String recipeName, Pageable pageable)
             throws UserServiceException {
         return ListBySeasonAndNameHandler.builder()
-                                         .withRecipe1Repository(recipe1Repository)
+                                         .withRecipeRepository(recipeRepository)
                                          .withSeason(season)
                                          .withRecipeName(recipeName)
                                          .withPageable(pageable)
@@ -62,7 +61,7 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public RecipeDigest retrieveRecipe(Long recipeId) throws UserServiceException {
         return GetRecipeHandler.builder()
-                               .withRecipe1Repository(recipe1Repository)
+                               .withRecipeRepository(recipeRepository)
                                .withRecipeId(recipeId)
                                .build().execute();
     }
@@ -71,7 +70,7 @@ public class RecipeServiceImpl implements RecipeService {
     public void deleteRecipe(Long recipeId, String userId) throws UserServiceException {
         DeleteRecipeHandler.builder()
                            .withUserRepository(userRepository)
-                           .withRecipe1Repository(recipe1Repository)
+                           .withRecipeRepository(recipeRepository)
                            .withUserId(userId)
                            .withRecipeId(recipeId)
                            .build().execute();
@@ -81,7 +80,7 @@ public class RecipeServiceImpl implements RecipeService {
     public RecipeDigest createRecipe(String userId, RecipeDigest request) throws UserServiceException {
         return CreateRecipeHandler.builder()
                                   .withUserRepository(userRepository)
-                                  .withRecipe1Repository(recipe1Repository)
+                                  .withRecipeRepository(recipeRepository)
                                   .withUserId(userId)
                                   .withRequest(request)
                                   .build().execute();
@@ -91,7 +90,7 @@ public class RecipeServiceImpl implements RecipeService {
     public RecipeDigest updateRecipe(String userId, RecipeDigest request) throws UserServiceException {
         return UpdateRecipeHandler.builder()
                                   .withUserRepository(userRepository)
-                                  .withRecipe1Repository(recipe1Repository)
+                                  .withRecipeRepository(recipeRepository)
                                   .withUserId(userId)
                                   .withRequest(request)
                                   .build().execute();

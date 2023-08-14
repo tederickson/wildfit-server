@@ -2,6 +2,7 @@ package com.wildfit.server.service.handler;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.List;
@@ -9,6 +10,8 @@ import java.util.List;
 import com.wildfit.server.domain.InstructionGroupDigest;
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.SeasonType;
+import com.wildfit.server.exception.UserServiceError;
+import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.Season;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -70,7 +73,7 @@ class CreateRecipeHandlerTest extends CommonRecipeHandlerTest {
         assertNotNull(testRecipe);
 
         final var dbRecipeId = testRecipe.getId();
-        final var dbRecipe = recipe1Repository.findById(dbRecipeId).orElseThrow();
+        final var dbRecipe = recipeRepository.findById(dbRecipeId).orElseThrow();
         assertEquals(name, dbRecipe.getName());
         assertEquals(Season.SPRING.name(), dbRecipe.getSeasonName());
     }
@@ -83,5 +86,30 @@ class CreateRecipeHandlerTest extends CommonRecipeHandlerTest {
         createRecipe(digest);
 
         validateTunaSalad(testRecipe);
+    }
+
+    @Test
+    void requestIsMissing() {
+        final var exception = assertThrows(UserServiceException.class,
+                () -> createRecipe(null));
+        assertEquals(UserServiceError.INVALID_PARAMETER, exception.getError());
+    }
+
+    @Test
+    void requestSeasonIsMissing() {
+        final var name = "CreateRecipeHandlerTest";
+
+        final var recipe = RecipeDigest.builder()
+                                       .withName(name)
+                                       .withIntroduction(INTRODUCTION)
+                                       .withPrepTimeMin(5)
+                                       .withCookTimeMin(15)
+                                       .withServingQty(4)
+                                       .withServingUnit("serving")
+                                       .build();
+
+        final var exception = assertThrows(UserServiceException.class,
+                () -> createRecipe(recipe));
+        assertEquals(UserServiceError.INVALID_PARAMETER, exception.getError());
     }
 }

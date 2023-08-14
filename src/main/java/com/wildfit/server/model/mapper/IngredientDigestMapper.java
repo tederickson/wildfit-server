@@ -3,6 +3,7 @@ package com.wildfit.server.model.mapper;
 import com.wildfit.server.domain.FoodItemDigest;
 import com.wildfit.server.domain.IngredientDigest;
 import com.wildfit.server.domain.IngredientType;
+import org.apache.commons.lang3.StringUtils;
 
 public class IngredientDigestMapper {
     private IngredientDigestMapper() {
@@ -22,14 +23,14 @@ public class IngredientDigestMapper {
                                .build();
     }
 
-    public static com.wildfit.server.model.Ingredient createIngredient(IngredientDigest ingredient) {
+    public static com.wildfit.server.model.Ingredient createIngredient(IngredientDigest ingredientDigest) {
         return new com.wildfit.server.model.Ingredient()
-                .setId(ingredient.getId())
-                .setFoodName(ingredient.getFoodName())
-                .setDescription(ingredient.getDescription())
-                .setIngredientServingQty(ingredient.getIngredientServingQty())
-                .setIngredientServingUnit(ingredient.getIngredientServingUnit())
-                .setIngredientType(ingredient.getIngredientType());
+                .setId(ingredientDigest.getId())
+                .setFoodName(StringUtils.trimToNull(ingredientDigest.getFoodName()))
+                .setDescription(StringUtils.trimToNull(ingredientDigest.getDescription()))
+                .setIngredientServingQty(ingredientDigest.getIngredientServingQty())
+                .setIngredientServingUnit(StringUtils.trimToNull(ingredientDigest.getIngredientServingUnit()))
+                .setIngredientType(ingredientDigest.getIngredientType());
     }
 
     public static IngredientDigest createIngredient(com.wildfit.server.model.Ingredient ingredient) {
@@ -46,14 +47,14 @@ public class IngredientDigestMapper {
         return builder.build();
     }
 
-    public static com.wildfit.server.model.CommonRecipe updateIngredient(
+    public static com.wildfit.server.model.Ingredient updateIngredient(
             com.wildfit.server.model.Ingredient ingredient,
             IngredientDigest ingredientDigest) {
         return ingredient
-                .setFoodName(ingredientDigest.getFoodName())
-                .setDescription(ingredientDigest.getDescription())
+                .setFoodName(StringUtils.trimToNull(ingredientDigest.getFoodName()))
+                .setDescription(StringUtils.trimToNull(ingredientDigest.getDescription()))
                 .setIngredientServingQty(ingredientDigest.getIngredientServingQty())
-                .setIngredientServingUnit(ingredientDigest.getIngredientServingUnit())
+                .setIngredientServingUnit(StringUtils.trimToNull(ingredientDigest.getIngredientServingUnit()))
                 .setIngredientType(ingredientDigest.getIngredientType());
     }
 }

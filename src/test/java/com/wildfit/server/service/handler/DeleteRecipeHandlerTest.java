@@ -52,7 +52,7 @@ class DeleteRecipeHandlerTest extends CommonRecipeHandlerTest {
         final var exception = assertThrows(UserServiceException.class,
                 () -> DeleteRecipeHandler.builder()
                                          .withUserRepository(userRepository)
-                                         .withRecipe1Repository(recipe1Repository)
+                                         .withRecipeRepository(recipeRepository)
                                          .withRecipeId(-1L)
                                          .build().execute());
         assertEquals(UserServiceError.INVALID_PARAMETER, exception.getError());
@@ -63,7 +63,7 @@ class DeleteRecipeHandlerTest extends CommonRecipeHandlerTest {
         final var exception = assertThrows(UserServiceException.class,
                 () -> DeleteRecipeHandler.builder()
                                          .withUserRepository(userRepository)
-                                         .withRecipe1Repository(recipe1Repository)
+                                         .withRecipeRepository(recipeRepository)
                                          .withUserId("-14L")
                                          .withRecipeId(-1L)
                                          .build().execute());
@@ -88,7 +88,7 @@ class DeleteRecipeHandlerTest extends CommonRecipeHandlerTest {
         final var exception = assertThrows(UserServiceException.class,
                 () -> DeleteRecipeHandler.builder()
                                          .withUserRepository(userRepository)
-                                         .withRecipe1Repository(recipe1Repository)
+                                         .withRecipeRepository(recipeRepository)
                                          .withUserId(dbUser.getUuid())
                                          .withRecipeId(testRecipe.getId())
                                          .build().execute());
@@ -98,16 +98,28 @@ class DeleteRecipeHandlerTest extends CommonRecipeHandlerTest {
     }
 
     @Test
+    void recipeNotFound() {
+        final var exception = assertThrows(UserServiceException.class,
+                () -> DeleteRecipeHandler.builder()
+                                         .withUserRepository(userRepository)
+                                         .withRecipeRepository(recipeRepository)
+                                         .withUserId(userId)
+                                         .withRecipeId(-100L)
+                                         .build().execute());
+        assertEquals(UserServiceError.RECIPE_NOT_FOUND, exception.getError());
+    }
+
+    @Test
     void execute() throws UserServiceException {
         createRecipe(recipe);
 
         DeleteRecipeHandler.builder()
                            .withUserRepository(userRepository)
-                           .withRecipe1Repository(recipe1Repository)
+                           .withRecipeRepository(recipeRepository)
                            .withUserId(userId)
                            .withRecipeId(testRecipe.getId())
                            .build().execute();
 
-        assertTrue(recipe1Repository.findById(testRecipe.getId()).isEmpty());
+        assertTrue(recipeRepository.findById(testRecipe.getId()).isEmpty());
     }
 }

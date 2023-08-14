@@ -15,7 +15,7 @@ public class DeleteRecipeHandler extends CommonRecipeHandler {
 
         final var recipe = getAuthorizedRecipe(recipeId);
 
-        recipe1Repository.delete(recipe);
+        recipeRepository.delete(recipe);
     }
 
     protected void validate() throws UserServiceException {
