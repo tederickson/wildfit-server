@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 
 import com.wildfit.server.domain.InstructionGroupDigest;
 import com.wildfit.server.domain.RecipeDigest;
-import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.model.Season;
 
 public final class RecipeMapper {
@@ -22,7 +21,7 @@ public final class RecipeMapper {
                                         .withId(recipe.getId())
                                         .withIntroduction(recipe.getIntroduction())
                                         .withName(recipe.getName())
-                                        .withSeason(SeasonType.valueOf(recipe.getSeasonName()))
+                                        .withSeason(recipe.getSeason().toSeasonType())
                                         .withPrepTimeMin(recipe.getPrepTimeMin())
                                         .withCookTimeMin(recipe.getCookTimeMin())
                                         .withServingUnit(recipe.getServingUnit())
@@ -44,7 +43,7 @@ public final class RecipeMapper {
                 .setEmail(email)
                 .setIntroduction(request.getIntroduction())
                 .setName(request.getName())
-                .setSeasonName(season)
+                .setSeason(season)
                 .setPrepTimeMin(request.getPrepTimeMin())
                 .setCookTimeMin(request.getCookTimeMin())
                 .setServingUnit(request.getServingUnit())
@@ -68,7 +67,7 @@ public final class RecipeMapper {
         // Never change the email address
         recipe.setIntroduction(request.getIntroduction())
               .setName(request.getName())
-              .setSeasonName(season)
+              .setSeason(season)
               .setPrepTimeMin(request.getPrepTimeMin())
               .setCookTimeMin(request.getCookTimeMin())
               .setServingUnit(request.getServingUnit())

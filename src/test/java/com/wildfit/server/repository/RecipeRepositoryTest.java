@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
+import com.wildfit.server.model.Season;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,7 +19,7 @@ class RecipeRepositoryTest {
     static final Pageable PAGEABLE = PageRequest.of(0, 20);
 
     static final String EMAIL = "ted.erickson@comcast.net";
-    static final String SEASON = "Spring";
+
 
     @Autowired
     RecipeRepository recipeRepository;
@@ -34,7 +35,7 @@ class RecipeRepositoryTest {
     void findAllBySeason() {
         final var name = "RecipeRepositoryTest Test Recipe1";
         final var recipe = new com.wildfit.server.model.Recipe()
-                .setSeasonName(SEASON)
+                .setSeason(Season.SPRING)
                 .setEmail(EMAIL)
                 .setName(name)
                 .setCreated(java.time.LocalDateTime.now())
@@ -45,8 +46,8 @@ class RecipeRepositoryTest {
                 .setServingQty(4);
         final var saved = recipeRepository.save(recipe);
 
-        final var rows = recipeRepository.findAllBySeasonName(SEASON, PAGEABLE);
-        final var dbRecipe = rows.stream().filter(x -> SEASON.equals(x.getSeasonName()))
+        final var rows = recipeRepository.findAllBySeason(Season.SPRING, PAGEABLE);
+        final var dbRecipe = rows.stream().filter(x -> Season.SPRING.equals(x.getSeason()))
                                  .filter(x -> EMAIL.equals(x.getEmail()))
                                  .filter(x -> name.equals(x.getName()))
                                  .findFirst().orElse(null);

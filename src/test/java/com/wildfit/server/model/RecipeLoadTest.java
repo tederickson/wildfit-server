@@ -68,7 +68,7 @@ public class RecipeLoadTest {
 
     private static Recipe buildMinimalRecipe() {
         return new Recipe()
-                .setSeasonName(Season.SUMMER)
+                .setSeason(Season.SUMMER)
                 .setName(recipeName)
                 .setEmail(EMAIL)
                 .setIntroduction(introduction)

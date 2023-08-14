@@ -20,7 +20,7 @@ public class ListBySeasonHandler {
     public RecipeListDigest execute() throws UserServiceException {
         validate();
 
-        return RecipeListMapper.map(recipeRepository.findAllBySeasonName(Season.map(season).name(), pageable));
+        return RecipeListMapper.map(recipeRepository.findAllBySeason(Season.map(season), pageable));
     }
 
     private void validate() throws UserServiceException {

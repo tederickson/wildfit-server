@@ -8,6 +8,8 @@ import java.util.Objects;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -41,8 +43,9 @@ public final class Recipe {
 
     private String name;
 
-    @Column(name = "season", length = 10)
-    private String seasonName;
+    @Column(name = "season", length = 10, nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Season season;
 
     private int prepTimeMin;
     private int cookTimeMin;
@@ -62,16 +65,6 @@ public final class Recipe {
             recipeGroups = new ArrayList<>();
         }
         recipeGroups.add(recipeGroup);
-    }
-
-    public Recipe setSeasonName(String seasonName) {
-        this.seasonName = seasonName;
-        return this;
-    }
-
-    public Recipe setSeasonName(Season season) {
-        this.seasonName = season.name();
-        return this;
     }
 
     public void assignAllParents() {
@@ -113,7 +106,7 @@ public final class Recipe {
                 ", email='" + email + '\'' +
                 ", introduction='" + introduction + '\'' +
                 ", name='" + name + '\'' +
-                ", season='" + seasonName + '\'' +
+                ", season='" + season + '\'' +
                 ", prepTimeMin=" + prepTimeMin +
                 ", cookTimeMin=" + cookTimeMin +
                 ", servingUnit='" + servingUnit + '\'' +

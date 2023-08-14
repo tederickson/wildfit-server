@@ -75,7 +75,7 @@ class CreateRecipeHandlerTest extends CommonRecipeHandlerTest {
         final var dbRecipeId = testRecipe.getId();
         final var dbRecipe = recipeRepository.findById(dbRecipeId).orElseThrow();
         assertEquals(name, dbRecipe.getName());
-        assertEquals(Season.SPRING.name(), dbRecipe.getSeasonName());
+        assertEquals(Season.SPRING, dbRecipe.getSeason());
     }
 
     @Test

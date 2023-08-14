@@ -1,7 +1,6 @@
 package com.wildfit.server.model.mapper;
 
 import com.wildfit.server.domain.RecipeSummaryDigest;
-import com.wildfit.server.domain.SeasonType;
 
 public class RecipeSummaryMapper {
     private RecipeSummaryMapper() {
@@ -12,7 +11,7 @@ public class RecipeSummaryMapper {
                                   .withId(recipe.getId())
                                   .withIntroduction(recipe.getIntroduction())
                                   .withName(recipe.getName())
-                                  .withSeason(SeasonType.valueOf(recipe.getSeasonName()))
+                                  .withSeason(recipe.getSeason().toSeasonType())
                                   .withPrepTimeMin(recipe.getPrepTimeMin())
                                   .withCookTimeMin(recipe.getCookTimeMin())
                                   .withServingUnit(recipe.getServingUnit())

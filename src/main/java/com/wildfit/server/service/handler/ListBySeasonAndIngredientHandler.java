@@ -6,7 +6,6 @@ import com.wildfit.server.domain.RecipeListDigest;
 import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
-import com.wildfit.server.model.Season;
 import com.wildfit.server.model.mapper.RecipeListMapper;
 import lombok.Builder;
 import org.apache.commons.lang3.StringUtils;
@@ -22,7 +21,7 @@ public class ListBySeasonAndIngredientHandler {
     public RecipeListDigest execute() throws UserServiceException {
         validate();
 
-        final var results = recipeRepository.findAllBySeasonAndIngredientName(Season.map(season).name(),
+        final var results = recipeRepository.findAllBySeasonAndIngredientName(season.toString(),
                 ingredientName, pageable);
 
         return RecipeListMapper.map(results);
