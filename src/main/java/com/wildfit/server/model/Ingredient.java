@@ -55,16 +55,11 @@ public class Ingredient extends CommonRecipe {
             return false;
         }
         com.wildfit.server.model.Ingredient that = (com.wildfit.server.model.Ingredient) o;
-        return Objects.equals(id, that.id)
-                && Objects.equals(foodName, that.foodName)
-                && Objects.equals(description, that.description)
-                && Objects.equals(ingredientServingQty, that.ingredientServingQty)
-                && Objects.equals(ingredientServingUnit, that.ingredientServingUnit)
-                && Objects.equals(ingredientType, that.ingredientType);
+        return Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, foodName, description, ingredientServingQty, ingredientServingUnit, ingredientType);
+        return Objects.hash(id);
     }
 }

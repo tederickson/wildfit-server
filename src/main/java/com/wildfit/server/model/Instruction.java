@@ -39,13 +39,11 @@ public class Instruction extends CommonRecipe {
             return false;
         }
         Instruction that = (Instruction) o;
-        return Objects.equals(id, that.id)
-                && Objects.equals(stepNumber, that.stepNumber)
-                && Objects.equals(text, that.text);
+        return Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, stepNumber, text);
+        return Objects.hash(id);
     }
 }
