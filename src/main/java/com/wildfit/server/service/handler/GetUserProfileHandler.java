@@ -9,10 +9,8 @@ import com.wildfit.server.model.mapper.UserProfileDigestMapper;
 import com.wildfit.server.repository.UserProfileRepository;
 import com.wildfit.server.repository.UserRepository;
 import lombok.Builder;
-import lombok.extern.slf4j.Slf4j;
 
 @Builder(setterPrefix = "with")
-@Slf4j
 public class GetUserProfileHandler {
 
     final UserRepository userRepository;
@@ -20,7 +18,6 @@ public class GetUserProfileHandler {
     final String userId;
 
     public UserProfileDigest execute() throws UserServiceException {
-        log.info("GetUserProfileHandler(" + userId + ")");
         validate();
 
         final var user = userRepository.findByUuid(userId)

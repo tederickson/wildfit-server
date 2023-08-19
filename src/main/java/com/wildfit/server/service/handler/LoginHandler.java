@@ -8,19 +8,16 @@ import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.mapper.UserDigestMapper;
 import com.wildfit.server.repository.UserRepository;
 import lombok.Builder;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 @Builder(setterPrefix = "with")
-@Slf4j
 public class LoginHandler {
     final UserRepository userRepository;
     final String email;
     final String password;
 
     public UserDigest execute() throws UserServiceException {
-        log.info("LoginHandler(" + email + "," + password + ")");
         validate();
 
         final var users = userRepository.findByEmail(email);

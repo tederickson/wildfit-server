@@ -15,7 +15,6 @@ import com.wildfit.server.repository.UserProfileRepository;
 import com.wildfit.server.repository.UserRepository;
 import com.wildfit.server.repository.VerificationTokenRepository;
 import lombok.Builder;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.SimpleMailMessage;
@@ -23,7 +22,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
-@Slf4j
 @Builder(setterPrefix = "with")
 public class CreateUserHandler {
 

@@ -101,7 +101,7 @@ public final class Recipe {
     @Override
     public String toString() {
         final var size = recipeGroups == null ? 0 : recipeGroups.size();
-        return "Recipe1{" +
+        return "Recipe{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", introduction='" + introduction + '\'' +

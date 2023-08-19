@@ -33,7 +33,7 @@ class RecipeRepositoryTest {
 
     @Test
     void findAllBySeason() {
-        final var name = "RecipeRepositoryTest Test Recipe1";
+        final var name = "RecipeRepositoryTest Test Recipe";
         final var recipe = new com.wildfit.server.model.Recipe()
                 .setSeason(Season.SPRING)
                 .setEmail(EMAIL)

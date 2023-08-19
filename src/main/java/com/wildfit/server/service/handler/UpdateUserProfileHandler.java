@@ -12,10 +12,8 @@ import com.wildfit.server.model.mapper.UserProfileDigestMapper;
 import com.wildfit.server.repository.UserProfileRepository;
 import com.wildfit.server.repository.UserRepository;
 import lombok.Builder;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
 
-@Slf4j
 @Builder(setterPrefix = "with")
 public class UpdateUserProfileHandler {
     final UserRepository userRepository;
@@ -25,7 +23,6 @@ public class UpdateUserProfileHandler {
 
     public UserProfileDigest execute() throws UserServiceException {
         validate();
-        log.info(userId + "|" + userProfileRequest);
 
         final var user = userRepository.findByUuid(userId).orElseThrow(() ->
                 new UserServiceException(UserServiceError.USER_NOT_FOUND));

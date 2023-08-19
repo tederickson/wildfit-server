@@ -9,7 +9,7 @@ import lombok.Data;
 public final class ParseRecipeRequest {
     private String query;
     private boolean line_delimited = true;
-    private String aggregate;   // Recipe1 name
+    private String aggregate;   // Recipe name
     private Integer num_servings;
 
     public void addIngredient(Float servingQty, String servingUnit, String foodName) {
