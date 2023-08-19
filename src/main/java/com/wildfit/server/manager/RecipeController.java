@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-@Tag(name = "Recipe1 API")
+@Tag(name = "Recipe API")
 @RequestMapping("v1/recipes")
 public class RecipeController {
     private final RecipeService recipeService;
@@ -39,11 +39,6 @@ public class RecipeController {
                                                      @RequestParam(value = "page", defaultValue = "0") Integer page,
                                                      @RequestParam(value = "pageSize", defaultValue = "30") Integer pageSize)
             throws UserServiceException {
-
-        final var logMessage = String.join("|", "retrieveRecipesForSeason", season.toString(),
-                page.toString(), pageSize.toString());
-        log.info(logMessage);
-
         final var pageable = PageMapper.map(page, pageSize);
 
         return recipeService.listBySeason(season, pageable);
@@ -56,11 +51,6 @@ public class RecipeController {
             @PathVariable(value = "ingredientName") String ingredientName,
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "pageSize", defaultValue = "30") Integer pageSize) throws UserServiceException {
-
-        final var logMessage = String.join("|", "retrieveRecipesForSeasonAndFood", season.toString(),
-                ingredientName, page.toString(), pageSize.toString());
-        log.info(logMessage);
-
         final var pageable = PageMapper.map(page, pageSize);
 
         return recipeService.listBySeasonAndIngredient(season, ingredientName, pageable);
@@ -73,11 +63,6 @@ public class RecipeController {
             @PathVariable(value = "recipeName") String recipeName,
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "pageSize", defaultValue = "30") Integer pageSize) throws UserServiceException {
-
-        final var logMessage = String.join("|", "listBySeasonAndName", season.toString(),
-                recipeName, page.toString(), pageSize.toString());
-        log.info(logMessage);
-
         final var pageable = PageMapper.map(page, pageSize);
 
         return recipeService.listBySeasonAndName(season, recipeName, pageable);
@@ -86,52 +71,38 @@ public class RecipeController {
     @Operation(summary = "Retrieve recipe")
     @GetMapping(value = "/{recipeId}", produces = "application/json")
     public RecipeDigest retrieveRecipe(@PathVariable(value = "recipeId") Long id) throws UserServiceException {
-
-        final var logMessage = String.join("|", "retrieveRecipe", id.toString());
-        log.info(logMessage);
-
         return recipeService.retrieveRecipe(id);
     }
 
-    @Operation(summary = "Delete Recipe1")
+    @Operation(summary = "Delete Recipe")
     @ApiResponses(value = { //
-            @ApiResponse(responseCode = "200", description = "Recipe1 deleted"), //
-            @ApiResponse(responseCode = "404", description = "Recipe1 not found"),
+            @ApiResponse(responseCode = "200", description = "Recipe deleted"), //
+            @ApiResponse(responseCode = "404", description = "Recipe not found"),
             @ApiResponse(responseCode = "401", description = "Not authorized to delete recipe")})
     @DeleteMapping(value = "/{recipeId}/users/{userId}")
     public void deleteRecipe(@PathVariable("recipeId") Long id, @PathVariable("userId") String userId)
             throws UserServiceException {
-        final var logMessage = String.join("|", "deleteRecipe", id.toString(), userId);
-        log.info(logMessage);
-
         recipeService.deleteRecipe(id, userId);
     }
 
-    @Operation(summary = "Create Recipe1")
+    @Operation(summary = "Create Recipe")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully created recipe")})
     @PostMapping(value = "/users/{userId}", produces = "application/json")
     public RecipeDigest createRecipe(@PathVariable("userId") String userId,
                                      @RequestBody RecipeDigest request) throws UserServiceException {
-        final var logMessage = String.join("|", "createRecipe", userId, request.toString());
-        log.info(logMessage);
-
         return recipeService.createRecipe(userId, request);
     }
 
-    @Operation(summary = "Update Recipe1")
+    @Operation(summary = "Update Recipe")
     @ApiResponses(value = { //
-            @ApiResponse(responseCode = "200", description = "Recipe1 updated"), //
-            @ApiResponse(responseCode = "404", description = "Recipe1 not found"),
+            @ApiResponse(responseCode = "200", description = "Recipe updated"), //
+            @ApiResponse(responseCode = "404", description = "Recipe not found"),
             @ApiResponse(responseCode = "401", description = "Not authorized to update recipe")})
     @PutMapping(value = "/{recipeId}/users/{userId}", produces = "application/json")
     public RecipeDigest updateRecipe(@PathVariable("recipeId") Long id,
                                      @PathVariable("userId") String userId,
                                      @RequestBody RecipeDigest request) throws UserServiceException {
-        final var logMessage = String.join("|", "updateRecipe",
-                id.toString(), userId, request.toString());
-        log.info(logMessage);
-
         if (!id.equals(request.getId())) {
             log.error(id + " does not match " + request.getId());
             throw new UserServiceException(com.wildfit.server.exception.UserServiceError.INVALID_PARAMETER);

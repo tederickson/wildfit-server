@@ -10,7 +10,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
  * and converted to the appropriate HTTP Status code.
  */
 @RestController
-@Slf4j
 @RequiredArgsConstructor
 @Tag(name = "Authentication API")
 @RequestMapping("v1/auth")
@@ -37,9 +35,6 @@ public class AuthenticationController {
     @GetMapping("/register/{confirmCode}")
     public RegisterUserResponse register(@PathVariable("confirmCode") String confirmCode)
             throws UserServiceException {
-        final var logMessage = String.join("|", "register", confirmCode);
-        log.info(logMessage);
-
         return userService.confirmUser(confirmCode);
     }
 
@@ -49,9 +44,6 @@ public class AuthenticationController {
             @ApiResponse(responseCode = "400", description = "Invalid user name and/or password")})
     @PostMapping("/login")
     public UserDigest login(@RequestBody LoginRequest request) throws UserServiceException {
-        final var logMessage = String.join("|", "login", request.toString());
-        log.info(logMessage);
-
         return userService.login(request.getEmail(), request.getPassword());
     }
 

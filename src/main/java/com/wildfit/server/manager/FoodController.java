@@ -12,7 +12,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
  * and converted to the appropriate HTTP Status code.
  */
 @RestController
-@Slf4j
 @RequiredArgsConstructor
 @Tag(name = "Food API")
 @RequestMapping("v1/fooditems")
@@ -39,9 +37,6 @@ public class FoodController {
     @GetMapping(value = "/{id}", produces = "application/json")
     public FoodItemDigest getFoodWithId(@PathVariable("id") String id)
             throws UserServiceException, NutritionixException {
-        final var logMessage = String.join("|", "getFoodWithId", id);
-        log.info(logMessage);
-
         return nutritionixService.getFoodWithId(id);
     }
 
@@ -52,9 +47,6 @@ public class FoodController {
     @GetMapping(value = "/barcodes/{barcode}", produces = "application/json")
     public FoodItemDigest getFoodWithBarcode(@PathVariable("barcode") String barcode)
             throws UserServiceException, NutritionixException {
-        final var logMessage = String.join("|", "getFoodWithBarcode", barcode);
-        log.info(logMessage);
-
         return nutritionixService.getFoodWithBarcode(barcode);
     }
 
@@ -64,9 +56,6 @@ public class FoodController {
     @GetMapping(produces = "application/json")
     public SearchFoodResponse getFoodsByQuery(@RequestParam(name = "description") String description)
             throws UserServiceException, NutritionixException {
-        final var logMessage = String.join("|", "getFoodsByQuery", description);
-        log.info(logMessage);
-
         return nutritionixService.getFoodsByQuery(description);
     }
 
@@ -76,9 +65,6 @@ public class FoodController {
     @GetMapping(value = "/recipes/{recipeId}", produces = "application/json")
     public FoodItemDigest getRecipeNutrition(@RequestParam(name = "recipeId") Long recipeId)
             throws UserServiceException, NutritionixException {
-        final var logMessage = String.join("|", "getRecipeNutrition", recipeId.toString());
-        log.info(logMessage);
-
         RecipeDigest recipeDigest = recipeService.retrieveRecipe(recipeId);
         return nutritionixService.getRecipeNutrition(recipeDigest);
     }
