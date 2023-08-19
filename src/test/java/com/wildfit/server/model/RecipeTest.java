@@ -2,11 +2,15 @@ package com.wildfit.server.model;
 
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.google.code.beanmatchers.BeanMatchers;
+import com.wildfit.server.util.ReadRecipeDigest;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.BeforeAll;
@@ -20,12 +24,27 @@ class RecipeTest {
     }
 
     @Test
-    public void shouldHaveANoArgsConstructor() {
+    void testToString() {
+        final var recipe = ReadRecipeDigest.getRecipe("Tuna_salad_with_apple_and_celery.json");
+
+        assertTrue(recipe.toString().contains("name='Tuna salad with apple and celery'"));
+    }
+
+    @Test
+    void testAuditDates() {
+        final var recipe = ReadRecipeDigest.getRecipe("Tuna_salad_with_apple_and_celery.json");
+
+        assertNull(recipe.getUpdated());
+        assertEquals(LocalDate.now(), recipe.getCreated().toLocalDate());
+    }
+
+    @Test
+    void shouldHaveANoArgsConstructor() {
         assertThat(Recipe.class, hasValidBeanConstructor());
     }
 
     @Test
-    public void equalsAndHashCode() {
+    void equalsAndHashCode() {
         EqualsVerifier.forClass(Recipe.class)
                       .withPrefabValues(RecipeGroup.class, new RecipeGroup().setId(3L), new RecipeGroup().setId(13L))
                       .suppress(Warning.NONFINAL_FIELDS)

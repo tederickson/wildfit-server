@@ -4,13 +4,11 @@ import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.google.code.beanmatchers.BeanMatchers;
-import com.wildfit.server.domain.RecipeDigest;
-import com.wildfit.server.model.mapper.RecipeMapper;
+import com.wildfit.server.util.ReadRecipeDigest;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.BeforeAll;
@@ -37,20 +35,11 @@ class RecipeGroupTest {
     }
 
     @Test
-    public void testToString() throws IOException {
-        final var digest = getRecipeDigest("Tuna_salad.json");
-        final var recipe = RecipeMapper.create(digest, "bob@bob.net");
+    public void testToString() {
+        final var recipe = ReadRecipeDigest.getRecipe("Tuna_salad.json");
         final var recipeGroup = recipe.getRecipeGroups().get(1);
 
         assertEquals(recipe, recipeGroup.getRecipe());
         assertEquals("RecipeGroup1{id=null, recipeGroupNumber=1, name='Dressing'}", recipeGroup.toString());
-    }
-
-    protected RecipeDigest getRecipeDigest(String fileName) throws IOException {
-        try (var in = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName)) {
-            final var mapper = new com.fasterxml.jackson.databind.ObjectMapper();
-
-            return mapper.readValue(in, RecipeDigest.class);
-        }
     }
 }
