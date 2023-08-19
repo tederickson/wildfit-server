@@ -21,11 +21,10 @@ import org.springframework.web.context.request.WebRequest;
 @ExtendWith(MockitoExtension.class)
 class ManagerAdviceTest {
 
-    @Mock
-    private WebRequest webRequest;
-
     @InjectMocks
     ManagerAdvice managerAdvice;
+    @Mock
+    private WebRequest webRequest;
 
     @Test
     void userServiceExceptionHandler() {

@@ -19,13 +19,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 class FoodControllerTest {
+    @InjectMocks
+    FoodController foodController;
     @Mock
     private NutritionixService nutritionixService;
     @Mock
     private RecipeService recipeService;
-
-    @InjectMocks
-    FoodController foodController;
 
     @Test
     void getFoodWithId() throws UserServiceException, NutritionixException {

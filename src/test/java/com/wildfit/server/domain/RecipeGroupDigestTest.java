@@ -10,30 +10,30 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.Test;
 
-class InstructionGroupDigestTest {
+class RecipeGroupDigestTest {
     @Test
     public void shouldHaveANoArgsConstructor() {
-        assertThat(InstructionGroupDigest.class, hasValidBeanConstructor());
+        assertThat(RecipeGroupDigest.class, hasValidBeanConstructor());
     }
 
     @Test
     public void gettersAndSettersShouldWorkForEachProperty() {
-        assertThat(InstructionGroupDigest.class, hasValidGettersAndSetters());
+        assertThat(RecipeGroupDigest.class, hasValidGettersAndSetters());
     }
 
     @Test
     public void allPropertiesShouldBeRepresentedInToStringOutput() {
-        assertThat(InstructionGroupDigest.class, hasValidBeanToString());
+        assertThat(RecipeGroupDigest.class, hasValidBeanToString());
     }
 
     @Test
     public void equalsAndHashCode() {
-        EqualsVerifier.forClass(InstructionGroupDigest.class).suppress(Warning.NONFINAL_FIELDS).verify();
+        EqualsVerifier.forClass(RecipeGroupDigest.class).suppress(Warning.NONFINAL_FIELDS).verify();
     }
 
     @Test
     void builder() {
-        final var request = InstructionGroupDigest.builder().withName("p").build();
+        final var request = RecipeGroupDigest.builder().withName("p").build();
         assertEquals("p", request.getName());
     }
 }

@@ -3,12 +3,10 @@ package com.wildfit.server.model.mapper;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import com.wildfit.server.domain.InstructionGroupDigest;
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.model.Season;
 
@@ -26,14 +24,12 @@ public final class RecipeMapper {
                                         .withCookTimeMin(recipe.getCookTimeMin())
                                         .withServingUnit(recipe.getServingUnit())
                                         .withServingQty(recipe.getServingQty());
-        List<InstructionGroupDigest> instructionGroups = new ArrayList<>();
 
         if (recipe.getRecipeGroups() != null) {
-            for (var recipeGroup : recipe.getRecipeGroups()) {
-                instructionGroups.add(RecipeGroupMapper.map(recipeGroup));
-            }
+            builder.withInstructionGroups(recipe.getRecipeGroups().stream().map(RecipeGroupMapper::map)
+                                                 .collect(Collectors.toList()));
         }
-        return builder.withInstructionGroups(instructionGroups).build();
+        return builder.build();
     }
 
     public static com.wildfit.server.model.Recipe create(RecipeDigest request, String email) {
@@ -50,7 +46,7 @@ public final class RecipeMapper {
                 .setServingQty(request.getServingQty())
                 .setCreated(LocalDateTime.now());
 
-        if (request.getInstructionGroups() != null) {
+        if (request.getInstructionGroups()  != null) {
             for (var instructionGroup : request.getInstructionGroups()) {
                 recipe.add(RecipeGroupMapper.create(instructionGroup));
             }

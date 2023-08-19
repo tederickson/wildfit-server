@@ -37,7 +37,7 @@ public class CreateUserHandler {
     public CreateUserResponse execute() throws UserServiceException {
         validate();
 
-        if (!PasswordValidator.isValid(password)) {
+        if (PasswordValidator.isNotValid(password)) {
             throw new UserServiceException(UserServiceError.INVALID_PASSWORD);
         }
         final var encodedPassword = PasswordEncodeDecode.encode(password);

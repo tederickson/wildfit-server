@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.UUID;
 
 import com.wildfit.server.domain.InstructionDigest;
-import com.wildfit.server.domain.InstructionGroupDigest;
 import com.wildfit.server.domain.RecipeDigest;
+import com.wildfit.server.domain.RecipeGroupDigest;
 import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
@@ -27,9 +27,9 @@ class DeleteRecipeHandlerTest extends CommonRecipeHandlerTest {
     final InstructionDigest step1 = InstructionDigest.builder().withStepNumber(1).withInstruction("Heat the oil")
                                                      .build();
 
-    final InstructionGroupDigest instructionGroup = InstructionGroupDigest.builder()
-                                                                          .withInstructionGroupNumber(1)
-                                                                          .withInstructions(List.of(step1)).build();
+    final RecipeGroupDigest recipeGroupDigest = RecipeGroupDigest.builder()
+                                                                 .withInstructionGroupNumber(1)
+                                                                 .withInstructions(List.of(step1)).build();
     final RecipeDigest recipe = RecipeDigest.builder()
                                             .withName(name)
                                             .withSeason(SeasonType.FALL)
@@ -38,7 +38,7 @@ class DeleteRecipeHandlerTest extends CommonRecipeHandlerTest {
                                             .withCookTimeMin(15)
                                             .withServingQty(4)
                                             .withServingUnit("serving")
-                                            .withInstructionGroups(List.of(instructionGroup))
+                                            .withInstructionGroups(List.of(recipeGroupDigest))
                                             .build();
 
     @Test

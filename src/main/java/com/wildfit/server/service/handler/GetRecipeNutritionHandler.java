@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Objects;
 
 import com.wildfit.server.domain.FoodItemDigest;
-import com.wildfit.server.domain.InstructionGroupDigest;
 import com.wildfit.server.domain.ParseRecipeRequest;
 import com.wildfit.server.domain.RecipeDigest;
+import com.wildfit.server.domain.RecipeGroupDigest;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.FoodItems;
 import com.wildfit.server.model.mapper.FoodItemDigestMapper;
@@ -28,7 +28,7 @@ public class GetRecipeNutritionHandler extends AbstractNutritionixHandler<FoodIt
         parseRecipeRequest.setNum_servings(recipeDigest.getServingQty());
 
         recipeDigest.getInstructionGroups().stream()
-                    .map(InstructionGroupDigest::getIngredients)
+                    .map(RecipeGroupDigest::getIngredients)
                     .flatMap(List::stream)
                     .forEach((ingredient) -> parseRecipeRequest.addIngredient(
                             ingredient.getIngredientServingQty(),

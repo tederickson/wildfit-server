@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.List;
 
-import com.wildfit.server.domain.InstructionGroupDigest;
 import com.wildfit.server.domain.RecipeDigest;
+import com.wildfit.server.domain.RecipeGroupDigest;
 import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
@@ -54,10 +54,10 @@ class CreateRecipeHandlerTest extends CommonRecipeHandlerTest {
         final var season = SeasonType.SPRING;
         final var name = "CreateRecipeHandlerTest";
 
-        final var instructionGroup = InstructionGroupDigest.builder()
-                                                           .withInstructionGroupNumber(1)
-                                                           .withInstructions(List.of(step1, step2, step3, step4))
-                                                           .build();
+        final var instructionGroup = RecipeGroupDigest.builder()
+                                                      .withInstructionGroupNumber(1)
+                                                      .withInstructions(List.of(step1, step2, step3, step4))
+                                                      .build();
         final var recipe = RecipeDigest.builder()
                                        .withName(name)
                                        .withSeason(season)

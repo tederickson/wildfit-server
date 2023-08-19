@@ -9,8 +9,8 @@ import java.util.stream.Collectors;
 
 import com.wildfit.server.domain.IngredientDigest;
 import com.wildfit.server.domain.InstructionDigest;
-import com.wildfit.server.domain.InstructionGroupDigest;
 import com.wildfit.server.domain.RecipeDigest;
+import com.wildfit.server.domain.RecipeGroupDigest;
 import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.exception.UserServiceException;
 import org.junit.jupiter.api.Test;
@@ -24,7 +24,7 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
     private static List<IngredientDigest> getIngredients(RecipeDigest recipe) {
         return recipe
                 .getInstructionGroups().stream()
-                .map(InstructionGroupDigest::getIngredients)
+                .map(RecipeGroupDigest::getIngredients)
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
     }
@@ -32,16 +32,16 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
     private static List<InstructionDigest> getInstructions(RecipeDigest recipe) {
         return recipe
                 .getInstructionGroups().stream()
-                .map(InstructionGroupDigest::getInstructions)
+                .map(RecipeGroupDigest::getInstructions)
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
     }
 
     @Test
     void changeSummary() throws UserServiceException {
-        final var instructionGroup = InstructionGroupDigest.builder()
-                                                           .withInstructionGroupNumber(1)
-                                                           .withInstructions(List.of(step1, step2)).build();
+        final var instructionGroup = RecipeGroupDigest.builder()
+                                                      .withInstructionGroupNumber(1)
+                                                      .withInstructions(List.of(step1, step2)).build();
         final var recipe = RecipeDigest.builder()
                                        .withName(NAME)
                                        .withSeason(SeasonType.SPRING)
@@ -94,9 +94,9 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
 
     @Test
     void addInstructionGroup() throws UserServiceException {
-        final var instructionGroup = InstructionGroupDigest.builder()
-                                                           .withInstructionGroupNumber(1)
-                                                           .withInstructions(List.of(step1, step2)).build();
+        final var instructionGroup = RecipeGroupDigest.builder()
+                                                      .withInstructionGroupNumber(1)
+                                                      .withInstructions(List.of(step1, step2)).build();
         final var recipe = RecipeDigest.builder()
                                        .withName(NAME)
                                        .withSeason(SeasonType.FALL)
@@ -115,11 +115,11 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
         assertEquals(2, recipeGroup.getInstructions().size());
         assertEquals(0, recipeGroup.getIngredients().size());
 
-        final var instructionGroup2 = InstructionGroupDigest.builder()
-                                                            .withInstructionGroupNumber(2)
-                                                            .withInstructions(List.of(step3, step4, step1))
-                                                            .withIngredients(List.of())
-                                                            .build();
+        final var instructionGroup2 = RecipeGroupDigest.builder()
+                                                       .withInstructionGroupNumber(2)
+                                                       .withInstructions(List.of(step3, step4, step1))
+                                                       .withIngredients(List.of())
+                                                       .build();
 
         testRecipe.getInstructionGroups().add(instructionGroup2);
         final var response = updateRecipe(testRecipe);
@@ -137,14 +137,14 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
 
     @Test
     void removeRecipeGroup() throws UserServiceException {
-        final var instructionGroup1 = InstructionGroupDigest.builder()
-                                                            .withInstructionGroupNumber(1)
-                                                            .withInstructions(List.of(step1, step2, step3, step4))
-                                                            .build();
-        final var instructionGroup2 = InstructionGroupDigest.builder()
-                                                            .withInstructionGroupNumber(2)
-                                                            .withInstructions(List.of(step1, step4))
-                                                            .build();
+        final var instructionGroup1 = RecipeGroupDigest.builder()
+                                                       .withInstructionGroupNumber(1)
+                                                       .withInstructions(List.of(step1, step2, step3, step4))
+                                                       .build();
+        final var instructionGroup2 = RecipeGroupDigest.builder()
+                                                       .withInstructionGroupNumber(2)
+                                                       .withInstructions(List.of(step1, step4))
+                                                       .build();
         final var recipe = RecipeDigest.builder()
                                        .withName(NAME)
                                        .withSeason(SeasonType.FALL)
@@ -166,10 +166,10 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
 
     @Test
     void removeInstruction() throws UserServiceException {
-        final var instructionGroup = InstructionGroupDigest.builder()
-                                                           .withInstructionGroupNumber(1)
-                                                           .withInstructions(List.of(step1, step2, step3, step4))
-                                                           .build();
+        final var instructionGroup = RecipeGroupDigest.builder()
+                                                      .withInstructionGroupNumber(1)
+                                                      .withInstructions(List.of(step1, step2, step3, step4))
+                                                      .build();
         final var recipe = RecipeDigest.builder()
                                        .withName(NAME)
                                        .withSeason(SeasonType.FALL)
@@ -191,10 +191,10 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
 
     @Test
     void updateInstruction() throws UserServiceException {
-        final var instructionGroup = InstructionGroupDigest.builder()
-                                                           .withInstructionGroupNumber(1)
-                                                           .withInstructions(List.of(step1, step2, step3, step4))
-                                                           .build();
+        final var instructionGroup = RecipeGroupDigest.builder()
+                                                      .withInstructionGroupNumber(1)
+                                                      .withInstructions(List.of(step1, step2, step3, step4))
+                                                      .build();
         final var recipe = RecipeDigest.builder()
                                        .withName(NAME)
                                        .withSeason(SeasonType.FALL)

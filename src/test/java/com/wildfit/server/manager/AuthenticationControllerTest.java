@@ -18,11 +18,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 class AuthenticationControllerTest {
 
-    @Mock
-    private UserService userService;
-
     @InjectMocks
     AuthenticationController controller;
+    @Mock
+    private UserService userService;
 
     @Test
     void register() throws UserServiceException {

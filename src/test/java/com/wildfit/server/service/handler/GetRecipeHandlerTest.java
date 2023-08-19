@@ -8,8 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.List;
 
 import com.google.common.collect.Iterables;
-import com.wildfit.server.domain.InstructionGroupDigest;
 import com.wildfit.server.domain.RecipeDigest;
+import com.wildfit.server.domain.RecipeGroupDigest;
 import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
@@ -37,9 +37,9 @@ class GetRecipeHandlerTest extends CommonRecipeHandlerTest {
 
     @Test
     void execute() throws UserServiceException {
-        final var instructionGroup = InstructionGroupDigest.builder()
-                                                           .withInstructionGroupNumber(1)
-                                                           .withInstructions(List.of(step1, step2)).build();
+        final var recipeGroupDigest = RecipeGroupDigest.builder()
+                                                       .withInstructionGroupNumber(1)
+                                                       .withInstructions(List.of(step1, step2)).build();
         final var recipe = RecipeDigest.builder()
                                        .withName(NAME)
                                        .withSeason(SeasonType.SPRING)
@@ -48,7 +48,7 @@ class GetRecipeHandlerTest extends CommonRecipeHandlerTest {
                                        .withCookTimeMin(15)
                                        .withServingQty(4)
                                        .withServingUnit("serving")
-                                       .withInstructionGroups(List.of(instructionGroup))
+                                       .withInstructionGroups(List.of(recipeGroupDigest))
                                        .build();
 
         createRecipe(recipe);

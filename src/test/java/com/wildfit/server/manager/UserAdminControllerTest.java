@@ -20,12 +20,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 class UserAdminControllerTest {
     static final String userId = "1nv4L1d";
-
-    @Mock
-    private UserService userService;
-
     @InjectMocks
     UserAdminController userAdminController;
+    @Mock
+    private UserService userService;
 
     @Test
     void createUser() throws UserServiceException {

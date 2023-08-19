@@ -10,18 +10,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class PasswordValidatorTest {
 
-    @ParameterizedTest(name = "#{index} - Run test with password = {0}")
-    @MethodSource("validPasswordProvider")
-    void test_password_regex_valid(String password) {
-        assertTrue(PasswordValidator.isValid(password));
-    }
-
-    @ParameterizedTest(name = "#{index} - Run test with password = {0}")
-    @MethodSource("invalidPasswordProvider")
-    void test_password_regex_invalid(String password) {
-        assertFalse(PasswordValidator.isValid(password));
-    }
-
     static Stream<String> validPasswordProvider() {
         return Stream.of(
                 "AAAbbbccc@123",
@@ -54,5 +42,17 @@ class PasswordValidatorTest {
                 "--------",                 // invalid
                 " ",                        // empty
                 "");                        // empty
+    }
+
+    @ParameterizedTest(name = "#{index} - Run test with password = {0}")
+    @MethodSource("validPasswordProvider")
+    void test_password_regex_valid(String password) {
+        assertFalse(com.wildfit.server.service.handler.PasswordValidator.isNotValid(password));
+    }
+
+    @ParameterizedTest(name = "#{index} - Run test with password = {0}")
+    @MethodSource("invalidPasswordProvider")
+    void test_password_regex_invalid(String password) {
+        assertTrue(com.wildfit.server.service.handler.PasswordValidator.isNotValid(password));
     }
 }

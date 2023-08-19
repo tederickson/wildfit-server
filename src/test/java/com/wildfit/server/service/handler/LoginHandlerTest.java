@@ -110,7 +110,7 @@ class LoginHandlerTest extends CommonHandlerTest {
     }
 
     private User createUser(boolean enabled) {
-        if (!PasswordValidator.isValid(PASSWORD)) {
+        if (PasswordValidator.isNotValid(PASSWORD)) {
             fail(UserServiceError.INVALID_PASSWORD.getMessage());
         }
         final var encodedPassword = PasswordEncodeDecode.encode(PASSWORD);

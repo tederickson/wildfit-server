@@ -3,7 +3,6 @@ package com.wildfit.server.model;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
@@ -34,6 +33,6 @@ class IngredientTest {
         assertEquals(ingredient2, dupe);
         assertNotEquals(ingredient2.hashCode(), ingredient1.hashCode());
         assertEquals(ingredient2.hashCode(), dupe.hashCode());
-        assertFalse(ingredient1.equals("bob"));
+        assertNotEquals("bob", ingredient1);
     }
 }

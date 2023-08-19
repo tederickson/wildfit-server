@@ -22,7 +22,8 @@ public class InstructionMapper {
                                 .build();
     }
 
-    public static CommonRecipe updateInstruction(com.wildfit.server.model.Instruction existingInstruction, InstructionDigest instruction) {
+    public static CommonRecipe updateInstruction(com.wildfit.server.model.Instruction existingInstruction,
+                                                 InstructionDigest instruction) {
         return existingInstruction
                 .setStepNumber(instruction.getStepNumber())
                 .setText(instruction.getInstruction());

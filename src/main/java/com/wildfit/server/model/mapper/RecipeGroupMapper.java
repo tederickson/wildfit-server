@@ -9,17 +9,18 @@ import java.util.stream.Collectors;
 
 import com.wildfit.server.domain.IngredientDigest;
 import com.wildfit.server.domain.InstructionDigest;
-import com.wildfit.server.domain.InstructionGroupDigest;
+import com.wildfit.server.domain.RecipeGroupDigest;
 import com.wildfit.server.model.CommonRecipe;
 import com.wildfit.server.model.CommonRecipeType;
 import com.wildfit.server.model.Ingredient;
+import com.wildfit.server.model.RecipeGroup;
 
 public class RecipeGroupMapper {
     private RecipeGroupMapper() {
     }
 
-    public static com.wildfit.server.model.RecipeGroup create(InstructionGroupDigest instructionGroup) {
-        final var recipeGroup = new com.wildfit.server.model.RecipeGroup()
+    public static RecipeGroup create(RecipeGroupDigest instructionGroup) {
+        final var recipeGroup = new RecipeGroup()
                 .setId(instructionGroup.getId())
                 .setName(instructionGroup.getName())
                 .setRecipeGroupNumber(instructionGroup.getInstructionGroupNumber());
@@ -36,11 +37,12 @@ public class RecipeGroupMapper {
         return recipeGroup;
     }
 
-    public static InstructionGroupDigest map(com.wildfit.server.model.RecipeGroup recipeGroup) {
-        final var builder = InstructionGroupDigest.builder()
-                                                  .withId(recipeGroup.getId())
-                                                  .withName(recipeGroup.getName())
-                                                  .withInstructionGroupNumber(recipeGroup.getRecipeGroupNumber());
+    public static RecipeGroupDigest map(RecipeGroup recipeGroup) {
+        final var builder = RecipeGroupDigest.builder()
+                                             .withId(recipeGroup.getId())
+                                             .withName(recipeGroup.getName())
+                                             .withInstructionGroupNumber(
+                                                     recipeGroup.getRecipeGroupNumber());
 
         List<InstructionDigest> instructions = new ArrayList<>();
         List<IngredientDigest> ingredients = new ArrayList<>();
@@ -59,8 +61,8 @@ public class RecipeGroupMapper {
                 .build();
     }
 
-    public static com.wildfit.server.model.RecipeGroup update(com.wildfit.server.model.RecipeGroup existing,
-                                                              InstructionGroupDigest instructionGroup) {
+    public static RecipeGroup update(RecipeGroup existing,
+                                     RecipeGroupDigest instructionGroup) {
         Map<Long, CommonRecipe> commonRecipeMap = new HashMap<>();
         if (existing.getCommonRecipes() != null) {
             commonRecipeMap = existing.getCommonRecipes().stream().collect(Collectors.toMap(

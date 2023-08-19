@@ -22,7 +22,7 @@ public class ListBySeasonAndNameHandler {
     public RecipeListDigest execute() throws UserServiceException {
         validate();
 
-        final var results = recipeRepository.findAllBySeasonAndName(Season.map(season) ,
+        final var results = recipeRepository.findAllBySeasonAndName(Season.map(season),
                 recipeName, pageable);
 
         return RecipeListMapper.map(results);
