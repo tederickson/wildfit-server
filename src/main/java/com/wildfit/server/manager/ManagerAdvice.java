@@ -18,9 +18,13 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @Slf4j
 public class ManagerAdvice extends ResponseEntityExceptionHandler {
 
+    private static void logRequestThatCausedTheError(WebRequest request) {
+        log.error(request.getDescription(false));
+    }
+
     @ExceptionHandler(UserServiceException.class)
     protected ResponseEntity<ErrorData> userServiceExceptionHandler(UserServiceException ex, WebRequest request) {
-        log.error(request.getDescription(false));
+        logRequestThatCausedTheError(request);
         log.error("UserServiceException", ex);
 
         final var userServiceException = ex.getError();
@@ -34,7 +38,7 @@ public class ManagerAdvice extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(NutritionixException.class)
     protected ResponseEntity<ErrorData> nutritionixExceptionHandler(NutritionixException ex, WebRequest request) {
-        log.error(request.getDescription(false));
+        logRequestThatCausedTheError(request);
         log.error("NutritionixException", ex);
 
         final var error = ErrorData.builder()
