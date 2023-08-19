@@ -27,6 +27,7 @@ class RecipeIngredientTypeTest {
         for (var enm : IngredientType.values()) {
             assertNotNull(RecipeIngredientType.map(enm));
         }
+        assertEquals(RecipeIngredientType.NONE, RecipeIngredientType.map(null));
     }
 
     @ParameterizedTest

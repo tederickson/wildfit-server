@@ -1,6 +1,7 @@
 package com.wildfit.server.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.stream.Collectors;
 
@@ -12,6 +13,13 @@ class NutritionixNutrientTypeTest {
     void getUsdaTag() {
         for (var enm : NutritionixNutrientType.values()) {
             assertEquals(enm.name(), enm.getUsdaTag(), enm.toString());
+        }
+    }
+
+    @Test
+    void getUnit() {
+        for (var enm : NutritionixNutrientType.values()) {
+            assertNotNull(enm.getUnit(), enm.toString());
         }
     }
 

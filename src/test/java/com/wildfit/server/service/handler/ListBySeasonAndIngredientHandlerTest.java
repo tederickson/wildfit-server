@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.util.ReadRecipeDigest;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
@@ -20,7 +21,7 @@ class ListBySeasonAndIngredientHandlerTest extends CommonRecipeHandlerTest {
 
     @Test
     void execute() throws Exception {
-        final var recipe = getRecipeDigest(FILE_NAME);
+        final var recipe = ReadRecipeDigest.getRecipeDigest(FILE_NAME);
         recipe.setName(RECIPE_NAME);
 
         createRecipe(recipe);
@@ -43,7 +44,7 @@ class ListBySeasonAndIngredientHandlerTest extends CommonRecipeHandlerTest {
 
     @Test
     void execute_pageIndexDoesNotExist() throws Exception {
-        final var recipe = getRecipeDigest(FILE_NAME);
+        final var recipe = ReadRecipeDigest.getRecipeDigest(FILE_NAME);
         recipe.setName(RECIPE_NAME);
 
         createRecipe(recipe);

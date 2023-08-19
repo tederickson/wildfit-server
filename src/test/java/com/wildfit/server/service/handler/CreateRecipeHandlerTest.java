@@ -13,6 +13,7 @@ import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.exception.UserServiceError;
 import com.wildfit.server.exception.UserServiceException;
 import com.wildfit.server.model.Season;
+import com.wildfit.server.util.ReadRecipeDigest;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -80,7 +81,7 @@ class CreateRecipeHandlerTest extends CommonRecipeHandlerTest {
 
     @Test
     public void createRecipeWithInstructionsAndIngredients() throws Exception {
-        final var digest = getRecipeDigest("Tuna_salad.json");
+        final var digest = ReadRecipeDigest.getRecipeDigest("Tuna_salad.json");
         validateTunaSalad(digest);
 
         createRecipe(digest);

@@ -32,7 +32,7 @@ class IngredientTest {
         assertEquals(ingredient2, ingredient2);
         assertEquals(ingredient2, dupe);
         assertNotEquals(ingredient2.hashCode(), ingredient1.hashCode());
+        assertNotEquals(ingredient2, ingredient1.hashCode());
         assertEquals(ingredient2.hashCode(), dupe.hashCode());
-        assertNotEquals("bob", ingredient1);
     }
 }

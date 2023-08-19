@@ -13,6 +13,7 @@ import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.RecipeGroupDigest;
 import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.util.ReadRecipeDigest;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -82,7 +83,7 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
 
     @Test
     void removeAllInstructionGroups() throws UserServiceException {
-        final var recipe = getRecipeDigest("Egg_muffins_with_mushrooms_and_herbs.json");
+        final var recipe = ReadRecipeDigest.getRecipeDigest("Egg_muffins_with_mushrooms_and_herbs.json");
 
         createRecipe(recipe);
 
@@ -216,8 +217,8 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
 
     @Test
     void addInstructionsAndIngredients() throws UserServiceException {
-        final var recipe = getRecipeDigest("Egg_muffins_with_mushrooms_and_herbs.json");
-        final var recipe2 = getRecipeDigest("Tuna_salad_with_apple_and_celery.json");
+        final var recipe = ReadRecipeDigest.getRecipeDigest("Egg_muffins_with_mushrooms_and_herbs.json");
+        final var recipe2 = ReadRecipeDigest.getRecipeDigest("Tuna_salad_with_apple_and_celery.json");
 
         createRecipe(recipe);
 

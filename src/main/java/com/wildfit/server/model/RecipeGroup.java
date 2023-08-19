@@ -2,6 +2,7 @@ package com.wildfit.server.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -42,6 +43,30 @@ public class RecipeGroup {
     private int recipeGroupNumber;
     private String name;
 
+    public void add(CommonRecipe commonRecipe) {
+        if (commonRecipes == null) {
+            commonRecipes = new ArrayList<>();
+        }
+        commonRecipes.add(commonRecipe);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        RecipeGroup that = (RecipeGroup) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
     @Override
     public String toString() {
         return "RecipeGroup1{" +
@@ -49,12 +74,5 @@ public class RecipeGroup {
                 ", recipeGroupNumber=" + recipeGroupNumber +
                 ", name='" + name + '\'' +
                 '}';
-    }
-
-    public void add(CommonRecipe commonRecipe) {
-        if (commonRecipes == null) {
-            commonRecipes = new ArrayList<>();
-        }
-        commonRecipes.add(commonRecipe);
     }
 }

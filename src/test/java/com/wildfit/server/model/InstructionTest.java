@@ -3,8 +3,8 @@ package com.wildfit.server.model;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -28,10 +28,10 @@ class InstructionTest {
         final var dupe = new Instruction().setId(instruction2.getId()).setText("Bob");
 
         assertNotEquals(instruction2, instruction1);
-        assertTrue(instruction2.equals(instruction2));
+        assertEquals(instruction2, instruction2);
         assertEquals(instruction2, dupe);
         assertNotEquals(instruction2.hashCode(), instruction1.hashCode());
         assertEquals(instruction2.hashCode(), dupe.hashCode());
-        assertNotEquals("bob", instruction2);
+        assertFalse(instruction2.equals("bob"));
     }
 }
