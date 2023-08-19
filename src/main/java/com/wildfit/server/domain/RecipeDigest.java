@@ -24,5 +24,5 @@ public final class RecipeDigest {
     private int servingQty;
 
     private String introduction;
-    private List<RecipeGroupDigest> instructionGroups;
+    private List<RecipeGroupDigest> recipeGroups;
 }

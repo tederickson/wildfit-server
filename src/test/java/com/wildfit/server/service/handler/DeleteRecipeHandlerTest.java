@@ -38,7 +38,7 @@ class DeleteRecipeHandlerTest extends CommonRecipeHandlerTest {
                                             .withCookTimeMin(15)
                                             .withServingQty(4)
                                             .withServingUnit("serving")
-                                            .withInstructionGroups(List.of(recipeGroupDigest))
+                                            .withRecipeGroups(List.of(recipeGroupDigest))
                                             .build();
 
     @Test

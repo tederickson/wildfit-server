@@ -32,9 +32,9 @@ class CreateRecipeHandlerTest extends CommonRecipeHandlerTest {
                         "because it is simple and can be eaten for breakfast, lunch, dinner or snack.",
                 digest.getIntroduction());
 
-        assertEquals(2, digest.getInstructionGroups().size());
+        assertEquals(2, digest.getRecipeGroups().size());
 
-        for (var instructionGroup : digest.getInstructionGroups()) {
+        for (var instructionGroup : digest.getRecipeGroups()) {
             switch (instructionGroup.getName()) {
                 case "Salad" -> {
                     assertEquals(4, instructionGroup.getInstructions().size());
@@ -66,7 +66,7 @@ class CreateRecipeHandlerTest extends CommonRecipeHandlerTest {
                                        .withCookTimeMin(15)
                                        .withServingQty(4)
                                        .withServingUnit("serving")
-                                       .withInstructionGroups(List.of(instructionGroup))
+                                       .withRecipeGroups(List.of(instructionGroup))
                                        .build();
         createRecipe(recipe);
 

@@ -6,7 +6,7 @@
   "servingUnit": "serving",
   "servingQty": 4,
   "introduction": "These lettuce wraps are so easy and full of flavor!\nThey make a great side dish, or are perfect for a healthy Spring approved recipe.",
-  "instructionGroups": [
+  "recipeGroups": [
     {
       "instructionGroupNumber": 0,
       "name": "",

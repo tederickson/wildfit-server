@@ -6,7 +6,7 @@
   "servingUnit": "serving",
   "servingQty": 4,
   "introduction": "Tuna is one of the staples in our household. \nWe eat it all the time, because it is simple and can be eaten for breakfast, lunch, dinner or snack.",
-  "instructionGroups": [
+  "recipeGroups": [
     {
       "instructionGroupNumber": 0,
       "name": "Dressing",

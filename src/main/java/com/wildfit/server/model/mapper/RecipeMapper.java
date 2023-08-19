@@ -26,7 +26,7 @@ public final class RecipeMapper {
                                         .withServingQty(recipe.getServingQty());
 
         if (recipe.getRecipeGroups() != null) {
-            builder.withInstructionGroups(recipe.getRecipeGroups().stream().map(RecipeGroupMapper::map)
+            builder.withRecipeGroups(recipe.getRecipeGroups().stream().map(RecipeGroupMapper::map)
                                                  .collect(Collectors.toList()));
         }
         return builder.build();
@@ -46,8 +46,8 @@ public final class RecipeMapper {
                 .setServingQty(request.getServingQty())
                 .setCreated(LocalDateTime.now());
 
-        if (request.getInstructionGroups()  != null) {
-            for (var instructionGroup : request.getInstructionGroups()) {
+        if (request.getRecipeGroups()  != null) {
+            for (var instructionGroup : request.getRecipeGroups()) {
                 recipe.add(RecipeGroupMapper.create(instructionGroup));
             }
         }
@@ -77,8 +77,8 @@ public final class RecipeMapper {
         }
         recipe.setRecipeGroups(new ArrayList<>());
 
-        if (request.getInstructionGroups() != null) {
-            for (var instructionGroup : request.getInstructionGroups()) {
+        if (request.getRecipeGroups() != null) {
+            for (var instructionGroup : request.getRecipeGroups()) {
                 final var id = instructionGroup.getId();
 
                 if (id == null) {

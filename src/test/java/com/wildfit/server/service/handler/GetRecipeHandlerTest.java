@@ -48,7 +48,7 @@ class GetRecipeHandlerTest extends CommonRecipeHandlerTest {
                                        .withCookTimeMin(15)
                                        .withServingQty(4)
                                        .withServingUnit("serving")
-                                       .withInstructionGroups(List.of(recipeGroupDigest))
+                                       .withRecipeGroups(List.of(recipeGroupDigest))
                                        .build();
 
         createRecipe(recipe);
@@ -57,7 +57,7 @@ class GetRecipeHandlerTest extends CommonRecipeHandlerTest {
                                                  .withRecipeRepository(recipeRepository)
                                                  .withRecipeId(testRecipe.getId())
                                                  .build().execute();
-        var instructionGroup1 = Iterables.getOnlyElement(recipeDigest.getInstructionGroups());
+        var instructionGroup1 = Iterables.getOnlyElement(recipeDigest.getRecipeGroups());
         assertTrue(instructionGroup1.getIngredients().isEmpty());
         assertEquals(2, instructionGroup1.getInstructions().size());
 

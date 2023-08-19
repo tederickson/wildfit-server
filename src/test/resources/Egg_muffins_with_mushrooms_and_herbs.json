@@ -6,7 +6,7 @@
   "servingUnit": "serving",
   "servingQty": 6,
   "introduction": "Perfect for batch cooking, breakfast, lunch, dinner and snack. \nHigh in protein, fat and nutrients. Low in carbs.",
-  "instructionGroups": [
+  "recipeGroups": [
     {
       "instructionGroupNumber": 0,
       "name": "",

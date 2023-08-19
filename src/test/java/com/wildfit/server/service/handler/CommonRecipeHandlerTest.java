@@ -101,7 +101,7 @@ public class CommonRecipeHandlerTest extends CommonHandlerTest {
 
             return mapper.readValue(in, RecipeDigest.class);
         } catch (Exception e) {
-            fail(fileName + " not found");
+            fail(fileName + " : " + e.getMessage());
         }
         return RecipeDigest.builder().build(); // never reached
     }
