@@ -4,7 +4,7 @@ import com.wildfit.server.domain.FoodItemDigest;
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.SearchFoodResponse;
 import com.wildfit.server.exception.NutritionixException;
-import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.NutritionixHeaderInfo;
 import com.wildfit.server.service.handler.GetFoodWithBarcodeHandler;
 import com.wildfit.server.service.handler.GetFoodWithIdHandler;
@@ -24,7 +24,7 @@ public class NutritionixServiceImpl implements NutritionixService {
     private final NutritionixHeaderInfo nutritionixHeaderInfo;
 
     @Override
-    public FoodItemDigest getFoodWithBarcode(String barcode) throws UserServiceException, NutritionixException {
+    public FoodItemDigest getFoodWithBarcode(String barcode) throws WildfitServiceException, NutritionixException {
         return GetFoodWithBarcodeHandler.builder()
                                         .withNutritionixHeaderInfo(nutritionixHeaderInfo)
                                         .withBarcode(barcode)
@@ -32,7 +32,7 @@ public class NutritionixServiceImpl implements NutritionixService {
     }
 
     @Override
-    public FoodItemDigest getFoodWithId(String nixItemId) throws UserServiceException, NutritionixException {
+    public FoodItemDigest getFoodWithId(String nixItemId) throws WildfitServiceException, NutritionixException {
         return GetFoodWithIdHandler.builder()
                                    .withNutritionixHeaderInfo(nutritionixHeaderInfo)
                                    .withNixItemId(nixItemId)
@@ -40,8 +40,7 @@ public class NutritionixServiceImpl implements NutritionixService {
     }
 
     @Override
-    public SearchFoodResponse getFoodsByQuery(String description)
-            throws UserServiceException, NutritionixException {
+    public SearchFoodResponse getFoodsByQuery(String description) throws WildfitServiceException, NutritionixException {
         return GetFoodsByQueryHandler.builder()
                                      .withNutritionixHeaderInfo(nutritionixHeaderInfo)
                                      .withDescription(description)
@@ -50,7 +49,7 @@ public class NutritionixServiceImpl implements NutritionixService {
 
     @Override
     public FoodItemDigest getRecipeNutrition(RecipeDigest recipeDigest)
-            throws UserServiceException, NutritionixException {
+            throws WildfitServiceException, NutritionixException {
         return GetRecipeNutritionHandler.builder()
                                         .withNutritionixHeaderInfo(nutritionixHeaderInfo)
                                         .withRecipeDigest(recipeDigest)

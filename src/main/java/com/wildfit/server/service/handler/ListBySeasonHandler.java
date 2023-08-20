@@ -4,8 +4,8 @@ import java.util.Objects;
 
 import com.wildfit.server.domain.RecipeListDigest;
 import com.wildfit.server.domain.SeasonType;
-import com.wildfit.server.exception.UserServiceError;
-import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.exception.WildfitServiceError;
+import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.Season;
 import com.wildfit.server.model.mapper.RecipeListMapper;
 import lombok.Builder;
@@ -17,20 +17,20 @@ public class ListBySeasonHandler {
     private final SeasonType season;
     private final Pageable pageable;
 
-    public RecipeListDigest execute() throws UserServiceException {
+    public RecipeListDigest execute() throws WildfitServiceException {
         validate();
 
         return RecipeListMapper.map(recipeRepository.findAllBySeason(Season.map(season), pageable));
     }
 
-    private void validate() throws UserServiceException {
+    private void validate() throws WildfitServiceException {
         Objects.requireNonNull(recipeRepository, "recipe1Repository");
 
         if (season == null) {
-            throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
+            throw new WildfitServiceException(WildfitServiceError.INVALID_PARAMETER);
         }
         if (pageable == null) {
-            throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
+            throw new WildfitServiceException(WildfitServiceError.INVALID_PARAMETER);
         }
     }
 }

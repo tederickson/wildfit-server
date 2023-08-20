@@ -9,8 +9,8 @@ import static org.mockito.Mockito.when;
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.RecipeListDigest;
 import com.wildfit.server.domain.SeasonType;
-import com.wildfit.server.exception.UserServiceError;
-import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.exception.WildfitServiceError;
+import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.service.RecipeService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,7 +28,7 @@ class RecipeControllerTest {
     private RecipeService recipeService;
 
     @Test
-    void retrieveRecipesForSeason() throws UserServiceException {
+    void retrieveRecipesForSeason() throws WildfitServiceException {
         when(recipeService.listBySeason(any(), any())).thenReturn(new RecipeListDigest());
 
         final var response = recipeController.retrieveRecipesForSeason(SeasonType.FALL, 12, 40);
@@ -36,7 +36,7 @@ class RecipeControllerTest {
     }
 
     @Test
-    void listBySeasonAndIngredient() throws UserServiceException {
+    void listBySeasonAndIngredient() throws WildfitServiceException {
         when(recipeService.listBySeasonAndIngredient(any(), any(), any())).thenReturn(new RecipeListDigest());
 
         final var response = recipeController.listBySeasonAndIngredient(SeasonType.FALL,
@@ -45,7 +45,7 @@ class RecipeControllerTest {
     }
 
     @Test
-    void listBySeasonAndName() throws UserServiceException {
+    void listBySeasonAndName() throws WildfitServiceException {
         when(recipeService.listBySeasonAndName(any(), any(), any())).thenReturn(new RecipeListDigest());
 
         final var response = recipeController.listBySeasonAndName(SeasonType.FALL,
@@ -54,7 +54,7 @@ class RecipeControllerTest {
     }
 
     @Test
-    void retrieveRecipe() throws UserServiceException {
+    void retrieveRecipe() throws WildfitServiceException {
         when(recipeService.retrieveRecipe(any())).thenReturn(RecipeDigest.builder().build());
 
         final var response = recipeController.retrieveRecipe(15L);
@@ -62,12 +62,12 @@ class RecipeControllerTest {
     }
 
     @Test
-    void deleteRecipe() throws UserServiceException {
+    void deleteRecipe() throws WildfitServiceException {
         recipeController.deleteRecipe(-15L, userId);
     }
 
     @Test
-    void createRecipe() throws UserServiceException {
+    void createRecipe() throws WildfitServiceException {
         when(recipeService.createRecipe(any(), any())).thenReturn(RecipeDigest.builder().build());
 
         final var response = recipeController.createRecipe(userId, RecipeDigest.builder().build());
@@ -75,7 +75,7 @@ class RecipeControllerTest {
     }
 
     @Test
-    void updateRecipe() throws UserServiceException {
+    void updateRecipe() throws WildfitServiceException {
         when(recipeService.updateRecipe(any(), any())).thenReturn(RecipeDigest.builder().build());
 
         final var response = recipeController.updateRecipe(recipeId, userId,
@@ -85,9 +85,9 @@ class RecipeControllerTest {
 
     @Test
     void updateRecipe_idsDoNotMatch() {
-        final var exception = assertThrows(UserServiceException.class,
+        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
                 () -> recipeController.updateRecipe(recipeId, userId, RecipeDigest.builder().build()));
-        assertEquals(UserServiceError.INVALID_PARAMETER, exception.getError());
+        assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
 
 }

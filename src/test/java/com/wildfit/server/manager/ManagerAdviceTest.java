@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.wildfit.server.domain.ErrorData;
 import com.wildfit.server.exception.NutritionixException;
-import com.wildfit.server.exception.UserServiceError;
-import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.exception.WildfitServiceError;
+import com.wildfit.server.exception.WildfitServiceException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -28,14 +28,14 @@ class ManagerAdviceTest {
 
     @Test
     void userServiceExceptionHandler() {
-        final var exception = new UserServiceException(UserServiceError.USER_NOT_FOUND);
+        final var exception = new WildfitServiceException(WildfitServiceError.USER_NOT_FOUND);
         final var response = managerAdvice.userServiceExceptionHandler(exception, webRequest);
 
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
 
         ErrorData expected = ErrorData.builder()
-                                      .withMessage(UserServiceError.USER_NOT_FOUND.getMessage())
-                                      .withErrorCode(UserServiceError.USER_NOT_FOUND.name())
+                                      .withMessage(WildfitServiceError.USER_NOT_FOUND.getMessage())
+                                      .withErrorCode(WildfitServiceError.USER_NOT_FOUND.name())
                                       .build();
         assertEquals(expected, response.getBody());
     }

@@ -9,7 +9,7 @@ import com.wildfit.server.domain.CreateUserRequest;
 import com.wildfit.server.domain.CreateUserResponse;
 import com.wildfit.server.domain.UpdateUserProfileRequest;
 import com.wildfit.server.domain.UserProfileDigest;
-import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,7 +26,7 @@ class UserAdminControllerTest {
     private UserService userService;
 
     @Test
-    void createUser() throws UserServiceException {
+    void createUser() throws WildfitServiceException {
         when(userService.createUser(any(), any(), any())).thenReturn(CreateUserResponse.builder().build());
         final var response = userAdminController.createUser(CreateUserRequest.builder().build());
 
@@ -34,7 +34,7 @@ class UserAdminControllerTest {
     }
 
     @Test
-    void getUser() throws UserServiceException {
+    void getUser() throws WildfitServiceException {
         when(userService.getUserProfile(userId)).thenReturn(UserProfileDigest.builder().build());
         final var response = userAdminController.getUser(userId);
 
@@ -42,7 +42,7 @@ class UserAdminControllerTest {
     }
 
     @Test
-    void updateUserProfile() throws UserServiceException {
+    void updateUserProfile() throws WildfitServiceException {
         UpdateUserProfileRequest request = UpdateUserProfileRequest.builder().build();
         when(userService.updateUserProfile(userId, request))
                 .thenReturn(UserProfileDigest.builder().build());
@@ -53,12 +53,12 @@ class UserAdminControllerTest {
     }
 
     @Test
-    void deleteUser() throws UserServiceException {
+    void deleteUser() throws WildfitServiceException {
         userAdminController.deleteUser(userId);
     }
 
     @Test
-    void changePassword() throws UserServiceException {
+    void changePassword() throws WildfitServiceException {
         userAdminController.changePassword(userId, ChangePasswordRequest.builder().build());
     }
 }

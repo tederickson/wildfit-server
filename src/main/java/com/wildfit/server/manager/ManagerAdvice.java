@@ -2,7 +2,6 @@ package com.wildfit.server.manager;
 
 import com.wildfit.server.domain.ErrorData;
 import com.wildfit.server.exception.NutritionixException;
-import com.wildfit.server.exception.UserServiceException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +21,9 @@ public class ManagerAdvice extends ResponseEntityExceptionHandler {
         log.error(request.getDescription(false));
     }
 
-    @ExceptionHandler(UserServiceException.class)
-    protected ResponseEntity<ErrorData> userServiceExceptionHandler(UserServiceException ex, WebRequest request) {
+    @ExceptionHandler(com.wildfit.server.exception.WildfitServiceException.class)
+    protected ResponseEntity<ErrorData> userServiceExceptionHandler(
+            com.wildfit.server.exception.WildfitServiceException ex, WebRequest request) {
         logRequestThatCausedTheError(request);
         log.error("UserServiceException", ex);
 

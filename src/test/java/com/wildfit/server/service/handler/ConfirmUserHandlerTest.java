@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.UUID;
 
-import com.wildfit.server.exception.UserServiceError;
-import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.exception.WildfitServiceError;
+import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.User;
 import com.wildfit.server.model.UserStatus;
 import com.wildfit.server.model.VerificationToken;
@@ -36,30 +36,30 @@ class ConfirmUserHandlerTest extends CommonHandlerTest {
     @ParameterizedTest
     @NullAndEmptySource
     void invalidConfirmationCode(String confirmationCode) {
-        final var exception = assertThrows(UserServiceException.class,
+        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
                 () -> ConfirmUserHandler.builder()
                                         .withUserRepository(userRepository)
                                         .withVerificationTokenRepository(verificationTokenRepository)
                                         .withConfirmationCode(confirmationCode)
                                         .build().execute());
-        assertEquals(UserServiceError.INVALID_CONFIRMATION_CODE, exception.getError());
+        assertEquals(WildfitServiceError.INVALID_CONFIRMATION_CODE, exception.getError());
     }
 
     @Test
     void confirmationCodeDoesNotMatch() {
         createUser();
 
-        final var exception = assertThrows(UserServiceException.class,
+        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
                 () -> ConfirmUserHandler.builder()
                                         .withUserRepository(userRepository)
                                         .withVerificationTokenRepository(verificationTokenRepository)
                                         .withConfirmationCode("BugsBunny")
                                         .build().execute());
-        assertEquals(UserServiceError.INVALID_CONFIRMATION_CODE, exception.getError());
+        assertEquals(WildfitServiceError.INVALID_CONFIRMATION_CODE, exception.getError());
     }
 
     @Test
-    void execute() throws UserServiceException {
+    void execute() throws WildfitServiceException {
         final User saved = createUser();
 
         ConfirmUserHandler.builder()

@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 
 @AllArgsConstructor
 @Getter
-public enum UserServiceError {
+public enum WildfitServiceError {
     MISSING_EMAIL("Missing email.", HttpStatus.BAD_REQUEST),
     INVALID_PASSWORD("Invalid password.", HttpStatus.BAD_REQUEST),
     INVALID_NAME("Missing name.", HttpStatus.BAD_REQUEST),
@@ -18,7 +18,7 @@ public enum UserServiceError {
     USER_NOT_FOUND("User not found.", HttpStatus.NOT_FOUND),
     RECIPE_NOT_FOUND("Recipe not found.", HttpStatus.NOT_FOUND),
     RECIPE_GROUP_NOT_FOUND("Recipe group not found.", HttpStatus.NOT_FOUND),
-    INGREDIENT_NOT_FOUND("Recipe ingredient not found.", HttpStatus.NOT_FOUND),
+    MEAL_NOT_FOUND("Meal not found.", HttpStatus.NOT_FOUND),
     NOT_REGISTERED("Your account isn't active or hasn't been approved yet.", HttpStatus.BAD_REQUEST),
     NOT_AUTHORIZED("Your account not authorized.", HttpStatus.UNAUTHORIZED),
     EMAIL_NOT_CONFIGURED("The email server is not configured.", HttpStatus.PRECONDITION_FAILED);

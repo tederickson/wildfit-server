@@ -5,7 +5,7 @@ import com.wildfit.server.domain.RegisterUserResponse;
 import com.wildfit.server.domain.UpdateUserProfileRequest;
 import com.wildfit.server.domain.UserDigest;
 import com.wildfit.server.domain.UserProfileDigest;
-import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.repository.UserProfileRepository;
 import com.wildfit.server.repository.UserRepository;
 import com.wildfit.server.repository.VerificationTokenRepository;
@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
     private final JavaMailSender javaMailSender;
 
     @Override
-    public CreateUserResponse createUser(String email, String password, String name) throws UserServiceException {
+    public CreateUserResponse createUser(String email, String password, String name) throws WildfitServiceException {
         return CreateUserHandler.builder()
                                 .withUserRepository(userRepository)
                                 .withUserProfileRepository(userProfileRepository)
@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(String userId) throws UserServiceException {
+    public void deleteUser(String userId) throws WildfitServiceException {
         DeleteUserHandler.builder()
                          .withUserRepository(userRepository)
                          .withUserId(userId)
@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void changePassword(String userId, String password) throws UserServiceException {
+    public void changePassword(String userId, String password) throws WildfitServiceException {
         ChangePasswordHandler.builder()
                              .withUserRepository(userRepository)
                              .withUserId(userId)
@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDigest login(String email, String password) throws UserServiceException {
+    public UserDigest login(String email, String password) throws WildfitServiceException {
         return LoginHandler.builder()
                            .withUserRepository(userRepository)
                            .withEmail(email)
@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserProfileDigest getUserProfile(String userId) throws UserServiceException {
+    public UserProfileDigest getUserProfile(String userId) throws WildfitServiceException {
         return GetUserProfileHandler.builder()
                                     .withUserRepository(userRepository)
                                     .withUserProfileRepository(userProfileRepository)
@@ -86,7 +86,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserProfileDigest updateUserProfile(String userId, UpdateUserProfileRequest request)
-            throws UserServiceException {
+            throws WildfitServiceException {
         return UpdateUserProfileHandler.builder()
                                        .withUserRepository(userRepository)
                                        .withUserProfileRepository(userProfileRepository)
@@ -96,7 +96,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public RegisterUserResponse confirmUser(String confirmationCode) throws UserServiceException {
+    public RegisterUserResponse confirmUser(String confirmationCode) throws WildfitServiceException {
         return ConfirmUserHandler.builder()
                                  .withUserRepository(userRepository)
                                  .withVerificationTokenRepository(verificationTokenRepository)

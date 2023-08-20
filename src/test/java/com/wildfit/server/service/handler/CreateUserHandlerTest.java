@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.UUID;
 
-import com.wildfit.server.exception.UserServiceError;
-import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.exception.WildfitServiceError;
+import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.User;
 import com.wildfit.server.model.UserStatus;
 import com.wildfit.server.repository.UserProfileRepository;
@@ -40,7 +40,7 @@ class CreateUserHandlerTest extends CommonHandlerTest {
     @ParameterizedTest
     @NullAndEmptySource
     void nullPassword(String password) {
-        final var exception = assertThrows(UserServiceException.class,
+        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
                 () -> CreateUserHandler.builder()
                                        .withUserRepository(userRepository)
                                        .withUserProfileRepository(userProfileRepository)
@@ -51,12 +51,12 @@ class CreateUserHandlerTest extends CommonHandlerTest {
                                        .withPassword(password)
                                        .withName(NAME)
                                        .build().execute());
-        assertEquals(UserServiceError.INVALID_PASSWORD, exception.getError());
+        assertEquals(WildfitServiceError.INVALID_PASSWORD, exception.getError());
     }
 
     @Test
     void invalidPassword() {
-        final var exception = assertThrows(UserServiceException.class,
+        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
                 () -> CreateUserHandler.builder()
                                        .withUserRepository(userRepository)
                                        .withUserProfileRepository(userProfileRepository)
@@ -67,13 +67,13 @@ class CreateUserHandlerTest extends CommonHandlerTest {
                                        .withEmail(EMAIL)
                                        .withName(NAME)
                                        .build().execute());
-        assertEquals(UserServiceError.INVALID_PASSWORD, exception.getError());
+        assertEquals(WildfitServiceError.INVALID_PASSWORD, exception.getError());
     }
 
     @ParameterizedTest
     @NullAndEmptySource
     void missingEmail(String email) {
-        final var exception = assertThrows(UserServiceException.class,
+        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
                 () -> CreateUserHandler.builder()
                                        .withUserRepository(userRepository)
                                        .withUserProfileRepository(userProfileRepository)
@@ -84,12 +84,12 @@ class CreateUserHandlerTest extends CommonHandlerTest {
                                        .withEmail(email)
                                        .withName(NAME)
                                        .build().execute());
-        assertEquals(UserServiceError.MISSING_EMAIL, exception.getError());
+        assertEquals(WildfitServiceError.MISSING_EMAIL, exception.getError());
     }
 
     @Test
     void emptyEmail() {
-        final var exception = assertThrows(UserServiceException.class,
+        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
                 () -> CreateUserHandler.builder()
                                        .withUserRepository(userRepository)
                                        .withUserProfileRepository(userProfileRepository)
@@ -100,13 +100,13 @@ class CreateUserHandlerTest extends CommonHandlerTest {
                                        .withEmail("    ")
                                        .withName(NAME)
                                        .build().execute());
-        assertEquals(UserServiceError.MISSING_EMAIL, exception.getError());
+        assertEquals(WildfitServiceError.MISSING_EMAIL, exception.getError());
     }
 
     @ParameterizedTest
     @NullAndEmptySource
     void missingName(String name) {
-        final var exception = assertThrows(UserServiceException.class,
+        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
                 () -> CreateUserHandler.builder()
                                        .withUserRepository(userRepository)
                                        .withUserProfileRepository(userProfileRepository)
@@ -117,12 +117,12 @@ class CreateUserHandlerTest extends CommonHandlerTest {
                                        .withEmail(EMAIL)
                                        .withName(name)
                                        .build().execute());
-        assertEquals(UserServiceError.INVALID_NAME, exception.getError());
+        assertEquals(WildfitServiceError.INVALID_NAME, exception.getError());
     }
 
     @Test
     void emptyName() {
-        final var exception = assertThrows(UserServiceException.class,
+        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
                 () -> CreateUserHandler.builder()
                                        .withUserRepository(userRepository)
                                        .withUserProfileRepository(userProfileRepository)
@@ -133,11 +133,11 @@ class CreateUserHandlerTest extends CommonHandlerTest {
                                        .withEmail(EMAIL)
                                        .withName("    ")
                                        .build().execute());
-        assertEquals(UserServiceError.INVALID_NAME, exception.getError());
+        assertEquals(WildfitServiceError.INVALID_NAME, exception.getError());
     }
 
     @Test
-    void execute() throws UserServiceException {
+    void execute() throws WildfitServiceException {
         final var response = CreateUserHandler.builder()
                                               .withUserRepository(userRepository)
                                               .withUserProfileRepository(userProfileRepository)
@@ -166,7 +166,7 @@ class CreateUserHandlerTest extends CommonHandlerTest {
         final var saved = userRepository.save(user);
         assertNotNull(saved);
 
-        final var exception = assertThrows(UserServiceException.class,
+        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
                 () -> CreateUserHandler.builder()
                                        .withUserRepository(userRepository)
                                        .withUserProfileRepository(userProfileRepository)
@@ -178,7 +178,7 @@ class CreateUserHandlerTest extends CommonHandlerTest {
                                        .withName(NAME)
                                        .build().execute());
 
-        assertEquals(UserServiceError.EXISTING_USER, exception.getError());
+        assertEquals(WildfitServiceError.EXISTING_USER, exception.getError());
     }
 
 }

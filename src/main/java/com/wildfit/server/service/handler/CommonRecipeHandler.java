@@ -2,8 +2,9 @@ package com.wildfit.server.service.handler;
 
 import java.util.Objects;
 
-import com.wildfit.server.exception.UserServiceError;
-import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.exception.WildfitServiceError;
+import com.wildfit.server.exception.WildfitServiceException;
+import com.wildfit.server.model.Recipe;
 import com.wildfit.server.repository.UserRepository;
 import lombok.experimental.SuperBuilder;
 
@@ -14,25 +15,27 @@ public class CommonRecipeHandler {
 
     protected final String userId;
 
-    protected com.wildfit.server.model.Recipe getAuthorizedRecipe(Long recipeId) throws UserServiceException {
+    protected Recipe getAuthorizedRecipe(Long recipeId) throws WildfitServiceException {
         final var user = userRepository.findByUuid(userId)
-                                       .orElseThrow(() -> new UserServiceException(UserServiceError.USER_NOT_FOUND));
+                                       .orElseThrow(() -> new WildfitServiceException(
+                                               WildfitServiceError.USER_NOT_FOUND));
         final var dbRecipe = recipeRepository.findById(recipeId)
                                              .orElseThrow(
-                                                     () -> new UserServiceException(UserServiceError.RECIPE_NOT_FOUND));
+                                                     () -> new WildfitServiceException(
+                                                             WildfitServiceError.RECIPE_NOT_FOUND));
 
         if (!dbRecipe.getEmail().equals(user.getEmail())) {
-            throw new UserServiceException(UserServiceError.NOT_AUTHORIZED);
+            throw new WildfitServiceException(WildfitServiceError.NOT_AUTHORIZED);
         }
         return dbRecipe;
     }
 
-    protected void validate() throws UserServiceException {
+    protected void validate() throws WildfitServiceException {
         Objects.requireNonNull(userRepository, "userRepository");
         Objects.requireNonNull(recipeRepository, "recipe1Repository");
 
         if (userId == null) {
-            throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
+            throw new WildfitServiceException(WildfitServiceError.INVALID_PARAMETER);
         }
     }
 }

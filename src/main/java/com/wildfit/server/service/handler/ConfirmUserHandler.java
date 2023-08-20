@@ -3,8 +3,8 @@ package com.wildfit.server.service.handler;
 import java.util.Objects;
 
 import com.wildfit.server.domain.RegisterUserResponse;
-import com.wildfit.server.exception.UserServiceError;
-import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.exception.WildfitServiceError;
+import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.repository.UserRepository;
 import com.wildfit.server.repository.VerificationTokenRepository;
 import lombok.Builder;
@@ -16,12 +16,12 @@ public class ConfirmUserHandler {
     final VerificationTokenRepository verificationTokenRepository;
     final String confirmationCode;
 
-    public RegisterUserResponse execute() throws UserServiceException {
+    public RegisterUserResponse execute() throws WildfitServiceException {
         validate();
 
         final var verificationToken = verificationTokenRepository.findByToken(confirmationCode);
         if (verificationToken == null) {
-            throw new UserServiceException(UserServiceError.INVALID_CONFIRMATION_CODE);
+            throw new WildfitServiceException(WildfitServiceError.INVALID_CONFIRMATION_CODE);
         }
 
         final var user = verificationToken.getUser();
@@ -35,12 +35,12 @@ public class ConfirmUserHandler {
                                    .build();
     }
 
-    private void validate() throws UserServiceException {
+    private void validate() throws WildfitServiceException {
         Objects.requireNonNull(userRepository, "userRepository");
         Objects.requireNonNull(verificationTokenRepository, "verificationTokenRepository");
 
         if (!StringUtils.hasText(confirmationCode)) {
-            throw new UserServiceException(UserServiceError.INVALID_CONFIRMATION_CODE);
+            throw new WildfitServiceException(WildfitServiceError.INVALID_CONFIRMATION_CODE);
         }
     }
 }

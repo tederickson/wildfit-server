@@ -3,7 +3,8 @@ package com.wildfit.server.manager;
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.RecipeListDigest;
 import com.wildfit.server.domain.SeasonType;
-import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.exception.WildfitServiceError;
+import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.service.RecipeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -38,7 +39,7 @@ public class RecipeController {
     public RecipeListDigest retrieveRecipesForSeason(@PathVariable(value = "season") SeasonType season,
                                                      @RequestParam(value = "page", defaultValue = "0") Integer page,
                                                      @RequestParam(value = "pageSize", defaultValue = "30") Integer pageSize)
-            throws UserServiceException {
+            throws WildfitServiceException {
         final var pageable = PageMapper.map(page, pageSize);
 
         return recipeService.listBySeason(season, pageable);
@@ -50,7 +51,7 @@ public class RecipeController {
             @PathVariable(value = "season") SeasonType season,
             @PathVariable(value = "ingredientName") String ingredientName,
             @RequestParam(value = "page", defaultValue = "0") Integer page,
-            @RequestParam(value = "pageSize", defaultValue = "30") Integer pageSize) throws UserServiceException {
+            @RequestParam(value = "pageSize", defaultValue = "30") Integer pageSize) throws WildfitServiceException {
         final var pageable = PageMapper.map(page, pageSize);
 
         return recipeService.listBySeasonAndIngredient(season, ingredientName, pageable);
@@ -62,7 +63,7 @@ public class RecipeController {
             @PathVariable(value = "season") SeasonType season,
             @PathVariable(value = "recipeName") String recipeName,
             @RequestParam(value = "page", defaultValue = "0") Integer page,
-            @RequestParam(value = "pageSize", defaultValue = "30") Integer pageSize) throws UserServiceException {
+            @RequestParam(value = "pageSize", defaultValue = "30") Integer pageSize) throws WildfitServiceException {
         final var pageable = PageMapper.map(page, pageSize);
 
         return recipeService.listBySeasonAndName(season, recipeName, pageable);
@@ -70,7 +71,7 @@ public class RecipeController {
 
     @Operation(summary = "Retrieve recipe")
     @GetMapping(value = "/{recipeId}", produces = "application/json")
-    public RecipeDigest retrieveRecipe(@PathVariable(value = "recipeId") Long id) throws UserServiceException {
+    public RecipeDigest retrieveRecipe(@PathVariable(value = "recipeId") Long id) throws WildfitServiceException {
         return recipeService.retrieveRecipe(id);
     }
 
@@ -81,7 +82,7 @@ public class RecipeController {
             @ApiResponse(responseCode = "401", description = "Not authorized to delete recipe")})
     @DeleteMapping(value = "/{recipeId}/users/{userId}")
     public void deleteRecipe(@PathVariable("recipeId") Long id, @PathVariable("userId") String userId)
-            throws UserServiceException {
+            throws WildfitServiceException {
         recipeService.deleteRecipe(id, userId);
     }
 
@@ -90,7 +91,7 @@ public class RecipeController {
             @ApiResponse(responseCode = "200", description = "Successfully created recipe")})
     @PostMapping(value = "/users/{userId}", produces = "application/json")
     public RecipeDigest createRecipe(@PathVariable("userId") String userId,
-                                     @RequestBody RecipeDigest request) throws UserServiceException {
+                                     @RequestBody RecipeDigest request) throws WildfitServiceException {
         return recipeService.createRecipe(userId, request);
     }
 
@@ -102,10 +103,10 @@ public class RecipeController {
     @PutMapping(value = "/{recipeId}/users/{userId}", produces = "application/json")
     public RecipeDigest updateRecipe(@PathVariable("recipeId") Long id,
                                      @PathVariable("userId") String userId,
-                                     @RequestBody RecipeDigest request) throws UserServiceException {
+                                     @RequestBody RecipeDigest request) throws WildfitServiceException {
         if (!id.equals(request.getId())) {
             log.error(id + " does not match " + request.getId());
-            throw new UserServiceException(com.wildfit.server.exception.UserServiceError.INVALID_PARAMETER);
+            throw new WildfitServiceException(WildfitServiceError.INVALID_PARAMETER);
         }
 
         return recipeService.updateRecipe(userId, request);

@@ -3,8 +3,8 @@ package com.wildfit.server.service.handler;
 import java.util.Objects;
 
 import com.wildfit.server.domain.UserDigest;
-import com.wildfit.server.exception.UserServiceError;
-import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.exception.WildfitServiceError;
+import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.mapper.UserDigestMapper;
 import com.wildfit.server.repository.UserRepository;
 import lombok.Builder;
@@ -17,7 +17,7 @@ public class LoginHandler {
     final String email;
     final String password;
 
-    public UserDigest execute() throws UserServiceException {
+    public UserDigest execute() throws WildfitServiceException {
         validate();
 
         final var users = userRepository.findByEmail(email);
@@ -25,24 +25,24 @@ public class LoginHandler {
             final var user = users.get(0);
 
             if (!user.isEnabled()) {
-                throw new UserServiceException(UserServiceError.NOT_REGISTERED);
+                throw new WildfitServiceException(WildfitServiceError.NOT_REGISTERED);
             }
             if (PasswordEncodeDecode.matches(password, user.getPassword())) {
                 return UserDigestMapper.map(user);
             }
         }
 
-        throw new UserServiceException(UserServiceError.USER_NOT_FOUND);
+        throw new WildfitServiceException(WildfitServiceError.USER_NOT_FOUND);
     }
 
-    private void validate() throws UserServiceException {
+    private void validate() throws WildfitServiceException {
         Objects.requireNonNull(userRepository, "userRepository");
 
         if (!StringUtils.hasText(email)) {
-            throw new UserServiceException(UserServiceError.MISSING_EMAIL);
+            throw new WildfitServiceException(WildfitServiceError.MISSING_EMAIL);
         }
         if (!StringUtils.hasText(password)) {
-            throw new UserServiceException(UserServiceError.INVALID_PASSWORD);
+            throw new WildfitServiceException(WildfitServiceError.INVALID_PASSWORD);
         }
     }
 }

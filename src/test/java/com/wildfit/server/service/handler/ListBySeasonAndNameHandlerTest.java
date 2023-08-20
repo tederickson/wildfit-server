@@ -5,8 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.wildfit.server.domain.SeasonType;
-import com.wildfit.server.exception.UserServiceError;
-import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.exception.WildfitServiceError;
 import com.wildfit.server.util.ReadRecipeDigest;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -61,37 +60,37 @@ class ListBySeasonAndNameHandlerTest extends CommonRecipeHandlerTest {
 
     @Test
     void missingSeason() {
-        final var exception = assertThrows(UserServiceException.class,
+        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
                 () -> ListBySeasonAndNameHandler.builder()
                                                 .withPageable(PageRequest.of(1, 100))
                                                 .withRecipeName(RECIPE_NAME)
                                                 .withRecipeRepository(recipeRepository)
                                                 .build()
                                                 .execute());
-        assertEquals(UserServiceError.INVALID_PARAMETER, exception.getError());
+        assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
 
     @Test
     void missingRecipeName() {
-        final var exception = assertThrows(UserServiceException.class,
+        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
                 () -> ListBySeasonAndNameHandler.builder()
                                                 .withSeason(SeasonType.SPRING)
                                                 .withPageable(PageRequest.of(1, 100))
                                                 .withRecipeRepository(recipeRepository)
                                                 .build()
                                                 .execute());
-        assertEquals(UserServiceError.INVALID_PARAMETER, exception.getError());
+        assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
 
     @Test
     void missingPageable() {
-        final var exception = assertThrows(UserServiceException.class,
+        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
                 () -> ListBySeasonAndNameHandler.builder()
                                                 .withSeason(SeasonType.SPRING)
                                                 .withRecipeName(RECIPE_NAME)
                                                 .withRecipeRepository(recipeRepository)
                                                 .build()
                                                 .execute());
-        assertEquals(UserServiceError.INVALID_PARAMETER, exception.getError());
+        assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
 }

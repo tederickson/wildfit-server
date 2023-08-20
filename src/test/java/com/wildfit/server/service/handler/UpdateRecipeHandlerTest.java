@@ -12,7 +12,7 @@ import com.wildfit.server.domain.InstructionDigest;
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.RecipeGroupDigest;
 import com.wildfit.server.domain.SeasonType;
-import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.util.ReadRecipeDigest;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -39,7 +39,7 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
     }
 
     @Test
-    void changeSummary() throws UserServiceException {
+    void changeSummary() throws WildfitServiceException {
         final var instructionGroup = RecipeGroupDigest.builder()
                                                       .withInstructionGroupNumber(1)
                                                       .withInstructions(List.of(step1, step2)).build();
@@ -82,7 +82,7 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
     }
 
     @Test
-    void removeAllInstructionGroups() throws UserServiceException {
+    void removeAllInstructionGroups() throws WildfitServiceException {
         final var recipe = ReadRecipeDigest.getRecipeDigest("Egg_muffins_with_mushrooms_and_herbs.json");
 
         createRecipe(recipe);
@@ -94,7 +94,7 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
     }
 
     @Test
-    void addRecipeGroup() throws UserServiceException {
+    void addRecipeGroup() throws WildfitServiceException {
         final var recipeGroupDigest = RecipeGroupDigest.builder()
                                                        .withInstructionGroupNumber(1)
                                                        .withInstructions(List.of(step1, step2)).build();
@@ -128,7 +128,7 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
     }
 
     @Test
-    void addInstructionsAndIngredientsToRecipeGroup() throws UserServiceException {
+    void addInstructionsAndIngredientsToRecipeGroup() throws WildfitServiceException {
         final var recipeGroupDigest = RecipeGroupDigest.builder()
                                                        .withInstructionGroupNumber(1)
                                                        .withInstructions(List.of(step1, step2)).build();
@@ -176,7 +176,7 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
     }
 
     @Test
-    void removeRecipeGroup() throws UserServiceException {
+    void removeRecipeGroup() throws WildfitServiceException {
         final var instructionGroup1 = RecipeGroupDigest.builder()
                                                        .withInstructionGroupNumber(1)
                                                        .withInstructions(List.of(step1, step2, step3, step4))
@@ -205,7 +205,7 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
     }
 
     @Test
-    void removeInstruction() throws UserServiceException {
+    void removeInstruction() throws WildfitServiceException {
         final var instructionGroup = RecipeGroupDigest.builder()
                                                       .withInstructionGroupNumber(1)
                                                       .withInstructions(List.of(step1, step2, step3, step4))
@@ -230,7 +230,7 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
     }
 
     @Test
-    void updateInstruction() throws UserServiceException {
+    void updateInstruction() throws WildfitServiceException {
         final var instructionGroup = RecipeGroupDigest.builder()
                                                       .withInstructionGroupNumber(1)
                                                       .withInstructions(List.of(step1, step2, step3, step4))
@@ -255,7 +255,7 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
     }
 
     @Test
-    void addInstructionsAndIngredients() throws UserServiceException {
+    void addInstructionsAndIngredients() throws WildfitServiceException {
         final var recipe = ReadRecipeDigest.getRecipeDigest("Egg_muffins_with_mushrooms_and_herbs.json");
         final var recipe2 = ReadRecipeDigest.getRecipeDigest("Tuna_salad_with_apple_and_celery.json");
 
@@ -284,7 +284,7 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
 
     @Test
     void updateRecipe_missingRequest() {
-        final var exception = assertThrows(UserServiceException.class,
+        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
                 () -> UpdateRecipeHandler.builder()
                                          .withUserRepository(userRepository)
                                          .withRecipeRepository(recipeRepository)
@@ -295,7 +295,7 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
 
     @Test
     void updateRecipe_missingUserId() {
-        final var exception = assertThrows(UserServiceException.class,
+        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
                 () -> UpdateRecipeHandler.builder()
                                          .withUserRepository(userRepository)
                                          .withRecipeRepository(recipeRepository)
@@ -307,7 +307,7 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
 
     @Test
     void updateRecipe_missingSeason() {
-        final var exception = assertThrows(UserServiceException.class,
+        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
                 () -> UpdateRecipeHandler.builder()
                                          .withUserRepository(userRepository)
                                          .withRecipeRepository(recipeRepository)
@@ -317,7 +317,8 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
         assertEquals("Invalid parameter.", exception.getMessage());
     }
 
-    private RecipeDigest updateRecipe(RecipeDigest testRecipe) throws UserServiceException {
+    private RecipeDigest updateRecipe(RecipeDigest testRecipe) throws
+                                                               com.wildfit.server.exception.WildfitServiceException {
         return UpdateRecipeHandler.builder()
                                   .withUserRepository(userRepository)
                                   .withRecipeRepository(recipeRepository)

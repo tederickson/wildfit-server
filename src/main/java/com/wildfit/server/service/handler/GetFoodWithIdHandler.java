@@ -3,8 +3,8 @@ package com.wildfit.server.service.handler;
 import java.util.Objects;
 
 import com.wildfit.server.domain.FoodItemDigest;
-import com.wildfit.server.exception.UserServiceError;
-import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.exception.WildfitServiceError;
+import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.FoodItems;
 import com.wildfit.server.model.mapper.FoodItemDigestMapper;
 import lombok.experimental.SuperBuilder;
@@ -30,11 +30,11 @@ public class GetFoodWithIdHandler extends AbstractNutritionixHandler<FoodItemDig
     }
 
     @Override
-    protected void validate() throws UserServiceException {
+    protected void validate() throws WildfitServiceException {
         super.validate();
 
         if (StringUtils.isAllBlank(nixItemId)) {
-            throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
+            throw new WildfitServiceException(WildfitServiceError.INVALID_PARAMETER);
         }
     }
 }

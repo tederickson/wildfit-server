@@ -4,8 +4,8 @@ import java.util.Objects;
 import java.util.UUID;
 
 import com.wildfit.server.domain.CreateUserResponse;
-import com.wildfit.server.exception.UserServiceError;
-import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.exception.WildfitServiceError;
+import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.User;
 import com.wildfit.server.model.UserProfile;
 import com.wildfit.server.model.UserStatus;
@@ -34,17 +34,17 @@ public class CreateUserHandler {
     final String password;
     final String name;
 
-    public CreateUserResponse execute() throws UserServiceException {
+    public CreateUserResponse execute() throws WildfitServiceException {
         validate();
 
         if (PasswordValidator.isNotValid(password)) {
-            throw new UserServiceException(UserServiceError.INVALID_PASSWORD);
+            throw new WildfitServiceException(WildfitServiceError.INVALID_PASSWORD);
         }
         final var encodedPassword = PasswordEncodeDecode.encode(password);
         final var users = userRepository.findByEmail(email);
 
         if (!CollectionUtils.isEmpty(users)) {
-            throw new UserServiceException(UserServiceError.EXISTING_USER);
+            throw new WildfitServiceException(WildfitServiceError.EXISTING_USER);
         }
 
         final var user = User.builder()
@@ -95,24 +95,24 @@ public class CreateUserHandler {
         javaMailSender.send(msg);
     }
 
-    private void validate() throws UserServiceException {
+    private void validate() throws WildfitServiceException {
         Objects.requireNonNull(userRepository, "userRepository");
         Objects.requireNonNull(userProfileRepository, "userProfileRepository");
         Objects.requireNonNull(verificationTokenRepository, "verificationTokenRepository");
         Objects.requireNonNull(javaMailSender, "javaMailSender");
 
         if (!StringUtils.hasText(email)) {
-            throw new UserServiceException(UserServiceError.MISSING_EMAIL);
+            throw new WildfitServiceException(WildfitServiceError.MISSING_EMAIL);
         }
         if (!StringUtils.hasText(password)) {
-            throw new UserServiceException(UserServiceError.INVALID_PASSWORD);
+            throw new WildfitServiceException(WildfitServiceError.INVALID_PASSWORD);
         }
         if (!StringUtils.hasText(name)) {
-            throw new UserServiceException(UserServiceError.INVALID_NAME);
+            throw new WildfitServiceException(WildfitServiceError.INVALID_NAME);
         }
 
         if (environment == null || !environment.containsProperty("spring.mail.username")) {
-            throw new UserServiceException(UserServiceError.EMAIL_NOT_CONFIGURED);
+            throw new WildfitServiceException(WildfitServiceError.EMAIL_NOT_CONFIGURED);
         }
     }
 }

@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.UUID;
 
-import com.wildfit.server.exception.UserServiceError;
-import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.exception.WildfitServiceError;
+import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.User;
 import com.wildfit.server.model.UserStatus;
 import org.junit.jupiter.api.Test;
@@ -25,26 +25,26 @@ class DeleteUserHandlerTest extends CommonHandlerTest {
 
     @Test
     void missingId() {
-        final var exception = assertThrows(UserServiceException.class,
+        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
                 () -> DeleteUserHandler.builder()
                                        .withUserRepository(userRepository)
                                        .withUserId(null)
                                        .build().execute());
-        assertEquals(UserServiceError.USER_NOT_FOUND, exception.getError());
+        assertEquals(WildfitServiceError.USER_NOT_FOUND, exception.getError());
     }
 
     @Test
     void userNotFound() {
-        final var exception = assertThrows(UserServiceException.class,
+        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
                 () -> DeleteUserHandler.builder()
                                        .withUserRepository(userRepository)
                                        .withUserId("-14L")
                                        .build().execute());
-        assertEquals(UserServiceError.USER_NOT_FOUND, exception.getError());
+        assertEquals(WildfitServiceError.USER_NOT_FOUND, exception.getError());
     }
 
     @Test
-    void execute() throws UserServiceException {
+    void execute() throws WildfitServiceException {
         final var user = User.builder()
                              .withStatus(UserStatus.FREE.getCode())
                              .withCreateDate(java.time.LocalDate.now())

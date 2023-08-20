@@ -5,8 +5,8 @@ import java.util.HashSet;
 import java.util.Objects;
 
 import com.wildfit.server.domain.SearchFoodResponse;
-import com.wildfit.server.exception.UserServiceError;
-import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.exception.WildfitServiceError;
+import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.SearchedFoodItem;
 import com.wildfit.server.model.SearchedFoodItems;
 import com.wildfit.server.model.mapper.SearchedFoodItemsMapper;
@@ -59,11 +59,11 @@ public class GetFoodsByQueryHandler extends AbstractNutritionixHandler<SearchFoo
     }
 
     @Override
-    protected void validate() throws UserServiceException {
+    protected void validate() throws WildfitServiceException {
         super.validate();
 
         if (StringUtils.isAllBlank(description)) {
-            throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
+            throw new WildfitServiceException(WildfitServiceError.INVALID_PARAMETER);
         }
     }
 

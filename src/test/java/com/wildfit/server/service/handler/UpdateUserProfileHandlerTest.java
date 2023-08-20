@@ -8,8 +8,8 @@ import java.util.UUID;
 
 import com.wildfit.server.domain.GenderType;
 import com.wildfit.server.domain.UpdateUserProfileRequest;
-import com.wildfit.server.exception.UserServiceError;
-import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.exception.WildfitServiceError;
+import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.User;
 import com.wildfit.server.model.UserProfile;
 import com.wildfit.server.model.UserStatus;
@@ -53,7 +53,7 @@ class UpdateUserProfileHandlerTest extends CommonHandlerTest {
 
     @Test
     void userNotFound() {
-        final var exception = assertThrows(UserServiceException.class,
+        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
                 () -> UpdateUserProfileHandler.builder()
                                               .withUserRepository(userRepository)
                                               .withUserProfileRepository(userProfileRepository)
@@ -61,11 +61,11 @@ class UpdateUserProfileHandlerTest extends CommonHandlerTest {
                                               .withUserProfileRequest(
                                                       UpdateUserProfileRequest.builder().withName(NAME).build())
                                               .build().execute());
-        assertEquals(UserServiceError.USER_NOT_FOUND, exception.getError());
+        assertEquals(WildfitServiceError.USER_NOT_FOUND, exception.getError());
     }
 
     @Test
-    void execute() throws UserServiceException {
+    void execute() throws WildfitServiceException {
         final var user = User.builder()
                              .withStatus(UserStatus.PREMIUM.getCode())
                              .withCreateDate(java.time.LocalDate.now())

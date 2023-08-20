@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.wildfit.server.exception.NutritionixException;
-import com.wildfit.server.exception.UserServiceError;
-import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.exception.WildfitServiceError;
+import com.wildfit.server.exception.WildfitServiceException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -24,7 +24,7 @@ class NutritionixServiceImplTest {
     private NutritionixService nutritionixService;
 
     @Test
-    void getFoodWithBarcode() throws UserServiceException, NutritionixException {
+    void getFoodWithBarcode() throws WildfitServiceException, NutritionixException {
         if (bypassNutritionixService) {
             return;
         }
@@ -48,23 +48,26 @@ class NutritionixServiceImplTest {
     @ParameterizedTest
     @NullAndEmptySource
     void nullBarcode(String barcode) {
-        final var exception = assertThrows(UserServiceException.class,
+        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
                 () -> nutritionixService.getFoodWithBarcode(barcode));
-        assertEquals(UserServiceError.INVALID_PARAMETER, exception.getError());
+        assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
 
     @Test
     void getFoodWithId_badParameters() {
-        assertThrows(UserServiceException.class, () -> nutritionixService.getFoodWithId(null));
+        assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+                () -> nutritionixService.getFoodWithId(null));
     }
 
     @Test
     void getFoodsByQuery_badParameters() {
-        assertThrows(UserServiceException.class, () -> nutritionixService.getFoodsByQuery(null));
+        assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+                () -> nutritionixService.getFoodsByQuery(null));
     }
 
     @Test
     void getRecipeNutrition_badParameters() {
-        assertThrows(UserServiceException.class, () -> nutritionixService.getRecipeNutrition(null));
+        assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+                () -> nutritionixService.getRecipeNutrition(null));
     }
 }

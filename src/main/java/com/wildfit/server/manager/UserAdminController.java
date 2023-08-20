@@ -5,7 +5,7 @@ import com.wildfit.server.domain.CreateUserRequest;
 import com.wildfit.server.domain.CreateUserResponse;
 import com.wildfit.server.domain.UpdateUserProfileRequest;
 import com.wildfit.server.domain.UserProfileDigest;
-import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -43,7 +43,7 @@ public class UserAdminController {
             @ApiResponse(responseCode = "412", description = "Email not configured")})
     @PostMapping(produces = "application/json")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public CreateUserResponse createUser(@RequestBody CreateUserRequest request) throws UserServiceException {
+    public CreateUserResponse createUser(@RequestBody CreateUserRequest request) throws WildfitServiceException {
         final var logMessage = String.join("|", "createUser", request.toString());
         log.info(logMessage);
 
@@ -55,7 +55,7 @@ public class UserAdminController {
             @ApiResponse(responseCode = "200", description = "Get user"), //
             @ApiResponse(responseCode = "404", description = "User id not found")})
     @GetMapping(value = "/{id}", produces = "application/json")
-    public UserProfileDigest getUser(@PathVariable("id") String id) throws UserServiceException {
+    public UserProfileDigest getUser(@PathVariable("id") String id) throws WildfitServiceException {
         final var logMessage = String.join("|", "getUser", id);
         log.info(logMessage);
 
@@ -69,7 +69,7 @@ public class UserAdminController {
     @PutMapping(value = "/{id}", produces = "application/json")
     public UserProfileDigest updateUserProfile(@PathVariable("id") String id,
                                                @RequestBody UpdateUserProfileRequest request)
-            throws UserServiceException {
+            throws WildfitServiceException {
         final var logMessage = String.join("|", "updateUserProfile", id, request.toString());
         log.info(logMessage);
 
@@ -81,7 +81,7 @@ public class UserAdminController {
             @ApiResponse(responseCode = "200", description = "User deleted"), //
             @ApiResponse(responseCode = "404", description = "User id not found")})
     @DeleteMapping(value = "/{id}")
-    public void deleteUser(@PathVariable("id") String id) throws UserServiceException {
+    public void deleteUser(@PathVariable("id") String id) throws WildfitServiceException {
         final var logMessage = String.join("|", "deleteUser", id);
         log.info(logMessage);
 
@@ -94,7 +94,7 @@ public class UserAdminController {
             @ApiResponse(responseCode = "400", description = "Invalid user id and/or password")})
     @PostMapping(value = "/{id}/change-password")
     public void changePassword(@PathVariable("id") String id, @RequestBody ChangePasswordRequest request)
-            throws UserServiceException {
+            throws WildfitServiceException {
         final var logMessage = String.join("|", "changePassword", id, request.toString());
         log.info(logMessage);
 

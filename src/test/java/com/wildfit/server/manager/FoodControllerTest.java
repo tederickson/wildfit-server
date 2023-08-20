@@ -8,7 +8,7 @@ import com.wildfit.server.domain.FoodItemDigest;
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.SearchFoodResponse;
 import com.wildfit.server.exception.NutritionixException;
-import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.service.NutritionixService;
 import com.wildfit.server.service.RecipeService;
 import org.junit.jupiter.api.Test;
@@ -27,7 +27,7 @@ class FoodControllerTest {
     private RecipeService recipeService;
 
     @Test
-    void getFoodWithId() throws UserServiceException, NutritionixException {
+    void getFoodWithId() throws WildfitServiceException, NutritionixException {
         final var id = "123";
         when(nutritionixService.getFoodWithId(id)).thenReturn(FoodItemDigest.builder().build());
 
@@ -36,7 +36,7 @@ class FoodControllerTest {
     }
 
     @Test
-    void getFoodWithBarcode() throws UserServiceException, NutritionixException {
+    void getFoodWithBarcode() throws WildfitServiceException, NutritionixException {
         final var barcode = "12345";
         when(nutritionixService.getFoodWithBarcode(barcode)).thenReturn(FoodItemDigest.builder().build());
 
@@ -45,7 +45,7 @@ class FoodControllerTest {
     }
 
     @Test
-    void getFoodsByQuery() throws UserServiceException, NutritionixException {
+    void getFoodsByQuery() throws WildfitServiceException, NutritionixException {
         final var description = "blah de blah, blah blah";
         when(nutritionixService.getFoodsByQuery(any())).thenReturn(new SearchFoodResponse());
 
@@ -54,7 +54,7 @@ class FoodControllerTest {
     }
 
     @Test
-    void getRecipeNutrition() throws UserServiceException, NutritionixException {
+    void getRecipeNutrition() throws WildfitServiceException, NutritionixException {
         when(recipeService.retrieveRecipe(any())).thenReturn(RecipeDigest.builder().build());
         when(nutritionixService.getRecipeNutrition(any())).thenReturn(FoodItemDigest.builder().build());
 

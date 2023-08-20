@@ -4,7 +4,7 @@ import com.wildfit.server.domain.FoodItemDigest;
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.SearchFoodResponse;
 import com.wildfit.server.exception.NutritionixException;
-import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.service.NutritionixService;
 import com.wildfit.server.service.RecipeService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -36,7 +36,7 @@ public class FoodController {
             @ApiResponse(responseCode = "400", description = "Nutritionix id not found")})
     @GetMapping(value = "/{id}", produces = "application/json")
     public FoodItemDigest getFoodWithId(@PathVariable("id") String id)
-            throws UserServiceException, NutritionixException {
+            throws WildfitServiceException, NutritionixException {
         return nutritionixService.getFoodWithId(id);
     }
 
@@ -46,7 +46,7 @@ public class FoodController {
             @ApiResponse(responseCode = "400", description = "Barcode not found")})
     @GetMapping(value = "/barcodes/{barcode}", produces = "application/json")
     public FoodItemDigest getFoodWithBarcode(@PathVariable("barcode") String barcode)
-            throws UserServiceException, NutritionixException {
+            throws WildfitServiceException, NutritionixException {
         return nutritionixService.getFoodWithBarcode(barcode);
     }
 
@@ -55,7 +55,7 @@ public class FoodController {
             @ApiResponse(responseCode = "200", description = "Get foods")})
     @GetMapping(produces = "application/json")
     public SearchFoodResponse getFoodsByQuery(@RequestParam(name = "description") String description)
-            throws UserServiceException, NutritionixException {
+            throws WildfitServiceException, NutritionixException {
         return nutritionixService.getFoodsByQuery(description);
     }
 
@@ -64,7 +64,7 @@ public class FoodController {
             @ApiResponse(responseCode = "200", description = "Get recipe nutrition")})
     @GetMapping(value = "/recipes/{recipeId}", produces = "application/json")
     public FoodItemDigest getRecipeNutrition(@RequestParam(name = "recipeId") Long recipeId)
-            throws UserServiceException, NutritionixException {
+            throws WildfitServiceException, NutritionixException {
         RecipeDigest recipeDigest = recipeService.retrieveRecipe(recipeId);
         return nutritionixService.getRecipeNutrition(recipeDigest);
     }

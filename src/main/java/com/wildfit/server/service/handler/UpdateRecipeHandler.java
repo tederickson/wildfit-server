@@ -1,8 +1,8 @@
 package com.wildfit.server.service.handler;
 
 import com.wildfit.server.domain.RecipeDigest;
-import com.wildfit.server.exception.UserServiceError;
-import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.exception.WildfitServiceError;
+import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.mapper.RecipeMapper;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 public class UpdateRecipeHandler extends CommonRecipeHandler {
     private final RecipeDigest request;
 
-    public RecipeDigest execute() throws UserServiceException {
+    public RecipeDigest execute() throws WildfitServiceException {
         validate();
 
         final var dbRecipe = getAuthorizedRecipe(request.getId());
@@ -21,14 +21,14 @@ public class UpdateRecipeHandler extends CommonRecipeHandler {
         return RecipeMapper.map(recipeRepository.save(dbRecipe));
     }
 
-    protected void validate() throws UserServiceException {
+    protected void validate() throws WildfitServiceException {
         super.validate();
 
         if (request == null) {
-            throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
+            throw new WildfitServiceException(WildfitServiceError.INVALID_PARAMETER);
         }
         if (request.getSeason() == null) {
-            throw new UserServiceException(UserServiceError.INVALID_PARAMETER);
+            throw new WildfitServiceException(WildfitServiceError.INVALID_PARAMETER);
         }
     }
 }

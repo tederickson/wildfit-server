@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 import com.wildfit.server.exception.NutritionixException;
-import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.NutritionixHeaderInfo;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ public abstract class AbstractNutritionixHandler<T> {
 
     protected abstract T executeInHandler();
 
-    public T execute() throws UserServiceException, NutritionixException {
+    public T execute() throws WildfitServiceException, NutritionixException {
         validate();
 
         try {
@@ -44,7 +44,7 @@ public abstract class AbstractNutritionixHandler<T> {
         return headers;
     }
 
-    protected void validate() throws UserServiceException {
+    protected void validate() throws WildfitServiceException {
         Objects.requireNonNull(nutritionixHeaderInfo, "nutritionixHeaderInfo");
     }
 }

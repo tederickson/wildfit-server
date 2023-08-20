@@ -3,7 +3,7 @@ package com.wildfit.server.manager;
 import com.wildfit.server.domain.LoginRequest;
 import com.wildfit.server.domain.RegisterUserResponse;
 import com.wildfit.server.domain.UserDigest;
-import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -34,7 +34,7 @@ public class AuthenticationController {
             @ApiResponse(responseCode = "404", description = "Confirmation code not found")})
     @GetMapping("/register/{confirmCode}")
     public RegisterUserResponse register(@PathVariable("confirmCode") String confirmCode)
-            throws UserServiceException {
+            throws WildfitServiceException {
         return userService.confirmUser(confirmCode);
     }
 
@@ -43,7 +43,7 @@ public class AuthenticationController {
             @ApiResponse(responseCode = "200", description = "Successfully logged in user"), //
             @ApiResponse(responseCode = "400", description = "Invalid user name and/or password")})
     @PostMapping("/login")
-    public UserDigest login(@RequestBody LoginRequest request) throws UserServiceException {
+    public UserDigest login(@RequestBody LoginRequest request) throws WildfitServiceException {
         return userService.login(request.getEmail(), request.getPassword());
     }
 

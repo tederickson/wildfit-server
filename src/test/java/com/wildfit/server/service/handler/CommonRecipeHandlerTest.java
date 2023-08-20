@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import com.wildfit.server.domain.InstructionDigest;
 import com.wildfit.server.domain.RecipeDigest;
-import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.User;
 import com.wildfit.server.model.UserStatus;
 import org.junit.jupiter.api.AfterEach;
@@ -84,7 +84,7 @@ public class CommonRecipeHandlerTest extends CommonHandlerTest {
         super.tearDown();
     }
 
-    protected void createRecipe(RecipeDigest recipe) throws UserServiceException {
+    protected void createRecipe(RecipeDigest recipe) throws WildfitServiceException {
         testRecipe = CreateRecipeHandler.builder()
                                         .withUserRepository(userRepository)
                                         .withRecipeRepository(recipeRepository)

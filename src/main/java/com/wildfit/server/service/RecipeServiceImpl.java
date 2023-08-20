@@ -3,7 +3,7 @@ package com.wildfit.server.service;
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.RecipeListDigest;
 import com.wildfit.server.domain.SeasonType;
-import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.repository.UserRepository;
 import com.wildfit.server.service.handler.CreateRecipeHandler;
 import com.wildfit.server.service.handler.DeleteRecipeHandler;
@@ -28,7 +28,7 @@ public class RecipeServiceImpl implements RecipeService {
     private final com.wildfit.server.repository.RecipeRepository recipeRepository;
 
     @Override
-    public RecipeListDigest listBySeason(SeasonType season, Pageable pageable) throws UserServiceException {
+    public RecipeListDigest listBySeason(SeasonType season, Pageable pageable) throws WildfitServiceException {
         return ListBySeasonHandler.builder()
                                   .withRecipeRepository(recipeRepository)
                                   .withSeason(season)
@@ -38,7 +38,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public RecipeListDigest listBySeasonAndIngredient(SeasonType season, String ingredientName, Pageable pageable)
-            throws UserServiceException {
+            throws WildfitServiceException {
         return ListBySeasonAndIngredientHandler.builder()
                                                .withRecipeRepository(recipeRepository)
                                                .withSeason(season)
@@ -49,7 +49,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public RecipeListDigest listBySeasonAndName(SeasonType season, String recipeName, Pageable pageable)
-            throws UserServiceException {
+            throws WildfitServiceException {
         return ListBySeasonAndNameHandler.builder()
                                          .withRecipeRepository(recipeRepository)
                                          .withSeason(season)
@@ -59,7 +59,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public RecipeDigest retrieveRecipe(Long recipeId) throws UserServiceException {
+    public RecipeDigest retrieveRecipe(Long recipeId) throws WildfitServiceException {
         return GetRecipeHandler.builder()
                                .withRecipeRepository(recipeRepository)
                                .withRecipeId(recipeId)
@@ -67,7 +67,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public void deleteRecipe(Long recipeId, String userId) throws UserServiceException {
+    public void deleteRecipe(Long recipeId, String userId) throws WildfitServiceException {
         DeleteRecipeHandler.builder()
                            .withUserRepository(userRepository)
                            .withRecipeRepository(recipeRepository)
@@ -77,7 +77,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public RecipeDigest createRecipe(String userId, RecipeDigest request) throws UserServiceException {
+    public RecipeDigest createRecipe(String userId, RecipeDigest request) throws WildfitServiceException {
         return CreateRecipeHandler.builder()
                                   .withUserRepository(userRepository)
                                   .withRecipeRepository(recipeRepository)
@@ -87,7 +87,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public RecipeDigest updateRecipe(String userId, RecipeDigest request) throws UserServiceException {
+    public RecipeDigest updateRecipe(String userId, RecipeDigest request) throws WildfitServiceException {
         return UpdateRecipeHandler.builder()
                                   .withUserRepository(userRepository)
                                   .withRecipeRepository(recipeRepository)

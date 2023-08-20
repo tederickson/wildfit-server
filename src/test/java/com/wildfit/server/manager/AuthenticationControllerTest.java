@@ -7,7 +7,7 @@ import static org.mockito.Mockito.when;
 import com.wildfit.server.domain.LoginRequest;
 import com.wildfit.server.domain.RegisterUserResponse;
 import com.wildfit.server.domain.UserDigest;
-import com.wildfit.server.exception.UserServiceException;
+import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,7 +24,7 @@ class AuthenticationControllerTest {
     private UserService userService;
 
     @Test
-    void register() throws UserServiceException {
+    void register() throws WildfitServiceException {
         when(userService.confirmUser(any())).thenReturn(RegisterUserResponse.builder().build());
 
         final var response = controller.register("deft");
@@ -32,7 +32,7 @@ class AuthenticationControllerTest {
     }
 
     @Test
-    void login() throws UserServiceException {
+    void login() throws WildfitServiceException {
         when(userService.login(any(), any())).thenReturn(UserDigest.builder().build());
 
         final var response = controller.login(LoginRequest.builder().build());
