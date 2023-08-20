@@ -15,6 +15,8 @@ public class RecipeSummaryMapper {
                                   .withPrepTimeMin(recipe.getPrepTimeMin())
                                   .withCookTimeMin(recipe.getCookTimeMin())
                                   .withServingUnit(recipe.getServingUnit())
-                                  .withServingQty(recipe.getServingQty()).build();
+                                  .withServingQty(recipe.getServingQty())
+                                  .withThumbnail(recipe.getThumbnail())
+                                  .build();
     }
 }

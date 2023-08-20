@@ -22,4 +22,5 @@ public final class RecipeSummaryDigest {
     private int servingQty;
 
     private String introduction;
+    private String thumbnail;
 }

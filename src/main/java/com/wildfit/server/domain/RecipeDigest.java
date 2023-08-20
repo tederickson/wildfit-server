@@ -25,4 +25,5 @@ public final class RecipeDigest {
 
     private String introduction;
     private List<RecipeGroupDigest> recipeGroups;
+    private String thumbnail;
 }

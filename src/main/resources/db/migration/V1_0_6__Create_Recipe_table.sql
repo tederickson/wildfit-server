@@ -10,6 +10,8 @@ CREATE TABLE recipe (
   serving_qty INT NOT NULL,
   created DATETIME NOT NULL,
   updated DATETIME,
+  thumbnail VARCHAR(255),
+
   KEY RECIPE_season_idx (season)
 );
 CREATE TABLE recipe_seq (next_val BIGINT DEFAULT NULL);

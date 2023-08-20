@@ -56,6 +56,7 @@ public final class Recipe {
 
     private LocalDateTime created;
     private LocalDateTime updated;
+    private String thumbnail; //  "https://nix-tag-images.s3.amazonaws.com/1763_thumb.jpg"
 
     @OneToMany(mappedBy = "recipe", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RecipeGroup> recipeGroups;
