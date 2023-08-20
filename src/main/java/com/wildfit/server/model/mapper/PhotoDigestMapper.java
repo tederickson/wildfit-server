@@ -16,13 +16,4 @@ public final class PhotoDigestMapper {
         }
         return builder.build();
     }
-
-    public static PhotoDigest map(String thumbnail) {
-        final var builder = PhotoDigest.builder();
-
-        if (thumbnail != null) {
-            builder.withThumb(thumbnail);
-        }
-        return builder.build();
-    }
 }

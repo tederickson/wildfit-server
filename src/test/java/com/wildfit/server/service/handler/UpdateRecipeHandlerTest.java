@@ -94,10 +94,10 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
     }
 
     @Test
-    void addInstructionGroup() throws UserServiceException {
-        final var instructionGroup = RecipeGroupDigest.builder()
-                                                      .withInstructionGroupNumber(1)
-                                                      .withInstructions(List.of(step1, step2)).build();
+    void addRecipeGroup() throws UserServiceException {
+        final var recipeGroupDigest = RecipeGroupDigest.builder()
+                                                       .withInstructionGroupNumber(1)
+                                                       .withInstructions(List.of(step1, step2)).build();
         final var recipe = RecipeDigest.builder()
                                        .withName(NAME)
                                        .withSeason(SeasonType.FALL)
@@ -106,7 +106,7 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
                                        .withCookTimeMin(15)
                                        .withServingQty(4)
                                        .withServingUnit("serving")
-                                       .withRecipeGroups(List.of(instructionGroup))
+                                       .withRecipeGroups(List.of(recipeGroupDigest))
                                        .build();
 
         createRecipe(recipe);
@@ -116,24 +116,63 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
         assertEquals(2, recipeGroup.getInstructions().size());
         assertEquals(0, recipeGroup.getIngredients().size());
 
-        final var instructionGroup2 = RecipeGroupDigest.builder()
-                                                       .withInstructionGroupNumber(2)
-                                                       .withInstructions(List.of(step3, step4, step1))
-                                                       .withIngredients(List.of())
-                                                       .build();
+        final var recipeGroupDigest1 = ReadRecipeDigest.getRecipeDigest("Tuna_salad.json");
+        assertEquals(2, recipeGroupDigest1.getRecipeGroups().size());
 
-        testRecipe.getRecipeGroups().add(instructionGroup2);
+        testRecipe.getRecipeGroups().addAll(recipeGroupDigest1.getRecipeGroups());
+        assertEquals(3, testRecipe.getRecipeGroups().size());
+
         final var response = updateRecipe(testRecipe);
 
-        assertEquals(2, response.getRecipeGroups().size());
-        for (var group : response.getRecipeGroups()) {
-            if (group.getInstructionGroupNumber() == 1) {
-                assertEquals(testRecipe.getRecipeGroups().get(0), group);
-            } else {
-                assertEquals(3, group.getInstructions().size());
-                assertEquals(0, group.getIngredients().size());
-            }
-        }
+        assertEquals(3, response.getRecipeGroups().size());
+    }
+
+    @Test
+    void addInstructionsAndIngredientsToRecipeGroup() throws UserServiceException {
+        final var recipeGroupDigest = RecipeGroupDigest.builder()
+                                                       .withInstructionGroupNumber(1)
+                                                       .withInstructions(List.of(step1, step2)).build();
+        final var recipe = RecipeDigest.builder()
+                                       .withName(NAME)
+                                       .withSeason(SeasonType.FALL)
+                                       .withIntroduction(INTRODUCTION)
+                                       .withPrepTimeMin(5)
+                                       .withCookTimeMin(15)
+                                       .withServingQty(4)
+                                       .withServingUnit("serving")
+                                       .withRecipeGroups(List.of(recipeGroupDigest))
+                                       .build();
+
+        createRecipe(recipe);
+
+        final var recipeGroupSize = 1;
+        final var originalInstructionSize = 2;
+        final var originalIngredientSize = 0;
+
+        assertEquals(recipeGroupSize, testRecipe.getRecipeGroups().size());
+        var recipeGroup = testRecipe.getRecipeGroups().get(0);
+        assertEquals(originalInstructionSize, recipeGroup.getInstructions().size());
+        assertEquals(originalIngredientSize, recipeGroup.getIngredients().size());
+
+        final var recipeGroupDigest1 = ReadRecipeDigest.getRecipeDigest("Chili_Beef_Lettuce_Wraps__Summer_.json");
+        assertEquals(1, recipeGroupDigest1.getRecipeGroups().size());
+
+        final var chiliRecipeGroup = recipeGroupDigest1.getRecipeGroups().get(0);
+
+        assertEquals(4, chiliRecipeGroup.getInstructions().size());
+        assertEquals(10, chiliRecipeGroup.getIngredients().size());
+
+        recipeGroup.getIngredients().addAll(chiliRecipeGroup.getIngredients());
+        recipeGroup.getInstructions().addAll(chiliRecipeGroup.getInstructions());
+
+        final var response = updateRecipe(testRecipe);
+
+
+        assertEquals(recipeGroupSize, response.getRecipeGroups().size());
+        recipeGroup = response.getRecipeGroups().get(0);
+
+        assertEquals(originalInstructionSize + 4, recipeGroup.getInstructions().size());
+        assertEquals(originalIngredientSize + 10, recipeGroup.getIngredients().size());
     }
 
     @Test
