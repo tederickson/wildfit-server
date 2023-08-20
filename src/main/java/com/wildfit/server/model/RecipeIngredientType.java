@@ -1,24 +1,22 @@
 package com.wildfit.server.model;
 
 import com.wildfit.server.domain.IngredientType;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
 public enum RecipeIngredientType {
-    MEAT("M"), PRODUCE("P"), DAIRY("D"), SPICE("S"), NONE("N");
+    BREAD,
+    CAN,
+    DAIRY,
+    DELI,
+    INTERNATIONAL,
+    MEAT,
+    NUT,
+    OIL,
+    PRODUCE,
+    SPICE,
 
-    final String code;
-
-    public static RecipeIngredientType findByCode(String code) {
-        for (var value : values()) {
-            if (value.code.equals(code)) {
-                return value;
-            }
-        }
-        return NONE;
-    }
+    NONE;
 
     public static RecipeIngredientType map(IngredientType ingredientType) {
         if (ingredientType == null) {

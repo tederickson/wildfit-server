@@ -34,7 +34,7 @@
           "description": "2 tsp neutral-flavored oil like coconut, avocado or walnut",
           "ingredientServingQty": 2,
           "ingredientServingUnit": "tsp",
-          "ingredientType": null
+          "ingredientType": "OIL"
         },
         {
           "foodName": "lean ground beef",
@@ -48,14 +48,14 @@
           "description": "1 tbsp fish sauce",
           "ingredientServingQty": 1,
           "ingredientServingUnit": "tbsp",
-          "ingredientType": null
+          "ingredientType": "INTERNATIONAL"
         },
         {
           "foodName": "chili sauce",
           "description": "1-2 tbsp chili sauce (depending on how much heat you want)",
           "ingredientServingQty": 2,
           "ingredientServingUnit": "tbsp",
-          "ingredientType": null
+          "ingredientType": "INTERNATIONAL"
         },
         {
           "foodName": "water",

@@ -38,14 +38,14 @@
           "description": "8 large eggs",
           "ingredientServingQty": 8,
           "ingredientServingUnit": "egg",
-          "ingredientType": null
+          "ingredientType": "DAIRY"
         },
         {
           "foodName": "bacon bits",
           "description": "100g bacon bits (or more)",
           "ingredientServingQty": 100,
           "ingredientServingUnit": "g",
-          "ingredientType": null
+          "ingredientType": "CAN"
         },
         {
           "foodName": "red onion",

@@ -34,7 +34,7 @@
           "description": "2 cans of tuna in water, drained",
           "ingredientServingQty": 2,
           "ingredientServingUnit": "can",
-          "ingredientType": null
+          "ingredientType": "CAN"
         },
         {
           "foodName": "celery",
@@ -48,7 +48,7 @@
           "description": "1 tbsp capers",
           "ingredientServingQty": 1,
           "ingredientServingUnit": "tbsp",
-          "ingredientType": null
+          "ingredientType": "CAN"
         },
         {
           "foodName": "red onion",
@@ -62,7 +62,7 @@
           "description": "4 cornichon (small sugar free pickled cucumbers)",
           "ingredientServingQty": 4,
           "ingredientServingUnit": "cornichon",
-          "ingredientType": null
+          "ingredientType": "CAN"
         }
       ]
     },
@@ -76,7 +76,7 @@
           "description": "1 tbsp sugar-free mayonnaise",
           "ingredientServingQty": 1,
           "ingredientServingUnit": "tbsp",
-          "ingredientType": null
+          "ingredientType": "CAN"
         },
         {
           "foodName": "plain Greek yogurt",

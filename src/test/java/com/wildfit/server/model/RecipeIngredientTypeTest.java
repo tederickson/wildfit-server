@@ -1,17 +1,11 @@
 package com.wildfit.server.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.wildfit.server.domain.IngredientType;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 class RecipeIngredientTypeTest {
 
@@ -30,23 +24,10 @@ class RecipeIngredientTypeTest {
         assertEquals(RecipeIngredientType.NONE, RecipeIngredientType.map(null));
     }
 
-    @ParameterizedTest
-    @NullAndEmptySource
-    @ValueSource(strings = {" Spring ", "apple"})
-    void notFound(String code) {
-        assertEquals(RecipeIngredientType.NONE, RecipeIngredientType.findByCode(code));
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"M", "S"})
-    void findByCode(String code) {
-        assertNotEquals(RecipeIngredientType.NONE, RecipeIngredientType.findByCode(code));
-    }
-
     @Test
-    void distinctCodes() {
-        final var values = RecipeIngredientType.values();
-        final var codes = Arrays.stream(values).map(RecipeIngredientType::getCode).collect(Collectors.toSet());
-        assertEquals(values.length, codes.size());
+    void ensureEnumFitsInDatabase() {
+        for (var enm : RecipeIngredientType.values()) {
+            assertTrue(enm.name().length() < 20, enm.toString());
+        }
     }
 }
