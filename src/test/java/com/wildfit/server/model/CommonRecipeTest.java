@@ -8,15 +8,16 @@ class CommonRecipeTest {
 
     @Test
     void getRecipeGroup() {
-        final var recipeGroup = new RecipeGroup().setId(123L);
-        final var instruction = new Instruction()
+        final RecipeGroup recipeGroup = new RecipeGroup().setId(123L);
+        final Instruction instruction = new Instruction()
                 .setId(3L)
                 .setText("Bob")
-                .setStepNumber(1)
-                .setRecipeGroup(recipeGroup);
+                .setStepNumber(1);
+        final CommonRecipe commonRecipe = instruction.setRecipeGroup(recipeGroup);
 
         assertEquals(recipeGroup, instruction.getRecipeGroup());
         assertEquals(CommonRecipeType.INSTRUCTION, instruction.getType());
         assertEquals(3L, instruction.getId());
+        assertEquals(3L, commonRecipe.getId());
     }
 }
