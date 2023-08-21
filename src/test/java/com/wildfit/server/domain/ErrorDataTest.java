@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 class ErrorDataTest {
     @Test
-    public void shouldHaveANoArgsConstructor() {
+    public void shouldHaveNoArgsConstructor() {
         assertThat(ErrorData.class, hasValidBeanConstructor());
     }
 

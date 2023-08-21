@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 class LoginRequestTest {
     @Test
-    public void shouldHaveANoArgsConstructor() {
+    public void shouldHaveNoArgsConstructor() {
         assertThat(LoginRequest.class, hasValidBeanConstructor());
     }
 

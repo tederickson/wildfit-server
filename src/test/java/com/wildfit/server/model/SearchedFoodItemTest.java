@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 class SearchedFoodItemTest {
     @Test
-    public void shouldHaveANoArgsConstructor() {
+    public void shouldHaveNoArgsConstructor() {
         assertThat(SearchedFoodItem.class, hasValidBeanConstructor());
     }
 

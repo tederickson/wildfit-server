@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 class ParseRecipeRequestTest {
     @Test
-    public void shouldHaveANoArgsConstructor() {
+    public void shouldHaveNoArgsConstructor() {
         assertThat(ParseRecipeRequest.class, hasValidBeanConstructor());
     }
 

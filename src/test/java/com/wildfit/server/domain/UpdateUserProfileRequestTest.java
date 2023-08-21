@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 class UpdateUserProfileRequestTest {
     @Test
-    public void shouldHaveANoArgsConstructor() {
+    public void shouldHaveNoArgsConstructor() {
         assertThat(UpdateUserProfileRequest.class, hasValidBeanConstructor());
     }
 

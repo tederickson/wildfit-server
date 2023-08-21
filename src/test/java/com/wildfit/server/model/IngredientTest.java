@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 class IngredientTest {
 
     @Test
-    public void shouldHaveANoArgsConstructor() {
+    public void shouldHaveNoArgsConstructor() {
         assertThat(Ingredient.class, hasValidBeanConstructor());
     }
 

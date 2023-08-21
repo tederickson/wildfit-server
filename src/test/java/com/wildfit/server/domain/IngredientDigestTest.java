@@ -24,7 +24,7 @@ class IngredientDigestTest {
     }
 
     @Test
-    public void shouldHaveANoArgsConstructor() {
+    public void shouldHaveNoArgsConstructor() {
         assertThat(IngredientDigest.class, hasValidBeanConstructor());
     }
 

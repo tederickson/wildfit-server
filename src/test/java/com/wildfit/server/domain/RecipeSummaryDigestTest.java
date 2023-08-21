@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 class RecipeSummaryDigestTest {
 
     @Test
-    public void shouldHaveANoArgsConstructor() {
+    public void shouldHaveNoArgsConstructor() {
         assertThat(RecipeSummaryDigest.class, hasValidBeanConstructor());
     }
 

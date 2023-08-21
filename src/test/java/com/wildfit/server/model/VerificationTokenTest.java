@@ -31,7 +31,7 @@ class VerificationTokenTest {
     }
 
     @Test
-    public void shouldHaveANoArgsConstructor() {
+    public void shouldHaveNoArgsConstructor() {
         assertThat(VerificationToken.class, hasValidBeanConstructor());
     }
 

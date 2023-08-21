@@ -39,7 +39,7 @@ class RecipeTest {
     }
 
     @Test
-    void shouldHaveANoArgsConstructor() {
+    void shouldHaveNoArgsConstructor() {
         assertThat(Recipe.class, hasValidBeanConstructor());
     }
 

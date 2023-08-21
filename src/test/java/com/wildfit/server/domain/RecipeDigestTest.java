@@ -22,7 +22,7 @@ class RecipeDigestTest {
     private JacksonTester<RecipeDigest> json;
 
     @Test
-    public void shouldHaveANoArgsConstructor() {
+    public void shouldHaveNoArgsConstructor() {
         assertThat(RecipeDigest.class, hasValidBeanConstructor());
     }
 

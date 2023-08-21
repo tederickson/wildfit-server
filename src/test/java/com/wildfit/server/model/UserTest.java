@@ -20,7 +20,7 @@ class UserTest {
     }
 
     @Test
-    public void shouldHaveANoArgsConstructor() {
+    public void shouldHaveNoArgsConstructor() {
         assertThat(User.class, hasValidBeanConstructor());
     }
 

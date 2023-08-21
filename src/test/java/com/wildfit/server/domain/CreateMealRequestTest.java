@@ -5,35 +5,40 @@ import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanToString;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetters;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.Test;
 
-class RecipeGroupDigestTest {
+class CreateMealRequestTest {
+
     @Test
     public void shouldHaveNoArgsConstructor() {
-        assertThat(RecipeGroupDigest.class, hasValidBeanConstructor());
+        assertThat(CreateMealRequest.class, hasValidBeanConstructor());
     }
 
     @Test
     public void gettersAndSettersShouldWorkForEachProperty() {
-        assertThat(RecipeGroupDigest.class, hasValidGettersAndSetters());
+        assertThat(CreateMealRequest.class, hasValidGettersAndSetters());
     }
 
     @Test
     public void allPropertiesShouldBeRepresentedInToStringOutput() {
-        assertThat(RecipeGroupDigest.class, hasValidBeanToString());
+        assertThat(CreateMealRequest.class, hasValidBeanToString());
     }
 
     @Test
     public void equalsAndHashCode() {
-        EqualsVerifier.forClass(RecipeGroupDigest.class).suppress(Warning.NONFINAL_FIELDS).verify();
+        EqualsVerifier.forClass(CreateMealRequest.class).suppress(Warning.NONFINAL_FIELDS).verify();
     }
 
     @Test
     void builder() {
-        final var request = RecipeGroupDigest.builder().withName("p").build();
-        assertEquals("p", request.getName());
+        final var request = CreateMealRequest.builder()
+                                             .withUuid("unique user id")
+                                             .build();
+        assertEquals("unique user id", request.getUuid());
+        assertNull(request.getRecipeIds());
     }
 }

@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 class CreateUserRequestTest {
     @Test
-    public void shouldHaveANoArgsConstructor() {
+    public void shouldHaveNoArgsConstructor() {
         assertThat(CreateUserRequest.class, hasValidBeanConstructor());
     }
 

@@ -21,7 +21,7 @@ class UserDigestTest {
     private JacksonTester<UserDigest> json;
 
     @Test
-    public void shouldHaveANoArgsConstructor() {
+    public void shouldHaveNoArgsConstructor() {
         assertThat(UserDigest.class, hasValidBeanConstructor());
     }
 

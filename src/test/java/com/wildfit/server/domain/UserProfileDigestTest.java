@@ -25,7 +25,7 @@ class UserProfileDigestTest {
     }
 
     @Test
-    public void shouldHaveANoArgsConstructor() {
+    public void shouldHaveNoArgsConstructor() {
         assertThat(UserProfileDigest.class, hasValidBeanConstructor());
     }
 

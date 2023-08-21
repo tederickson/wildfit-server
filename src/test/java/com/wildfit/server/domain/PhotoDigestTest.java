@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 class PhotoDigestTest {
 
     @Test
-    public void shouldHaveANoArgsConstructor() {
+    public void shouldHaveNoArgsConstructor() {
         assertThat(PhotoDigest.class, hasValidBeanConstructor());
     }
 

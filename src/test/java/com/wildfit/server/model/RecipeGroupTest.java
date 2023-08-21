@@ -22,7 +22,7 @@ class RecipeGroupTest {
     }
 
     @Test
-    public void shouldHaveANoArgsConstructor() {
+    public void shouldHaveNoArgsConstructor() {
         assertThat(RecipeGroup.class, hasValidBeanConstructor());
     }
 

@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 class ChangePasswordRequestTest {
     @Test
-    public void shouldHaveANoArgsConstructor() {
+    public void shouldHaveNoArgsConstructor() {
         assertThat(ChangePasswordRequest.class, hasValidBeanConstructor());
     }
 

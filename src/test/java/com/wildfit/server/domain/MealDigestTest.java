@@ -5,6 +5,7 @@ import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanToString;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetters;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,37 +16,41 @@ import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-class FoodItemDigestTest {
+class MealDigestTest {
     @BeforeAll
     public static void init() {
-        BeanMatchers.registerValueGenerator(() -> PhotoDigest.builder().withThumb("thumb").build(), PhotoDigest.class);
         BeanMatchers.registerValueGenerator(LocalDate::now, LocalDate.class);
         BeanMatchers.registerValueGenerator(LocalDateTime::now, LocalDateTime.class);
     }
 
     @Test
     public void shouldHaveNoArgsConstructor() {
-        assertThat(FoodItemDigest.class, hasValidBeanConstructor());
+        assertThat(MealDigest.class, hasValidBeanConstructor());
     }
 
     @Test
     public void gettersAndSettersShouldWorkForEachProperty() {
-        assertThat(FoodItemDigest.class, hasValidGettersAndSetters());
+        assertThat(MealDigest.class, hasValidGettersAndSetters());
     }
 
     @Test
     public void allPropertiesShouldBeRepresentedInToStringOutput() {
-        assertThat(FoodItemDigest.class, hasValidBeanToString());
+        assertThat(MealDigest.class, hasValidBeanToString());
     }
 
     @Test
     public void equalsAndHashCode() {
-        EqualsVerifier.forClass(FoodItemDigest.class).suppress(Warning.NONFINAL_FIELDS).verify();
+        EqualsVerifier.forClass(MealDigest.class).suppress(Warning.NONFINAL_FIELDS).verify();
     }
 
     @Test
     void builder() {
-        final var request = FoodItemDigest.builder().withBrandName("p").build();
-        assertEquals("p", request.getBrandName());
+        final var request = MealDigest.builder()
+                                      .withId(333L)
+                                      .withUuid("unique user id")
+                                      .build();
+        assertEquals("unique user id", request.getUuid());
+        assertEquals(333L, request.getId());
+        assertNull(request.getRecipes());
     }
 }

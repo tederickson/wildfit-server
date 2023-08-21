@@ -30,7 +30,7 @@ class NutritionixHeaderInfoTest {
     }
 
     @Test
-    public void shouldHaveANoArgsConstructor() {
+    public void shouldHaveNoArgsConstructor() {
         assertThat(NutritionixHeaderInfo.class, hasValidBeanConstructor());
     }
 

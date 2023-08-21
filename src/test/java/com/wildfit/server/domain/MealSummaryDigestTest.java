@@ -5,6 +5,7 @@ import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanToString;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetters;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,37 +16,42 @@ import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-class FoodItemDigestTest {
+class MealSummaryDigestTest {
     @BeforeAll
     public static void init() {
-        BeanMatchers.registerValueGenerator(() -> PhotoDigest.builder().withThumb("thumb").build(), PhotoDigest.class);
         BeanMatchers.registerValueGenerator(LocalDate::now, LocalDate.class);
         BeanMatchers.registerValueGenerator(LocalDateTime::now, LocalDateTime.class);
     }
 
     @Test
     public void shouldHaveNoArgsConstructor() {
-        assertThat(FoodItemDigest.class, hasValidBeanConstructor());
+        assertThat(MealSummaryDigest.class, hasValidBeanConstructor());
     }
 
     @Test
     public void gettersAndSettersShouldWorkForEachProperty() {
-        assertThat(FoodItemDigest.class, hasValidGettersAndSetters());
+        assertThat(MealSummaryDigest.class, hasValidGettersAndSetters());
     }
 
     @Test
     public void allPropertiesShouldBeRepresentedInToStringOutput() {
-        assertThat(FoodItemDigest.class, hasValidBeanToString());
+        assertThat(MealSummaryDigest.class, hasValidBeanToString());
     }
 
     @Test
     public void equalsAndHashCode() {
-        EqualsVerifier.forClass(FoodItemDigest.class).suppress(Warning.NONFINAL_FIELDS).verify();
+        EqualsVerifier.simple().forClass(MealSummaryDigest.class).suppress(Warning.NONFINAL_FIELDS).verify();
     }
 
     @Test
     void builder() {
-        final var request = FoodItemDigest.builder().withBrandName("p").build();
-        assertEquals("p", request.getBrandName());
+        final var request = MealSummaryDigest.builder()
+                                             .withId(333L)
+                                             .withName("unique name")
+                                             .withCooked(true)
+                                             .build();
+        assertEquals("unique name", request.getName());
+        assertEquals(333L, request.getId());
+        assertTrue(request.isCooked());
     }
 }
