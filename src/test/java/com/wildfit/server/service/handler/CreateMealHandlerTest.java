@@ -45,7 +45,7 @@ class CreateMealHandlerTest extends CommonMealHandlerTest {
         final var expectedDate = LocalDate.now();
         assertEquals(expectedDate, mealDigest.getStartDate());
         assertEquals(expectedDate, mealDigest.getEndDate());
-        assertEquals(3, mealDigest.getRecipes().size());
+        assertEquals(recipeIds.size(), mealDigest.getRecipes().size());
 
         for (var mealSummary : mealDigest.getRecipes()) {
             assertNull(mealSummary.getPlanDate());

@@ -26,4 +26,12 @@ public class MealSummaryMapper {
     public static MealSummary create(Recipe recipe) {
         return new MealSummary().setRecipeId(recipe.getId());
     }
+
+    public static MealSummary update( MealSummaryDigest summary, MealSummary summaryMapEntity) {
+        summaryMapEntity
+                .setCooked(summary.isCooked())
+                .setPlanDate(summary.getPlanDate());
+
+        return summaryMapEntity;
+    }
 }

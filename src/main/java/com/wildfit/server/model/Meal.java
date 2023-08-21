@@ -40,6 +40,10 @@ public class Meal {
     @OneToMany(mappedBy = "meal", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MealSummary> recipes;
 
+    public void updateSummaryMeals() {
+        recipes.forEach(x -> x.setMeal(this));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
