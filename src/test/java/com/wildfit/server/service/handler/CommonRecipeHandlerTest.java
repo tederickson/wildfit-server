@@ -1,7 +1,10 @@
 package com.wildfit.server.service.handler;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import com.wildfit.server.domain.InstructionDigest;
 import com.wildfit.server.domain.RecipeDigest;
@@ -49,6 +52,7 @@ public class CommonRecipeHandlerTest extends CommonHandlerTest {
 
     protected static String userId;
     protected static RecipeDigest testRecipe;
+    protected static List<RecipeDigest> recipeDigests = new ArrayList<>();
 
     @Autowired
     protected com.wildfit.server.repository.RecipeRepository recipeRepository;
@@ -80,6 +84,12 @@ public class CommonRecipeHandlerTest extends CommonHandlerTest {
 
             testRecipe = null;
         }
+        if (!recipeDigests.isEmpty()) {
+            final var recipeIds = recipeDigests.stream().map(RecipeDigest::getId).collect(Collectors.toList());
+            recipeRepository.deleteAllById(recipeIds);
+
+            recipeDigests.clear();
+        }
 
         super.tearDown();
     }
@@ -91,5 +101,17 @@ public class CommonRecipeHandlerTest extends CommonHandlerTest {
                                         .withUserId(userId)
                                         .withRequest(recipe)
                                         .build().execute();
+    }
+
+    protected void createRecipes(List<RecipeDigest> recipes) throws WildfitServiceException {
+        for (var recipe : recipes) {
+            final var persisted = CreateRecipeHandler.builder()
+                                                     .withUserRepository(userRepository)
+                                                     .withRecipeRepository(recipeRepository)
+                                                     .withUserId(userId)
+                                                     .withRequest(recipe)
+                                                     .build().execute();
+            recipeDigests.add(persisted);
+        }
     }
 }

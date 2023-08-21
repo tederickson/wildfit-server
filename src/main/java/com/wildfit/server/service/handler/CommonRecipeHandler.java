@@ -5,12 +5,13 @@ import java.util.Objects;
 import com.wildfit.server.exception.WildfitServiceError;
 import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.Recipe;
+import com.wildfit.server.repository.RecipeRepository;
 import com.wildfit.server.repository.UserRepository;
 import lombok.experimental.SuperBuilder;
 
 @SuperBuilder(setterPrefix = "with")
 public class CommonRecipeHandler {
-    protected final com.wildfit.server.repository.RecipeRepository recipeRepository;
+    protected final RecipeRepository recipeRepository;
     protected final UserRepository userRepository;
 
     protected final String userId;
@@ -32,7 +33,7 @@ public class CommonRecipeHandler {
 
     protected void validate() throws WildfitServiceException {
         Objects.requireNonNull(userRepository, "userRepository");
-        Objects.requireNonNull(recipeRepository, "recipe1Repository");
+        Objects.requireNonNull(recipeRepository, " recipeRepository");
 
         if (userId == null) {
             throw new WildfitServiceException(WildfitServiceError.INVALID_PARAMETER);

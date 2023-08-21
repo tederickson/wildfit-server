@@ -28,7 +28,7 @@ public class ListBySeasonAndIngredientHandler {
     }
 
     private void validate() throws WildfitServiceException {
-        Objects.requireNonNull(recipeRepository, "recipe1Repository");
+        Objects.requireNonNull(recipeRepository, " recipeRepository");
 
         if (season == null) {
             throw new WildfitServiceException(WildfitServiceError.INVALID_PARAMETER);

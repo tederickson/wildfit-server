@@ -26,7 +26,7 @@ public class GetRecipeHandler {
     }
 
     private void validate() throws WildfitServiceException {
-        Objects.requireNonNull(recipeRepository, "recipe1Repository");
+        Objects.requireNonNull(recipeRepository, " recipeRepository");
 
         if (recipeId == null) {
             throw new WildfitServiceException(WildfitServiceError.INVALID_PARAMETER);
