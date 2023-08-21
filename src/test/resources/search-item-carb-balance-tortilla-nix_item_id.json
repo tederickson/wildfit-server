@@ -1,0 +1,120 @@
+{
+  "foods": [
+    {
+      "food_name": "Carb Balance Tortilla Wraps, Spinach Herb",
+      "brand_name": "Mission",
+      "serving_qty": 1,
+      "serving_unit": "tortilla",
+      "serving_weight_grams": 43,
+      "nf_metric_qty": 43,
+      "nf_metric_uom": "g",
+      "nf_calories": 60,
+      "nf_total_fat": 3.5,
+      "nf_saturated_fat": 1.5,
+      "nf_cholesterol": 0,
+      "nf_sodium": 330,
+      "nf_total_carbohydrate": 18,
+      "nf_dietary_fiber": 15,
+      "nf_sugars": 0,
+      "nf_protein": 6,
+      "nf_potassium": 50,
+      "nf_p": null,
+      "full_nutrients": [
+        {
+          "attr_id": 203,
+          "value": 6
+        },
+        {
+          "attr_id": 204,
+          "value": 3.5
+        },
+        {
+          "attr_id": 205,
+          "value": 18
+        },
+        {
+          "attr_id": 208,
+          "value": 60
+        },
+        {
+          "attr_id": 269,
+          "value": 0
+        },
+        {
+          "attr_id": 291,
+          "value": 15
+        },
+        {
+          "attr_id": 301,
+          "value": 80
+        },
+        {
+          "attr_id": 303,
+          "value": 0.7
+        },
+        {
+          "attr_id": 306,
+          "value": 50
+        },
+        {
+          "attr_id": 307,
+          "value": 330
+        },
+        {
+          "attr_id": 324,
+          "value": 0
+        },
+        {
+          "attr_id": 328,
+          "value": 0
+        },
+        {
+          "attr_id": 539,
+          "value": 0
+        },
+        {
+          "attr_id": 601,
+          "value": 0
+        },
+        {
+          "attr_id": 605,
+          "value": 0
+        },
+        {
+          "attr_id": 606,
+          "value": 1.5
+        },
+        {
+          "attr_id": 645,
+          "value": 0
+        },
+        {
+          "attr_id": 646,
+          "value": 1.5
+        }
+      ],
+      "nix_brand_name": "Mission",
+      "nix_brand_id": "51db37c6176fe9790a89940d",
+      "nix_item_name": "Carb Balance Tortilla Wraps, Spinach Herb",
+      "nix_item_id": "5d7208ca5dab18961f9183c7",
+      "metadata": {},
+      "source": 8,
+      "ndb_no": null,
+      "tags": null,
+      "alt_measures": null,
+      "lat": null,
+      "lng": null,
+      "photo": {
+        "thumb": "https://nutritionix-api.s3.amazonaws.com/62ee4a5ea58c4000088c940a.jpeg",
+        "highres": null,
+        "is_user_uploaded": false
+      },
+      "note": null,
+      "class_code": null,
+      "brick_code": null,
+      "tag_id": null,
+      "updated_at": "2022-08-06T11:02:54+00:00",
+      "nf_ingredient_statement": "Water, Modified Wheat Starch,Whole Wheat Flour, Wheat Gluten, Vegetable Shortening (Interesterified and Hydrogenated Soybean Oils), Wheat Gluten Isolate, contains 2% or less of: Spinach Powder, Salt, Onion Powder, Spices, Garlic Powder, Sunflower Oil, Yellow 5 Aluminum Lake, Blue 1 Aluminum Lake, Baking Soda, Sodium Acid Pyrophosphate, Cellulose Gum, Distilled Monoglycerides, Sucralose, Fumaric Acid, and Calcium Propionate and Sorbic Acid (to maintain freshness). CONTAINS: WHEAT"
+    }
+  ]
+}

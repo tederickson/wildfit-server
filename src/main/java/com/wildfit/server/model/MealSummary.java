@@ -60,6 +60,7 @@ public class MealSummary {
                 "id=" + id +
                 ", recipeId=" + recipeId +
                 ", cooked=" + cooked +
+                ", planDate=" + planDate +
                 '}';
     }
 }
