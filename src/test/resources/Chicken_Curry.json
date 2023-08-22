@@ -1,0 +1,180 @@
+{
+  "name": "Chicken Curry",
+  "season": "SPRING",
+  "prepTimeMin": 5,
+  "cookTimeMin": 35,
+  "servingUnit": "serving",
+  "servingQty": 4,
+  "introduction": "As the weather cools down, it is so nice to have a hot, spicy dinner to warm us up! This comforting dish is full of vegetables, healthy protein, and tastes rich and luxurious. Plus it is quick and easy to prepare. You can also easily make in vegan by using mushrooms or eggplant in place of chicken. Try it tonight!",
+  "thumbnail": "https://getwildfit.com/wp-content/uploads/elementor/thumbs/DSC_0251_blog0-p7u1tkph9fjdvncqwxbshioaoh46imh8c5oujzcprk.jpg",
+  "recipeGroups": [
+    {
+      "instructionGroupNumber": 0,
+      "name": "Red Chili Paste",
+      "instructions": [
+        {
+          "stepNumber": 1,
+          "instruction": "First you will make the curry paste. This can be made ahead, and set in the fridge overnight for the flavours to meld. I often double the recipe and put an airtight jarful in the freezer for later use."
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Heat a small saucepan on medium, then add 2 Tablespoons of coconut oil to the pan and allow to melt. Add the onion pieces and cook, stirring until they are translucent and sweet smelling. Next add the minced garlic, ginger and measured spices to the pan and stir continually for 1-2 minutes. This quick toasting releases the volatile oils and aromas of the spices, adding to the flavor of the finished paste. The seasoning of this dish is adaptable to your liking. By following the instructions you will get a bit of heat, and a flavorful curry. By increasing the quantity of chili powder, or adding extra cayenne pepper you will get more heat. By adding more curry powder or fresh curry leaves you will intensify the curry flavours. I prefer the warm, bright and pungent flavours of garam masala (\u201chot mixture\u201d) spices of cloves, caraway, cardamom and fennel, so it is emphasized in this particular recipe. Make it your own, according to your preference and tastes. "
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Finally, add the chopped tomato pieces and allow the sauce to come to a boil. Reduce heat and cook down until tomatoes are softened, about 10 minutes or so. If you are in deep Spring, you can also substitute the tomatoes for green bell peppers, and they will act much the same, but may release less water so you may want to add an extra tablespoon of water or broth to the pan. Stir the sauce every couple minutes so the tomatoes do not stick to the pan or burn. The mixture is ready when the sauce liquid has reduced and the tomatoes have released their skins. Turn off the burner and set the paste aside to cook for a few minutes. Once cooled slightly, pour red chili mixture into a food processor and blend until it becomes a smooth paste."
+        }
+      ],
+      "ingredients": [
+        {
+          "foodName": "coconut oil",
+          "description": "2 Tablespoons of coconut oil",
+          "ingredientServingQty": 2,
+          "ingredientServingUnit": "tbsp",
+          "ingredientType": "OIL"
+        },
+        {
+          "foodName": "large red onion",
+          "description": "1/2 large red onion, chopped",
+          "ingredientServingQty": 0.5,
+          "ingredientServingUnit": null,
+          "ingredientType": "PRODUCE"
+        },
+        {
+          "foodName": "garlic",
+          "description": "2 cloves of garlic, smashed and minced",
+          "ingredientServingQty": 2,
+          "ingredientServingUnit": "cloves",
+          "ingredientType": "PRODUCE"
+        },
+        {
+          "foodName": "ginger",
+          "description": "1 inch chunk of ginger, peeled and minced",
+          "ingredientServingQty": 1,
+          "ingredientServingUnit": "inch",
+          "ingredientType": "PRODUCE"
+        },
+        {
+          "foodName": "roma tomato",
+          "description": "4 roma tomatoes, chopped in chunks",
+          "ingredientServingQty": 4,
+          "ingredientServingUnit": "tomato",
+          "ingredientType": "PRODUCE"
+        },
+        {
+          "foodName": "curry powder",
+          "description": "1 Tablespoon of dried curry powder",
+          "ingredientServingQty": 1,
+          "ingredientServingUnit": "tbsp",
+          "ingredientType": "SPICE"
+        },
+        {
+          "foodName": "garam masala",
+          "description": "1 Tablespoon of garam masala spice powder",
+          "ingredientServingQty": 1,
+          "ingredientServingUnit": "tbsp",
+          "ingredientType": "SPICE"
+        },
+        {
+          "foodName": "red chili powder",
+          "description": "1 teaspoon of red chili powder (or more to taste)",
+          "ingredientServingQty": 1,
+          "ingredientServingUnit": "tsp",
+          "ingredientType": "SPICE"
+        },
+        {
+          "foodName": "himalayan salt",
+          "description": "1 teaspoon of  Himalayan salt",
+          "ingredientServingQty": 1,
+          "ingredientServingUnit": "tsp",
+          "ingredientType": "SPICE"
+        }
+      ]
+    },
+    {
+      "instructionGroupNumber": 1,
+      "name": "Main Dish",
+      "instructions": [
+        {
+          "stepNumber": 1,
+          "instruction": "This dish requires only a pan or two, plus a bit of chopping time. Making the red curry  from scratch is simpler than you would think, and adds a depth of flavor and complexity that is hard to recreate. You also receive the added benefit of enjoying the nutrition of the fresh whole foods, rather than a pasteurized product with additives and preservatives."
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "You can begin by chopping the chicken into evenly sized pieces, then seasoning it with salt and pepper. Set it aside, and with a clean knife, hands and board, prepare your vegetables. Mince the garlic and ginger, chop the tomato and zucchini separately, remove stems of kale leaves and tear them into bite sized pieces. You want your zucchini chunks to be about the size of the chicken pieces, so that everything cooks evenly and looks appealing for presentation. Now you are ready to cook! "
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "To make the dish, heat a wok, large saucepan or high sided cast iron pan to medium high. Add a small amount of oil to coat the bottom of the pan unless using a seasoned cast iron or non stick pan. Pour in the chicken pieces and sear each side, 1-2 minutes per side, stirring until pieces are white and opaque. If using veggies instead, do the same, cooking them in a bit of oil until golden and slightly softened. "
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Reduce heat to medium and stir in zucchini pieces, cooking while stirring another 5 minutes or so until they are golden and slightly softened. The whole dish will have more time to cook in the liquid, so keep this in mind as you do not want a mushy finish to your veggies. "
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Add the chili paste and coconut milk to the pan, bringing it up to a simmer. Stir to combine all ingredients well, and allow to simmer for another 5-10 minutes until zucchini is nearly softened to your liking. Stir in kale pieces, allow them to wilt and brighten, stirring 2 minutes more. If you would like more liquid, add up to one cup of water or broth and warm it up for a minute or so. Finally, stir in cilantro leaves, reserving a few for garnish. "
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Meanwhile, use your food processor to create cauliflower rice (or chop florets finely). Steam or saute cauliflower rice for 2-5 minutes until softened but still chewy. Alternatively, for less cleanup, simply add the cauli rice to your curry before you add the kale pieces. It all ends up in the same bowl anyway! "
+        },
+        {
+          "stepNumber": 7,
+          "instruction": "Serve curry over cauliflower rice, and garnish with cilantro or your herb of choice. This dish keeps well up to 5 days in the fridge and the flavors only deepen with time. Also freezes well, and so is great to prep and thawz for an even faster evening meal or lunch. Enjoy!"
+        }
+      ],
+      "ingredients": [
+        {
+          "foodName": "Chicken breast",
+          "description": "2 boneless, skinless chicken breasts, cut in chunks (Make vegan by substituting mushrooms or eggplant pieces)",
+          "ingredientServingQty": 2,
+          "ingredientServingUnit": null,
+          "ingredientType": "MEAT"
+        },
+        {
+          "foodName": "zuchini",
+          "description": "2 cups of zucchini, peeled and seeds removed",
+          "ingredientServingQty": 2,
+          "ingredientServingUnit": "cup",
+          "ingredientType": "PRODUCE"
+        },
+        {
+          "foodName": "kale",
+          "description": "Small bunch of kale, leaves removed from stem",
+          "ingredientServingQty": 1,
+          "ingredientServingUnit": "bunch",
+          "ingredientType": "PRODUCE"
+        },
+        {
+          "foodName": "coconut milk",
+          "description": "1 can of coconut milk",
+          "ingredientServingQty": 1,
+          "ingredientServingUnit": "can",
+          "ingredientType": "INTERNATIONAL"
+        },
+        {
+          "foodName": "cilantro",
+          "description": "Small bunch of fresh cilantro (or herb of choice)",
+          "ingredientServingQty": 1,
+          "ingredientServingUnit": "bunch",
+          "ingredientType": "PRODUCE"
+        },
+        {
+          "foodName": "water",
+          "description": "1 cup water or broth",
+          "ingredientServingQty": 1,
+          "ingredientServingUnit": "cup",
+          "ingredientType": null
+        },
+        {
+          "foodName": "cauliflower",
+          "description": "One head of cauliflower (if serving with cauli rice)",
+          "ingredientServingQty": 1,
+          "ingredientServingUnit": "head",
+          "ingredientType": "PRODUCE"
+        }
+      ]
+    }
+  ]
+}
