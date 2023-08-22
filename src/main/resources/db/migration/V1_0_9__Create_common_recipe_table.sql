@@ -13,7 +13,7 @@ INSERT INTO common_recipe_seq VALUES(10);
 
 CREATE TABLE instruction (
   step_number int NOT NULL,
-  text varchar(600) NOT NULL,
+  text varchar(1200) NOT NULL,
   common_recipe_join_id bigint NOT NULL,
 
   PRIMARY KEY (common_recipe_join_id),
