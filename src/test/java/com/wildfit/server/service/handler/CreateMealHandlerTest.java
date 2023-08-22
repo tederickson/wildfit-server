@@ -50,7 +50,7 @@ class CreateMealHandlerTest extends CommonMealHandlerTest {
         for (var mealSummary : mealDigest.getRecipes()) {
             assertNull(mealSummary.getPlanDate());
             assertFalse(mealSummary.isCooked());
-            assertNull(mealSummary.getThumbnail());
+            assertNotNull(mealSummary.getThumbnail());
 
             final var recipe =
                     recipeDigests.stream().filter(x -> mealSummary.getRecipeId().equals(x.getId()))

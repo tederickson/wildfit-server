@@ -11,6 +11,7 @@ import com.wildfit.server.service.handler.CreateMealHandler;
 import com.wildfit.server.service.handler.DeleteMealHandler;
 import com.wildfit.server.service.handler.RetrieveAllMealsHandler;
 import com.wildfit.server.service.handler.RetrieveMealHandler;
+import com.wildfit.server.service.handler.UpdateMealHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -64,6 +65,10 @@ public class MealServiceImpl implements MealService {
 
     @Override
     public MealDigest updateMeal(MealDigest request) throws WildfitServiceException {
-        return null;
+        return UpdateMealHandler.builder()
+                                .withMealRepository(mealRepository)
+                                .withRecipeRepository(recipeRepository)
+                                .withRequest(request)
+                                .build().execute();
     }
 }
