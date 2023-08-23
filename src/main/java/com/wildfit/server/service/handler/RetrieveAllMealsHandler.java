@@ -15,17 +15,19 @@ import com.wildfit.server.model.mapper.MealMapper;
 import com.wildfit.server.repository.RecipeRepository;
 import lombok.experimental.SuperBuilder;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.domain.Pageable;
 import org.springframework.util.CollectionUtils;
 
 @SuperBuilder(setterPrefix = "with")
 public class RetrieveAllMealsHandler extends CommonMealHandler {
     private final RecipeRepository recipeRepository;
     private final String userId;
+    private final Pageable pageable;
 
     public List<MealDigest> execute() throws WildfitServiceException {
         validate();
 
-        final List<Meal> meals = mealRepository.findAllByUuidOrderByStartDateDesc(userId);
+        final List<Meal> meals = mealRepository.findAllByUuidOrderByStartDateDesc(userId, pageable);
         if (CollectionUtils.isEmpty(meals)) {
             throw new WildfitServiceException(WildfitServiceError.MEAL_NOT_FOUND);
         }
@@ -45,6 +47,9 @@ public class RetrieveAllMealsHandler extends CommonMealHandler {
         Objects.requireNonNull(recipeRepository, "recipeRepository");
 
         if (StringUtils.isAllBlank(userId)) {
+            throw new WildfitServiceException(WildfitServiceError.INVALID_PARAMETER);
+        }
+        if (pageable == null) {
             throw new WildfitServiceException(WildfitServiceError.INVALID_PARAMETER);
         }
     }

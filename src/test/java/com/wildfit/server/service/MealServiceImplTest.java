@@ -8,9 +8,9 @@ import com.wildfit.server.domain.MealDigest;
 import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.repository.MealRepository;
 import com.wildfit.server.repository.RecipeRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -21,8 +21,12 @@ class MealServiceImplTest {
     @Mock
     RecipeRepository recipeRepository;
 
-    @InjectMocks
-    private MealServiceImpl mealService;
+    private MealService mealService;
+
+    @BeforeEach
+    void setUp() {
+        mealService = new MealServiceImpl(recipeRepository, mealRepository);
+    }
 
     @Test
     void retrieveMeal() {
@@ -34,7 +38,7 @@ class MealServiceImplTest {
     @Test
     void retrieveAllMeals() {
         final var exception = assertThrows(WildfitServiceException.class,
-                () -> mealService.retrieveAllMeals(null));
+                () -> mealService.retrieveAllMeals(null, null));
         assertEquals("Invalid parameter.", exception.getMessage());
     }
 

@@ -15,6 +15,7 @@ import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.util.ReadRecipeDigest;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
 
 @SpringBootTest
 class RetrieveAllMealsHandlerTest extends CommonMealHandlerTest {
@@ -40,6 +41,7 @@ class RetrieveAllMealsHandlerTest extends CommonMealHandlerTest {
                                                         .withMealRepository(mealRepository)
                                                         .withRecipeRepository(recipeRepository)
                                                         .withUserId(testUserId)
+                                                        .withPageable(PageRequest.of(0, 100))
                                                         .build().execute();
         assertNotNull(responseList);
         assertEquals(1, responseList.size());
@@ -64,6 +66,7 @@ class RetrieveAllMealsHandlerTest extends CommonMealHandlerTest {
                 () -> RetrieveAllMealsHandler.builder()
                                              .withMealRepository(mealRepository)
                                              .withRecipeRepository(recipeRepository)
+                                             .withPageable(PageRequest.of(0, 100))
                                              .build().execute());
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
@@ -75,6 +78,18 @@ class RetrieveAllMealsHandlerTest extends CommonMealHandlerTest {
                                              .withMealRepository(mealRepository)
                                              .withRecipeRepository(recipeRepository)
                                              .withUserId("  ")
+                                             .withPageable(PageRequest.of(0, 100))
+                                             .build().execute());
+        assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
+    }
+
+    @Test
+    void missingPageRequest() {
+        final var exception = assertThrows(WildfitServiceException.class,
+                () -> RetrieveAllMealsHandler.builder()
+                                             .withMealRepository(mealRepository)
+                                             .withRecipeRepository(recipeRepository)
+                                             .withUserId(userId)
                                              .build().execute());
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }

@@ -13,6 +13,7 @@ import com.wildfit.server.service.handler.RetrieveAllMealsHandler;
 import com.wildfit.server.service.handler.RetrieveMealHandler;
 import com.wildfit.server.service.handler.UpdateMealHandler;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -37,11 +38,12 @@ public class MealServiceImpl implements MealService {
     }
 
     @Override
-    public List<MealDigest> retrieveAllMeals(String userId) throws WildfitServiceException {
+    public List<MealDigest> retrieveAllMeals(String userId, Pageable pageable) throws WildfitServiceException {
         return RetrieveAllMealsHandler.builder()
                                       .withMealRepository(mealRepository)
                                       .withRecipeRepository(recipeRepository)
                                       .withUserId(userId)
+                                      .withPageable(pageable)
                                       .build().execute();
     }
 

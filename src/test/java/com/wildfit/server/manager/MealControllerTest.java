@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.wildfit.server.domain.CreateMealRequest;
 import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.service.MealService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -17,15 +17,19 @@ class MealControllerTest {
     static final Long mealId = 123456L;
     static final String userId = "abra-cadabra";
 
-    @InjectMocks
-    MealController mealController;
+    private MealController mealController;
 
     @Mock
     private MealService mealService;
 
+    @BeforeEach
+    void setUp() {
+        mealController = new MealController(mealService);
+    }
+
     @Test
     void retrieveAllMeals() throws WildfitServiceException {
-        final var response = mealController.retrieveAllMeals(userId);
+        final var response = mealController.retrieveAllMeals(userId, 14, 30);
         assertTrue(response.isEmpty());
     }
 

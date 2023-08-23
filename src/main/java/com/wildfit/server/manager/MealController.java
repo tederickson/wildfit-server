@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -31,9 +32,13 @@ public class MealController {
 
     @Operation(summary = "Get all meals for the user")
     @GetMapping(value = "/users/{userId}", produces = "application/json")
-    public List<MealDigest> retrieveAllMeals(@PathVariable(value = "userId") String userId)
+    public List<MealDigest> retrieveAllMeals(@PathVariable(value = "userId") String userId,
+                                             @RequestParam(value = "page", defaultValue = "0") Integer page,
+                                             @RequestParam(value = "pageSize", defaultValue = "30") Integer pageSize)
             throws WildfitServiceException {
-        return mealService.retrieveAllMeals(userId);
+        final var pageable = PageMapper.map(page, pageSize);
+
+        return mealService.retrieveAllMeals(userId, pageable);
     }
 
     @Operation(summary = "Get meal details")
