@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "Food API")
-@RequestMapping("v1/fooditems")
+@RequestMapping("v1/foods")
 public class FoodController {
     private final NutritionixService nutritionixService;
     private final RecipeService recipeService;
