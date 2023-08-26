@@ -8,8 +8,6 @@ import java.util.stream.Collectors;
 
 import com.wildfit.server.domain.CreateMealRequest;
 import com.wildfit.server.domain.MealDigest;
-import com.wildfit.server.exception.WildfitServiceError;
-import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.Meal;
 import com.wildfit.server.model.MealSummary;
 import com.wildfit.server.model.Recipe;
@@ -47,8 +45,7 @@ public final class MealMapper {
         return meal;
     }
 
-    public static void update(MealDigest mealDigest, Meal entity, Map<Long, Recipe> recipeMap)
-            throws WildfitServiceException {
+    public static void update(MealDigest mealDigest, Meal entity, Map<Long, Recipe> recipeMap) {
         entity.setStartDate(mealDigest.getStartDate())
               .setEndDate(mealDigest.getEndDate());
 
@@ -64,13 +61,7 @@ public final class MealMapper {
                 if (summaryDigest.getId() == null) {
                     mealSummaries.add(MealSummaryMapper.create(recipe));
                 } else {
-                    final var summaryMapEntity = summaryMap.get(mapKey);
-
-                    if (summaryMapEntity == null) {
-                        log.error("summaryDigest {} not found", summaryDigest);
-                        throw new WildfitServiceException(WildfitServiceError.MEAL_NOT_FOUND);
-                    }
-                    mealSummaries.add(MealSummaryMapper.update(summaryDigest, summaryMapEntity));
+                    mealSummaries.add(MealSummaryMapper.update(summaryDigest, summaryMap.get(mapKey)));
                 }
             }
         }
