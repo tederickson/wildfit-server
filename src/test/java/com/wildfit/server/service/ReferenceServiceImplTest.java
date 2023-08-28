@@ -1,0 +1,29 @@
+package com.wildfit.server.service;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import com.wildfit.server.domain.IngredientType;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+class ReferenceServiceImplTest {
+    private ReferenceService service;
+
+    @BeforeEach
+    void setUp() {
+        service = new ReferenceServiceImpl();
+    }
+
+    @Test
+    void getIngredientTypes() {
+        final var response = service.getIngredientTypes();
+
+        assertEquals(IngredientType.values().length, response.size());
+
+        for (var reference : response) {
+            IngredientType ingredientType = IngredientType.valueOf(reference.getType());
+
+            assertEquals(ingredientType.getDescription(), reference.getDescription());
+        }
+    }
+}
