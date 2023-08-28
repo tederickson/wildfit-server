@@ -8,13 +8,14 @@ import com.wildfit.server.exception.WildfitServiceError;
 import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.Season;
 import com.wildfit.server.model.mapper.RecipeListMapper;
+import com.wildfit.server.repository.RecipeRepository;
 import lombok.Builder;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Pageable;
 
 @Builder(setterPrefix = "with")
 public class ListBySeasonAndNameHandler {
-    private final com.wildfit.server.repository.RecipeRepository recipeRepository;
+    private final RecipeRepository recipeRepository;
     private final SeasonType season;
     private final String recipeName;
     private final Pageable pageable;

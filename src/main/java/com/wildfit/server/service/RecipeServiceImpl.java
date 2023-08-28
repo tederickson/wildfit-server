@@ -4,6 +4,7 @@ import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.RecipeListDigest;
 import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.exception.WildfitServiceException;
+import com.wildfit.server.repository.RecipeRepository;
 import com.wildfit.server.repository.UserRepository;
 import com.wildfit.server.service.handler.CreateRecipeHandler;
 import com.wildfit.server.service.handler.DeleteRecipeHandler;
@@ -25,7 +26,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class RecipeServiceImpl implements RecipeService {
     private final UserRepository userRepository;
-    private final com.wildfit.server.repository.RecipeRepository recipeRepository;
+    private final RecipeRepository recipeRepository;
 
     @Override
     public RecipeListDigest listBySeason(SeasonType season, Pageable pageable) throws WildfitServiceException {

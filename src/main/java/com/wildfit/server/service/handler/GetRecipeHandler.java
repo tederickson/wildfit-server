@@ -6,13 +6,14 @@ import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.exception.WildfitServiceError;
 import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.mapper.RecipeMapper;
+import com.wildfit.server.repository.RecipeRepository;
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Builder(setterPrefix = "with")
 public class GetRecipeHandler {
-    private final com.wildfit.server.repository.RecipeRepository recipeRepository;
+    private final RecipeRepository recipeRepository;
     private final Long recipeId;
 
     public RecipeDigest execute() throws WildfitServiceException {

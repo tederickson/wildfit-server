@@ -11,6 +11,7 @@ import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.User;
 import com.wildfit.server.model.UserStatus;
+import com.wildfit.server.repository.RecipeRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +56,7 @@ public class CommonRecipeHandlerTest extends CommonHandlerTest {
     protected static List<RecipeDigest> recipeDigests = new ArrayList<>();
 
     @Autowired
-    protected com.wildfit.server.repository.RecipeRepository recipeRepository;
+    protected RecipeRepository recipeRepository;
 
     @BeforeEach
     void setUp() {
