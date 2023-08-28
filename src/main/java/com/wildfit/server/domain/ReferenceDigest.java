@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder(setterPrefix = "with")
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReferenceDigest {
+public final class ReferenceDigest {
     private String type;
     private String description;
 }
