@@ -1,7 +1,5 @@
 package com.wildfit.server.domain;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,10 +9,14 @@ import lombok.NoArgsConstructor;
 @Builder(setterPrefix = "with")
 @NoArgsConstructor
 @AllArgsConstructor
-public final class ShoppingListDigest {
+public final class ShoppingListItemDigest {
     private Long id;
-    private String uuid;
-    private Long mealId;
 
-    private List<ShoppingListItemDigest> items;
+    private String foodName;
+
+    private Float totalQuantity;
+    private String unit;
+
+    private IngredientType ingredientType;
+    private boolean purchased;
 }
