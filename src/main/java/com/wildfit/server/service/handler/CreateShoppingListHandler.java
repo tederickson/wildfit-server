@@ -36,9 +36,7 @@ public class CreateShoppingListHandler {
 
         shoppingListRepository.deleteByUuid(userId);
 
-        final var shoppingList = shoppingListRepository.save(new ShoppingList()
-                .setUuid(userId)
-                .setMealId(meal.getId()));
+        final var shoppingList = shoppingListRepository.save(new ShoppingList().setUuid(userId));
 
         for (var recipeId : meal.getRecipes().stream().map(MealSummary::getRecipeId).toList()) {
             for (var recipeGroup : getRecipe(recipeId).getRecipeGroups()) {

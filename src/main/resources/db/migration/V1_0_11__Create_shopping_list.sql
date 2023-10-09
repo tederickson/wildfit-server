@@ -1,8 +1,6 @@
 CREATE TABLE shopping_list (
-     id         BIGINT NOT NULL PRIMARY KEY,
-
-     uuid       varchar(255)  NOT NULL,
-     meal_id    BIGINT NOT NULL,
+     id BIGINT NOT NULL PRIMARY KEY,
+     uuid   varchar(255)  NOT NULL,
 
      KEY user_idx (uuid)
 );

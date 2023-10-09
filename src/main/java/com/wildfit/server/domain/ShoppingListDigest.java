@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 public final class ShoppingListDigest {
     private Long id;
     private String uuid;
-    private Long mealId;
 
     private List<ShoppingListItemDigest> items;
 }
