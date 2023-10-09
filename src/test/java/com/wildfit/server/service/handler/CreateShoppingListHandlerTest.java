@@ -12,6 +12,7 @@ import com.wildfit.server.domain.CreateMealRequest;
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.exception.WildfitServiceError;
 import com.wildfit.server.exception.WildfitServiceException;
+import com.wildfit.server.model.ShoppingListItem;
 import com.wildfit.server.repository.ShoppingListRepository;
 import com.wildfit.server.util.ReadRecipeDigest;
 import org.junit.jupiter.api.AfterEach;
@@ -69,7 +70,11 @@ class CreateShoppingListHandlerTest extends CommonMealHandlerTest {
                                      .build().execute();
 
             final var shoppingList = shoppingListRepository.findByUuid(userId).orElseThrow();
-            System.out.println("shoppingList = " + shoppingList);
+
+            final var itemListMap = shoppingList.getShoppingListItems().stream().collect(Collectors.groupingBy(
+                    ShoppingListItem::getFoodName));
+
+            itemListMap.forEach((k, v) -> assertEquals(1, v.size(), k));
         } finally {
             shoppingListRepository.deleteByUuid(userId);
         }

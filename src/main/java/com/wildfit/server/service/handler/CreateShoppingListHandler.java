@@ -3,6 +3,7 @@ package com.wildfit.server.service.handler;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Objects;
 
@@ -14,7 +15,7 @@ import com.wildfit.server.model.MealSummary;
 import com.wildfit.server.model.Recipe;
 import com.wildfit.server.model.ShoppingList;
 import com.wildfit.server.model.ShoppingListItem;
-import com.wildfit.server.model.mapper.ShoppingListMapper;
+import com.wildfit.server.model.mapper.ShoppingListItemMapper;
 import com.wildfit.server.repository.MealRepository;
 import com.wildfit.server.repository.RecipeRepository;
 import com.wildfit.server.repository.ShoppingListRepository;
@@ -51,7 +52,7 @@ public class CreateShoppingListHandler {
                 var shoppingListItems = recipeGroup.getCommonRecipes().stream()
                                                    .filter(x -> CommonRecipeType.INGREDIENT.equals(x.getType()))
                                                    .map(x -> (Ingredient) x)
-                                                   .map(ShoppingListMapper::map)
+                                                   .map(ShoppingListItemMapper::map)
                                                    .toList();
 
                 for (var item : shoppingListItems) {
@@ -80,10 +81,19 @@ public class CreateShoppingListHandler {
     }
 
     private void combineIngredients(List<ShoppingListItem> shoppingListItems) {
-        System.out.println("shoppingListItems = " + shoppingListItems);
-
         if (shoppingListItems.size() > 1) {
-            System.out.println("MULTIPLE");
+            ListIterator<ShoppingListItem> itr = shoppingListItems.listIterator();
+
+            var first = itr.next();
+            while (itr.hasNext()) {
+                var next = itr.next();
+
+                if (first.getServingUnit().equals(next.getServingUnit())) {
+                    itr.remove();
+
+                    first.setServingQty(first.getServingQty() + next.getServingQty());
+                }
+            }
         }
     }
 

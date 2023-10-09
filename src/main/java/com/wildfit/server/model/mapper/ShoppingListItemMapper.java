@@ -4,8 +4,8 @@ import com.wildfit.server.model.Ingredient;
 import com.wildfit.server.model.ShoppingListItem;
 import org.apache.commons.lang3.StringUtils;
 
-public class ShoppingListMapper {
-    private ShoppingListMapper() {
+public class ShoppingListItemMapper {
+    private ShoppingListItemMapper() {
     }
 
     public static ShoppingListItem map(Ingredient ingredient) {
