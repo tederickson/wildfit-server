@@ -1,5 +1,9 @@
 package com.wildfit.server.service.handler;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import com.wildfit.server.exception.WildfitServiceError;
@@ -9,6 +13,8 @@ import com.wildfit.server.model.Ingredient;
 import com.wildfit.server.model.MealSummary;
 import com.wildfit.server.model.Recipe;
 import com.wildfit.server.model.ShoppingList;
+import com.wildfit.server.model.ShoppingListItem;
+import com.wildfit.server.model.mapper.ShoppingListMapper;
 import com.wildfit.server.repository.MealRepository;
 import com.wildfit.server.repository.RecipeRepository;
 import com.wildfit.server.repository.ShoppingListRepository;
@@ -38,14 +44,46 @@ public class CreateShoppingListHandler {
 
         final var shoppingList = shoppingListRepository.save(new ShoppingList().setUuid(userId));
 
+        Map<String, List<ShoppingListItem>> shoppingListItemMap = new HashMap<>();
+
         for (var recipeId : meal.getRecipes().stream().map(MealSummary::getRecipeId).toList()) {
             for (var recipeGroup : getRecipe(recipeId).getRecipeGroups()) {
-                var ingredients = recipeGroup.getCommonRecipes().stream()
-                                             .filter(x -> CommonRecipeType.INGREDIENT.equals(x.getType()))
-                                             .map(x -> (Ingredient) x)
-                                             .toList();
-                System.out.println("ingredients = " + ingredients);
+                var shoppingListItems = recipeGroup.getCommonRecipes().stream()
+                                                   .filter(x -> CommonRecipeType.INGREDIENT.equals(x.getType()))
+                                                   .map(x -> (Ingredient) x)
+                                                   .map(ShoppingListMapper::map)
+                                                   .toList();
+
+                for (var item : shoppingListItems) {
+                    final var key = item.getFoodName();
+                    List<ShoppingListItem> existing = shoppingListItemMap.get(key);
+
+                    if (existing == null) {
+                        existing = new ArrayList<>();
+                    }
+                    existing.add(item);
+
+                    shoppingListItemMap.put(key, existing);
+                }
             }
+        }
+
+        List<ShoppingListItem> shoppingListItems = new ArrayList<>();
+
+        shoppingListItemMap.forEach((k, v) -> combineIngredients(v));
+        shoppingListItemMap.forEach((k, v) -> shoppingListItems.addAll(v));
+
+        shoppingList.setShoppingListItems(shoppingListItems);
+        shoppingList.updateShoppingListItems();
+
+        shoppingListRepository.save(shoppingList);
+    }
+
+    private void combineIngredients(List<ShoppingListItem> shoppingListItems) {
+        System.out.println("shoppingListItems = " + shoppingListItems);
+
+        if (shoppingListItems.size() > 1) {
+            System.out.println("MULTIPLE");
         }
     }
 

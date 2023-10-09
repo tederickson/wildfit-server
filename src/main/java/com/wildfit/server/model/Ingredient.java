@@ -27,10 +27,10 @@ public class Ingredient extends CommonRecipe {
     private String foodName;
     private String description;
 
-    @Column(name = "ingredient_serving_qty")
+    @Column(name = "ingredient_serving_qty", nullable = false)
     private Float ingredientServingQty;
 
-    @Column(name = "ingredient_serving_unit", length = 20)
+    @Column(name = "ingredient_serving_unit", length = 20, nullable = false)
     private String ingredientServingUnit;
 
     @Column(name = "ingredient_type", length = 20, nullable = false)

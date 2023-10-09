@@ -1,12 +1,16 @@
 package com.wildfit.server.model;
 
+import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Index;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -29,12 +33,12 @@ public class ShoppingList {
 
     private String uuid;
 
-    //    @OneToMany(mappedBy = "meal", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    //    private List<MealSummary> recipes;
-    //
-    //    public void updateSummaryMeals() {
-    //        recipes.forEach(x -> x.setMeal(this));
-    //    }
+    @OneToMany(mappedBy = "shoppingList", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ShoppingListItem> shoppingListItems;
+
+    public void updateShoppingListItems() {
+        shoppingListItems.forEach(x -> x.setShoppingList(this));
+    }
 
     @Override
     public boolean equals(Object o) {

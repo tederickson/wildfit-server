@@ -21,10 +21,10 @@ CREATE TABLE instruction (
 );
 
 CREATE TABLE ingredient (
-  description varchar(255) DEFAULT NULL,
-  food_name varchar(255) DEFAULT NULL,
-  ingredient_serving_qty float DEFAULT NULL,
-  ingredient_serving_unit varchar(20) DEFAULT NULL,
+  description varchar(255) NOT NULL,
+  food_name varchar(255) NOT NULL,
+  ingredient_serving_qty float NOT NULL,
+  ingredient_serving_unit varchar(20) NOT NULL,
   ingredient_type varchar(20)  NOT NULL,
   common_recipe_join_id bigint NOT NULL,
 
