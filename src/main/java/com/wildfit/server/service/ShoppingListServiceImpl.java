@@ -8,6 +8,7 @@ import com.wildfit.server.repository.RecipeRepository;
 import com.wildfit.server.repository.ShoppingListRepository;
 import com.wildfit.server.repository.UserRepository;
 import com.wildfit.server.service.handler.CreateShoppingListHandler;
+import com.wildfit.server.service.handler.GetShoppingListHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,11 +27,14 @@ public class ShoppingListServiceImpl implements ShoppingListService {
 
     @Override
     public ShoppingListDigest getShoppingList(String userId) throws WildfitServiceException {
-        return null;
+        return GetShoppingListHandler.builder()
+                                     .withShoppingListRepository(shoppingListRepository)
+                                     .withUserId(userId)
+                                     .build().execute();
     }
 
     @Override
-    public void deleteItemFromShoppingList(String userId, Long itemId) throws WildfitServiceException {
+    public void deleteItemFromShoppingList(String userId, Long shoppingListId) throws WildfitServiceException {
 
     }
 

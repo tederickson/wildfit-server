@@ -47,6 +47,8 @@ public class ShoppingListItem {
     @Enumerated(EnumType.STRING)
     private IngredientType ingredientType;
 
+    private boolean purchased;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -72,6 +74,7 @@ public class ShoppingListItem {
                 ", servingQty=" + servingQty +
                 ", servingUnit='" + servingUnit + '\'' +
                 ", ingredientType=" + ingredientType +
+                ", purchased=" + purchased +
                 '}';
     }
 }
