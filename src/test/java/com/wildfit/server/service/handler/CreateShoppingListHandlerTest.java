@@ -1,5 +1,7 @@
 package com.wildfit.server.service.handler;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -9,7 +11,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.wildfit.server.domain.CreateMealRequest;
+import com.wildfit.server.domain.IngredientDigest;
 import com.wildfit.server.domain.RecipeDigest;
+import com.wildfit.server.domain.RecipeGroupDigest;
 import com.wildfit.server.exception.WildfitServiceError;
 import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.ShoppingListItem;
@@ -29,11 +33,7 @@ class CreateShoppingListHandlerTest extends CommonMealHandlerTest {
 
     @AfterEach
     void tearDown() {
-        if (mealDigest != null) {
-            mealRepository.deleteById(mealDigest.getId());
-
-            mealDigest = null;
-        }
+        shoppingListRepository.deleteByUuid(userId);
 
         super.tearDown();
     }
@@ -59,25 +59,30 @@ class CreateShoppingListHandlerTest extends CommonMealHandlerTest {
         assertNotNull(mealDigest.getId());
         assertEquals(userId, mealDigest.getUuid());
 
-        try {
-            CreateShoppingListHandler.builder()
-                                     .withUserRepository(userRepository)
-                                     .withRecipeRepository(recipeRepository)
-                                     .withMealRepository(mealRepository)
-                                     .withShoppingListRepository(shoppingListRepository)
-                                     .withMealId(mealDigest.getId())
-                                     .withUserId(userId)
-                                     .build().execute();
+        CreateShoppingListHandler.builder()
+                                 .withUserRepository(userRepository)
+                                 .withRecipeRepository(recipeRepository)
+                                 .withMealRepository(mealRepository)
+                                 .withShoppingListRepository(shoppingListRepository)
+                                 .withMealId(mealDigest.getId())
+                                 .withUserId(userId)
+                                 .build().execute();
 
-            final var shoppingList = shoppingListRepository.findByUuid(userId).orElseThrow();
+        final var shoppingList = shoppingListRepository.findByUuid(userId).orElseThrow();
 
-            final var itemListMap = shoppingList.getShoppingListItems().stream().collect(Collectors.groupingBy(
-                    ShoppingListItem::getFoodName));
+        final var itemListMap = shoppingList.getShoppingListItems().stream().collect(Collectors.groupingBy(
+                ShoppingListItem::getFoodName));
 
-            itemListMap.forEach((k, v) -> assertEquals(1, v.size(), k));
-        } finally {
-            shoppingListRepository.deleteByUuid(userId);
-        }
+        itemListMap.forEach((k, v) -> assertEquals(1, v.size(), k));
+
+        final var foodNames = recipeDigests.stream().map(RecipeDigest::getRecipeGroups)
+                                           .flatMap(List::stream)
+                                           .map(RecipeGroupDigest::getIngredients)
+                                           .flatMap(List::stream)
+                                           .map(IngredientDigest::getFoodName)
+                                           .collect(Collectors.toSet());
+
+        assertThat(foodNames, containsInAnyOrder(itemListMap.keySet().toArray()));
     }
 
     @Test
