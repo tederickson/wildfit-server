@@ -1,7 +1,9 @@
 package com.wildfit.server.service.handler;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.everyItem;
+import static org.hamcrest.Matchers.in;
+import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -11,9 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.wildfit.server.domain.CreateMealRequest;
-import com.wildfit.server.domain.IngredientDigest;
 import com.wildfit.server.domain.RecipeDigest;
-import com.wildfit.server.domain.RecipeGroupDigest;
 import com.wildfit.server.exception.WildfitServiceError;
 import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.ShoppingListItem;
@@ -27,7 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 @Transactional
-class CreateShoppingListHandlerTest extends CommonMealHandlerTest {
+class DeleteItemFromShoppingListHandlerTest extends CommonMealHandlerTest {
 
     @Autowired
     protected ShoppingListRepository shoppingListRepository;
@@ -70,63 +70,75 @@ class CreateShoppingListHandlerTest extends CommonMealHandlerTest {
 
         final var shoppingList = shoppingListRepository.findByUuid(userId).orElseThrow();
 
-        final var itemListMap = shoppingList.getShoppingListItems().stream().collect(Collectors.groupingBy(
-                ShoppingListItem::getFoodName));
+        final var foodNames = List.of("pepper", "tuna in water");
 
-        itemListMap.forEach((k, v) -> assertEquals(1, v.size(), k));
+        final var pepper = shoppingList.getShoppingListItems().stream().filter(x -> "pepper".equals(x.getFoodName()))
+                                       .map(ShoppingListItem::getId).findFirst().orElseThrow();
+        final var tuna = shoppingList.getShoppingListItems().stream()
+                                     .filter(x -> "tuna in water".equals(x.getFoodName()))
+                                     .map(ShoppingListItem::getId).findFirst().orElseThrow();
 
-        final var foodNames = recipeDigests.stream().map(RecipeDigest::getRecipeGroups)
-                                           .flatMap(List::stream)
-                                           .map(RecipeGroupDigest::getIngredients)
-                                           .flatMap(List::stream)
-                                           .map(IngredientDigest::getFoodName)
-                                           .collect(Collectors.toSet());
+        final var count = shoppingList.getShoppingListItems().size();
 
-        assertThat(foodNames, containsInAnyOrder(itemListMap.keySet().toArray()));
+        DeleteItemFromShoppingListHandler.builder()
+                                         .withUserRepository(userRepository)
+                                         .withShoppingListRepository(shoppingListRepository)
+                                         .withItemId(pepper)
+                                         .withUserId(userId)
+                                         .build().execute();
+        DeleteItemFromShoppingListHandler.builder()
+                                         .withUserRepository(userRepository)
+                                         .withShoppingListRepository(shoppingListRepository)
+                                         .withItemId(tuna)
+                                         .withUserId(userId)
+                                         .build().execute();
+        final var modifiedShoppingList = shoppingListRepository.findByUuid(userId).orElseThrow();
+        final var modifiedCount = modifiedShoppingList.getShoppingListItems().size();
+
+        assertEquals(count, modifiedCount + 2);
+
+        final var existingNames = modifiedShoppingList.getShoppingListItems().stream()
+                                                      .map(ShoppingListItem::getFoodName).toList();
+
+        assertThat(existingNames, everyItem(not(in(foodNames))));
     }
 
     @Test
     void nullParameters() {
         assertThrows(NullPointerException.class,
-                () -> CreateShoppingListHandler.builder().build().execute());
+                () -> DeleteItemFromShoppingListHandler.builder().build().execute());
     }
 
     @Test
     void missingRequest() {
         final var exception = assertThrows(WildfitServiceException.class,
-                () -> CreateShoppingListHandler.builder()
-                                               .withUserRepository(userRepository)
-                                               .withRecipeRepository(recipeRepository)
-                                               .withMealRepository(mealRepository)
-                                               .withShoppingListRepository(shoppingListRepository)
-                                               .build().execute());
+                () -> DeleteItemFromShoppingListHandler.builder()
+                                                       .withUserRepository(userRepository)
+                                                       .withShoppingListRepository(shoppingListRepository)
+                                                       .build().execute());
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
 
     @Test
     void missingUserId() {
         final var exception = assertThrows(WildfitServiceException.class,
-                () -> CreateShoppingListHandler.builder()
-                                               .withUserRepository(userRepository)
-                                               .withRecipeRepository(recipeRepository)
-                                               .withMealRepository(mealRepository)
-                                               .withShoppingListRepository(shoppingListRepository)
-                                               .withMealId(1234L)
-                                               .build().execute());
+                () -> DeleteItemFromShoppingListHandler.builder()
+                                                       .withUserRepository(userRepository)
+                                                       .withShoppingListRepository(shoppingListRepository)
+                                                       .withItemId(1234L)
+                                                       .build().execute());
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
 
     @Test
     void blankUserId() {
         final var exception = assertThrows(WildfitServiceException.class,
-                () -> CreateShoppingListHandler.builder()
-                                               .withUserRepository(userRepository)
-                                               .withRecipeRepository(recipeRepository)
-                                               .withMealRepository(mealRepository)
-                                               .withShoppingListRepository(shoppingListRepository)
-                                               .withMealId(15L)
-                                               .withUserId("  ")
-                                               .build().execute());
+                () -> DeleteItemFromShoppingListHandler.builder()
+                                                       .withUserRepository(userRepository)
+                                                       .withShoppingListRepository(shoppingListRepository)
+                                                       .withItemId(15L)
+                                                       .withUserId("  ")
+                                                       .build().execute());
         assertEquals(WildfitServiceError.USER_NOT_FOUND, exception.getError());
     }
 }

@@ -7,7 +7,7 @@ import com.wildfit.server.exception.WildfitServiceException;
 public interface ShoppingListService {
     ShoppingListDigest getShoppingList(String userId) throws WildfitServiceException;
 
-    void deleteItemFromShoppingList(String userId, Long shoppingListId) throws WildfitServiceException;
+    void deleteItemFromShoppingList(String userId, Long itemId) throws WildfitServiceException;
 
     void createShoppingList(CreateShoppingListRequest request) throws WildfitServiceException;
 }

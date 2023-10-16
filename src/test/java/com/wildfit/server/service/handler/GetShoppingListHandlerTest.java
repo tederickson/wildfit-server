@@ -25,6 +25,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
+@Transactional
 class GetShoppingListHandlerTest extends CommonMealHandlerTest {
 
     @Autowired
@@ -38,7 +39,6 @@ class GetShoppingListHandlerTest extends CommonMealHandlerTest {
     }
 
     @Test
-    @Transactional
     void execute() throws WildfitServiceException {
         List<RecipeDigest> recipeDigestList = new ArrayList<>();
 
