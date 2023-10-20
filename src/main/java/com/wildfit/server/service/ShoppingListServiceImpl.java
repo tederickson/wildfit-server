@@ -2,6 +2,7 @@ package com.wildfit.server.service;
 
 import com.wildfit.server.domain.CreateShoppingListRequest;
 import com.wildfit.server.domain.ShoppingListDigest;
+import com.wildfit.server.exception.WildfitServiceError;
 import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.repository.MealRepository;
 import com.wildfit.server.repository.RecipeRepository;
@@ -47,6 +48,9 @@ public class ShoppingListServiceImpl implements ShoppingListService {
 
     @Override
     public void createShoppingList(CreateShoppingListRequest request) throws WildfitServiceException {
+        if (request == null) {
+            throw new WildfitServiceException(WildfitServiceError.INVALID_PARAMETER);
+        }
         CreateShoppingListHandler.builder()
                                  .withUserRepository(userRepository)
                                  .withRecipeRepository(recipeRepository)
