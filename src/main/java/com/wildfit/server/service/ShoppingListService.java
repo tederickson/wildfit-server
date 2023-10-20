@@ -10,4 +10,6 @@ public interface ShoppingListService {
     void deleteItemFromShoppingList(String userId, Long itemId) throws WildfitServiceException;
 
     void createShoppingList(CreateShoppingListRequest request) throws WildfitServiceException;
+
+    void updateShoppingList(ShoppingListDigest request) throws WildfitServiceException;
 }

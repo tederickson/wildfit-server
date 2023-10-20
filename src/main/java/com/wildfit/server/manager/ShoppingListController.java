@@ -2,6 +2,7 @@ package com.wildfit.server.manager;
 
 import com.wildfit.server.domain.CreateShoppingListRequest;
 import com.wildfit.server.domain.ShoppingListDigest;
+import com.wildfit.server.exception.WildfitServiceError;
 import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.service.ShoppingListService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -51,6 +52,22 @@ public class ShoppingListController {
     public ShoppingListDigest createShoppingList(@RequestBody CreateShoppingListRequest request)
             throws WildfitServiceException {
         shoppingListService.createShoppingList(request);
+
+        return shoppingListService.getShoppingList(request.getUuid());
+    }
+
+    @Operation(summary = "Update the shopping list")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully updated shopping list"),
+            @ApiResponse(responseCode = "404", description = "Shopping list not found")})
+    @PostMapping(value = "/users/{userId}", produces = "application/json")
+    public ShoppingListDigest updateShoppingList(@PathVariable(value = "userId") String userId,
+                                                 @RequestBody ShoppingListDigest request)
+            throws WildfitServiceException {
+        if (!userId.equals(request.getUuid())) {
+            throw new WildfitServiceException(WildfitServiceError.INVALID_PARAMETER);
+        }
+        shoppingListService.updateShoppingList(request);
 
         return shoppingListService.getShoppingList(request.getUuid());
     }
