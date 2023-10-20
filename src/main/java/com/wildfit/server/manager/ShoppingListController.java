@@ -69,7 +69,7 @@ public class ShoppingListController {
         }
         shoppingListService.updateShoppingList(request);
 
-        return shoppingListService.getShoppingList(request.getUuid());
+        return shoppingListService.getShoppingList(userId);
     }
 
 }

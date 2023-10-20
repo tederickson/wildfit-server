@@ -1,8 +1,12 @@
 package com.wildfit.server.manager;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.wildfit.server.domain.CreateShoppingListRequest;
+import com.wildfit.server.domain.ShoppingListDigest;
+import com.wildfit.server.exception.WildfitServiceError;
 import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.service.ShoppingListService;
 import org.junit.jupiter.api.BeforeEach;
@@ -43,5 +47,17 @@ class ShoppingListControllerTest {
                                                                      .withMealId(mealId)
                                                                      .build();
         assertNull(controller.createShoppingList(request));
+    }
+
+    @Test
+    void updateShoppingList_mismatchedUser() {
+        final var exception = assertThrows(WildfitServiceException.class,
+                () -> controller.updateShoppingList(userId, ShoppingListDigest.builder().build()));
+        assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
+    }
+
+    @Test
+    void updateShoppingList() throws WildfitServiceException {
+        assertNull(controller.updateShoppingList(userId, ShoppingListDigest.builder().withUuid(userId).build()));
     }
 }
