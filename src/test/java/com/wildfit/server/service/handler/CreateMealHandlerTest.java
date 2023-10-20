@@ -100,4 +100,18 @@ class CreateMealHandlerTest extends CommonMealHandlerTest {
                                        .build().execute());
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
+
+    @Test
+    void missingRecipeIds() {
+        final var request = CreateMealRequest.builder()
+                                             .withUuid(userId)
+                                             .build();
+        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+                () -> CreateMealHandler.builder()
+                                       .withMealRepository(mealRepository)
+                                       .withRecipeRepository(recipeRepository)
+                                       .withRequest(request)
+                                       .build().execute());
+        assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
+    }
 }
