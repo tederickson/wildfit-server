@@ -10,9 +10,4 @@ public class WildfitServiceException extends Exception {
         super(error.getMessage());
         this.error = error;
     }
-
-    public WildfitServiceException(WildfitServiceError error, Throwable cause) {
-        super(error.getMessage(), cause);
-        this.error = error;
-    }
 }
