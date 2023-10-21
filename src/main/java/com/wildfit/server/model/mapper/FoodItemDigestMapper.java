@@ -92,7 +92,6 @@ public final class FoodItemDigestMapper {
 
                             //    FASAT(606, "FASAT", "Fatty acids, total saturated", "g", "nf_saturated_fat");
                             case FASAT -> builder.withSaturatedFat(nutrient.getValue());
-                            default -> log.warn("Unexpected nutrient type: " + nutrientType);
                         }
                     }
                 }

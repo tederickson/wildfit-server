@@ -37,6 +37,10 @@
           "value": 100
         },
         {
+          "attr_id": 305,
+          "value": 0
+        },
+        {
           "attr_id": 307,
           "value": 0
         },
@@ -47,6 +51,10 @@
         {
           "attr_id": 606,
           "value": 8
+        },
+        {
+          "attr_id": 999,
+          "value": 138
         }
       ],
       "nix_brand_name": "Kerrygold",

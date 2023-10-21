@@ -63,6 +63,7 @@ class FoodItemDigestMapperTest {
                                            .withSodium(0.0f)
                                            .withTotalCarbohydrate(0.0f)
                                            .withProtein(0.0f)
+                                           .withPhosphorus(0.0f)
                                            .withNixBrandName("Kerrygold")
                                            .withNixBrandId("51db37b7176fe9790a8989b4")
                                            .withNixItemId("52a15041d122497b50000a75")
