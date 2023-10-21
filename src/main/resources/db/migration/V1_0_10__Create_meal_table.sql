@@ -13,10 +13,10 @@ CREATE TABLE meal_seq (next_val bigint DEFAULT NULL);
 INSERT INTO meal_seq VALUES(10);
 
 CREATE TABLE meal_summary (
-  id         BIGINT NOT NULL PRIMARY KEY,
-  meal_id    BIGINT NOT NULL,
-  recipe_id  BIGINT NOT NULL,
-  cooked     bit(1) NOT NULL,
+  id         BIGINT  NOT NULL PRIMARY KEY,
+  meal_id    BIGINT  NOT NULL,
+  recipe_id  BIGINT  NOT NULL,
+  cooked     boolean NOT NULL,
   plan_date  date,
 
   CONSTRAINT meal_fk FOREIGN KEY (meal_id) REFERENCES meal (id)
