@@ -3,6 +3,7 @@ package com.wildfit.server.util;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import com.wildfit.server.domain.RecipeDigest;
+import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.Recipe;
 import com.wildfit.server.model.mapper.RecipeMapper;
 
@@ -23,6 +24,11 @@ public class ReadRecipeDigest {
     public static Recipe getRecipe(String fileName) {
         final var digest = getRecipeDigest(fileName);
 
-        return RecipeMapper.create(digest, RECIPE_EMAIL);
+        try {
+            return RecipeMapper.create(digest, RECIPE_EMAIL);
+        } catch (WildfitServiceException e) {
+            fail(fileName + " : " + e.getMessage());
+        }
+        return null; // never reached
     }
 }

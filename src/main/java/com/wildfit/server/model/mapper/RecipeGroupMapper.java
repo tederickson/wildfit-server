@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import com.wildfit.server.domain.IngredientDigest;
 import com.wildfit.server.domain.InstructionDigest;
 import com.wildfit.server.domain.RecipeGroupDigest;
+import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.CommonRecipe;
 import com.wildfit.server.model.CommonRecipeType;
 import com.wildfit.server.model.Ingredient;
@@ -19,7 +20,7 @@ public class RecipeGroupMapper {
     private RecipeGroupMapper() {
     }
 
-    public static RecipeGroup create(RecipeGroupDigest instructionGroup) {
+    public static RecipeGroup create(RecipeGroupDigest instructionGroup) throws WildfitServiceException {
         final var recipeGroup = new RecipeGroup()
                 .setId(instructionGroup.getId())
                 .setName(instructionGroup.getName())
@@ -62,7 +63,7 @@ public class RecipeGroupMapper {
     }
 
     public static RecipeGroup update(RecipeGroup existing,
-                                     RecipeGroupDigest instructionGroup) {
+                                     RecipeGroupDigest instructionGroup) throws WildfitServiceException {
         Map<Long, CommonRecipe> commonRecipeMap = new HashMap<>();
         if (existing.getCommonRecipes() != null) {
             commonRecipeMap = existing.getCommonRecipes().stream().collect(Collectors.toMap(

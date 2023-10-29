@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import com.wildfit.server.domain.RecipeDigest;
+import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.Season;
 
 public final class RecipeMapper {
@@ -33,7 +34,8 @@ public final class RecipeMapper {
         return builder.build();
     }
 
-    public static com.wildfit.server.model.Recipe create(RecipeDigest request, String email) {
+    public static com.wildfit.server.model.Recipe create(RecipeDigest request, String email)
+            throws WildfitServiceException {
         final var season = Season.map(request.getSeason());
 
         final var recipe = new com.wildfit.server.model.Recipe()
@@ -59,7 +61,8 @@ public final class RecipeMapper {
         return recipe;
     }
 
-    public static void update(com.wildfit.server.model.Recipe recipe, RecipeDigest request) {
+    public static void update(com.wildfit.server.model.Recipe recipe, RecipeDigest request)
+            throws WildfitServiceException {
         final var season = Season.map(request.getSeason());
 
         // Never change the email address

@@ -2,20 +2,37 @@ package com.wildfit.server.model.mapper;
 
 import com.wildfit.server.domain.IngredientDigest;
 import com.wildfit.server.domain.IngredientType;
+import com.wildfit.server.exception.WildfitServiceError;
+import com.wildfit.server.exception.WildfitServiceException;
 import org.apache.commons.lang3.StringUtils;
 
 public class IngredientDigestMapper {
     private IngredientDigestMapper() {
     }
 
-    public static com.wildfit.server.model.Ingredient createIngredient(IngredientDigest ingredientDigest) {
-        return new com.wildfit.server.model.Ingredient()
+    public static com.wildfit.server.model.Ingredient createIngredient(IngredientDigest ingredientDigest)
+            throws WildfitServiceException {
+        var ingredient = new com.wildfit.server.model.Ingredient()
                 .setId(ingredientDigest.getId())
                 .setFoodName(StringUtils.trimToNull(ingredientDigest.getFoodName()))
                 .setDescription(StringUtils.trimToNull(ingredientDigest.getDescription()))
                 .setIngredientServingQty(ingredientDigest.getIngredientServingQty())
                 .setIngredientServingUnit(StringUtils.trimToNull(ingredientDigest.getIngredientServingUnit()))
                 .setIngredientType(getIngredientType(ingredientDigest));
+
+        if (ingredient.getIngredientServingUnit() == null) {
+            ingredient.setIngredientServingUnit(ingredient.getFoodName());
+        }
+
+        if (ingredient.getFoodName() == null
+                || ingredient.getDescription() == null
+                || ingredient.getIngredientServingQty() == null
+                || ingredient.getIngredientServingUnit() == null
+                || ingredient.getIngredientType() == null) {
+            throw new WildfitServiceException(WildfitServiceError.INVALID_PARAMETER, ingredientDigest.toString());
+        }
+
+        return ingredient;
     }
 
     private static IngredientType getIngredientType(IngredientDigest ingredientDigest) {

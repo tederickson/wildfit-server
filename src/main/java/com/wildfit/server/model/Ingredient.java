@@ -23,8 +23,10 @@ import lombok.experimental.Accessors;
 public class Ingredient extends CommonRecipe {
     @Id
     private Long id; // shows up in database as CommonRecipe.JOIN_KEY
-    @Column(name = "food_name")
+    @Column(name = "food_name", nullable = false)
     private String foodName;
+
+    @Column(nullable = false)
     private String description;
 
     @Column(name = "ingredient_serving_qty", nullable = false)
