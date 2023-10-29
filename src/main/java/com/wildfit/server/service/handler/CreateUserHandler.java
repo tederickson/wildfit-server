@@ -75,7 +75,7 @@ public class CreateUserHandler {
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo(verificationToken.getUser().getEmail());
 
-        msg.setSubject("WILDFIT account activiation");
+        msg.setSubject("WILDFIT account activation");
         final var text = String.join("\n",
                 "Dear " + name + ",",
                 "",
