@@ -32,7 +32,7 @@ public class LogExecutionTime {
         Object result = proceedingJoinPoint.proceed();
         stopWatch.stop();
 
-        log.info("Execution time of {}.{} :: {} ms", className, methodName, stopWatch.getTotalTimeMillis());
+        log.info("Execution time of {}.{} | {} ms", className, methodName, stopWatch.getTotalTimeMillis());
 
         return result;
     }
