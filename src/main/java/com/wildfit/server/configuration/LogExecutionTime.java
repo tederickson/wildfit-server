@@ -10,7 +10,7 @@ import org.springframework.util.StopWatch;
 
 /**
  * <a href="https://howtodoinjava.com/spring-boot/performance-logging-aspectj-aop">
- * Log the execution times of Controller methods</a>
+ * Log the execution times of all public Controller methods without having to annotate each method.</a>
  */
 @Slf4j
 @Aspect
