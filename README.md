@@ -78,3 +78,4 @@ Accessing the data returns 9 ingredients and 4 instructions.
 The enum provides efficient mapping of the database row to a Java class.
 
 ![WildFit database](WildFitSchema.png "WildFit Schema")
+
