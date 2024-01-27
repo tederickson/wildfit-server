@@ -66,7 +66,7 @@ The way to solve this is by a joined table strategy:
 
 Separate tables are created for the parent and child classes.
 
-The primary id of the child classes are the primary key of the parent class.  
+The primary id of the child classes is the primary key of the parent class.  
 This ensures unique key values between the child classes.  
 Otherwise would need a compound index to ensure uniqueness.
 
