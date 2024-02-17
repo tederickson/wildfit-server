@@ -7,7 +7,7 @@ individuals on their health and wellness journey.
 
 # Documentation
 
-Swagger provides the API documentation.  
+Swagger provides the API documentation of the 28+ REST endpoints.  
 Run the application and point a browser to http://localhost:8080/swagger-ui.html
 
 # Run the Application
