@@ -83,10 +83,10 @@ The enum provides efficient mapping of the database row to a Java class.
 The code is broken up into:
 * config - almost all the stuff needed to run the app
 * deserialization - the glue code needed to convert JSON to Java
-* domain - the DTO (Data Transfer Objects) that talk to the database
+* model - the DTO (Data Transfer Objects) that talk to the database
 * exception - the application specific Exceptions
 * manager - some folks call this package rest - it contains the RestControllers which process the URLs that interact with the application.
-* model - the glue code needed to allow JSON to talk to the database
+* domain - the REST request/response domain objects that are converted to JSON
 * mapper - the glue coded needed to convert JSON to Java or Database rows to Java
 * repository - surprisingly simple way to create a SQL command. Turn on Spring Boot parameters to view the generated SQL.
 * service - the methods called by the managers/controllers.
