@@ -105,7 +105,7 @@ public class RecipeController {
                                      @PathVariable("userId") String userId,
                                      @RequestBody RecipeDigest request) throws WildfitServiceException {
         if (!id.equals(request.getId())) {
-            log.error(id + " does not match " + request.getId());
+            log.error("{} does not match {}", id, request.getId());
             throw new WildfitServiceException(WildfitServiceError.INVALID_PARAMETER);
         }
 

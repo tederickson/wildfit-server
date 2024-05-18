@@ -64,8 +64,8 @@ public class UpdateMealHandler extends CommonMealHandler {
             request.setStartDate(LocalDate.now());
             request.setEndDate(request.getStartDate());
         } else {
-            request.setStartDate(planDates.get(0));
-            request.setEndDate(planDates.get(planDates.size() - 1));
+            request.setStartDate(planDates.getFirst());
+            request.setEndDate(planDates.getLast());
         }
     }
 }

@@ -22,7 +22,7 @@ public class LoginHandler {
 
         final var users = userRepository.findByEmail(email);
         if (!CollectionUtils.isEmpty(users)) {
-            final var user = users.get(0);
+            final var user = users.getFirst();
 
             if (!user.isEnabled()) {
                 throw new WildfitServiceException(WildfitServiceError.NOT_REGISTERED);
