@@ -82,7 +82,7 @@ The enum provides efficient mapping of the database row to a Java class.
 # Code
 The code is broken up into:
 * config - almost all the stuff needed to run the app
-* deserialization - the glue code needed to convert JSON to Java
+* deserialization - custom deserialization code that converts JSON to Java
 * model - the DTO (Data Transfer Objects) that talk to the database
 * exception - the application specific Exceptions
 * manager - some folks call this package rest - it contains the RestControllers which process the URLs that interact with the application.
@@ -91,7 +91,7 @@ The code is broken up into:
 * repository - surprisingly simple way to create a SQL command. Turn on Spring Boot parameters to view the generated SQL.
 * service - the methods called by the managers/controllers.
 * handlers - the only purpose of these classes called by the service is to mitigate merge hell and provide unique test 
-classes for the handlers. Otherwise you end up with 10,000+ lines of unit test cases for each service that are a pain to merge or refactor.  
+classes for the handlers. Otherwise you end up with 10,000+ lines of unit test cases for each service that are difficult to refactor.  
 
 The current stats are that every line of code generates 10 lines of test code.  
 That is because you have to mock out services and mimic return values.
