@@ -17,13 +17,13 @@ public class PasswordEncodeDecode {
     }
 
     public static String encode(String myPassword) {
-        final var encoder = new Argon2PasswordEncoder();
+        final var encoder = Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8();
 
         return encoder.encode(myPassword);
     }
 
     public static boolean matches(String myPassword, String encodedPassword) {
-        final var encoder = new Argon2PasswordEncoder();
+        final var encoder = Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8();
 
         return encoder.matches(myPassword, encodedPassword);
     }
