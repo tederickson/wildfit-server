@@ -46,7 +46,7 @@ class RetrieveAllMealsHandlerTest extends CommonMealHandlerTest {
         assertNotNull(responseList);
         assertEquals(1, responseList.size());
 
-        final var response = responseList.get(0);
+        final var response = responseList.getFirst();
         assertNotNull(response.getId());
         assertNotNull(response.getStartDate());
         assertNotNull(response.getEndDate());

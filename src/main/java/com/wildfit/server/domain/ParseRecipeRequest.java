@@ -16,9 +16,9 @@ public final class ParseRecipeRequest {
         String ingredient;
 
         if (servingUnit == null || servingUnit.equals(foodName)) {
-            ingredient = String.format("%s %s", servingQty, foodName);
+            ingredient = "%s %s".formatted(servingQty, foodName);
         } else {
-            ingredient = String.format("%s %s %s", servingQty, servingUnit, foodName);
+            ingredient = "%s %s %s".formatted(servingQty, servingUnit, foodName);
         }
 
         if (query == null) {

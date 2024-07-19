@@ -64,7 +64,7 @@ class SearchedFoodItemsMapperTest {
          *       "locale": "en_US"
          *     },
          */
-        final var firstCommon = searchFoodItemDigest.getCommon().get(0);
+        final var firstCommon = searchFoodItemDigest.getCommon().getFirst();
 
         assertEquals("grilled cheese", firstCommon.getFoodName());
         assertEquals("sandwich", firstCommon.getServingUnit());

@@ -50,12 +50,12 @@ class UserProfileRepositoryTest extends AbstractRepositoryTest {
         final var users = userRepository.findByEmail(EMAIL);
 
         assertEquals(1, users.size());
-        final var retrieved = users.get(0);
+        final var retrieved = users.getFirst();
 
         assertEquals(EMAIL, retrieved.getEmail());
         assertEquals(UserStatus.FREE, retrieved.getUserStatus());
 
-        final var retrievedProfile = userProfileRepository.findByUser(users.get(0)).orElseThrow();
+        final var retrievedProfile = userProfileRepository.findByUser(users.getFirst()).orElseThrow();
 
         assertEquals(EMAIL, retrievedProfile.getUser().getEmail());
         assertEquals(USER_NAME, retrievedProfile.getName());

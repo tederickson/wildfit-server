@@ -74,7 +74,7 @@ public class CommonRecipeHandlerTest extends CommonHandlerTest {
 
             userId = dbUser.getUuid();
         } else {
-            userId = users.get(0).getUuid();
+            userId = users.getFirst().getUuid();
         }
     }
 

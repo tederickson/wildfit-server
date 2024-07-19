@@ -90,7 +90,7 @@ class UpdateMealHandlerTest extends CommonMealHandlerTest {
         final var recipeIds = recipeDigests.stream().map(RecipeDigest::getId).toList();
         final var request = CreateMealRequest.builder()
                                              .withUuid(userId)
-                                             .withRecipeIds(List.of(recipeIds.get(0))).build();
+                                             .withRecipeIds(List.of(recipeIds.getFirst())).build();
 
         createMeal(request);
 
@@ -136,7 +136,7 @@ class UpdateMealHandlerTest extends CommonMealHandlerTest {
         createMeal(request);
 
         mealDigest.getRecipes().forEach(x -> x.setCooked(true));
-        mealDigest.getRecipes().get(0).setRecipeId(-100L);
+        mealDigest.getRecipes().getFirst().setRecipeId(-100L);
 
         final var response = UpdateMealHandler.builder()
                                               .withMealRepository(mealRepository)

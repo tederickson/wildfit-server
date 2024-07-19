@@ -89,7 +89,7 @@ class RetrieveMealHandlerTest extends CommonMealHandlerTest {
         final var deletedRecipes =
                 response.getRecipes().stream().filter(x -> x.getRecipeId() == null).toList();
         assertEquals(1, deletedRecipes.size());
-        assertEquals(MealSummaryDigest.builder().build(), deletedRecipes.get(0));
+        assertEquals(MealSummaryDigest.builder().build(), deletedRecipes.getFirst());
     }
 
     @Test
