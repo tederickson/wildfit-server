@@ -15,7 +15,7 @@ Run the application and point a browser to http://localhost:8080/swagger-ui.html
 Run the following command in a terminal window:
 
 ```bash
-mvn spring-boot:run -Dspring-boot.run.profiles=dev
+mvn clean spring-boot:run -Dspring-boot.run.profiles=dev
 ```
 
 # Config
@@ -45,9 +45,11 @@ query string parameters.
 
 # Test
 
-run `mvn test -Dspring.profiles.active=dev` to run all JUnit tests.
+run `mvn clean test -Dspring.profiles.active=dev` to run all JUnit tests.
 
 The current test environment utilizes SpringBootTest, JsonTest and Mockito to achieve a 93% test coverage.
+
+The JaCoCo reports are available at [wildfit-server](http://localhost:63342/wildfit-server/server/target/site/jacoco/index.html#up-c).
 
 # Database
 
