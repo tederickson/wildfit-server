@@ -1,12 +1,12 @@
 package com.wildfit.server.service.handler;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PasswordValidatorTest {
 
@@ -47,12 +47,12 @@ class PasswordValidatorTest {
     @ParameterizedTest(name = "#{index} - Run test with password = {0}")
     @MethodSource("validPasswordProvider")
     void test_password_regex_valid(String password) {
-        assertFalse(com.wildfit.server.service.handler.PasswordValidator.isNotValid(password));
+        assertFalse(PasswordValidator.isNotValid(password));
     }
 
     @ParameterizedTest(name = "#{index} - Run test with password = {0}")
     @MethodSource("invalidPasswordProvider")
     void test_password_regex_invalid(String password) {
-        assertTrue(com.wildfit.server.service.handler.PasswordValidator.isNotValid(password));
+        assertTrue(PasswordValidator.isNotValid(password));
     }
 }

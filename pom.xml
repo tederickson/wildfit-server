@@ -131,9 +131,11 @@
                         <exclude>com/wildfit/server/configuration/*</exclude>
 
                         <!--  Handlers that call Nutritionix -->
-                        <exclude>**/GetFoodsByQueryHandler.*</exclude>
-                        <exclude>**/GetRecipeNutritionHandler.*</exclude>
                         <exclude>**/AbstractNutritionixHandler.*</exclude>
+                        <exclude>**/GetFoodsByQueryHandler.*</exclude>
+                        <exclude>**/GetFoodWithBarcodeHandler.*</exclude>
+                        <exclude>**/GetFoodWithIdHandler.*</exclude>
+                        <exclude>**/GetRecipeNutritionHandler.*</exclude>
                     </excludes>
                 </configuration>
                 <version>0.8.12</version>
