@@ -1,16 +1,7 @@
 package com.wildfit.server.service.handler;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.wildfit.server.domain.CreateMealRequest;
+import com.wildfit.server.domain.CreateShoppingListRequest;
 import com.wildfit.server.domain.IngredientDigest;
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.RecipeGroupDigest;
@@ -18,12 +9,24 @@ import com.wildfit.server.exception.WildfitServiceError;
 import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.ShoppingListItem;
 import com.wildfit.server.repository.ShoppingListRepository;
+import com.wildfit.server.service.ShoppingListService;
+import com.wildfit.server.service.ShoppingListServiceImpl;
 import com.wildfit.server.util.ReadRecipeDigest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 @Transactional
@@ -59,14 +62,15 @@ class CreateShoppingListHandlerTest extends CommonMealHandlerTest {
         assertNotNull(mealDigest.getId());
         assertEquals(userId, mealDigest.getUuid());
 
-        CreateShoppingListHandler.builder()
-                                 .withUserRepository(userRepository)
-                                 .withRecipeRepository(recipeRepository)
-                                 .withMealRepository(mealRepository)
-                                 .withShoppingListRepository(shoppingListRepository)
-                                 .withMealId(mealDigest.getId())
-                                 .withUserId(userId)
-                                 .build().execute();
+        ShoppingListService shoppingListService = new ShoppingListServiceImpl(userRepository,
+                                                                              mealRepository,
+                                                                              recipeRepository,
+                                                                              shoppingListRepository);
+        CreateShoppingListRequest createShoppingListRequest =  CreateShoppingListRequest.builder()
+                .withUuid(userId)
+                .withMealId(mealDigest.getId())
+                .build();
+        shoppingListService.createShoppingList(createShoppingListRequest);
 
         final var shoppingList = shoppingListRepository.findByUuid(userId).orElseThrow();
 
@@ -128,5 +132,19 @@ class CreateShoppingListHandlerTest extends CommonMealHandlerTest {
                                                .withUserId("  ")
                                                .build().execute());
         assertEquals(WildfitServiceError.USER_NOT_FOUND, exception.getError());
+    }
+
+    @Test
+    void missingMeal() {
+        final var exception = assertThrows(WildfitServiceException.class,
+                                           () -> CreateShoppingListHandler.builder()
+                                                   .withUserRepository(userRepository)
+                                                   .withRecipeRepository(recipeRepository)
+                                                   .withMealRepository(mealRepository)
+                                                   .withShoppingListRepository(shoppingListRepository)
+                                                   .withMealId(-15L)
+                                                   .withUserId(userId)
+                                                   .build().execute());
+        assertEquals(WildfitServiceError.MEAL_NOT_FOUND, exception.getError());
     }
 }

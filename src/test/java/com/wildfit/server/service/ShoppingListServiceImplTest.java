@@ -26,7 +26,6 @@ class ShoppingListServiceImplTest {
     @Mock
     ShoppingListRepository shoppingListRepository;
 
-
     private ShoppingListService shoppingListService;
 
     @BeforeEach
