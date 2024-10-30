@@ -1,5 +1,25 @@
 package com.wildfit.server.service.handler;
 
+import com.wildfit.server.domain.CreateMealRequest;
+import com.wildfit.server.domain.CreateShoppingListRequest;
+import com.wildfit.server.domain.RecipeDigest;
+import com.wildfit.server.domain.ShoppingListDigest;
+import com.wildfit.server.domain.ShoppingListItemDigest;
+import com.wildfit.server.exception.WildfitServiceError;
+import com.wildfit.server.exception.WildfitServiceException;
+import com.wildfit.server.repository.ShoppingListRepository;
+import com.wildfit.server.service.ShoppingListService;
+import com.wildfit.server.util.ReadRecipeDigest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -7,24 +27,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import com.wildfit.server.domain.CreateMealRequest;
-import com.wildfit.server.domain.RecipeDigest;
-import com.wildfit.server.domain.ShoppingListDigest;
-import com.wildfit.server.domain.ShoppingListItemDigest;
-import com.wildfit.server.exception.WildfitServiceError;
-import com.wildfit.server.exception.WildfitServiceException;
-import com.wildfit.server.repository.ShoppingListRepository;
-import com.wildfit.server.util.ReadRecipeDigest;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 @Transactional
@@ -35,7 +37,10 @@ class UpdateShoppingListHandlerTest extends CommonMealHandlerTest {
     private static final String TUNA = "tuna in water";
 
     @Autowired
-    protected ShoppingListRepository shoppingListRepository;
+    private ShoppingListRepository shoppingListRepository;
+
+    @Autowired
+    private ShoppingListService shoppingListService;
 
     @AfterEach
     void tearDown() {
@@ -64,21 +69,13 @@ class UpdateShoppingListHandlerTest extends CommonMealHandlerTest {
         assertNotNull(mealDigest.getId());
         assertEquals(userId, mealDigest.getUuid());
 
-        CreateShoppingListHandler.builder()
-                                 .withUserRepository(userRepository)
-                                 .withRecipeRepository(recipeRepository)
-                                 .withMealRepository(mealRepository)
-                                 .withShoppingListRepository(shoppingListRepository)
-                                 .withMealId(mealDigest.getId())
-                                 .withUserId(userId)
-                                 .build().execute();
+        shoppingListService.createShoppingList(CreateShoppingListRequest.builder()
+                                                       .withUuid(userId)
+                                                       .withMealId(mealDigest.getId()).build());
 
         shoppingListRepository.findByUuid(userId).orElseThrow();
 
-        var shoppingList = GetShoppingListHandler.builder()
-                                                 .withShoppingListRepository(shoppingListRepository)
-                                                 .withUserId(userId)
-                                                 .build().execute();
+        var shoppingList = shoppingListService.getShoppingList(userId);
 
         final var itemListMap = shoppingList.getItems().stream()
                                             .collect(Collectors.groupingBy(ShoppingListItemDigest::getFoodName));
@@ -98,16 +95,9 @@ class UpdateShoppingListHandlerTest extends CommonMealHandlerTest {
         itemListMap.get(TUNA).forEach(item -> item.setPurchased(true));
         itemListMap.get(APPLE).forEach(item -> item.setPurchased(true));
 
+        shoppingListService.updateShoppingList(shoppingList);
 
-        UpdateShoppingListHandler.builder()
-                                 .withShoppingListRepository(shoppingListRepository)
-                                 .withRequest(shoppingList)
-                                 .build().execute();
-
-        shoppingList = GetShoppingListHandler.builder()
-                                             .withShoppingListRepository(shoppingListRepository)
-                                             .withUserId(userId)
-                                             .build().execute();
+        shoppingList = shoppingListService.getShoppingList(userId);
         assertThat(shoppingList.getItems().size(), is(originalShoppingListItemCount));
 
         for (var item : shoppingList.getItems()) {
@@ -137,20 +127,18 @@ class UpdateShoppingListHandlerTest extends CommonMealHandlerTest {
     @Test
     void missingUserId() {
         final var exception = assertThrows(WildfitServiceException.class,
-                () -> UpdateShoppingListHandler.builder()
-                                               .withShoppingListRepository(shoppingListRepository)
-                                               .withRequest(ShoppingListDigest.builder().build())
-                                               .build().execute());
+                                           () -> shoppingListService.updateShoppingList(ShoppingListDigest.builder()
+                                                                                                .build()));
         assertEquals(WildfitServiceError.SHOPPING_LIST_NOT_FOUND, exception.getError());
     }
 
     @Test
     void blankUserId() {
         final var exception = assertThrows(WildfitServiceException.class,
-                () -> UpdateShoppingListHandler.builder()
-                                               .withShoppingListRepository(shoppingListRepository)
-                                               .withRequest(ShoppingListDigest.builder().withUuid("  ").build())
-                                               .build().execute());
+                                           () -> shoppingListService.updateShoppingList(ShoppingListDigest.builder()
+                                                                                                .withUuid("  ")
+                                                                                                .build()));
+
         assertEquals(WildfitServiceError.SHOPPING_LIST_NOT_FOUND, exception.getError());
     }
 }

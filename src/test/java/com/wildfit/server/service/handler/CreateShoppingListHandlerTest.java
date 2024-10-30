@@ -32,10 +32,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class CreateShoppingListHandlerTest extends CommonMealHandlerTest {
 
     @Autowired
-    protected ShoppingListRepository shoppingListRepository;
+    private ShoppingListRepository shoppingListRepository;
 
     @Autowired
-    ShoppingListService shoppingListService;
+    private ShoppingListService shoppingListService;
 
     @AfterEach
     void tearDown() {
