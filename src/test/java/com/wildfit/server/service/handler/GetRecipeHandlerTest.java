@@ -20,7 +20,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class GetRecipeHandlerTest extends CommonRecipeHandlerTest {
     private static final String NAME = "GetRecipeHandlerTest";
 
-
     @Test
     void nullParameters() {
         assertThrows(NullPointerException.class,
