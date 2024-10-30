@@ -31,22 +31,14 @@ class GetUserProfileHandlerTest extends CommonHandlerTest {
     @Test
     void missingId() {
         final var exception = assertThrows(WildfitServiceException.class,
-                                           () -> GetUserProfileHandler.builder()
-                                                   .withUserRepository(userRepository)
-                                                   .withUserProfileRepository(userProfileRepository)
-                                                   .withUserId(null)
-                                                   .build().execute());
+                                           () -> userService.getUserProfile(null));
         assertEquals(WildfitServiceError.USER_NOT_FOUND, exception.getError());
     }
 
     @Test
     void userNotFound() {
         final var exception = assertThrows(WildfitServiceException.class,
-                                           () -> GetUserProfileHandler.builder()
-                                                   .withUserRepository(userRepository)
-                                                   .withUserProfileRepository(userProfileRepository)
-                                                   .withUserId("-14L")
-                                                   .build().execute());
+                                           () -> userService.getUserProfile("-14L"));
         assertEquals(WildfitServiceError.USER_NOT_FOUND, exception.getError());
     }
 
@@ -71,11 +63,7 @@ class GetUserProfileHandlerTest extends CommonHandlerTest {
         final var saved = userProfileRepository.save(userProfile);
         assertNotNull(saved);
 
-        final var digest = GetUserProfileHandler.builder()
-                .withUserRepository(userRepository)
-                .withUserProfileRepository(userProfileRepository)
-                .withUserId(saved.getUser().getUuid())
-                .build().execute();
+        final var digest = userService.getUserProfile(saved.getUser().getUuid());
 
         assertEquals(EMAIL, digest.getUser().getEmail());
         assertEquals(39, digest.getAge());
