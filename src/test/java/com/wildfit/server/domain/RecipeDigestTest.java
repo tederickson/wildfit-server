@@ -49,8 +49,10 @@ class RecipeDigestTest {
 
     @Test
     void jsonRead() throws Exception {
-        final var introduction = "Tuna is one of the staples in our household. \nWe eat it all the time, because " +
-                "it is simple and can be eaten for breakfast, lunch, dinner or snack.";
+        final var introduction = """
+                Tuna is one of the staples in our household.\s
+                We eat it all the time, because \
+                it is simple and can be eaten for breakfast, lunch, dinner or snack.""";
 
         final var recipeDigest = RecipeDigest.builder()
                 .withName("Tuna salad")

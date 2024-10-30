@@ -31,8 +31,10 @@ class CreateRecipeHandlerTest extends CommonRecipeHandlerTest {
         assertEquals(0, digest.getCookTimeMin());
         assertEquals("serving", digest.getServingUnit());
         assertEquals(4, digest.getServingQty());
-        assertEquals("Tuna is one of the staples in our household. \nWe eat it all the time, " +
-                             "because it is simple and can be eaten for breakfast, lunch, dinner or snack.",
+        assertEquals("""
+                             Tuna is one of the staples in our household.\s
+                             We eat it all the time, \
+                             because it is simple and can be eaten for breakfast, lunch, dinner or snack.""",
                      digest.getIntroduction());
 
         assertEquals(2, digest.getRecipeGroups().size());
