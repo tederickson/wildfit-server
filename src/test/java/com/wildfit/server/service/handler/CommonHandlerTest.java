@@ -1,6 +1,7 @@
 package com.wildfit.server.service.handler;
 
 import com.wildfit.server.repository.UserRepository;
+import com.wildfit.server.service.UserService;
 import org.junit.jupiter.api.AfterEach;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,6 +12,9 @@ public class CommonHandlerTest {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    UserService userService;
 
     @AfterEach
     void tearDown() {

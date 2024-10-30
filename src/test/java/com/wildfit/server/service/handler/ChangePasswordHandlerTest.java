@@ -31,22 +31,14 @@ class ChangePasswordHandlerTest extends CommonHandlerTest {
     @NullAndEmptySource
     void nullPassword(String password) {
         final var exception = assertThrows(WildfitServiceException.class,
-                                           () -> ChangePasswordHandler.builder()
-                                                   .withUserRepository(userRepository)
-                                                   .withUserId(USER_ID)
-                                                   .withPassword(password)
-                                                   .build().execute());
+                                           () -> userService.changePassword(USER_ID, password));
         assertEquals(WildfitServiceError.INVALID_PASSWORD, exception.getError());
     }
 
     @Test
     void invalidPassword() {
         final var exception = assertThrows(WildfitServiceException.class,
-                                           () -> ChangePasswordHandler.builder()
-                                                   .withUserRepository(userRepository)
-                                                   .withPassword("apple")
-                                                   .withUserId(USER_ID)
-                                                   .build().execute());
+                                           () -> userService.changePassword(USER_ID, "apple"));
         assertEquals(WildfitServiceError.INVALID_PASSWORD, exception.getError());
     }
 
@@ -61,6 +53,13 @@ class ChangePasswordHandlerTest extends CommonHandlerTest {
     }
 
     @Test
+    void invalidId() {
+        final var exception = assertThrows(WildfitServiceException.class,
+                                           () -> userService.changePassword("Invalid", PASSWORD));
+        assertEquals(WildfitServiceError.USER_NOT_FOUND, exception.getError());
+    }
+
+    @Test
     void execute() throws WildfitServiceException {
         final var user = User.builder()
                 .withStatus(UserStatus.FREE.getCode())
@@ -71,11 +70,7 @@ class ChangePasswordHandlerTest extends CommonHandlerTest {
         final var saved = userRepository.save(user);
         assertNotNull(saved);
 
-        ChangePasswordHandler.builder()
-                .withUserRepository(userRepository)
-                .withPassword(PASSWORD)
-                .withUserId(saved.getUuid())
-                .build().execute();
+        userService.changePassword(saved.getUuid(), PASSWORD);
 
         final var updatedUser = userRepository.findById(saved.getId()).orElseThrow();
         assertNotSame(saved.getPassword(), updatedUser.getPassword());
