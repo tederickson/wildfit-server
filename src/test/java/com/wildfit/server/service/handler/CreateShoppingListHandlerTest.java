@@ -10,7 +10,6 @@ import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.ShoppingListItem;
 import com.wildfit.server.repository.ShoppingListRepository;
 import com.wildfit.server.service.ShoppingListService;
-import com.wildfit.server.service.ShoppingListServiceImpl;
 import com.wildfit.server.util.ReadRecipeDigest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -34,6 +33,9 @@ class CreateShoppingListHandlerTest extends CommonMealHandlerTest {
 
     @Autowired
     protected ShoppingListRepository shoppingListRepository;
+
+    @Autowired
+    ShoppingListService shoppingListService;
 
     @AfterEach
     void tearDown() {
@@ -62,10 +64,6 @@ class CreateShoppingListHandlerTest extends CommonMealHandlerTest {
         assertNotNull(mealDigest.getId());
         assertEquals(userId, mealDigest.getUuid());
 
-        ShoppingListService shoppingListService = new ShoppingListServiceImpl(userRepository,
-                                                                              mealRepository,
-                                                                              recipeRepository,
-                                                                              shoppingListRepository);
         CreateShoppingListRequest createShoppingListRequest =  CreateShoppingListRequest.builder()
                 .withUuid(userId)
                 .withMealId(mealDigest.getId())
@@ -109,42 +107,37 @@ class CreateShoppingListHandlerTest extends CommonMealHandlerTest {
 
     @Test
     void missingUserId() {
+        CreateShoppingListRequest createShoppingListRequest = CreateShoppingListRequest.builder()
+                .withMealId(1234L)
+                .build();
+
         final var exception = assertThrows(WildfitServiceException.class,
-                () -> CreateShoppingListHandler.builder()
-                                               .withUserRepository(userRepository)
-                                               .withRecipeRepository(recipeRepository)
-                                               .withMealRepository(mealRepository)
-                                               .withShoppingListRepository(shoppingListRepository)
-                                               .withMealId(1234L)
-                                               .build().execute());
+                                           () -> shoppingListService.createShoppingList(createShoppingListRequest));
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
 
     @Test
     void blankUserId() {
+        CreateShoppingListRequest createShoppingListRequest = CreateShoppingListRequest.builder()
+                .withMealId(15L)
+                .withUuid("  ")
+                .build();
+
         final var exception = assertThrows(WildfitServiceException.class,
-                () -> CreateShoppingListHandler.builder()
-                                               .withUserRepository(userRepository)
-                                               .withRecipeRepository(recipeRepository)
-                                               .withMealRepository(mealRepository)
-                                               .withShoppingListRepository(shoppingListRepository)
-                                               .withMealId(15L)
-                                               .withUserId("  ")
-                                               .build().execute());
+                                           () -> shoppingListService.createShoppingList(createShoppingListRequest));
         assertEquals(WildfitServiceError.USER_NOT_FOUND, exception.getError());
     }
 
     @Test
     void missingMeal() {
+        CreateShoppingListRequest createShoppingListRequest = CreateShoppingListRequest.builder()
+                .withMealId(-15L)
+                .withUuid(userId)
+                .build();
+
         final var exception = assertThrows(WildfitServiceException.class,
-                                           () -> CreateShoppingListHandler.builder()
-                                                   .withUserRepository(userRepository)
-                                                   .withRecipeRepository(recipeRepository)
-                                                   .withMealRepository(mealRepository)
-                                                   .withShoppingListRepository(shoppingListRepository)
-                                                   .withMealId(-15L)
-                                                   .withUserId(userId)
-                                                   .build().execute());
+                                           () -> shoppingListService.createShoppingList(createShoppingListRequest));
+
         assertEquals(WildfitServiceError.MEAL_NOT_FOUND, exception.getError());
     }
 }
