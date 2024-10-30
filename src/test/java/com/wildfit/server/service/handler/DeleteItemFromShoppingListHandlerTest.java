@@ -1,5 +1,24 @@
 package com.wildfit.server.service.handler;
 
+import com.wildfit.server.domain.CreateMealRequest;
+import com.wildfit.server.domain.CreateShoppingListRequest;
+import com.wildfit.server.domain.RecipeDigest;
+import com.wildfit.server.exception.WildfitServiceError;
+import com.wildfit.server.exception.WildfitServiceException;
+import com.wildfit.server.model.ShoppingListItem;
+import com.wildfit.server.repository.ShoppingListRepository;
+import com.wildfit.server.service.ShoppingListService;
+import com.wildfit.server.util.ReadRecipeDigest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.everyItem;
 import static org.hamcrest.Matchers.in;
@@ -8,29 +27,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import com.wildfit.server.domain.CreateMealRequest;
-import com.wildfit.server.domain.RecipeDigest;
-import com.wildfit.server.exception.WildfitServiceError;
-import com.wildfit.server.exception.WildfitServiceException;
-import com.wildfit.server.model.ShoppingListItem;
-import com.wildfit.server.repository.ShoppingListRepository;
-import com.wildfit.server.util.ReadRecipeDigest;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
-
 @SpringBootTest
 @Transactional
 class DeleteItemFromShoppingListHandlerTest extends CommonMealHandlerTest {
 
     @Autowired
-    protected ShoppingListRepository shoppingListRepository;
+    private ShoppingListRepository shoppingListRepository;
+
+    @Autowired
+    private ShoppingListService shoppingListService;
 
     @AfterEach
     void tearDown() {
@@ -59,14 +64,9 @@ class DeleteItemFromShoppingListHandlerTest extends CommonMealHandlerTest {
         assertNotNull(mealDigest.getId());
         assertEquals(userId, mealDigest.getUuid());
 
-        CreateShoppingListHandler.builder()
-                                 .withUserRepository(userRepository)
-                                 .withRecipeRepository(recipeRepository)
-                                 .withMealRepository(mealRepository)
-                                 .withShoppingListRepository(shoppingListRepository)
-                                 .withMealId(mealDigest.getId())
-                                 .withUserId(userId)
-                                 .build().execute();
+        shoppingListService.createShoppingList(CreateShoppingListRequest.builder()
+                                                       .withUuid(userId)
+                                                       .withMealId(mealDigest.getId()).build());
 
         final var shoppingList = shoppingListRepository.findByUuid(userId).orElseThrow();
 
@@ -80,18 +80,9 @@ class DeleteItemFromShoppingListHandlerTest extends CommonMealHandlerTest {
 
         final var count = shoppingList.getShoppingListItems().size();
 
-        DeleteItemFromShoppingListHandler.builder()
-                                         .withUserRepository(userRepository)
-                                         .withShoppingListRepository(shoppingListRepository)
-                                         .withItemId(pepper)
-                                         .withUserId(userId)
-                                         .build().execute();
-        DeleteItemFromShoppingListHandler.builder()
-                                         .withUserRepository(userRepository)
-                                         .withShoppingListRepository(shoppingListRepository)
-                                         .withItemId(tuna)
-                                         .withUserId(userId)
-                                         .build().execute();
+        shoppingListService.deleteItemFromShoppingList(userId, pepper);
+        shoppingListService.deleteItemFromShoppingList(userId, tuna);
+
         final var modifiedShoppingList = shoppingListRepository.findByUuid(userId).orElseThrow();
         final var modifiedCount = modifiedShoppingList.getShoppingListItems().size();
 
@@ -133,12 +124,7 @@ class DeleteItemFromShoppingListHandlerTest extends CommonMealHandlerTest {
     @Test
     void blankUserId() {
         final var exception = assertThrows(WildfitServiceException.class,
-                () -> DeleteItemFromShoppingListHandler.builder()
-                                                       .withUserRepository(userRepository)
-                                                       .withShoppingListRepository(shoppingListRepository)
-                                                       .withItemId(15L)
-                                                       .withUserId("  ")
-                                                       .build().execute());
+                                           () -> shoppingListService.deleteItemFromShoppingList("  ", 15L));
         assertEquals(WildfitServiceError.USER_NOT_FOUND, exception.getError());
     }
 }
