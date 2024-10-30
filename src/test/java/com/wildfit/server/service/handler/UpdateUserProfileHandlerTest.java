@@ -51,6 +51,34 @@ class UpdateUserProfileHandlerTest extends CommonHandlerTest {
     }
 
     @Test
+    void missingName() {
+        final var user = User.builder()
+                .withStatus(UserStatus.PREMIUM.getCode())
+                .withCreateDate(java.time.LocalDate.now())
+                .withPassword(PASSWORD)
+                .withUuid(UUID.randomUUID().toString())
+                .withEmail(EMAIL).build();
+        final var dbUser = userRepository.save(user);
+        final var saved = userProfileRepository.save(UserProfile.builder()
+                                                             .withUser(dbUser)
+                                                             .withName(NAME).build());
+        assertNotNull(saved);
+
+        final var updateUserProfileRequest = UpdateUserProfileRequest.builder()
+                .withAge(39)
+                .withGender(GenderType.MALE)
+                .withWeight(185.7f)
+                .withHeightFeet(5)
+                .withHeightInches(7)
+                .build();
+
+        final var exception = assertThrows(WildfitServiceException.class,
+                                           () -> userService.updateUserProfile(saved.getUser().getUuid(),
+                                                                               updateUserProfileRequest));
+        assertEquals(WildfitServiceError.INVALID_NAME, exception.getError());
+    }
+
+    @Test
     void execute() throws WildfitServiceException {
         final var user = User.builder()
                 .withStatus(UserStatus.PREMIUM.getCode())
