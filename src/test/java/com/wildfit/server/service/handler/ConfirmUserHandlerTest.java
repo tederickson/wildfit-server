@@ -36,7 +36,7 @@ class ConfirmUserHandlerTest extends CommonHandlerTest {
     @ParameterizedTest
     @NullAndEmptySource
     void invalidConfirmationCode(String confirmationCode) {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> ConfirmUserHandler.builder()
                                                    .withUserRepository(userRepository)
                                                    .withVerificationTokenRepository(verificationTokenRepository)
@@ -49,7 +49,7 @@ class ConfirmUserHandlerTest extends CommonHandlerTest {
     void confirmationCodeDoesNotMatch() {
         createUser();
 
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> ConfirmUserHandler.builder()
                                                    .withUserRepository(userRepository)
                                                    .withVerificationTokenRepository(verificationTokenRepository)

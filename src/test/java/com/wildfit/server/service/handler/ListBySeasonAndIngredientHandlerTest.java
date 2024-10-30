@@ -2,6 +2,7 @@ package com.wildfit.server.service.handler;
 
 import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.exception.WildfitServiceError;
+import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.util.ReadRecipeDigest;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -57,7 +58,7 @@ class ListBySeasonAndIngredientHandlerTest extends CommonRecipeHandlerTest {
 
     @Test
     void missingSeason() {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> ListBySeasonAndIngredientHandler.builder()
                                                    .withPageable(PAGE_REQUEST)
                                                    .withIngredientName(ingredientName)
@@ -69,7 +70,7 @@ class ListBySeasonAndIngredientHandlerTest extends CommonRecipeHandlerTest {
 
     @Test
     void missingIngredientName() {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> ListBySeasonAndIngredientHandler.builder()
                                                    .withSeason(SeasonType.SPRING)
                                                    .withPageable(PAGE_REQUEST)
@@ -81,7 +82,7 @@ class ListBySeasonAndIngredientHandlerTest extends CommonRecipeHandlerTest {
 
     @Test
     void missingPageable() {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> ListBySeasonAndIngredientHandler.builder()
                                                    .withSeason(SeasonType.SPRING)
                                                    .withIngredientName(ingredientName)

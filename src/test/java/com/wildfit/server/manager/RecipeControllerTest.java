@@ -85,7 +85,7 @@ class RecipeControllerTest {
 
     @Test
     void updateRecipe_idsDoNotMatch() {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> recipeController.updateRecipe(recipeId, userId,
                                                                                RecipeDigest.builder().build()));
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());

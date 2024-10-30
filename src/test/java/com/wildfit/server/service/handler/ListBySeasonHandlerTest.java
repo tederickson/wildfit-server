@@ -2,6 +2,7 @@ package com.wildfit.server.service.handler;
 
 import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.exception.WildfitServiceError;
+import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.util.ReadRecipeDigest;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -35,14 +36,14 @@ class ListBySeasonHandlerTest extends CommonRecipeHandlerTest {
 
     @Test
     void missingSeason() {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> recipeService.listBySeason(null, PAGE_REQUEST));
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
 
     @Test
     void missingPageable() {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> recipeService.listBySeason(SeasonType.SPRING, null));
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }

@@ -78,7 +78,7 @@ class CreateMealHandlerTest extends CommonMealHandlerTest {
     @Test
     void missingUserId() {
         final var request = CreateMealRequest.builder().withRecipeIds(List.of(3L)).build();
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> CreateMealHandler.builder()
                                                    .withMealRepository(mealRepository)
                                                    .withRecipeRepository(recipeRepository)
@@ -92,7 +92,7 @@ class CreateMealHandlerTest extends CommonMealHandlerTest {
         final var request = CreateMealRequest.builder()
                 .withUuid("  ")
                 .withRecipeIds(List.of(3L)).build();
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> CreateMealHandler.builder()
                                                    .withMealRepository(mealRepository)
                                                    .withRecipeRepository(recipeRepository)
@@ -106,7 +106,7 @@ class CreateMealHandlerTest extends CommonMealHandlerTest {
         final var request = CreateMealRequest.builder()
                 .withUuid(userId)
                 .build();
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> CreateMealHandler.builder()
                                                    .withMealRepository(mealRepository)
                                                    .withRecipeRepository(recipeRepository)

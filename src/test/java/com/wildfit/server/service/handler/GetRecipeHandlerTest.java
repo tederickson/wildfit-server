@@ -28,14 +28,14 @@ class GetRecipeHandlerTest extends CommonRecipeHandlerTest {
 
     @Test
     void missingRecipeId() {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> recipeService.retrieveRecipe(null));
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
 
     @Test
     void invalidRecipeId() {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> recipeService.retrieveRecipe(-7L));
         assertEquals(WildfitServiceError.RECIPE_NOT_FOUND, exception.getError());
     }

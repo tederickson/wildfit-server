@@ -4,6 +4,7 @@ import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.RecipeGroupDigest;
 import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.exception.WildfitServiceError;
+import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.Season;
 import com.wildfit.server.util.ReadRecipeDigest;
 import org.junit.jupiter.api.Test;
@@ -90,7 +91,7 @@ class CreateRecipeHandlerTest extends CommonRecipeHandlerTest {
 
     @Test
     void requestIsMissing() {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> createRecipe(null));
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
@@ -108,7 +109,7 @@ class CreateRecipeHandlerTest extends CommonRecipeHandlerTest {
                 .withServingUnit("serving")
                 .build();
 
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> createRecipe(recipe));
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }

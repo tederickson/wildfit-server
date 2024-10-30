@@ -48,26 +48,26 @@ class NutritionixServiceImplTest {
     @ParameterizedTest
     @NullAndEmptySource
     void nullBarcode(String barcode) {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> nutritionixService.getFoodWithBarcode(barcode));
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
 
     @Test
     void getFoodWithId_badParameters() {
-        assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        assertThrows(WildfitServiceException.class,
                      () -> nutritionixService.getFoodWithId(null));
     }
 
     @Test
     void getFoodsByQuery_badParameters() {
-        assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        assertThrows(WildfitServiceException.class,
                      () -> nutritionixService.getFoodsByQuery(null));
     }
 
     @Test
     void getRecipeNutrition_badParameters() {
-        assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        assertThrows(WildfitServiceException.class,
                      () -> nutritionixService.getRecipeNutrition(null));
     }
 }

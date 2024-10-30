@@ -49,7 +49,7 @@ class DeleteMealHandlerTest extends CommonMealHandlerTest {
 
     @Test
     void missingUserId() {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> DeleteMealHandler.builder()
                                                    .withMealRepository(mealRepository)
                                                    .withMealId(-1L)
@@ -59,7 +59,7 @@ class DeleteMealHandlerTest extends CommonMealHandlerTest {
 
     @Test
     void blankUserId() {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> DeleteMealHandler.builder()
                                                    .withMealRepository(mealRepository)
                                                    .withMealId(-1L)
@@ -70,7 +70,7 @@ class DeleteMealHandlerTest extends CommonMealHandlerTest {
 
     @Test
     void missingMealId() {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> DeleteMealHandler.builder()
                                                    .withMealRepository(mealRepository)
                                                    .withUserId(userId)

@@ -53,7 +53,7 @@ class UpdateUserProfileHandlerTest extends CommonHandlerTest {
 
     @Test
     void userNotFound() {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> UpdateUserProfileHandler.builder()
                                                    .withUserRepository(userRepository)
                                                    .withUserProfileRepository(userProfileRepository)

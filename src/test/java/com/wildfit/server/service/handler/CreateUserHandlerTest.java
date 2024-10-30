@@ -40,7 +40,7 @@ class CreateUserHandlerTest extends CommonHandlerTest {
     @ParameterizedTest
     @NullAndEmptySource
     void nullPassword(String password) {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> CreateUserHandler.builder()
                                                    .withUserRepository(userRepository)
                                                    .withUserProfileRepository(userProfileRepository)
@@ -56,7 +56,7 @@ class CreateUserHandlerTest extends CommonHandlerTest {
 
     @Test
     void invalidPassword() {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> CreateUserHandler.builder()
                                                    .withUserRepository(userRepository)
                                                    .withUserProfileRepository(userProfileRepository)
@@ -73,7 +73,7 @@ class CreateUserHandlerTest extends CommonHandlerTest {
     @ParameterizedTest
     @NullAndEmptySource
     void missingEmail(String email) {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> CreateUserHandler.builder()
                                                    .withUserRepository(userRepository)
                                                    .withUserProfileRepository(userProfileRepository)
@@ -89,7 +89,7 @@ class CreateUserHandlerTest extends CommonHandlerTest {
 
     @Test
     void emptyEmail() {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> CreateUserHandler.builder()
                                                    .withUserRepository(userRepository)
                                                    .withUserProfileRepository(userProfileRepository)
@@ -106,7 +106,7 @@ class CreateUserHandlerTest extends CommonHandlerTest {
     @ParameterizedTest
     @NullAndEmptySource
     void missingName(String name) {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> CreateUserHandler.builder()
                                                    .withUserRepository(userRepository)
                                                    .withUserProfileRepository(userProfileRepository)
@@ -122,7 +122,7 @@ class CreateUserHandlerTest extends CommonHandlerTest {
 
     @Test
     void emptyName() {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> CreateUserHandler.builder()
                                                    .withUserRepository(userRepository)
                                                    .withUserProfileRepository(userProfileRepository)
@@ -166,7 +166,7 @@ class CreateUserHandlerTest extends CommonHandlerTest {
         final var saved = userRepository.save(user);
         assertNotNull(saved);
 
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> CreateUserHandler.builder()
                                                    .withUserRepository(userRepository)
                                                    .withUserProfileRepository(userProfileRepository)

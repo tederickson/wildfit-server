@@ -30,7 +30,7 @@ class ChangePasswordHandlerTest extends CommonHandlerTest {
     @ParameterizedTest
     @NullAndEmptySource
     void nullPassword(String password) {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> ChangePasswordHandler.builder()
                                                    .withUserRepository(userRepository)
                                                    .withUserId(USER_ID)
@@ -41,7 +41,7 @@ class ChangePasswordHandlerTest extends CommonHandlerTest {
 
     @Test
     void invalidPassword() {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> ChangePasswordHandler.builder()
                                                    .withUserRepository(userRepository)
                                                    .withPassword("apple")
@@ -52,7 +52,7 @@ class ChangePasswordHandlerTest extends CommonHandlerTest {
 
     @Test
     void missingId() {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> ChangePasswordHandler.builder()
                                                    .withUserRepository(userRepository)
                                                    .withPassword(PASSWORD)

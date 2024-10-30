@@ -28,7 +28,7 @@ class LoginHandlerTest extends CommonHandlerTest {
     @ParameterizedTest
     @NullAndEmptySource
     void nullPassword(String password) {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> LoginHandler.builder()
                                                    .withUserRepository(userRepository)
                                                    .withEmail(EMAIL)
@@ -40,7 +40,7 @@ class LoginHandlerTest extends CommonHandlerTest {
     @ParameterizedTest
     @NullAndEmptySource
     void missingEmail(String email) {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> LoginHandler.builder()
                                                    .withUserRepository(userRepository)
                                                    .withPassword(PASSWORD)
@@ -51,7 +51,7 @@ class LoginHandlerTest extends CommonHandlerTest {
 
     @Test
     void emptyEmail() {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> LoginHandler.builder()
                                                    .withUserRepository(userRepository)
                                                    .withPassword(PASSWORD)
@@ -62,7 +62,7 @@ class LoginHandlerTest extends CommonHandlerTest {
 
     @Test
     void userNotFound() {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> LoginHandler.builder()
                                                    .withUserRepository(userRepository)
                                                    .withPassword(PASSWORD)
@@ -74,7 +74,7 @@ class LoginHandlerTest extends CommonHandlerTest {
     @Test
     void userNotEnabled() {
         createUser(false);
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> LoginHandler.builder()
                                                    .withUserRepository(userRepository)
                                                    .withPassword(PASSWORD)
@@ -86,7 +86,7 @@ class LoginHandlerTest extends CommonHandlerTest {
     @Test
     void doesNotMatchPassword() {
         createUser(true);
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> LoginHandler.builder()
                                                    .withUserRepository(userRepository)
                                                    .withPassword("AndLo792134*")

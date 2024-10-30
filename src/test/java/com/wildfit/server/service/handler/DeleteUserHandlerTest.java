@@ -25,7 +25,7 @@ class DeleteUserHandlerTest extends CommonHandlerTest {
 
     @Test
     void missingId() {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> DeleteUserHandler.builder()
                                                    .withUserRepository(userRepository)
                                                    .withUserId(null)
@@ -35,7 +35,7 @@ class DeleteUserHandlerTest extends CommonHandlerTest {
 
     @Test
     void userNotFound() {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> DeleteUserHandler.builder()
                                                    .withUserRepository(userRepository)
                                                    .withUserId("-14L")

@@ -12,14 +12,14 @@ class PageMapperTest {
 
     @Test
     void invalidPage() {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> PageMapper.map(null, 23));
         assertEquals(WildfitServiceError.INVALID_PAGE_OFFSET, exception.getError());
     }
 
     @Test
     void invalidPageSize() {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+        final var exception = assertThrows(WildfitServiceException.class,
                                            () -> PageMapper.map(1, null));
         assertEquals(WildfitServiceError.INVALID_PAGE_SIZE, exception.getError());
     }
