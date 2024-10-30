@@ -1,7 +1,5 @@
 package com.wildfit.server.model;
 
-import java.util.Objects;
-
 import com.wildfit.server.domain.IngredientType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,6 +11,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
+
+import java.util.Objects;
 
 @Getter
 @Setter

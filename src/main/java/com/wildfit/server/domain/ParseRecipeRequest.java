@@ -17,13 +17,15 @@ public final class ParseRecipeRequest {
 
         if (servingUnit == null || servingUnit.equals(foodName)) {
             ingredient = "%s %s".formatted(servingQty, foodName);
-        } else {
+        }
+        else {
             ingredient = "%s %s %s".formatted(servingQty, servingUnit, foodName);
         }
 
         if (query == null) {
             query = ingredient;
-        } else {
+        }
+        else {
             query += "\n" + ingredient;
         }
     }

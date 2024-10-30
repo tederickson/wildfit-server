@@ -26,34 +26,34 @@ public class NutritionixServiceImpl implements NutritionixService {
     @Override
     public FoodItemDigest getFoodWithBarcode(String barcode) throws WildfitServiceException, NutritionixException {
         return GetFoodWithBarcodeHandler.builder()
-                                        .withNutritionixHeaderInfo(nutritionixHeaderInfo)
-                                        .withBarcode(barcode)
-                                        .build().execute();
+                .withNutritionixHeaderInfo(nutritionixHeaderInfo)
+                .withBarcode(barcode)
+                .build().execute();
     }
 
     @Override
     public FoodItemDigest getFoodWithId(String nixItemId) throws WildfitServiceException, NutritionixException {
         return GetFoodWithIdHandler.builder()
-                                   .withNutritionixHeaderInfo(nutritionixHeaderInfo)
-                                   .withNixItemId(nixItemId)
-                                   .build().execute();
+                .withNutritionixHeaderInfo(nutritionixHeaderInfo)
+                .withNixItemId(nixItemId)
+                .build().execute();
     }
 
     @Override
     public SearchFoodResponse getFoodsByQuery(String description) throws WildfitServiceException, NutritionixException {
         return GetFoodsByQueryHandler.builder()
-                                     .withNutritionixHeaderInfo(nutritionixHeaderInfo)
-                                     .withDescription(description)
-                                     .build().execute();
+                .withNutritionixHeaderInfo(nutritionixHeaderInfo)
+                .withDescription(description)
+                .build().execute();
     }
 
     @Override
     public FoodItemDigest getRecipeNutrition(RecipeDigest recipeDigest)
             throws WildfitServiceException, NutritionixException {
         return GetRecipeNutritionHandler.builder()
-                                        .withNutritionixHeaderInfo(nutritionixHeaderInfo)
-                                        .withRecipeDigest(recipeDigest)
-                                        .build().execute();
+                .withNutritionixHeaderInfo(nutritionixHeaderInfo)
+                .withRecipeDigest(recipeDigest)
+                .build().execute();
     }
 
 }

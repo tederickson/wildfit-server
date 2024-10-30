@@ -1,7 +1,5 @@
 package com.wildfit.server.manager;
 
-import java.util.List;
-
 import com.wildfit.server.domain.CreateMealRequest;
 import com.wildfit.server.domain.MealDigest;
 import com.wildfit.server.exception.WildfitServiceException;
@@ -21,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @Slf4j

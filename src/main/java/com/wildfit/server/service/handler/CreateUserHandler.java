@@ -1,8 +1,5 @@
 package com.wildfit.server.service.handler;
 
-import java.util.Objects;
-import java.util.UUID;
-
 import com.wildfit.server.domain.CreateUserResponse;
 import com.wildfit.server.exception.WildfitServiceError;
 import com.wildfit.server.exception.WildfitServiceException;
@@ -21,6 +18,9 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
+
+import java.util.Objects;
+import java.util.UUID;
 
 @Builder(setterPrefix = "with")
 public class CreateUserHandler {
@@ -48,22 +48,22 @@ public class CreateUserHandler {
         }
 
         final var user = User.builder()
-                             .withStatus(UserStatus.FREE.getCode())
-                             .withCreateDate(java.time.LocalDate.now())
-                             .withPassword(encodedPassword)
-                             .withEmail(email)
-                             .withEnabled(false)
-                             .withUuid(UUID.randomUUID().toString())
-                             .build();
+                .withStatus(UserStatus.FREE.getCode())
+                .withCreateDate(java.time.LocalDate.now())
+                .withPassword(encodedPassword)
+                .withEmail(email)
+                .withEnabled(false)
+                .withUuid(UUID.randomUUID().toString())
+                .build();
         final var dbUser = userRepository.save(user);
         final var userProfile = UserProfile.builder().withUser(dbUser)
-                                           .withName(name)
-                                           .build();
+                .withName(name)
+                .build();
 
         final var saved = userProfileRepository.save(userProfile);
 
         final var verificationToken = new VerificationToken(RandomStringUtils.randomAlphabetic(30),
-                userProfile.getUser());
+                                                            userProfile.getUser());
 
         verificationTokenRepository.save(verificationToken);
         sendEmail(verificationToken);
@@ -77,18 +77,20 @@ public class CreateUserHandler {
 
         msg.setSubject("WILDFIT account activation");
         final var text = String.join("\n",
-                "Dear " + name + ",",
-                "",
-                "Thank you for signing up for access to the WILDFIT application, your account has been created.",
-                "",
-                "To activate your account, please visit:",
-                "http://localhost:8080/v1/auth/register/" + verificationToken.getToken(),
-                "",
-                "Your account will automatically be approved once you click this URL. " +
-                        "If you have problems activating your account please contact support (support@wildfit.com).",
-                "",
-                "Warm Regards,",
-                "Wildfit team"
+                                     "Dear " + name + ",",
+                                     "",
+                                     "Thank you for signing up for access to the WILDFIT application, your account " +
+                                             "has been created.",
+                                     "",
+                                     "To activate your account, please visit:",
+                                     "http://localhost:8080/v1/auth/register/" + verificationToken.getToken(),
+                                     "",
+                                     "Your account will automatically be approved once you click this URL. " +
+                                             "If you have problems activating your account please contact support " +
+                                             "(support@wildfit.com).",
+                                     "",
+                                     "Warm Regards,",
+                                     "Wildfit team"
         );
         msg.setText(text);
 

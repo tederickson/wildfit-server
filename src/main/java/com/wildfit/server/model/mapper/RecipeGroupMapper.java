@@ -1,12 +1,5 @@
 package com.wildfit.server.model.mapper;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
-
 import com.wildfit.server.domain.IngredientDigest;
 import com.wildfit.server.domain.InstructionDigest;
 import com.wildfit.server.domain.RecipeGroupDigest;
@@ -15,6 +8,13 @@ import com.wildfit.server.model.CommonRecipe;
 import com.wildfit.server.model.CommonRecipeType;
 import com.wildfit.server.model.Ingredient;
 import com.wildfit.server.model.RecipeGroup;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class RecipeGroupMapper {
     private RecipeGroupMapper() {
@@ -40,10 +40,10 @@ public class RecipeGroupMapper {
 
     public static RecipeGroupDigest map(RecipeGroup recipeGroup) {
         final var builder = RecipeGroupDigest.builder()
-                                             .withId(recipeGroup.getId())
-                                             .withName(recipeGroup.getName())
-                                             .withInstructionGroupNumber(
-                                                     recipeGroup.getRecipeGroupNumber());
+                .withId(recipeGroup.getId())
+                .withName(recipeGroup.getName())
+                .withInstructionGroupNumber(
+                        recipeGroup.getRecipeGroupNumber());
 
         List<InstructionDigest> instructions = new ArrayList<>();
         List<IngredientDigest> ingredients = new ArrayList<>();
@@ -51,7 +51,8 @@ public class RecipeGroupMapper {
         for (var common : recipeGroup.getCommonRecipes()) {
             if (CommonRecipeType.INSTRUCTION == common.getType()) {
                 instructions.add(InstructionMapper.createInstruction((com.wildfit.server.model.Instruction) common));
-            } else {
+            }
+            else {
                 ingredients.add(IngredientDigestMapper.createIngredient((Ingredient) common));
             }
         }
@@ -77,7 +78,8 @@ public class RecipeGroupMapper {
 
                 if (id == null) {
                     existing.add(InstructionMapper.createInstruction(instruction));
-                } else {
+                }
+                else {
                     final var existingInstruction = commonRecipeMap.get(id);
                     Objects.requireNonNull(existingInstruction, "instruction with id " + id);
 
@@ -92,7 +94,8 @@ public class RecipeGroupMapper {
 
                 if (id == null) {
                     existing.add(IngredientDigestMapper.createIngredient(ingredientDigest));
-                } else {
+                }
+                else {
                     final var existingIngredient = commonRecipeMap.get(id);
                     Objects.requireNonNull(existingIngredient, "ingredient with id " + id);
 

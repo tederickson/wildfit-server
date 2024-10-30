@@ -1,10 +1,10 @@
 package com.wildfit.server.model.mapper;
 
-import java.util.Map;
-
 import com.wildfit.server.domain.MealSummaryDigest;
 import com.wildfit.server.model.MealSummary;
 import com.wildfit.server.model.Recipe;
+
+import java.util.Map;
 
 public class MealSummaryMapper {
     public static MealSummaryDigest map(MealSummary mealSummary, Map<Long, Recipe> recipeMap) {
@@ -13,12 +13,12 @@ public class MealSummaryMapper {
 
         if (recipe != null) {
             builder.withId(mealSummary.getId())
-                   .withRecipeId(recipe.getId())
-                   .withName(recipe.getName())
-                   .withSeason(recipe.getSeason().toSeasonType())
-                   .withPlanDate(mealSummary.getPlanDate())
-                   .withCooked(mealSummary.isCooked())
-                   .withThumbnail(recipe.getThumbnail());
+                    .withRecipeId(recipe.getId())
+                    .withName(recipe.getName())
+                    .withSeason(recipe.getSeason().toSeasonType())
+                    .withPlanDate(mealSummary.getPlanDate())
+                    .withCooked(mealSummary.isCooked())
+                    .withThumbnail(recipe.getThumbnail());
         }
         return builder.build();
     }

@@ -1,9 +1,5 @@
 package com.wildfit.server.service.handler;
 
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
-
 import com.wildfit.server.domain.MealDigest;
 import com.wildfit.server.exception.WildfitServiceError;
 import com.wildfit.server.exception.WildfitServiceException;
@@ -14,6 +10,10 @@ import com.wildfit.server.model.mapper.MealMapper;
 import com.wildfit.server.repository.RecipeRepository;
 import lombok.experimental.SuperBuilder;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @SuperBuilder(setterPrefix = "with")
 public class RetrieveMealHandler extends CommonMealHandler {
@@ -29,8 +29,8 @@ public class RetrieveMealHandler extends CommonMealHandler {
                 .orElseThrow(() -> new WildfitServiceException(WildfitServiceError.MEAL_NOT_FOUND));
 
         final var recipeIds = meal.getRecipes().stream()
-                                  .map(MealSummary::getRecipeId)
-                                  .collect(Collectors.toList());
+                .map(MealSummary::getRecipeId)
+                .collect(Collectors.toList());
 
         final Map<Long, Recipe> recipeMap = getRecipeMap(recipeRepository, recipeIds);
 

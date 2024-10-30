@@ -1,13 +1,13 @@
 package com.wildfit.server.service.handler;
 
-import java.util.Objects;
-
 import com.wildfit.server.exception.WildfitServiceError;
 import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.ShoppingList;
 import com.wildfit.server.repository.ShoppingListRepository;
 import com.wildfit.server.repository.UserRepository;
 import lombok.Builder;
+
+import java.util.Objects;
 
 @Builder(setterPrefix = "with")
 public class DeleteItemFromShoppingListHandler {
@@ -21,11 +21,11 @@ public class DeleteItemFromShoppingListHandler {
         validate();
 
         userRepository.findByUuid(userId)
-                      .orElseThrow(() -> new WildfitServiceException(WildfitServiceError.USER_NOT_FOUND));
+                .orElseThrow(() -> new WildfitServiceException(WildfitServiceError.USER_NOT_FOUND));
 
         final ShoppingList shoppingList = shoppingListRepository.findByUuid(userId)
-                                                                .orElseThrow(() -> new WildfitServiceException(
-                                                                        WildfitServiceError.SHOPPING_LIST_NOT_FOUND));
+                .orElseThrow(() -> new WildfitServiceException(
+                        WildfitServiceError.SHOPPING_LIST_NOT_FOUND));
 
         shoppingList.getShoppingListItems().removeIf(item -> itemId.equals(item.getId()));
         shoppingListRepository.save(shoppingList);

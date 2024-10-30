@@ -1,7 +1,5 @@
 package com.wildfit.server.service.handler;
 
-import java.util.Objects;
-
 import com.wildfit.server.domain.RecipeListDigest;
 import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.exception.WildfitServiceError;
@@ -11,6 +9,8 @@ import com.wildfit.server.model.mapper.RecipeListMapper;
 import com.wildfit.server.repository.RecipeRepository;
 import lombok.Builder;
 import org.springframework.data.domain.Pageable;
+
+import java.util.Objects;
 
 @Builder(setterPrefix = "with")
 public class ListBySeasonHandler {

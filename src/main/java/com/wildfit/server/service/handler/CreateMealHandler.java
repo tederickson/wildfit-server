@@ -1,8 +1,5 @@
 package com.wildfit.server.service.handler;
 
-import java.util.Map;
-import java.util.Objects;
-
 import com.wildfit.server.domain.CreateMealRequest;
 import com.wildfit.server.domain.MealDigest;
 import com.wildfit.server.exception.WildfitServiceError;
@@ -14,6 +11,9 @@ import com.wildfit.server.repository.RecipeRepository;
 import lombok.experimental.SuperBuilder;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;
+
+import java.util.Map;
+import java.util.Objects;
 
 @SuperBuilder(setterPrefix = "with")
 public class CreateMealHandler extends CommonMealHandler {

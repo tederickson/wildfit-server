@@ -1,7 +1,5 @@
 package com.wildfit.server.service;
 
-import java.util.List;
-
 import com.wildfit.server.domain.CreateMealRequest;
 import com.wildfit.server.domain.MealDigest;
 import com.wildfit.server.exception.WildfitServiceException;
@@ -15,6 +13,8 @@ import com.wildfit.server.service.handler.UpdateMealHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * The service calls Handlers to implement the functionality.
@@ -30,47 +30,47 @@ public class MealServiceImpl implements MealService {
     @Override
     public MealDigest retrieveMeal(Long mealId, String userId) throws WildfitServiceException {
         return RetrieveMealHandler.builder()
-                                  .withMealRepository(mealRepository)
-                                  .withRecipeRepository(recipeRepository)
-                                  .withMealId(mealId)
-                                  .withUserId(userId)
-                                  .build().execute();
+                .withMealRepository(mealRepository)
+                .withRecipeRepository(recipeRepository)
+                .withMealId(mealId)
+                .withUserId(userId)
+                .build().execute();
     }
 
     @Override
     public List<MealDigest> retrieveAllMeals(String userId, Pageable pageable) throws WildfitServiceException {
         return RetrieveAllMealsHandler.builder()
-                                      .withMealRepository(mealRepository)
-                                      .withRecipeRepository(recipeRepository)
-                                      .withUserId(userId)
-                                      .withPageable(pageable)
-                                      .build().execute();
+                .withMealRepository(mealRepository)
+                .withRecipeRepository(recipeRepository)
+                .withUserId(userId)
+                .withPageable(pageable)
+                .build().execute();
     }
 
     @Override
     public void deleteMeal(Long mealId, String userId) throws WildfitServiceException {
         DeleteMealHandler.builder()
-                         .withMealRepository(mealRepository)
-                         .withMealId(mealId)
-                         .withUserId(userId)
-                         .build().execute();
+                .withMealRepository(mealRepository)
+                .withMealId(mealId)
+                .withUserId(userId)
+                .build().execute();
     }
 
     @Override
     public MealDigest createMeal(CreateMealRequest request) throws WildfitServiceException {
         return CreateMealHandler.builder()
-                                .withMealRepository(mealRepository)
-                                .withRecipeRepository(recipeRepository)
-                                .withRequest(request)
-                                .build().execute();
+                .withMealRepository(mealRepository)
+                .withRecipeRepository(recipeRepository)
+                .withRequest(request)
+                .build().execute();
     }
 
     @Override
     public MealDigest updateMeal(MealDigest request) throws WildfitServiceException {
         return UpdateMealHandler.builder()
-                                .withMealRepository(mealRepository)
-                                .withRecipeRepository(recipeRepository)
-                                .withRequest(request)
-                                .build().execute();
+                .withMealRepository(mealRepository)
+                .withRecipeRepository(recipeRepository)
+                .withRequest(request)
+                .build().execute();
     }
 }

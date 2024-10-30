@@ -1,7 +1,5 @@
 package com.wildfit.server.service.handler;
 
-import java.util.Objects;
-
 import com.wildfit.server.domain.UserDigest;
 import com.wildfit.server.exception.WildfitServiceError;
 import com.wildfit.server.exception.WildfitServiceException;
@@ -10,6 +8,8 @@ import com.wildfit.server.repository.UserRepository;
 import lombok.Builder;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
+
+import java.util.Objects;
 
 @Builder(setterPrefix = "with")
 public class LoginHandler {

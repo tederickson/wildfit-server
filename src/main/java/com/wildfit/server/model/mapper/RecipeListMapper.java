@@ -1,9 +1,9 @@
 package com.wildfit.server.model.mapper;
 
+import com.wildfit.server.domain.RecipeListDigest;
+
 import java.util.List;
 import java.util.stream.Collectors;
-
-import com.wildfit.server.domain.RecipeListDigest;
 
 public class RecipeListMapper {
     private RecipeListMapper() {
@@ -14,7 +14,8 @@ public class RecipeListMapper {
 
         if (recipes == null || recipes.isEmpty()) {
             recipeListDigest.setRecipes(List.of());
-        } else {
+        }
+        else {
             recipeListDigest.setRecipes(recipes.stream().map(RecipeSummaryMapper::map).collect(Collectors.toList()));
         }
         return recipeListDigest;

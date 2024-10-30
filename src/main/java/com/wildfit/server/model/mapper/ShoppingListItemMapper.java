@@ -20,12 +20,12 @@ public class ShoppingListItemMapper {
 
     public static ShoppingListItemDigest map(ShoppingListItem shoppingListItem) {
         return ShoppingListItemDigest.builder()
-                                     .withId(shoppingListItem.getId())
-                                     .withFoodName(shoppingListItem.getFoodName())
-                                     .withTotalQuantity(shoppingListItem.getServingQty())
-                                     .withUnit(shoppingListItem.getServingUnit())
-                                     .withIngredientType(shoppingListItem.getIngredientType())
-                                     .withPurchased(shoppingListItem.isPurchased())
-                                     .build();
+                .withId(shoppingListItem.getId())
+                .withFoodName(shoppingListItem.getFoodName())
+                .withTotalQuantity(shoppingListItem.getServingQty())
+                .withUnit(shoppingListItem.getServingUnit())
+                .withIngredientType(shoppingListItem.getIngredientType())
+                .withPurchased(shoppingListItem.isPurchased())
+                .build();
     }
 }

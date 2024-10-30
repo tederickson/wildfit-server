@@ -9,12 +9,12 @@ public class ShoppingListDigestMapper {
 
     public static ShoppingListDigest map(ShoppingList shoppingList) {
         return ShoppingListDigest.builder()
-                                 .withId(shoppingList.getId())
-                                 .withUuid(shoppingList.getUuid())
-                                 .withItems(shoppingList.getShoppingListItems().stream()
-                                                        .map(ShoppingListItemMapper::map)
-                                                        .toList())
-                                 .build();
+                .withId(shoppingList.getId())
+                .withUuid(shoppingList.getUuid())
+                .withItems(shoppingList.getShoppingListItems().stream()
+                                   .map(ShoppingListItemMapper::map)
+                                   .toList())
+                .build();
 
     }
 }

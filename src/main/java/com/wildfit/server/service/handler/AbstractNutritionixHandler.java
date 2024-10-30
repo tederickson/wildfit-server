@@ -1,8 +1,5 @@
 package com.wildfit.server.service.handler;
 
-import java.util.List;
-import java.util.Objects;
-
 import com.wildfit.server.exception.NutritionixException;
 import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.NutritionixHeaderInfo;
@@ -11,6 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.HttpStatusCodeException;
+
+import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 @SuperBuilder(setterPrefix = "with")

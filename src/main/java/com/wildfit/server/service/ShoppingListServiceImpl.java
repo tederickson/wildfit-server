@@ -31,19 +31,19 @@ public class ShoppingListServiceImpl implements ShoppingListService {
     @Override
     public ShoppingListDigest getShoppingList(String userId) throws WildfitServiceException {
         return GetShoppingListHandler.builder()
-                                     .withShoppingListRepository(shoppingListRepository)
-                                     .withUserId(userId)
-                                     .build().execute();
+                .withShoppingListRepository(shoppingListRepository)
+                .withUserId(userId)
+                .build().execute();
     }
 
     @Override
     public void deleteItemFromShoppingList(String userId, Long itemId) throws WildfitServiceException {
         DeleteItemFromShoppingListHandler.builder()
-                                         .withUserRepository(userRepository)
-                                         .withShoppingListRepository(shoppingListRepository)
-                                         .withUserId(userId)
-                                         .withItemId(itemId)
-                                         .build().execute();
+                .withUserRepository(userRepository)
+                .withShoppingListRepository(shoppingListRepository)
+                .withUserId(userId)
+                .withItemId(itemId)
+                .build().execute();
     }
 
     @Override
@@ -52,22 +52,22 @@ public class ShoppingListServiceImpl implements ShoppingListService {
             throw new WildfitServiceException(WildfitServiceError.INVALID_PARAMETER);
         }
         CreateShoppingListHandler.builder()
-                                 .withUserRepository(userRepository)
-                                 .withRecipeRepository(recipeRepository)
-                                 .withMealRepository(mealRepository)
-                                 .withShoppingListRepository(shoppingListRepository)
-                                 .withMealId(request.getMealId())
-                                 .withUserId(request.getUuid())
-                                 .build()
-                                 .execute();
+                .withUserRepository(userRepository)
+                .withRecipeRepository(recipeRepository)
+                .withMealRepository(mealRepository)
+                .withShoppingListRepository(shoppingListRepository)
+                .withMealId(request.getMealId())
+                .withUserId(request.getUuid())
+                .build()
+                .execute();
     }
 
     @Override
     public void updateShoppingList(ShoppingListDigest request) throws WildfitServiceException {
         UpdateShoppingListHandler.builder()
-                                 .withShoppingListRepository(shoppingListRepository)
-                                 .withRequest(request)
-                                 .build().execute();
+                .withShoppingListRepository(shoppingListRepository)
+                .withRequest(request)
+                .build().execute();
 
     }
 }

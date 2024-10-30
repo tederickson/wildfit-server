@@ -1,7 +1,5 @@
 package com.wildfit.server.service.handler;
 
-import java.util.Objects;
-
 import com.wildfit.server.domain.ShoppingListDigest;
 import com.wildfit.server.exception.WildfitServiceError;
 import com.wildfit.server.exception.WildfitServiceException;
@@ -9,6 +7,8 @@ import com.wildfit.server.model.ShoppingList;
 import com.wildfit.server.model.mapper.ShoppingListDigestMapper;
 import com.wildfit.server.repository.ShoppingListRepository;
 import lombok.Builder;
+
+import java.util.Objects;
 
 @Builder(setterPrefix = "with")
 public class GetShoppingListHandler {
@@ -20,8 +20,8 @@ public class GetShoppingListHandler {
         validate();
 
         final ShoppingList shoppingList = shoppingListRepository.findByUuid(userId)
-                                                                .orElseThrow(() -> new WildfitServiceException(
-                                                                        WildfitServiceError.SHOPPING_LIST_NOT_FOUND));
+                .orElseThrow(() -> new WildfitServiceException(
+                        WildfitServiceError.SHOPPING_LIST_NOT_FOUND));
         return ShoppingListDigestMapper.map(shoppingList);
     }
 

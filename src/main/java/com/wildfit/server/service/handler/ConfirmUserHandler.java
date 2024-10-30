@@ -1,7 +1,5 @@
 package com.wildfit.server.service.handler;
 
-import java.util.Objects;
-
 import com.wildfit.server.domain.RegisterUserResponse;
 import com.wildfit.server.exception.WildfitServiceError;
 import com.wildfit.server.exception.WildfitServiceException;
@@ -9,6 +7,8 @@ import com.wildfit.server.repository.UserRepository;
 import com.wildfit.server.repository.VerificationTokenRepository;
 import lombok.Builder;
 import org.springframework.util.StringUtils;
+
+import java.util.Objects;
 
 @Builder(setterPrefix = "with")
 public class ConfirmUserHandler {
@@ -31,8 +31,8 @@ public class ConfirmUserHandler {
         userRepository.save(user);
 
         return RegisterUserResponse.builder()
-                                   .withMessage("Your account is active.")
-                                   .build();
+                .withMessage("Your account is active.")
+                .build();
     }
 
     private void validate() throws WildfitServiceException {

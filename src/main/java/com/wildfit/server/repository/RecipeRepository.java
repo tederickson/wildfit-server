@@ -1,13 +1,13 @@
 package com.wildfit.server.repository;
 
-import java.util.List;
-
 import com.wildfit.server.model.Recipe;
 import com.wildfit.server.model.Season;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
+
+import java.util.List;
 
 public interface RecipeRepository extends PagingAndSortingRepository<Recipe, Long>, CrudRepository<Recipe, Long> {
     List<Recipe> findAllBySeason(Season season, Pageable pageable);

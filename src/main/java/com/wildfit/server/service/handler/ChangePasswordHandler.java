@@ -1,12 +1,12 @@
 package com.wildfit.server.service.handler;
 
-import java.util.Objects;
-
 import com.wildfit.server.exception.WildfitServiceError;
 import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.repository.UserRepository;
 import lombok.Builder;
 import org.springframework.util.StringUtils;
+
+import java.util.Objects;
 
 @Builder(setterPrefix = "with")
 public class ChangePasswordHandler {
@@ -23,8 +23,8 @@ public class ChangePasswordHandler {
         final var encodedPassword = PasswordEncodeDecode.encode(password);
 
         final var user = userRepository.findByUuid(userId)
-                                       .orElseThrow(() -> new WildfitServiceException(
-                                               WildfitServiceError.USER_NOT_FOUND));
+                .orElseThrow(() -> new WildfitServiceException(
+                        WildfitServiceError.USER_NOT_FOUND));
 
         user.setPassword(encodedPassword);
         userRepository.save(user);

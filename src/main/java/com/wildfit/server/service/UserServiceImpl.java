@@ -38,69 +38,69 @@ public class UserServiceImpl implements UserService {
     @Override
     public CreateUserResponse createUser(String email, String password, String name) throws WildfitServiceException {
         return CreateUserHandler.builder()
-                                .withUserRepository(userRepository)
-                                .withUserProfileRepository(userProfileRepository)
-                                .withVerificationTokenRepository(verificationTokenRepository)
-                                .withEnvironment(environment)
-                                .withJavaMailSender(javaMailSender)
-                                .withEmail(email)
-                                .withPassword(password)
-                                .withName(name)
-                                .build().execute();
+                .withUserRepository(userRepository)
+                .withUserProfileRepository(userProfileRepository)
+                .withVerificationTokenRepository(verificationTokenRepository)
+                .withEnvironment(environment)
+                .withJavaMailSender(javaMailSender)
+                .withEmail(email)
+                .withPassword(password)
+                .withName(name)
+                .build().execute();
     }
 
     @Override
     public void deleteUser(String userId) throws WildfitServiceException {
         DeleteUserHandler.builder()
-                         .withUserRepository(userRepository)
-                         .withUserId(userId)
-                         .build().execute();
+                .withUserRepository(userRepository)
+                .withUserId(userId)
+                .build().execute();
     }
 
     @Override
     public void changePassword(String userId, String password) throws WildfitServiceException {
         ChangePasswordHandler.builder()
-                             .withUserRepository(userRepository)
-                             .withUserId(userId)
-                             .withPassword(password)
-                             .build().execute();
+                .withUserRepository(userRepository)
+                .withUserId(userId)
+                .withPassword(password)
+                .build().execute();
     }
 
     @Override
     public UserDigest login(String email, String password) throws WildfitServiceException {
         return LoginHandler.builder()
-                           .withUserRepository(userRepository)
-                           .withEmail(email)
-                           .withPassword(password)
-                           .build().execute();
+                .withUserRepository(userRepository)
+                .withEmail(email)
+                .withPassword(password)
+                .build().execute();
     }
 
     @Override
     public UserProfileDigest getUserProfile(String userId) throws WildfitServiceException {
         return GetUserProfileHandler.builder()
-                                    .withUserRepository(userRepository)
-                                    .withUserProfileRepository(userProfileRepository)
-                                    .withUserId(userId)
-                                    .build().execute();
+                .withUserRepository(userRepository)
+                .withUserProfileRepository(userProfileRepository)
+                .withUserId(userId)
+                .build().execute();
     }
 
     @Override
     public UserProfileDigest updateUserProfile(String userId, UpdateUserProfileRequest request)
             throws WildfitServiceException {
         return UpdateUserProfileHandler.builder()
-                                       .withUserRepository(userRepository)
-                                       .withUserProfileRepository(userProfileRepository)
-                                       .withUserId(userId)
-                                       .withUserProfileRequest(request)
-                                       .build().execute();
+                .withUserRepository(userRepository)
+                .withUserProfileRepository(userProfileRepository)
+                .withUserId(userId)
+                .withUserProfileRequest(request)
+                .build().execute();
     }
 
     @Override
     public RegisterUserResponse confirmUser(String confirmationCode) throws WildfitServiceException {
         return ConfirmUserHandler.builder()
-                                 .withUserRepository(userRepository)
-                                 .withVerificationTokenRepository(verificationTokenRepository)
-                                 .withConfirmationCode(confirmationCode)
-                                 .build().execute();
+                .withUserRepository(userRepository)
+                .withVerificationTokenRepository(verificationTokenRepository)
+                .withConfirmationCode(confirmationCode)
+                .build().execute();
     }
 }

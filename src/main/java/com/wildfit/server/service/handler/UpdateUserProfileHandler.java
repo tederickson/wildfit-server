@@ -1,7 +1,5 @@
 package com.wildfit.server.service.handler;
 
-import java.util.Objects;
-
 import com.wildfit.server.domain.UpdateUserProfileRequest;
 import com.wildfit.server.domain.UserProfileDigest;
 import com.wildfit.server.exception.WildfitServiceError;
@@ -14,6 +12,8 @@ import com.wildfit.server.repository.UserRepository;
 import lombok.Builder;
 import org.springframework.util.StringUtils;
 
+import java.util.Objects;
+
 @Builder(setterPrefix = "with")
 public class UpdateUserProfileHandler {
     final UserRepository userRepository;
@@ -25,10 +25,10 @@ public class UpdateUserProfileHandler {
         validate();
 
         final var user = userRepository.findByUuid(userId).orElseThrow(() ->
-                new WildfitServiceException(WildfitServiceError.USER_NOT_FOUND));
+                                                                               new WildfitServiceException(WildfitServiceError.USER_NOT_FOUND));
 
         final var userProfile = userProfileRepository.findByUser(user)
-                                                     .orElse(UserProfile.builder().withUser(user).build());
+                .orElse(UserProfile.builder().withUser(user).build());
 
         userProfile.setName(userProfileRequest.getName());
         userProfile.setAge(userProfileRequest.getAge());

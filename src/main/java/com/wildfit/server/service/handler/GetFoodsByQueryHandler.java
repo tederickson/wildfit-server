@@ -1,9 +1,5 @@
 package com.wildfit.server.service.handler;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Objects;
-
 import com.wildfit.server.domain.SearchFoodResponse;
 import com.wildfit.server.exception.WildfitServiceError;
 import com.wildfit.server.exception.WildfitServiceException;
@@ -16,6 +12,10 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Objects;
+
 @SuperBuilder(setterPrefix = "with")
 public class GetFoodsByQueryHandler extends AbstractNutritionixHandler<SearchFoodResponse> {
     private final String description;
@@ -26,17 +26,18 @@ public class GetFoodsByQueryHandler extends AbstractNutritionixHandler<SearchFoo
         final var entity = new HttpEntity<>(getHeaders());
 
         final var queryParameters = String.join("&",
-                "query=" + description,
-                // brand type to filter branded results by. 1=Restaurant, 2=Grocery
-                "branded_type=2",
-                // whether to include detailed nutrient fields like full_nutrients and serving_weight_grams
-                "detailed=true");
+                                                "query=" + description,
+                                                // brand type to filter branded results by. 1=Restaurant, 2=Grocery
+                                                "branded_type=2",
+                                                // whether to include detailed nutrient fields like full_nutrients
+                                                // and serving_weight_grams
+                                                "detailed=true");
 
         url = NUTRITIONIX_URL + "v2/search/instant?" + queryParameters;
 
 
         final var searchedFoodItems = restTemplate.exchange(url, HttpMethod.GET, entity, SearchedFoodItems.class)
-                                                  .getBody();
+                .getBody();
         Objects.requireNonNull(searchedFoodItems, "searchedFoodItems");
 
         // How do I filter out duplicate common foods from the /search/instant endpoint?

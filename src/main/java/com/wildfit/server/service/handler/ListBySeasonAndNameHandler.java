@@ -1,7 +1,5 @@
 package com.wildfit.server.service.handler;
 
-import java.util.Objects;
-
 import com.wildfit.server.domain.RecipeListDigest;
 import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.exception.WildfitServiceError;
@@ -12,6 +10,8 @@ import com.wildfit.server.repository.RecipeRepository;
 import lombok.Builder;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Pageable;
+
+import java.util.Objects;
 
 @Builder(setterPrefix = "with")
 public class ListBySeasonAndNameHandler {
@@ -24,7 +24,7 @@ public class ListBySeasonAndNameHandler {
         validate();
 
         final var results = recipeRepository.findAllBySeasonAndName(Season.map(season),
-                recipeName, pageable);
+                                                                    recipeName, pageable);
 
         return RecipeListMapper.map(results);
     }

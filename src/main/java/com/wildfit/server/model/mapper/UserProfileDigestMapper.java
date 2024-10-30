@@ -12,14 +12,14 @@ public final class UserProfileDigestMapper {
     public static UserProfileDigest map(User user, UserProfile userProfile) {
         final var userDigest = UserDigestMapper.map(user);
         final var builder = UserProfileDigest.builder()
-                                             .withUser(userDigest);
+                .withUser(userDigest);
 
         if (userProfile != null) {
             builder.withName(userProfile.getName())
-                   .withAge(userProfile.getAge())
-                   .withHeightFeet(userProfile.getHeight_feet())
-                   .withHeightInches(userProfile.getHeight_inches())
-                   .withWeight(userProfile.getWeight());
+                    .withAge(userProfile.getAge())
+                    .withHeightFeet(userProfile.getHeight_feet())
+                    .withHeightInches(userProfile.getHeight_inches())
+                    .withWeight(userProfile.getWeight());
 
             final var gender = Gender.findByCode(userProfile.getGender());
             if (gender != null) {

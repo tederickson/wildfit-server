@@ -1,8 +1,5 @@
 package com.wildfit.server.model;
 
-import java.time.LocalDate;
-import java.util.Objects;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,6 +12,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.time.LocalDate;
+import java.util.Objects;
 
 @Getter
 @Setter

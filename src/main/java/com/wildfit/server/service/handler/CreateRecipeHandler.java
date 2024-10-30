@@ -14,8 +14,8 @@ public class CreateRecipeHandler extends CommonRecipeHandler {
         validate();
 
         final var user = userRepository.findByUuid(userId)
-                                       .orElseThrow(() -> new WildfitServiceException(
-                                               WildfitServiceError.USER_NOT_FOUND));
+                .orElseThrow(() -> new WildfitServiceException(
+                        WildfitServiceError.USER_NOT_FOUND));
 
         final var recipe = RecipeMapper.create(request, user.getEmail());
         final var saved = recipeRepository.save(recipe);

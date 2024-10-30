@@ -1,7 +1,5 @@
 package com.wildfit.server.service.handler;
 
-import java.util.Objects;
-
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.exception.WildfitServiceError;
 import com.wildfit.server.exception.WildfitServiceException;
@@ -9,6 +7,8 @@ import com.wildfit.server.model.mapper.RecipeMapper;
 import com.wildfit.server.repository.RecipeRepository;
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.Objects;
 
 @Slf4j
 @Builder(setterPrefix = "with")

@@ -9,9 +9,9 @@ public final class CreateUserResponseMapper {
 
     public static CreateUserResponse map(User user) {
         return CreateUserResponse.builder()
-                                 .withId(user.getId())
-                                 .withEmail(user.getEmail())
-                                 .withUuid(user.getUuid())
-                                 .build();
+                .withId(user.getId())
+                .withEmail(user.getEmail())
+                .withUuid(user.getUuid())
+                .build();
     }
 }

@@ -31,69 +31,69 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public RecipeListDigest listBySeason(SeasonType season, Pageable pageable) throws WildfitServiceException {
         return ListBySeasonHandler.builder()
-                                  .withRecipeRepository(recipeRepository)
-                                  .withSeason(season)
-                                  .withPageable(pageable)
-                                  .build().execute();
+                .withRecipeRepository(recipeRepository)
+                .withSeason(season)
+                .withPageable(pageable)
+                .build().execute();
     }
 
     @Override
     public RecipeListDigest listBySeasonAndIngredient(SeasonType season, String ingredientName, Pageable pageable)
             throws WildfitServiceException {
         return ListBySeasonAndIngredientHandler.builder()
-                                               .withRecipeRepository(recipeRepository)
-                                               .withSeason(season)
-                                               .withIngredientName(ingredientName)
-                                               .withPageable(pageable)
-                                               .build().execute();
+                .withRecipeRepository(recipeRepository)
+                .withSeason(season)
+                .withIngredientName(ingredientName)
+                .withPageable(pageable)
+                .build().execute();
     }
 
     @Override
     public RecipeListDigest listBySeasonAndName(SeasonType season, String recipeName, Pageable pageable)
             throws WildfitServiceException {
         return ListBySeasonAndNameHandler.builder()
-                                         .withRecipeRepository(recipeRepository)
-                                         .withSeason(season)
-                                         .withRecipeName(recipeName)
-                                         .withPageable(pageable)
-                                         .build().execute();
+                .withRecipeRepository(recipeRepository)
+                .withSeason(season)
+                .withRecipeName(recipeName)
+                .withPageable(pageable)
+                .build().execute();
     }
 
     @Override
     public RecipeDigest retrieveRecipe(Long recipeId) throws WildfitServiceException {
         return GetRecipeHandler.builder()
-                               .withRecipeRepository(recipeRepository)
-                               .withRecipeId(recipeId)
-                               .build().execute();
+                .withRecipeRepository(recipeRepository)
+                .withRecipeId(recipeId)
+                .build().execute();
     }
 
     @Override
     public void deleteRecipe(Long recipeId, String userId) throws WildfitServiceException {
         DeleteRecipeHandler.builder()
-                           .withUserRepository(userRepository)
-                           .withRecipeRepository(recipeRepository)
-                           .withUserId(userId)
-                           .withRecipeId(recipeId)
-                           .build().execute();
+                .withUserRepository(userRepository)
+                .withRecipeRepository(recipeRepository)
+                .withUserId(userId)
+                .withRecipeId(recipeId)
+                .build().execute();
     }
 
     @Override
     public RecipeDigest createRecipe(String userId, RecipeDigest request) throws WildfitServiceException {
         return CreateRecipeHandler.builder()
-                                  .withUserRepository(userRepository)
-                                  .withRecipeRepository(recipeRepository)
-                                  .withUserId(userId)
-                                  .withRequest(request)
-                                  .build().execute();
+                .withUserRepository(userRepository)
+                .withRecipeRepository(recipeRepository)
+                .withUserId(userId)
+                .withRequest(request)
+                .build().execute();
     }
 
     @Override
     public RecipeDigest updateRecipe(String userId, RecipeDigest request) throws WildfitServiceException {
         return UpdateRecipeHandler.builder()
-                                  .withUserRepository(userRepository)
-                                  .withRecipeRepository(recipeRepository)
-                                  .withUserId(userId)
-                                  .withRequest(request)
-                                  .build().execute();
+                .withUserRepository(userRepository)
+                .withRecipeRepository(recipeRepository)
+                .withUserId(userId)
+                .withRequest(request)
+                .build().execute();
     }
 }

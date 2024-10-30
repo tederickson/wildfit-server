@@ -1,8 +1,5 @@
 package com.wildfit.server.service.handler;
 
-import java.util.List;
-import java.util.Objects;
-
 import com.wildfit.server.domain.FoodItemDigest;
 import com.wildfit.server.domain.ParseRecipeRequest;
 import com.wildfit.server.domain.RecipeDigest;
@@ -17,6 +14,9 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+import java.util.Objects;
+
 @Slf4j
 @SuperBuilder(setterPrefix = "with")
 public class GetRecipeNutritionHandler extends AbstractNutritionixHandler<FoodItemDigest> {
@@ -29,15 +29,15 @@ public class GetRecipeNutritionHandler extends AbstractNutritionixHandler<FoodIt
         parseRecipeRequest.setNum_servings(recipeDigest.getServingQty());
 
         recipeDigest.getRecipeGroups().stream()
-                    .map(RecipeGroupDigest::getIngredients)
-                    .flatMap(List::stream)
-                    .forEach((ingredient) -> parseRecipeRequest.addIngredient(
-                            ingredient.getIngredientServingQty(),
-                            ingredient.getIngredientServingUnit(),
-                            ingredient.getFoodName()));
+                .map(RecipeGroupDigest::getIngredients)
+                .flatMap(List::stream)
+                .forEach((ingredient) -> parseRecipeRequest.addIngredient(
+                        ingredient.getIngredientServingQty(),
+                        ingredient.getIngredientServingUnit(),
+                        ingredient.getFoodName()));
 
         log.info("{}, {} servings\n{}", recipeDigest.getName(), parseRecipeRequest.getNum_servings(),
-                parseRecipeRequest.getQuery());
+                 parseRecipeRequest.getQuery());
 
         final var restTemplate = new RestTemplate();
         final var entity = new HttpEntity<>(parseRecipeRequest, getHeaders());

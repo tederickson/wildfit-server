@@ -1,13 +1,13 @@
 package com.wildfit.server.service.handler;
 
-import java.util.Objects;
-
 import com.wildfit.server.exception.WildfitServiceError;
 import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.Recipe;
 import com.wildfit.server.repository.RecipeRepository;
 import com.wildfit.server.repository.UserRepository;
 import lombok.experimental.SuperBuilder;
+
+import java.util.Objects;
 
 @SuperBuilder(setterPrefix = "with")
 public class CommonRecipeHandler {
@@ -18,12 +18,12 @@ public class CommonRecipeHandler {
 
     protected Recipe getAuthorizedRecipe(Long recipeId) throws WildfitServiceException {
         final var user = userRepository.findByUuid(userId)
-                                       .orElseThrow(() -> new WildfitServiceException(
-                                               WildfitServiceError.USER_NOT_FOUND));
+                .orElseThrow(() -> new WildfitServiceException(
+                        WildfitServiceError.USER_NOT_FOUND));
         final var dbRecipe = recipeRepository.findById(recipeId)
-                                             .orElseThrow(
-                                                     () -> new WildfitServiceException(
-                                                             WildfitServiceError.RECIPE_NOT_FOUND));
+                .orElseThrow(
+                        () -> new WildfitServiceException(
+                                WildfitServiceError.RECIPE_NOT_FOUND));
 
         if (!dbRecipe.getEmail().equals(user.getEmail())) {
             throw new WildfitServiceException(WildfitServiceError.NOT_AUTHORIZED);

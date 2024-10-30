@@ -1,9 +1,5 @@
 package com.wildfit.server.service.handler;
 
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
-
 import com.wildfit.server.domain.ShoppingListDigest;
 import com.wildfit.server.exception.WildfitServiceError;
 import com.wildfit.server.exception.WildfitServiceException;
@@ -11,6 +7,10 @@ import com.wildfit.server.model.ShoppingList;
 import com.wildfit.server.model.ShoppingListItem;
 import com.wildfit.server.repository.ShoppingListRepository;
 import lombok.Builder;
+
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Builder(setterPrefix = "with")
 public class UpdateShoppingListHandler {
@@ -21,12 +21,12 @@ public class UpdateShoppingListHandler {
         validate();
 
         final ShoppingList shoppingList = shoppingListRepository.findByUuid(request.getUuid())
-                                                                .orElseThrow(() -> new WildfitServiceException(
-                                                                        WildfitServiceError.SHOPPING_LIST_NOT_FOUND));
+                .orElseThrow(() -> new WildfitServiceException(
+                        WildfitServiceError.SHOPPING_LIST_NOT_FOUND));
 
         final Map<Long, ShoppingListItem> itemMap = shoppingList.getShoppingListItems().stream()
-                                                                .collect(Collectors.toMap(ShoppingListItem::getId,
-                                                                        shoppingListItem -> shoppingListItem));
+                .collect(Collectors.toMap(ShoppingListItem::getId,
+                                          shoppingListItem -> shoppingListItem));
 
         for (var item : request.getItems()) {
             ShoppingListItem shoppingListItem = itemMap.get(item.getId());

@@ -1,12 +1,5 @@
 package com.wildfit.server.service.handler;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
-import java.util.Objects;
-
 import com.wildfit.server.exception.WildfitServiceError;
 import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.CommonRecipeType;
@@ -22,6 +15,13 @@ import com.wildfit.server.repository.ShoppingListRepository;
 import com.wildfit.server.repository.UserRepository;
 import lombok.Builder;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
+import java.util.Objects;
+
 @Builder(setterPrefix = "with")
 public class CreateShoppingListHandler {
     private final UserRepository userRepository;
@@ -36,7 +36,7 @@ public class CreateShoppingListHandler {
         validate();
 
         userRepository.findByUuid(userId)
-                      .orElseThrow(() -> new WildfitServiceException(WildfitServiceError.USER_NOT_FOUND));
+                .orElseThrow(() -> new WildfitServiceException(WildfitServiceError.USER_NOT_FOUND));
 
         final var meal = mealRepository.findById(mealId).orElseThrow(
                 () -> new WildfitServiceException(WildfitServiceError.MEAL_NOT_FOUND));
@@ -50,10 +50,10 @@ public class CreateShoppingListHandler {
         for (var recipeId : meal.getRecipes().stream().map(MealSummary::getRecipeId).toList()) {
             for (var recipeGroup : getRecipe(recipeId).getRecipeGroups()) {
                 var shoppingListItems = recipeGroup.getCommonRecipes().stream()
-                                                   .filter(x -> CommonRecipeType.INGREDIENT.equals(x.getType()))
-                                                   .map(x -> (Ingredient) x)
-                                                   .map(ShoppingListItemMapper::map)
-                                                   .toList();
+                        .filter(x -> CommonRecipeType.INGREDIENT.equals(x.getType()))
+                        .map(x -> (Ingredient) x)
+                        .map(ShoppingListItemMapper::map)
+                        .toList();
 
                 for (var item : shoppingListItems) {
                     final var key = item.getFoodName();
@@ -99,7 +99,7 @@ public class CreateShoppingListHandler {
 
     private Recipe getRecipe(Long recipeId) throws WildfitServiceException {
         return recipeRepository.findById(recipeId)
-                               .orElseThrow(() -> new WildfitServiceException(WildfitServiceError.RECIPE_NOT_FOUND));
+                .orElseThrow(() -> new WildfitServiceException(WildfitServiceError.RECIPE_NOT_FOUND));
 
     }
 

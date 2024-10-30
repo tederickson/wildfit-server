@@ -1,11 +1,11 @@
 package com.wildfit.server.service.handler;
 
-import java.util.Objects;
-
 import com.wildfit.server.exception.WildfitServiceError;
 import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.repository.UserRepository;
 import lombok.Builder;
+
+import java.util.Objects;
 
 @Builder(setterPrefix = "with")
 public class DeleteUserHandler {
@@ -17,8 +17,8 @@ public class DeleteUserHandler {
         validate();
 
         final var user = userRepository.findByUuid(userId)
-                                       .orElseThrow(() -> new WildfitServiceException(
-                                               WildfitServiceError.USER_NOT_FOUND));
+                .orElseThrow(() -> new WildfitServiceException(
+                        WildfitServiceError.USER_NOT_FOUND));
 
         userRepository.delete(user);
     }

@@ -1,5 +1,9 @@
 package com.wildfit.server.model.mapper;
 
+import com.wildfit.server.domain.RecipeDigest;
+import com.wildfit.server.exception.WildfitServiceException;
+import com.wildfit.server.model.Season;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,29 +11,25 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import com.wildfit.server.domain.RecipeDigest;
-import com.wildfit.server.exception.WildfitServiceException;
-import com.wildfit.server.model.Season;
-
 public final class RecipeMapper {
     private RecipeMapper() {
     }
 
     public static RecipeDigest map(com.wildfit.server.model.Recipe recipe) {
         final var builder = RecipeDigest.builder()
-                                        .withId(recipe.getId())
-                                        .withIntroduction(recipe.getIntroduction())
-                                        .withName(recipe.getName())
-                                        .withSeason(recipe.getSeason().toSeasonType())
-                                        .withPrepTimeMin(recipe.getPrepTimeMin())
-                                        .withCookTimeMin(recipe.getCookTimeMin())
-                                        .withServingUnit(recipe.getServingUnit())
-                                        .withServingQty(recipe.getServingQty())
-                                        .withThumbnail(recipe.getThumbnail());
+                .withId(recipe.getId())
+                .withIntroduction(recipe.getIntroduction())
+                .withName(recipe.getName())
+                .withSeason(recipe.getSeason().toSeasonType())
+                .withPrepTimeMin(recipe.getPrepTimeMin())
+                .withCookTimeMin(recipe.getCookTimeMin())
+                .withServingUnit(recipe.getServingUnit())
+                .withServingQty(recipe.getServingQty())
+                .withThumbnail(recipe.getThumbnail());
 
         if (recipe.getRecipeGroups() != null) {
             builder.withRecipeGroups(recipe.getRecipeGroups().stream().map(RecipeGroupMapper::map)
-                                           .collect(Collectors.toList()));
+                                             .collect(Collectors.toList()));
         }
         return builder.build();
     }
@@ -67,14 +67,14 @@ public final class RecipeMapper {
 
         // Never change the email address
         recipe.setIntroduction(request.getIntroduction())
-              .setName(request.getName())
-              .setSeason(season)
-              .setPrepTimeMin(request.getPrepTimeMin())
-              .setCookTimeMin(request.getCookTimeMin())
-              .setServingUnit(request.getServingUnit())
-              .setServingQty(request.getServingQty())
-              .setUpdated(LocalDateTime.now())
-              .setThumbnail(recipe.getThumbnail());
+                .setName(request.getName())
+                .setSeason(season)
+                .setPrepTimeMin(request.getPrepTimeMin())
+                .setCookTimeMin(request.getCookTimeMin())
+                .setServingUnit(request.getServingUnit())
+                .setServingQty(request.getServingQty())
+                .setUpdated(LocalDateTime.now())
+                .setThumbnail(recipe.getThumbnail());
 
         Map<Long, com.wildfit.server.model.RecipeGroup> recipeGroup1Map = new HashMap<>();
         if (recipe.getRecipeGroups() != null) {
@@ -89,7 +89,8 @@ public final class RecipeMapper {
 
                 if (id == null) {
                     recipe.add(RecipeGroupMapper.create(instructionGroup));
-                } else {
+                }
+                else {
                     final var existing = recipeGroup1Map.get(id);
                     Objects.requireNonNull(existing, "recipe group with id " + id);
 

@@ -16,10 +16,10 @@ public class InstructionMapper {
 
     public static InstructionDigest createInstruction(com.wildfit.server.model.Instruction instruction) {
         return InstructionDigest.builder()
-                                .withId(instruction.getId())
-                                .withStepNumber(instruction.getStepNumber())
-                                .withInstruction(instruction.getText())
-                                .build();
+                .withId(instruction.getId())
+                .withStepNumber(instruction.getStepNumber())
+                .withInstruction(instruction.getText())
+                .build();
     }
 
     public static CommonRecipe updateInstruction(com.wildfit.server.model.Instruction existingInstruction,
