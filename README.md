@@ -47,7 +47,7 @@ query string parameters.
 
 run `mvn clean test -Dspring.profiles.active=dev` to run all JUnit tests.
 
-The current test environment utilizes SpringBootTest, JsonTest and Mockito to achieve a 93% test coverage.
+The current test environment utilizes SpringBootTest, JsonTest and Mockito to achieve a 97% test coverage.
 
 The JaCoCo reports are available at [wildfit-server](http://localhost:63342/wildfit-server/server/target/site/jacoco/index.html#up-c).
 
