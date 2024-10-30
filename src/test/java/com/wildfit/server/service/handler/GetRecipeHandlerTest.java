@@ -35,6 +35,13 @@ class GetRecipeHandlerTest extends CommonRecipeHandlerTest {
     }
 
     @Test
+    void invalidRecipeId() {
+        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
+                                           () -> recipeService.retrieveRecipe(-7L));
+        assertEquals(WildfitServiceError.RECIPE_NOT_FOUND, exception.getError());
+    }
+
+    @Test
     void execute() throws WildfitServiceException {
         final var recipeGroupDigest = RecipeGroupDigest.builder()
                 .withInstructionGroupNumber(1)
