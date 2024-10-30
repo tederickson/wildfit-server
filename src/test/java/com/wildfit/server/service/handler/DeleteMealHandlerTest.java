@@ -23,22 +23,14 @@ class DeleteMealHandlerTest extends CommonMealHandlerTest {
                 .setEndDate(LocalDate.now());
         final var entity = mealRepository.save(meal);
 
-        DeleteMealHandler.builder()
-                .withMealRepository(mealRepository)
-                .withMealId(entity.getId())
-                .withUserId(userId)
-                .build().execute();
+        mealService.deleteMeal(entity.getId(), userId);
 
         assertTrue(mealRepository.findById(entity.getId()).isEmpty());
     }
 
     @Test
     void execute_noMatchingRows() throws WildfitServiceException {
-        DeleteMealHandler.builder()
-                .withMealRepository(mealRepository)
-                .withMealId(-1L)
-                .withUserId(userId)
-                .build().execute();
+        mealService.deleteMeal(-1L, userId);
     }
 
     @Test
@@ -50,31 +42,21 @@ class DeleteMealHandlerTest extends CommonMealHandlerTest {
     @Test
     void missingUserId() {
         final var exception = assertThrows(WildfitServiceException.class,
-                                           () -> DeleteMealHandler.builder()
-                                                   .withMealRepository(mealRepository)
-                                                   .withMealId(-1L)
-                                                   .build().execute());
+                                           () -> mealService.deleteMeal(-1L, null));
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
 
     @Test
     void blankUserId() {
         final var exception = assertThrows(WildfitServiceException.class,
-                                           () -> DeleteMealHandler.builder()
-                                                   .withMealRepository(mealRepository)
-                                                   .withMealId(-1L)
-                                                   .withUserId("  ")
-                                                   .build().execute());
+                                           () -> mealService.deleteMeal(-1L, "  "));
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
 
     @Test
     void missingMealId() {
         final var exception = assertThrows(WildfitServiceException.class,
-                                           () -> DeleteMealHandler.builder()
-                                                   .withMealRepository(mealRepository)
-                                                   .withUserId(userId)
-                                                   .build().execute());
+                                           () -> mealService.deleteMeal(null, userId));
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
 }
