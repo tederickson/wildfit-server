@@ -39,12 +39,7 @@ class RetrieveMealHandlerTest extends CommonMealHandlerTest {
 
         createMeal(request);
 
-        final var response = RetrieveMealHandler.builder()
-                .withMealRepository(mealRepository)
-                .withRecipeRepository(recipeRepository)
-                .withUserId(testUserId)
-                .withMealId(mealDigest.getId())
-                .build().execute();
+        final var response = mealService.retrieveMeal(mealDigest.getId(), testUserId);
         assertNotNull(response);
         assertNotNull(response.getId());
         assertNotNull(response.getStartDate());
@@ -73,12 +68,8 @@ class RetrieveMealHandlerTest extends CommonMealHandlerTest {
 
         recipeRepository.deleteById(recipeDigests.get(1).getId());
 
-        final var response = RetrieveMealHandler.builder()
-                .withMealRepository(mealRepository)
-                .withRecipeRepository(recipeRepository)
-                .withUserId(testUserId)
-                .withMealId(mealDigest.getId())
-                .build().execute();
+        final var response = mealService.retrieveMeal(mealDigest.getId(), testUserId);
+
         assertNotNull(response);
         assertNotNull(response.getId());
         assertNotNull(response.getStartDate());
@@ -101,34 +92,22 @@ class RetrieveMealHandlerTest extends CommonMealHandlerTest {
     @Test
     void missingUserId() {
         final var exception = assertThrows(WildfitServiceException.class,
-                                           () -> RetrieveMealHandler.builder()
-                                                   .withMealRepository(mealRepository)
-                                                   .withRecipeRepository(recipeRepository)
-                                                   .withMealId(-1L)
-                                                   .build().execute());
+                                           () -> mealService.retrieveMeal(-1L, null));
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
 
     @Test
     void blankUserId() {
         final var exception = assertThrows(WildfitServiceException.class,
-                                           () -> RetrieveMealHandler.builder()
-                                                   .withMealRepository(mealRepository)
-                                                   .withRecipeRepository(recipeRepository)
-                                                   .withMealId(-1L)
-                                                   .withUserId("  ")
-                                                   .build().execute());
+                                           () -> mealService.retrieveMeal(-1L, "  "));
+
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
 
     @Test
     void missingMealId() {
         final var exception = assertThrows(WildfitServiceException.class,
-                                           () -> RetrieveMealHandler.builder()
-                                                   .withMealRepository(mealRepository)
-                                                   .withRecipeRepository(recipeRepository)
-                                                   .withUserId(userId)
-                                                   .build().execute());
+                                           () -> mealService.retrieveMeal(null, userId));
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
 }

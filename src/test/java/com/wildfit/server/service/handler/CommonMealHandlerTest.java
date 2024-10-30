@@ -4,6 +4,7 @@ import com.wildfit.server.domain.CreateMealRequest;
 import com.wildfit.server.domain.MealDigest;
 import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.repository.MealRepository;
+import com.wildfit.server.service.MealService;
 import org.junit.jupiter.api.AfterEach;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,6 +13,8 @@ public class CommonMealHandlerTest extends CommonRecipeHandlerTest {
 
     @Autowired
     protected MealRepository mealRepository;
+    @Autowired
+    protected MealService mealService;
 
     @AfterEach
     void tearDown() {
@@ -25,10 +28,6 @@ public class CommonMealHandlerTest extends CommonRecipeHandlerTest {
     }
 
     protected void createMeal(final CreateMealRequest request) throws WildfitServiceException {
-        mealDigest = CreateMealHandler.builder()
-                .withMealRepository(mealRepository)
-                .withRecipeRepository(recipeRepository)
-                .withRequest(request)
-                .build().execute();
+        mealDigest = mealService.createMeal(request);
     }
 }
