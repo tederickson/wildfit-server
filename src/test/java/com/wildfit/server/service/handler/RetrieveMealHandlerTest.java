@@ -110,4 +110,11 @@ class RetrieveMealHandlerTest extends CommonMealHandlerTest {
                                            () -> mealService.retrieveMeal(null, userId));
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
+
+    @Test
+    void mealNotFound() {
+        final var exception = assertThrows(WildfitServiceException.class,
+                                           () -> mealService.retrieveMeal(-1L, userId));
+        assertEquals(WildfitServiceError.MEAL_NOT_FOUND, exception.getError());
+    }
 }
