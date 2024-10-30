@@ -26,20 +26,14 @@ class DeleteUserHandlerTest extends CommonHandlerTest {
     @Test
     void missingId() {
         final var exception = assertThrows(WildfitServiceException.class,
-                                           () -> DeleteUserHandler.builder()
-                                                   .withUserRepository(userRepository)
-                                                   .withUserId(null)
-                                                   .build().execute());
+                                           () -> userService.deleteUser(null));
         assertEquals(WildfitServiceError.USER_NOT_FOUND, exception.getError());
     }
 
     @Test
     void userNotFound() {
         final var exception = assertThrows(WildfitServiceException.class,
-                                           () -> DeleteUserHandler.builder()
-                                                   .withUserRepository(userRepository)
-                                                   .withUserId("-14L")
-                                                   .build().execute());
+                                           () -> userService.deleteUser("-14L"));
         assertEquals(WildfitServiceError.USER_NOT_FOUND, exception.getError());
     }
 
@@ -55,10 +49,7 @@ class DeleteUserHandlerTest extends CommonHandlerTest {
         final var saved = userRepository.save(user);
         assertNotNull(saved);
 
-        DeleteUserHandler.builder()
-                .withUserRepository(userRepository)
-                .withUserId(saved.getUuid())
-                .build().execute();
+        userService.deleteUser(saved.getUuid());
 
         final var users = userRepository.findByEmail(EMAIL);
         assertTrue(users.isEmpty());
