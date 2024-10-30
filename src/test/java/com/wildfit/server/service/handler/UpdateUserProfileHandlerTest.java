@@ -32,35 +32,21 @@ class UpdateUserProfileHandlerTest extends CommonHandlerTest {
     @Test
     void missingId() {
         assertThrows(NullPointerException.class,
-                     () -> UpdateUserProfileHandler.builder()
-                             .withUserRepository(userRepository)
-                             .withUserProfileRepository(userProfileRepository)
-                             .withUserId(null)
-                             .withUserProfileRequest(UpdateUserProfileRequest.builder().build())
-                             .build().execute());
+                     () -> userService.updateUserProfile(null, UpdateUserProfileRequest.builder().build()));
     }
 
     @Test
     void missingUserProfileRequest() {
         assertThrows(NullPointerException.class,
-                     () -> UpdateUserProfileHandler.builder()
-                             .withUserRepository(userRepository)
-                             .withUserProfileRepository(userProfileRepository)
-                             .withUserId("123L")
-                             .withUserProfileRequest(null)
-                             .build().execute());
+                     () -> userService.updateUserProfile("123L", null));
     }
 
     @Test
     void userNotFound() {
         final var exception = assertThrows(WildfitServiceException.class,
-                                           () -> UpdateUserProfileHandler.builder()
-                                                   .withUserRepository(userRepository)
-                                                   .withUserProfileRepository(userProfileRepository)
-                                                   .withUserId("-14L")
-                                                   .withUserProfileRequest(
-                                                           UpdateUserProfileRequest.builder().withName(NAME).build())
-                                                   .build().execute());
+                                           () -> userService.updateUserProfile("-14L",
+                                                                               UpdateUserProfileRequest.builder()
+                                                                                       .withName(NAME).build()));
         assertEquals(WildfitServiceError.USER_NOT_FOUND, exception.getError());
     }
 
@@ -87,12 +73,7 @@ class UpdateUserProfileHandlerTest extends CommonHandlerTest {
                 .withHeightInches(7)
                 .build();
 
-        final var digest = UpdateUserProfileHandler.builder()
-                .withUserRepository(userRepository)
-                .withUserProfileRepository(userProfileRepository)
-                .withUserId(saved.getUser().getUuid())
-                .withUserProfileRequest(updateUserProfileRequest)
-                .build().execute();
+        final var digest = userService.updateUserProfile(saved.getUser().getUuid(), updateUserProfileRequest);
 
         assertEquals(EMAIL, digest.getUser().getEmail());
         assertEquals("Fluffy Bunny", digest.getName());
