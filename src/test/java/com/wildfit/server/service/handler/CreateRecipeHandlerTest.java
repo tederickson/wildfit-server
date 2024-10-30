@@ -19,9 +19,11 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 @SpringBootTest
 class CreateRecipeHandlerTest extends CommonRecipeHandlerTest {
+    private static final String RECIPE_HANDLER_NAME = "CreateRecipeHandlerTest";
 
     private static void validateTunaSalad(com.wildfit.server.domain.RecipeDigest digest) {
         assertNotNull(digest);
+
 
         assertEquals("Tuna salad", digest.getName());
         assertEquals(com.wildfit.server.domain.SeasonType.SPRING, digest.getSeason());
@@ -53,14 +55,13 @@ class CreateRecipeHandlerTest extends CommonRecipeHandlerTest {
     @Test
     void execute() throws Exception {
         final var season = SeasonType.SPRING;
-        final var name = "CreateRecipeHandlerTest";
 
         final var instructionGroup = RecipeGroupDigest.builder()
                 .withInstructionGroupNumber(1)
                 .withInstructions(List.of(step1, step2, step3, step4))
                 .build();
         final var recipe = RecipeDigest.builder()
-                .withName(name)
+                .withName(RECIPE_HANDLER_NAME)
                 .withSeason(season)
                 .withIntroduction(INTRODUCTION)
                 .withPrepTimeMin(5)
@@ -75,7 +76,7 @@ class CreateRecipeHandlerTest extends CommonRecipeHandlerTest {
 
         final var dbRecipeId = testRecipe.getId();
         final var dbRecipe = recipeRepository.findById(dbRecipeId).orElseThrow();
-        assertEquals(name, dbRecipe.getName());
+        assertEquals(RECIPE_HANDLER_NAME, dbRecipe.getName());
         assertEquals(Season.SPRING, dbRecipe.getSeason());
     }
 
@@ -98,10 +99,8 @@ class CreateRecipeHandlerTest extends CommonRecipeHandlerTest {
 
     @Test
     void requestSeasonIsMissing() {
-        final var name = "CreateRecipeHandlerTest";
-
         final var recipe = RecipeDigest.builder()
-                .withName(name)
+                .withName(RECIPE_HANDLER_NAME)
                 .withIntroduction(INTRODUCTION)
                 .withPrepTimeMin(5)
                 .withCookTimeMin(15)
@@ -112,5 +111,21 @@ class CreateRecipeHandlerTest extends CommonRecipeHandlerTest {
         final var exception = assertThrows(WildfitServiceException.class,
                                            () -> createRecipe(recipe));
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
+    }
+
+    @Test
+    void invalidUserId() {
+        final var recipe = RecipeDigest.builder()
+                .withName(RECIPE_HANDLER_NAME)
+                .withSeason(SeasonType.SPRING)
+                .withIntroduction(INTRODUCTION)
+                .withPrepTimeMin(5)
+                .withCookTimeMin(15)
+                .withServingQty(4)
+                .withServingUnit("serving")
+                .build();
+        final var exception = assertThrows(WildfitServiceException.class,
+                                           () -> recipeService.createRecipe("1nv4Lid", recipe));
+        assertEquals(WildfitServiceError.USER_NOT_FOUND, exception.getError());
     }
 }
