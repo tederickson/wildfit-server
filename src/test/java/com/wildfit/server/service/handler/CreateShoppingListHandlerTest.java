@@ -140,4 +140,16 @@ class CreateShoppingListHandlerTest extends CommonMealHandlerTest {
 
         assertEquals(WildfitServiceError.MEAL_NOT_FOUND, exception.getError());
     }
+
+    @Test
+    void missingMealId() {
+        CreateShoppingListRequest createShoppingListRequest = CreateShoppingListRequest.builder()
+                .withUuid(userId)
+                .build();
+
+        final var exception = assertThrows(WildfitServiceException.class,
+                                           () -> shoppingListService.createShoppingList(createShoppingListRequest));
+
+        assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
+    }
 }
