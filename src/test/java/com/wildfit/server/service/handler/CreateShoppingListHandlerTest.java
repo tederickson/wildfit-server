@@ -56,15 +56,15 @@ class CreateShoppingListHandlerTest extends CommonMealHandlerTest {
 
         final var recipeIds = recipeDigests.stream().map(RecipeDigest::getId).collect(Collectors.toList());
         final var request = CreateMealRequest.builder()
-                                             .withUuid(userId)
-                                             .withRecipeIds(recipeIds).build();
+                .withUuid(userId)
+                .withRecipeIds(recipeIds).build();
 
         createMeal(request);
 
         assertNotNull(mealDigest.getId());
         assertEquals(userId, mealDigest.getUuid());
 
-        CreateShoppingListRequest createShoppingListRequest =  CreateShoppingListRequest.builder()
+        CreateShoppingListRequest createShoppingListRequest = CreateShoppingListRequest.builder()
                 .withUuid(userId)
                 .withMealId(mealDigest.getId())
                 .build();
@@ -78,11 +78,11 @@ class CreateShoppingListHandlerTest extends CommonMealHandlerTest {
         itemListMap.forEach((k, v) -> assertEquals(1, v.size(), k));
 
         final var foodNames = recipeDigests.stream().map(RecipeDigest::getRecipeGroups)
-                                           .flatMap(List::stream)
-                                           .map(RecipeGroupDigest::getIngredients)
-                                           .flatMap(List::stream)
-                                           .map(IngredientDigest::getFoodName)
-                                           .collect(Collectors.toSet());
+                .flatMap(List::stream)
+                .map(RecipeGroupDigest::getIngredients)
+                .flatMap(List::stream)
+                .map(IngredientDigest::getFoodName)
+                .collect(Collectors.toSet());
 
         assertThat(foodNames, containsInAnyOrder(itemListMap.keySet().toArray()));
     }
@@ -90,18 +90,18 @@ class CreateShoppingListHandlerTest extends CommonMealHandlerTest {
     @Test
     void nullParameters() {
         assertThrows(NullPointerException.class,
-                () -> CreateShoppingListHandler.builder().build().execute());
+                     () -> CreateShoppingListHandler.builder().build().execute());
     }
 
     @Test
     void missingRequest() {
         final var exception = assertThrows(WildfitServiceException.class,
-                () -> CreateShoppingListHandler.builder()
-                                               .withUserRepository(userRepository)
-                                               .withRecipeRepository(recipeRepository)
-                                               .withMealRepository(mealRepository)
-                                               .withShoppingListRepository(shoppingListRepository)
-                                               .build().execute());
+                                           () -> CreateShoppingListHandler.builder()
+                                                   .withUserRepository(userRepository)
+                                                   .withRecipeRepository(recipeRepository)
+                                                   .withMealRepository(mealRepository)
+                                                   .withShoppingListRepository(shoppingListRepository)
+                                                   .build().execute());
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
 

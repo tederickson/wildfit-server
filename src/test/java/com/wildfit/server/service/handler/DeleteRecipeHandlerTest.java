@@ -8,9 +8,7 @@ import com.wildfit.server.exception.WildfitServiceError;
 import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.User;
 import com.wildfit.server.model.UserStatus;
-import com.wildfit.server.service.RecipeService;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
@@ -45,35 +43,32 @@ class DeleteRecipeHandlerTest extends CommonRecipeHandlerTest {
             .withRecipeGroups(List.of(recipeGroupDigest))
             .build();
 
-    @Autowired
-    private RecipeService recipeService;
-
     @Test
     void nullParameters() {
         assertThrows(NullPointerException.class,
-                () -> DeleteRecipeHandler.builder().build().execute());
+                     () -> DeleteRecipeHandler.builder().build().execute());
     }
 
     @Test
     void missingId() {
         final var exception = assertThrows(WildfitServiceException.class,
-                () -> DeleteRecipeHandler.builder()
-                                         .withUserRepository(userRepository)
-                                         .withRecipeRepository(recipeRepository)
-                                         .withRecipeId(-1L)
-                                         .build().execute());
+                                           () -> DeleteRecipeHandler.builder()
+                                                   .withUserRepository(userRepository)
+                                                   .withRecipeRepository(recipeRepository)
+                                                   .withRecipeId(-1L)
+                                                   .build().execute());
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
 
     @Test
     void userNotFound() {
         final var exception = assertThrows(WildfitServiceException.class,
-                () -> DeleteRecipeHandler.builder()
-                                         .withUserRepository(userRepository)
-                                         .withRecipeRepository(recipeRepository)
-                                         .withUserId("-14L")
-                                         .withRecipeId(-1L)
-                                         .build().execute());
+                                           () -> DeleteRecipeHandler.builder()
+                                                   .withUserRepository(userRepository)
+                                                   .withRecipeRepository(recipeRepository)
+                                                   .withUserId("-14L")
+                                                   .withRecipeId(-1L)
+                                                   .build().execute());
         assertEquals(WildfitServiceError.USER_NOT_FOUND, exception.getError());
     }
 
@@ -85,20 +80,20 @@ class DeleteRecipeHandlerTest extends CommonRecipeHandlerTest {
         assertNotSame(EMAIL, bobEmail);
 
         final var user = User.builder()
-                             .withStatus(UserStatus.FREE.getCode())
-                             .withCreateDate(LocalDate.now())
-                             .withPassword("encoded password")
-                             .withUuid(UUID.randomUUID().toString())
-                             .withEmail(bobEmail).build();
+                .withStatus(UserStatus.FREE.getCode())
+                .withCreateDate(LocalDate.now())
+                .withPassword("encoded password")
+                .withUuid(UUID.randomUUID().toString())
+                .withEmail(bobEmail).build();
         final var dbUser = userRepository.save(user);
 
         final var exception = assertThrows(WildfitServiceException.class,
-                () -> DeleteRecipeHandler.builder()
-                                         .withUserRepository(userRepository)
-                                         .withRecipeRepository(recipeRepository)
-                                         .withUserId(dbUser.getUuid())
-                                         .withRecipeId(testRecipe.getId())
-                                         .build().execute());
+                                           () -> DeleteRecipeHandler.builder()
+                                                   .withUserRepository(userRepository)
+                                                   .withRecipeRepository(recipeRepository)
+                                                   .withUserId(dbUser.getUuid())
+                                                   .withRecipeId(testRecipe.getId())
+                                                   .build().execute());
         assertEquals(WildfitServiceError.NOT_AUTHORIZED, exception.getError());
 
         userRepository.delete(dbUser);

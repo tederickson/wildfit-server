@@ -26,9 +26,9 @@ public class CommonMealHandlerTest extends CommonRecipeHandlerTest {
 
     protected void createMeal(final CreateMealRequest request) throws WildfitServiceException {
         mealDigest = CreateMealHandler.builder()
-                                      .withMealRepository(mealRepository)
-                                      .withRecipeRepository(recipeRepository)
-                                      .withRequest(request)
-                                      .build().execute();
+                .withMealRepository(mealRepository)
+                .withRecipeRepository(recipeRepository)
+                .withRequest(request)
+                .build().execute();
     }
 }

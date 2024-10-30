@@ -1,12 +1,12 @@
 package com.wildfit.server.repository;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import com.wildfit.server.model.UserStatus;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 class UserRepositoryTest extends AbstractRepositoryTest {
@@ -44,7 +44,7 @@ class UserRepositoryTest extends AbstractRepositoryTest {
         assertNotNull(saved);
 
         final var user = userRepository.findByUuid(saved.getUuid())
-                                       .orElse(null);
+                .orElse(null);
 
 
         assertNotNull(user);

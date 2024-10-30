@@ -1,12 +1,5 @@
 package com.wildfit.server.service.handler;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import java.util.UUID;
-
 import com.wildfit.server.exception.WildfitServiceError;
 import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.User;
@@ -16,24 +9,31 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
+
 @SpringBootTest
 class LoginHandlerTest extends CommonHandlerTest {
 
     @Test
     void nullParameters() {
         assertThrows(NullPointerException.class,
-                () -> LoginHandler.builder().build().execute());
+                     () -> LoginHandler.builder().build().execute());
     }
 
     @ParameterizedTest
     @NullAndEmptySource
     void nullPassword(String password) {
         final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
-                () -> LoginHandler.builder()
-                                  .withUserRepository(userRepository)
-                                  .withEmail(EMAIL)
-                                  .withPassword(password)
-                                  .build().execute());
+                                           () -> LoginHandler.builder()
+                                                   .withUserRepository(userRepository)
+                                                   .withEmail(EMAIL)
+                                                   .withPassword(password)
+                                                   .build().execute());
         assertEquals(WildfitServiceError.INVALID_PASSWORD, exception.getError());
     }
 
@@ -41,33 +41,33 @@ class LoginHandlerTest extends CommonHandlerTest {
     @NullAndEmptySource
     void missingEmail(String email) {
         final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
-                () -> LoginHandler.builder()
-                                  .withUserRepository(userRepository)
-                                  .withPassword(PASSWORD)
-                                  .withEmail(email)
-                                  .build().execute());
+                                           () -> LoginHandler.builder()
+                                                   .withUserRepository(userRepository)
+                                                   .withPassword(PASSWORD)
+                                                   .withEmail(email)
+                                                   .build().execute());
         assertEquals(WildfitServiceError.MISSING_EMAIL, exception.getError());
     }
 
     @Test
     void emptyEmail() {
         final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
-                () -> LoginHandler.builder()
-                                  .withUserRepository(userRepository)
-                                  .withPassword(PASSWORD)
-                                  .withEmail("    ")
-                                  .build().execute());
+                                           () -> LoginHandler.builder()
+                                                   .withUserRepository(userRepository)
+                                                   .withPassword(PASSWORD)
+                                                   .withEmail("    ")
+                                                   .build().execute());
         assertEquals(WildfitServiceError.MISSING_EMAIL, exception.getError());
     }
 
     @Test
     void userNotFound() {
         final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
-                () -> LoginHandler.builder()
-                                  .withUserRepository(userRepository)
-                                  .withPassword(PASSWORD)
-                                  .withEmail(EMAIL)
-                                  .build().execute());
+                                           () -> LoginHandler.builder()
+                                                   .withUserRepository(userRepository)
+                                                   .withPassword(PASSWORD)
+                                                   .withEmail(EMAIL)
+                                                   .build().execute());
         assertEquals(WildfitServiceError.USER_NOT_FOUND, exception.getError());
     }
 
@@ -75,11 +75,11 @@ class LoginHandlerTest extends CommonHandlerTest {
     void userNotEnabled() {
         createUser(false);
         final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
-                () -> LoginHandler.builder()
-                                  .withUserRepository(userRepository)
-                                  .withPassword(PASSWORD)
-                                  .withEmail(EMAIL)
-                                  .build().execute());
+                                           () -> LoginHandler.builder()
+                                                   .withUserRepository(userRepository)
+                                                   .withPassword(PASSWORD)
+                                                   .withEmail(EMAIL)
+                                                   .build().execute());
         assertEquals(WildfitServiceError.NOT_REGISTERED, exception.getError());
     }
 
@@ -87,11 +87,11 @@ class LoginHandlerTest extends CommonHandlerTest {
     void doesNotMatchPassword() {
         createUser(true);
         final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
-                () -> LoginHandler.builder()
-                                  .withUserRepository(userRepository)
-                                  .withPassword("AndLo792134*")
-                                  .withEmail(EMAIL)
-                                  .build().execute());
+                                           () -> LoginHandler.builder()
+                                                   .withUserRepository(userRepository)
+                                                   .withPassword("AndLo792134*")
+                                                   .withEmail(EMAIL)
+                                                   .build().execute());
         assertEquals(WildfitServiceError.USER_NOT_FOUND, exception.getError());
     }
 
@@ -99,10 +99,10 @@ class LoginHandlerTest extends CommonHandlerTest {
     void execute() throws WildfitServiceException {
         final var user = createUser(true);
         final var response = LoginHandler.builder()
-                                         .withUserRepository(userRepository)
-                                         .withPassword(PASSWORD)
-                                         .withEmail(EMAIL)
-                                         .build().execute();
+                .withUserRepository(userRepository)
+                .withPassword(PASSWORD)
+                .withEmail(EMAIL)
+                .build().execute();
 
         assertNotNull(response);
         assertEquals(EMAIL, response.getEmail());
@@ -115,13 +115,13 @@ class LoginHandlerTest extends CommonHandlerTest {
         }
         final var encodedPassword = PasswordEncodeDecode.encode(PASSWORD);
         final var user = User.builder()
-                             .withStatus(UserStatus.FREE.getCode())
-                             .withCreateDate(java.time.LocalDate.now())
-                             .withPassword(encodedPassword)
-                             .withEmail(EMAIL)
-                             .withUuid(UUID.randomUUID().toString())
-                             .withEnabled(enabled)
-                             .build();
+                .withStatus(UserStatus.FREE.getCode())
+                .withCreateDate(java.time.LocalDate.now())
+                .withPassword(encodedPassword)
+                .withEmail(EMAIL)
+                .withUuid(UUID.randomUUID().toString())
+                .withEnabled(enabled)
+                .build();
         final var saved = userRepository.save(user);
         assertNotNull(saved);
 

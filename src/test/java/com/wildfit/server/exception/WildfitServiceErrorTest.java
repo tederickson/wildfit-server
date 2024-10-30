@@ -1,9 +1,9 @@
 package com.wildfit.server.exception;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WildfitServiceErrorTest {
 

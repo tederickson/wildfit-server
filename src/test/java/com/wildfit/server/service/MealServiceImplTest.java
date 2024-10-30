@@ -1,8 +1,5 @@
 package com.wildfit.server.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import com.wildfit.server.domain.CreateMealRequest;
 import com.wildfit.server.domain.MealDigest;
 import com.wildfit.server.exception.WildfitServiceException;
@@ -13,6 +10,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
 class MealServiceImplTest {
@@ -31,35 +31,35 @@ class MealServiceImplTest {
     @Test
     void retrieveMeal() {
         final var exception = assertThrows(WildfitServiceException.class,
-                () -> mealService.retrieveMeal(null, null));
+                                           () -> mealService.retrieveMeal(null, null));
         assertEquals("Invalid parameter.", exception.getMessage());
     }
 
     @Test
     void retrieveAllMeals() {
         final var exception = assertThrows(WildfitServiceException.class,
-                () -> mealService.retrieveAllMeals(null, null));
+                                           () -> mealService.retrieveAllMeals(null, null));
         assertEquals("Invalid parameter.", exception.getMessage());
     }
 
     @Test
     void deleteMeal() {
         final var exception = assertThrows(WildfitServiceException.class,
-                () -> mealService.deleteMeal(null, null));
+                                           () -> mealService.deleteMeal(null, null));
         assertEquals("Invalid parameter.", exception.getMessage());
     }
 
     @Test
     void createMeal() {
         final var exception = assertThrows(WildfitServiceException.class,
-                () -> mealService.createMeal(CreateMealRequest.builder().build()));
+                                           () -> mealService.createMeal(CreateMealRequest.builder().build()));
         assertEquals("Invalid parameter.", exception.getMessage());
     }
 
     @Test
     void updateMeal() {
         final var exception = assertThrows(WildfitServiceException.class,
-                () -> mealService.updateMeal(MealDigest.builder().build()));
+                                           () -> mealService.updateMeal(MealDigest.builder().build()));
         assertEquals("Invalid parameter.", exception.getMessage());
     }
 }

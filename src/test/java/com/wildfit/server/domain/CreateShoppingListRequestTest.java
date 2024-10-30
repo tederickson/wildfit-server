@@ -1,15 +1,15 @@
 package com.wildfit.server.domain;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
+import org.junit.jupiter.api.Test;
+
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanToString;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetters;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-
-import nl.jqno.equalsverifier.EqualsVerifier;
-import nl.jqno.equalsverifier.Warning;
-import org.junit.jupiter.api.Test;
 
 class CreateShoppingListRequestTest {
 
@@ -36,8 +36,8 @@ class CreateShoppingListRequestTest {
     @Test
     void builder() {
         final var request = CreateShoppingListRequest.builder()
-                                                     .withUuid("unique user id")
-                                                     .build();
+                .withUuid("unique user id")
+                .build();
         assertEquals("unique user id", request.getUuid());
         assertNull(request.getMealId());
     }

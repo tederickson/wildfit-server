@@ -2,10 +2,8 @@ package com.wildfit.server.service.handler;
 
 import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.exception.WildfitServiceError;
-import com.wildfit.server.service.RecipeService;
 import com.wildfit.server.util.ReadRecipeDigest;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 
@@ -19,8 +17,6 @@ class ListBySeasonAndNameHandlerTest extends CommonRecipeHandlerTest {
     private static final String RECIPE_NAME = "TEST TEST TEST Chili Beef Lettuce Wraps";
     private static final PageRequest PAGE_REQUEST = PageRequest.of(0, 100);
 
-    @Autowired
-    private RecipeService recipeService;
 
     @Test
     void execute() throws Exception {
@@ -32,8 +28,8 @@ class ListBySeasonAndNameHandlerTest extends CommonRecipeHandlerTest {
         final var response = recipeService.listBySeasonAndName(SeasonType.SPRING, RECIPE_NAME, PAGE_REQUEST);
 
         final var foundRecipe = response.getRecipes().stream()
-                                        .filter(x -> x.getId().equals(testRecipe.getId()))
-                                        .findFirst();
+                .filter(x -> x.getId().equals(testRecipe.getId()))
+                .findFirst();
         assertTrue(foundRecipe.isPresent());
 
         assertEquals(RECIPE_NAME, foundRecipe.get().getName());

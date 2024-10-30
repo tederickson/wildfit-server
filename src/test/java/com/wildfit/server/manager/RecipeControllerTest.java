@@ -1,11 +1,5 @@
 package com.wildfit.server.manager;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.RecipeListDigest;
 import com.wildfit.server.domain.SeasonType;
@@ -17,6 +11,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class RecipeControllerTest {
@@ -40,7 +40,7 @@ class RecipeControllerTest {
         when(recipeService.listBySeasonAndIngredient(any(), any(), any())).thenReturn(new RecipeListDigest());
 
         final var response = recipeController.listBySeasonAndIngredient(SeasonType.FALL,
-                "iceberg lettuce", 3, 40);
+                                                                        "iceberg lettuce", 3, 40);
         assertNotNull(response);
     }
 
@@ -49,7 +49,7 @@ class RecipeControllerTest {
         when(recipeService.listBySeasonAndName(any(), any(), any())).thenReturn(new RecipeListDigest());
 
         final var response = recipeController.listBySeasonAndName(SeasonType.FALL,
-                "lettuce wraps", 3, 40);
+                                                                  "lettuce wraps", 3, 40);
         assertNotNull(response);
     }
 
@@ -79,14 +79,15 @@ class RecipeControllerTest {
         when(recipeService.updateRecipe(any(), any())).thenReturn(RecipeDigest.builder().build());
 
         final var response = recipeController.updateRecipe(recipeId, userId,
-                RecipeDigest.builder().withId(recipeId).build());
+                                                           RecipeDigest.builder().withId(recipeId).build());
         assertNotNull(response);
     }
 
     @Test
     void updateRecipe_idsDoNotMatch() {
         final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
-                () -> recipeController.updateRecipe(recipeId, userId, RecipeDigest.builder().build()));
+                                           () -> recipeController.updateRecipe(recipeId, userId,
+                                                                               RecipeDigest.builder().build()));
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
 

@@ -1,17 +1,5 @@
 package com.wildfit.server.service.handler;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.wildfit.server.domain.CreateMealRequest;
 import com.wildfit.server.domain.MealDigest;
 import com.wildfit.server.domain.MealSummaryDigest;
@@ -21,6 +9,18 @@ import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.util.ReadRecipeDigest;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 class UpdateMealHandlerTest extends CommonMealHandlerTest {
@@ -36,8 +36,8 @@ class UpdateMealHandlerTest extends CommonMealHandlerTest {
 
         final var recipeIds = recipeDigests.stream().map(RecipeDigest::getId).collect(Collectors.toList());
         final var request = CreateMealRequest.builder()
-                                             .withUuid(userId)
-                                             .withRecipeIds(recipeIds).build();
+                .withUuid(userId)
+                .withRecipeIds(recipeIds).build();
 
         createMeal(request);
 
@@ -62,10 +62,10 @@ class UpdateMealHandlerTest extends CommonMealHandlerTest {
         }
 
         final var response = UpdateMealHandler.builder()
-                                              .withMealRepository(mealRepository)
-                                              .withRecipeRepository(recipeRepository)
-                                              .withRequest(mealDigest)
-                                              .build().execute();
+                .withMealRepository(mealRepository)
+                .withRecipeRepository(recipeRepository)
+                .withRequest(mealDigest)
+                .build().execute();
 
         assertEquals(expectedDate.minusDays(1), response.getStartDate());
         assertEquals(planDate.minusDays(1), response.getEndDate());
@@ -89,8 +89,8 @@ class UpdateMealHandlerTest extends CommonMealHandlerTest {
 
         final var recipeIds = recipeDigests.stream().map(RecipeDigest::getId).toList();
         final var request = CreateMealRequest.builder()
-                                             .withUuid(userId)
-                                             .withRecipeIds(List.of(recipeIds.getFirst())).build();
+                .withUuid(userId)
+                .withRecipeIds(List.of(recipeIds.getFirst())).build();
 
         createMeal(request);
 
@@ -107,10 +107,10 @@ class UpdateMealHandlerTest extends CommonMealHandlerTest {
         mealDigest.getRecipes().add(MealSummaryDigest.builder().withRecipeId(recipeIds.get(2)).build());
 
         final var response = UpdateMealHandler.builder()
-                                              .withMealRepository(mealRepository)
-                                              .withRecipeRepository(recipeRepository)
-                                              .withRequest(mealDigest)
-                                              .build().execute();
+                .withMealRepository(mealRepository)
+                .withRecipeRepository(recipeRepository)
+                .withRequest(mealDigest)
+                .build().execute();
 
         assertEquals(recipeIds.size(), response.getRecipes().size());
 
@@ -130,8 +130,8 @@ class UpdateMealHandlerTest extends CommonMealHandlerTest {
 
         final var recipeIds = recipeDigests.stream().map(RecipeDigest::getId).collect(Collectors.toList());
         final var request = CreateMealRequest.builder()
-                                             .withUuid(userId)
-                                             .withRecipeIds(recipeIds).build();
+                .withUuid(userId)
+                .withRecipeIds(recipeIds).build();
 
         createMeal(request);
 
@@ -139,37 +139,37 @@ class UpdateMealHandlerTest extends CommonMealHandlerTest {
         mealDigest.getRecipes().getFirst().setRecipeId(-100L);
 
         final var response = UpdateMealHandler.builder()
-                                              .withMealRepository(mealRepository)
-                                              .withRecipeRepository(recipeRepository)
-                                              .withRequest(mealDigest)
-                                              .build().execute();
+                .withMealRepository(mealRepository)
+                .withRecipeRepository(recipeRepository)
+                .withRequest(mealDigest)
+                .build().execute();
         assertEquals(1, response.getRecipes().size());
     }
 
     @Test
     void nullParameters() {
         assertThrows(NullPointerException.class,
-                () -> UpdateMealHandler.builder().build().execute());
+                     () -> UpdateMealHandler.builder().build().execute());
     }
 
     @Test
     void missingRequest() {
         assertThrows(NullPointerException.class,
-                () -> UpdateMealHandler.builder()
-                                       .withMealRepository(mealRepository)
-                                       .withRecipeRepository(recipeRepository)
-                                       .build().execute());
+                     () -> UpdateMealHandler.builder()
+                             .withMealRepository(mealRepository)
+                             .withRecipeRepository(recipeRepository)
+                             .build().execute());
     }
 
     @Test
     void missingUserId() {
         final var request = MealDigest.builder().build();
         final var exception = assertThrows(WildfitServiceException.class,
-                () -> UpdateMealHandler.builder()
-                                       .withMealRepository(mealRepository)
-                                       .withRecipeRepository(recipeRepository)
-                                       .withRequest(request)
-                                       .build().execute());
+                                           () -> UpdateMealHandler.builder()
+                                                   .withMealRepository(mealRepository)
+                                                   .withRecipeRepository(recipeRepository)
+                                                   .withRequest(request)
+                                                   .build().execute());
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
 
@@ -177,11 +177,11 @@ class UpdateMealHandlerTest extends CommonMealHandlerTest {
     void blankUserId() {
         final var request = MealDigest.builder().withUuid("  ").build();
         final var exception = assertThrows(WildfitServiceException.class,
-                () -> UpdateMealHandler.builder()
-                                       .withMealRepository(mealRepository)
-                                       .withRecipeRepository(recipeRepository)
-                                       .withRequest(request)
-                                       .build().execute());
+                                           () -> UpdateMealHandler.builder()
+                                                   .withMealRepository(mealRepository)
+                                                   .withRecipeRepository(recipeRepository)
+                                                   .withRequest(request)
+                                                   .build().execute());
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
 
@@ -189,30 +189,30 @@ class UpdateMealHandlerTest extends CommonMealHandlerTest {
     void missingMealSummaryDigest() {
         final var request = MealDigest.builder().withUuid(userId).build();
         final var exception = assertThrows(WildfitServiceException.class,
-                () -> UpdateMealHandler.builder()
-                                       .withMealRepository(mealRepository)
-                                       .withRecipeRepository(recipeRepository)
-                                       .withRequest(request)
-                                       .build().execute());
+                                           () -> UpdateMealHandler.builder()
+                                                   .withMealRepository(mealRepository)
+                                                   .withRecipeRepository(recipeRepository)
+                                                   .withRequest(request)
+                                                   .build().execute());
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
 
     @Test
     void invalidMealId() {
         final var request = MealDigest.builder()
-                                      .withUuid(userId)
-                                      .withId(-9L)
-                                      .withRecipes(List.of(MealSummaryDigest.builder()
-                                                                            .withId(95L)
-                                                                            .withRecipeId(14L)
-                                                                            .build()))
-                                      .build();
+                .withUuid(userId)
+                .withId(-9L)
+                .withRecipes(List.of(MealSummaryDigest.builder()
+                                             .withId(95L)
+                                             .withRecipeId(14L)
+                                             .build()))
+                .build();
         final var exception = assertThrows(WildfitServiceException.class,
-                () -> UpdateMealHandler.builder()
-                                       .withMealRepository(mealRepository)
-                                       .withRecipeRepository(recipeRepository)
-                                       .withRequest(request)
-                                       .build().execute());
+                                           () -> UpdateMealHandler.builder()
+                                                   .withMealRepository(mealRepository)
+                                                   .withRecipeRepository(recipeRepository)
+                                                   .withRequest(request)
+                                                   .build().execute());
         assertEquals(WildfitServiceError.MEAL_NOT_FOUND, exception.getError());
     }
 }

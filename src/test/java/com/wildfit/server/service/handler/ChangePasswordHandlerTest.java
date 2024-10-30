@@ -1,12 +1,5 @@
 package com.wildfit.server.service.handler;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import java.util.UUID;
-
 import com.wildfit.server.exception.WildfitServiceError;
 import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.User;
@@ -16,6 +9,13 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 @SpringBootTest
 class ChangePasswordHandlerTest extends CommonHandlerTest {
 
@@ -24,58 +24,58 @@ class ChangePasswordHandlerTest extends CommonHandlerTest {
     @Test
     void nullParameters() {
         assertThrows(NullPointerException.class,
-                () -> ChangePasswordHandler.builder().build().execute());
+                     () -> ChangePasswordHandler.builder().build().execute());
     }
 
     @ParameterizedTest
     @NullAndEmptySource
     void nullPassword(String password) {
         final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
-                () -> ChangePasswordHandler.builder()
-                                           .withUserRepository(userRepository)
-                                           .withUserId(USER_ID)
-                                           .withPassword(password)
-                                           .build().execute());
+                                           () -> ChangePasswordHandler.builder()
+                                                   .withUserRepository(userRepository)
+                                                   .withUserId(USER_ID)
+                                                   .withPassword(password)
+                                                   .build().execute());
         assertEquals(WildfitServiceError.INVALID_PASSWORD, exception.getError());
     }
 
     @Test
     void invalidPassword() {
         final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
-                () -> ChangePasswordHandler.builder()
-                                           .withUserRepository(userRepository)
-                                           .withPassword("apple")
-                                           .withUserId(USER_ID)
-                                           .build().execute());
+                                           () -> ChangePasswordHandler.builder()
+                                                   .withUserRepository(userRepository)
+                                                   .withPassword("apple")
+                                                   .withUserId(USER_ID)
+                                                   .build().execute());
         assertEquals(WildfitServiceError.INVALID_PASSWORD, exception.getError());
     }
 
     @Test
     void missingId() {
         final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
-                () -> ChangePasswordHandler.builder()
-                                           .withUserRepository(userRepository)
-                                           .withPassword(PASSWORD)
-                                           .build().execute());
+                                           () -> ChangePasswordHandler.builder()
+                                                   .withUserRepository(userRepository)
+                                                   .withPassword(PASSWORD)
+                                                   .build().execute());
         assertEquals(WildfitServiceError.USER_NOT_FOUND, exception.getError());
     }
 
     @Test
     void execute() throws WildfitServiceException {
         final var user = User.builder()
-                             .withStatus(UserStatus.FREE.getCode())
-                             .withCreateDate(java.time.LocalDate.now())
-                             .withPassword("encoded password")
-                             .withUuid(UUID.randomUUID().toString())
-                             .withEmail(EMAIL).build();
+                .withStatus(UserStatus.FREE.getCode())
+                .withCreateDate(java.time.LocalDate.now())
+                .withPassword("encoded password")
+                .withUuid(UUID.randomUUID().toString())
+                .withEmail(EMAIL).build();
         final var saved = userRepository.save(user);
         assertNotNull(saved);
 
         ChangePasswordHandler.builder()
-                             .withUserRepository(userRepository)
-                             .withPassword(PASSWORD)
-                             .withUserId(saved.getUuid())
-                             .build().execute();
+                .withUserRepository(userRepository)
+                .withPassword(PASSWORD)
+                .withUserId(saved.getUuid())
+                .build().execute();
 
         final var updatedUser = userRepository.findById(saved.getId()).orElseThrow();
         assertNotSame(saved.getPassword(), updatedUser.getPassword());

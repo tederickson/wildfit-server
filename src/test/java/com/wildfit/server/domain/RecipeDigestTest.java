@@ -1,13 +1,5 @@
 package com.wildfit.server.domain;
 
-import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
-import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanToString;
-import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetters;
-import static com.wildfit.server.domain.SeasonType.FALL;
-import static com.wildfit.server.domain.SeasonType.SPRING;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.Test;
@@ -15,6 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.json.JsonContent;
+
+import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
+import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanToString;
+import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetters;
+import static com.wildfit.server.domain.SeasonType.FALL;
+import static com.wildfit.server.domain.SeasonType.SPRING;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @JsonTest
 class RecipeDigestTest {
@@ -53,14 +53,14 @@ class RecipeDigestTest {
                 "it is simple and can be eaten for breakfast, lunch, dinner or snack.";
 
         final var recipeDigest = RecipeDigest.builder()
-                                             .withName("Tuna salad")
-                                             .withSeason(SPRING)
-                                             .withPrepTimeMin(15)
-                                             .withCookTimeMin(0)
-                                             .withServingUnit("serving")
-                                             .withServingQty(4)
-                                             .withIntroduction(introduction)
-                                             .build();
+                .withName("Tuna salad")
+                .withSeason(SPRING)
+                .withPrepTimeMin(15)
+                .withCookTimeMin(0)
+                .withServingUnit("serving")
+                .withServingQty(4)
+                .withIntroduction(introduction)
+                .build();
 
         final JsonContent<RecipeDigest> result = json.write(recipeDigest);
         final var jsonText = result.getJson();

@@ -1,8 +1,5 @@
 package com.wildfit.server.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import com.wildfit.server.domain.CreateShoppingListRequest;
 import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.repository.MealRepository;
@@ -14,6 +11,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
 class ShoppingListServiceImplTest {
@@ -31,41 +31,41 @@ class ShoppingListServiceImplTest {
     @BeforeEach
     void setUp() {
         shoppingListService = new ShoppingListServiceImpl(userRepository, mealRepository, recipeRepository,
-                shoppingListRepository);
+                                                          shoppingListRepository);
     }
 
     @Test
     void getShoppingList() {
         final var exception = assertThrows(WildfitServiceException.class,
-                () -> shoppingListService.getShoppingList(null));
+                                           () -> shoppingListService.getShoppingList(null));
         assertEquals("Invalid parameter.", exception.getMessage());
     }
 
     @Test
     void deleteItemFromShoppingList() {
         final var exception = assertThrows(WildfitServiceException.class,
-                () -> shoppingListService.deleteItemFromShoppingList(null, null));
+                                           () -> shoppingListService.deleteItemFromShoppingList(null, null));
         assertEquals("Invalid parameter.", exception.getMessage());
     }
 
     @Test
     void createShoppingList_nullRequest() {
         final var exception = assertThrows(WildfitServiceException.class,
-                () -> shoppingListService.createShoppingList(null));
+                                           () -> shoppingListService.createShoppingList(null));
         assertEquals("Invalid parameter.", exception.getMessage());
     }
 
     @Test
     void createShoppingList() {
         final var exception = assertThrows(WildfitServiceException.class,
-                () -> shoppingListService.createShoppingList(CreateShoppingListRequest.builder().build()));
+                                           () -> shoppingListService.createShoppingList(CreateShoppingListRequest.builder().build()));
         assertEquals("Invalid parameter.", exception.getMessage());
     }
 
     @Test
     void updateShoppingList() {
         final var exception = assertThrows(WildfitServiceException.class,
-                () -> shoppingListService.updateShoppingList(null));
+                                           () -> shoppingListService.updateShoppingList(null));
         assertEquals("Invalid parameter.", exception.getMessage());
     }
 }

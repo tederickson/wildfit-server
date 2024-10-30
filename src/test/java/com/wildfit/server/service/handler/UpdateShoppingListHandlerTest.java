@@ -61,8 +61,8 @@ class UpdateShoppingListHandlerTest extends CommonMealHandlerTest {
 
         final var recipeIds = recipeDigests.stream().map(RecipeDigest::getId).collect(Collectors.toList());
         final var request = CreateMealRequest.builder()
-                                             .withUuid(userId)
-                                             .withRecipeIds(recipeIds).build();
+                .withUuid(userId)
+                .withRecipeIds(recipeIds).build();
 
         createMeal(request);
 
@@ -78,7 +78,7 @@ class UpdateShoppingListHandlerTest extends CommonMealHandlerTest {
         var shoppingList = shoppingListService.getShoppingList(userId);
 
         final var itemListMap = shoppingList.getItems().stream()
-                                            .collect(Collectors.groupingBy(ShoppingListItemDigest::getFoodName));
+                .collect(Collectors.groupingBy(ShoppingListItemDigest::getFoodName));
 
         itemListMap.forEach((k, v) -> assertEquals(1, v.size(), k));
 
@@ -89,7 +89,7 @@ class UpdateShoppingListHandlerTest extends CommonMealHandlerTest {
         assertTrue(foodNames.containsAll(updatedItems));
 
         assertTrue(shoppingList.getItems().stream().map(ShoppingListItemDigest::isPurchased)
-                               .allMatch(item -> item.equals(Boolean.FALSE)));
+                           .allMatch(item -> item.equals(Boolean.FALSE)));
 
         itemListMap.get(PEPPER).forEach(item -> item.setPurchased(true));
         itemListMap.get(TUNA).forEach(item -> item.setPurchased(true));
@@ -103,7 +103,8 @@ class UpdateShoppingListHandlerTest extends CommonMealHandlerTest {
         for (var item : shoppingList.getItems()) {
             if (updatedItems.contains(item.getFoodName())) {
                 assertTrue(item.isPurchased());
-            } else {
+            }
+            else {
                 assertFalse(item.isPurchased());
             }
         }
@@ -112,15 +113,15 @@ class UpdateShoppingListHandlerTest extends CommonMealHandlerTest {
     @Test
     void nullParameters() {
         assertThrows(NullPointerException.class,
-                () -> UpdateShoppingListHandler.builder().build().execute());
+                     () -> UpdateShoppingListHandler.builder().build().execute());
     }
 
     @Test
     void missingRequest() {
         final var exception = assertThrows(WildfitServiceException.class,
-                () -> UpdateShoppingListHandler.builder()
-                                               .withShoppingListRepository(shoppingListRepository)
-                                               .build().execute());
+                                           () -> UpdateShoppingListHandler.builder()
+                                                   .withShoppingListRepository(shoppingListRepository)
+                                                   .build().execute());
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
 

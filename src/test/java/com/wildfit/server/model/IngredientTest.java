@@ -1,11 +1,11 @@
 package com.wildfit.server.model;
 
+import org.junit.jupiter.api.Test;
+
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-
-import org.junit.jupiter.api.Test;
 
 class IngredientTest {
 
@@ -18,8 +18,8 @@ class IngredientTest {
     public void testToString() {
         final var ingredient = new Ingredient().setId(3L).setFoodName("Orange").setDescription("Mandarin Orange");
         assertEquals("Ingredient(id=3, foodName=Orange, description=Mandarin Orange," +
-                        " ingredientServingQty=null, ingredientServingUnit=null, ingredientType=null)",
-                ingredient.toString());
+                             " ingredientServingQty=null, ingredientServingUnit=null, ingredientType=null)",
+                     ingredient.toString());
     }
 
     @Test

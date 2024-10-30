@@ -1,8 +1,5 @@
 package com.wildfit.server.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import com.wildfit.server.repository.UserProfileRepository;
 import com.wildfit.server.repository.UserRepository;
 import com.wildfit.server.repository.VerificationTokenRepository;
@@ -13,6 +10,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.JavaMailSender;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceImplTest {
@@ -38,49 +38,49 @@ class UserServiceImplTest {
     @Test
     void createUser() {
         final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
-                () -> userService.createUser(email, password, name));
+                                           () -> userService.createUser(email, password, name));
         assertEquals("Missing email.", exception.getMessage());
     }
 
     @Test
     void deleteUser() {
         final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
-                () -> userService.deleteUser(userId));
+                                           () -> userService.deleteUser(userId));
         assertEquals("User not found.", exception.getMessage());
     }
 
     @Test
     void changePassword() {
         final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
-                () -> userService.changePassword(userId, password));
+                                           () -> userService.changePassword(userId, password));
         assertEquals("User not found.", exception.getMessage());
     }
 
     @Test
     void login() {
         final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
-                () -> userService.login(email, password));
+                                           () -> userService.login(email, password));
         assertEquals("Missing email.", exception.getMessage());
     }
 
     @Test
     void getUserProfile() {
         final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
-                () -> userService.getUserProfile(userId));
+                                           () -> userService.getUserProfile(userId));
         assertEquals("User not found.", exception.getMessage());
     }
 
     @Test
     void updateUserProfile() {
         final var exception = assertThrows(NullPointerException.class,
-                () -> userService.updateUserProfile(userId, null));
+                                           () -> userService.updateUserProfile(userId, null));
         assertEquals("userId", exception.getMessage());
     }
 
     @Test
     void confirmUser() {
         final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
-                () -> userService.confirmUser(null));
+                                           () -> userService.confirmUser(null));
         assertEquals("Invalid confirmation code.", exception.getMessage());
     }
 }

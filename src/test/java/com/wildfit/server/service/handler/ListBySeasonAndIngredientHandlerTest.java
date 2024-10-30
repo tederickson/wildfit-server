@@ -2,10 +2,8 @@ package com.wildfit.server.service.handler;
 
 import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.exception.WildfitServiceError;
-import com.wildfit.server.service.RecipeService;
 import com.wildfit.server.util.ReadRecipeDigest;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 
@@ -21,8 +19,6 @@ class ListBySeasonAndIngredientHandlerTest extends CommonRecipeHandlerTest {
     private static final String FILE_NAME = "Egg_muffins_with_mushrooms_and_herbs.json";
     private static final PageRequest PAGE_REQUEST = PageRequest.of(0, 100);
 
-    @Autowired
-    private RecipeService recipeService;
 
     @Test
     void execute() throws Exception {
@@ -34,8 +30,8 @@ class ListBySeasonAndIngredientHandlerTest extends CommonRecipeHandlerTest {
         final var response = recipeService.listBySeasonAndIngredient(SeasonType.SPRING, ingredientName, PAGE_REQUEST);
 
         final var foundRecipe = response.getRecipes().stream()
-                                        .filter(x -> x.getId().equals(testRecipe.getId()))
-                                        .findFirst();
+                .filter(x -> x.getId().equals(testRecipe.getId()))
+                .findFirst();
         assertTrue(foundRecipe.isPresent());
 
         assertEquals(RECIPE_NAME, foundRecipe.get().getName());
@@ -49,12 +45,12 @@ class ListBySeasonAndIngredientHandlerTest extends CommonRecipeHandlerTest {
         createRecipe(recipe);
 
         final var response = ListBySeasonAndIngredientHandler.builder()
-                                                             .withSeason(SeasonType.SPRING)
-                                                             .withPageable(PageRequest.of(10, 100))
-                                                             .withIngredientName(ingredientName)
-                                                             .withRecipeRepository(recipeRepository)
-                                                             .build()
-                                                             .execute();
+                .withSeason(SeasonType.SPRING)
+                .withPageable(PageRequest.of(10, 100))
+                .withIngredientName(ingredientName)
+                .withRecipeRepository(recipeRepository)
+                .build()
+                .execute();
 
         assertTrue(response.getRecipes().isEmpty());
     }

@@ -1,11 +1,11 @@
 package com.wildfit.server.util;
 
-import static org.junit.jupiter.api.Assertions.fail;
-
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.Recipe;
 import com.wildfit.server.model.mapper.RecipeMapper;
+
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class ReadRecipeDigest {
     public static final String RECIPE_EMAIL = "bob@bob.net";

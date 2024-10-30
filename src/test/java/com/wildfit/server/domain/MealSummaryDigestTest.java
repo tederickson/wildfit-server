@@ -1,20 +1,20 @@
 package com.wildfit.server.domain;
 
+import com.google.code.beanmatchers.BeanMatchers;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanToString;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetters;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
-import com.google.code.beanmatchers.BeanMatchers;
-import nl.jqno.equalsverifier.EqualsVerifier;
-import nl.jqno.equalsverifier.Warning;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
 
 class MealSummaryDigestTest {
     @BeforeAll
@@ -46,10 +46,10 @@ class MealSummaryDigestTest {
     @Test
     void builder() {
         final var request = MealSummaryDigest.builder()
-                                             .withId(333L)
-                                             .withName("unique name")
-                                             .withCooked(true)
-                                             .build();
+                .withId(333L)
+                .withName("unique name")
+                .withCooked(true)
+                .build();
         assertEquals("unique name", request.getName());
         assertEquals(333L, request.getId());
         assertTrue(request.isCooked());

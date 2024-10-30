@@ -1,10 +1,5 @@
 package com.wildfit.server.manager;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import com.wildfit.server.domain.ErrorData;
 import com.wildfit.server.exception.NutritionixException;
 import com.wildfit.server.exception.WildfitServiceError;
@@ -17,6 +12,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.context.request.WebRequest;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockitoExtension.class)
 class ManagerAdviceTest {
@@ -34,9 +34,9 @@ class ManagerAdviceTest {
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
 
         ErrorData expected = ErrorData.builder()
-                                      .withMessage(WildfitServiceError.USER_NOT_FOUND.getMessage())
-                                      .withErrorCode(WildfitServiceError.USER_NOT_FOUND.name())
-                                      .build();
+                .withMessage(WildfitServiceError.USER_NOT_FOUND.getMessage())
+                .withErrorCode(WildfitServiceError.USER_NOT_FOUND.name())
+                .build();
         assertEquals(expected, response.getBody());
     }
 

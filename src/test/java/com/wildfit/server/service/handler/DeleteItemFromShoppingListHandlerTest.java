@@ -56,8 +56,8 @@ class DeleteItemFromShoppingListHandlerTest extends CommonMealHandlerTest {
 
         final var recipeIds = recipeDigests.stream().map(RecipeDigest::getId).collect(Collectors.toList());
         final var request = CreateMealRequest.builder()
-                                             .withUuid(userId)
-                                             .withRecipeIds(recipeIds).build();
+                .withUuid(userId)
+                .withRecipeIds(recipeIds).build();
 
         createMeal(request);
 
@@ -73,10 +73,10 @@ class DeleteItemFromShoppingListHandlerTest extends CommonMealHandlerTest {
         final var foodNames = List.of("pepper", "tuna in water");
 
         final var pepper = shoppingList.getShoppingListItems().stream().filter(x -> "pepper".equals(x.getFoodName()))
-                                       .map(ShoppingListItem::getId).findFirst().orElseThrow();
+                .map(ShoppingListItem::getId).findFirst().orElseThrow();
         final var tuna = shoppingList.getShoppingListItems().stream()
-                                     .filter(x -> "tuna in water".equals(x.getFoodName()))
-                                     .map(ShoppingListItem::getId).findFirst().orElseThrow();
+                .filter(x -> "tuna in water".equals(x.getFoodName()))
+                .map(ShoppingListItem::getId).findFirst().orElseThrow();
 
         final var count = shoppingList.getShoppingListItems().size();
 
@@ -89,7 +89,7 @@ class DeleteItemFromShoppingListHandlerTest extends CommonMealHandlerTest {
         assertEquals(count, modifiedCount + 2);
 
         final var existingNames = modifiedShoppingList.getShoppingListItems().stream()
-                                                      .map(ShoppingListItem::getFoodName).toList();
+                .map(ShoppingListItem::getFoodName).toList();
 
         assertThat(existingNames, everyItem(not(in(foodNames))));
     }
@@ -97,27 +97,27 @@ class DeleteItemFromShoppingListHandlerTest extends CommonMealHandlerTest {
     @Test
     void nullParameters() {
         assertThrows(NullPointerException.class,
-                () -> DeleteItemFromShoppingListHandler.builder().build().execute());
+                     () -> DeleteItemFromShoppingListHandler.builder().build().execute());
     }
 
     @Test
     void missingRequest() {
         final var exception = assertThrows(WildfitServiceException.class,
-                () -> DeleteItemFromShoppingListHandler.builder()
-                                                       .withUserRepository(userRepository)
-                                                       .withShoppingListRepository(shoppingListRepository)
-                                                       .build().execute());
+                                           () -> DeleteItemFromShoppingListHandler.builder()
+                                                   .withUserRepository(userRepository)
+                                                   .withShoppingListRepository(shoppingListRepository)
+                                                   .build().execute());
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
 
     @Test
     void missingUserId() {
         final var exception = assertThrows(WildfitServiceException.class,
-                () -> DeleteItemFromShoppingListHandler.builder()
-                                                       .withUserRepository(userRepository)
-                                                       .withShoppingListRepository(shoppingListRepository)
-                                                       .withItemId(1234L)
-                                                       .build().execute());
+                                           () -> DeleteItemFromShoppingListHandler.builder()
+                                                   .withUserRepository(userRepository)
+                                                   .withShoppingListRepository(shoppingListRepository)
+                                                   .withItemId(1234L)
+                                                   .build().execute());
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
 

@@ -1,9 +1,9 @@
 package com.wildfit.server.service.handler;
 
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.junit.jupiter.api.Test;
 
 class PasswordEncodeDecodeTest {
 

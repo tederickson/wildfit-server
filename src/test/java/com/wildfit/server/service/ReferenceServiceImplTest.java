@@ -1,10 +1,10 @@
 package com.wildfit.server.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import com.wildfit.server.domain.IngredientType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ReferenceServiceImplTest {
     private ReferenceService service;

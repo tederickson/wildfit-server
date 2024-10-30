@@ -1,18 +1,18 @@
 package com.wildfit.server.repository;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.time.LocalDate;
-import java.util.UUID;
-
 import com.wildfit.server.model.User;
 import com.wildfit.server.model.UserProfile;
 import com.wildfit.server.model.UserStatus;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.time.LocalDate;
+import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 class UserProfileRepositoryTest extends AbstractRepositoryTest {
@@ -32,16 +32,16 @@ class UserProfileRepositoryTest extends AbstractRepositoryTest {
     @Test
     void findByEmail_withUser() {
         final var user = User.builder()
-                             .withStatus(UserStatus.FREE.getCode())
-                             .withCreateDate(LocalDate.now())
-                             .withPassword(PASSWORD)
-                             .withUuid(UUID.randomUUID().toString())
-                             .withEmail(EMAIL).build();
+                .withStatus(UserStatus.FREE.getCode())
+                .withCreateDate(LocalDate.now())
+                .withPassword(PASSWORD)
+                .withUuid(UUID.randomUUID().toString())
+                .withEmail(EMAIL).build();
         final var dbUser = userRepository.save(user);
         final var userProfile = UserProfile.builder()
-                                           .withUser(dbUser)
-                                           .withName(USER_NAME)
-                                           .build();
+                .withUser(dbUser)
+                .withName(USER_NAME)
+                .build();
 
         final var saved = userProfileRepository.save(userProfile);
 

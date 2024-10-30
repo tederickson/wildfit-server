@@ -55,8 +55,8 @@ class GetShoppingListHandlerTest extends CommonMealHandlerTest {
 
         final var recipeIds = recipeDigests.stream().map(RecipeDigest::getId).collect(Collectors.toList());
         final var request = CreateMealRequest.builder()
-                                             .withUuid(userId)
-                                             .withRecipeIds(recipeIds).build();
+                .withUuid(userId)
+                .withRecipeIds(recipeIds).build();
 
         createMeal(request);
 
@@ -74,9 +74,9 @@ class GetShoppingListHandlerTest extends CommonMealHandlerTest {
         assertEquals(dbShoppingList.getUuid(), shoppingList.getUuid());
 
         final var dbItemMap = dbShoppingList.getShoppingListItems().stream()
-                                            .collect(Collectors.groupingBy(ShoppingListItem::getFoodName));
+                .collect(Collectors.groupingBy(ShoppingListItem::getFoodName));
         final var itemMap = shoppingList.getItems().stream()
-                                        .collect(Collectors.groupingBy(ShoppingListItemDigest::getFoodName));
+                .collect(Collectors.groupingBy(ShoppingListItemDigest::getFoodName));
 
         assertThat(dbItemMap.keySet(), containsInAnyOrder(itemMap.keySet().toArray()));
     }
@@ -84,16 +84,16 @@ class GetShoppingListHandlerTest extends CommonMealHandlerTest {
     @Test
     void nullParameters() {
         assertThrows(NullPointerException.class,
-                () -> GetShoppingListHandler.builder().build().execute());
+                     () -> GetShoppingListHandler.builder().build().execute());
     }
 
 
     @Test
     void missingUserId() {
         final var exception = assertThrows(WildfitServiceException.class,
-                () -> GetShoppingListHandler.builder()
-                                            .withShoppingListRepository(shoppingListRepository)
-                                            .build().execute());
+                                           () -> GetShoppingListHandler.builder()
+                                                   .withShoppingListRepository(shoppingListRepository)
+                                                   .build().execute());
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
 

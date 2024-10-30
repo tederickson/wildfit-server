@@ -1,12 +1,5 @@
 package com.wildfit.server.service.handler;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.wildfit.server.domain.IngredientDigest;
 import com.wildfit.server.domain.InstructionDigest;
 import com.wildfit.server.domain.RecipeDigest;
@@ -16,6 +9,13 @@ import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.util.ReadRecipeDigest;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
@@ -41,18 +41,18 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
     @Test
     void changeSummary() throws WildfitServiceException {
         final var instructionGroup = RecipeGroupDigest.builder()
-                                                      .withInstructionGroupNumber(1)
-                                                      .withInstructions(List.of(step1, step2)).build();
+                .withInstructionGroupNumber(1)
+                .withInstructions(List.of(step1, step2)).build();
         final var recipe = RecipeDigest.builder()
-                                       .withName(NAME)
-                                       .withSeason(SeasonType.SPRING)
-                                       .withIntroduction(INTRODUCTION)
-                                       .withPrepTimeMin(5)
-                                       .withCookTimeMin(15)
-                                       .withServingQty(4)
-                                       .withServingUnit("serving")
-                                       .withRecipeGroups(List.of(instructionGroup))
-                                       .build();
+                .withName(NAME)
+                .withSeason(SeasonType.SPRING)
+                .withIntroduction(INTRODUCTION)
+                .withPrepTimeMin(5)
+                .withCookTimeMin(15)
+                .withServingQty(4)
+                .withServingUnit("serving")
+                .withRecipeGroups(List.of(instructionGroup))
+                .build();
 
         createRecipe(recipe);
 
@@ -96,18 +96,18 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
     @Test
     void addRecipeGroup() throws WildfitServiceException {
         final var recipeGroupDigest = RecipeGroupDigest.builder()
-                                                       .withInstructionGroupNumber(1)
-                                                       .withInstructions(List.of(step1, step2)).build();
+                .withInstructionGroupNumber(1)
+                .withInstructions(List.of(step1, step2)).build();
         final var recipe = RecipeDigest.builder()
-                                       .withName(NAME)
-                                       .withSeason(SeasonType.FALL)
-                                       .withIntroduction(INTRODUCTION)
-                                       .withPrepTimeMin(5)
-                                       .withCookTimeMin(15)
-                                       .withServingQty(4)
-                                       .withServingUnit("serving")
-                                       .withRecipeGroups(List.of(recipeGroupDigest))
-                                       .build();
+                .withName(NAME)
+                .withSeason(SeasonType.FALL)
+                .withIntroduction(INTRODUCTION)
+                .withPrepTimeMin(5)
+                .withCookTimeMin(15)
+                .withServingQty(4)
+                .withServingUnit("serving")
+                .withRecipeGroups(List.of(recipeGroupDigest))
+                .build();
 
         createRecipe(recipe);
 
@@ -130,18 +130,18 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
     @Test
     void addInstructionsAndIngredientsToRecipeGroup() throws WildfitServiceException {
         final var recipeGroupDigest = RecipeGroupDigest.builder()
-                                                       .withInstructionGroupNumber(1)
-                                                       .withInstructions(List.of(step1, step2)).build();
+                .withInstructionGroupNumber(1)
+                .withInstructions(List.of(step1, step2)).build();
         final var recipe = RecipeDigest.builder()
-                                       .withName(NAME)
-                                       .withSeason(SeasonType.FALL)
-                                       .withIntroduction(INTRODUCTION)
-                                       .withPrepTimeMin(5)
-                                       .withCookTimeMin(15)
-                                       .withServingQty(4)
-                                       .withServingUnit("serving")
-                                       .withRecipeGroups(List.of(recipeGroupDigest))
-                                       .build();
+                .withName(NAME)
+                .withSeason(SeasonType.FALL)
+                .withIntroduction(INTRODUCTION)
+                .withPrepTimeMin(5)
+                .withCookTimeMin(15)
+                .withServingQty(4)
+                .withServingUnit("serving")
+                .withRecipeGroups(List.of(recipeGroupDigest))
+                .build();
 
         createRecipe(recipe);
 
@@ -178,23 +178,23 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
     @Test
     void removeRecipeGroup() throws WildfitServiceException {
         final var instructionGroup1 = RecipeGroupDigest.builder()
-                                                       .withInstructionGroupNumber(1)
-                                                       .withInstructions(List.of(step1, step2, step3, step4))
-                                                       .build();
+                .withInstructionGroupNumber(1)
+                .withInstructions(List.of(step1, step2, step3, step4))
+                .build();
         final var instructionGroup2 = RecipeGroupDigest.builder()
-                                                       .withInstructionGroupNumber(2)
-                                                       .withInstructions(List.of(step1, step4))
-                                                       .build();
+                .withInstructionGroupNumber(2)
+                .withInstructions(List.of(step1, step4))
+                .build();
         final var recipe = RecipeDigest.builder()
-                                       .withName(NAME)
-                                       .withSeason(SeasonType.FALL)
-                                       .withIntroduction(INTRODUCTION)
-                                       .withPrepTimeMin(5)
-                                       .withCookTimeMin(15)
-                                       .withServingQty(4)
-                                       .withServingUnit("serving")
-                                       .withRecipeGroups(List.of(instructionGroup1, instructionGroup2))
-                                       .build();
+                .withName(NAME)
+                .withSeason(SeasonType.FALL)
+                .withIntroduction(INTRODUCTION)
+                .withPrepTimeMin(5)
+                .withCookTimeMin(15)
+                .withServingQty(4)
+                .withServingUnit("serving")
+                .withRecipeGroups(List.of(instructionGroup1, instructionGroup2))
+                .build();
 
         createRecipe(recipe);
 
@@ -207,19 +207,19 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
     @Test
     void removeInstruction() throws WildfitServiceException {
         final var instructionGroup = RecipeGroupDigest.builder()
-                                                      .withInstructionGroupNumber(1)
-                                                      .withInstructions(List.of(step1, step2, step3, step4))
-                                                      .build();
+                .withInstructionGroupNumber(1)
+                .withInstructions(List.of(step1, step2, step3, step4))
+                .build();
         final var recipe = RecipeDigest.builder()
-                                       .withName(NAME)
-                                       .withSeason(SeasonType.FALL)
-                                       .withIntroduction(INTRODUCTION)
-                                       .withPrepTimeMin(5)
-                                       .withCookTimeMin(15)
-                                       .withServingQty(4)
-                                       .withServingUnit("serving")
-                                       .withRecipeGroups(List.of(instructionGroup))
-                                       .build();
+                .withName(NAME)
+                .withSeason(SeasonType.FALL)
+                .withIntroduction(INTRODUCTION)
+                .withPrepTimeMin(5)
+                .withCookTimeMin(15)
+                .withServingQty(4)
+                .withServingUnit("serving")
+                .withRecipeGroups(List.of(instructionGroup))
+                .build();
 
         createRecipe(recipe);
 
@@ -232,19 +232,19 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
     @Test
     void updateInstruction() throws WildfitServiceException {
         final var instructionGroup = RecipeGroupDigest.builder()
-                                                      .withInstructionGroupNumber(1)
-                                                      .withInstructions(List.of(step1, step2, step3, step4))
-                                                      .build();
+                .withInstructionGroupNumber(1)
+                .withInstructions(List.of(step1, step2, step3, step4))
+                .build();
         final var recipe = RecipeDigest.builder()
-                                       .withName(NAME)
-                                       .withSeason(SeasonType.FALL)
-                                       .withIntroduction(INTRODUCTION)
-                                       .withPrepTimeMin(5)
-                                       .withCookTimeMin(15)
-                                       .withServingQty(4)
-                                       .withServingUnit("serving")
-                                       .withRecipeGroups(List.of(instructionGroup))
-                                       .build();
+                .withName(NAME)
+                .withSeason(SeasonType.FALL)
+                .withIntroduction(INTRODUCTION)
+                .withPrepTimeMin(5)
+                .withCookTimeMin(15)
+                .withServingQty(4)
+                .withServingUnit("serving")
+                .withRecipeGroups(List.of(instructionGroup))
+                .build();
 
         createRecipe(recipe);
 
@@ -267,7 +267,7 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
         final var response = updateRecipe(testRecipe);
 
         assertEquals(recipe.getRecipeGroups().size() + recipe2.getRecipeGroups().size(),
-                response.getRecipeGroups().size());
+                     response.getRecipeGroups().size());
 
         final var recipeIngredients = getIngredients(recipe);
         final var recipe2Ingredients = getIngredients(recipe2);
@@ -284,46 +284,41 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
 
     @Test
     void updateRecipe_missingRequest() {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
-                () -> UpdateRecipeHandler.builder()
-                                         .withUserRepository(userRepository)
-                                         .withRecipeRepository(recipeRepository)
-                                         .withUserId(userId)
-                                         .build().execute());
+        final var exception = assertThrows(WildfitServiceException.class,
+                                           () -> UpdateRecipeHandler.builder()
+                                                   .withUserRepository(userRepository)
+                                                   .withRecipeRepository(recipeRepository)
+                                                   .withUserId(userId)
+                                                   .build().execute());
         assertEquals("Invalid parameter.", exception.getMessage());
     }
 
     @Test
     void updateRecipe_missingUserId() {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
-                () -> UpdateRecipeHandler.builder()
-                                         .withUserRepository(userRepository)
-                                         .withRecipeRepository(recipeRepository)
-                                         .withRequest(RecipeDigest.builder()
-                                                                  .withSeason(SeasonType.SUMMER).build())
-                                         .build().execute());
+        final var exception = assertThrows(WildfitServiceException.class,
+                                           () -> UpdateRecipeHandler.builder()
+                                                   .withUserRepository(userRepository)
+                                                   .withRecipeRepository(recipeRepository)
+                                                   .withRequest(RecipeDigest.builder()
+                                                                        .withSeason(SeasonType.SUMMER).build())
+                                                   .build().execute());
         assertEquals("Invalid parameter.", exception.getMessage());
     }
 
     @Test
     void updateRecipe_missingSeason() {
-        final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
-                () -> UpdateRecipeHandler.builder()
-                                         .withUserRepository(userRepository)
-                                         .withRecipeRepository(recipeRepository)
-                                         .withUserId(userId)
-                                         .withRequest(RecipeDigest.builder().build())
-                                         .build().execute());
+        final var exception = assertThrows(WildfitServiceException.class,
+                                           () -> UpdateRecipeHandler.builder()
+                                                   .withUserRepository(userRepository)
+                                                   .withRecipeRepository(recipeRepository)
+                                                   .withUserId(userId)
+                                                   .withRequest(RecipeDigest.builder().build())
+                                                   .build().execute());
         assertEquals("Invalid parameter.", exception.getMessage());
     }
 
     private RecipeDigest updateRecipe(RecipeDigest testRecipe) throws
-                                                               com.wildfit.server.exception.WildfitServiceException {
-        return UpdateRecipeHandler.builder()
-                                  .withUserRepository(userRepository)
-                                  .withRecipeRepository(recipeRepository)
-                                  .withUserId(userId)
-                                  .withRequest(testRecipe)
-                                  .build().execute();
+            WildfitServiceException {
+        return recipeService.updateRecipe(userId, testRecipe);
     }
 }

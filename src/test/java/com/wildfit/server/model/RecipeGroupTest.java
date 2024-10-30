@@ -1,18 +1,18 @@
 package com.wildfit.server.model;
 
-import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 import com.google.code.beanmatchers.BeanMatchers;
 import com.wildfit.server.util.ReadRecipeDigest;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class RecipeGroupTest {
     @BeforeAll
@@ -29,9 +29,9 @@ class RecipeGroupTest {
     @Test
     public void equalsAndHashCode() {
         EqualsVerifier.simple().forClass(RecipeGroup.class)
-                      .withPrefabValues(RecipeGroup.class, new RecipeGroup().setId(3L), new RecipeGroup().setId(13L))
-                      .suppress(Warning.NONFINAL_FIELDS)
-                      .suppress(Warning.SURROGATE_KEY).verify();
+                .withPrefabValues(RecipeGroup.class, new RecipeGroup().setId(3L), new RecipeGroup().setId(13L))
+                .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.SURROGATE_KEY).verify();
     }
 
     @Test

@@ -1,20 +1,20 @@
 package com.wildfit.server.domain;
 
+import com.google.code.beanmatchers.BeanMatchers;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanToString;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetters;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
-import com.google.code.beanmatchers.BeanMatchers;
-import nl.jqno.equalsverifier.EqualsVerifier;
-import nl.jqno.equalsverifier.Warning;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
 
 class MealDigestTest {
     @BeforeAll
@@ -46,9 +46,9 @@ class MealDigestTest {
     @Test
     void builder() {
         final var request = MealDigest.builder()
-                                      .withId(333L)
-                                      .withUuid("unique user id")
-                                      .build();
+                .withId(333L)
+                .withUuid("unique user id")
+                .build();
         assertEquals("unique user id", request.getUuid());
         assertEquals(333L, request.getId());
         assertNull(request.getRecipes());

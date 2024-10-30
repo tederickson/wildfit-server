@@ -1,9 +1,5 @@
 package com.wildfit.server.manager;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import com.wildfit.server.domain.CreateShoppingListRequest;
 import com.wildfit.server.domain.ShoppingListDigest;
 import com.wildfit.server.exception.WildfitServiceError;
@@ -14,6 +10,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
 class ShoppingListControllerTest {
@@ -43,16 +43,17 @@ class ShoppingListControllerTest {
     @Test
     void createShoppingList() throws WildfitServiceException {
         CreateShoppingListRequest request = CreateShoppingListRequest.builder()
-                                                                     .withUuid(userId)
-                                                                     .withMealId(mealId)
-                                                                     .build();
+                .withUuid(userId)
+                .withMealId(mealId)
+                .build();
         assertNull(controller.createShoppingList(request));
     }
 
     @Test
     void updateShoppingList_mismatchedUser() {
         final var exception = assertThrows(WildfitServiceException.class,
-                () -> controller.updateShoppingList(userId, ShoppingListDigest.builder().build()));
+                                           () -> controller.updateShoppingList(userId,
+                                                                               ShoppingListDigest.builder().build()));
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
 
