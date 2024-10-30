@@ -37,11 +37,7 @@ class ConfirmUserHandlerTest extends CommonHandlerTest {
     @NullAndEmptySource
     void invalidConfirmationCode(String confirmationCode) {
         final var exception = assertThrows(WildfitServiceException.class,
-                                           () -> ConfirmUserHandler.builder()
-                                                   .withUserRepository(userRepository)
-                                                   .withVerificationTokenRepository(verificationTokenRepository)
-                                                   .withConfirmationCode(confirmationCode)
-                                                   .build().execute());
+                                           () -> userService.confirmUser(confirmationCode));
         assertEquals(WildfitServiceError.INVALID_CONFIRMATION_CODE, exception.getError());
     }
 
@@ -50,11 +46,7 @@ class ConfirmUserHandlerTest extends CommonHandlerTest {
         createUser();
 
         final var exception = assertThrows(WildfitServiceException.class,
-                                           () -> ConfirmUserHandler.builder()
-                                                   .withUserRepository(userRepository)
-                                                   .withVerificationTokenRepository(verificationTokenRepository)
-                                                   .withConfirmationCode("BugsBunny")
-                                                   .build().execute());
+                                           () -> userService.confirmUser("BugsBunny"));
         assertEquals(WildfitServiceError.INVALID_CONFIRMATION_CODE, exception.getError());
     }
 
@@ -62,11 +54,7 @@ class ConfirmUserHandlerTest extends CommonHandlerTest {
     void execute() throws WildfitServiceException {
         final User saved = createUser();
 
-        ConfirmUserHandler.builder()
-                .withUserRepository(userRepository)
-                .withVerificationTokenRepository(verificationTokenRepository)
-                .withConfirmationCode(CONFIRMATION_CODE)
-                .build().execute();
+        userService.confirmUser(CONFIRMATION_CODE);
 
         final var updatedUser = userRepository.findById(saved.getId()).orElseThrow();
         assertEquals(UserStatus.FREE, updatedUser.getUserStatus());
