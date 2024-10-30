@@ -101,13 +101,17 @@ class DeleteItemFromShoppingListHandlerTest extends CommonMealHandlerTest {
     }
 
     @Test
-    void missingRequest() {
+    void missingItemId() {
         final var exception = assertThrows(WildfitServiceException.class,
-                                           () -> DeleteItemFromShoppingListHandler.builder()
-                                                   .withUserRepository(userRepository)
-                                                   .withShoppingListRepository(shoppingListRepository)
-                                                   .build().execute());
+                                           () -> shoppingListService.deleteItemFromShoppingList(userId, null));
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
+    }
+
+    @Test
+    void invalidItemId() {
+        final var exception = assertThrows(WildfitServiceException.class,
+                                           () -> shoppingListService.deleteItemFromShoppingList(userId, -3L));
+        assertEquals(WildfitServiceError.SHOPPING_LIST_NOT_FOUND, exception.getError());
     }
 
     @Test
