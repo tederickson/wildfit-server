@@ -1,24 +1,29 @@
 package com.wildfit.server.service.handler;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.List;
-
 import com.google.common.collect.Iterables;
 import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.RecipeGroupDigest;
 import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.exception.WildfitServiceError;
 import com.wildfit.server.exception.WildfitServiceException;
+import com.wildfit.server.service.RecipeService;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 class GetRecipeHandlerTest extends CommonRecipeHandlerTest {
-    static final String NAME = "GetRecipeHandlerTest";
+    private static final String NAME = "GetRecipeHandlerTest";
+
+    @Autowired
+    private RecipeService recipeService;
 
     @Test
     void nullParameters() {
@@ -29,9 +34,7 @@ class GetRecipeHandlerTest extends CommonRecipeHandlerTest {
     @Test
     void missingRecipeId() {
         final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
-                () -> GetRecipeHandler.builder()
-                                      .withRecipeRepository(recipeRepository)
-                                      .build().execute());
+                                           () -> recipeService.retrieveRecipe(null));
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
 
@@ -53,10 +56,8 @@ class GetRecipeHandlerTest extends CommonRecipeHandlerTest {
 
         createRecipe(recipe);
 
-        final var recipeDigest = GetRecipeHandler.builder()
-                                                 .withRecipeRepository(recipeRepository)
-                                                 .withRecipeId(testRecipe.getId())
-                                                 .build().execute();
+        final var recipeDigest = recipeService.retrieveRecipe(testRecipe.getId());
+
         var instructionGroup1 = Iterables.getOnlyElement(recipeDigest.getRecipeGroups());
         assertTrue(instructionGroup1.getIngredients().isEmpty());
         assertEquals(2, instructionGroup1.getInstructions().size());
