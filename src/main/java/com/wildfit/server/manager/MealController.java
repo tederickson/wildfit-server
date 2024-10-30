@@ -32,9 +32,9 @@ public class MealController {
 
     @Operation(summary = "Get all meals for the user")
     @GetMapping(value = "/users/{userId}", produces = "application/json")
-    public List<MealDigest> retrieveAllMeals(@PathVariable(value = "userId") String userId,
-                                             @RequestParam(value = "page", defaultValue = "0") Integer page,
-                                             @RequestParam(value = "pageSize", defaultValue = "30") Integer pageSize)
+    public List<MealDigest> retrieveAllMeals(@PathVariable String userId,
+                                             @RequestParam(defaultValue = "0") Integer page,
+                                             @RequestParam(defaultValue = "30") Integer pageSize)
             throws WildfitServiceException {
         final var pageable = PageMapper.map(page, pageSize);
 
@@ -43,8 +43,8 @@ public class MealController {
 
     @Operation(summary = "Get meal details")
     @GetMapping(value = "/{mealId}/users/{userId}", produces = "application/json")
-    public MealDigest retrieveMeal(@PathVariable(value = "mealId") Long mealId,
-                                   @PathVariable(value = "userId") String userId) throws WildfitServiceException {
+    public MealDigest retrieveMeal(@PathVariable Long mealId,
+                                   @PathVariable String userId) throws WildfitServiceException {
         return mealService.retrieveMeal(mealId, userId);
     }
 
@@ -54,8 +54,8 @@ public class MealController {
             @ApiResponse(responseCode = "404", description = "Meal not found"),
             @ApiResponse(responseCode = "401", description = "Not authorized to delete meal")})
     @DeleteMapping(value = "/{mealId}/users/{userId}")
-    public void deleteMeal(@PathVariable("mealId") Long mealId,
-                           @PathVariable("userId") String userId) throws WildfitServiceException {
+    public void deleteMeal(@PathVariable Long mealId,
+                           @PathVariable String userId) throws WildfitServiceException {
         mealService.deleteMeal(mealId, userId);
     }
 

@@ -29,7 +29,7 @@ public class ShoppingListController {
 
     @Operation(summary = "Get the shopping list for the user")
     @GetMapping(value = "/users/{userId}", produces = "application/json")
-    public ShoppingListDigest getShoppingList(@PathVariable(value = "userId") String userId)
+    public ShoppingListDigest getShoppingList(@PathVariable String userId)
             throws WildfitServiceException {
         return shoppingListService.getShoppingList(userId);
     }
@@ -39,7 +39,7 @@ public class ShoppingListController {
             @ApiResponse(responseCode = "200", description = "Item deleted"), //
             @ApiResponse(responseCode = "404", description = "Shopping list not found")})
     @DeleteMapping(value = "/users/{userId}/items/{itemId}")
-    public void deleteItemFromShoppingList(@PathVariable("userId") String userId, @PathVariable("itemId") Long itemId)
+    public void deleteItemFromShoppingList(@PathVariable String userId, @PathVariable Long itemId)
             throws WildfitServiceException {
         shoppingListService.deleteItemFromShoppingList(userId, itemId);
     }
@@ -61,7 +61,7 @@ public class ShoppingListController {
             @ApiResponse(responseCode = "200", description = "Successfully updated shopping list"),
             @ApiResponse(responseCode = "404", description = "Shopping list not found")})
     @PostMapping(value = "/users/{userId}", produces = "application/json")
-    public ShoppingListDigest updateShoppingList(@PathVariable(value = "userId") String userId,
+    public ShoppingListDigest updateShoppingList(@PathVariable String userId,
                                                  @RequestBody ShoppingListDigest request)
             throws WildfitServiceException {
         if (!userId.equals(request.getUuid())) {

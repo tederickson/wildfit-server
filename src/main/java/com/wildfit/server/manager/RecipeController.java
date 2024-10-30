@@ -36,9 +36,9 @@ public class RecipeController {
 
     @Operation(summary = "Retrieve recipes for a specific season")
     @GetMapping(value = "/seasons/{season}", produces = "application/json")
-    public RecipeListDigest retrieveRecipesForSeason(@PathVariable(value = "season") SeasonType season,
-                                                     @RequestParam(value = "page", defaultValue = "0") Integer page,
-                                                     @RequestParam(value = "pageSize", defaultValue = "30") Integer pageSize)
+    public RecipeListDigest retrieveRecipesForSeason(@PathVariable SeasonType season,
+                                                     @RequestParam(defaultValue = "0") Integer page,
+                                                     @RequestParam(defaultValue = "30") Integer pageSize)
             throws WildfitServiceException {
         final var pageable = PageMapper.map(page, pageSize);
 
@@ -48,10 +48,10 @@ public class RecipeController {
     @Operation(summary = "Retrieve all recipes for a specific season that include a specific food")
     @GetMapping(value = "/seasons/{season}/ingredients/{ingredientName}", produces = "application/json")
     public RecipeListDigest listBySeasonAndIngredient(
-            @PathVariable(value = "season") SeasonType season,
-            @PathVariable(value = "ingredientName") String ingredientName,
-            @RequestParam(value = "page", defaultValue = "0") Integer page,
-            @RequestParam(value = "pageSize", defaultValue = "30") Integer pageSize) throws WildfitServiceException {
+            @PathVariable SeasonType season,
+            @PathVariable String ingredientName,
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "30") Integer pageSize) throws WildfitServiceException {
         final var pageable = PageMapper.map(page, pageSize);
 
         return recipeService.listBySeasonAndIngredient(season, ingredientName, pageable);
@@ -60,10 +60,10 @@ public class RecipeController {
     @Operation(summary = "Retrieve all recipes for a specific season and name")
     @GetMapping(value = "/seasons/{season}/names/{recipeName}", produces = "application/json")
     public RecipeListDigest listBySeasonAndName(
-            @PathVariable(value = "season") SeasonType season,
-            @PathVariable(value = "recipeName") String recipeName,
-            @RequestParam(value = "page", defaultValue = "0") Integer page,
-            @RequestParam(value = "pageSize", defaultValue = "30") Integer pageSize) throws WildfitServiceException {
+            @PathVariable SeasonType season,
+            @PathVariable String recipeName,
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "30") Integer pageSize) throws WildfitServiceException {
         final var pageable = PageMapper.map(page, pageSize);
 
         return recipeService.listBySeasonAndName(season, recipeName, pageable);
@@ -81,7 +81,7 @@ public class RecipeController {
             @ApiResponse(responseCode = "404", description = "Recipe not found"),
             @ApiResponse(responseCode = "401", description = "Not authorized to delete recipe")})
     @DeleteMapping(value = "/{recipeId}/users/{userId}")
-    public void deleteRecipe(@PathVariable("recipeId") Long id, @PathVariable("userId") String userId)
+    public void deleteRecipe(@PathVariable("recipeId") Long id, @PathVariable String userId)
             throws WildfitServiceException {
         recipeService.deleteRecipe(id, userId);
     }
@@ -90,7 +90,7 @@ public class RecipeController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully created recipe")})
     @PostMapping(value = "/users/{userId}", produces = "application/json")
-    public RecipeDigest createRecipe(@PathVariable("userId") String userId,
+    public RecipeDigest createRecipe(@PathVariable String userId,
                                      @RequestBody RecipeDigest request) throws WildfitServiceException {
         return recipeService.createRecipe(userId, request);
     }
@@ -102,7 +102,7 @@ public class RecipeController {
             @ApiResponse(responseCode = "401", description = "Not authorized to update recipe")})
     @PutMapping(value = "/{recipeId}/users/{userId}", produces = "application/json")
     public RecipeDigest updateRecipe(@PathVariable("recipeId") Long id,
-                                     @PathVariable("userId") String userId,
+                                     @PathVariable String userId,
                                      @RequestBody RecipeDigest request) throws WildfitServiceException {
         if (!id.equals(request.getId())) {
             log.error("{} does not match {}", id, request.getId());

@@ -56,7 +56,7 @@ public class UserAdminController {
             @ApiResponse(responseCode = "200", description = "Get user"), //
             @ApiResponse(responseCode = "404", description = "User id not found")})
     @GetMapping(value = "/{id}", produces = "application/json")
-    public UserProfileDigest getUser(@PathVariable("id") String id) throws WildfitServiceException {
+    public UserProfileDigest getUser(@PathVariable String id) throws WildfitServiceException {
         final var logMessage = String.join("|", "getUser", id);
         log.info(logMessage);
 
@@ -68,7 +68,7 @@ public class UserAdminController {
             @ApiResponse(responseCode = "200", description = "Update user"), //
             @ApiResponse(responseCode = "404", description = "User id not found")})
     @PutMapping(value = "/{id}", produces = "application/json")
-    public UserProfileDigest updateUserProfile(@PathVariable("id") String id,
+    public UserProfileDigest updateUserProfile(@PathVariable String id,
                                                @RequestBody UpdateUserProfileRequest request)
             throws WildfitServiceException {
         final var logMessage = String.join("|", "updateUserProfile", id, request.toString());
@@ -82,7 +82,7 @@ public class UserAdminController {
             @ApiResponse(responseCode = "200", description = "User deleted"), //
             @ApiResponse(responseCode = "404", description = "User id not found")})
     @DeleteMapping(value = "/{id}")
-    public void deleteUser(@PathVariable("id") String id) throws WildfitServiceException {
+    public void deleteUser(@PathVariable String id) throws WildfitServiceException {
         final var logMessage = String.join("|", "deleteUser", id);
         log.info(logMessage);
 
@@ -94,7 +94,7 @@ public class UserAdminController {
             @ApiResponse(responseCode = "200", description = "Successfully changed password"), //
             @ApiResponse(responseCode = "400", description = "Invalid user id and/or password")})
     @PostMapping(value = "/{id}/change-password")
-    public void changePassword(@PathVariable("id") String id, @RequestBody ChangePasswordRequest request)
+    public void changePassword(@PathVariable String id, @RequestBody ChangePasswordRequest request)
             throws WildfitServiceException {
         final var logMessage = String.join("|", "changePassword", id, request.toString());
         log.info(logMessage);

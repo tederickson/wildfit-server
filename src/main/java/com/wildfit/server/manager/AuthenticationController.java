@@ -33,7 +33,7 @@ public class AuthenticationController {
             @ApiResponse(responseCode = "200", description = "Confirm user email account"), //
             @ApiResponse(responseCode = "404", description = "Confirmation code not found")})
     @GetMapping("/register/{confirmCode}")
-    public RegisterUserResponse register(@PathVariable("confirmCode") String confirmCode)
+    public RegisterUserResponse register(@PathVariable String confirmCode)
             throws WildfitServiceException {
         return userService.confirmUser(confirmCode);
     }
