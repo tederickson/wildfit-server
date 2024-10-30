@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 class ListBySeasonHandlerTest extends CommonRecipeHandlerTest {
-    private final static PageRequest PAGE_REQUEST = PageRequest.of(0, 100);
+    private static final PageRequest PAGE_REQUEST = PageRequest.of(0, 100);
 
     @Autowired
     private RecipeService recipeService;

@@ -1,15 +1,17 @@
 package com.wildfit.server.service.handler;
 
+import com.wildfit.server.domain.SeasonType;
+import com.wildfit.server.exception.WildfitServiceError;
+import com.wildfit.server.service.RecipeService;
+import com.wildfit.server.util.ReadRecipeDigest;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import com.wildfit.server.domain.SeasonType;
-import com.wildfit.server.exception.WildfitServiceError;
-import com.wildfit.server.util.ReadRecipeDigest;
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.PageRequest;
 
 @SpringBootTest
 class ListBySeasonAndIngredientHandlerTest extends CommonRecipeHandlerTest {
@@ -17,6 +19,10 @@ class ListBySeasonAndIngredientHandlerTest extends CommonRecipeHandlerTest {
     private static final String RECIPE_NAME = "ListBySeasonAndIngredientHandlerTest";
     private static final String ingredientName = "mushrooms";
     private static final String FILE_NAME = "Egg_muffins_with_mushrooms_and_herbs.json";
+    private static final PageRequest PAGE_REQUEST = PageRequest.of(0, 100);
+
+    @Autowired
+    private RecipeService recipeService;
 
     @Test
     void execute() throws Exception {
@@ -25,13 +31,7 @@ class ListBySeasonAndIngredientHandlerTest extends CommonRecipeHandlerTest {
 
         createRecipe(recipe);
 
-        final var response = ListBySeasonAndIngredientHandler.builder()
-                                                             .withSeason(SeasonType.SPRING)
-                                                             .withPageable(PageRequest.of(0, 100))
-                                                             .withIngredientName(ingredientName)
-                                                             .withRecipeRepository(recipeRepository)
-                                                             .build()
-                                                             .execute();
+        final var response = recipeService.listBySeasonAndIngredient(SeasonType.SPRING, ingredientName, PAGE_REQUEST);
 
         final var foundRecipe = response.getRecipes().stream()
                                         .filter(x -> x.getId().equals(testRecipe.getId()))
@@ -62,36 +62,36 @@ class ListBySeasonAndIngredientHandlerTest extends CommonRecipeHandlerTest {
     @Test
     void missingSeason() {
         final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
-                () -> ListBySeasonAndIngredientHandler.builder()
-                                                      .withPageable(PageRequest.of(1, 100))
-                                                      .withIngredientName(ingredientName)
-                                                      .withRecipeRepository(recipeRepository)
-                                                      .build()
-                                                      .execute());
+                                           () -> ListBySeasonAndIngredientHandler.builder()
+                                                   .withPageable(PAGE_REQUEST)
+                                                   .withIngredientName(ingredientName)
+                                                   .withRecipeRepository(recipeRepository)
+                                                   .build()
+                                                   .execute());
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
 
     @Test
     void missingIngredientName() {
         final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
-                () -> ListBySeasonAndIngredientHandler.builder()
-                                                      .withSeason(SeasonType.SPRING)
-                                                      .withPageable(PageRequest.of(1, 100))
-                                                      .withRecipeRepository(recipeRepository)
-                                                      .build()
-                                                      .execute());
+                                           () -> ListBySeasonAndIngredientHandler.builder()
+                                                   .withSeason(SeasonType.SPRING)
+                                                   .withPageable(PAGE_REQUEST)
+                                                   .withRecipeRepository(recipeRepository)
+                                                   .build()
+                                                   .execute());
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
 
     @Test
     void missingPageable() {
         final var exception = assertThrows(com.wildfit.server.exception.WildfitServiceException.class,
-                () -> ListBySeasonAndIngredientHandler.builder()
-                                                      .withSeason(SeasonType.SPRING)
-                                                      .withIngredientName(ingredientName)
-                                                      .withRecipeRepository(recipeRepository)
-                                                      .build()
-                                                      .execute());
+                                           () -> ListBySeasonAndIngredientHandler.builder()
+                                                   .withSeason(SeasonType.SPRING)
+                                                   .withIngredientName(ingredientName)
+                                                   .withRecipeRepository(recipeRepository)
+                                                   .build()
+                                                   .execute());
         assertEquals(WildfitServiceError.INVALID_PARAMETER, exception.getError());
     }
 }
