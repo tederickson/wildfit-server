@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class RecipeGroupTest {
     @BeforeAll
@@ -37,6 +38,8 @@ class RecipeGroupTest {
     @Test
     public void testToString() {
         final var recipe = ReadRecipeDigest.getRecipe("Tuna_salad.json");
+        assertNotNull(recipe);
+        assertNotNull(recipe.getRecipeGroups());
         final var recipeGroup = recipe.getRecipeGroups().get(1);
 
         assertEquals(recipe, recipeGroup.getRecipe());

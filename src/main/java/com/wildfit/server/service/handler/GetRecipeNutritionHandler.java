@@ -32,9 +32,9 @@ public class GetRecipeNutritionHandler extends AbstractNutritionixHandler<FoodIt
                 .map(RecipeGroupDigest::getIngredients)
                 .flatMap(List::stream)
                 .forEach((ingredient) -> parseRecipeRequest.addIngredient(
-                        ingredient.getIngredientServingQty(),
-                        ingredient.getIngredientServingUnit(),
-                        ingredient.getFoodName()));
+                        ingredient.ingredientServingQty(),
+                        ingredient.ingredientServingUnit(),
+                        ingredient.foodName()));
 
         log.info("{}, {} servings\n{}", recipeDigest.getName(), parseRecipeRequest.getNum_servings(),
                  parseRecipeRequest.getQuery());

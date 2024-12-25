@@ -27,7 +27,7 @@ class PasswordValidatorTest {
     // one uppercase character,
     // one digit,
     // one special character
-    // and length between 8 to 20.
+    // and length is between 8 and 20.
     static Stream<String> invalidPasswordProvider() {
         return Stream.of(
                 "12345678",                 // invalid, only digit

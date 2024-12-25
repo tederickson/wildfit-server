@@ -90,7 +90,7 @@ public final class RecipeGroupMapper {
         }
         if (instructionGroup.getIngredients() != null) {
             for (var ingredientDigest : instructionGroup.getIngredients()) {
-                final var id = ingredientDigest.getId();
+                final var id = ingredientDigest.id();
 
                 if (id == null) {
                     existing.add(IngredientDigestMapper.createIngredient(ingredientDigest));

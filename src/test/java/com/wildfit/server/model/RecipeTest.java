@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -27,6 +28,7 @@ class RecipeTest {
     void testToString() {
         final var recipe = ReadRecipeDigest.getRecipe("Tuna_salad_with_apple_and_celery.json");
 
+        assertNotNull(recipe);
         assertTrue(recipe.toString().contains("name='Tuna salad with apple and celery'"));
     }
 
@@ -34,6 +36,7 @@ class RecipeTest {
     void testAuditDates() {
         final var recipe = ReadRecipeDigest.getRecipe("Tuna_salad_with_apple_and_celery.json");
 
+        assertNotNull(recipe);
         assertNull(recipe.getUpdated());
         assertEquals(LocalDate.now(), recipe.getCreated().toLocalDate());
     }

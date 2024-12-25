@@ -3,7 +3,6 @@ package com.wildfit.server.model.mapper;
 import com.wildfit.server.domain.IngredientDigest;
 import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.Ingredient;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -11,17 +10,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class IngredientDigestMapperTest {
 
-    @BeforeEach
-    void setUp() {
-    }
-
     @Test
     void createIngredient() {
-        IngredientDigest ingredientDigest = new IngredientDigest();
+        var ingredientDigest = IngredientDigest.builder();
 
-        assertThrows(WildfitServiceException.class, () -> IngredientDigestMapper.createIngredient(ingredientDigest));
-        ingredientDigest.setFoodName("Apple");
-        assertThrows(WildfitServiceException.class, () -> IngredientDigestMapper.createIngredient(ingredientDigest));
+        assertThrows(WildfitServiceException.class,
+                     () -> IngredientDigestMapper.createIngredient(ingredientDigest.build()));
+        ingredientDigest.withFoodName("Apple");
+        assertThrows(WildfitServiceException.class,
+                     () -> IngredientDigestMapper.createIngredient(ingredientDigest.build()));
     }
 
     @Test
@@ -34,10 +31,10 @@ class IngredientDigestMapperTest {
 
     @Test
     void updateIngredient() {
-        IngredientDigest ingredientDigest = new IngredientDigest();
+        var ingredientDigest = IngredientDigest.builder();
         Ingredient ingredient = new Ingredient();
 
-        Ingredient updated = IngredientDigestMapper.updateIngredient(ingredient, ingredientDigest);
+        Ingredient updated = IngredientDigestMapper.updateIngredient(ingredient, ingredientDigest.build());
         assertNotNull(updated);
     }
 }

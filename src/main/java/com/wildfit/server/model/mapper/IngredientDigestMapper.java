@@ -13,11 +13,11 @@ public final class IngredientDigestMapper {
     public static com.wildfit.server.model.Ingredient createIngredient(IngredientDigest ingredientDigest)
             throws WildfitServiceException {
         var ingredient = new com.wildfit.server.model.Ingredient()
-                .setId(ingredientDigest.getId())
-                .setFoodName(StringUtils.trimToNull(ingredientDigest.getFoodName()))
-                .setDescription(StringUtils.trimToNull(ingredientDigest.getDescription()))
-                .setIngredientServingQty(ingredientDigest.getIngredientServingQty())
-                .setIngredientServingUnit(StringUtils.trimToNull(ingredientDigest.getIngredientServingUnit()))
+                .setId(ingredientDigest.id())
+                .setFoodName(StringUtils.trimToNull(ingredientDigest.foodName()))
+                .setDescription(StringUtils.trimToNull(ingredientDigest.description()))
+                .setIngredientServingQty(ingredientDigest.ingredientServingQty())
+                .setIngredientServingUnit(StringUtils.trimToNull(ingredientDigest.ingredientServingUnit()))
                 .setIngredientType(getIngredientType(ingredientDigest));
 
         if (ingredient.getIngredientServingUnit() == null) {
@@ -36,8 +36,8 @@ public final class IngredientDigestMapper {
     }
 
     private static IngredientType getIngredientType(IngredientDigest ingredientDigest) {
-        return ingredientDigest.getIngredientType() == null ? IngredientType.NONE :
-                ingredientDigest.getIngredientType();
+        return ingredientDigest.ingredientType() == null ? IngredientType.NONE :
+                ingredientDigest.ingredientType();
     }
 
     public static IngredientDigest createIngredient(com.wildfit.server.model.Ingredient ingredient) {
@@ -55,10 +55,10 @@ public final class IngredientDigestMapper {
             com.wildfit.server.model.Ingredient ingredient,
             IngredientDigest ingredientDigest) {
         return ingredient
-                .setFoodName(StringUtils.trimToNull(ingredientDigest.getFoodName()))
-                .setDescription(StringUtils.trimToNull(ingredientDigest.getDescription()))
-                .setIngredientServingQty(ingredientDigest.getIngredientServingQty())
-                .setIngredientServingUnit(StringUtils.trimToNull(ingredientDigest.getIngredientServingUnit()))
+                .setFoodName(StringUtils.trimToNull(ingredientDigest.foodName()))
+                .setDescription(StringUtils.trimToNull(ingredientDigest.description()))
+                .setIngredientServingQty(ingredientDigest.ingredientServingQty())
+                .setIngredientServingUnit(StringUtils.trimToNull(ingredientDigest.ingredientServingUnit()))
                 .setIngredientType(getIngredientType(ingredientDigest));
     }
 }

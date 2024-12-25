@@ -81,7 +81,7 @@ class CreateShoppingListHandlerTest extends CommonMealHandlerTest {
                 .flatMap(List::stream)
                 .map(RecipeGroupDigest::getIngredients)
                 .flatMap(List::stream)
-                .map(IngredientDigest::getFoodName)
+                .map(IngredientDigest::foodName)
                 .collect(Collectors.toSet());
 
         assertThat(foodNames, containsInAnyOrder(itemListMap.keySet().toArray()));

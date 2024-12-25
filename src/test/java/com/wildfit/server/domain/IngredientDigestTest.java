@@ -9,10 +9,6 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
-import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanToString;
-import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetters;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class IngredientDigestTest {
@@ -24,21 +20,6 @@ class IngredientDigestTest {
     }
 
     @Test
-    public void shouldHaveNoArgsConstructor() {
-        assertThat(IngredientDigest.class, hasValidBeanConstructor());
-    }
-
-    @Test
-    public void gettersAndSettersShouldWorkForEachProperty() {
-        assertThat(IngredientDigest.class, hasValidGettersAndSetters());
-    }
-
-    @Test
-    public void allPropertiesShouldBeRepresentedInToStringOutput() {
-        assertThat(IngredientDigest.class, hasValidBeanToString());
-    }
-
-    @Test
     public void equalsAndHashCode() {
         EqualsVerifier.forClass(IngredientDigest.class).suppress(Warning.NONFINAL_FIELDS).verify();
     }
@@ -46,6 +27,6 @@ class IngredientDigestTest {
     @Test
     void builder() {
         final var request = IngredientDigest.builder().withFoodName("p").build();
-        assertEquals("p", request.getFoodName());
+        assertEquals("p", request.foodName());
     }
 }
