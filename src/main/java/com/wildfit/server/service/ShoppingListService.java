@@ -53,8 +53,8 @@ public class ShoppingListService {
                 .withRecipeRepository(recipeRepository)
                 .withMealRepository(mealRepository)
                 .withShoppingListRepository(shoppingListRepository)
-                .withMealId(request.getMealId())
-                .withUserId(request.getUuid())
+                .withMealId(request.mealId())
+                .withUserId(request.uuid())
                 .build()
                 .execute();
     }

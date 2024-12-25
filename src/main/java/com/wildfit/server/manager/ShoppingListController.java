@@ -53,7 +53,7 @@ public class ShoppingListController {
             throws WildfitServiceException {
         shoppingListService.createShoppingList(request);
 
-        return shoppingListService.getShoppingList(request.getUuid());
+        return shoppingListService.getShoppingList(request.uuid());
     }
 
     @Operation(summary = "Update the shopping list")
