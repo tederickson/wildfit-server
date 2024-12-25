@@ -6,12 +6,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class ReferenceServiceImplTest {
+class ReferenceServiceTest {
     private ReferenceService service;
 
     @BeforeEach
     void setUp() {
-        service = new ReferenceServiceImpl();
+        service = new ReferenceService();
     }
 
     @Test
