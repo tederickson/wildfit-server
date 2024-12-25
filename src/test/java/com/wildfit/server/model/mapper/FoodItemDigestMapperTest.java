@@ -27,14 +27,14 @@ class FoodItemDigestMapperTest {
     void null_FoodItem() {
         final var foodItemDigest = FoodItemDigestMapper.mapFoodItem(null);
         assertNotNull(foodItemDigest);
-        assertNull(foodItemDigest.getFoodName());
+        assertNull(foodItemDigest.foodName());
     }
 
     @Test
     void null_SearchedFoodItem() {
         final var foodItemDigest = FoodItemDigestMapper.mapSearchedFoodItem(null);
         assertNotNull(foodItemDigest);
-        assertNull(foodItemDigest.getFoodName());
+        assertNull(foodItemDigest.foodName());
     }
 
     @Test
@@ -80,7 +80,7 @@ class FoodItemDigestMapperTest {
 
         final var foodItemDigest = FoodItemDigestMapper.mapFoodItem(foodItems.getFoods()[0]);
 
-        assertNull(foodItemDigest.getPhosphorus());
-        assertEquals(50, foodItemDigest.getPotassium());
+        assertNull(foodItemDigest.phosphorus());
+        assertEquals(50, foodItemDigest.potassium());
     }
 }

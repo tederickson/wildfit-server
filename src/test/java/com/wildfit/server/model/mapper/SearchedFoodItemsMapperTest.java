@@ -66,10 +66,10 @@ class SearchedFoodItemsMapperTest {
          */
         final var firstCommon = searchFoodItemDigest.getCommon().getFirst();
 
-        assertEquals("grilled cheese", firstCommon.getFoodName());
-        assertEquals("sandwich", firstCommon.getServingUnit());
-        assertEquals(1, firstCommon.getServingQty());
-        assertEquals("https://nix-tag-images.s3.amazonaws.com/1763_thumb.jpg", firstCommon.getPhoto().getThumb());
-        assertEquals(365.76, firstCommon.getCalories(), 0.01);
+        assertEquals("grilled cheese", firstCommon.foodName());
+        assertEquals("sandwich", firstCommon.servingUnit());
+        assertEquals(1, firstCommon.servingQty());
+        assertEquals("https://nix-tag-images.s3.amazonaws.com/1763_thumb.jpg", firstCommon.photo().getThumb());
+        assertEquals(365.76, firstCommon.calories(), 0.01);
     }
 }

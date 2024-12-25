@@ -32,7 +32,7 @@ class NutritionixServiceTest {
 
         nutritionixService.getFoodWithBarcode("767707001258");
         assertNotNull(foodItemDigest);
-        assertEquals("Kerrygold", foodItemDigest.getBrandName());
+        assertEquals("Kerrygold", foodItemDigest.brandName());
     }
 
     @Test
