@@ -2,7 +2,7 @@ package com.wildfit.server.model.mapper;
 
 import com.wildfit.server.domain.RecipeSummaryDigest;
 
-public class RecipeSummaryMapper {
+public final class RecipeSummaryMapper {
     private RecipeSummaryMapper() {
     }
 

@@ -3,7 +3,7 @@ package com.wildfit.server.model.mapper;
 import com.wildfit.server.domain.ShoppingListDigest;
 import com.wildfit.server.model.ShoppingList;
 
-public class ShoppingListDigestMapper {
+public final class ShoppingListDigestMapper {
     private ShoppingListDigestMapper() {
     }
 

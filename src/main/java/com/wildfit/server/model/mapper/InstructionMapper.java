@@ -3,7 +3,7 @@ package com.wildfit.server.model.mapper;
 import com.wildfit.server.domain.InstructionDigest;
 import com.wildfit.server.model.CommonRecipe;
 
-public class InstructionMapper {
+public final class InstructionMapper {
     private InstructionMapper() {
     }
 

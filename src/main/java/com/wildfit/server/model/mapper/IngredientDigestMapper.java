@@ -6,7 +6,7 @@ import com.wildfit.server.exception.WildfitServiceError;
 import com.wildfit.server.exception.WildfitServiceException;
 import org.apache.commons.lang3.StringUtils;
 
-public class IngredientDigestMapper {
+public final class IngredientDigestMapper {
     private IngredientDigestMapper() {
     }
 

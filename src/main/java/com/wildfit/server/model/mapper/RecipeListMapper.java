@@ -5,7 +5,7 @@ import com.wildfit.server.domain.RecipeListDigest;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class RecipeListMapper {
+public final class RecipeListMapper {
     private RecipeListMapper() {
     }
 

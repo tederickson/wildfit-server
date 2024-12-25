@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class RecipeGroupMapper {
+public final class RecipeGroupMapper {
     private RecipeGroupMapper() {
     }
 
