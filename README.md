@@ -20,11 +20,9 @@ mvn clean spring-boot:run -Dspring-boot.run.profiles=dev
 
 # Config
 
-Only the application.properties file is stored in Git.  
+Only the src/main/resources/application.yml file is stored in Git.  
 The rest are local files to prevent leaking sensitive information.
 
-* src/main/resources/application.properties
-    * Common configuration values
 * src/main/resources/application-dev.properties
     * Development configuration values
 * flyway.conf
