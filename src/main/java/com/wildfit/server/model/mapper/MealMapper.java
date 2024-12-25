@@ -35,7 +35,7 @@ public final class MealMapper {
 
     public static Meal create(CreateMealRequest request, Map<Long, Recipe> recipeMap) {
         final Meal meal = new Meal()
-                .setUuid(request.getUuid())
+                .setUuid(request.uuid())
                 .setStartDate(LocalDate.now())
                 .setEndDate(LocalDate.now());
 

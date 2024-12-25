@@ -23,7 +23,7 @@ public class CreateMealHandler extends CommonMealHandler {
     public MealDigest execute() throws WildfitServiceException {
         validate();
 
-        final Map<Long, Recipe> recipeMap = getRecipeMap(recipeRepository, request.getRecipeIds());
+        final Map<Long, Recipe> recipeMap = getRecipeMap(recipeRepository, request.recipeIds());
 
         final Meal meal = MealMapper.create(request, recipeMap);
         final Meal persistedMeal = mealRepository.save(meal);
@@ -37,10 +37,10 @@ public class CreateMealHandler extends CommonMealHandler {
         Objects.requireNonNull(recipeRepository, " recipeRepository");
         Objects.requireNonNull(request, " request");
 
-        if (StringUtils.isAllBlank(request.getUuid())) {
+        if (StringUtils.isAllBlank(request.uuid())) {
             throw new WildfitServiceException(WildfitServiceError.INVALID_PARAMETER);
         }
-        if (CollectionUtils.isEmpty(request.getRecipeIds())) {
+        if (CollectionUtils.isEmpty(request.recipeIds())) {
             throw new WildfitServiceException(WildfitServiceError.INVALID_PARAMETER);
         }
     }
