@@ -1,0 +1,25 @@
+springdoc:
+  swagger-ui:
+    #OpenApi - OAS3  sort the tags and operations
+    operationsSorter: alpha
+    tagsSorter: alpha
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: '587'
+    properties:
+      mail:
+        smtp:
+          writetimeout: '5000'
+          starttls:
+            enable: 'true'
+          timeout: '5000'
+          auth: 'true'
+          connectiontimeout: '5000'
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: 'false'
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/wildfit
