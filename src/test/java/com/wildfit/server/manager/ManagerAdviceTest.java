@@ -51,8 +51,8 @@ class ManagerAdviceTest {
 
         final var errorData = response.getBody();
 
-        assertNull(errorData.getErrorCode());
-        assertTrue(errorData.getMessage().contains("BAD_REQUEST"));
-        assertEquals(400, errorData.getNutritionixStatusCode());
+        assertNull(errorData.errorCode());
+        assertTrue(errorData.message().contains("BAD_REQUEST"));
+        assertEquals(400, errorData.nutritionixStatusCode());
     }
 }
