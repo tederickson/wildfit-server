@@ -70,8 +70,8 @@ The primary id of the child classes is the primary key of the parent class.
 This ensures unique key values between the child classes.  
 Otherwise would need a compound index to ensure uniqueness.
 
-Storing the enum name is better than the default enum number because if someone inserts a
-new enum value the database does not have to be updated with the new number.
+Storing the enum name is better than using the default enum number because if someone inserts a
+new enum value the database will have to be updated with the new numbers.
 
 Query for the parent class returns 13 rows.  
 Accessing the data returns 9 ingredients and 4 instructions.
@@ -90,8 +90,9 @@ The code is broken up into:
 * mapper - the glue coded needed to convert JSON to Java or Database rows to Java
 * repository - surprisingly simple way to create a SQL command. Turn on Spring Boot parameters to view the generated SQL.
 * service - the methods called by the managers/controllers.
-* handlers - the only purpose of these classes called by the service is to mitigate merge hell and provide unique test 
-classes for the handlers. Otherwise you end up with 10,000+ lines of unit test cases for each service that are difficult to refactor.  
+* handlers - provides loose coupling, a lightweight service, separation of concerns, and allows several people to work on 
+the same service without merge collisions. The handlers also provide unique test classes for the service methods. 
+Otherwise you end up with 10,000+ lines of unit test cases for each service which are difficult to refactor and merge.  
 
 The current stats are that every line of code generates 10 lines of test code.  
 That is because you have to mock out services and mimic return values.
