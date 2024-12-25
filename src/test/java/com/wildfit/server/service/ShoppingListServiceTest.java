@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
-class ShoppingListServiceImplTest {
+class ShoppingListServiceTest {
     @Mock
     UserRepository userRepository;
     @Mock
@@ -30,8 +30,8 @@ class ShoppingListServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        shoppingListService = new ShoppingListServiceImpl(userRepository, mealRepository, recipeRepository,
-                                                          shoppingListRepository);
+        shoppingListService = new ShoppingListService(userRepository, mealRepository, recipeRepository,
+                                                      shoppingListRepository);
     }
 
     @Test
