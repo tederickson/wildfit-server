@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
-class RecipeServiceImplTest {
+class RecipeServiceTest {
     private static final Pageable PAGEABLE = PageRequest.of(1, 20);
 
     @Mock
@@ -25,7 +25,7 @@ class RecipeServiceImplTest {
     RecipeRepository recipeRepository;
 
     @InjectMocks
-    private RecipeServiceImpl recipeService;
+    private RecipeService recipeService;
 
     @Test
     void listBySeason_nullSeasonType() {

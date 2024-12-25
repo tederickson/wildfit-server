@@ -4,23 +4,89 @@ import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.domain.RecipeListDigest;
 import com.wildfit.server.domain.SeasonType;
 import com.wildfit.server.exception.WildfitServiceException;
+import com.wildfit.server.repository.RecipeRepository;
+import com.wildfit.server.repository.UserRepository;
+import com.wildfit.server.service.handler.CreateRecipeHandler;
+import com.wildfit.server.service.handler.DeleteRecipeHandler;
+import com.wildfit.server.service.handler.GetRecipeHandler;
+import com.wildfit.server.service.handler.ListBySeasonAndIngredientHandler;
+import com.wildfit.server.service.handler.ListBySeasonAndNameHandler;
+import com.wildfit.server.service.handler.ListBySeasonHandler;
+import com.wildfit.server.service.handler.UpdateRecipeHandler;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
-public interface RecipeService {
-    RecipeListDigest listBySeason(SeasonType season, Pageable pageable) throws WildfitServiceException;
+/**
+ * The service calls Handlers to implement the functionality.
+ * This provides loose coupling, a lightweight service, separation of concerns, and allows several people to work on
+ * the same service without merge collisions.
+ */
+@Service
+@RequiredArgsConstructor
+public class RecipeService {
+    private final UserRepository userRepository;
+    private final RecipeRepository recipeRepository;
 
-    RecipeListDigest listBySeasonAndIngredient(SeasonType season, String ingredientName, Pageable pageable)
-            throws WildfitServiceException;
+    public RecipeListDigest listBySeason(SeasonType season, Pageable pageable) throws WildfitServiceException {
+        return ListBySeasonHandler.builder()
+                .withRecipeRepository(recipeRepository)
+                .withSeason(season)
+                .withPageable(pageable)
+                .build().execute();
+    }
 
-    RecipeListDigest listBySeasonAndName(SeasonType season, String recipeName, Pageable pageable)
-            throws WildfitServiceException;
+    public RecipeListDigest listBySeasonAndIngredient(SeasonType season, String ingredientName, Pageable pageable)
+            throws WildfitServiceException {
+        return ListBySeasonAndIngredientHandler.builder()
+                .withRecipeRepository(recipeRepository)
+                .withSeason(season)
+                .withIngredientName(ingredientName)
+                .withPageable(pageable)
+                .build().execute();
+    }
 
-    RecipeDigest retrieveRecipe(Long recipeId) throws WildfitServiceException;
+    public RecipeListDigest listBySeasonAndName(SeasonType season, String recipeName, Pageable pageable)
+            throws WildfitServiceException {
+        return ListBySeasonAndNameHandler.builder()
+                .withRecipeRepository(recipeRepository)
+                .withSeason(season)
+                .withRecipeName(recipeName)
+                .withPageable(pageable)
+                .build().execute();
+    }
 
-    void deleteRecipe(Long recipeId, String userId) throws WildfitServiceException;
+    public RecipeDigest retrieveRecipe(Long recipeId) throws WildfitServiceException {
+        return GetRecipeHandler.builder()
+                .withRecipeRepository(recipeRepository)
+                .withRecipeId(recipeId)
+                .build().execute();
+    }
 
-    RecipeDigest createRecipe(String userId, RecipeDigest request) throws WildfitServiceException;
+    public void deleteRecipe(Long recipeId, String userId) throws WildfitServiceException {
+        DeleteRecipeHandler.builder()
+                .withUserRepository(userRepository)
+                .withRecipeRepository(recipeRepository)
+                .withUserId(userId)
+                .withRecipeId(recipeId)
+                .build().execute();
+    }
 
-    RecipeDigest updateRecipe(String userId, RecipeDigest request) throws WildfitServiceException;
+    public RecipeDigest createRecipe(String userId, RecipeDigest request) throws WildfitServiceException {
+        return CreateRecipeHandler.builder()
+                .withUserRepository(userRepository)
+                .withRecipeRepository(recipeRepository)
+                .withUserId(userId)
+                .withRequest(request)
+                .build().execute();
+    }
 
+    public RecipeDigest updateRecipe(String userId, RecipeDigest request) throws WildfitServiceException {
+        return UpdateRecipeHandler.builder()
+                .withUserRepository(userRepository)
+                .withRecipeRepository(recipeRepository)
+                .withUserId(userId)
+                .withRequest(request)
+                .build().execute();
+    }
 }
