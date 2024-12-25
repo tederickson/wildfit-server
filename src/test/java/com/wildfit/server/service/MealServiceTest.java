@@ -25,7 +25,7 @@ class MealServiceTest {
 
     @BeforeEach
     void setUp() {
-        mealService = new MealService (recipeRepository, mealRepository);
+        mealService = new MealService(recipeRepository, mealRepository);
     }
 
     @Test

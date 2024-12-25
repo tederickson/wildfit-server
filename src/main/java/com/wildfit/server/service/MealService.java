@@ -23,7 +23,7 @@ import java.util.List;
  */
 @Service
 @RequiredArgsConstructor
-public class   MealService {
+public class MealService {
     private final RecipeRepository recipeRepository;
     private final MealRepository mealRepository;
 
