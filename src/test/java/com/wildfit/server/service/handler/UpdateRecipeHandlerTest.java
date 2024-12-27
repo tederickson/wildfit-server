@@ -248,7 +248,13 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
 
         createRecipe(recipe);
 
-        testRecipe.getRecipeGroups().getFirst().getInstructions().get(2).setInstruction("CHANGED!");
+        InstructionDigest instruction = testRecipe.getRecipeGroups().getFirst().getInstructions().get(2);
+        var updatedInstruction = InstructionDigest.builder()
+                .withInstruction("CHANGED!")
+                .withStepNumber(instruction.stepNumber())
+                .withId(instruction.id()).build();
+        testRecipe.getRecipeGroups().getFirst().getInstructions().set(2, updatedInstruction);
+
         final var response = updateRecipe(testRecipe);
 
         assertEquals(testRecipe, response);

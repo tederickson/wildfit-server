@@ -9,9 +9,9 @@ public final class InstructionMapper {
 
     public static com.wildfit.server.model.Instruction createInstruction(InstructionDigest instruction) {
         return new com.wildfit.server.model.Instruction()
-                .setId(instruction.getId())
-                .setStepNumber(instruction.getStepNumber())
-                .setText(instruction.getInstruction());
+                .setId(instruction.id())
+                .setStepNumber(instruction.stepNumber())
+                .setText(instruction.instruction());
     }
 
     public static InstructionDigest createInstruction(com.wildfit.server.model.Instruction instruction) {
@@ -25,7 +25,7 @@ public final class InstructionMapper {
     public static CommonRecipe updateInstruction(com.wildfit.server.model.Instruction existingInstruction,
                                                  InstructionDigest instruction) {
         return existingInstruction
-                .setStepNumber(instruction.getStepNumber())
-                .setText(instruction.getInstruction());
+                .setStepNumber(instruction.stepNumber())
+                .setText(instruction.instruction());
     }
 }
