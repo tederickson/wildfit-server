@@ -69,7 +69,7 @@ class SearchedFoodItemsMapperTest {
         assertEquals("grilled cheese", firstCommon.foodName());
         assertEquals("sandwich", firstCommon.servingUnit());
         assertEquals(1, firstCommon.servingQty());
-        assertEquals("https://nix-tag-images.s3.amazonaws.com/1763_thumb.jpg", firstCommon.photo().getThumb());
+        assertEquals("https://nix-tag-images.s3.amazonaws.com/1763_thumb.jpg", firstCommon.photo().thumb());
         assertEquals(365.76, firstCommon.calories(), 0.01);
     }
 }
