@@ -4,7 +4,7 @@ import lombok.Builder;
 
 import java.util.List;
 
-@Builder(setterPrefix = "with")
+@Builder(setterPrefix = "with", toBuilder = true)
 public record ShoppingListDigest(
         Long id,
         String uuid,

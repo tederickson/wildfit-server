@@ -75,7 +75,7 @@ class UpdateShoppingListHandlerTest extends CommonMealHandlerTest {
 
         shoppingListRepository.findByUuid(userId).orElseThrow();
 
-        var shoppingList = shoppingListService.getShoppingList(userId);
+        final ShoppingListDigest shoppingList = shoppingListService.getShoppingList(userId);
 
         final var itemListMap = shoppingList.items().stream()
                 .collect(Collectors.groupingBy(ShoppingListItemDigest::foodName));
@@ -95,12 +95,15 @@ class UpdateShoppingListHandlerTest extends CommonMealHandlerTest {
         itemListMap.put(TUNA, setPurchased(itemListMap.get(TUNA)));
         itemListMap.put(APPLE, setPurchased(itemListMap.get(APPLE)));
 
-        shoppingListService.updateShoppingList(shoppingList);
+        final List<ShoppingListItemDigest> items = itemListMap.values().stream().flatMap(List::stream).toList();
+        final var updatedShoppingList = shoppingList.toBuilder().withItems(items).build();
 
-        shoppingList = shoppingListService.getShoppingList(userId);
-        assertThat(shoppingList.items().size(), is(originalShoppingListItemCount));
+        shoppingListService.updateShoppingList(updatedShoppingList);
 
-        for (var item : shoppingList.items()) {
+        var dbShoppingList = shoppingListService.getShoppingList(userId);
+        assertThat(dbShoppingList.items().size(), is(originalShoppingListItemCount));
+
+        for (var item : dbShoppingList.items()) {
             if (updatedItems.contains(item.foodName())) {
                 assertTrue(item.purchased());
             }
