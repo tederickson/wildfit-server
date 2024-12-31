@@ -20,7 +20,7 @@ public class UpdateShoppingListHandler {
     public void execute() throws WildfitServiceException {
         validate();
 
-        final ShoppingList shoppingList = shoppingListRepository.findByUuid(request.getUuid())
+        final ShoppingList shoppingList = shoppingListRepository.findByUuid(request.uuid())
                 .orElseThrow(() -> new WildfitServiceException(
                         WildfitServiceError.SHOPPING_LIST_NOT_FOUND));
 
@@ -28,16 +28,16 @@ public class UpdateShoppingListHandler {
                 .collect(Collectors.toMap(ShoppingListItem::getId,
                                           shoppingListItem -> shoppingListItem));
 
-        for (var item : request.getItems()) {
-            ShoppingListItem shoppingListItem = itemMap.get(item.getId());
+        for (var item : request.items()) {
+            ShoppingListItem shoppingListItem = itemMap.get(item.id());
 
             if (shoppingListItem == null) {
                 // Future requirement might add shopping list items
                 throw new WildfitServiceException(WildfitServiceError.INVALID_PARAMETER);
             }
-            shoppingListItem.setPurchased(item.isPurchased());
-            shoppingListItem.setServingQty(item.getTotalQuantity());
-            shoppingListItem.setServingUnit(item.getUnit());
+            shoppingListItem.setPurchased(item.purchased());
+            shoppingListItem.setServingQty(item.totalQuantity());
+            shoppingListItem.setServingUnit(item.unit());
         }
 
         shoppingListRepository.save(shoppingList);

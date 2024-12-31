@@ -77,8 +77,8 @@ class UpdateShoppingListHandlerTest extends CommonMealHandlerTest {
 
         var shoppingList = shoppingListService.getShoppingList(userId);
 
-        final var itemListMap = shoppingList.getItems().stream()
-                .collect(Collectors.groupingBy(ShoppingListItemDigest::getFoodName));
+        final var itemListMap = shoppingList.items().stream()
+                .collect(Collectors.groupingBy(ShoppingListItemDigest::foodName));
 
         itemListMap.forEach((k, v) -> assertEquals(1, v.size(), k));
 
@@ -88,26 +88,34 @@ class UpdateShoppingListHandlerTest extends CommonMealHandlerTest {
 
         assertTrue(foodNames.containsAll(updatedItems));
 
-        assertTrue(shoppingList.getItems().stream().map(ShoppingListItemDigest::isPurchased)
+        assertTrue(shoppingList.items().stream().map(ShoppingListItemDigest::purchased)
                            .allMatch(item -> item.equals(Boolean.FALSE)));
 
-        itemListMap.get(PEPPER).forEach(item -> item.setPurchased(true));
-        itemListMap.get(TUNA).forEach(item -> item.setPurchased(true));
-        itemListMap.get(APPLE).forEach(item -> item.setPurchased(true));
+        itemListMap.put(PEPPER, setPurchased(itemListMap.get(PEPPER)));
+        itemListMap.put(TUNA, setPurchased(itemListMap.get(TUNA)));
+        itemListMap.put(APPLE, setPurchased(itemListMap.get(APPLE)));
 
         shoppingListService.updateShoppingList(shoppingList);
 
         shoppingList = shoppingListService.getShoppingList(userId);
-        assertThat(shoppingList.getItems().size(), is(originalShoppingListItemCount));
+        assertThat(shoppingList.items().size(), is(originalShoppingListItemCount));
 
-        for (var item : shoppingList.getItems()) {
-            if (updatedItems.contains(item.getFoodName())) {
-                assertTrue(item.isPurchased());
+        for (var item : shoppingList.items()) {
+            if (updatedItems.contains(item.foodName())) {
+                assertTrue(item.purchased());
             }
             else {
-                assertFalse(item.isPurchased());
+                assertFalse(item.purchased());
             }
         }
+    }
+
+    private List<ShoppingListItemDigest> setPurchased(List<ShoppingListItemDigest> shoppingListItemDigests) {
+        List<ShoppingListItemDigest> updated = new ArrayList<>();
+        for (var shoppingListDigest : shoppingListItemDigests) {
+            updated.add(shoppingListDigest.toBuilder().withPurchased(true).build());
+        }
+        return updated;
     }
 
     @Test

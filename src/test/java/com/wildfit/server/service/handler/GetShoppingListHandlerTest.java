@@ -70,13 +70,13 @@ class GetShoppingListHandlerTest extends CommonMealHandlerTest {
         final var dbShoppingList = shoppingListRepository.findByUuid(userId).orElseThrow();
         final var shoppingList = shoppingListService.getShoppingList(userId);
 
-        assertEquals(dbShoppingList.getId(), shoppingList.getId());
-        assertEquals(dbShoppingList.getUuid(), shoppingList.getUuid());
+        assertEquals(dbShoppingList.getId(), shoppingList.id());
+        assertEquals(dbShoppingList.getUuid(), shoppingList.uuid());
 
         final var dbItemMap = dbShoppingList.getShoppingListItems().stream()
                 .collect(Collectors.groupingBy(ShoppingListItem::getFoodName));
-        final var itemMap = shoppingList.getItems().stream()
-                .collect(Collectors.groupingBy(ShoppingListItemDigest::getFoodName));
+        final var itemMap = shoppingList.items().stream()
+                .collect(Collectors.groupingBy(ShoppingListItemDigest::foodName));
 
         assertThat(dbItemMap.keySet(), containsInAnyOrder(itemMap.keySet().toArray()));
     }

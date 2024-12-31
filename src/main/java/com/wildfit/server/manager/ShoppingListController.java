@@ -64,7 +64,7 @@ public class ShoppingListController {
     public ShoppingListDigest updateShoppingList(@PathVariable String userId,
                                                  @RequestBody ShoppingListDigest request)
             throws WildfitServiceException {
-        if (!userId.equals(request.getUuid())) {
+        if (!userId.equals(request.uuid())) {
             throw new WildfitServiceException(WildfitServiceError.INVALID_PARAMETER);
         }
         shoppingListService.updateShoppingList(request);

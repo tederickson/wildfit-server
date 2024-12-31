@@ -16,21 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class ShoppingListDigestTest {
 
     @Test
-    public void shouldHaveNoArgsConstructor() {
-        assertThat(ShoppingListDigest.class, hasValidBeanConstructor());
-    }
-
-    @Test
-    public void gettersAndSettersShouldWorkForEachProperty() {
-        assertThat(ShoppingListDigest.class, hasValidGettersAndSetters());
-    }
-
-    @Test
-    public void allPropertiesShouldBeRepresentedInToStringOutput() {
-        assertThat(ShoppingListDigest.class, hasValidBeanToString());
-    }
-
-    @Test
     public void equalsAndHashCode() {
         EqualsVerifier.forClass(ShoppingListDigest.class).suppress(Warning.NONFINAL_FIELDS).verify();
     }
@@ -43,8 +28,8 @@ class ShoppingListDigestTest {
                 .withItems(List.of())
                 .build();
 
-        assertEquals(142143L, digest.getId());
-        assertEquals("APP", digest.getUuid());
-        assertTrue(digest.getItems().isEmpty());
+        assertEquals(142143L, digest.id());
+        assertEquals("APP", digest.uuid());
+        assertTrue(digest.items().isEmpty());
     }
 }
