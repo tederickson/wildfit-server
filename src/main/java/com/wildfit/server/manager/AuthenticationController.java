@@ -44,7 +44,7 @@ public class AuthenticationController {
             @ApiResponse(responseCode = "400", description = "Invalid user name and/or password")})
     @PostMapping("/login")
     public UserDigest login(@RequestBody LoginRequest request) throws WildfitServiceException {
-        return userService.login(request.getEmail(), request.getPassword());
+        return userService.login(request.email(), request.password());
     }
 
 }
