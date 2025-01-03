@@ -99,7 +99,7 @@ public class UserAdminController {
         final var logMessage = String.join("|", "changePassword", id, request.toString());
         log.info(logMessage);
 
-        userService.changePassword(id, request.getPassword());
+        userService.changePassword(id, request.password());
     }
 
 }
