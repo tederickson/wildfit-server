@@ -30,7 +30,7 @@ class ListBySeasonAndIngredientHandlerTest extends CommonRecipeHandlerTest {
 
         final var response = recipeService.listBySeasonAndIngredient(SeasonType.SPRING, ingredientName, PAGE_REQUEST);
 
-        final var foundRecipe = response.getRecipes().stream()
+        final var foundRecipe = response.recipes().stream()
                 .filter(x -> x.getId().equals(testRecipe.getId()))
                 .findFirst();
         assertTrue(foundRecipe.isPresent());
@@ -53,7 +53,7 @@ class ListBySeasonAndIngredientHandlerTest extends CommonRecipeHandlerTest {
                 .build()
                 .execute();
 
-        assertTrue(response.getRecipes().isEmpty());
+        assertTrue(response.recipes().isEmpty());
     }
 
     @Test

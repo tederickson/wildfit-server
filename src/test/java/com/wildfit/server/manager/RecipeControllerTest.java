@@ -12,6 +12,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -29,7 +31,7 @@ class RecipeControllerTest {
 
     @Test
     void retrieveRecipesForSeason() throws WildfitServiceException {
-        when(recipeService.listBySeason(any(), any())).thenReturn(new RecipeListDigest());
+        when(recipeService.listBySeason(any(), any())).thenReturn(new RecipeListDigest(List.of()));
 
         final var response = recipeController.retrieveRecipesForSeason(SeasonType.FALL, 12, 40);
         assertNotNull(response);
@@ -37,7 +39,7 @@ class RecipeControllerTest {
 
     @Test
     void listBySeasonAndIngredient() throws WildfitServiceException {
-        when(recipeService.listBySeasonAndIngredient(any(), any(), any())).thenReturn(new RecipeListDigest());
+        when(recipeService.listBySeasonAndIngredient(any(), any(), any())).thenReturn(new RecipeListDigest(List.of()));
 
         final var response = recipeController.listBySeasonAndIngredient(SeasonType.FALL,
                                                                         "iceberg lettuce", 3, 40);
@@ -46,7 +48,7 @@ class RecipeControllerTest {
 
     @Test
     void listBySeasonAndName() throws WildfitServiceException {
-        when(recipeService.listBySeasonAndName(any(), any(), any())).thenReturn(new RecipeListDigest());
+        when(recipeService.listBySeasonAndName(any(), any(), any())).thenReturn(new RecipeListDigest(List.of()));
 
         final var response = recipeController.listBySeasonAndName(SeasonType.FALL,
                                                                   "lettuce wraps", 3, 40);
