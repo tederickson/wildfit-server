@@ -36,8 +36,6 @@ class UserTest {
 
     @Test
     public void equalsAndHashCode() {
-        EqualsVerifier.forClass(User.class)
-                
-                .suppress(Warning.SURROGATE_KEY).verify();
+        EqualsVerifier.forClass(User.class).suppress(Warning.SURROGATE_KEY).verify();
     }
 }

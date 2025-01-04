@@ -30,7 +30,6 @@ class MealSummaryTest {
     public void equalsAndHashCode() {
         EqualsVerifier.simple().forClass(MealSummary.class)
                 .withPrefabValues(MealSummary.class, new MealSummary().setId(3L), new MealSummary().setId(13L))
-                
                 .suppress(Warning.SURROGATE_KEY).verify();
     }
 
