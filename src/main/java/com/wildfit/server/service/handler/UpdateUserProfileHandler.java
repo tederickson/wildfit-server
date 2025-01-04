@@ -30,17 +30,17 @@ public class UpdateUserProfileHandler {
         final var userProfile = userProfileRepository.findByUser(user)
                 .orElse(UserProfile.builder().withUser(user).build());
 
-        userProfile.setName(userProfileRequest.getName());
-        userProfile.setAge(userProfileRequest.getAge());
+        userProfile.setName(userProfileRequest.name());
+        userProfile.setAge(userProfileRequest.age());
 
-        if (userProfileRequest.getGender() != null) {
-            final var gender = Gender.map(userProfileRequest.getGender());
+        if (userProfileRequest.gender() != null) {
+            final var gender = Gender.map(userProfileRequest.gender());
             userProfile.setGender(gender.getCodeAsCharacter());
         }
 
-        userProfile.setHeight_feet(userProfileRequest.getHeightFeet());
-        userProfile.setHeight_inches(userProfileRequest.getHeightInches());
-        userProfile.setWeight(userProfileRequest.getWeight());
+        userProfile.setHeight_feet(userProfileRequest.heightFeet());
+        userProfile.setHeight_inches(userProfileRequest.heightInches());
+        userProfile.setWeight(userProfileRequest.weight());
 
         final var saved = userProfileRepository.save(userProfile);
 
@@ -53,7 +53,7 @@ public class UpdateUserProfileHandler {
         Objects.requireNonNull(userId, "userId");
         Objects.requireNonNull(userProfileRequest, "userProfileRequest");
 
-        if (!StringUtils.hasText(userProfileRequest.getName())) {
+        if (!StringUtils.hasText(userProfileRequest.name())) {
             throw new WildfitServiceException(WildfitServiceError.INVALID_NAME);
         }
     }
