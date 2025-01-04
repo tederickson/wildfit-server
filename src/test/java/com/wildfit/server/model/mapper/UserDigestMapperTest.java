@@ -29,10 +29,10 @@ class UserDigestMapperTest {
 
         final var digest = UserDigestMapper.map(user);
 
-        assertEquals(MAIL, digest.getEmail());
-        assertEquals(UserStatusType.FREE, digest.getStatus());
-        assertEquals(12314L, digest.getId());
-        assertEquals(user.getUuid(), digest.getUuid());
+        assertEquals(MAIL, digest.email());
+        assertEquals(UserStatusType.FREE, digest.status());
+        assertEquals(12314L, digest.id());
+        assertEquals(user.getUuid(), digest.uuid());
     }
 
     @Test
@@ -47,8 +47,8 @@ class UserDigestMapperTest {
 
         final var digest = UserDigestMapper.map(user);
 
-        assertNull(digest.getEmail());
-        assertNull(digest.getStatus());
-        assertNull(digest.getUuid());
+        assertNull(digest.email());
+        assertNull(digest.status());
+        assertNull(digest.uuid());
     }
 }

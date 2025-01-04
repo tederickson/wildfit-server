@@ -55,7 +55,7 @@ class UserProfileDigestTest {
                 .withHeightInches(3)
                 .build();
 
-        assertEquals("email", userProfileDigest.getUser().getEmail());
+        assertEquals("email", userProfileDigest.getUser().email());
         assertEquals(39, userProfileDigest.getAge());
     }
 }

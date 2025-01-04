@@ -71,8 +71,8 @@ class LoginHandlerTest extends CommonHandlerTest {
         final var response = userService.login(EMAIL, PASSWORD);
 
         assertNotNull(response);
-        assertEquals(EMAIL, response.getEmail());
-        assertEquals(user.getId(), response.getId());
+        assertEquals(EMAIL, response.email());
+        assertEquals(user.getId(), response.id());
     }
 
     private User createUser(boolean enabled) {

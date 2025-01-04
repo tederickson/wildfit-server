@@ -65,7 +65,7 @@ class GetUserProfileHandlerTest extends CommonHandlerTest {
 
         final var digest = userService.getUserProfile(saved.getUser().getUuid());
 
-        assertEquals(EMAIL, digest.getUser().getEmail());
+        assertEquals(EMAIL, digest.getUser().email());
         assertEquals(39, digest.getAge());
         assertEquals(GenderType.MALE, digest.getGender());
         assertEquals(185.7f, digest.getWeight());
