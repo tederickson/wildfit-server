@@ -28,7 +28,7 @@ class ShoppingListItemTest {
     public void equalsAndHashCode() {
         EqualsVerifier.simple().forClass(ShoppingListItem.class)
                 .withPrefabValues(ShoppingList.class, new ShoppingList().setId(3L), new ShoppingList().setId(13L))
-                .suppress(Warning.NONFINAL_FIELDS)
+                
                 .suppress(Warning.SURROGATE_KEY).verify();
     }
 

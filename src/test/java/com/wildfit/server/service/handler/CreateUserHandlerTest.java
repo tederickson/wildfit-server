@@ -73,9 +73,9 @@ class CreateUserHandlerTest extends CommonHandlerTest {
     void execute() throws WildfitServiceException {
         final var response = userService.createUser(EMAIL, PASSWORD, NAME);
 
-        assertEquals(EMAIL, response.getEmail());
+        assertEquals(EMAIL, response.email());
 
-        final var user = userRepository.findById(response.getId()).orElseThrow();
+        final var user = userRepository.findById(response.id()).orElseThrow();
         assertEquals(EMAIL, user.getEmail());
     }
 

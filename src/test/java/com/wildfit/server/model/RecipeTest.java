@@ -50,7 +50,7 @@ class RecipeTest {
     void equalsAndHashCode() {
         EqualsVerifier.forClass(Recipe.class)
                 .withPrefabValues(RecipeGroup.class, new RecipeGroup().setId(3L), new RecipeGroup().setId(13L))
-                .suppress(Warning.NONFINAL_FIELDS)
+                
                 .suppress(Warning.SURROGATE_KEY).verify();
     }
 }

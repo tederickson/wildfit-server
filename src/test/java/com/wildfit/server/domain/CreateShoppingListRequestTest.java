@@ -1,7 +1,6 @@
 package com.wildfit.server.domain;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
-import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,7 +10,7 @@ class CreateShoppingListRequestTest {
 
     @Test
     public void equalsAndHashCode() {
-        EqualsVerifier.forClass(CreateShoppingListRequest.class).suppress(Warning.NONFINAL_FIELDS).verify();
+        EqualsVerifier.forClass(CreateShoppingListRequest.class).verify();
     }
 
     @Test

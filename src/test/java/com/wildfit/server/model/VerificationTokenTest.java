@@ -48,7 +48,7 @@ class VerificationTokenTest {
     @Test
     public void equalsAndHashCode() {
         EqualsVerifier.forClass(VerificationToken.class)
-                .suppress(Warning.NONFINAL_FIELDS)
+                
                 .suppress(Warning.SURROGATE_KEY).verify();
     }
 

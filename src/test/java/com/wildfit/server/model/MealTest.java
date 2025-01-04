@@ -29,7 +29,7 @@ class MealTest {
     public void equalsAndHashCode() {
         EqualsVerifier.simple().forClass(Meal.class)
                 .withPrefabValues(Meal.class, new Meal().setId(3L), new Meal().setId(13L))
-                .suppress(Warning.NONFINAL_FIELDS)
+                
                 .suppress(Warning.SURROGATE_KEY).verify();
     }
 

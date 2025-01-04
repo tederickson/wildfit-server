@@ -26,7 +26,7 @@ class ShoppingListTest {
                 .withPrefabValues(ShoppingListItem.class,
                                   new ShoppingListItem().setId(3L),
                                   new ShoppingListItem().setId(13L))
-                .suppress(Warning.NONFINAL_FIELDS)
+                
                 .suppress(Warning.SURROGATE_KEY).verify();
     }
 }

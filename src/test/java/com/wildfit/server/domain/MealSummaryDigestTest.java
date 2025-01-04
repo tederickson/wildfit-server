@@ -2,7 +2,6 @@ package com.wildfit.server.domain;
 
 import com.google.code.beanmatchers.BeanMatchers;
 import nl.jqno.equalsverifier.EqualsVerifier;
-import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -40,7 +39,7 @@ class MealSummaryDigestTest {
 
     @Test
     public void equalsAndHashCode() {
-        EqualsVerifier.simple().forClass(MealSummaryDigest.class).suppress(Warning.NONFINAL_FIELDS).verify();
+        EqualsVerifier.simple().forClass(MealSummaryDigest.class).verify();
     }
 
     @Test

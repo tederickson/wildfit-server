@@ -40,7 +40,7 @@ class UserProfileTest {
     @Test
     public void equalsAndHashCode() {
         EqualsVerifier.forClass(UserProfile.class)
-                .suppress(Warning.NONFINAL_FIELDS)
+                
                 .suppress(Warning.SURROGATE_KEY).verify();
     }
 }
