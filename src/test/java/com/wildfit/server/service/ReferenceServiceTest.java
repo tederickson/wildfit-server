@@ -21,9 +21,9 @@ class ReferenceServiceTest {
         assertEquals(IngredientType.values().length, response.size());
 
         for (var reference : response) {
-            IngredientType ingredientType = IngredientType.valueOf(reference.getType());
+            IngredientType ingredientType = IngredientType.valueOf(reference.type());
 
-            assertEquals(ingredientType.getDescription(), reference.getDescription());
+            assertEquals(ingredientType.getDescription(), reference.description());
         }
     }
 }
