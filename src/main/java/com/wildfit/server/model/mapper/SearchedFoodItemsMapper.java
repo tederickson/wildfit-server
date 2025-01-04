@@ -4,26 +4,22 @@ import com.wildfit.server.domain.SearchFoodResponse;
 import com.wildfit.server.model.SearchedFoodItems;
 
 import java.util.Arrays;
-import java.util.stream.Collectors;
+import java.util.List;
 
 public final class SearchedFoodItemsMapper {
     private SearchedFoodItemsMapper() {
     }
 
     public static SearchFoodResponse map(SearchedFoodItems searchedFoodItems) {
-        final var response = new SearchFoodResponse();
-
-        if (searchedFoodItems != null) {
-            response.setBranded(
-                    Arrays.stream(searchedFoodItems.getBranded())
-                            .map(FoodItemDigestMapper::mapSearchedFoodItem)
-                            .collect(Collectors.toList()));
-            response.setCommon(
-                    Arrays.stream(searchedFoodItems.getCommon())
-                            .map(FoodItemDigestMapper::mapSearchedFoodItem)
-                            .collect(Collectors.toList()));
+        if (searchedFoodItems == null) {
+            return new SearchFoodResponse(List.of(), List.of());
         }
+        var branded = Arrays.stream(searchedFoodItems.getBranded())
+                .map(FoodItemDigestMapper::mapSearchedFoodItem).toList();
+        var common = Arrays.stream(searchedFoodItems.getCommon())
+                .map(FoodItemDigestMapper::mapSearchedFoodItem).toList();
 
-        return response;
+
+        return new SearchFoodResponse(common, branded);
     }
 }

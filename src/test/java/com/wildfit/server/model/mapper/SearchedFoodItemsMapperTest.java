@@ -13,7 +13,7 @@ import java.nio.file.Files;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @JsonTest
 class SearchedFoodItemsMapperTest {
@@ -27,8 +27,8 @@ class SearchedFoodItemsMapperTest {
     void nullParameters() {
         final var searchFoodItemDigest = SearchedFoodItemsMapper.map(null);
         assertNotNull(searchFoodItemDigest);
-        assertNull(searchFoodItemDigest.getBranded());
-        assertNull(searchFoodItemDigest.getCommon());
+        assertTrue(searchFoodItemDigest.branded().isEmpty());
+        assertTrue(searchFoodItemDigest.common().isEmpty());
     }
 
     @Test
@@ -41,8 +41,8 @@ class SearchedFoodItemsMapperTest {
         assertEquals(20, searchedFoodItems.getCommon().length);
 
         final var searchFoodItemDigest = SearchedFoodItemsMapper.map(searchedFoodItems);
-        assertEquals(20, searchFoodItemDigest.getBranded().size());
-        assertEquals(20, searchFoodItemDigest.getCommon().size());
+        assertEquals(20, searchFoodItemDigest.branded().size());
+        assertEquals(20, searchFoodItemDigest.common().size());
 
         /*
          *  "common": [
@@ -64,7 +64,7 @@ class SearchedFoodItemsMapperTest {
          *       "locale": "en_US"
          *     },
          */
-        final var firstCommon = searchFoodItemDigest.getCommon().getFirst();
+        final var firstCommon = searchFoodItemDigest.common().getFirst();
 
         assertEquals("grilled cheese", firstCommon.foodName());
         assertEquals("sandwich", firstCommon.servingUnit());

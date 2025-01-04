@@ -13,6 +13,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -47,7 +49,7 @@ class FoodControllerTest {
     @Test
     void getFoodsByQuery() throws WildfitServiceException, NutritionixException {
         final var description = "blah de blah, blah blah";
-        when(nutritionixService.getFoodsByQuery(any())).thenReturn(new SearchFoodResponse());
+        when(nutritionixService.getFoodsByQuery(any())).thenReturn(new SearchFoodResponse(List.of(), List.of()));
 
         final var response = foodController.getFoodsByQuery(description);
         assertNotNull(response);
