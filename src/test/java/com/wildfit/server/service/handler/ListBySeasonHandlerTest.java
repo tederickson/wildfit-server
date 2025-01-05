@@ -27,11 +27,11 @@ class ListBySeasonHandlerTest extends CommonRecipeHandlerTest {
         final var response = recipeService.listBySeason(SeasonType.SPRING, PAGE_REQUEST);
 
         final var foundRecipe = response.recipes().stream()
-                .filter(x -> x.getId().equals(testRecipe.getId()))
+                .filter(x -> x.id().equals(testRecipe.getId()))
                 .findFirst();
         assertTrue(foundRecipe.isPresent());
 
-        assertEquals("TEST TEST TEST Chili Beef Lettuce Wraps", foundRecipe.get().getName());
+        assertEquals("TEST TEST TEST Chili Beef Lettuce Wraps", foundRecipe.get().name());
     }
 
     @Test

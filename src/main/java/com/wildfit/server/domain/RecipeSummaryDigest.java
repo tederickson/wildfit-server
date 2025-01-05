@@ -1,26 +1,20 @@
 package com.wildfit.server.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data
 @Builder(setterPrefix = "with")
-@NoArgsConstructor
-@AllArgsConstructor
-public final class RecipeSummaryDigest {
-    private Long id;
+public record RecipeSummaryDigest(
+        Long id,
 
-    private String name;
-    private SeasonType season;
+        String name,
+        SeasonType season,
 
-    private int prepTimeMin;
-    private int cookTimeMin;
+        int prepTimeMin,
+        int cookTimeMin,
 
-    private String servingUnit;
-    private int servingQty;
+        String servingUnit,
+        int servingQty,
 
-    private String introduction;
-    private String thumbnail;
+        String introduction,
+        String thumbnail) {
 }
