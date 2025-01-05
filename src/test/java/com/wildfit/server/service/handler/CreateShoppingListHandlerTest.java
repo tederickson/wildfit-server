@@ -79,7 +79,7 @@ class CreateShoppingListHandlerTest extends CommonMealHandlerTest {
 
         final var foodNames = recipeDigests.stream().map(RecipeDigest::getRecipeGroups)
                 .flatMap(List::stream)
-                .map(RecipeGroupDigest::getIngredients)
+                .map(RecipeGroupDigest::ingredients)
                 .flatMap(List::stream)
                 .map(IngredientDigest::foodName)
                 .collect(Collectors.toSet());

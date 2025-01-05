@@ -25,7 +25,7 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
     private static List<IngredientDigest> getIngredients(RecipeDigest recipe) {
         return recipe
                 .getRecipeGroups().stream()
-                .map(RecipeGroupDigest::getIngredients)
+                .map(RecipeGroupDigest::ingredients)
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
     }
@@ -33,7 +33,7 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
     private static List<InstructionDigest> getInstructions(RecipeDigest recipe) {
         return recipe
                 .getRecipeGroups().stream()
-                .map(RecipeGroupDigest::getInstructions)
+                .map(RecipeGroupDigest::instructions)
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
     }
@@ -57,7 +57,7 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
         createRecipe(recipe);
 
         assertEquals(1, testRecipe.getRecipeGroups().size());
-        assertEquals(2, testRecipe.getRecipeGroups().getFirst().getInstructions().size());
+        assertEquals(2, testRecipe.getRecipeGroups().getFirst().instructions().size());
 
         testRecipe.setIntroduction("blah blah blah");
         testRecipe.setName("name");
@@ -70,7 +70,7 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
         final var response = updateRecipe(testRecipe);
 
         assertEquals(1, response.getRecipeGroups().size());
-        assertEquals(2, response.getRecipeGroups().getFirst().getInstructions().size());
+        assertEquals(2, response.getRecipeGroups().getFirst().instructions().size());
 
         assertEquals("blah blah blah", response.getIntroduction());
         assertEquals("name", response.getName());
@@ -113,8 +113,8 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
 
         assertEquals(1, testRecipe.getRecipeGroups().size());
         var recipeGroup = testRecipe.getRecipeGroups().getFirst();
-        assertEquals(2, recipeGroup.getInstructions().size());
-        assertEquals(0, recipeGroup.getIngredients().size());
+        assertEquals(2, recipeGroup.instructions().size());
+        assertEquals(0, recipeGroup.ingredients().size());
 
         final var recipeGroupDigest1 = ReadRecipeDigest.getRecipeDigest("Tuna_salad.json");
         assertEquals(2, recipeGroupDigest1.getRecipeGroups().size());
@@ -151,19 +151,19 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
 
         assertEquals(recipeGroupSize, testRecipe.getRecipeGroups().size());
         var recipeGroup = testRecipe.getRecipeGroups().getFirst();
-        assertEquals(originalInstructionSize, recipeGroup.getInstructions().size());
-        assertEquals(originalIngredientSize, recipeGroup.getIngredients().size());
+        assertEquals(originalInstructionSize, recipeGroup.instructions().size());
+        assertEquals(originalIngredientSize, recipeGroup.ingredients().size());
 
         final var recipeGroupDigest1 = ReadRecipeDigest.getRecipeDigest("Chili_Beef_Lettuce_Wraps__Summer_.json");
         assertEquals(1, recipeGroupDigest1.getRecipeGroups().size());
 
         final var chiliRecipeGroup = recipeGroupDigest1.getRecipeGroups().getFirst();
 
-        assertEquals(4, chiliRecipeGroup.getInstructions().size());
-        assertEquals(10, chiliRecipeGroup.getIngredients().size());
+        assertEquals(4, chiliRecipeGroup.instructions().size());
+        assertEquals(10, chiliRecipeGroup.ingredients().size());
 
-        recipeGroup.getIngredients().addAll(chiliRecipeGroup.getIngredients());
-        recipeGroup.getInstructions().addAll(chiliRecipeGroup.getInstructions());
+        recipeGroup.ingredients().addAll(chiliRecipeGroup.ingredients());
+        recipeGroup.instructions().addAll(chiliRecipeGroup.instructions());
 
         final var response = updateRecipe(testRecipe);
 
@@ -171,8 +171,8 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
         assertEquals(recipeGroupSize, response.getRecipeGroups().size());
         recipeGroup = response.getRecipeGroups().getFirst();
 
-        assertEquals(originalInstructionSize + 4, recipeGroup.getInstructions().size());
-        assertEquals(originalIngredientSize + 10, recipeGroup.getIngredients().size());
+        assertEquals(originalInstructionSize + 4, recipeGroup.instructions().size());
+        assertEquals(originalIngredientSize + 10, recipeGroup.ingredients().size());
     }
 
     @Test
@@ -223,7 +223,7 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
 
         createRecipe(recipe);
 
-        testRecipe.getRecipeGroups().getFirst().getInstructions().remove(2);
+        testRecipe.getRecipeGroups().getFirst().instructions().remove(2);
         final var response = updateRecipe(testRecipe);
 
         assertEquals(testRecipe, response);
@@ -248,12 +248,12 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
 
         createRecipe(recipe);
 
-        InstructionDigest instruction = testRecipe.getRecipeGroups().getFirst().getInstructions().get(2);
+        InstructionDigest instruction = testRecipe.getRecipeGroups().getFirst().instructions().get(2);
         var updatedInstruction = InstructionDigest.builder()
                 .withInstruction("CHANGED!")
                 .withStepNumber(instruction.stepNumber())
                 .withId(instruction.id()).build();
-        testRecipe.getRecipeGroups().getFirst().getInstructions().set(2, updatedInstruction);
+        testRecipe.getRecipeGroups().getFirst().instructions().set(2, updatedInstruction);
 
         final var response = updateRecipe(testRecipe);
 

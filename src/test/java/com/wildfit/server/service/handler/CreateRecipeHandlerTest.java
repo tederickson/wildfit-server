@@ -40,16 +40,16 @@ class CreateRecipeHandlerTest extends CommonRecipeHandlerTest {
         assertEquals(2, digest.getRecipeGroups().size());
 
         for (var instructionGroup : digest.getRecipeGroups()) {
-            switch (instructionGroup.getName()) {
+            switch (instructionGroup.name()) {
                 case "Salad" -> {
-                    assertEquals(4, instructionGroup.getInstructions().size());
-                    assertEquals(5, instructionGroup.getIngredients().size());
+                    assertEquals(4, instructionGroup.instructions().size());
+                    assertEquals(5, instructionGroup.ingredients().size());
                 }
                 case "Dressing" -> {
-                    assertEquals(0, instructionGroup.getInstructions().size());
-                    assertEquals(4, instructionGroup.getIngredients().size());
+                    assertEquals(0, instructionGroup.instructions().size());
+                    assertEquals(4, instructionGroup.ingredients().size());
                 }
-                default -> fail(instructionGroup.getName());
+                default -> fail(instructionGroup.name());
             }
         }
     }

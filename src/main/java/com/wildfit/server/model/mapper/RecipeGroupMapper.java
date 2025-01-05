@@ -22,16 +22,16 @@ public final class RecipeGroupMapper {
 
     public static RecipeGroup create(RecipeGroupDigest instructionGroup) throws WildfitServiceException {
         final var recipeGroup = new RecipeGroup()
-                .setId(instructionGroup.getId())
-                .setName(instructionGroup.getName())
-                .setRecipeGroupNumber(instructionGroup.getInstructionGroupNumber());
-        if (instructionGroup.getInstructions() != null) {
-            for (var instruction : instructionGroup.getInstructions()) {
+                .setId(instructionGroup.id())
+                .setName(instructionGroup.name())
+                .setRecipeGroupNumber(instructionGroup.instructionGroupNumber());
+        if (instructionGroup.instructions() != null) {
+            for (var instruction : instructionGroup.instructions()) {
                 recipeGroup.add(InstructionMapper.createInstruction(instruction));
             }
         }
-        if (instructionGroup.getIngredients() != null) {
-            for (var ingredient : instructionGroup.getIngredients()) {
+        if (instructionGroup.ingredients() != null) {
+            for (var ingredient : instructionGroup.ingredients()) {
                 recipeGroup.add(IngredientDigestMapper.createIngredient(ingredient));
             }
         }
@@ -72,8 +72,8 @@ public final class RecipeGroupMapper {
         }
         existing.setCommonRecipes(new ArrayList<>());
 
-        if (instructionGroup.getInstructions() != null) {
-            for (var instruction : instructionGroup.getInstructions()) {
+        if (instructionGroup.instructions() != null) {
+            for (var instruction : instructionGroup.instructions()) {
                 final var id = instruction.id();
 
                 if (id == null) {
@@ -88,8 +88,8 @@ public final class RecipeGroupMapper {
                 }
             }
         }
-        if (instructionGroup.getIngredients() != null) {
-            for (var ingredientDigest : instructionGroup.getIngredients()) {
+        if (instructionGroup.ingredients() != null) {
+            for (var ingredientDigest : instructionGroup.ingredients()) {
                 final var id = ingredientDigest.id();
 
                 if (id == null) {

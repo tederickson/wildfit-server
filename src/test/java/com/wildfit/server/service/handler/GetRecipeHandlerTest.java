@@ -61,10 +61,10 @@ class GetRecipeHandlerTest extends CommonRecipeHandlerTest {
         final var recipeDigest = recipeService.retrieveRecipe(testRecipe.getId());
 
         var instructionGroup1 = Iterables.getOnlyElement(recipeDigest.getRecipeGroups());
-        assertTrue(instructionGroup1.getIngredients().isEmpty());
-        assertEquals(2, instructionGroup1.getInstructions().size());
+        assertTrue(instructionGroup1.ingredients().isEmpty());
+        assertEquals(2, instructionGroup1.instructions().size());
 
-        final var recipeGroupId = instructionGroup1.getId();
+        final var recipeGroupId = instructionGroup1.id();
         assertNotNull(recipeGroupId);
     }
 }

@@ -85,7 +85,7 @@ public final class RecipeMapper {
 
         if (request.getRecipeGroups() != null) {
             for (var instructionGroup : request.getRecipeGroups()) {
-                final var id = instructionGroup.getId();
+                final var id = instructionGroup.id();
 
                 if (id == null) {
                     recipe.add(RecipeGroupMapper.create(instructionGroup));
