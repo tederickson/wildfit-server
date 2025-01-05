@@ -48,7 +48,7 @@ public class UserAdminController {
         final var logMessage = String.join("|", "createUser", request.toString());
         log.info(logMessage);
 
-        return userService.createUser(request.getEmail(), request.getPassword(), request.getName());
+        return userService.createUser(request.email(), request.password(), request.name());
     }
 
     @Operation(summary = "Get User Profile")

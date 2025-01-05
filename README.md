@@ -82,7 +82,6 @@ The enum provides efficient mapping of the database row to a Java class.
 # Code
 The code is broken up into:
 * config - almost all the stuff needed to run the app
-* deserialization - custom deserialization code that converts JSON to Java
 * model - the DTO (Data Transfer Objects) that talk to the database
 * exception - the application specific Exceptions
 * manager - some folks call this package rest - it contains the RestControllers which process the URLs that interact with the application.
