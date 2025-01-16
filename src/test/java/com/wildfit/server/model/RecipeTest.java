@@ -33,6 +33,14 @@ class RecipeTest {
     }
 
     @Test
+    void testInitializedRecipe() {
+        final var recipe = new Recipe();
+
+        assertTrue(recipe.toString().contains("recipeGroups size=0"));
+        recipe.assignAllParents();
+    }
+
+    @Test
     void testAuditDates() {
         final var recipe = ReadRecipeDigest.getRecipe("Tuna_salad_with_apple_and_celery.json");
 
