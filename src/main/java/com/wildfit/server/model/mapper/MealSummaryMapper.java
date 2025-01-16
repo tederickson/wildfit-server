@@ -7,6 +7,9 @@ import com.wildfit.server.model.Recipe;
 import java.util.Map;
 
 public final class MealSummaryMapper {
+    private MealSummaryMapper() {
+    }
+
     public static MealSummaryDigest map(MealSummary mealSummary, Map<Long, Recipe> recipeMap) {
         final var recipe = recipeMap.get(mealSummary.getRecipeId());
         final var builder = MealSummaryDigest.builder();
