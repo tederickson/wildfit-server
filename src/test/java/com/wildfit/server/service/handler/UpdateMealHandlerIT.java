@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
-class UpdateMealHandlerTest extends CommonMealHandlerTest {
+class UpdateMealHandlerIT extends CommonMealHandlerTest {
     @Test
     void execute() throws WildfitServiceException {
         List<RecipeDigest> recipeDigestList = new ArrayList<>();
