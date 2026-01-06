@@ -30,7 +30,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 @Transactional
-class UpdateShoppingListHandlerTest extends CommonMealHandlerTest {
+class UpdateShoppingListHandlerIT extends CommonMealHandlerTest {
 
     private static final String PEPPER = "pepper";
     private static final String APPLE = "apple";
