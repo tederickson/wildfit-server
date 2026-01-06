@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 @Transactional
-class CreateShoppingListHandlerTest extends CommonMealHandlerTest {
+class CreateShoppingListHandlerIT extends CommonMealHandlerTest {
 
     @Autowired
     private ShoppingListRepository shoppingListRepository;

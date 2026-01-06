@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
-class CreateUserHandlerTest extends CommonHandlerTest {
+class CreateUserHandlerIT extends CommonHandlerTest {
 
     @Test
     void nullParameters() {
