@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
-class ConfirmUserHandlerTest extends CommonHandlerTest {
+class ConfirmUserHandlerIT extends CommonHandlerTest {
 
     private static final String CONFIRMATION_CODE = "Apples";
 

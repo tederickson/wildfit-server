@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
-class ChangePasswordHandlerTest extends CommonHandlerTest {
+class ChangePasswordHandlerIT extends CommonHandlerTest {
 
     private static final String USER_ID = "1222L";
 
