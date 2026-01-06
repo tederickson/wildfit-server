@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
-class NutritionixServiceTest {
+class NutritionixServiceIT {
     @Value("${bypass.Nutritionix.Service:true}")
     private boolean bypassNutritionixService;
 

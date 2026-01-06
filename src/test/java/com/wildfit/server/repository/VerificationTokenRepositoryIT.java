@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 @SpringBootTest
-class VerificationTokenRepositoryTest extends AbstractRepositoryTest {
+class VerificationTokenRepositoryIT extends AbstractRepositoryTest {
 
     private static final String TOKEN = "ApplePieToken3";
 

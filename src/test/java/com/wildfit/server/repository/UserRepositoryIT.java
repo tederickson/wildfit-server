@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
-class UserRepositoryTest extends AbstractRepositoryTest {
+class UserRepositoryIT extends AbstractRepositoryTest {
     // The move to Spring Boot 3.4.7 broke the tests that save a User with an Optimistic Locking Failure Exception
 
     @Test
