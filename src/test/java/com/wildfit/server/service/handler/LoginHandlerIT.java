@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 @SpringBootTest
-class LoginHandlerTest extends CommonHandlerTest {
+class LoginHandlerIT extends CommonHandlerTest {
 
     @Test
     void nullParameters() {

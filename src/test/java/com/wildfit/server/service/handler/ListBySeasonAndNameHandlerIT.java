@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
-class ListBySeasonAndNameHandlerTest extends CommonRecipeHandlerTest {
+class ListBySeasonAndNameHandlerIT extends CommonRecipeHandlerTest {
 
     private static final String RECIPE_NAME = "TEST TEST TEST Chili Beef Lettuce Wraps";
     private static final PageRequest PAGE_REQUEST = PageRequest.of(0, 100);
