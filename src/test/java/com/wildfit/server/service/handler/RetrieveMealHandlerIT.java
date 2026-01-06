@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
-class RetrieveMealHandlerTest extends CommonMealHandlerTest {
+class RetrieveMealHandlerIT extends CommonMealHandlerTest {
 
     @Test
     void execute() throws WildfitServiceException {

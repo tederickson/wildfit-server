@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
-class RetrieveAllMealsHandlerTest extends CommonMealHandlerTest {
+class RetrieveAllMealsHandlerIT extends CommonMealHandlerTest {
 
     public static final PageRequest PAGE_REQUEST = PageRequest.of(0, 100);
 
