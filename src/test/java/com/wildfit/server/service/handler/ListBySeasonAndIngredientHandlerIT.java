@@ -13,10 +13,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
-class ListBySeasonAndIngredientHandlerTest extends CommonRecipeHandlerTest {
+class ListBySeasonAndIngredientHandlerIT extends CommonRecipeHandlerTest {
 
     private static final String RECIPE_NAME = "ListBySeasonAndIngredientHandlerTest";
-    private static final String ingredientName = "mushrooms";
+    private static final String INGREDIENT_NAME = "mushrooms";
     private static final String FILE_NAME = "Egg_muffins_with_mushrooms_and_herbs.json";
     private static final PageRequest PAGE_REQUEST = PageRequest.of(0, 100);
 
@@ -28,7 +28,7 @@ class ListBySeasonAndIngredientHandlerTest extends CommonRecipeHandlerTest {
 
         createRecipe(recipe);
 
-        final var response = recipeService.listBySeasonAndIngredient(SeasonType.SPRING, ingredientName, PAGE_REQUEST);
+        final var response = recipeService.listBySeasonAndIngredient(SeasonType.SPRING, INGREDIENT_NAME, PAGE_REQUEST);
 
         final var foundRecipe = response.recipes().stream()
                 .filter(x -> x.id().equals(testRecipe.getId()))
@@ -48,7 +48,7 @@ class ListBySeasonAndIngredientHandlerTest extends CommonRecipeHandlerTest {
         final var response = ListBySeasonAndIngredientHandler.builder()
                 .withSeason(SeasonType.SPRING)
                 .withPageable(PageRequest.of(10, 100))
-                .withIngredientName(ingredientName)
+                .withIngredientName(INGREDIENT_NAME)
                 .withRecipeRepository(recipeRepository)
                 .build()
                 .execute();
@@ -61,7 +61,7 @@ class ListBySeasonAndIngredientHandlerTest extends CommonRecipeHandlerTest {
         final var exception = assertThrows(WildfitServiceException.class,
                                            () -> ListBySeasonAndIngredientHandler.builder()
                                                    .withPageable(PAGE_REQUEST)
-                                                   .withIngredientName(ingredientName)
+                                                   .withIngredientName(INGREDIENT_NAME)
                                                    .withRecipeRepository(recipeRepository)
                                                    .build()
                                                    .execute());
@@ -85,7 +85,7 @@ class ListBySeasonAndIngredientHandlerTest extends CommonRecipeHandlerTest {
         final var exception = assertThrows(WildfitServiceException.class,
                                            () -> ListBySeasonAndIngredientHandler.builder()
                                                    .withSeason(SeasonType.SPRING)
-                                                   .withIngredientName(ingredientName)
+                                                   .withIngredientName(INGREDIENT_NAME)
                                                    .withRecipeRepository(recipeRepository)
                                                    .build()
                                                    .execute());

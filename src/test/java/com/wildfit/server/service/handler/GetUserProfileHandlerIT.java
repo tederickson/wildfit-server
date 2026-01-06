@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
-class GetUserProfileHandlerTest extends CommonHandlerTest {
+class GetUserProfileHandlerIT extends CommonHandlerTest {
     @Autowired
     UserProfileRepository userProfileRepository;
 
