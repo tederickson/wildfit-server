@@ -49,7 +49,7 @@ run `mvn clean install -Dspring.profiles.active=dev` to run all JUnit and Integr
 
 The current test environment utilizes SpringBootTest, JsonTest and Mockito to achieve a 97% test coverage.
 
-The JaCoCo reports are available by opening [wildfit-server](target/site/jacoco/index.html) in a browser.
+The JaCoCo reports are available by opening target/site/jacoco-merged-test-coverage-report/index.html in a browser.
 
 # Database
 
@@ -82,18 +82,22 @@ The enum provides efficient mapping of the database row to a Java class.
 ![WildFit database](WildFitSchema.png "WildFit Schema")
 
 # Code
+
 The code is broken up into:
+
 * config - almost all the stuff needed to run the app
 * model - the DTO (Data Transfer Objects) that talk to the database
 * exception - the application specific Exceptions
-* manager - some folks call this package rest - it contains the RestControllers which process the URLs that interact with the application.
+* manager - some folks call this package rest - it contains the RestControllers which process the URLs that interact
+  with the application.
 * domain - the REST request/response domain objects that are converted to JSON
 * mapper - the glue coded needed to convert JSON to Java or Database rows to Java
-* repository - surprisingly simple way to create a SQL command. Turn on Spring Boot parameters to view the generated SQL.
+* repository - surprisingly simple way to create a SQL command. Turn on Spring Boot parameters to view the generated
+  SQL.
 * service - the methods called by the managers/controllers.
-* handlers - provides loose coupling, a lightweight service, separation of concerns, and allows several people to work on 
-the same service without merge collisions. The handlers also provide unique test classes for the service methods. 
-Otherwise you end up with 10,000+ lines of unit test cases for each service which are difficult to refactor and merge.  
+* handlers - provides loose coupling, a lightweight service, separation of concerns, and allows several people to work
+  on the same service without merge collisions. The handlers also provide unique test classes for the service methods.
+  Otherwise you end up with 10,000+ lines of unit test cases for each service which are difficult to refactor and merge.
 
 The current stats are that every line of code generates 10 lines of test code.  
 That is because you have to mock out services and mimic return values.
