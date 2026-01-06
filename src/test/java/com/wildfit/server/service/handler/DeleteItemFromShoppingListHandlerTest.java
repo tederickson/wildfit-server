@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.everyItem;
@@ -54,7 +53,7 @@ class DeleteItemFromShoppingListHandlerTest extends CommonMealHandlerTest {
 
         createRecipes(recipeDigestList);
 
-        final var recipeIds = recipeDigests.stream().map(RecipeDigest::getId).collect(Collectors.toList());
+        final var recipeIds = recipeDigests.stream().map(RecipeDigest::getId).toList();
         final var request = CreateMealRequest.builder()
                 .withUuid(userId)
                 .withRecipeIds(recipeIds).build();

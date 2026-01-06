@@ -59,7 +59,7 @@ class UpdateShoppingListHandlerTest extends CommonMealHandlerTest {
 
         createRecipes(recipeDigestList);
 
-        final var recipeIds = recipeDigests.stream().map(RecipeDigest::getId).collect(Collectors.toList());
+        final var recipeIds = recipeDigests.stream().map(RecipeDigest::getId).toList();
         final var request = CreateMealRequest.builder()
                 .withUuid(userId)
                 .withRecipeIds(recipeIds).build();

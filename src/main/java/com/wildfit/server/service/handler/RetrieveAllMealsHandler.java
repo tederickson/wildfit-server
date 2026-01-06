@@ -16,7 +16,6 @@ import org.springframework.util.CollectionUtils;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 @SuperBuilder(setterPrefix = "with")
 public class RetrieveAllMealsHandler extends CommonMealHandler {
@@ -34,11 +33,11 @@ public class RetrieveAllMealsHandler extends CommonMealHandler {
         final var recipeIds = meals.stream().map(Meal::getRecipes)
                 .flatMap(List::stream)
                 .map(MealSummary::getRecipeId)
-                .collect(Collectors.toList());
+                .toList();
 
         final Map<Long, Recipe> recipeMap = getRecipeMap(recipeRepository, recipeIds);
 
-        return meals.stream().map(x -> MealMapper.map(x, recipeMap)).collect(Collectors.toList());
+        return meals.stream().map(x -> MealMapper.map(x, recipeMap)).toList();
     }
 
     protected void validate() throws WildfitServiceException {

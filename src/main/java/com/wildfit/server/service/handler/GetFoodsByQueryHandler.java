@@ -27,10 +27,10 @@ public class GetFoodsByQueryHandler extends AbstractNutritionixHandler<SearchFoo
 
         final var queryParameters = String.join("&",
                                                 "query=" + description,
-                                                // brand type to filter branded results by. 1=Restaurant, 2=Grocery
+                // brand type to filter branded results by. 1=Restaurant, 2=Grocery
                                                 "branded_type=2",
-                                                // whether to include detailed nutrient fields like full_nutrients
-                                                // and serving_weight_grams
+                // whether to include detailed nutrient fields like full_nutrients
+                // and serving_weight_grams
                                                 "detailed=true");
 
         url = NUTRITIONIX_URL + "v2/search/instant?" + queryParameters;

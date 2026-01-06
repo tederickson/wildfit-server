@@ -11,7 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -32,7 +31,7 @@ class CreateMealHandlerTest extends CommonMealHandlerTest {
 
         createRecipes(recipeDigestList);
 
-        final var recipeIds = recipeDigests.stream().map(RecipeDigest::getId).collect(Collectors.toList());
+        final var recipeIds = recipeDigests.stream().map(RecipeDigest::getId).toList();
         final var request = CreateMealRequest.builder()
                 .withUuid(userId)
                 .withRecipeIds(recipeIds).build();

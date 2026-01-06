@@ -12,7 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -27,7 +26,7 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
                 .getRecipeGroups().stream()
                 .map(RecipeGroupDigest::ingredients)
                 .flatMap(Collection::stream)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private static List<InstructionDigest> getInstructions(RecipeDigest recipe) {
@@ -35,7 +34,7 @@ class UpdateRecipeHandlerTest extends CommonRecipeHandlerTest {
                 .getRecipeGroups().stream()
                 .map(RecipeGroupDigest::instructions)
                 .flatMap(Collection::stream)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Test

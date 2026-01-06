@@ -13,7 +13,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 @SuperBuilder(setterPrefix = "with")
 public class RetrieveMealHandler extends CommonMealHandler {
@@ -30,7 +29,7 @@ public class RetrieveMealHandler extends CommonMealHandler {
 
         final var recipeIds = meal.getRecipes().stream()
                 .map(MealSummary::getRecipeId)
-                .collect(Collectors.toList());
+                .toList();
 
         final Map<Long, Recipe> recipeMap = getRecipeMap(recipeRepository, recipeIds);
 
