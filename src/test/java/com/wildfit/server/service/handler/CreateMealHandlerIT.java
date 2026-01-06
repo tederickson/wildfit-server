@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
-class CreateMealHandlerTest extends CommonMealHandlerTest {
+class CreateMealHandlerIT extends CommonMealHandlerTest {
 
     @Test
     void execute() throws WildfitServiceException {
