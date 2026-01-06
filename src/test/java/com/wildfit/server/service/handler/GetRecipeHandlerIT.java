@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
-class GetRecipeHandlerTest extends CommonRecipeHandlerTest {
+class GetRecipeHandlerIT extends CommonRecipeHandlerTest {
     private static final String NAME = "GetRecipeHandlerTest";
 
     @Test

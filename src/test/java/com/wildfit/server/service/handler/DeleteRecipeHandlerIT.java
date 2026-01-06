@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
-class DeleteRecipeHandlerTest extends CommonRecipeHandlerTest {
+class DeleteRecipeHandlerIT extends CommonRecipeHandlerTest {
     private final String name = "TEST TEST TEST";
 
     private final InstructionDigest step1 = InstructionDigest.builder()
