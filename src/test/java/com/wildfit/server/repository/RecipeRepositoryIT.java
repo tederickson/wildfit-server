@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
-class RecipeRepositoryTest {
+class RecipeRepositoryIT {
     static final Pageable PAGEABLE = PageRequest.of(0, 20);
 
     static final String EMAIL = "ted.erickson@comcast.net";

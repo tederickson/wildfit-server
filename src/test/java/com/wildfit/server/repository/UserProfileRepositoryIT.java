@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
-class UserProfileRepositoryTest extends AbstractRepositoryTest {
+class UserProfileRepositoryIT extends AbstractRepositoryTest {
     private static final String USER_NAME = "Bob Tester";
 
     @Autowired
