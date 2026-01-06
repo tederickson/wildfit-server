@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 @SpringBootTest
-class CreateRecipeHandlerTest extends CommonRecipeHandlerTest {
+class CreateRecipeHandlerIT extends CommonRecipeHandlerTest {
     private static final String RECIPE_HANDLER_NAME = "CreateRecipeHandlerTest";
 
     private static void validateTunaSalad(com.wildfit.server.domain.RecipeDigest digest) {
