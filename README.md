@@ -13,10 +13,7 @@ Run the application and point a browser to http://localhost:8080/swagger-ui.html
 # Run the Application
 
 Run the following command in a terminal window:
-
-```bash
-mvn clean spring-boot:run -Dspring-boot.run.profiles=dev
-```
+`mvn clean spring-boot:run -Dspring-boot.run.profiles=dev`
 
 # Config
 
@@ -40,6 +37,9 @@ Required HEADERS when accessing Nutritionix V2 API endpoints:
 
 Please note, when authenticating with the API, you must send the x-app-id and x-app-key params as headers, and not as
 query string parameters.
+
+## Nutritionix Access
+Unfortunately the Nutritionix access has expired.  The yearly subscription is too expensive for a demo project.
 
 # Test
 
