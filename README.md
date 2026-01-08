@@ -39,7 +39,16 @@ Please note, when authenticating with the API, you must send the x-app-id and x-
 query string parameters.
 
 ## Nutritionix Access
-Unfortunately the Nutritionix access has expired.  The yearly subscription is too expensive for a demo project.
+
+Unfortunately the Nutritionix access has expired. The yearly subscription is too expensive for a demo project.
+
+Fortunately since this project implements the Separation of Concerns architecture pattern, I mocked the Nutrionix API
+inside the NutritionixService without impacting the majority of the code.
+
+## Populate The Database With Sample Recipes
+* Run the application
+* Use Pycharm to open the [wildfit-ETL project](https://github.com/tederickson/wildfit-ETL)
+* Run the wildfit-ETL ParseRecipes python program
 
 # Test
 

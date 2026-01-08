@@ -4,17 +4,12 @@ import com.wildfit.server.domain.SearchFoodResponse;
 import com.wildfit.server.exception.WildfitServiceError;
 import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.SearchedFoodItem;
-import com.wildfit.server.model.SearchedFoodItems;
 import com.wildfit.server.model.mapper.SearchedFoodItemsMapper;
 import lombok.experimental.SuperBuilder;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Objects;
 
 @SuperBuilder(setterPrefix = "with")
 public class GetFoodsByQueryHandler extends AbstractNutritionixHandler<SearchFoodResponse> {
@@ -22,23 +17,23 @@ public class GetFoodsByQueryHandler extends AbstractNutritionixHandler<SearchFoo
 
     @Override
     protected SearchFoodResponse executeInHandler() {
-        final var restTemplate = new RestTemplate();
-        final var entity = new HttpEntity<>(getHeaders());
+        //  final var restTemplate = new RestTemplate();
+        // final var entity = new HttpEntity<>(getHeaders());
 
-        final var queryParameters = String.join("&",
-                                                "query=" + description,
+        // final var queryParameters = String.join("&",
+        //                                       "query=" + description,
                 // brand type to filter branded results by. 1=Restaurant, 2=Grocery
-                                                "branded_type=2",
+        //                                       "branded_type=2",
                 // whether to include detailed nutrient fields like full_nutrients
                 // and serving_weight_grams
-                                                "detailed=true");
+        //                                      "detailed=true");
 
-        url = NUTRITIONIX_URL + "v2/search/instant?" + queryParameters;
+        // url = NUTRITIONIX_URL + "v2/search/instant?" + queryParameters;
 
 
-        final var searchedFoodItems = restTemplate.exchange(url, HttpMethod.GET, entity, SearchedFoodItems.class)
-                .getBody();
-        Objects.requireNonNull(searchedFoodItems, "searchedFoodItems");
+        // final var searchedFoodItems = restTemplate.exchange(url, HttpMethod.GET, entity, SearchedFoodItems.class)
+        //         .getBody();
+        // Objects.requireNonNull(searchedFoodItems, "searchedFoodItems");
 
         // How do I filter out duplicate common foods from the /search/instant endpoint?
         // To provide the best experience to the end user, it is recommended to filter common food results
@@ -46,17 +41,17 @@ public class GetFoodsByQueryHandler extends AbstractNutritionixHandler<SearchFoo
         // (ex. “Blackberry” and “Blackberries”).
         // For best results, filter the results to show only one food per tag_id. Generally, the first one will
         // be the most relevant based on the user search query.
-        SearchedFoodItem[] common = filterByTagId(searchedFoodItems.getCommon());
+        // SearchedFoodItem[] common = filterByTagId(searchedFoodItems.getCommon());
 
-        common = filterByDescription(common);
+        // common = filterByDescription(common);
 
-        SearchedFoodItem[] branded = searchedFoodItems.getBranded();
+        // SearchedFoodItem[] branded = searchedFoodItems.getBranded();
 
-        final var updatedResponse = new SearchedFoodItems();
-        updatedResponse.setCommon(common);
-        updatedResponse.setBranded(branded);
+        // final var updatedResponse = new SearchedFoodItems();
+        // updatedResponse.setCommon(common);
+        // updatedResponse.setBranded(branded);
 
-        return SearchedFoodItemsMapper.map(updatedResponse);
+        return SearchedFoodItemsMapper.map(null);
     }
 
     @Override
