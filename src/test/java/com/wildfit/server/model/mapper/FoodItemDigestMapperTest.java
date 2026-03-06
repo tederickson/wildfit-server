@@ -5,6 +5,7 @@ import com.wildfit.server.domain.PhotoDigest;
 import com.wildfit.server.model.FoodItems;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
+import tools.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 
@@ -17,7 +18,7 @@ class FoodItemDigestMapperTest {
 
     public static FoodItems getFoodItems(String fileName) throws IOException {
         try (var in = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName)) {
-            final var mapper = new tools.jackson.databind.ObjectMapper();
+            final var mapper = new ObjectMapper();
 
             return mapper.readValue(in, FoodItems.class);
         }

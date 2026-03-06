@@ -4,6 +4,7 @@ import com.wildfit.server.domain.RecipeDigest;
 import com.wildfit.server.exception.WildfitServiceException;
 import com.wildfit.server.model.Recipe;
 import com.wildfit.server.model.mapper.RecipeMapper;
+import tools.jackson.databind.ObjectMapper;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -12,7 +13,7 @@ public class ReadRecipeDigest {
 
     public static RecipeDigest getRecipeDigest(String fileName) {
         try (var in = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName)) {
-            final var mapper = new tools.jackson.databind.ObjectMapper();
+            final var mapper = new ObjectMapper();
 
             return mapper.readValue(in, RecipeDigest.class);
         } catch (Exception e) {
