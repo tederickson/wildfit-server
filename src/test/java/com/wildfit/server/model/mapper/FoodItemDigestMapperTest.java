@@ -17,7 +17,7 @@ class FoodItemDigestMapperTest {
 
     public static FoodItems getFoodItems(String fileName) throws IOException {
         try (var in = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName)) {
-            final var mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+            final var mapper = new tools.jackson.databind.ObjectMapper();
 
             return mapper.readValue(in, FoodItems.class);
         }

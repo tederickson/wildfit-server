@@ -12,7 +12,7 @@ public class ReadRecipeDigest {
 
     public static RecipeDigest getRecipeDigest(String fileName) {
         try (var in = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName)) {
-            final var mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+            final var mapper = new tools.jackson.databind.ObjectMapper();
 
             return mapper.readValue(in, RecipeDigest.class);
         } catch (Exception e) {
