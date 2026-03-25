@@ -64,6 +64,11 @@
             <artifactId>jackson-core</artifactId>
             <version>[2.21.1,)</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>[7.0.6,)</version>
+        </dependency>
         <!-- End GitHub dependabot alert -->
 
         <dependency>
@@ -227,7 +232,8 @@
                         </goals>
                         <configuration>
                             <dataFile>${project.build.directory}/jacoco-output/merged.exec</dataFile>
-                            <outputDirectory>${project.reporting.outputDirectory}/jacoco-merged-test-coverage-report</outputDirectory>
+                            <outputDirectory>${project.reporting.outputDirectory}/jacoco-merged-test-coverage-report
+                            </outputDirectory>
                         </configuration>
                     </execution>
 
