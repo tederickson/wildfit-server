@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>4.0.5</version>
+        <version>4.0.8</version>
         <relativePath/>
     </parent>
     <groupId>com.wildfit</groupId>
@@ -56,7 +56,7 @@
         <dependency>
             <groupId>tools.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>3.1.1</version>
+            <version>3.2.2</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
